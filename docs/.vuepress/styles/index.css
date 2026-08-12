@@ -1,0 +1,40 @@
+/* ====== 自定义样式 ====== */
+/* 注意：内容宽度通过 palette.scss 中的 $content-width 变量配置 */
+
+/* Mermaid 图表自适应宽度 */
+.mermaid {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* 确保图片不会溢出 */
+.vp-page img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 代码块横向滚动 */
+.vp-page pre,
+.vp-page div[class*="language-"] {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/* 表格宽度 */
+.vp-page table {
+  width: 100%;
+  table-layout: auto;
+  display: table;
+  overflow-x: auto;
+}
+
+/* 产品矩阵卡片表格行高亮 */
+.vp-page table tbody tr:hover {
+  background-color: var(--bg-color-mute, rgba(124, 58, 237, 0.06));
+}

@@ -1,0 +1,88 @@
+import { sidebar } from "vuepress-theme-hope";
+
+export const zhSidebar = sidebar({
+  "/": [
+    {
+      text: "产品矩阵",
+      icon: "table-columns",
+      prefix: "/products/",
+      link: "/products/README.md",
+      collapsible: true,
+      children: [
+        "README.md",
+        "aiti-agent.md",
+        "aiti-devtools.md",
+        "aiti-devtools-plugins.md",
+        "aiti-mcp-bridge.md",
+        "aiti-ide-plugins.md",
+      ],
+    },
+    {
+      text: "指南",
+      icon: "lightbulb",
+      prefix: "/guide/",
+      link: "/guide/README.md",
+      collapsible: true,
+      children: [
+        "README.md",
+        "what-is-aiti.md",
+        "architecture.md",
+        "quick-start.md",
+      ],
+    },
+    {
+      text: "开发者工具",
+      icon: "screwdriver-wrench",
+      prefix: "/devtools/",
+      link: "/devtools/README.md",
+      collapsible: true,
+      children: [
+        "README.md",
+        "quick-start.md",
+        "inject.md",
+        "vite-plugin.md",
+        "vue-plugin.md",
+        "cdp-commands.md",
+      ],
+    },
+    {
+      text: "MCP 桥",
+      icon: "link",
+      prefix: "/mcp-bridge/",
+      link: "/mcp-bridge/README.md",
+      collapsible: true,
+      children: [
+        "README.md",
+        "server.md",
+        "session.md",
+        "ai-agents.md",
+      ],
+    },
+    {
+      text: "IDE 插件",
+      icon: "puzzle-piece",
+      prefix: "/ide/",
+      link: "/ide/README.md",
+      collapsible: true,
+      children: [
+        "README.md",
+        "vscode.md",
+        "idea.md",
+      ],
+    },
+    {
+      text: "路线图",
+      icon: "road",
+      prefix: "/roadmaps/",
+      link: "/roadmaps/README.md",
+      collapsible: true,
+      children: [
+        "README.md",
+        "master-plan.md",
+        "aiti-agent.md",
+        "aiti-devtools.md",
+        "aiti-mcp-bridge.md",
+      ],
+    },
+  ],
+});
