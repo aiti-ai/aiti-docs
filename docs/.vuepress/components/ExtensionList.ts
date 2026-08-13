@@ -1,13 +1,29 @@
 /**
- * ExtensionList — 扩展列表组件（纯 JS 版）。
+ * ExtensionList — 扩展列表组件（TS 版）。
  *
- * 用 .js 而非 .vue：.vue 的 SFC 编译产物在隧道链路（nginx/pi-web pipe）
+ * 用 .ts 而非 .vue：.vue 的 SFC 编译产物在隧道链路（nginx/pi-web pipe）
  * 下存在模块响应损坏问题（浏览器缓存坏条目导致 304 后语法错误）。
- * .js 由 vite esbuild 转换，与其它 .js 模块同路径，已验证链路正常。
+ * .ts 由 vite esbuild 转换（同 .js 路径），链路已验证正常。
  *
- * 数据源：/extensions.json（编译插件 extensions-catalog.ts 自动生成）。
+ * 数据源：
+ * - SSR/首屏：__EXTENSIONS_CATALOG__（编译插件 define 注入的构建期数据）→
+ *   列表内容进 contentRendered → slimsearch 静态搜索 / SEO 可索引。
+ * - 客户端：fetch /extensions.json 刷新（dev 下扩展 md 变化实时生效）。
  */
 import { defineComponent, ref, onMounted, computed, h } from "vue";
+
+/** 构建期注入的扩展数据（插件 define 钩子），SSR 与首屏即用。 */
+declare const __EXTENSIONS_CATALOG__: string | undefined;
+
+function ssrCatalog() {
+  try {
+    const raw = typeof __EXTENSIONS_CATALOG__ !== "undefined" ? __EXTENSIONS_CATALOG__ : "";
+    const d = raw ? JSON.parse(raw) : null;
+    return d && Array.isArray(d.extensions) ? d : null;
+  } catch {
+    return null;
+  }
+}
 
 const TYPE_LABEL = {
   "devtools-plugin": "开发工具插件",
@@ -29,18 +45,22 @@ const STATUS_LABEL = {
 export default defineComponent({
   name: "ExtensionList",
   setup() {
-    const catalog = ref(null);
+    const ssr = ssrCatalog();
+    const catalog = ref(ssr);
     const error = ref("");
-    const loading = ref(true);
+    const loading = ref(!ssr);
 
     onMounted(async () => {
+      // 生产/构建：SSR 数据（__EXTENSIONS_CATALOG__）已就地渲染，不再请求 JSON。
+      // dev：扩展 md 改动 → /extensions.json 实时变化 → fetch 刷新（就地重渲染，不整页刷新）。
+      if (!import.meta.env.DEV) return;
       try {
         const res = await fetch("/extensions.json", { cache: "no-store" });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         catalog.value = await res.json();
+        loading.value = false;
       } catch (e) {
         error.value = String(e);
-      } finally {
         loading.value = false;
       }
     });
@@ -74,6 +94,7 @@ export default defineComponent({
         e.description
           ? h("p", { class: "ext-desc" }, e.description)
           : null,
+        e.soul ? h("p", { class: "ext-soul" }, [h("span", { class: "ext-soul-mark" }, "❝"), e.soul]) : null,
         h("dl", { class: "ext-detail" }, [
           e.version ? [h("dt", "版本"), h("dd", e.version)] : null,
           e.npm ? [h("dt", "npm"), h("dd", h("code", e.npm))] : null,
@@ -108,7 +129,7 @@ export default defineComponent({
           "div",
           { class: "ext-meta" },
           [
-            "共 " + catalog.count + " 个扩展 · 数据源 ",
+            "共 " + (catalog.count ?? catalog.extensions?.length ?? 0) + " 个扩展 · 数据源 ",
             h("a", { href: "/extensions.json", target: "_blank", rel: "noopener" }, "/extensions.json"),
             " · 更新于 " + (catalog.generatedAt || "").slice(0, 16).replace("T", " "),
           ]

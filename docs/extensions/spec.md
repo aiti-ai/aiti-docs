@@ -20,6 +20,7 @@ ext:
   id: aiti-devtools             # 必须，唯一 id（一般与文件名一致）
   name: aiti devtools           # 展示名（缺省 = id）
   description: 一句话描述        # 列表卡片副标题
+  soul: 一句话灵魂描述          # 设计源动力（卡片斜体标注，可选但推荐）
   type: devtools-plugin         # 类型枚举（见下）
   category: 页面调试注入         # 列表分组（自定义中文分类）
   version: 0.2.1                # 当前版本
@@ -41,6 +42,7 @@ ext:
 | `id` | ✅ | 唯一标识，与文件名一致；也是 JSON 里的主键 |
 | `name` | — | 展示名，缺省用 `id` |
 | `description` | — | 一句话描述（列表卡片显示） |
+| `soul` | — | 一句话灵魂描述——设计这个扩展的源动力（卡片斜体高亮，推荐填） |
 | `type` | — | 类型枚举，缺省 `other` |
 | `category` | — | 列表分组，自定义中文分类名，缺省归"其他" |
 | `version` / `status` / `author` | — | 版本、状态（active/beta/experimental/archived）、维护者 |
@@ -107,6 +109,7 @@ ext:
       "id": "aiti-devtools",
       "name": "aiti devtools",
       "description": "…",
+      "soul": "我的输入是我宝贵的财富——说过的好话，值得收藏。",
       "type": "devtools-plugin",
       "category": "页面调试注入",
       "version": "0.2.1",

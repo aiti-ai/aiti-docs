@@ -5,6 +5,7 @@ ext:
   id: devtools-vscode
   name: aiti-devtools-vscode
   description: VSCode 插件 —— 一键注入 + 直连 IDE AI agent 窗口
+  soul: 最顺手的地方，就该有调试器。
   type: ide-plugin
   category: IDE 集成
   version: 0.1.0
@@ -18,6 +19,8 @@ ext:
 ---
 
 # aiti-devtools-vscode
+
+> ❝ **最顺手的地方，就该有调试器。** ❞
 
 IDE 插件是"注入 + 桥 + AI 窗口"的最后一公里：一键完成注入，经 mcp-bridge 直接把消息发到 IDE 里的 AI agent 窗口。
 

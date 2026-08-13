@@ -5,6 +5,7 @@ ext:
   id: aiti-devtools-vue
   name: aiti-devtools-vue
   description: Vue 工程插件 —— dev 自动本地注入
+  soul: 注入不该打断开发，它该像空气一样存在。
   type: devtools-plugin
   category: 页面调试注入
   version: 0.1.0
@@ -19,6 +20,8 @@ ext:
 ---
 
 # aiti-devtools-vue
+
+> ❝ **注入不该打断开发，它该像空气一样存在。** ❞
 
 Vue 工程的本地注入插件，dev 模式自动注入，与 Vite 插件同构的桥协议。
 

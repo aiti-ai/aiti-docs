@@ -2,7 +2,7 @@ import { defineClientConfig } from 'vuepress/client';
 
 // Import custom styles
 import './styles/index.css';
-import ExtensionList from './components/ExtensionList.js';
+import ExtensionList from './components/ExtensionList.ts';
 
 export default defineClientConfig({
   enhance({ app, router, siteData }) {

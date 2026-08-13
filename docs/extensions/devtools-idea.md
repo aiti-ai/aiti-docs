@@ -5,6 +5,7 @@ ext:
   id: devtools-idea
   name: aiti-devtools-idea
   description: JetBrains IDEA 插件 —— 一键注入 + 直连 IDE AI agent 窗口
+  soul: 最顺手的地方，就该有调试器。
   type: ide-plugin
   category: IDE 集成
   version: 0.1.0
@@ -18,6 +19,8 @@ ext:
 ---
 
 # aiti-devtools-idea
+
+> ❝ **最顺手的地方，就该有调试器。** ❞
 
 JetBrains 系 IDE 插件：注入 + 桥 + AI 窗口最后一公里，消息直达 JetBrains AI Assistant 等内置 AI。
 

@@ -5,6 +5,7 @@ ext:
   id: demo
   name: Demo Extension
   description: 全插槽演示扩展 —— 框架验证用，覆盖每个扩展点
+  soul: 框架先有例子，人才有样子。
   type: dev-repo
   category: 示例
   version: 0.1.0
@@ -18,6 +19,8 @@ ext:
 ---
 
 # demo
+
+> ❝ **框架先有例子，人才有样子。** ❞
 
 pi-web 扩展框架的全插槽演示扩展：覆盖 `server.startup/shutdown/api/middleware`、全部 `ui.*` 插槽与 client bundle 协议，用于开发期验证框架。
 

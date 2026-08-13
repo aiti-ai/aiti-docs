@@ -75,6 +75,7 @@ export const zhSidebar = sidebar({
         "aiti-mcp-bridge.md",
         "session-manager.md",
         "aiti-cmd.md",
+        "aiti-prompts.md",
         "service-tunnels.md",
         "aiti-inject.md",
         "devtools-vscode.md",

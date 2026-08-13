@@ -5,6 +5,7 @@ ext:
   id: session-manager
   name: session-manager
   description: 跨项目会话面板 —— tag 树+颜色 / 收藏 / 搜索 / 归档 / 看板
+  soul: 会话不是用完即走的流水，是每天都在累积的资产。
   type: dev-repo
   category: 会话管理
   version: 0.2.0
@@ -19,6 +20,8 @@ ext:
 ---
 
 # session-manager
+
+> ❝ **会话不是用完即走的流水，是每天都在累积的资产。** ❞
 
 aiti-agent（pi-web）的跨项目会话管理扩展：tag 树 + 颜色、收藏、FTS5 全文搜索、`.pwarc` 归档、看板视图。
 

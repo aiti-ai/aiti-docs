@@ -5,6 +5,7 @@ ext:
   id: aiti-devtools
   name: aiti devtools
   description: 页面内 AI 调试助手 —— 注入 __dbg + Inspector + MCP 桥
+  soul: AI 不该对着屏幕瞎猜，它该真正看见页面。
   type: devtools-plugin
   category: 页面调试注入
   version: 0.2.1
@@ -19,6 +20,8 @@ ext:
 ---
 
 # aiti-devtools
+
+> ❝ **AI 不该对着屏幕瞎猜，它该真正看见页面。** ❞
 
 把 AI 请到页面开发现场：注入 `__dbg` + Inspector 悬浮 UI + MCP 桥，AI 和人真正在**同一个页面**上协作。
 

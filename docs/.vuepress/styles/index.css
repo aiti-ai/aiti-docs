@@ -95,6 +95,20 @@
 .ext-status.experimental { background: #f3e8ff; color: #7c3aed; }
 .ext-status.archived { background: #f0f0f0; color: #666; }
 .ext-desc { font-size: 0.88rem; color: var(--text-color, #333); margin: 0.15rem 0 0; }
+.ext-soul {
+  font-size: 0.82rem;
+  color: var(--theme-color, #7c3aed);
+  font-style: italic;
+  margin: 0.25rem 0 0;
+  padding: 0.3rem 0.55rem;
+  background: var(--bg-color-mute, rgba(124, 58, 237, 0.08));
+  border-radius: 6px;
+  line-height: 1.45;
+}
+.ext-soul-mark {
+  margin-right: 0.3rem;
+  opacity: 0.55;
+}
 .ext-detail { display: grid; grid-template-columns: auto 1fr; gap: 0.1rem 0.6rem; margin: 0.2rem 0 0; font-size: 0.8rem; }
 .ext-detail dt { color: var(--text-color-lighter); }
 .ext-detail dd { margin: 0; overflow-wrap: anywhere; }

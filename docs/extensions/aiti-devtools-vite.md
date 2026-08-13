@@ -5,6 +5,7 @@ ext:
   id: aiti-devtools-vite
   name: aiti-devtools-vite
   description: Vite 插件 —— dev 自动本地注入，零配置
+  soul: 注入不该打断开发，它该像空气一样存在。
   type: devtools-plugin
   category: 页面调试注入
   version: 0.2.1
@@ -20,6 +21,8 @@ ext:
 ---
 
 # aiti-devtools-vite
+
+> ❝ **注入不该打断开发，它该像空气一样存在。** ❞
 
 Vite 工程的零配置注入插件：dev 模式自动注入 `__dbg`，不上生产、不改业务代码。
 
