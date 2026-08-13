@@ -92,4 +92,4 @@ tags: [devtools, cdp, reference]
 | 手势桥 | Browser.* 受限操作由宿主执行（transient activation 安全） |
 | 结果 | `{ok: true, result}` 或 `{ok: false, error}`，按 requestId 关联 |
 
-> 通过 MCP 调用见 [MCP 桥 · server](/mcp-bridge/server.md)。
+> 通过 MCP 调用见 [MCP 桥 · server](/guide/mcp/server.md)。

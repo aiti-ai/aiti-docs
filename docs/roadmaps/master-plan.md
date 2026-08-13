@@ -17,11 +17,11 @@ description: aiti 整体规划 — 目标、产品矩阵、分层架构、里程
 | 维度 | 结论 |
 |---|---|
 | 干什么 | 自己的 AI 开发工具生态：自托管工作台 + 页面调试注入 + AI agent 改造 |
-| 地基 | fork agegr/pi-web 自有分支（146 commits 领先，全生态唯一 service-tunnels / queue 恢复） |
+| 地基 | 构建于开源项目 agegr/pi-web（全生态唯一 service-tunnels / queue 恢复） |
 | 引擎 | pi（earendil-works/pi，85k★，每日发版，mise 管理） |
 | 差异化 | 共享 JSONL 会话 + 真实工作区 + 服务隧道 + **AI 与页面/IDE 同场协作**（无人五层齐全） |
 | 产品矩阵 | 14 个产品，覆盖入口/注入/桥接/Agent 四层（见 [产品矩阵](/products/README.md)） |
-| 品牌 | aiti · 域名 `aiti.py` · GitHub `aiti-ai` · npm scope `@justdb` |
+| 品牌 | aiti · 域名 `aiti.pw` · GitHub `aiti-ai` · npm scope `@justdb` |
 | 北极星 | 自己日常可用 → 外部 10+ 活跃用户 → 5+ 外部贡献者 |
 | 当前状态 | 命名已定（aiti）；aiti-devtools 0.2.x 已可用（自检 21/21）；桥链路已通；aiti-agent M0 待执行 |
 
@@ -47,7 +47,7 @@ description: aiti 整体规划 — 目标、产品矩阵、分层架构、里程
 | L1 | devtools-vite/vue/next/react/svelte | 📋 | R2 |
 | L2 | aiti-mcp-bridge / server | 🚧 桥链路已通 | R2 配置最小化收官 |
 | L3 | 任意 AI agent 接入 | ✅ 协议就绪 | 持续 |
-| L4 | aiti-agent（pi-web fork） | 📋 M0 | M0-M4 |
+| L4 | aiti-agent（基于 pi-web） | 📋 M0 | M0-M4 |
 | L4 | devtools-vscode / idea | 📋 | R3 |
 
 ---
@@ -74,7 +74,7 @@ description: aiti 整体规划 — 目标、产品矩阵、分层架构、里程
 ```mermaid
 timeline
     title aiti 整体路线图
-    2026 Q3 已定稿 : 命名 aiti · 域名 aiti.py · npm scope @justdb
+    2026 Q3 已定稿 : 命名 aiti · 域名 aiti.pw · npm scope @justdb
     2026 Q3 桥链路 : aiti-devtools 0.2.x · 方案 B/C/D/E 完成
     2026 Q4 R1 : devtools 稳定发布 · 框架插件
     2026 Q4 M0 : aiti-agent 地基（rebase v0.8.7）
@@ -114,10 +114,10 @@ timeline
 
 | # | 决策 | 结论 | 依据 |
 |---|---|---|---|
-| D1 | 上游不合并 PR 怎么办 | 纯 fork + 持续同步起步，每周 rebase | 先保可用，再谈独立 |
+| D1 | 上游不合并 PR 怎么办 | 持续同步上游起步，每周 rebase | 先保可用，再谈独立 |
 | D2 | jmfederico 是竞品不是续作 | 不能合并其代码，只能借鉴功能 | fork:false、栈不同、品牌混淆 |
 | D3 | 生态碎片化 → 抢事实主线？ | 不做主线之争，功能做好自己 | 成本高收益不确定 |
-| D4 | 产品定位升维 | 从"fork 维护"到"自己的开发工具" | 用户明确：独立品牌/独立边界 |
+| D4 | 产品定位升维 | 从"跟随上游"到"自己的开发工具" | 用户明确：独立品牌/独立边界 |
 | D5 | 远程调试功能集 | CDP/VNC/ttyd 三件套；WS 链路 M1 首验 | 对照 PiClaw 已验证；service-tunnels 零改动可暴露 |
 | D6 | 工具市场形态 | `just get <tool>` 统一安装（mise → apt → npx/pipx） | just 35k★ / mise 32k★ |
 | D7 | 推广时机 | 先产品后推广（M1 后再投放） | 缺终端/Docker 时转化率低 |
@@ -126,7 +126,7 @@ timeline
 | D10 | MCP 会话命名 | `token → instanceId`、`uid → frameId`、组合 `pageId` | 职责清晰、配置最小化 |
 | D11 | 用户交互协议 | `user_*` 工具族独立成类（confirm/choose/input/pick/presence/notify） | 工具名即语义，返回形状不同 |
 | D12 | npm scope | `@justdb/*`（裸名 3-4 字母被 npm 防抢注风控拒绝） | 实测 404/拒绝 |
-| D13 | 域名 | `aiti.py` 主站点；aiti.pw 已注册作备用/跳转 | 2026-08-08 申请 |
+| D13 | 域名 | `aiti.pw` 主站点（官网/文档/端点） | 2026-08-08 申请 |
 
 ---
 
@@ -134,11 +134,11 @@ timeline
 
 ### 已完成 ✅
 
-- **品牌身份**：命名 aiti、域名 aiti.py、GitHub 组织 aiti-ai、npm scope @justdb
+- **品牌身份**：命名 aiti、域名 aiti.pw、GitHub 组织 aiti-ai、npm scope @justdb
 - **aiti-devtools 0.2.x**：自检 21/21 全过（原生 HTML + React 均验证）；Inspector/HUD/事件冻结/调速面板/类 CDP 42 命令/框架识别/MCP 桥/刷新恢复/安全边界
 - **方案 B/C/D/E**：宿主目标路由、MCP 桥会话体系（pageId）、用户交互工具族（user_*）全链路实施
 - **桥链路**：SSE 页面桥 + 全局 pendingRequests + 事件广播（open_file）；service-tunnels 集成注入（transformResponse prepend）
-- **调研**：pi-web 生态全景、fork 谱系、omp、CLI 交互、工具市场、推广方案
+- **调研**：pi-web 生态全景、上游谱系、omp、CLI 交互、工具市场、推广方案
 
 ### 进行中 🚧
 
@@ -178,7 +178,7 @@ timeline
 - [ ] **aiti-mcp-bridge 配置最小化收官**：claim/secret/TTL 全量验证；sessions 发现文档化
 - [ ] **aiti-agent M0**：rebase v0.8.7、验证链、service-tunnels 公开化
 - [ ] **IDE 插件（R3）**：vscode 先行（注入 + 桥 + Copilot Chat 面板），idea 跟进
-- [ ] **域名/托管**：aiti.py 解析生效后配置站点（海外托管免备案）
+- [ ] **域名/托管**：aiti.pw 解析生效后配置站点（海外托管免备案）
 - [ ] **npm 清理**：`npm unpublish @justdb/aiti@0.0.0`（占坑脏版本，文档复制完成后执行）
 - [ ] **GitHub 建仓库**：aiti-ai/aiti、aiti-ai/aiti-docs、aiti-ai/aiti-devtools 等
 - [ ] **CLI 桥接 P0 前置实测**：CC control_request、Codex exec resume、OpenCode run --session
@@ -196,4 +196,4 @@ timeline
 | [aiti-devtools 规划](/roadmaps/aiti-devtools.md) | 注入生态计划 |
 | [aiti-mcp-bridge 规划](/roadmaps/aiti-mcp-bridge.md) | 桥接层计划 |
 | [指南 · 架构](/guide/architecture.md) | 分层架构与数据流 |
-| [MCP 桥 · 会话](/mcp-bridge/session.md) | pageId 会话体系 |
+| [MCP 桥 · 会话](/guide/mcp/session.md) | pageId 会话体系 |

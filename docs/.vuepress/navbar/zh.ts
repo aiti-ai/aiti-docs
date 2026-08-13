@@ -18,9 +18,14 @@ export const zhNavbar = navbar([
     link: "/devtools/",
   },
   {
+    text: "扩展",
+    icon: "puzzle-piece",
+    link: "/extensions/",
+  },
+  {
     text: "MCP 桥",
     icon: "link",
-    link: "/mcp-bridge/",
+    link: "/guide/mcp/",
   },
   {
     text: "IDE 插件",
@@ -42,8 +47,8 @@ export const zhNavbar = navbar([
         icon: "github",
       },
       {
-        text: "aiti.py",
-        link: "https://aiti.py",
+        text: "aiti.pw",
+        link: "https://aiti.pw",
         icon: "globe",
       },
     ],

@@ -15,3 +15,4 @@ description: aiti-devtools 使用文档 — 注入、插件、命令集
 | [Vite 插件](/devtools/vite-plugin.md) | `@justdb/aiti-devtools-vite` |
 | [Vue 插件](/devtools/vue-plugin.md) | `@justdb/aiti-devtools-vue` |
 | [CDP 命令集](/devtools/cdp-commands.md) | 8 域 42 命令参考 |
+| [aiti-agent 扩展点](/devtools/extension-points.md) | 扩展框架：插槽、契约、生命周期，及如何加新扩展点 |

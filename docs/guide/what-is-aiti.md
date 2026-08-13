@@ -14,7 +14,7 @@ tags: [guide, concept]
 | 项 | 值 |
 |---|---|
 | 品牌 | aiti（2026-08-08 定稿） |
-| 域名 | `https://aiti.py` |
+| 域名 | `https://aiti.pw` |
 | GitHub 组织 | `aiti-ai` |
 | npm scope | `@justdb`（裸名 3-4 字母被 npm 防抢注风控拒绝） |
 | 一句话 | AI 开发像打喷嚏一样简单自然 |
@@ -23,7 +23,7 @@ tags: [guide, concept]
 
 ### 主线 A：aiti-agent — Web 主战场
 
-以 **pi** 为引擎、自托管的个人 AI 开发工作台。**就是现在的 pi-web，我们做自有分支（fork）**——fork 是地基，产品身份独立。
+以 **pi** 为引擎、自托管的个人 AI 开发工作台。构建于开源项目 **pi-web** 之上，产品身份独立（来历见[项目起源](/guide/origin.md)）。
 
 - 浏览器是唯一操作面，`docker run` 一键起
 - 全生态唯一的 service-tunnels（HTTP vhost + TCP 隧道 + TOTP）与 queue 崩溃恢复
@@ -50,13 +50,13 @@ tags: [guide, concept]
 | 关系 | 说明 |
 |---|---|
 | pi = 引擎 | earendil-works/pi 是执行内核（每日发版，mise 管理）；aiti 接受这个依赖 |
-| pi-web = 地基 | agegr/pi-web 是 Web 壳，**我们 fork 出自有分支**（146 commits 领先）；继续 rebase 同步，但品牌/身份独立 |
+| pi-web = 起点 | agegr/pi-web 是开源的 Web 壳，我们构建于其上（含全生态唯一的 service-tunnels / queue 恢复）；产品身份独立，来龙去脉见[项目起源](/guide/origin.md) |
 | 竞品 fork | jmfederico（栈不同不可合并）、PiClaw（拼定位不拼功能）、omp（远期双引擎选项） |
 
 ## 生态全景
 
 ```
-         aiti.py（官网/文档/端点）
+         aiti.pw（官网/文档/端点）
                 │
    ┌────────────┼────────────┐
    ▼            ▼            ▼

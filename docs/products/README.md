@@ -12,7 +12,7 @@ aiti 不是单一产品，而是一个 **AI 开发工具生态**。所有产品�
 
 | # | 产品 | npm 包名 | 形态 | 一句话定位 | 状态 |
 |---|---|---|---|---|---|
-| 1 | **aiti-agent** | `@justdb/aiti-agent` | Web 应用 + Docker 镜像 | 自托管个人 AI 开发工作台（**pi-web 自有分支**），浏览器是唯一操作面 | 🚧 M0-M4 |
+| 1 | **aiti-agent** | `@justdb/aiti-agent` | Web 应用 + Docker 镜像 | 自托管个人 AI 开发工作台（**基于 pi-web 构建**），浏览器是唯一操作面 | 🚧 M0-M4 |
 | 2 | **aiti-core** | `@justdb/aiti` | SDK（协议/类型/共享库） | 全产品共享：桥协议、`pageId` 会话模型、注入脚本、MCP 工具定义 | 📋 |
 | 3 | **aiti-devtools** | `@justdb/aiti-devtools` | 注入 SDK（`inject.js`） | 页面内 AI 调试助手：`__dbg` + Inspector + MCP 桥（形态① 主动适配） | ✅ 0.2.x |
 | 4 | **aiti-devtools-vite** | `@justdb/aiti-devtools-vite` | Vite 插件 | dev server 自动注入，**本地 inject** | 📋 |
@@ -27,7 +27,7 @@ aiti 不是单一产品，而是一个 **AI 开发工具生态**。所有产品�
 | 13 | **aiti-devtools-chrome** | `@justdb/aiti-devtools-chrome` | Chrome 扩展 | 免改代码注入（形态②），任意站点可调试 | 📋 |
 | 14 | **aiti-docs** | `@justdb/aiti-docs` | 文档站（本网站） | VuePress 文档 + 产品矩阵 + 路线图 | ✅ 本页 |
 
-> 品牌与身份：GitHub 组织 `aiti-ai` · 官网 `https://aiti.py` · npm scope `@justdb` · 协议 MIT。
+> 品牌与身份：GitHub 组织 `aiti-ai` · 官网 `https://aiti.pw` · npm scope `@justdb` · 协议 MIT。
 
 ## 二、分层架构
 
@@ -60,7 +60,7 @@ aiti 不是单一产品，而是一个 **AI 开发工具生态**。所有产品�
 
 ### 主线 A：aiti-agent — Web 主战场
 
-以 **pi** 为引擎、自托管的个人 AI 开发工作台。地基是 **agegr/pi-web 的自有分支**（146 commits 领先，含全生态唯一的 service-tunnels / queue 恢复），产品身份独立。
+以 **pi** 为引擎、自托管的个人 AI 开发工作台。构建于开源项目 **agegr/pi-web** 之上（含全生态唯一的 service-tunnels / queue 恢复），产品身份独立。来历见[项目起源](/guide/origin.md)。
 
 - 形态：Docker 单容器（lite/full）→ 浏览器 + 移动端
 - 能力五层：UI 层 → 调试可视化层（CDP/VNC/ttyd）→ 暴露层（service-tunnels）→ 执行层（pi agent SDK）→ 数据层（共享 JSONL + queue 持久化）
@@ -109,6 +109,6 @@ docker run aiti → 浏览器打开工作台 → 页面 dev 环境注入 aiti-de
 | 命名 | `token → instanceId`（连接身份）、`uid → frameId`（目标 frame）、组合 = `pageId` |
 | 环境变量 | 统一 `AITI_*`（如 `AITI_OPEN_CMD`、`AITI_MCP_TOKEN`） |
 | npm scope | `@justdb/*`（裸名 3-4 字母被 npm 防抢注风控拒绝） |
-| 域名 | `aiti.py`（官网 / 文档 / MCP 端点） |
+| 域名 | `aiti.pw`（官网 / 文档 / MCP 端点） |
 
 > 下一节：[指南 · 什么是 aiti](/guide/what-is-aiti.md)

@@ -50,4 +50,4 @@ aiti: 重新注入          # 检测到双注入时修复
 | AI 窗口注入 | VS Code Webview（Copilot Chat 扩展点）；无扩展点时回退「打开 ai.html」 |
 | 多窗口 | 每工程一个 instanceId；同工程多窗口共享 |
 
-> 相关：[IDE 插件产品页](/products/aiti-ide-plugins.md) · [改造 AI agent](/mcp-bridge/ai-agents.md)
+> 相关：[IDE 插件产品页](/products/aiti-ide-plugins.md) · [改造 AI agent](/guide/mcp/ai-agents.md)

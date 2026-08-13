@@ -77,4 +77,4 @@ execInPage(cmd, args, frameId)
 - 危险命令确认卡 + 确认队列；浏览器受限操作走手势桥（用户真实点击）
 - 桥 token 认证；右键/中键放行
 
-> 相关：[CDP 命令集](/devtools/cdp-commands.md) · [MCP 桥 · 会话](/mcp-bridge/session.md)
+> 相关：[CDP 命令集](/devtools/cdp-commands.md) · [MCP 桥 · 会话](/guide/mcp/session.md)

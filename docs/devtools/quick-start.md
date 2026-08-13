@@ -58,5 +58,5 @@ export default defineConfig({
 ## 下一步
 
 - 了解注入原理：[inject](/devtools/inject.md)
-- 接入 AI：[MCP 桥 · AI agent](/mcp-bridge/ai-agents.md)
+- 接入 AI：[MCP 桥 · AI agent](/guide/mcp/ai-agents.md)
 - 命令参考：[CDP 命令集](/devtools/cdp-commands.md)

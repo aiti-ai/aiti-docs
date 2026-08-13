@@ -69,7 +69,7 @@ AI 窗开关 + 位置尺寸、放行方案、视口、目标 URL 全部持久化
 
 ## 4. 文件结构
 
-开发源在 `examples/dbg-widget/`（vite dev + 构建），发布形态为 **pi-web 扩展**（`dev-repo/aiti-devtools/`，部署 `~/.pi/web/extensions/aiti-devtools/`）。
+开发源在 `examples/dbg-widget/`（vite dev + 构建），发布形态为 **aiti-agent 扩展**（`dev-repo/aiti-devtools/`，部署 `~/.pi/web/extensions/aiti-devtools/`）。
 
 | 文件 | 职责 |
 |---|---|
@@ -78,7 +78,7 @@ AI 窗开关 + 位置尺寸、放行方案、视口、目标 URL 全部持久化
 | `examples/dbg-widget/src/mcp/bridge-client.js` | 通用桥客户端（页面/AI 窗连桥） |
 | `examples/dbg-widget/tools/build-launcher.mjs` | 构建单文件 `dist/aiti-launcher.js`（client + launcher 打包） |
 | `examples/dbg-widget/dbg-mcp-server.cjs` | MCP 桥（stdio + HTTP + 页面 SSE）独立运行版 |
-| `dev-repo/aiti-devtools/` | pi-web 扩展：`bridge.ts`（MCP 桥）/ `inject.ts`（service-tunnels 注入）/ `client/aiti-client.mjs`（AI 窗口） |
+| `dev-repo/aiti-devtools/` | aiti-agent 扩展：`bridge.ts`（MCP 桥）/ `inject.ts`（service-tunnels 注入）/ `client/aiti-client.mjs`（AI 窗口） |
 | `examples/dbg-widget/tools/deploy-ext.mjs` | 构建 launcher + 部署扩展到 `~/.pi/web/extensions/aiti-devtools/` |
 
 ## 5. 开发 / 运行
@@ -87,7 +87,7 @@ AI 窗开关 + 位置尺寸、放行方案、视口、目标 URL 全部持久化
 cd examples/dbg-widget
 pnpm dev          # vite：hub.html 测试中心（五框架目标页 + 自检）
 node tools/build-launcher.mjs   # → dist/aiti-launcher.js（注入单文件）
-node tools/deploy-ext.mjs       # → ~/.pi/web/extensions/aiti-devtools/（pi-web 热重载）
+node tools/deploy-ext.mjs       # → ~/.pi/web/extensions/aiti-devtools/（aiti-agent 热重载）
 node dbg-mcp-server.cjs --http :8777   # 独立 MCP 桥
 ```
 

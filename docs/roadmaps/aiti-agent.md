@@ -1,13 +1,13 @@
 ---
 title: aiti-agent 规划
 icon: 🤖
-description: Web 工作台（pi-web fork）阶段计划 M0-M4
+description: Web 工作台（基于 pi-web）阶段计划 M0-M4
 tags: [roadmap, aiti-agent]
 ---
 
 # aiti-agent 规划（Web 主战场）
 
-> 就是现在的 **pi-web 自有分支**。fork 是地基，产品身份独立（品牌 aiti、域名 aiti.py、scope @justdb）。
+> 构建于开源项目 **pi-web** 之上，产品身份独立（品牌 aiti、域名 aiti.pw、scope @justdb）。来历见[项目起源](/guide/origin.md)。
 
 ## 阶段计划
 

@@ -19,22 +19,100 @@
   display: block;
 }
 
-/* 代码块横向滚动 */
+/* 代码块：始终折行自适应（任何屏幕都不横向滚动） */
 .vp-page pre,
 .vp-page div[class*="language-"] {
   max-width: 100%;
-  overflow-x: auto;
+  overflow-x: hidden;
+}
+.vp-page div[class*="language-"] pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
-/* 表格宽度 */
+/* 表格：始终折行自适应 */
 .vp-page table {
   width: 100%;
   table-layout: auto;
   display: table;
-  overflow-x: auto;
+  overflow-x: hidden;
+}
+.vp-page table th,
+.vp-page table td {
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  white-space: normal;
+  vertical-align: top;
 }
 
 /* 产品矩阵卡片表格行高亮 */
 .vp-page table tbody tr:hover {
   background-color: var(--bg-color-mute, rgba(124, 58, 237, 0.06));
+}
+
+/* ====== 扩展列表（ExtensionList 组件） ====== */
+.ext-list { margin: 1.25rem 0; }
+.ext-note { color: var(--text-color-lighter); padding: 1rem 0; }
+.ext-error { color: var(--danger-color, #e05252); }
+.ext-meta { font-size: 0.85rem; color: var(--text-color-lighter); margin-bottom: 1rem; }
+.ext-group { margin-bottom: 1.75rem; }
+.ext-cat {
+  font-size: 1.05rem;
+  font-weight: 600;
+  border-bottom: 1px solid var(--border-color, #e5e7eb);
+  padding-bottom: 0.35rem;
+  margin-bottom: 0.75rem;
+}
+.ext-cat-count {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--text-color-lighter);
+  margin-left: 0.35rem;
+}
+.ext-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 0.75rem; }
+.ext-card {
+  border: 1px solid var(--border-color, #e5e7eb);
+  border-radius: 8px;
+  padding: 0.75rem 0.9rem;
+  background: var(--bg-color-float, #fff);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.ext-card-head { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+.ext-name { font-weight: 600; }
+.ext-type {
+  font-size: 0.72rem;
+  color: var(--text-color-lighter);
+  border: 1px solid var(--border-color, #e5e7eb);
+  border-radius: 999px;
+  padding: 0.05rem 0.5rem;
+}
+.ext-status { font-size: 0.72rem; border-radius: 999px; padding: 0.05rem 0.5rem; }
+.ext-status.active { background: #e6f7e6; color: #1a7f37; }
+.ext-status.beta { background: #fff4e5; color: #b26a00; }
+.ext-status.experimental { background: #f3e8ff; color: #7c3aed; }
+.ext-status.archived { background: #f0f0f0; color: #666; }
+.ext-desc { font-size: 0.88rem; color: var(--text-color, #333); margin: 0.15rem 0 0; }
+.ext-detail { display: grid; grid-template-columns: auto 1fr; gap: 0.1rem 0.6rem; margin: 0.2rem 0 0; font-size: 0.8rem; }
+.ext-detail dt { color: var(--text-color-lighter); }
+.ext-detail dd { margin: 0; overflow-wrap: anywhere; }
+.ext-tag {
+  font-size: 0.72rem;
+  background: var(--bg-color-secondary, #f3f4f6);
+  border-radius: 4px;
+  padding: 0.05rem 0.4rem;
+  margin-right: 0.3rem;
+}
+.ext-install {
+  margin: 0.35rem 0 0;
+  font-size: 0.78rem;
+  background: var(--code-bg-color, #f6f8fa);
+  border-radius: 6px;
+  padding: 0.5rem 0.7rem;
+  white-space: pre-wrap;
+  word-break: break-all;
+  overflow-wrap: anywhere;
+  overflow-x: hidden;
 }

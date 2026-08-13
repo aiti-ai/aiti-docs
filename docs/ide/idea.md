@@ -48,4 +48,4 @@ Tools → aiti
 5. 选择方案 A → AI 改代码 → 页面自动验证
 ```
 
-> 相关：[IDE 插件产品页](/products/aiti-ide-plugins.md) · [改造 AI agent](/mcp-bridge/ai-agents.md)
+> 相关：[IDE 插件产品页](/products/aiti-ide-plugins.md) · [改造 AI agent](/guide/mcp/ai-agents.md)

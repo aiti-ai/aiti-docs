@@ -40,7 +40,7 @@ IDE AI agent 窗口 / Claude Code / Cursor / aiti-agent
 │  ├─ /bridge/sse               │  持久连接（role=page|ai）
 │  ├─ /bridge/result            │  执行结果回桥
 │  ├─ /bridge/event             │  页面事件（open_file 等）
-│  └─ /mcp/sse + /mcp           │  MCP JSON-RPC（tools/list / tools/call）
+│  └─ /mcp/mcp              │  MCP JSON-RPC（tools/list / tools/call；Streamable HTTP）
 └────────────┬────────────────┘
              │ SSE
              ▼
@@ -90,5 +90,17 @@ npx @justdb/aiti-mcp-bridge --http 8777
 - secret 防跨页面冲突：只有原页面能复用自己的 instanceId
 - 危险命令确认 + 手势桥（transient activation）
 - 桥端点默认本机监听，支持 `AITI_MCP_TOKEN` 环境变量
+- MCP 端点外网鉴权：计划适配 service-tunnels（auth + token 并存）
 
-> 会话体系详解见 [MCP 桥 · 会话](/mcp-bridge/session.md)，改造 AI agent 见 [MCP 桥 · AI agent](/mcp-bridge/ai-agents.md)。
+## 7. 2026-08 新增能力
+
+| 能力 | 说明 | 文档 |
+|---|---|---|
+| **Streamable HTTP 传输** | `GET /mcp/mcp` 持久流 + `Mcp-Session-Id`，服务端可主动写消息 | [MCP Server](/guide/mcp/server.md) |
+| **`aiti_inbox` 消息主通道** | 人发消息/异步作答/页面事件进队列，agent 调工具取走——任何 agent 100% 可用 | [接入 AI agent](/guide/mcp/ai-agents.md) |
+| **`/bridge/push`** | 人 → AI 主动发消息（sampling 推 / inbox 入队 降级） | [MCP Server](/guide/mcp/server.md) |
+| **消息 session 存储** | 参照 pi session 同款 JSONL（append-only 事件流），consumed 历史保留 | [MCP Server](/guide/mcp/server.md) |
+| **cockpit 通用 AI 窗口** | 引导页 + 地址配置中枢 + 操作台；无 aiUrl 时默认打开 | [cockpit](/guide/mcp/cockpit.md) |
+| **消息消费状态** | pending → delivered → consumed，窗口滑动窗口显示 | [cockpit](/guide/mcp/cockpit.md) |
+
+> 会话体系详解见 [MCP 桥 · 会话](/guide/mcp/session.md)，改造 AI agent 见 [MCP 桥 · AI agent](/guide/mcp/ai-agents.md)，人侧界面见 [cockpit](/guide/mcp/cockpit.md)。

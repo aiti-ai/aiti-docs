@@ -52,9 +52,9 @@ createDbgLauncher → window.__dbg 暴露
 
 ```
 AI (MCP client)
-  │ JSON-RPC (stdio / HTTP / SSE)
+  │ JSON-RPC (stdio / HTTP stateless / Streamable HTTP)
   ▼
-bridge: /mcp/sse + /mcp ── tools/list · tools/call(page_exec/page_snapshot/user_*)
+bridge: /mcp/mcp ── tools/list · tools/call(page_exec/page_snapshot/user_*/aiti_inbox)
   │ SSE 推 {type:'exec', requestId, cmd, args}
   ▼
 页面 client（mcpConnect 注册，EventSource 长连）
@@ -66,7 +66,11 @@ bridge: /mcp/sse + /mcp ── tools/list · tools/call(page_exec/page_snapshot/
 bridge 全局 pendingRequests resolve → MCP 响应回 AI
 ```
 
-事件方向：页面事件（`open_file`、`dbg_element_selected`、`user_*` 作答）→ bridge 广播 → AI 窗口（ai.html / IDE AI 窗口）展示与作答。
+- **Streamable HTTP**（2026-08）：`GET /mcp/mcp` 持久流 + `Mcp-Session-Id`——服务端可主动写消息（sampling 请求/进度）；pi 等现代 client 自动优先探测（详情见 [MCP Server](/guide/mcp/server.md)）。
+- **消息主通道 `aiti_inbox`**（2026-08）：人发消息/异步作答/页面事件进 outbox 队列，agent 调工具取走（任何 agent 100% 可用；sampling 推仅 pi 等少数支持，见 [接入 AI agent](/guide/mcp/ai-agents.md)）。
+- **人侧界面 cockpit**（2026-08）：引导接入 + 地址配置中枢 + 操作台；无 aiUrl 时 AI 窗默认打开（见 [cockpit](/guide/mcp/cockpit.md)）。
+
+事件方向：页面事件（`open_file`、`dbg_element_selected`、`user_*` 作答）→ bridge 广播 → AI 窗口（cockpit / ai.html / IDE AI 窗口）展示与作答。
 
 ## 4. 会话模型（pageId）
 
@@ -110,7 +114,7 @@ sequenceDiagram
 浏览器（唯一操作面）
   │
   ▼
-aiti-agent (Next.js, pi-web fork)
+aiti-agent (Next.js, 基于 pi-web)
   ├── 会话管理（共享 pi JSONL + queue 持久化）
   ├── service-tunnels（HTTP vhost + TCP 隧道 + TOTP）
   ├── pi agent SDK（进程内执行层）
@@ -118,4 +122,4 @@ aiti-agent (Next.js, pi-web fork)
   └── 工具市场（just get: mise → apt → npx/pipx）
 ```
 
-> 相关：[产品矩阵](/products/README.md) · [MCP 桥 · 会话](/mcp-bridge/session.md) · [开发者工具 · 注入原理](/devtools/inject.md)
+> 相关：[产品矩阵](/products/README.md) · [MCP 桥 · 会话](/guide/mcp/session.md) · [开发者工具 · 注入原理](/devtools/inject.md)

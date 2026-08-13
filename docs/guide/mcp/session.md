@@ -2,7 +2,7 @@
 title: 会话体系
 icon: 🪪
 description: pageId = instanceId/frameId、发现、复用、刷新不断线
-tags: [mcp-bridge, session, pageId]
+tags: [guide, mcp-bridge, session, pageId]
 ---
 
 # 会话体系（pageId）
@@ -11,11 +11,11 @@ tags: [mcp-bridge, session, pageId]
 
 ## 1. ID 归属
 
-| 旧 | 新 | 语义 | 示例 |
-|---|---|---|---|
-| `token` | **`instanceId`** | 连接身份（桥分配） | 带端口页面用端口号 `6513`；否则随机 `qx482` |
-| `uid` | **`frameId`** | 目标 frame（CDP 术语） | `host` / `f0` / `f1` |
-| — | **`pageId`** | 最终配置 ID = instanceId/frameId | `01234/f0` |
+| 概念 | 语义 | 示例 |
+|---|---|---|
+| `instanceId` | 连接身份（桥分配） | 带端口页面用端口号 `6513`；否则随机 `qx482` |
+| `frameId` | 目标 frame（CDP 术语） | `host` / `f0` / `f1` |
+| `pageId` | 最终配置 ID = instanceId/frameId | `01234/f0` |
 
 - 页面连桥：申请 `instanceId` → 登记各 `frameId` → 拼装 `pageId`，**页面侧掌控**并上报给桥
 - 桥只做登记与路由（pageId → instanceId 找连接 + frameId 找目标 frame）
@@ -64,9 +64,17 @@ curl http://localhost:8777/bridge/sessions
 
 AI 引导建议：先 `bridge_status`（或 `GET /bridge/sessions`）→ 选择默认 pageId → 其余操作全部带 pageId。
 
-## 4. 配置最小化
+## 4. Agent 会话（MCP 侧）
+
+- agent 经 MCP 连桥后，桥按 `clientInfo.name`（或 `aiti_hello` 的 agentId）注册到 **agents 注册表**
+- streamable HTTP 会话：`Mcp-Session-Id` 关联 agent + 持久流（可推）；stateless：无会话，按 agentId 参数区分
+- agent 断开：流断 → 标记离线，注册信息 + outbox 保留 TTL（同 instanceId 的 TTL 模式）
+- 多 agent 同时在线：各 agent 独立注册表项，`user_*` 交互带 agentId（窗口显示"谁在问"），互不串台
+
+## 5. 配置最小化
 
 - inspect 只需传 AI 地址（`aiUrl`）——宿主把环境（pageId）构建好，AI 窗口打开即用
 - IDE 插件自动配置：桥地址 + token + 当前工程 pageId 写入 MCP 配置，用户零手工
+- 无 aiUrl 时 AI 窗默认打开 cockpit（引导页），显示桥地址与接入方式
 
-> 相关：[MCP Server](/mcp-bridge/server.md) · [改造 AI agent](/mcp-bridge/ai-agents.md)
+> 相关：[MCP Server](/guide/mcp/server.md) · [接入 AI agent](/guide/mcp/ai-agents.md) · [cockpit](/guide/mcp/cockpit.md)

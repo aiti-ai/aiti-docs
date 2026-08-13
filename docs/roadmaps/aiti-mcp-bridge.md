@@ -50,4 +50,4 @@ aiti-mcp-bridge（本地服务）→ pageId 会话 → SSE → aiti-devtools 注
         └── 页面事件（open_file / 元素选中 / user_* 作答）实时回推 AI 窗口
 ```
 
-> 协议细节见 [MCP 桥 · Server](/mcp-bridge/server.md)，会话见 [会话体系](/mcp-bridge/session.md)。
+> 协议细节见 [MCP 桥 · Server](/guide/mcp/server.md)，会话见 [会话体系](/guide/mcp/session.md)。

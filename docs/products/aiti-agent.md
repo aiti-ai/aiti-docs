@@ -1,21 +1,21 @@
 ---
 title: aiti-agent
 icon: 🤖
-description: 自托管个人 AI 开发工作台（pi-web 自有分支），Web 主战场
+description: 自托管个人 AI 开发工作台（基于 pi-web 构建），Web 主战场
 tags: [product, aiti-agent, pi-web]
 ---
 
 # aiti-agent — Web 主战场
 
 > **一句话**：以 **pi** 为引擎、自托管的个人 AI 开发工作台 —— 浏览器是唯一操作面，`docker run` 一键起，`just get` 装工具。
-> **关系**：**就是现在的 pi-web，我们会自有分支（fork）**。产品身份独立，功能边界不受 pi-web 限制。
+> **来历**：构建于开源项目 pi-web 之上，越用越深、越改越多，最终按自己的方式发版（见[项目起源](/guide/origin.md)）。
 
 ## 1. 定位
 
 | 维度 | 结论 |
 |---|---|
 | 干什么 | 自建 AI 开发工作台（不是"再做一个 pi-web"，是"用 pi 做自己的工具"） |
-| 地基 | fork agegr/pi-web（146 commits 领先，含全生态唯一的 service-tunnels / queue 恢复） |
+| 地基 | 构建于开源项目 agegr/pi-web（含全生态唯一的 service-tunnels / queue 恢复） |
 | 引擎 | pi（earendil-works/pi，每日发版，mise 管理版本） |
 | 差异化 | 共享 pi JSONL 会话 + 真实工作区 + 服务隧道 + 远程调试可视化（无人五层齐全） |
 | 形态 | Docker 单容器（lite/full）→ 浏览器 + 移动端 |
@@ -46,16 +46,16 @@ UI 层：会话/服务/终端/桌面/调试 统一界面
 | `just get` 工具市场 | 📋 M1 起步 | just + mise + apt 分层安装 |
 | PWA / 移动端 / SSH 多机 | 📋 M4 | 远期 |
 
-## 4. 与 pi / fork 的关系
+## 4. 与 pi / pi-web 的关系
 
 - **pi = 引擎**：接受每日发版依赖，mise 管理版本；远期可抽象（M4 再议，omp 双引擎为备选）。
-- **fork = 地基**：继续 rebase 跟随上游，但**产品身份独立**（独立品牌 aiti、独立域名、独立 npm scope）。
+- **pi-web = 起点**：构建于其开源代码之上，产品身份独立（独立品牌 aiti、独立域名、独立 npm scope）。完整的来龙去脉见[项目起源](/guide/origin.md)。
 
 ## 5. 与生态关系
 
 | 项目 | stars | 定位 | 我们 |
 |---|---|---|---|
-| agegr/pi-web（上游） | 3.7k | 原始版 | **自有分支**（继续同步，不合并 PR 就自己改） |
+| agegr/pi-web（上游） | 3.7k | 原始版 | 我们构建于其上，按自己的方式演进 |
 | jmfederico | 474 | 服务化重写 | 只能借鉴功能，不能合并代码（fork:false，栈不同） |
 | PiClaw | 814 | Docker 全栈 | 拼定位不拼功能：共享 JSONL 会话 + 真实工作区 + 隧道 |
 | omp（Oh My Pi） | 22.5k | Rust 核心 | 双引擎远期选项（M4 评估 SDK 兼容性） |
@@ -67,7 +67,7 @@ UI 层：会话/服务/终端/桌面/调试 统一界面
 docker run -p 30141:30141 -v aiti-data:/data aiti-ai/aiti:lite
 
 # 浏览器打开
-open https://aiti.py  # 或 http://localhost:30141
+open https://aiti.pw  # 或 http://localhost:30141
 ```
 
 > 规划详见 [路线图 · aiti-agent](/roadmaps/aiti-agent.md) 与 [整体规划](/roadmaps/master-plan.md)。

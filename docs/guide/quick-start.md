@@ -87,6 +87,6 @@ AI：已修复 Form.vue:42 —— 增加空值兜底。
 ## 下一步
 
 - [开发者工具 · 注入原理](/devtools/inject.md)
-- [MCP 桥 · 会话体系](/mcp-bridge/session.md)
-- [MCP 桥 · 改造 AI agent](/mcp-bridge/ai-agents.md)
+- [MCP 桥 · 会话体系](/guide/mcp/session.md)
+- [MCP 桥 · 改造 AI agent](/guide/mcp/ai-agents.md)
 - [整体规划](/roadmaps/master-plan.md)

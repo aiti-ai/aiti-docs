@@ -4,3 +4,6 @@ docs/.vuepress/.temp/
 docs/.vuepress/dist/
 *.local
 .DS_Store
+
+# 编译生成物（extensions-catalog 插件每次编译重新生成）
+docs/.vuepress/public/extensions.json

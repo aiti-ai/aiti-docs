@@ -4,7 +4,7 @@ import { zhNavbar } from "./navbar/index.js";
 import { zhSidebar } from "./sidebar/index.js";
 
 export default hopeTheme({
-  hostname: "https://aiti.py",
+  hostname: "https://aiti.pw",
   author: {
     name: "aiti-ai",
     url: "https://github.com/aiti-ai",
@@ -171,7 +171,7 @@ export default hopeTheme({
 
     // SEO 插件
     seo: {
-      canonical: "https://aiti.py",
+      canonical: "https://aiti.pw",
     },
   },
 });
