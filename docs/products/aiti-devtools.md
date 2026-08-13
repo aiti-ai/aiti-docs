@@ -1,13 +1,13 @@
 ---
 title: aiti-devtools
 icon: 🛠️
-description: 页面内 AI 调试助手 — 注入 __dbg + Inspector + MCP 桥
+description: 页面内 AI 调试助手 — 注入 aiti-devtools + Inspector + MCP 桥
 tags: [product, aiti-devtools, inject]
 ---
 
 # aiti-devtools — 页面内 AI 调试助手（注入核心包）
 
-> **一句话**：把 AI 请到页面开发现场 —— 注入 `__dbg` + Inspector 悬浮 UI + MCP 桥，AI 和人真正在**同一个页面**上有机协作。
+> **一句话**：把 AI 请到页面开发现场 —— 注入 `aiti-devtools` + Inspector 悬浮 UI + MCP 桥，AI 和人真正在**同一个页面**上有机协作。
 > **形态**：① 开发者主动适配（本包）→ ② Chrome 扩展/平台内置 → ③ IDE 插件（vscode/idea）。
 > 当前版本 **0.2.x**：自检 21/21 全过（原生 HTML + React 均验证），含华为 HarmonyOS 真机缩放修复。
 
@@ -16,8 +16,8 @@ tags: [product, aiti-devtools, inject]
 ```html
 <script src="aiti-devtools/inject.js"></script>
 <script>
-  createDbgLauncher('http://localhost:3000/todo', {
-    aiUrl: 'http://localhost:30141/dbg/chat?session=abc', // AI 会话页（可选）
+  createAitiLauncher('http://localhost:3000/todo', {
+    aiUrl: 'http://localhost:30141/ai/chat?session=abc', // AI 会话页（可选）
     bridgeBase: 'http://localhost:8777',                   // MCP 桥（可选）
     bridgeToken: 'dev',
   });
@@ -73,7 +73,7 @@ AI 窗开关 + 位置尺寸、放行方案、视口、目标 URL 全部持久化
 
 | 文件 | 职责 |
 |---|---|
-| `examples/dbg-widget/src/client/index.js` | 注入的迷你 `__dbg` client（元素画像：尺寸/样式/组件源码与位置/调用处/pageId/url） |
+| `examples/dbg-widget/src/client/index.js` | 注入的迷你 `aiti-devtools` client（元素画像：尺寸/样式/组件源码与位置/调用处/pageId/url） |
 | `examples/dbg-widget/src/launcher/` | 宿主 launcher（widget UI / inspector / MCP 桥 / 交互面板，模块化） |
 | `examples/dbg-widget/src/mcp/bridge-client.js` | 通用桥客户端（页面/AI 窗连桥） |
 | `examples/dbg-widget/tools/build-launcher.mjs` | 构建单文件 `dist/aiti-launcher.js`（client + launcher 打包） |

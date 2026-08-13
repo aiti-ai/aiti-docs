@@ -13,19 +13,19 @@ tags: [guide, mcp-bridge, cockpit, ai-window]
 
 | 地址 | 含义 | 谁用 | 来源 |
 |---|---|---|---|
-| **AI 服务器地址**（aiUrl） | AI 窗 iframe 加载的页面 = 适配了 aiti 协议的带 Web agent（aiti-agent / pi-web / 任何实现 `__dbg` 协议 + aiti 扩展 client 的页面） | launcher 打开 AI 窗 | 自动推断（注入时 script src → 服务根）；`data-ai-url`；用户在 cockpit 设置 |
+| **AI 服务器地址**（aiUrl） | AI 窗 iframe 加载的页面 = 适配了 aiti 协议的带 Web agent（aiti-agent / pi-web / 任何实现 `aiti-devtools` 协议 + aiti 扩展 client 的页面） | launcher 打开 AI 窗 | 自动推断（注入时 script src → 服务根）；`data-ai-url`；用户在 cockpit 设置 |
 | **MCP 桥地址**（bridge URL） | MCP server 端点（`…/mcp/mcp`）；agent 的 mcp.json 指向它；窗口的 bridge-client 连它 | agent + 窗口 | 自动推断（注入时 script src → 同目录 mcp）；`data-bridge-url`；手动编辑 |
 | **agent 的 MCP 配置片段** | 由桥地址派生的接入配置（mcp.json / claude mcp add 命令） | 用户复制到 agent | 窗口生成显示 |
 
-> 适配规则（开放协议）：**任何带 Web 界面的 agent**，只要它的页面注入 aiti-devtools 扩展 client（或实现 `__dbg` postMessage 协议），就可以作为 AI 服务器地址被配置——即"主动纳入 aiti 体系"。
+> 适配规则（开放协议）：**任何带 Web 界面的 agent**，只要它的页面注入 aiti-devtools 扩展 client（或实现 `aiti-devtools` postMessage 协议），就可以作为 AI 服务器地址被配置——即"主动纳入 aiti 体系"。
 
 ## 2. 三条接入路径
 
 ### 路径一：AI 服务器地址（带 Web agent 适配，最完整体验）
 
-1. 用户在 cockpit 设置 AI 服务器地址 → postMessage `dbg_ai_set_url` 推给宿主 inject。
+1. 用户在 cockpit 设置 AI 服务器地址 → postMessage `aiti_ai_set_url` 推给宿主 inject。
 2. launcher 重建 AI iframe 加载新地址。
-3. **协议探测**：10s 内收到该 iframe 的 `dbg_ai_ready`（扩展 client 心跳）= 协议通 → **inject 确认后才记 localStorage** → 下次自动打开该界面，不再需要引导页。
+3. **协议探测**：10s 内收到该 iframe 的 `aiti_ai_ready`（扩展 client 心跳）= 协议通 → **inject 确认后才记 localStorage** → 下次自动打开该界面，不再需要引导页。
 4. **10s 不通**（普通网站/未适配）→ 提示"是否回到引导页"；不记录地址。
 
 ### 路径二：MCP 桥地址（降级方式，任何 agent）

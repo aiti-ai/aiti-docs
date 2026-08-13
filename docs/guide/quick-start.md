@@ -35,7 +35,7 @@ export default defineConfig({
 ```html
 <script src="aiti-devtools/inject.js"></script>
 <script>
-  createDbgLauncher('http://localhost:3000/todo', {
+  createAitiLauncher('http://localhost:3000/todo', {
     bridgeBase: 'http://localhost:8777',
   });
 </script>

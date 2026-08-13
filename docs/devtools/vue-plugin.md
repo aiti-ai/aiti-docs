@@ -46,7 +46,7 @@ app.mount('#app');
 
 ## 能力
 
-- 注入 `__dbg` + Inspector UI（与注入核心包同构）
+- 注入 `aiti-devtools` + Inspector UI（与注入核心包同构）
 - **组件级定位**：选区 → `{framework:'vue', file, line, component}` → AI 可直接定位到 SFC 文件
 - 与 Vite 插件叠加使用时自动跳过（避免双注入）
 

@@ -28,7 +28,7 @@ export default defineConfig({
       // MCP 桥（可选）：devtools 自动连桥并登记 pageId
       bridge: { base: 'http://localhost:8777', token: 'dev' },
       // AI 会话页（可选）：aiti-agent 或 IDE AI 窗口
-      aiUrl: 'http://localhost:30141/dbg/chat',
+      aiUrl: 'http://localhost:30141/ai/chat',
       // 默认 dev-only；生产构建强制关闭
       enabled: process.env.NODE_ENV !== 'production',
       // 注入模式：'prepend'（默认，响应开头最早执行）
@@ -52,7 +52,7 @@ export default defineConfig({
 
 - 仅对 dev server（或开启的 preview）响应注入；生产 build 输出不含注入代码
 - 注入脚本内联进 HTML 响应，无额外网络请求
-- 与手动 `<script>` 引入、IDE 插件注入互斥检测（`window.__dbg` 已存在则跳过）
+- 与手动 `<script>` 引入、IDE 插件注入互斥检测（`window.__aiti` 已存在则跳过）
 
 ## 验证
 

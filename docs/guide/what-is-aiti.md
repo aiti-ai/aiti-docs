@@ -33,7 +33,7 @@ tags: [guide, concept]
 
 把 AI 请到页面开发现场。**嵌入各个主流开发工具**（Vite / Vue / Next / React / Svelte），**本地 inject**：
 
-- 注入 `__dbg` 迷你 client + Inspector 悬浮 UI + 8 域 42 命令类 CDP 命令集
+- 注入 `aiti-devtools` 迷你 client + Inspector 悬浮 UI + 8 域 42 命令类 CDP 命令集
 - 框架源码定位：React/Next/Vue/Svelte dev 构建 → `{framework, file, line}`
 - 三种形态：主动适配（script 引入）/ Chrome 扩展 / IDE 插件
 

@@ -44,7 +44,7 @@ IDE AI agent 窗口 / Claude Code / Cursor / aiti-agent
 └────────────┬────────────────┘
              │ SSE
              ▼
-   aiti-devtools（页面注入）→ __dbg client → 目标 frame 执行
+   aiti-devtools（页面注入）→ aiti-devtools client → 目标 frame 执行
 ```
 
 ## 4. MCP 工具族

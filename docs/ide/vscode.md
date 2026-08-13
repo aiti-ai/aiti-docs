@@ -44,7 +44,7 @@ aiti: 重新注入          # 检测到双注入时修复
 
 | 要点 | 方案 |
 |---|---|
-| 注入检测 | `window.__dbg` 存在则跳过（防双注入） |
+| 注入检测 | `window.__aiti` 存在则跳过（防双注入） |
 | 代理 | 本地反向代理 dev server，`transformResponse` 同语义 prepend |
 | 桥生命周期 | 插件管理子进程；窗口关闭优雅停桥（TTL 保留 pageId） |
 | AI 窗口注入 | VS Code Webview（Copilot Chat 扩展点）；无扩展点时回退「打开 ai.html」 |

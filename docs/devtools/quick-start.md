@@ -24,7 +24,7 @@ export default defineConfig({
       // 可选：MCP 桥
       bridge: { base: 'http://localhost:8777', token: 'dev' },
       // 可选：AI 会话页
-      aiUrl: 'http://localhost:30141/dbg/chat',
+      aiUrl: 'http://localhost:30141/ai/chat',
     }),
   ],
 });
@@ -37,8 +37,8 @@ export default defineConfig({
 ```html
 <script src="aiti-devtools/inject.js"></script>
 <script>
-  createDbgLauncher('http://localhost:3000/todo', {
-    aiUrl: 'http://localhost:30141/dbg/chat?session=abc', // 可选
+  createAitiLauncher('http://localhost:3000/todo', {
+    aiUrl: 'http://localhost:30141/ai/chat?session=abc', // 可选
     bridgeBase: 'http://localhost:8777',                  // 可选
     bridgeToken: 'dev',
   });

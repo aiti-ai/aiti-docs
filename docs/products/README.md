@@ -14,7 +14,7 @@ aiti 不是单一产品，而是一个 **AI 开发工具生态**。所有产品�
 |---|---|---|---|---|---|
 | 1 | **aiti-agent** | `@justdb/aiti-agent` | Web 应用 + Docker 镜像 | 自托管个人 AI 开发工作台（**基于 pi-web 构建**），浏览器是唯一操作面 | 🚧 M0-M4 |
 | 2 | **aiti-core** | `@justdb/aiti` | SDK（协议/类型/共享库） | 全产品共享：桥协议、`pageId` 会话模型、注入脚本、MCP 工具定义 | 📋 |
-| 3 | **aiti-devtools** | `@justdb/aiti-devtools` | 注入 SDK（`inject.js`） | 页面内 AI 调试助手：`__dbg` + Inspector + MCP 桥（形态① 主动适配） | ✅ 0.2.x |
+| 3 | **aiti-devtools** | `@justdb/aiti-devtools` | 注入 SDK（`inject.js`） | 页面内 AI 调试助手：`aiti-devtools` + Inspector + MCP 桥（形态① 主动适配） | ✅ 0.2.x |
 | 4 | **aiti-devtools-vite** | `@justdb/aiti-devtools-vite` | Vite 插件 | dev server 自动注入，**本地 inject** | 📋 |
 | 5 | **aiti-devtools-vue** | `@justdb/aiti-devtools-vue` | Vue 插件 | Vue 应用内注入（app.use 一行接入） | 📋 |
 | 6 | **aiti-devtools-next** | `@justdb/aiti-devtools-next` | Next.js 插件 | 框架级注入（dev 构建 + `_debugSource` 源码定位） | 📋 |
@@ -43,7 +43,7 @@ aiti 不是单一产品，而是一个 **AI 开发工具生态**。所有产品�
 │             配置 aiti-devtools · pageId 会话 · SSE 页面桥       │
 ├─────────────────────────────────────────────────────────────┤
 │ L1 注入层    aiti-devtools + vite/vue/next/react/svelte 插件    │
-│             __dbg client · Inspector · 类 CDP 命令集 · 本地注入  │
+│             aiti-devtools client · Inspector · 类 CDP 命令集 · 本地注入  │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -51,7 +51,7 @@ aiti 不是单一产品，而是一个 **AI 开发工具生态**。所有产品�
 
 | 层 | 产品 | 职责 |
 |---|---|---|
-| **L1 注入层** | aiti-devtools 系列 | 把调试客户端注入到**正在开发的页面**：`__dbg` 迷你 client、Inspector 悬浮 UI、8 域 42 命令类 CDP 命令集、框架源码定位（React/Next/Vue/Svelte） |
+| **L1 注入层** | aiti-devtools 系列 | 把调试客户端注入到**正在开发的页面**：`aiti-devtools` 迷你 client、Inspector 悬浮 UI、8 域 42 命令类 CDP 命令集、框架源码定位（React/Next/Vue/Svelte） |
 | **L2 桥接层** | aiti-mcp-bridge / server | 让 AI 与页面对话：MCP 工具（`page_exec` / `page_snapshot` / `bridge_status` / `user_*`）、`pageId = instanceId/frameId` 会话体系、SSE 长连、事件广播（open_file 等） |
 | **L3 Agent 层** | 任意 MCP 客户端 | 把桥接结果接入你的 AI：Claude Code、Cursor、IDE 内置 AI、aiti-agent 均可作为宿主 agent |
 | **L4 入口层** | aiti-agent / IDE 插件 | 最终用户操作面：浏览器工作台；IDE 插件负责一键完成注入 + 把消息送进 IDE 的 AI agent 窗口 |
@@ -104,7 +104,7 @@ docker run aiti → 浏览器打开工作台 → 页面 dev 环境注入 aiti-de
 
 | 约定 | 值 |
 |---|---|
-| 桥协议 | `__dbg` 消息信封 + MCP JSON-RPC + SSE 页面桥 |
+| 桥协议 | `aiti-devtools` 消息信封 + MCP JSON-RPC + SSE 页面桥 |
 | 会话 ID | `pageId = instanceId/frameId`（如 `01234/f0`），TTL 保留、secret 防串台 |
 | 命名 | `token → instanceId`（连接身份）、`uid → frameId`（目标 frame）、组合 = `pageId` |
 | 环境变量 | 统一 `AITI_*`（如 `AITI_OPEN_CMD`、`AITI_MCP_TOKEN`） |

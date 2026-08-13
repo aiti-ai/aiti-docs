@@ -16,7 +16,7 @@ tags: [product, aiti-devtools, vite, vue, next, inject]
 | 本地注入 | 插件在构建/dev 阶段把注入脚本打进产物，不走远程加载 |
 | dev-only | 默认仅 dev 模式注入，生产构建零残留、零体积 |
 | 零配置 | `pnpm add -D` + 一行启用，自动识别框架 |
-| 与形态①②③ 兼容 | 插件注入的 `__dbg` client 与手动 `<script>` 引入完全同构，桥协议一致 |
+| 与形态①②③ 兼容 | 插件注入的 `aiti-devtools` client 与手动 `<script>` 引入完全同构，桥协议一致 |
 | 源码定位 | dev 构建下自动带上 `_debugSource` / `__file` / `__svelte_meta`，AI 报错可定位到源码 |
 
 ## 2. 插件矩阵
@@ -45,7 +45,7 @@ export default defineConfig({
       // 可选：MCP 桥地址，devtools 自动连桥
       bridge: { base: 'http://localhost:8777', token: 'dev' },
       // 可选：AI 会话页（aiti-agent / IDE AI 窗）
-      aiUrl: 'http://localhost:30141/dbg/chat',
+      aiUrl: 'http://localhost:30141/ai/chat',
       // 默认仅 dev 生效
       enabled: process.env.NODE_ENV !== 'production',
     }),
@@ -84,7 +84,7 @@ module.exports = withAitiDevtools({
 ```
 插件注册 → dev server 响应（HTML 或首屏脚本）
   → prepend 注入（transformResponse 同一语义，最早执行）
-  → createDbgLauncher 初始化 → window.__dbg 暴露
+  → createAitiLauncher 初始化 → window.__aiti 暴露
   → Inspector UI 挂载 → (可选) 连 MCP 桥 SSE
   → 宿主页/同源 iframe 注入（injectAllIframes / MutationObserver 兜底动态 iframe）
   → 跨域 iframe 跳过（可枚举、不可定向执行）

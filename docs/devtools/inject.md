@@ -21,10 +21,10 @@ tags: [devtools, inject, architecture]
 
 ```
 HTML 响应（prepend，最早执行）
-  → createDbgLauncher(aiUrl, {bridgeBase, bridgeToken})
-  → 初始化 __dbg 迷你 client（DOM/CSS/Input/Page/Runtime/Storage/Performance/Browser 8 域）
+  → createAitiLauncher(aiUrl, {bridgeBase, bridgeToken})
+  → 初始化 aiti-devtools 迷你 client（DOM/CSS/Input/Page/Runtime/Storage/Performance/Browser 8 域）
   → Inspector UI 挂载（右下角 💬/🎯）
-  → 宿主自身 client 注入（__DBG_POST__ 回调，source='self'）
+  → 宿主自身 client 注入（__AITI_POST__ 回调，source='self'）
   → 同源 iframe 批量注入（injectAllIframes + MutationObserver 兜底动态 iframe）
   → (可选) 连 MCP 桥 SSE（mcpConnect 注册，EventSource 长连）
   → 页面把 instanceId 持久化 localStorage（刷新复用，不断线）
@@ -38,8 +38,8 @@ HTML 响应（prepend，最早执行）
 
 ```js
 {
-  __dbg: 1,            // 协议标记
-  type: 'dbg_exec',    // dbg_* 命名空间
+  __aiti: 1,            // 协议标记
+  type: 'aiti_exec',    // aiti_* 命名空间
   payload: {...},      // 类型负载
   requestId: 'req_1',  // 异步命令关联
   _f: 'f0' | undefined // 下行定向：目标 iframe frameId；缺省 = host
@@ -48,8 +48,8 @@ HTML 响应（prepend，最早执行）
 
 | 方向 | 说明 |
 |---|---|
-| host → iframe | `postMessage({__dbg:1, _f:frameId, type, payload}, '*')` |
-| host → self | `__DBG_POST__` 回调本地派发（不走 postMessage） |
+| host → iframe | `postMessage({__aiti:1, _f:frameId, type, payload}, '*')` |
+| host → self | `__AITI_POST__` 回调本地派发（不走 postMessage） |
 | iframe → host | `parent.postMessage`，宿主按 `e.source` 识别来源（回程不依赖 `_f`） |
 
 ### 异步命令往返
@@ -57,9 +57,9 @@ HTML 响应（prepend，最早执行）
 ```
 execInPage(cmd, args, frameId)
   → requestId 入 pendingCommands
-  → postToFrame(frameId, {type:'dbg_exec'})
+  → postToFrame(frameId, {type:'aiti_exec'})
   → 目标 client 执行 CDP 命令
-  → post({type:'dbg_exec_result', payload:{requestId, ok, result}})
+  → post({type:'aiti_exec_result', payload:{requestId, ok, result}})
   → 宿主按 requestId resolve（以 requestId 关联，不依赖 _f）
 ```
 

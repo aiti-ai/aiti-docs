@@ -23,7 +23,7 @@ tags: [guide, architecture]
 
 | 层 | 关键组件 | 职责 |
 |---|---|---|
-| L1 注入层 | `inject.js` / `__dbg` client / Inspector UI / CDP 命令集 | 在页面内提供可执行、可采集、可交互的调试能力 |
+| L1 注入层 | `inject.js` / `aiti-devtools` client / Inspector UI / CDP 命令集 | 在页面内提供可执行、可采集、可交互的调试能力 |
 | L2 桥接层 | bridge 服务 / MCP server / SSE / pageId 会话 | 把页面能力封装成 AI 可调用的 MCP 工具，并做会话路由 |
 | L3 Agent 层 | 任意 MCP 客户端 | 消费 `page_*` / `user_*` 工具，完成 AI 推理 |
 | L4 入口层 | aiti-agent / IDE 插件 | 用户操作面与注入编排 |
@@ -34,19 +34,19 @@ tags: [guide, architecture]
 工程插件（vite/vue/next/...） 或 IDE 插件代理 或 Chrome 扩展
         │ 注入（prepend / transformResponse 同语义）
         ▼
-createDbgLauncher → window.__dbg 暴露
+createAitiLauncher → window.__aiti 暴露
         │
-        ├── 宿主自身注入（__DBG_POST__ 回调，source='self'）
+        ├── 宿主自身注入（__AITI_POST__ 回调，source='self'）
         ├── 同源 iframe 注入（injectAllIframes + MutationObserver 兜底）
         └── 跨域 iframe 跳过（可枚举、不可定向执行）
         │
         ▼
-消息信封：{ __dbg:1, type:'dbg_*', payload, requestId, _f:frameId }
+消息信封：{ __aiti:1, type:'aiti_*', payload, requestId, _f:frameId }
 ```
 
-- 宿主 → iframe：`postMessage({__dbg:1, _f:frameId, ...}, '*')`
+- 宿主 → iframe：`postMessage({__aiti:1, _f:frameId, ...}, '*')`
 - iframe → 宿主：`parent.postMessage`，宿主按 `e.source` 识别来源
-- 异步命令：`execInPage(cmd, args, frameId)` → `requestId` 入 pending → 结果回 `dbg_exec_result{requestId,...}` resolve
+- 异步命令：`execInPage(cmd, args, frameId)` → `requestId` 入 pending → 结果回 `aiti_exec_result{requestId,...}` resolve
 
 ## 3. 桥链路（MCP ⇄ 页面）
 
@@ -58,10 +58,10 @@ bridge: /mcp/mcp ── tools/list · tools/call(page_exec/page_snapshot/user_*/
   │ SSE 推 {type:'exec', requestId, cmd, args}
   ▼
 页面 client（mcpConnect 注册，EventSource 长连）
-  │ post({type:'dbg_mcp_exec'})
+  │ post({type:'aiti_mcp_exec'})
   ▼
 宿主 handleAiCommand → 危险命令确认 → execInPage 路由到 frameId
-  │ dbg_exec_result → POST /bridge/result {pageId, requestId, ok, result}
+  │ aiti_exec_result → POST /bridge/result {pageId, requestId, ok, result}
   ▼
 bridge 全局 pendingRequests resolve → MCP 响应回 AI
 ```
@@ -70,7 +70,7 @@ bridge 全局 pendingRequests resolve → MCP 响应回 AI
 - **消息主通道 `aiti_inbox`**（2026-08）：人发消息/异步作答/页面事件进 outbox 队列，agent 调工具取走（任何 agent 100% 可用；sampling 推仅 pi 等少数支持，见 [接入 AI agent](/guide/mcp/ai-agents.md)）。
 - **人侧界面 cockpit**（2026-08）：引导接入 + 地址配置中枢 + 操作台；无 aiUrl 时 AI 窗默认打开（见 [cockpit](/guide/mcp/cockpit.md)）。
 
-事件方向：页面事件（`open_file`、`dbg_element_selected`、`user_*` 作答）→ bridge 广播 → AI 窗口（cockpit / ai.html / IDE AI 窗口）展示与作答。
+事件方向：页面事件（`open_file`、`aiti_element_selected`、`user_*` 作答）→ bridge 广播 → AI 窗口（cockpit / ai.html / IDE AI 窗口）展示与作答。
 
 ## 4. 会话模型（pageId）
 
@@ -96,7 +96,7 @@ sequenceDiagram
 
     U->>IDE: 「首页按钮没反应，帮我查」
     IDE->>B: MCP page_exec(click button)
-    B->>P: SSE exec → __dbg 点击按钮
+    B->>P: SSE exec → aiti-devtools 点击按钮
     P-->>B: 采集 console 报错 → /bridge/result
     B-->>IDE: 报错信息 + 源码定位(file:line)
     IDE->>B: MCP user_confirm(是否修复)

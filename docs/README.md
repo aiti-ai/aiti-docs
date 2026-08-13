@@ -27,7 +27,7 @@ features:
     details: 改造任意 AI agent，经 MCP 桥操作页面/询问用户；aiti_inbox 消息主通道 + 通用 AI 窗口 cockpit
     link: /products/aiti-mcp-bridge.md
   - title: 本地注入
-    details: 零成本接入现有工程，dev 模式自动注入 __dbg，无需改业务代码
+    details: 零成本接入现有工程，dev 模式自动注入 aiti-devtools，无需改业务代码
   - title: 会话体系
     details: pageId = instanceId/frameId，刷新不断线、多页面不串台，AI 一个词定位目标
   - title: 开放生态
@@ -50,18 +50,32 @@ footer: MIT Licensed | Copyright © 2026 aiti-ai
 
 ### 一条链路看懂生态
 
+两条路径，共享同一个页面现场：**aiti-agent 直连**（最佳体验）与 **MCP 代理**（回退，适配任意 agent）。
+
+#### 最佳体验 · aiti-agent Web 控制台直连（完整 AI 控制台）
+
+> 💡 **补充说明**：aiti-agent Web 控制台是开箱即用的默认形态；其他 AI 同样可以适配——**有 web console 的 AI，可以直接接入 aiti-devtools**（类似本图直连模式，操作页面与询问用户能力一致）。
+
 ```mermaid
 flowchart TB
-    A[IDE AI agent 窗口] -->|MCP| B[aiti-mcp-bridge]
-    E[🌟 aiti-agent Web 工作台] -->|同构桥| C[aiti-devtools 注入]
-    B -->|SSE 桥| C
-    C -->|__dbg + Inspector| D[正在开发的页面]
-    D -->|交互结果| C
-    C -->|交互结果| B
-    B -->|交互结果| A
+    P[被调试网页] <-->|本地注入| D[aiti-devtools]
+    W[🌟 aiti-agent] <-->|AI 窗 · 双向连接| D
+    D <-->|pi 引擎直连 · 会话 / 工作区 / 执行| A[pi agent]
 
     classDef highlight fill:#fff3bf,stroke:#f59f00,stroke-width:4px,font-weight:bold;
-    class E highlight;
+    class W highlight;
+```
+
+#### 回退体验 · MCP 代理（aiti-cockpit 弱化平替）
+
+> 💡 **补充说明**：没有 web console 的 agent，经 **aiti-mcp-bridge 走 MCP 代理**即可适配任意 agent——但 **MCP 协议的消息及时度不够**（多数 agent 靠 `aiti_inbox` 拉取，非主动推送），可能**需要不时人工干预**，体验不如直连。
+
+```mermaid
+flowchart TB
+    P[被调试网页] <-->|本地注入| D[aiti-devtools]
+    C[🛰️ aiti-cockpit] <-->|AI 窗 · 双向直连| D
+    D <-->|连桥 · role=ai| B[aiti-mcp-bridge]
+    B <-->|MCP · page_* / user_* 工具| X["任意 AI agent<br/>Claude Code · Cursor · IDE AI"]
 ```
 
 ### 快速体验

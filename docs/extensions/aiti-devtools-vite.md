@@ -24,6 +24,6 @@ ext:
 
 > ❝ **注入不该打断开发，它该像空气一样存在。** ❞
 
-Vite 工程的零配置注入插件：dev 模式自动注入 `__dbg`，不上生产、不改业务代码。
+Vite 工程的零配置注入插件：dev 模式自动注入 `aiti-devtools`，不上生产、不改业务代码。
 
 - 详细文档：[Vite 插件](/devtools/vite-plugin.md) · [插件矩阵](/products/aiti-devtools-plugins.md)
