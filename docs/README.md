@@ -51,12 +51,17 @@ footer: MIT Licensed | Copyright © 2026 aiti-ai
 ### 一条链路看懂生态
 
 ```mermaid
-flowchart LR
+flowchart TB
     A[IDE AI agent 窗口] -->|MCP| B[aiti-mcp-bridge]
-    B -->|SSE 桥| C[aiti-devtools 注入]
+    E[🌟 aiti-agent Web 工作台] -->|同构桥| C[aiti-devtools 注入]
+    B -->|SSE 桥| C
     C -->|__dbg + Inspector| D[正在开发的页面]
-    D -->|交互结果| C --> B --> A
-    E[aiti-agent Web 工作台] -->|同构桥| C
+    D -->|交互结果| C
+    C -->|交互结果| B
+    B -->|交互结果| A
+
+    classDef highlight fill:#fff3bf,stroke:#f59f00,stroke-width:4px,font-weight:bold;
+    class E highlight;
 ```
 
 ### 快速体验
