@@ -83,12 +83,14 @@ client bundle 里 `ctx.registerItems(slot, items)` 注册实际组件。
 |---|---|---|---|
 | `toolbar` | 顶部工具条（globe 旁） | 工具按钮（带图标/文案） | aiti-devtools（🧰 入口）、aiti-cmd |
 | `sidebar` | 侧栏头部（New/Refresh 旁） | 面板入口按钮 + 运行中数量徽标 | session-manager |
+| `sidebarFooter` | 侧栏底部快捷操作行（模型/技能/插件同一排） | 快捷入口按钮（与内置同风格） | aiti-extman（🧩 扩展管理） |
 | `sessionTopbar` | 聊天顶部栏 | 当前会话 tag 区（chips + ★ + 编辑） | session-manager |
 | `sessionRowActions` | 侧栏会话行 hover 操作区 | 行内 ★ / tag 按钮 | session-manager |
 | `dialogs` | AppShell 弹窗区 | 弹窗 | aiti-devtools、aiti-cmd（终端） |
 | `banners` | 页面顶部告警区 | 告警条幅 | service-tunnels（自暴露告警） |
 | `pages` | AppShell tab 系统 | 全页视图 | session-manager（看板） |
-| `chatInputTop` | 聊天输入框上方 | 输入辅助区 | aiti-devtools（inspect 候选区） |
+| `chatInputTop` | 聊天输入框上方 | 输入辅助区 | aiti-devtools（inspect 候选区）、demo-lazy（字数统计） |
+| `userMessageActions` | user 消息底部 hover 操作区 | 消息级行为按钮 | aiti-prompts（收藏 prompt）、demo（📌） |
 
 ### 插槽上下文（render props）
 
