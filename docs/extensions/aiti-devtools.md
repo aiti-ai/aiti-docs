@@ -27,3 +27,22 @@ ext:
 
 - 形态① 开发者主动适配（本包）→ ② 平台内置 → ③ IDE 插件（vscode/idea）
 - 详细文档：[开发者工具](/devtools/) · [产品页](/products/aiti-devtools.md)
+
+## AI 自管理能力
+
+> AI 能为你：**调试任意页面，也调试自己的窗口——AI 管自己。**
+
+```yaml
+ai:
+  manage: true
+  skills:
+    - 多面调试目标：aiti_page_exec/snapshot/logs/network/bridge_status（class-CDP 到任意页面）
+    - AI 管自己：**AI 主窗口（非 iframe）** 多注册自己 pageId `xxx/ai` 进桥 → CDP 自己的窗口（读 dialog/填扩展弹窗表单/截屏审核）；**没有 host 宿主时主窗口自己也在被管理之列（`xxx/ai` 在，通道就在）**
+    - 用户交互：点选元素/确认/选项/输入/在场探测/通知
+    - 注入与特性：inject-ports 注入开关、features 逐项启停
+  storage_dir: <dataDir>
+  source_dir: dev-repo/aiti-devtools（core 在 dev-repo/core）
+  page: 工具栏 🧰 AITI
+```
+
+接入 ai-helper 后：结果回填走「API 直写」或「CDP 回填扩展弹窗表单」两条通道，后者即经本扩展的 AI 窗自桥接（见 [aiti-helper](/extensions/aiti-helper.html)）。
