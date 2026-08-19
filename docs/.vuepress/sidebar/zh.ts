@@ -78,6 +78,7 @@ export const zhSidebar = sidebar({
         "aiti-extman.md",
         "aiti-prompts.md",
         "aiti-helper.md",
+        "aiti-configs.md",
         "service-tunnels.md",
         "aiti-inject.md",
         "devtools-vscode.md",
