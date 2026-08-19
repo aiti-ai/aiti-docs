@@ -30,6 +30,10 @@ export interface ExtCatalogEntry {
   version?: string;
   status?: string;
   author?: string;
+  /** 发行者（发布/维护方，如 aiti-ai）；比 author 更明确的发布主体标识。 */
+  publisher?: string;
+  /** 发行者网站（可点击打开，如 https://aiti.pw）。 */
+  website?: string;
   repo?: string;
   npm?: string;
   install?: string;
@@ -82,6 +86,8 @@ const extensionsCatalog = (): PluginObject => {
         version: raw.version ?? "",
         status: raw.status ?? "active",
         author: raw.author ?? "",
+        publisher: raw.publisher ?? "",
+        website: raw.website ?? "",
         repo: raw.repo ?? "",
         npm: raw.npm ?? "",
         install: raw.install ?? "",

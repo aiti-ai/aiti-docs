@@ -11,6 +11,8 @@ ext:
   version: 0.2.1
   status: active
   author: aiti-ai
+  publisher: aiti-ai
+  website: https://aiti.pw
   repo: ""
   npm: "@justdb/aiti-devtools-vite"
   install: |

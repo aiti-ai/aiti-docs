@@ -11,6 +11,8 @@ ext:
   version: 0.1.0
   status: experimental
   author: aiti-ai
+  publisher: aiti-ai
+  website: https://aiti.pw
   repo: ""
   install: |
     # 部署到 ~/.pi/web/extensions/aiti-model-check/ 后 reload

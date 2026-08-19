@@ -11,6 +11,8 @@ ext:
   version: 0.1.0
   status: experimental
   author: aiti-ai
+  publisher: aiti-ai
+  website: https://aiti.pw
   repo: ""
   install: |
     # 从 JetBrains 插件市场安装 aiti-devtools-idea

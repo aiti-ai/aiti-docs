@@ -11,6 +11,8 @@ ext:
   version: 0.1.0
   status: active
   author: aiti-ai
+  publisher: aiti-ai
+  website: https://aiti.pw
   repo: ""
   install: |
     # 方案：docs/aiti-ui-env-extension-plan.md
@@ -86,6 +88,14 @@ open https://pi.example.com/dev/aiti-ui-env/vnc/vnc.html  # 面板点「打开�
 
 > 公网暴露：无新端口——5900/6080 只回环，浏览器经当前站点 middleware（`/aiti-ui-env/vnc/*`）
 > 直访（HTTP+WS 代理；认证=30min HttpOnly cookie，URL 零凭据，无 cookie 一律 403）。
+
+## AI 帮助点（ai.helpers）
+
+| 帮助点 | 作用 | 落地 |
+|---|---|---|
+| `ui-env-setup` AI 帮我选显示模式 | 描述运行场景 → AI 推荐显示模式（prefer-headless 等） | `POST set-mode`（mapping mode） |
+
+声明在 `index.ts` 的 `ai.helpers`，由 ai-helper 主动聚合（无需注册）。
 
 ## 文档
 

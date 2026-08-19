@@ -11,6 +11,8 @@ ext:
   version: 0.1.0
   status: beta
   author: aiti-ai
+  publisher: aiti-ai
+  website: https://aiti.pw
   repo: ""
   install: |
     # 部署到 ~/.pi/web/extensions/aiti-cmd/ 后 reload
@@ -46,3 +48,13 @@ ai:
 ```
 
 接入 ai-helper 后：在命令详情点「AI 帮我写」→ 描述 → 预览 → 填入并保存（见 [aiti-helper](/extensions/aiti-helper.html)）。
+
+### AI 帮助点（ai.helpers）
+
+| 帮助点 | 作用 | 落地 |
+|---|---|---|
+| `command-create` AI 帮我写命令 | 描述需求 → AI 写命令 JSON → 入库 | `POST /commands`（mapping name/cmd/tags/confirm） |
+| `command-fill` AI 帮我填命令表单 | 从命令详情弹窗 AI 按钮唤起 → AI 工具链直接回填表单 | `fill`（self_ui/form_fill + JSON 契约 `{filled:{字段:值},note}`） |
+| `command-fix` AI 优化/修复命令 | AI 读命令列表 → 找目标 → 改进 → 更新 | `PUT /commands/{id}`（path 模板） |
+
+声明在 `index.ts` 的 `ai.helpers`，由 ai-helper 主动聚合（无需注册）。

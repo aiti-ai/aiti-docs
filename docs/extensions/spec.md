@@ -82,6 +82,8 @@ ext:
   version: 0.1.0
   status: experimental
   author: you
+  publisher: you
+  website: https://example.com
   repo: ""
   npm: ""
   install: |
@@ -115,6 +117,8 @@ ext:
       "version": "0.2.1",
       "status": "active",
       "author": "aiti-ai",
+      "publisher": "aiti-ai",
+      "website": "https://aiti.pw",
       "repo": "",
       "npm": "@justdb/aiti-devtools",
       "install": "pnpm add -D …",

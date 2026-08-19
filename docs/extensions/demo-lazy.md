@@ -12,6 +12,8 @@ ext:
   version: 0.2.0
   status: beta
   author: aiti-ai
+  publisher: aiti-ai
+  website: https://aiti.pw
   repo: ""
   npm: ""
   install: |

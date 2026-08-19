@@ -11,6 +11,8 @@ ext:
   version: 0.1.0
   status: experimental
   author: aiti-ai
+  publisher: aiti-ai
+  website: https://aiti.pw
   repo: ""
   install: |
     # 部署到 ~/.pi/web/extensions/aiti-prompts/ 后 reload
@@ -46,3 +48,11 @@ ai:
 ```
 
 接入 ai-helper 后：收藏面板「AI 帮我写」→ 描述一段可用指令 → 预览 → 入库（见 [aiti-helper](/extensions/aiti-helper.html)）。
+
+### AI 帮助点（ai.helpers）
+
+| 帮助点 | 作用 | 落地 |
+|---|---|---|
+| `prompt-create` AI 帮我写 prompt | 描述场景 → AI 生成 prompt JSON → 校验入库 | `POST /prompts`（mapping name/text/tags） |
+
+声明在 `index.ts` 的 `ai.helpers`，由 ai-helper 主动聚合（无需注册）。

@@ -11,6 +11,8 @@ ext:
   version: 0.1.0
   status: experimental
   author: aiti-ai
+  publisher: aiti-ai
+  website: https://aiti.pw
   repo: ""
   install: |
     # 从 marketplace 安装 aiti-devtools-vscode（或 dev 模式本地加载）

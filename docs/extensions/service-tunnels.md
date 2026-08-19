@@ -11,6 +11,8 @@ ext:
   version: 0.3.0
   status: active
   author: aiti-ai
+  publisher: aiti-ai
+  website: https://aiti.pw
   repo: ""
   install: |
     # 源码：dev-repo dev-repo/service-tunnels/

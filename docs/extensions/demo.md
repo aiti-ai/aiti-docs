@@ -11,6 +11,8 @@ ext:
   version: 0.1.0
   status: experimental
   author: aiti-ai
+  publisher: aiti-ai
+  website: https://aiti.pw
   repo: ""
   install: |
     # 框架验证用，一般无需安装（已部署时可直接参考）

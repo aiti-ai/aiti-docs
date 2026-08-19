@@ -11,6 +11,8 @@ ext:
   version: 0.3.0
   status: experimental
   author: aiti-ai
+  publisher: aiti-ai
+  website: https://aiti.pw
   repo: ""
   install: |
     # dev 分支启动时作为 extra 扩展根注入：

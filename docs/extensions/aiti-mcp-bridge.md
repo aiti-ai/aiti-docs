@@ -11,6 +11,8 @@ ext:
   version: 0.2.0
   status: active
   author: aiti-ai
+  publisher: aiti-ai
+  website: https://aiti.pw
   repo: ""
   npm: "@justdb/aiti-mcp-bridge"
   install: |
