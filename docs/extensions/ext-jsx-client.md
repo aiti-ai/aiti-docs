@@ -65,8 +65,8 @@ templates/ext-jsx-client/
 ├── package.json            # scripts(build/deploy) + vite devDep
 ├── vite.config.ts          # lib mode + jsx automatic + alias 正则 + external:[]
 ├── skills/                 # AI 帮助点（aiti-helper skills 机制）
-│   ├── index.json          # 列 skill 名（如 ["ext-guide"]）
-│   └── ext-guide/SKILL.md  # 占位 skill（复制后换成你的帮助点）
+│   ├── index.json          # 列 skill 名（如 ["ext-create"]）
+│   └── ext-create/SKILL.md # 「用本模板创建新扩展」完整指南（AI 参考它创建/维护扩展）
 ├── client/src/
 │   ├── entry.tsx           # register(ctx) 入口 + 示例面板（useState/列表 map key 示范）
 │   ├── host-shim.ts        # react → 宿主 h/useState… 委托桥（含 jsxs validated 标记）
@@ -97,6 +97,7 @@ export default {
 ```
 
 - `skills/index.json` 只列 skill 名；每个 skill 一个 `skills/<name>/SKILL.md`（frontmatter：`name/title/summary/placeholder/outputs/action`，正文是给 AI 读的手册，可用 `{basePath}` 拼 API 路径）
+- 模板自带 `ext-create`：**「用本模板创建新扩展」完整指南**（复制 → 改配置 → 写组件 → 构建 → 部署 → 生效，含坑速查与落地清单），AI 可直接参考它创建新扩展；复制后换成你自己的帮助点
 - 可运行例子：[demo 扩展](/extensions/demo.html) 的 `skills/demo-selfcheck`（AI 跑自检）与 `demo-humor`（AI 玩幽默彩蛋）
 
 ## 常见坑（模板已踩平，勿回退）
