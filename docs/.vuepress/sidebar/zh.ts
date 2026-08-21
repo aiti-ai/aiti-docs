@@ -85,6 +85,7 @@ export const zhSidebar = sidebar({
         "devtools-idea.md",
         "demo.md",
         "demo-lazy.md",
+        "ext-jsx-client.md",
       ],
     },
     {
