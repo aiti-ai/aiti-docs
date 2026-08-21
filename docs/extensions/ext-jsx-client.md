@@ -62,11 +62,14 @@ npm install && npm run build:client
 
 ```
 templates/ext-jsx-client/
-├── package.json            # scripts(build/watch/deploy) + vite devDep
+├── package.json            # scripts(build/deploy) + vite devDep
 ├── vite.config.ts          # lib mode + jsx automatic + alias 正则 + external:[]
+├── skills/                 # AI 帮助点（aiti-helper skills 机制）
+│   ├── index.json          # 列 skill 名（如 ["ext-guide"]）
+│   └── ext-guide/SKILL.md  # 占位 skill（复制后换成你的帮助点）
 ├── client/src/
 │   ├── entry.tsx           # register(ctx) 入口 + 示例面板（useState/列表 map key 示范）
-│   ├── host-shim.ts        # react → 宿主 h/useState… 委托桥
+│   ├── host-shim.ts        # react → 宿主 h/useState… 委托桥（含 jsxs validated 标记）
 │   └── jsx-runtime.ts      # 一行
 └── tools/build-client.mjs  # 包装 vite build
 ```
@@ -80,13 +83,32 @@ templates/ext-jsx-client/
    产物零 React 引用，宿主保持单渲染实例。
 3. **依赖内联**：`rollupOptions.external: []` 强制 npm 依赖全打进单个 `.mjs`。
 
+## AI 帮助点（aiti-helper skills）
+
+模板自带 `skills/` 骨架。扩展在 `index.ts` 声明后，aiti-helper 会自动聚合该扩展的
+AI 帮助点（弹窗 🤖 AI 按钮 → 按扩展分组高亮）：
+
+```ts
+export default {
+  id: "your-ext",
+  // ...
+  ai: { manage: true, intro: "一句话：AI 能帮我做什么", skills: "skills" },
+}
+```
+
+- `skills/index.json` 只列 skill 名；每个 skill 一个 `skills/<name>/SKILL.md`（frontmatter：`name/title/summary/placeholder/outputs/action`，正文是给 AI 读的手册，可用 `{basePath}` 拼 API 路径）
+- 可运行例子：[demo 扩展](/extensions/demo.html) 的 `skills/demo-selfcheck`（AI 跑自检）与 `demo-humor`（AI 玩幽默彩蛋）
+
 ## 常见坑（模板已踩平，勿回退）
 
 - **vite 默认 classic JSX** → 必须 `esbuild.jsx: "automatic"`，否则产物 `React.createElement` + React 未定义。
 - **alias 前缀匹配** → 用正则 `/^react$/`、`/^react\/jsx-runtime$/` 分开（字符串 alias 会吞 `jsx-runtime`）。
 - **lib mode 默认外部化 dependencies** → 必须 `external: []` 才内联。
 - **`__setCtx(ctx)` 最先调**（任何 JSX 渲染前），否则组件里 hooks 委托不到宿主。
+- **静态兄弟元素假阳性 key 警告** → host-shim 的 `jsxs` 必须补 `_store.validated = 1`（值必须是 1；2 仍告警）。抄 host-shim 时别漏这段。
 - **JSX 里 `map()` / svg path 数组必须给 key**（宿主是 React，规则一致）。
+- **弹窗关闭按钮带 `aria-label="关闭"`**：aiti-helper 的全局 AI 按钮靠识别关闭按钮注入到其左边；裸文本"关闭"识别不了 → AI 按钮不注入。
+- **DialogsSlot 的 `onClose` 别传空函数**：会导致面板内关闭按钮/遮罩全部失效，要绑真实状态（`onClose={() => setPanelOpen(false)}`）。
 
 ## 命令
 
