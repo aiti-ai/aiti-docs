@@ -21,6 +21,24 @@ export default defineUserConfig({
         // 修复 dev 模式 HMR 崩溃：vuepress bundler 仅在 isDebug 时定义 NODE_ENV=development，
         // 导致正常 dev 模式下 @vue/runtime-core 的 __VUE_HMR_RUNTIME__ 被 tree-shake 掉
         'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV === 'production' ? 'production' : 'development'),
+
+        // 修复 dev 模式 PageMeta 崩溃：plugin-git 注入的 __GIT_* 编译期全局同样只在
+        // isDebug 时生效 → useLastUpdated 读 locale.value.latestUpdateAt（无 typeof 兜底）
+        // TypeError: Cannot read properties of undefined (reading 'latestUpdateAt')。
+        // 这里手动补齐（值 = @vuepress/plugin-git gitPlugin 的 define，zh-CN 单 locale）。
+        // 注意 __GIT_CONTRIBUTORS__/__GIT_CHANGELOG__ 保持 false：dev 下 page.data.git
+        // 未被 extendsPage 注入，useContributors 走空数组分支才不崩（显示不依赖它）。
+        __GIT_CHANGELOG__: 'false',
+        __GIT_CONTRIBUTORS__: 'false',
+        __GIT_LOCALES__: JSON.stringify({
+          '/': {
+            contributors: '贡献者',
+            changelog: '更新日志',
+            timeOn: '于',
+            viewChangelog: '查看所有更新日志',
+            latestUpdateAt: '最近更新',
+          },
+        }),
       },
       server: {
         // 放开 Host 限制（dev server 无妨）：支持任意隧道/代理域名访问
