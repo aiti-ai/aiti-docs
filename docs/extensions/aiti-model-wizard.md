@@ -52,7 +52,15 @@ aiti_model_wizard_delete    # 删除 provider
 - **添加**：搜索 → 提供商详情（api/注册/领 token/已知模型）→ 填 token 测试 → 勾选模型 → 保存
 - **自定义**：贴 baseUrl / 文档片段 / 代码示例 → 反向匹配候选 / 自动探测（品牌 + 模型列表 + 一键回填）→ 同凭据/测试/选模型/保存
 - **已配置**：列表（token 打码）→ 改 token（留空保留）/ 删除
+- **新模型检测与提醒**：后台扫描（启动 +3s 与每 30min，拉取有 key 的 provider /models，8s 超时静默失败）存两份快照（`dataDir/reminder.json`：`prev`=前日基线、`curr`=今日可用）；**新模型 = (今日 − 前日) − 已配置**，跨天自动推进 prev，首次运行只建基线不提醒。发现新增后：① 页面顶部 10s 绿色 toast（**点击 → 打开向导「已配置」页**）② provider 卡片显示「✨ 新增 N」徽标 ③ 编辑流「刷新可选模型」自动**预勾选**新模型（带「新」标，点保存即一键启用）
+- toast 频控（服务端持久化裁决，`GET /new-models?toast=1` 才消费额度）：每天 ≤ 3 次、相邻间隔 ≥ 2h；超限静默（徽标/预勾选仍可用，不影响）
 - 无模型时自动顶部 banner 引导
+
+## 新模型检测 API
+
+- `GET /new-models` → `{ ok, scanning, total, providers: { <p>: { count, newModels[] } }, baseline, toast? }`（徽标/总览用，不消费 toast 额度；`baseline=false` 表示首日只建基线）
+- `GET /new-models?toast=1` → 同上 + `toast`（`allowed:true` 表示消费一次额度；`false` 附 `reason: gap|daily-limit` 与 `nextAtMs`）
+- `POST /new-models/refresh` → 强制立即后台重扫
 
 ## 配置 `config.json`（aiti-model-wizard dataDir）
 
@@ -65,7 +73,15 @@ aiti_model_wizard_delete    # 删除 provider
     "ttlHours": 168
   },
   "download": { "justget": "auto", "timeoutMs": 90000 },
-  "probe": { "timeoutMs": 12000, "maxTokens": 8 }
+  "probe": { "timeoutMs": 12000, "maxTokens": 8 },
+  "reminder": {
+    "enabled": true,
+    "checkIntervalMs": 1800000,
+    "fetchTimeoutMs": 8000,
+    "maxPerDay": 3,
+    "minGapMs": 7200000,
+    "toastMs": 10000
+  }
 }
 ```
 
