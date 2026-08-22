@@ -69,26 +69,26 @@ AI 窗开关 + 位置尺寸、放行方案、视口、目标 URL 全部持久化
 
 ## 4. 文件结构
 
-开发源在 `examples/dbg-widget/`（vite dev + 构建），发布形态为 **aiti-agent 扩展**（`dev-repo/aiti-devtools/`，部署 `~/.pi/web/extensions/aiti-devtools/`）。
+开发源在 `dev-repo/inject/`（esbuild 构建注入产物），发布形态为 **aiti-agent 扩展**（`dev-repo/aiti-devtools/`，部署 `~/.pi/web/extensions/aiti-devtools/`）。
 
 | 文件 | 职责 |
 |---|---|
-| `examples/dbg-widget/src/client/index.js` | 注入的迷你 `aiti-devtools` client（元素画像：尺寸/样式/组件源码与位置/调用处/pageId/url） |
-| `examples/dbg-widget/src/launcher/` | 宿主 launcher（widget UI / inspector / MCP 桥 / 交互面板，模块化） |
-| `examples/dbg-widget/src/mcp/bridge-client.js` | 通用桥客户端（页面/AI 窗连桥） |
-| `examples/dbg-widget/tools/build-launcher.mjs` | 构建单文件 `dist/aiti-launcher.js`（client + launcher 打包） |
-| `examples/dbg-widget/dbg-mcp-server.cjs` | MCP 桥（stdio + HTTP + 页面 SSE）独立运行版 |
+| `dev-repo/inject/src/client/index.js` | 注入的迷你 `aiti-devtools` client（元素画像：尺寸/样式/组件源码与位置/调用处/pageId/url） |
+| `dev-repo/inject/src/launcher/` | 宿主 launcher（widget UI / inspector / MCP 桥 / 交互面板，模块化） |
+| `dev-repo/inject/src/mcp/bridge-client.js` | 通用桥客户端（页面/AI 窗连桥） |
+| `dev-repo/inject/tools/build.mjs` | 构建单文件 `dist/aiti-launcher.js`（client + launcher 打包） |
+| `dev-repo/bridge/dev-repo/bridge/bin/aiti-bridge.mjs` | MCP 桥（stdio + HTTP + 页面 SSE）独立运行版 |
 | `dev-repo/aiti-devtools/` | aiti-agent 扩展：`bridge.ts`（MCP 桥）/ `inject.ts`（service-tunnels 注入）/ `client/aiti-client.mjs`（AI 窗口） |
-| `examples/dbg-widget/tools/deploy-ext.mjs` | 构建 launcher + 部署扩展到 `~/.pi/web/extensions/aiti-devtools/` |
+| `dev-repo/aiti-devtools/tools/deploy.mjs` | 构建 launcher + 部署扩展到 `~/.pi/web/extensions/aiti-devtools/` |
 
 ## 5. 开发 / 运行
 
 ```bash
-cd examples/dbg-widget
-pnpm dev          # vite：hub.html 测试中心（五框架目标页 + 自检）
-node tools/build-launcher.mjs   # → dist/aiti-launcher.js（注入单文件）
-node tools/deploy-ext.mjs       # → ~/.pi/web/extensions/aiti-devtools/（aiti-agent 热重载）
-node dbg-mcp-server.cjs --http :8777   # 独立 MCP 桥
+node dev-repo/inject/tools/build.mjs          # → inject/dist/aiti-launcher.js（注入单文件）+ bridge-client.js + cdp-core.js
+node dev-repo/core/tools/build-assets.mjs     # 重建 core/assets（构建产物集中地，桥/载体插件读它）
+node dev-repo/aiti-devtools/tools/deploy.mjs              # → ~/.pi/web/extensions/aiti-devtools/（aiti-agent 热重载）
+node dev-repo/bridge/dev-repo/bridge/bin/aiti-bridge.mjs --port 8777   # 独立 MCP 桥
+node dev-repo/pi-ext/tools/build.mjs              # → dev-repo/pi-ext/dist/aiti-devtools-pi.js（pi 扩展）
 ```
 
 > 插件矩阵见 [aiti-devtools 插件](/products/aiti-devtools-plugins.md)，使用文档见 [开发者工具](/devtools/)。

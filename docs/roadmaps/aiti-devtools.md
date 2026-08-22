@@ -33,7 +33,7 @@ tags: [roadmap, aiti-devtools]
 ## 技术债务与待办
 
 - [ ] `DBG_*` → `AITI_*` 环境变量统一（`DBG_MCP_TOKEN` → `AITI_MCP_TOKEN`、`DBG_OPEN_CMD` → `AITI_OPEN_CMD`）
-- [x] 同步链路统一：旧 `packages/` 发布副本 + `dbg-launcher.js` monolith 已删除——唯一开发源 `examples/dbg-widget/src/` + `dev-repo/`，构建部署走 `tools/build-launcher.mjs` → `tools/deploy-ext.mjs`
+- [x] 同步链路统一：旧 `packages/` 发布副本 + `dbg-launcher.js` monolith 已删除——唯一开发源 `dev-repo/inject/src/` + `dev-repo/`，构建部署走 `dev-repo/inject/tools/build.mjs` → `dev-repo/aiti-devtools/tools/deploy.mjs`
 - [ ] 自检扩展：跨域 iframe 枚举、SSE 断线重连、TTL 复用回归
 - [ ] npm 包拆分：client/launcher（`aiti-launcher.js`）与 mcp-server/client 独立版本管理
 - [ ] 双注入互斥检测标准化（`window.__aiti` 探测 + 防抖）
