@@ -26,6 +26,7 @@ ext:
 
 模型可用性管理扩展：对 models.json 里每个 model 用**类 suggest 的轻量直连**发一条极小探针消息（`"ping" → 期望回 "ok"`），看返回：**200=可用 / 429=限流（解析 Retry-After、X-RateLimit-Reset、错误提示 → 预测恢复时间）/ 其它=异常**。每次探测记录入 `history.jsonl` + `state.json`，后台哨兵周期复测非可用模型 → **观测到实际恢复时间**，识别可用窗口。
 
+- **模型清单两源合并**：每次打开都按「models.json 显式配置 ∪ pi ModelRuntime 快照」合并——快照是扩展启动时建的，之后向导新加的 provider/模型不在快照里也会从 models.json 补上（`source: models.json`），不依赖重建；runtime 有的仍以 runtime 为准（store 补全 + baseUrl/api 规范化）。检查列表永不只基于自己的历史 state
 - **探测**：全模型一键探测（并发 4 路 · 10s 超时 · ~8 token/次），支持 openai-completions / anthropic-messages / openai-responses 三种接口
 - **429 识别**：`Retry-After`（秒/HTTP 日期）、`X-RateLimit-Reset`、错误体提示（"Weekly usage limit reached. Resets in 4 days."、"GLM 套餐已到期"…）→ 预计恢复时间
 - **记录**：history.jsonl 全量 + state.json 每模型最近状态 / 20 条时间线 / 连续 429 计数 / `recoveredAt` 恢复时间
