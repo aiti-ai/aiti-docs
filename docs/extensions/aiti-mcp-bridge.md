@@ -5,7 +5,7 @@ ext:
   id: aiti-mcp-bridge
   name: aiti-mcp-bridge
   description: MCP 桥 —— 让任意 AI agent 操作页面、直达 IDE AI 窗口
-  soul: 每个 AI 都该能碰到你的页面、听懂你的话。
+  soul: 隔着玻璃看页面的 AI，永远只是个旁观者。
   type: bridge
   category: MCP 桥
   version: 0.2.0
@@ -24,7 +24,7 @@ ext:
 
 # aiti-mcp-bridge
 
-> ❝ **每个 AI 都该能碰到你的页面、听懂你的话。** ❞
+> ❝ **隔着玻璃看页面的 AI，永远只是个旁观者。** ❞
 
 MCP 桥把"页面调试能力"变成任意 AI agent 的工具：配置 aiti-devtools 使用、改造 AI agent、消息直达 IDE AI agent 窗口。
 

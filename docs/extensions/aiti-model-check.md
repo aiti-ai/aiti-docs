@@ -5,7 +5,7 @@ ext:
   id: aiti-model-check
   name: 模型可用性管理
   description: 模型健康度探测 —— 对每个模型发极小探针消息，看是否可用 / 429 限流 / 异常；解析限流恢复时间（Retry-After 等），记录历史识别可用窗口
-  soul: 想切模型时先问一句，限流还有多久 —— 不用一个个试。
+  soul: 模型在不在家，敲门问问它。
   type: dev-repo
   category: AI 能力
   version: 0.1.0
@@ -22,7 +22,7 @@ ext:
 
 # aiti-model-check
 
-> ❝ **想切模型时先问一句，限流还有多久 —— 不用一个个试。** ❞
+> ❝ **模型在不在家，敲门问问它。** ❞
 
 模型可用性管理扩展：对 models.json 里每个 model 用**类 suggest 的轻量直连**发一条极小探针消息（`"ping" → 期望回 "ok"`），看返回：**200=可用 / 429=限流（解析 Retry-After、X-RateLimit-Reset、错误提示 → 预测恢复时间）/ 其它=异常**。每次探测记录入 `history.jsonl` + `state.json`，后台哨兵周期复测非可用模型 → **观测到实际恢复时间**，识别可用窗口。
 

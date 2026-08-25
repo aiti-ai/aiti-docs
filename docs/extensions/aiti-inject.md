@@ -5,7 +5,7 @@ ext:
   id: aiti-inject
   name: aiti-inject
   description: dev 实例专用 —— 在 pi-web dev 页面注入生产 aiti-devtools launcher（FAB）
-  soul: 开发环境就该直接开练，不折腾配置。
+  soul: 调试的第一步不该是读文档。
   type: dev-repo
   category: 页面调试注入
   version: 0.3.0
@@ -23,7 +23,7 @@ ext:
 
 # aiti-inject
 
-> ❝ **开发环境就该直接开练，不折腾配置。** ❞
+> ❝ **调试的第一步不该是读文档。** ❞
 
 **pi-web dev 分支专用**扩展：打开 dev 页面时把**生产** aiti-devtools 的 launcher（inject JS）注入页面，dev 界面出现生产的 FAB（调试器入口）。
 

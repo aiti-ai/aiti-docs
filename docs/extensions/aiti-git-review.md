@@ -5,7 +5,7 @@ ext:
   id: aiti-git-review
   name: Git 代码审核
   description: 专职审核未提交变更 —— Monaco diff 工作区（并排/合并/纯新/大纲）+ 行级标注（必须/建议/疑问）+ anchor 标志行重映射（边审边改不失效）+ 汇总终审清单 + AI 预审（aiti_review_* 工具只注入评审会话，日常零工具）
-  soul: 人审 + AI 预审同一标注库，边审边改也不丢 —— 专职审核，绝不提交。
+  soul: 作为人类，这是我对抗ai的最后倔犟了
   type: dev-repo
   category: 开发工具
   version: 0.1.0
@@ -22,7 +22,7 @@ ext:
 
 # aiti-git-review
 
-> ❝ **人审 + AI 预审同一标注库，边审边改也不丢 —— 专职审核，绝不提交。** ❞
+> ❝ **作为人类，这是我对抗ai的最后倔犟了** ❞
 
 Git 代码审核扩展：审「未提交的全部变更」（`git diff HEAD` + untracked，git 概念对用户隐藏）。**只读 git 白名单**（status/diff/log/show/rev-parse/merge-base/ls-files/hash-object），无任何写子命令。
 

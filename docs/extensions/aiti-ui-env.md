@@ -5,7 +5,7 @@ ext:
   id: aiti-ui-env
   name: UI 环境（桌面/无头虚拟屏）
   description: 后台无头服务器 UI 调试的环境分配器 —— 4 态模式（优先桌面/优先无头/总是桌面/总是无头）裁决新启动 MCP/应用的显示环境，Xvfb+openbox+AT-SPI 虚拟屏 + VNC-on-web 浏览器查看，Linux/Windows 双平台服务化
-  soul: 屏幕看不到 ≠ 不能调试；让每个新进程自动落在该在的屏上。
+  soul: 没有显示器，也可以有舞台。
   type: dev-repo
   category: 调试
   version: 0.1.0
@@ -27,7 +27,7 @@ ext:
 
 # aiti-ui-env
 
-> ❝ **屏幕看不到 ≠ 不能调试。** ❞
+> ❝ **没有显示器，也可以有舞台。** ❞
 
 后台无头服务器（VPS/工作站）上的 UI 调试环境管理器：一套 **4 态模式开关**，
 裁决「新启动的 MCP / GUI 应用」落在 **真实桌面** 还是 **Xvfb 无头虚拟屏**
