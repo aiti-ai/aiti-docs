@@ -33,7 +33,7 @@ aiti-mcp-bridge 的核心价值：**让任意 AI agent 拥有操作页面、询�
 ### Claude Code
 
 ```bash
-claude mcp add aiti -- npx @justdb/aiti-mcp-server --bridge http://localhost:8777
+claude mcp add aiti -- npx @aiti-ai/aiti-mcp-server --bridge http://localhost:8777
 claude mcp list   # 确认 aiti 已连接
 ```
 
@@ -45,7 +45,7 @@ claude mcp list   # 确认 aiti 已连接
     "aiti": {
       "type": "stdio",
       "command": "npx",
-      "args": ["@justdb/aiti-mcp-server", "--bridge", "http://localhost:8777"]
+      "args": ["@aiti-ai/aiti-mcp-server", "--bridge", "http://localhost:8777"]
     }
   }
 }

@@ -10,13 +10,13 @@ tags: [devtools, quick-start]
 ## 方式一：Vite 工程（推荐）
 
 ```bash
-pnpm add -D @justdb/aiti-devtools-vite
+pnpm add -D @aiti-ai/aiti-devtools-vite
 ```
 
 ```ts
 // vite.config.ts
 import { defineConfig } from 'vite';
-import { aitiDevtools } from '@justdb/aiti-devtools-vite';
+import { aitiDevtools } from '@aiti-ai/aiti-devtools-vite';
 
 export default defineConfig({
   plugins: [

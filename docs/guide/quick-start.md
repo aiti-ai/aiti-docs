@@ -19,12 +19,12 @@ tags: [guide, quick-start]
 ### 方式 A：工程插件（推荐，Vite 示例）
 
 ```bash
-pnpm add -D @justdb/aiti-devtools-vite
+pnpm add -D @aiti-ai/aiti-devtools-vite
 ```
 
 ```ts
 // vite.config.ts
-import { aitiDevtools } from '@justdb/aiti-devtools-vite';
+import { aitiDevtools } from '@aiti-ai/aiti-devtools-vite';
 export default defineConfig({
   plugins: [aitiDevtools({ bridge: { base: 'http://localhost:8777' } })],
 });
@@ -46,9 +46,9 @@ export default defineConfig({
 ## 步骤 2：启动 MCP 桥
 
 ```bash
-npx @justdb/aiti-mcp-bridge --http 8777
+npx @aiti-ai/aiti-mcp-bridge --http 8777
 # 或（等同，直接跑 server）
-npx @justdb/aiti-mcp-server --http 8777
+npx @aiti-ai/aiti-mcp-server --http 8777
 ```
 
 页面应自动连桥（也可刷新页面确认）。
@@ -58,7 +58,7 @@ npx @justdb/aiti-mcp-server --http 8777
 ### Claude Code
 
 ```bash
-claude mcp add aiti -- npx @justdb/aiti-mcp-server --bridge http://localhost:8777
+claude mcp add aiti -- npx @aiti-ai/aiti-mcp-server --bridge http://localhost:8777
 ```
 
 ### Cursor / VS Code Copilot Chat
@@ -66,7 +66,7 @@ claude mcp add aiti -- npx @justdb/aiti-mcp-server --bridge http://localhost:877
 在 MCP 设置中添加 stdio server：
 
 ```json
-{ "command": "npx", "args": ["@justdb/aiti-mcp-server", "--bridge", "http://localhost:8777"] }
+{ "command": "npx", "args": ["@aiti-ai/aiti-mcp-server", "--bridge", "http://localhost:8777"] }
 ```
 
 ### aiti-agent（Web 工作台）

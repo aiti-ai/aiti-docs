@@ -13,12 +13,12 @@ MCP 端点：**stdio + HTTP（stateless）+ Streamable HTTP（持久流）** 三
 
 ```bash
 # 桥（本地服务，含会话登记/路由/广播）
-npx @justdb/aiti-mcp-bridge --http 8777
+npx @aiti-ai/aiti-mcp-bridge --http 8777
 
 # 或直接跑 MCP server（等同，桥的 MCP 面）
-npx @justdb/aiti-mcp-server --http 8777
+npx @aiti-ai/aiti-mcp-server --http 8777
 # stdio 模式（给 Claude Code / Cursor 等用）
-npx @justdb/aiti-mcp-server --bridge http://localhost:8777
+npx @aiti-ai/aiti-mcp-server --bridge http://localhost:8777
 ```
 
 ## 传输

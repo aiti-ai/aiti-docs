@@ -91,4 +91,4 @@ node dev-repo/bridge/dev-repo/bridge/bin/aiti-bridge.mjs --port 8777   # 独立 
 node dev-repo/pi-ext/tools/build.mjs              # → dev-repo/pi-ext/dist/aiti-devtools-pi.js（pi 扩展）
 ```
 
-> 插件矩阵见 [aiti-devtools 插件](/products/aiti-devtools-plugins.md)，使用文档见 [开发者工具](/devtools/)。
+> 插件矩阵见 [aiti-devtools 插件](/products/aiti-devtools-plugins.md)，使用文档见 [aiti-devtools](/devtools/)。

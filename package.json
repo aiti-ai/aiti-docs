@@ -1,5 +1,5 @@
 {
-  "name": "@justdb/aiti-docs",
+  "name": "@aiti-ai/aiti-docs",
   "version": "0.1.0",
   "private": true,
   "description": "aiti 官方文档站 — 以 pi 为引擎的个人 AI 开发工作台与本地调试注入生态（aiti-agent / aiti-devtools / aiti-mcp-bridge）",

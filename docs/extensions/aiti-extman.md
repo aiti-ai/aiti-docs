@@ -46,7 +46,7 @@ pi-web 的扩展管理器扩展：把扩展管理从宿主内置 UI 迁出，业
 
 | 来源 | 发行者取自 | 示例 |
 |---|---|---|
-| npm 包 | npm registry：`_npmUser` / `maintainers` / 最新版 `author`（私有 registry 无发行者信息时回退注册表条目 author / `npm:<包名>` 指纹） | `npm:@justdb/aiti-devtools` → jonschlinkert |
+| npm 包 | npm registry：`_npmUser` / `maintainers` / 最新版 `author`（私有 registry 无发行者信息时回退注册表条目 author / `npm:<包名>` 指纹） | `npm:@aiti-ai/aiti-devtools` → jonschlinkert |
 | github/gitlab/git | 仓库 owner（URL 解析，离线可得） | `git:https://github.com/foo/bar` → foo |
 | 本地路径 / zip / 其他 url | package.json 的 `author`（字符串或对象）→ 网站取 author.url / homepage / repository | `/path/to/ext` → author.name |
 

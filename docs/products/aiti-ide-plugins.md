@@ -13,8 +13,8 @@ tags: [product, ide, vscode, idea]
 
 | 插件 | 包名 / 市场名 | 目标 IDE | 状态 |
 |---|---|---|---|
-| aiti-devtools-vscode | `@justdb/aiti-devtools-vscode` | VS Code / Cursor / Windsurf | 📋 |
-| aiti-devtools-idea | `@justdb/aiti-devtools-idea` | IntelliJ / PyCharm / WebStorm / GoLand / Android Studio | 📋 |
+| aiti-devtools-vscode | `@aiti-ai/aiti-devtools-vscode` | VS Code / Cursor / Windsurf | 📋 |
+| aiti-devtools-idea | `@aiti-ai/aiti-devtools-idea` | IntelliJ / PyCharm / WebStorm / GoLand / Android Studio | 📋 |
 
 ## 2. 三大职责
 

@@ -16,7 +16,7 @@ tags: [guide, concept]
 | 品牌 | aiti（2026-08-08 定稿） |
 | 域名 | `https://aiti.pw` |
 | GitHub 组织 | `aiti-ai` |
-| npm scope | `@justdb`（裸名 3-4 字母被 npm 防抢注风控拒绝） |
+| npm scope | `@aiti-ai`（裸名 3-4 字母被 npm 防抢注风控拒绝） |
 | 一句话 | AI 开发像打喷嚏一样简单自然 |
 
 ## 三条主线

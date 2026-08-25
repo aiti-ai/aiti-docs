@@ -6,28 +6,28 @@ description: aiti 完整产品矩阵 — 覆盖入口层 / 注入层 / 桥接层
 
 # 产品矩阵
 
-aiti 不是单一产品，而是一个 **AI 开发工具生态**。所有产品统一品牌、统一协议、统一 npm scope（`@justdb`）。
+aiti 不是单一产品，而是一个 **AI 开发工具生态**。所有产品统一品牌、统一协议、统一 npm scope（`@aiti-ai`）。
 
 ## 一、矩阵总览
 
 | # | 产品 | npm 包名 | 形态 | 一句话定位 | 状态 |
 |---|---|---|---|---|---|
-| 1 | **aiti-agent** | `@justdb/aiti-agent` | Web 应用 + Docker 镜像 | 自托管个人 AI 开发工作台（**基于 pi-web 构建**），浏览器是唯一操作面 | 🚧 M0-M4 |
-| 2 | **aiti-core** | `@justdb/aiti` | SDK（协议/类型/共享库） | 全产品共享：桥协议、`pageId` 会话模型、注入脚本、MCP 工具定义 | 📋 |
-| 3 | **aiti-devtools** | `@justdb/aiti-devtools` | 注入 SDK（`inject.js`） | 页面内 AI 调试助手：`aiti-devtools` + Inspector + MCP 桥（形态① 主动适配） | ✅ 0.2.x |
-| 4 | **aiti-devtools-vite** | `@justdb/aiti-devtools-vite` | Vite 插件 | dev server 自动注入，**本地 inject** | 📋 |
-| 5 | **aiti-devtools-vue** | `@justdb/aiti-devtools-vue` | Vue 插件 | Vue 应用内注入（app.use 一行接入） | 📋 |
-| 6 | **aiti-devtools-next** | `@justdb/aiti-devtools-next` | Next.js 插件 | 框架级注入（dev 构建 + `_debugSource` 源码定位） | 📋 |
-| 7 | **aiti-devtools-react** | `@justdb/aiti-devtools-react` | React 插件 | React 工程注入 | 📋 |
-| 8 | **aiti-devtools-svelte** | `@justdb/aiti-devtools-svelte` | Svelte 插件 | Svelte 工程注入 | 📋 |
-| 9 | **aiti-mcp-bridge** | `@justdb/aiti-mcp-bridge` | 本地桥服务（CLI） | **配置 aiti-devtools 使用**、改造任意 AI agent、消息直达 IDE AI 窗口 | 🚧 桥已通 |
-| 10 | **aiti-mcp-server** | `@justdb/aiti-mcp-server` | MCP server | stdio + HTTP + SSE 三 transport 的 MCP 端点（含 `page_exec` / `user_*` 工具族） | ✅ 0.2.x |
-| 11 | **aiti-devtools-vscode** | `@justdb/aiti-devtools-vscode` | VS Code 扩展 | 完成注入 + 直连 IDE 内置 AI agent 窗口 | 📋 |
-| 12 | **aiti-devtools-idea** | `@justdb/aiti-devtools-idea` | JetBrains 插件 | 同上（IntelliJ / PyCharm / WebStorm / GoLand） | 📋 |
-| 13 | **aiti-devtools-chrome** | `@justdb/aiti-devtools-chrome` | Chrome 扩展 | 免改代码注入（形态②），任意站点可调试 | 📋 |
-| 14 | **aiti-docs** | `@justdb/aiti-docs` | 文档站（本网站） | VuePress 文档 + 产品矩阵 + 路线图 | ✅ 本页 |
+| 1 | **aiti-agent** | `@aiti-ai/aiti-agent` | Web 应用 + Docker 镜像 | 自托管个人 AI 开发工作台（**基于 pi-web 构建**），浏览器是唯一操作面 | 🚧 M0-M4 |
+| 2 | **aiti-core** | `@aiti-ai/aiti` | SDK（协议/类型/共享库） | 全产品共享：桥协议、`pageId` 会话模型、注入脚本、MCP 工具定义 | 📋 |
+| 3 | **aiti-devtools** | `@aiti-ai/aiti-devtools` | 注入 SDK（`inject.js`） | 页面内 AI 调试助手：`aiti-devtools` + Inspector + MCP 桥（形态① 主动适配） | ✅ 0.2.x |
+| 4 | **aiti-devtools-vite** | `@aiti-ai/aiti-devtools-vite` | Vite 插件 | dev server 自动注入，**本地 inject** | 📋 |
+| 5 | **aiti-devtools-vue** | `@aiti-ai/aiti-devtools-vue` | Vue 插件 | Vue 应用内注入（app.use 一行接入） | 📋 |
+| 6 | **aiti-devtools-next** | `@aiti-ai/aiti-devtools-next` | Next.js 插件 | 框架级注入（dev 构建 + `_debugSource` 源码定位） | 📋 |
+| 7 | **aiti-devtools-react** | `@aiti-ai/aiti-devtools-react` | React 插件 | React 工程注入 | 📋 |
+| 8 | **aiti-devtools-svelte** | `@aiti-ai/aiti-devtools-svelte` | Svelte 插件 | Svelte 工程注入 | 📋 |
+| 9 | **aiti-mcp-bridge** | `@aiti-ai/aiti-mcp-bridge` | 本地桥服务（CLI） | **配置 aiti-devtools 使用**、改造任意 AI agent、消息直达 IDE AI 窗口 | 🚧 桥已通 |
+| 10 | **aiti-mcp-server** | `@aiti-ai/aiti-mcp-server` | MCP server | stdio + HTTP + SSE 三 transport 的 MCP 端点（含 `page_exec` / `user_*` 工具族） | ✅ 0.2.x |
+| 11 | **aiti-devtools-vscode** | `@aiti-ai/aiti-devtools-vscode` | VS Code 扩展 | 完成注入 + 直连 IDE 内置 AI agent 窗口 | 📋 |
+| 12 | **aiti-devtools-idea** | `@aiti-ai/aiti-devtools-idea` | JetBrains 插件 | 同上（IntelliJ / PyCharm / WebStorm / GoLand） | 📋 |
+| 13 | **aiti-devtools-chrome** | `@aiti-ai/aiti-devtools-chrome` | Chrome 扩展 | 免改代码注入（形态②），任意站点可调试 | 📋 |
+| 14 | **aiti-docs** | `@aiti-ai/aiti-docs` | 文档站（本网站） | VuePress 文档 + 产品矩阵 + 路线图 | ✅ 本页 |
 
-> 品牌与身份：GitHub 组织 `aiti-ai` · 官网 `https://aiti.pw` · npm scope `@justdb` · 协议 MIT。
+> 品牌与身份：GitHub 组织 `aiti-ai` · 官网 `https://aiti.pw` · npm scope `@aiti-ai` · 协议 MIT。
 
 ## 二、分层架构
 
@@ -108,7 +108,7 @@ docker run aiti → 浏览器打开工作台 → 页面 dev 环境注入 aiti-de
 | 会话 ID | `pageId = instanceId/frameId`（如 `01234/f0`），TTL 保留、secret 防串台 |
 | 命名 | `token → instanceId`（连接身份）、`uid → frameId`（目标 frame）、组合 = `pageId` |
 | 环境变量 | 统一 `AITI_*`（如 `AITI_OPEN_CMD`、`AITI_MCP_TOKEN`） |
-| npm scope | `@justdb/*`（裸名 3-4 字母被 npm 防抢注风控拒绝） |
+| npm scope | `@aiti-ai/*`（裸名 3-4 字母被 npm 防抢注风控拒绝） |
 | 域名 | `aiti.pw`（官网 / 文档 / MCP 端点） |
 
 > 下一节：[指南 · 什么是 aiti](/guide/what-is-aiti.md)

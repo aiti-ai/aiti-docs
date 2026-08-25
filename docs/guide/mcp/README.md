@@ -25,14 +25,14 @@ tags: [guide, mcp-bridge, mcp, ai-agent]
 
 ```bash
 # 1. 启动桥（本地服务，默认 8777）
-npx @justdb/aiti-mcp-bridge --http 8777
+npx @aiti-ai/aiti-mcp-bridge --http 8777
 
 # 2. 页面注入 aiti-devtools（Vite 示例）
-pnpm add -D @justdb/aiti-devtools-vite
+pnpm add -D @aiti-ai/aiti-devtools-vite
 # vite.config.ts 启用插件，dev 页面右下角出现 💬 / 🎯
 
 # 3. 把桥配给任意 MCP 客户端
-# Claude Code:  claude mcp add aiti -- npx @justdb/aiti-mcp-server --bridge http://localhost:8777
+# Claude Code:  claude mcp add aiti -- npx @aiti-ai/aiti-mcp-server --bridge http://localhost:8777
 # Cursor / IDE: MCP 设置添加 aiti-mcp-server（stdio）
 
 # 4. 让 AI 开始调试

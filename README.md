@@ -4,7 +4,7 @@ aiti 官方文档站 —— 以 **pi** 为引擎的个人 AI 开发工作台与�
 
 - 官网：<https://aiti.py>
 - GitHub：<https://github.com/aiti-ai>
-- npm scope：`@justdb/*`
+- npm scope：`@aiti-ai/*`
 
 ## 内容
 

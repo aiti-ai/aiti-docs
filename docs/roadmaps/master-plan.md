@@ -21,7 +21,7 @@ description: aiti 整体规划 — 目标、产品矩阵、分层架构、里程
 | 引擎 | pi（earendil-works/pi，85k★，每日发版，mise 管理） |
 | 差异化 | 共享 JSONL 会话 + 真实工作区 + 服务隧道 + **AI 与页面/IDE 同场协作**（无人五层齐全） |
 | 产品矩阵 | 14 个产品，覆盖入口/注入/桥接/Agent 四层（见 [产品矩阵](/products/README.md)） |
-| 品牌 | aiti · 域名 `aiti.pw` · GitHub `aiti-ai` · npm scope `@justdb` |
+| 品牌 | aiti · 域名 `aiti.pw` · GitHub `aiti-ai` · npm scope `@aiti-ai` |
 | 北极星 | 自己日常可用 → 外部 10+ 活跃用户 → 5+ 外部贡献者 |
 | 当前状态 | 命名已定（aiti）；aiti-devtools 0.2.x 已可用（自检 21/21）；桥链路已通；aiti-agent M0 待执行 |
 
@@ -74,7 +74,7 @@ description: aiti 整体规划 — 目标、产品矩阵、分层架构、里程
 ```mermaid
 timeline
     title aiti 整体路线图
-    2026 Q3 已定稿 : 命名 aiti · 域名 aiti.pw · npm scope @justdb
+    2026 Q3 已定稿 : 命名 aiti · 域名 aiti.pw · npm scope @aiti-ai
     2026 Q3 桥链路 : aiti-devtools 0.2.x · 方案 B/C/D/E 完成
     2026 Q4 R1 : devtools 稳定发布 · 框架插件
     2026 Q4 M0 : aiti-agent 地基（rebase v0.8.7）
@@ -91,7 +91,7 @@ timeline
 | 阶段 | 目标 | 交付 | 状态 |
 |---|---|---|---|
 | **R0 · 协议** | 注入/桥/会话协议打通 | 方案 B/C/D/E ✅；aiti-devtools 0.2.x（21 项自检）；桥端点全量 | ✅ |
-| **R1 · 核心可用** | 开发者开箱即用 | `@justdb/aiti-devtools` 正式发布；README/demo 完善；`AITI_*` 环境变量统一 | 🚧 |
+| **R1 · 核心可用** | 开发者开箱即用 | `@aiti-ai/aiti-devtools` 正式发布；README/demo 完善；`AITI_*` 环境变量统一 | 🚧 |
 | **R2 · 插件矩阵** | 嵌入主流开发工具 | devtools-vite/vue/next/react/svelte；mcp-bridge 配置最小化收官；Chrome 扩展 | 📋 |
 | **R3 · IDE 插件** | 消息直达 IDE AI 窗口 | devtools-vscode / devtools-idea（注入 + 桥 + AI 窗口面板 + 作答卡） | 📋 |
 | **R4 · 平台化** | 生态开放 | 扩展市场（npm + MCP registry 数据源）、公开协议文档、贡献指南 | 📋 |
@@ -125,7 +125,7 @@ timeline
 | D9 | devtools 目标路由 | 方案 C（宿主目标路由）替代方案 B：目标 = 宿主 + 宿主真实 iframe | inject 不建自建 targetFrame |
 | D10 | MCP 会话命名 | `token → instanceId`、`uid → frameId`、组合 `pageId` | 职责清晰、配置最小化 |
 | D11 | 用户交互协议 | `user_*` 工具族独立成类（confirm/choose/input/pick/presence/notify） | 工具名即语义，返回形状不同 |
-| D12 | npm scope | `@justdb/*`（裸名 3-4 字母被 npm 防抢注风控拒绝） | 实测 404/拒绝 |
+| D12 | npm scope | `@aiti-ai/*`（裸名 3-4 字母被 npm 防抢注风控拒绝） | 实测 404/拒绝 |
 | D13 | 域名 | `aiti.pw` 主站点（官网/文档/端点） | 2026-08-08 申请 |
 
 ---
@@ -134,7 +134,7 @@ timeline
 
 ### 已完成 ✅
 
-- **品牌身份**：命名 aiti、域名 aiti.pw、GitHub 组织 aiti-ai、npm scope @justdb
+- **品牌身份**：命名 aiti、域名 aiti.pw、GitHub 组织 aiti-ai、npm scope @aiti-ai
 - **aiti-devtools 0.2.x**：自检 21/21 全过（原生 HTML + React 均验证）；Inspector/HUD/事件冻结/调速面板/类 CDP 42 命令/框架识别/MCP 桥/刷新恢复/安全边界
 - **方案 B/C/D/E**：宿主目标路由、MCP 桥会话体系（pageId）、用户交互工具族（user_*）全链路实施
 - **桥链路**：SSE 页面桥 + 全局 pendingRequests + 事件广播（open_file）；service-tunnels 集成注入（transformResponse prepend）
@@ -179,7 +179,7 @@ timeline
 - [ ] **aiti-agent M0**：rebase v0.8.7、验证链、service-tunnels 公开化
 - [ ] **IDE 插件（R3）**：vscode 先行（注入 + 桥 + Copilot Chat 面板），idea 跟进
 - [ ] **域名/托管**：aiti.pw 解析生效后配置站点（海外托管免备案）
-- [ ] **npm 清理**：`npm unpublish @justdb/aiti@0.0.0`（占坑脏版本，文档复制完成后执行）
+- [ ] **npm 清理**：`npm unpublish @aiti-ai/aiti@0.0.0`（占坑脏版本，文档复制完成后执行）
 - [ ] **GitHub 建仓库**：aiti-ai/aiti、aiti-ai/aiti-docs、aiti-ai/aiti-devtools 等
 - [ ] **CLI 桥接 P0 前置实测**：CC control_request、Codex exec resume、OpenCode run --session
 - [ ] **公开协议文档**：桥协议、pageId 会话、注入脚本规范 → 生态开放（R4）

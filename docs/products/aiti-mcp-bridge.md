@@ -13,8 +13,8 @@ tags: [product, aiti-mcp-bridge, mcp, ai-agent]
 
 | 包 | 形态 | 职责 |
 |---|---|---|
-| `@justdb/aiti-mcp-bridge` | 本地桥服务（CLI） | 配置 aiti-devtools 的桥地址/token/pageId；会话登记与路由；事件广播；对接 IDE AI 窗口 |
-| `@justdb/aiti-mcp-server` | MCP server | stdio + HTTP + SSE 三 transport 的 MCP 端点，暴露 `page_*` / `user_*` 工具族 |
+| `@aiti-ai/aiti-mcp-bridge` | 本地桥服务（CLI） | 配置 aiti-devtools 的桥地址/token/pageId；会话登记与路由；事件广播；对接 IDE AI 窗口 |
+| `@aiti-ai/aiti-mcp-server` | MCP server | stdio + HTTP + SSE 三 transport 的 MCP 端点，暴露 `page_*` / `user_*` 工具族 |
 
 ## 2. 它解决了什么
 
@@ -74,10 +74,10 @@ IDE AI agent 窗口 / Claude Code / Cursor / aiti-agent
 
 ```bash
 # 1. 启动桥
-npx @justdb/aiti-mcp-bridge --http 8777
+npx @aiti-ai/aiti-mcp-bridge --http 8777
 
 # 2. 配置任意 MCP 客户端
-# Claude Code: claude mcp add aiti -- npx @justdb/aiti-mcp-server --bridge http://localhost:8777
+# Claude Code: claude mcp add aiti -- npx @aiti-ai/aiti-mcp-server --bridge http://localhost:8777
 # Cursor / IDE AI: 在 MCP 设置里添加 aiti-mcp-server（stdio）
 
 # 3. 告诉 AI 目标页面

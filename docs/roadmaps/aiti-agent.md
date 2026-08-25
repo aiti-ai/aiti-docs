@@ -7,7 +7,7 @@ tags: [roadmap, aiti-agent]
 
 # aiti-agent 规划（Web 主战场）
 
-> 构建于开源项目 **pi-web** 之上，产品身份独立（品牌 aiti、域名 aiti.pw、scope @justdb）。来历见[项目起源](/guide/origin.md)。
+> 构建于开源项目 **pi-web** 之上，产品身份独立（品牌 aiti、域名 aiti.pw、scope @aiti-ai）。来历见[项目起源](/guide/origin.md)。
 
 ## 阶段计划
 

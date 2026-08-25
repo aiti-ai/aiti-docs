@@ -31,7 +31,7 @@ features:
   - title: 会话体系
     details: pageId = instanceId/frameId，刷新不断线、多页面不串台，AI 一个词定位目标
   - title: 开放生态
-    details: npm scope @justdb · GitHub 组织 aiti-ai · 官网 aiti.pw
+    details: npm scope @aiti-ai · GitHub 组织 aiti-ai · 官网 aiti.pw
 
 copyright: false
 footer: MIT Licensed | Copyright © 2026 aiti-ai
@@ -82,11 +82,11 @@ flowchart TB
 
 ```bash
 # 1. 在工程里装 devtools 注入（Vite 示例）
-pnpm add -D @justdb/aiti-devtools-vite
+pnpm add -D @aiti-ai/aiti-devtools-vite
 # 在 vite.config.ts 中启用插件，dev 启动后页面右下角出现 💬 / 🎯 按钮
 
 # 2. 启动 MCP 桥（改造你的 AI agent）
-npx @justdb/aiti-mcp-bridge --http 8777
+npx @aiti-ai/aiti-mcp-bridge --http 8777
 
 # 3. 把桥配置给任意 MCP 客户端（Claude Code / Cursor / IDE 内置 AI）
 #   配置 aiti-mcp-server 后，AI 即可 page_exec / page_snapshot / user_confirm ...
@@ -96,9 +96,9 @@ npx @justdb/aiti-mcp-bridge --http 8777
 
 | 层 | 产品 | 包名 / 形态 | 定位 |
 |---|---|---|---|
-| 入口层 | aiti-agent | `@justdb/aiti-agent` · Web + Docker | 自托管 AI 开发工作台（基于 pi-web） |
-| 注入层 | aiti-devtools 系列 | `@justdb/aiti-devtools-*` · 插件/SDK | 嵌入主流开发工具，本地注入 |
-| 桥接层 | aiti-mcp-bridge | `@justdb/aiti-mcp-bridge` · 本地服务 | 配置 devtools、改造 AI agent |
+| 入口层 | aiti-agent | `@aiti-ai/aiti-agent` · Web + Docker | 自托管 AI 开发工作台（基于 pi-web） |
+| 注入层 | aiti-devtools 系列 | `@aiti-ai/aiti-devtools-*` · 插件/SDK | 嵌入主流开发工具，本地注入 |
+| 桥接层 | aiti-mcp-bridge | `@aiti-ai/aiti-mcp-bridge` · 本地服务 | 配置 devtools、改造 AI agent |
 | Agent 层 | 任意 AI agent | Claude Code / Cursor / IDE AI | 经 MCP 操作页面、直达 IDE 窗口 |
 
 > 完整矩阵见 [产品矩阵](/products/)，整体规划见 [路线图](/roadmaps/master-plan.md)。

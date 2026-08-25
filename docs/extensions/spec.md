@@ -14,22 +14,22 @@ description: 扩展 md 的 ext frontmatter 规范、type 枚举、提交新扩�
 
 ```yaml
 ---
-title: aiti-devtools            # 页面标题（列表也用它做展示名时的兜底）
+title: aiti-helper              # 页面标题（列表也用它做展示名时的兜底）
 icon: 🧰                        # 页面图标
 ext:
-  id: aiti-devtools             # 必须，唯一 id（一般与文件名一致）
-  name: aiti devtools           # 展示名（缺省 = id）
+  id: aiti-helper               # 必须，唯一 id（一般与文件名一致）
+  name: aiti helper             # 展示名（缺省 = id）
   description: 一句话描述        # 列表卡片副标题
   soul: 一句话灵魂描述          # 设计源动力（卡片斜体标注，可选但推荐）
-  type: devtools-plugin         # 类型枚举（见下）
+  type: dev-repo              # 类型枚举（见下）
   category: 页面调试注入         # 列表分组（自定义中文分类）
   version: 0.2.1                # 当前版本
   status: active                # active / beta / experimental / archived
   author: aiti-ai               # 维护者
   repo: ""                      # 有独立仓库时填 "owner/repo"（暂无仓库留空）
-  npm: "@justdb/aiti-devtools"  # npm 包名（可选）
+  npm: "@aiti-ai/my-ext"         # npm 包名（可选）
   install: |
-    pnpm add -D @justdb/aiti-devtools-vite
+    pnpm add -D @aiti-ai/my-ext
   license: MIT
   tags: [inject, inspector, mcp] # 检索标签
 ---
@@ -53,14 +53,18 @@ ext:
 
 ### type 枚举
 
+> ⚠️ **注册表只收 pi-web 扩展**：aiti-devtools 的 SDK 本体与各框架插件（Vite/webpack/Nuxt/Astro…）**不是扩展**，归独立大主题 [/devtools/](/devtools/)，登记在 `docs/devtools/integrations/`（见下文「integrations 注册」）；IDE 插件归 [/ide/](/ide/)。原 `devtools-plugin`/`ide-plugin` 类型已废弃移出。
+
 | type | 含义 |
 |---|---|
-| `devtools-plugin` | 开发工具插件（Vite / Vue / Next 等本地注入） |
 | `dev-repo` | aiti-agent 运行时扩展（`~/.pi/web/extensions/`） |
 | `bridge` | MCP 桥 / 本地服务 |
-| `ide-plugin` | IDE 插件（VSCode / IDEA 等） |
 | `theme` / `skill` | 主题 / 技能（pi / aiti-agent 生态预留） |
 | `other` | 其他 |
+
+## 1.5 integrations 注册（aiti-devtools 框架集成）
+
+aiti-devtools 各框架集成页放在 `docs/devtools/integrations/<id>.md`，frontmatter 同样用 `ext:` 块（字段同上，type 自由填如 `vite-plugin`）。它们不进 `extensions.extensions` 数组，而是编译进独立的 `integrations` 数组（见下文 JSON 消费），页面 docs 链接指向 `/devtools/integrations/*.html`。
 
 ## 2. 提交新扩展
 
@@ -99,35 +103,35 @@ ext:
 
 ## 3. JSON 消费
 
-`/extensions.json` 结构（`schemaVersion: 1`）：
+`/extensions.json` 结构（`schemaVersion: 2`——**分家**：`extensions` 只含 pi-web 扩展；框架集成分离到 `integrations` 数组）：
 
 ```json
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "generatedAt": "2026-08-14T00:00:00.000Z",
-  "count": 8,
+  "count": 38,
   "extensions": [
     {
-      "id": "aiti-devtools",
-      "name": "aiti devtools",
+      "id": "aiti-helper",
+      "name": "aiti helper",
       "description": "…",
-      "soul": "我的输入是我宝贵的财富——说过的好话，值得收藏。",
-      "type": "devtools-plugin",
-      "category": "页面调试注入",
-      "version": "0.2.1",
+      "type": "dev-repo",
+      "docs": "/extensions/aiti-helper.html"
+    }
+  ],
+  "integrations": [
+    {
+      "id": "aiti-devtools-vite",
+      "name": "aiti-devtools-vite",
+      "description": "Vite 插件 —— dev 自动本地注入，一行插件 = 同源 /aiti/ 全套",
+      "type": "vite-plugin",
+      "npm": "@aiti-ai/aiti-devtools-vite",
+      "install": "pnpm add -D @aiti-ai/aiti-devtools-vite\n# vite.config.ts: plugins: [aitiDevtools()]",
       "status": "active",
-      "author": "aiti-ai",
-      "publisher": "aiti-ai",
-      "website": "https://aiti.pw",
-      "repo": "",
-      "npm": "@justdb/aiti-devtools",
-      "install": "pnpm add -D …",
-      "license": "MIT",
-      "tags": [],
-      "docs": "/extensions/aiti-devtools.html"
+      "docs": "/devtools/integrations/vite.html"
     }
   ]
 }
 ```
 
-aiti-agent 拉取 `https://aiti.pw/extensions.json` 即可自动发现扩展列表。
+aiti-agent 拉取 `https://aiti.pw/extensions.json` 即可自动发现扩展列表——**扩展发现只消费 `extensions` 数组**（框架插件不是可安装扩展，不该出现在扩展列表里）。

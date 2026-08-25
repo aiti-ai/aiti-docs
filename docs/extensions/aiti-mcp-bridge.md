@@ -14,9 +14,9 @@ ext:
   publisher: aiti-ai
   website: https://aiti.pw
   repo: ""
-  npm: "@justdb/aiti-mcp-bridge"
+  npm: "@aiti-ai/aiti-mcp-bridge"
   install: |
-    npx @justdb/aiti-mcp-bridge --http 8777
+    npx @aiti-ai/aiti-mcp-bridge --http 8777
     # 配置成 MCP server 后，AI 即可 page_exec / page_snapshot / user_confirm ...
   license: MIT
   tags: [mcp, bridge, ai-agent]

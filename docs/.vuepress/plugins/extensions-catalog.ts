@@ -1,7 +1,8 @@
 /**
- * extensions-catalog — 扩展注册表编译插件。
+ * extensions-catalog — 扩展/集成 注册表编译插件。
  *
- * 扫描 docs/extensions/*.md 的 `ext:` frontmatter（直接读磁盘 + js-yaml 解析，
+ * 扫描 docs/extensions/*.md（pi-web 扩展）与 docs/devtools/integrations/*.md（aiti-devtools
+ * 框架集成——不是扩展）的 `ext:` frontmatter（直接读磁盘 + js-yaml 解析，
  * 不依赖 vuepress 页面状态——dev 热更新时页面 frontmatter 更新有异步时序，
  * 直接读文件最可靠），产出两样东西：
  *
@@ -66,12 +67,23 @@ interface AppLike {
 }
 
 const extensionsCatalog = (): PluginObject => {
-  /** 扫描 docs/extensions/*.md 的 ext frontmatter → 条目列表（已按 id 排序） */
-  const readEntries = (app: AppLike) => {
-    const extDir = resolve(app.dir.source(), "extensions");
+  /** 扫描某目录下 *.md 的 ext frontmatter → 条目列表（已按 id 排序）；docsPrefix 决定条目 docs 链接前缀 */
+  const readDirEntries = (
+    app: AppLike,
+    dirName: string,
+    docsPrefix: string,
+    skip: string[] = ["README.md", "spec.md"],
+  ) => {
+    const extDir = resolve(app.dir.source(), dirName);
     const entries: (ExtCatalogEntry & { docs: string })[] = [];
-    for (const name of readdirSync(extDir).filter((f) => f.endsWith(".md"))) {
-      if (name === "README.md" || name === "spec.md") continue;
+    let names: string[] = [];
+    try {
+      names = readdirSync(extDir).filter((f) => f.endsWith(".md"));
+    } catch {
+      return entries; // 目录不存在（如 integrations 尚未创建）→ 空列表
+    }
+    for (const name of names) {
+      if (skip.includes(name)) continue;
       const meta = readExtMeta(join(extDir, name));
       const raw = meta?.ext as Partial<ExtCatalogEntry> | undefined;
       if (!raw || typeof raw !== "object" || typeof raw.id !== "string" || !raw.id) continue;
@@ -93,19 +105,25 @@ const extensionsCatalog = (): PluginObject => {
         install: raw.install ?? "",
         license: raw.license ?? "",
         tags: Array.isArray(raw.tags) ? raw.tags : [],
-        docs: `/extensions/${pageName}`,
+        docs: `${docsPrefix}${pageName}`,
       });
     }
     return entries.sort((a, b) => a.id.localeCompare(b.id));
   };
 
-  /** 写 public/extensions.json */
+  /** pi-web 扩展（docs/extensions/）与 aiti-devtools 框架集成（docs/devtools/integrations/）分开扫描 */
+  const readEntries = (app: AppLike) => readDirEntries(app, "extensions", "/extensions/");
+  const readIntegrations = (app: AppLike) =>
+    readDirEntries(app, join("devtools", "integrations"), "/devtools/integrations/");
+
+  /** 写 public/extensions.json（schemaVersion 2：extensions 只含 pi-web 扩展；integrations 独立数组） */
   const generate = (app: AppLike) => {
     const json = {
-      schemaVersion: 1,
+      schemaVersion: 2,
       generatedAt: new Date().toISOString(),
       count: 0,
       extensions: readEntries(app),
+      integrations: readIntegrations(app),
     };
     json.count = json.extensions.length;
     const outFile = resolve(app.dir.public(), "extensions.json");
@@ -122,13 +140,17 @@ const extensionsCatalog = (): PluginObject => {
         __EXTENSIONS_CATALOG__: JSON.stringify({
           generatedAt: new Date().toISOString(),
           extensions: readEntries(app as AppLike),
+          integrations: readIntegrations(app as AppLike),
         }),
       };
     },
 
-    /** 声明监听扩展目录（md 变化 → onWatched 触发 → 重新生成 JSON） */
+    /** 声明监听两个目录（md 变化 → onWatched 触发 → 重新生成 JSON） */
     watch(app) {
-      return [resolve(app.dir.source(), "extensions", "**", "*.md")];
+      return [
+        resolve(app.dir.source(), "extensions", "**", "*.md"),
+        resolve(app.dir.source(), "devtools", "integrations", "**", "*.md"),
+      ];
     },
 
     /** 启动/构建时生成 */

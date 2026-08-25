@@ -14,7 +14,7 @@ tags: [roadmap, aiti-devtools]
 | 阶段 | 目标 | 交付 | 状态 |
 |---|---|---|---|
 | **R0 · 协议** | 注入/桥/会话协议打通 | 方案 B/C/D/E ✅；aiti-devtools 0.2.x（自检 21/21）；桥端点全量 | ✅ |
-| **R1 · 核心可用** | 开发者开箱即用 | `@justdb/aiti-devtools` 正式发布；`AITI_*` 环境变量统一；自检扩展到 30+ | 🚧 |
+| **R1 · 核心可用** | 开发者开箱即用 | `@aiti-ai/aiti-devtools` 正式发布；`AITI_*` 环境变量统一；自检扩展到 30+ | 🚧 |
 | **R2 · 插件矩阵** | 嵌入主流开发工具 | devtools-**vite** 优先，vue/next/react/svelte 跟进；Chrome 扩展（形态②） | 📋 |
 | **R3 · IDE 插件** | 完成注入 + 直达 AI 窗口 | devtools-vscode / devtools-idea（见 [aiti-mcp-bridge 规划](/roadmaps/aiti-mcp-bridge.md)） | 📋 |
 | **R4 · 平台化** | 生态开放 | 公开注入协议/脚本规范、扩展市场、贡献指南 | 📋 |
@@ -23,12 +23,12 @@ tags: [roadmap, aiti-devtools]
 
 | 插件 | 包名 | 注入点 | 优先级 |
 |---|---|---|---|
-| Vite | `@justdb/aiti-devtools-vite` | transformIndexHtml / 中间件 prepend | P0 |
-| Vue | `@justdb/aiti-devtools-vue` | app.use + 组件定位 | P0 |
-| Next.js | `@justdb/aiti-devtools-next` | dev server 响应注入 + `_debugSource` | P1 |
-| React | `@justdb/aiti-devtools-react` | Babel 插件 / 入口 | P1 |
-| Svelte | `@justdb/aiti-devtools-svelte` | `__svelte_meta` 源码定位 | P1 |
-| Webpack | `@justdb/aiti-devtools-webpack` | html-webpack-plugin 钩子 | P2(可选) |
+| Vite | `@aiti-ai/aiti-devtools-vite` | transformIndexHtml / 中间件 prepend | P0 |
+| Vue | `@aiti-ai/aiti-devtools-vue` | app.use + 组件定位 | P0 |
+| Next.js | `@aiti-ai/aiti-devtools-next` | dev server 响应注入 + `_debugSource` | P1 |
+| React | `@aiti-ai/aiti-devtools-react` | Babel 插件 / 入口 | P1 |
+| Svelte | `@aiti-ai/aiti-devtools-svelte` | `__svelte_meta` 源码定位 | P1 |
+| Webpack | `@aiti-ai/aiti-devtools-webpack` | html-webpack-plugin 钩子 | P2(可选) |
 
 ## 技术债务与待办
 
