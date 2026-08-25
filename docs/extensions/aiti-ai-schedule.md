@@ -8,7 +8,7 @@ ext:
   soul: 别再每个扩展自造 setInterval 了——声明即调度，AI 也能自己排班。
   type: dev-repo
   category: 系统工具
-  version: 0.3.0
+  version: 0.3.2
   status: active
   author: aiti-ai
   publisher: aiti-ai
@@ -38,7 +38,9 @@ pi-web 常驻调度器：**7×24 与会话死活无关**。两类任务统一进
 | 调度 | cron 表达式（5/6 段，`0 9 * * *`）、间隔（`30m`/`90s`）、一次性（`+30m` / ISO 时间） |
 | 水位持久化 | state.json 记 `nextRunAt`；停机宽限内（默认 5min）补跑、超宽限记 missed |
 | 执行三模式 | `session` 注入活会话 steer · 一次性全功能会话（工具/文件可用）· `invokeAI` 轻量问答；`auto` 自动降级 |
-| 安全网 | 并发上限 2 · 单次超时 10min · 失败重试 1 次（60s 后）· once/maxRuns 到量自停 |
+| 安全网 | 并发上限 2 · 单次超时 10min · 失败重试 1 次（60s 后）· once/maxRuns 到量自停 · 连续失败 3 次自动暂停 · 每日执行预算（计划级 dailyCap + 全局 config.dailyCap，手动不占额） |
+| 时区 | 计划可指定 IANA 时区（cron 按该墙钟计算，DST 迭代收敛）；缺省本机 |
+| 权限 | AI 创建的计划默认停用待人工批准；agent 工具无启用/批准能力；编辑不得携带启停字段 |
 | AI 自建计划 | `schedule_task` 工具（add/list/get/update/enable/disable/remove/run-now），agent 创建默认待确认 |
 | 管理页 | ⏰调度 页：列表/新建编辑/启停/批准/立即执行/删除/运行历史/SSE 实时刷新/浏览器通知 |
 
@@ -54,7 +56,8 @@ pi-web 常驻调度器：**7×24 与会话死活无关**。两类任务统一进
 | 变量 | 含义 |
 |---|---|
 | `AITI_AI_SCHEDULE_ENABLED` | 未设 = 不自动触发（宁可手动开）；运行时还可用 config `{enabled:false}` 暂停 |
-| `AITI_AI_SCHEDULE_DATA_DIR` | 覆盖存储目录（默认 `~/.pi/web/data/aiti-ai-schedule/`） |
+| `AITI_AI_SCHEDULE_DATA_DIR` | 覆盖存储目录（默认 `~/.pi/web/data/aiti-ai-schedule/`）。**双实例分离预案**：dev 已配独立根 `~/.pi/web-dev/data/aiti-ai-schedule`（drop-in），prod 保持默认——两实例 plans/state 天然隔离，即使将来同时开门控也不会互踩水位 |
+| `PORT` | drop-in 显式设置（一次性会话自调地址兜底，不依赖 Next 内部行为） |
 | `AITI_AI_SCHEDULE_API_ORIGIN` | 一次性会话自调地址（默认 `http://127.0.0.1:$PORT`） |
 | `AITI_AI_SCHEDULE_CATCHUP_GRACE_SEC` | 补跑宽限秒数（默认 300） |
 
