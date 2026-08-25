@@ -4,7 +4,7 @@ icon: 🟠
 ext:
   id: aiti-claude-code-agent
   name: Claude Code 会话后端
-  description: 驱动 Claude Code CLI 会话 —— 从 All Sessions 恢复历史行（agentKey: claude）
+  description: "驱动 Claude Code CLI 会话 —— 从 All Sessions 恢复历史行（agentKey: claude）"
   soul: 历史会话不是化石——点一下就活过来。
   type: dev-repo
   category: 多 agent 后端
