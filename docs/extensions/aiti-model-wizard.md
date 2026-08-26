@@ -34,6 +34,12 @@ ext:
 - **零门槛输入**：反向/探测输入框接受任意文本/代码片段/文档（如 SDK 示例里的 `base_url='https://…'`），自动提取所有 URL 逐个穷尽匹配+探测
 - **品牌识别**：探测命中后三层信号（OpenAPI `info.title` 声明 > 模型 id 前缀 > 目录 URL 匹配），显示真实品牌名；带 key 时顺手拉 /models 模型列表直接勾选
 - **安全**：token **只进不出**，任何读取都打码（`sk-***abcd`）；编辑留空=保留原 key
+- **apiKey 三形态**：字面量 / 环境变量名（全大写）/ `!shell命令`（取 stdout）——测试连接、探测、拉模型统一解析；models.json 存原始值由 pi 运行时解析
+- **元数据六源反填**：已配置条目 → 内置目录 → 厂商 /models 富字段 → models.dev → OpenRouter/LiteLLM 兕底 → **跨提供商同 id 互证**（本目录缺新模型时借其它网关同 id/命名变体条目，字段取共识多数派；cost 仅全部一致才带）；保存反馈展示逐字段来源「🪄 自动反填：…」
+- **maxTokens 实测校正（probe-cap）**：新保存的模型逐个发最小探针验证输出上限，虚报被拒解析报错自动下调并回写（ark-coding glm 修正表）；模型行 ⏳/✓↓/! 徽标
+- **一级撤销**：保存/删除前快照受影响 provider 旧条目，「↩ 撤销上次保存」一键回滚（订阅登录型豁免）
+- **参数查看/编辑弹窗**：任意位置的 👁 打开——显示名/能力勾选/contextWindow/maxTokens/cost 四项/thinkingLevelMap 七级/DeepSeek 思考兼容/developer 角色/模型级 headers/API 覆盖；纯 key 条目与 OAuth·目录型 provider 也能看（后者只读 + 「目录反填」徽标）
+- **品牌图标**：@lobehub/icons 按需引入（订阅服务/浏览目录/推荐卡/已配置卡），未命中回退首字母方块
 
 ## agent 工具
 
