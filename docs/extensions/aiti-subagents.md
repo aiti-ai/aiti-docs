@@ -1,5 +1,5 @@
 ---
-title: aiti-subagents
+title: 子代理（aiti-subagents）
 icon: 👥
 ext:
   id: aiti-subagents
