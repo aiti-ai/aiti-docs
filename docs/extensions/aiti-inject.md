@@ -29,3 +29,7 @@ ext:
 
 - 极简：只声明 `client` 字段，无服务端逻辑；带内容哈希版本号注入（launcher 改动 → 强制拉新）。
 - 生产环境（npm 安装包）不设置 `PI_WEB_EXTRA_EXTENSIONS_DIRS`，不加载此扩展。
+
+## 相关
+
+- 正经可配版：[aiti-debug-inject](aiti-debug-inject.md)（feature 配置目标地址 + 开关，跨实例调试）

@@ -88,6 +88,7 @@ export default defineComponent({
       h("article", { class: "ext-card", key: e.id }, [
         h("header", { class: "ext-card-head" }, [
           h("a", { class: "ext-name", href: e.docs }, e.name),
+          e.name !== e.id ? h("code", { class: "ext-id" }, e.id) : null,
           h("span", { class: "ext-type" }, typeLabel(e.type)),
           h("span", { class: "ext-status " + e.status }, statusLabel(e.status)),
         ]),

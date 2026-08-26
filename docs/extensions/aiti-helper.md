@@ -1,5 +1,5 @@
 ---
-title: aiti-helper
+title: AI Helper（aiti-helper）
 icon: 🤖
 ext:
   id: aiti-helper
@@ -37,6 +37,6 @@ ext:
 - **AI 自管理清单**：读取各扩展 `ai` 段（自管理清单）→ 维护命令/prompt/扩展，乃至**新建一个扩展**（配合 aiti-extman）
 - **配置版本化（安全网）**：`configs_status` / `configs_commit` / `configs_restore` 把 ai 扩展与 pi 核心明文配置入 git——AI 改坏可回滚；**session 等巨大文件永不入仓**（硬排除 + 大小双拦截）；**崩溃自检恢复**：`ai-configs selfcheck/recover` 后台拉起 AI（带版本提示词）协助修复 + 🛡 安全盾：用户点选历史版本恢复，恢复不丢数据（先 commit+tag 再恢复，验证 OK 才写 HEAD），命令 + 网页双入口
 
-> 工作流与设计全文：`dev-repo/docs/aiti-ai-helper-plan.md`（含 aiti-devtools「AI 管自己」自桥接、各扩展自管理清单、进化的 AI agent 理念、版本化设计）。
+> 工作流与设计全文：内部方案文档（含 aiti-devtools「AI 管自己」自桥接、各扩展自管理清单、进化的 AI agent 理念、版本化设计）。
 >
-> **其他扩展接入指南**（三步声明 skills + 集成 + 验证清单）：`dev-repo/docs/aiti-helper-integration-guide.md`——声明 `ai` 段 → 写 `skills/<name>/SKILL.md` → deploy 递归拷贝；含 SKILL.md 规范速查 / api+fill 输出契约 / 来源标注 / 常见坑。
+> **其他扩展接入指南**（三步声明 skills + 集成 + 验证清单，见内部接入指南）——声明 `ai` 段 → 写 `skills/<name>/SKILL.md` → deploy 递归拷贝；含 SKILL.md 规范速查 / api+fill 输出契约 / 来源标注 / 常见坑。

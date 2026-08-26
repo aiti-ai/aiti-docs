@@ -15,7 +15,7 @@ ext:
   website: https://aiti.pw
   repo: ""
   install: |
-    # 源码：dev-repo dev-repo/service-tunnels/
+    # 源码：dev-repo/service-tunnels/
     # 部署：node tools/deploy.mjs（构建客户端 + 拷贝 + 目标内 npm install --omit=dev）
     # 生效：POST /api/extensions/reload
   license: MIT
@@ -77,7 +77,7 @@ service-tunnels 扩展（~/.pi/web/extensions/service-tunnels/，完全自包含
   ├─ server.middleware → 服务 vhost 分支（st.proxy.parseHost/resolve）+ allowlocal 门禁
   ├─ server.api        → /api/extensions/service-tunnels/<action>（发现/暴露/隧道/用户/TOTP/自暴露）
   ├─ ui.toolbar/dialogs/banners + client bundle → ServicesDialog（Ports/Self/Users 三页签）+ 🔴 自暴露告警
-  └─ node_modules/service-tunnels/ —— 标准 npm 依赖（私有源 npm-registry.example.com，deploy 时
+  └─ node_modules/service-tunnels/ —— 标准 npm 依赖（私有 npm 源，deploy 时
      `npm install --omit=dev` 安装；加载器按扩展目录解析裸说明符）
 ```
 
@@ -94,7 +94,7 @@ service-tunnels 扩展（~/.pi/web/extensions/service-tunnels/，完全自包含
 ## 开发与部署
 
 ```bash
-cd dev-repo/dev-repo/service-tunnels
+cd dev-repo/service-tunnels
 node tools/build-client.mjs   # 客户端 bundle（esbuild，react→host-shim 外部化）
 npm install                  # 开发依赖（esbuild）
 node tools/deploy.mjs         # 构建客户端 + 拷贝源码 + 目标内 npm install --omit=dev

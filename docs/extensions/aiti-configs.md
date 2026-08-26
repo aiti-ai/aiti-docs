@@ -1,5 +1,5 @@
 ---
-title: aiti-configs
+title: 配置版本化 + 崩溃自检（aiti-configs）
 icon: 🛡
 ext:
   id: aiti-configs
@@ -35,13 +35,13 @@ ext:
 - **恢复协议五步走（不丢数据）**：固化现场 → 打 pre-recover tag → checkout 写回源 → 复测 → 写 HEAD
 - **操作前固化现场（对标 etckeeper Pre-Invoke）**：`POST /snapshot`（sync+commit+可选 tag）——**ai-helper invoke 前自动调用**，AI 改配置/扩展前先备份，改坏可回滚
 - **tag 标记「好用版本」**：安全盾历史 tab 🏷 打/列/删 tag + `configs_tag` 工具 + `GET/POST/DELETE /tag` API；回滚可直接指 tag（如 `good-v1`）
-- **暴露给其他扩展**：程序化 `POST /snapshot`、`POST/DELETE /tag`、`POST /commit` API + MCP 工具（status/commit/snapshot/restore/selfcheck/log/config/tag）——**其他扩展适配见 `docs/aiti-configs-integration-guide.md`（声明 configs.includes 即自动入网）**
+- **暴露给其他扩展**：程序化 `POST /snapshot`、`POST/DELETE /tag`、`POST /commit` API + MCP 工具（status/commit/snapshot/restore/selfcheck/log/config/tag）——**其他扩展适配：声明 configs.includes 即自动入网（详见内部接入指南）**
 
 ## 配置 `ai-configs.json`（放 aiti-configs dataDir，AI 可编辑）
 
 ```jsonc
 {
-  "repo": "~/workspace/dev-repo/dev-repo/ai-configs",  // 配置仓（git init 一次）
+  "repo": "~/ai-configs",                 // 配置仓路径（自定义；git init 一次）
   "includes": [                           // 手写项（扩展声明自动聚合）
     { "path": "~/.pi/agent/settings.json", "dest": "pi/agent/settings.json" },
     { "path": "~/.pi/agent/models.json",   "dest": "pi/agent/models.json" },
@@ -64,4 +64,4 @@ node <extDir>/watchdog.mjs [dataDir] recover    # 诊断包（喂给独立 AI �
 node <extDir>/watchdog.mjs [dataDir] export/import  # 迁移（不含 session）
 ```
 
-> 设计全文：`dev-repo/docs/aiti-configs-extension-plan.md`（含拓展点：注册制 includes、自动哨兵、AI 智能提交、迁移包）。
+> 设计全文：内部方案文档（含拓展点：注册制 includes、自动哨兵、AI 智能提交、迁移包）。

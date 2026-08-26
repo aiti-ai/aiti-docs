@@ -62,6 +62,9 @@ npx @aiti-ai/aiti-mcp-server --bridge http://localhost:8777
 | `page_snapshot` | `{pageId?}` | 页面快照：DOM 概要 + 视口 + 框架识别 |
 | `bridge_status` | — | 桥状态、活跃连接、可操作 pageId 列表、**已连 agent 列表** |
 | `page_logs` / `page_network` | `{pageId, level/since/limit}` | 页面 console 日志 / 请求完成态（服务端环形缓冲，断连也能查） |
+| `self_ui` | `{pageId?}` | 扫描目标页面当前打开的弹窗/表单字段/按钮清单（弹窗标题+字段 label/selector/type），配合 `form_fill` 定位回填 |
+| `form_fill` | `{pageId?, dialog?, fields, button?}` | 向目标页面弹窗/表单回填字段值（React 兼容原生 setter + input/change 事件），可选回填后点按钮 |
+| `file_stat` | `{path}` | 查询文件存在性/类型/大小/修改时间（绝对路径；源码定位、「后端打开」前置校验用） |
 
 ### user_*（人机交互）
 
@@ -116,5 +119,5 @@ npx @aiti-ai/aiti-mcp-server --bridge http://localhost:8777
 - token/secret 认证：SSE / result / event 全部校验
 - 兼容路径：不带 secret（老 client / dev token）放行
 - 危险命令确认 + 手势桥（见 [安全边界](/products/aiti-devtools.md#3-安全边界)）
-- **MCP 端点鉴权（TODO）**：外网暴露的桥（如 your-pi-web.example.com）无独立鉴权——计划适配 service-tunnels（改造为 auth + token 并存，token 作额外开关）；当前维持内网/隧道限定
+- **MCP 端点鉴权（TODO）**：公网暴露的桥无独立鉴权——计划适配 service-tunnels（改造为 auth + token 并存，token 作额外开关）；当前维持内网/隧道限定
 - 页面事件订阅默认不投递（显式订阅才推，防框架 error 噪音）

@@ -1,5 +1,5 @@
 ---
-title: aiti-ai-input
+title: AI 输入增强（aiti-ai-input）
 icon: ⌨️
 ext:
   id: aiti-ai-input

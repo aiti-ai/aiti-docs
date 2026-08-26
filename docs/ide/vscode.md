@@ -47,7 +47,7 @@ aiti: 重新注入          # 检测到双注入时修复
 | 注入检测 | `window.__aiti` 存在则跳过（防双注入） |
 | 代理 | 本地反向代理 dev server，`transformResponse` 同语义 prepend |
 | 桥生命周期 | 插件管理子进程；窗口关闭优雅停桥（TTL 保留 pageId） |
-| AI 窗口注入 | VS Code Webview（Copilot Chat 扩展点）；无扩展点时回退「打开 ai.html」 |
+| AI 窗口注入 | VS Code Webview（Copilot Chat 扩展点）；无扩展点时回退「打开 cockpit」 |
 | 多窗口 | 每工程一个 instanceId；同工程多窗口共享 |
 
 > 相关：[IDE 插件产品页](/products/aiti-ide-plugins.md) · [改造 AI agent](/guide/mcp/ai-agents.md)

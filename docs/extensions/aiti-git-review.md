@@ -1,5 +1,5 @@
 ---
-title: aiti-git-review
+title: Git 代码审核（aiti-git-review）
 icon: 👁️
 ext:
   id: aiti-git-review
@@ -49,4 +49,4 @@ aiti_review_summarize        # 汇总终审清单
 
 `skills/pre-review/SKILL.md` —— AI 预审员手册（核对真实代码、逐条标注、输出终审建议；铁律不修改代码）。
 
-> 设计全文：`dev-repo/docs/aiti-git-review-plan.md`
+> 设计全文：内部方案文档

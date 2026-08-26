@@ -1,5 +1,5 @@
 ---
-title: aiti-prompts
+title: aiti prompt 片段收藏库（aiti-prompts）
 icon: 📌
 ext:
   id: aiti-prompts

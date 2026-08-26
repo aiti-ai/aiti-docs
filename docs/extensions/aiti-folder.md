@@ -1,5 +1,5 @@
 ---
-title: aiti-folder
+title: 文件夹浏览器（aiti-folder）
 icon: 📂
 ext:
   id: aiti-folder

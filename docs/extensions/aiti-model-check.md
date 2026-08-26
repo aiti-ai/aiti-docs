@@ -1,5 +1,5 @@
 ---
-title: aiti-model-check
+title: 模型可用性管理（aiti-model-check）
 icon: 📡
 ext:
   id: aiti-model-check
@@ -32,7 +32,7 @@ ext:
 - **记录**：history.jsonl 全量 + state.json 每模型最近状态 / 20 条时间线 / 连续 429 计数 / `recoveredAt` 恢复时间
 - **后台哨兵**：每 60s 只复测 429/异常 的模型，全可用时不打搅 → 自动识别"什么时候恢复"
 - **agent 工具**（`aiti_model_status/probe/history/config`）：AI 直接调，如「检查模型可用性」
-- **ai-helper 帮助点**（skills，🤖 弹窗可唤）：`model-check`（检查可用性）/ `model-config`（调配置），见 `docs/aiti-helper-integration-guide.md`
+- **ai-helper 帮助点**（skills，🤖 弹窗可唤）：`model-check`（检查可用性）/ `model-config`（调配置），详见 aiti-helper 接入指南（内部文档）
 - **📡 网页面板**：状态总览（✅/🔴/⚠️/⚪ + 预计恢复）/ 一键探测 / 历史时间线
 
 ## agent 工具
@@ -56,4 +56,4 @@ aiti_model_config    # 读/改配置
 }
 ```
 
-> 设计全文：`dev-repo/docs/aiti-model-check-extension-plan.md`
+> 设计全文：内部方案文档

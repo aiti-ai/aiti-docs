@@ -1,5 +1,5 @@
 ---
-title: ext-jsx-client
+title: ext-jsx-client（扩展 JSX 模板）
 icon: ⚛️
 ext:
   id: ext-jsx-client
@@ -118,5 +118,5 @@ npm run build:client   # 构建（改源码后必跑，否则页面无变化）
 npm run watch          # vite build --watch：改源码自动重建（rev 变化 → 配合前端 rev poller 即无刷新 HMR）
 ```
 
-> 详细方案文档（本地 `dev-repo/docs/aiti-ext-jsx-vite-plan.md`）：host-shim 完整代码、
+> 详细方案文档（内部文档）：host-shim 完整代码、
 > vite.config 全文、HMR 分层方案。

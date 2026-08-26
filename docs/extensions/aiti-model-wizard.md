@@ -1,5 +1,5 @@
 ---
-title: aiti-model-wizard
+title: 模型添加向导（aiti-model-wizard）
 icon: 🧙
 ext:
   id: aiti-model-wizard

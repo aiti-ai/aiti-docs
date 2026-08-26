@@ -82,6 +82,7 @@
 }
 .ext-card-head { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
 .ext-name { font-weight: 600; }
+.ext-id { font-size: 0.72rem; color: var(--vp-c-text-mute, #888); font-family: var(--code-font-family, monospace); font-weight: 400; }
 .ext-type {
   font-size: 0.72rem;
   color: var(--text-color-lighter);

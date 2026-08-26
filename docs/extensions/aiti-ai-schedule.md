@@ -29,7 +29,7 @@ pi-web 常驻调度器：**7×24 与会话死活无关**。两类任务统一进
 1. **扩展 hook 任务（§2.5 机制）**：其他扩展在入口 `export default` 加顶层 `schedules: [{ id, name, intervalSec, enabled, run(ctx) }]`，本扩展聚合注册、到点调用——接入方零定时器。
 2. **AI 计划（plans.json）**：用户在 ⏰调度 页新建，或 agent 经 `schedule_task` 工具自建；到点由执行引擎按三模式驱动 AI 完成。
 
-- 设计全文：`docs/aiti-ai-schedule-真正方案.md`
+- 设计全文：内部方案文档
 
 ## 能力一览（v0.3）
 

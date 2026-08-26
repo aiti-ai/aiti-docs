@@ -1,5 +1,5 @@
 ---
-title: aiti-channels
+title: IM 渠道（aiti-channels）
 icon: 📮
 ext:
   id: aiti-channels

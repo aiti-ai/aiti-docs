@@ -147,10 +147,10 @@ interface ExtCoreApi {
 
 ```bash
 # 服务端代码改动 → 热重载（jiti moduleCache:false，代码生效）
-curl -X POST http://127.0.0.1:30142/dev/api/extensions/reload   # dev 实例
+curl -X POST http://127.0.0.1:<端口>/api/extensions/reload   # dev 实例
 
 # 前端 bundle 改动 → reload 后刷新浏览器（ESM module map 缓存）
-curl http://127.0.0.1:30142/dev/api/extensions/status           # 加载状态/版本/错误
+curl http://127.0.0.1:<端口>/api/extensions/status           # 加载状态/版本/错误
 ```
 
 热重载：逐个 `shutdown()` → 清缓存 → `loadAll()` → `startAll()`，成功后原子
@@ -169,10 +169,10 @@ swap `globalThis.__piWebExt`；单个扩展加载失败不阻塞其它扩展（�
 |---|---|---|
 | session-manager | `~/.pi/web/extensions/session-manager/` | 跨项目会话面板：tag 树+颜色 / 收藏 / 搜索（FTS5）/ 归档（.pwarc）/ 看板 |
 | service-tunnels | `~/.pi/web/extensions/service-tunnels/` | 服务端口发现 + 隧道 + 自暴露（middleware 钩子使用者） |
-| aiti-devtools | dev-repo 仓库 → 部署产物 | 页面内 AI 调试助手：MCP 桥 + 注入 + AI 窗口（toolbar/dialogs/chatInputTop + ChatHook） |
+| aiti-devtools | 主仓库源码 → 部署产物 | 页面内 AI 调试助手：MCP 桥 + 注入 + AI 窗口（toolbar/dialogs/chatInputTop + ChatHook） |
 | aiti-cmd | `~/.pi/web/extensions/aiti-cmd/` | 命令管理器：真 PTY 终端 + 常用命令 + 消息识别命令（PopoverAction 使用者） |
 | demo | `~/.pi/web/extensions/demo/` | 全插槽演示（框架验证用，可删除） |
-| dev-exts/aiti-inject | dev-repo 仓库 `dev-exts/` | dev 实例专用：注入生产 launcher（FAB）到 dev 页面 |
+| dev-exts/aiti-inject | 主仓库 `dev-exts/` | dev 实例专用：注入生产 launcher（FAB）到 dev 页面 |
 
 ## 10. 需要新的扩展点？
 

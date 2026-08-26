@@ -34,7 +34,7 @@ Tools → aiti
 
 | 差异 | 处理 |
 |---|---|
-| AI Assistant 版本差异 | 老版本无 MCP 支持 → 回退「打开 ai.html」+ 手动复制 pageId |
+| AI Assistant 版本差异 | 老版本无 MCP 支持 → 回退「打开 cockpit」+ 手动复制 pageId |
 | 多语言 IDE | 面板文案走 IDE 本地化；桥协议与语言无关 |
 | Android Studio | 注入目标是 Web 页面（dev 构建），真机调试走 Chrome CDP |
 

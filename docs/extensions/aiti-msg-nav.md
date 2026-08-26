@@ -1,5 +1,5 @@
 ---
-title: aiti-msg-nav
+title: 消息滚动导航（aiti-msg-nav）
 icon: 🧭
 ext:
   id: aiti-msg-nav

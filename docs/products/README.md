@@ -12,7 +12,7 @@ aiti 不是单一产品，而是一个 **AI 开发工具生态**。所有产品�
 
 | # | 产品 | npm 包名 | 形态 | 一句话定位 | 状态 |
 |---|---|---|---|---|---|
-| 1 | **aiti-agent** | `@aiti-ai/aiti-agent` | Web 应用 + Docker 镜像 | 自托管个人 AI 开发工作台（**基于 pi-web 构建**），浏览器是唯一操作面 | 🚧 M0-M4 |
+| 1 | **aiti-agent** | `@aiti-ai/aiti-agent` | Web 应用 + Docker 镜像 | 自托管个人 AI 开发工作台（**基于 pi-web 构建**），浏览器为主操作面，与 pi CLI / pi IDE 扩展同源兼容 | 🚧 M0-M4 |
 | 2 | **aiti-core** | `@aiti-ai/aiti` | SDK（协议/类型/共享库） | 全产品共享：桥协议、`pageId` 会话模型、注入脚本、MCP 工具定义 | 📋 |
 | 3 | **aiti-devtools** | `@aiti-ai/aiti-devtools` | 注入 SDK（`inject.js`） | 页面内 AI 调试助手：`aiti-devtools` + Inspector + MCP 桥（形态① 主动适配） | ✅ 0.2.x |
 | 4 | **aiti-devtools-vite** | `@aiti-ai/aiti-devtools-vite` | Vite 插件 | dev server 自动注入，**本地 inject** | 📋 |

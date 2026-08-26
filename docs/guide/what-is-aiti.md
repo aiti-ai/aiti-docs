@@ -7,13 +7,13 @@ tags: [guide, concept]
 
 # 什么是 aiti
 
-**aiti**（阿嚏 ——「AI 开发像打喷嚏一样简单自然」）是一个以 **pi** 为引擎的 **AI 开发工具生态**，由三条产品主线组成：
+**aiti**（发音 `/aiti/`，谐音「阿嚏」——「AI 开发像打喷嚏一样简单自然」）是一个以 **pi** 为引擎的 **AI 开发工具生态**，由三条产品主线组成：
 
 ## 品牌与身份
 
 | 项 | 值 |
 |---|---|
-| 品牌 | aiti（2026-08-08 定稿） |
+| 品牌 | aiti（2026-08-08 定稿；发音 `/aiti/`，谐音「阿嚏」） |
 | 域名 | `https://aiti.pw` |
 | GitHub 组织 | `aiti-ai` |
 | npm scope | `@aiti-ai`（裸名 3-4 字母被 npm 防抢注风控拒绝） |
@@ -25,7 +25,7 @@ tags: [guide, concept]
 
 以 **pi** 为引擎、自托管的个人 AI 开发工作台。构建于开源项目 **pi-web** 之上，产品身份独立（来历见[项目起源](/guide/origin.md)）。
 
-- 浏览器是唯一操作面，`docker run` 一键起
+- 浏览器是主操作面，`docker run` 一键起（与 pi 同源兼容：pi CLI / pi IDE 扩展操作同一批会话）
 - 全生态唯一的 service-tunnels（HTTP vhost + TCP 隧道 + TOTP）与 queue 崩溃恢复
 - 规划：内置终端 → Chrome CDP 远程调试 → CLI 桥接 → noVNC 桌面 → 工具市场
 

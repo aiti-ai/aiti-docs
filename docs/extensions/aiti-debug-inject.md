@@ -34,7 +34,7 @@ ext:
 ## 用法
 
 1. 扩展管理器 → aiti-debug-inject → 功能管理：
-   - 「服务地址（目标 pi-web）」文本框填地址（如 `https://pi.example.com` 或 `http://127.0.0.1:20341/dev`），回车保存。
+   - 「服务地址（目标 pi-web）」文本框填目标站点地址（如 `https://pi-web.example.com` 或 `http://127.0.0.1:<端口>`），回车保存。
    - 「启用注入」开关打开。
 2. 本实例页面即时注入目标 launcher（feature 变更监听，无需刷新）。
 

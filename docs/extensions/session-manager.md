@@ -16,7 +16,7 @@ ext:
   repo: ""
   install: |
     # 部署到 ~/.pi/web/extensions/session-manager/ 后 reload：
-    curl -X POST http://127.0.0.1:30142/dev/api/extensions/reload
+    curl -X POST http://127.0.0.1:<端口>/api/extensions/reload
   license: MIT
   tags: [sessions, tag, search, archive]
 ---

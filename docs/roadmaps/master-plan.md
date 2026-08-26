@@ -8,7 +8,7 @@ description: aiti 整体规划 — 目标、产品矩阵、分层架构、里程
 
 > **活文档**：本文是 aiti 生态的唯一总纲，持续更新。每完成一步，更新对应状态标记（✅ 完成 / 🚧 进行中 / 📋 待定）。
 > 一句话：**以 pi 为引擎，构建「Web 工作台 + 本地注入 + MCP 桥接」三位一体的 AI 开发工具生态** ——
-> 浏览器是唯一操作面（aiti-agent），主流开发工具本地注入（aiti-devtools），任意 AI agent 直达 IDE 窗口（aiti-mcp-bridge）。
+> Web 工作台为主操作面、与 pi CLI / IDE 扩展同源兼容（aiti-agent），主流开发工具本地注入（aiti-devtools），任意 AI agent 直达 IDE 窗口（aiti-mcp-bridge）。
 
 ---
 
@@ -56,7 +56,7 @@ description: aiti 整体规划 — 目标、产品矩阵、分层架构、里程
 
 ### 2.1 三条主线
 
-1. **主线 A · aiti-agent**：以 pi 为引擎的自托管 Web 工作台 —— 浏览器唯一操作面、Docker 一键起、远程调试可视化。
+1. **主线 A · aiti-agent**：以 pi 为引擎的自托管 Web 工作台 —— 浏览器主操作面（兼容 pi CLI / IDE 扩展）、Docker 一键起、远程调试可视化。
 2. **主线 B · aiti-devtools**：嵌入各主流开发工具（Vite/Vue/Next/React/Svelte）、**本地 inject**、AI 与页面同场协作。
 3. **主线 C · aiti-mcp-bridge**：配置 aiti-devtools 使用、**改造 AI agent**、支持 aiti-devtools 与 vscode/idea 插件完成注入、**消息直达 IDE 的 AI agent 窗口**。
 
@@ -167,7 +167,7 @@ timeline
 | CDP 工具 token 消耗 | 可选 skill，默认不加载 | 📋 |
 | 与 PiClaw 竞争 | 拼定位不拼功能（共享会话 + 真实工作区 + 隧道） | ✅ 已定 |
 | 引擎绑定（pi vs omp） | 主线绑 pi；M0 验证 SDK 兼容；M4 评估双引擎 | 📋 |
-| IDE AI 窗口扩展点变化 | 面板回退方案（ai.html）兜底 | 📋 |
+| IDE AI 窗口扩展点变化 | 面板回退方案（cockpit）兜底 | 📋 |
 
 ---
 

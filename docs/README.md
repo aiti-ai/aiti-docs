@@ -14,7 +14,7 @@ actions:
 
 features:
   - title: aiti-agent
-    details: 自托管 Web 工作台（基于 pi-web 构建），浏览器是唯一操作面，docker run 一键起
+    details: 自托管 Web 工作台（基于 pi-web 构建），浏览器为主操作面，兼容 pi CLI / IDE 扩展，docker run 一键起
     link: /products/aiti-agent.md
   - title: 扩展
     icon: 🧩
@@ -39,10 +39,10 @@ footer: MIT Licensed | Copyright © 2026 aiti-ai
 
 ## 什么是 aiti？
 
-**aiti**（阿嚏 ——「AI 开发像打喷嚏一样简单自然」）是一个以 **pi** 为引擎的 **AI 开发工具生态**：
+**aiti**（发音 `/aiti/`，谐音「阿嚏」——「AI 开发像打喷嚏一样简单自然」）是一个以 **pi** 为引擎的 **AI 开发工具生态**：
 
 - **Web 主战场**：`aiti-agent` 是自托管的个人 AI 开发工作台（基于开源项目 pi-web 构建，来历见[项目起源](/guide/origin.md)），
-  浏览器是唯一操作面，Docker 一键启动，内置会话管理、服务隧道、远程调试可视化。
+  浏览器为主操作面，且因与 pi 同源兼容，pi CLI 与 pi IDE 扩展可操作同一批会话；Docker 一键启动，内置会话管理、服务隧道、远程调试可视化。
 - **开发工具嵌入**：`aiti-devtools` 注入到 Vite / Vue / Next / React / Svelte 等主流开发工具，
   把 AI 请到页面开发现场 —— 页面就是可调试、可交互、可回答 AI 问题的对象。
 - **AI agent 改造**：`aiti-mcp-bridge` 作为 MCP 桥，让 Claude Code / Cursor / IDE 内置 AI 等任意 agent

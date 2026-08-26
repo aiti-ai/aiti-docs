@@ -1,5 +1,5 @@
 ---
-title: demo
+title: Demo Extension（demo）
 icon: 🧪
 ext:
   id: demo
@@ -8,7 +8,7 @@ ext:
   soul: 框架先有例子，人才有样子。
   type: dev-repo
   category: 示例
-  version: 0.1.0
+  version: 0.2.0
   status: experimental
   author: aiti-ai
   publisher: aiti-ai

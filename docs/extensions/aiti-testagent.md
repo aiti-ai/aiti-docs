@@ -1,5 +1,5 @@
 ---
-title: aiti-testagent
+title: TestAgent（aiti-testagent）
 icon: 🧪
 ext:
   id: aiti-testagent

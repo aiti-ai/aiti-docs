@@ -1,5 +1,5 @@
 ---
-title: aiti-editor
+title: 文件编辑器（aiti-editor）
 icon: ✍️
 ext:
   id: aiti-editor

@@ -70,7 +70,7 @@ bridge 全局 pendingRequests resolve → MCP 响应回 AI
 - **消息主通道 `aiti_inbox`**（2026-08）：人发消息/异步作答/页面事件进 outbox 队列，agent 调工具取走（任何 agent 100% 可用；sampling 推仅 pi 等少数支持，见 [接入 AI agent](/guide/mcp/ai-agents.md)）。
 - **人侧界面 cockpit**（2026-08）：引导接入 + 地址配置中枢 + 操作台；无 aiUrl 时 AI 窗默认打开（见 [cockpit](/guide/mcp/cockpit.md)）。
 
-事件方向：页面事件（`open_file`、`aiti_element_selected`、`user_*` 作答）→ bridge 广播 → AI 窗口（cockpit / ai.html / IDE AI 窗口）展示与作答。
+事件方向：页面事件（`open_file`、`aiti_element_selected`、`user_*` 作答）→ bridge 广播 → AI 窗口（cockpit / IDE AI 窗口）展示与作答。
 
 ## 4. 会话模型（pageId）
 
@@ -111,7 +111,7 @@ sequenceDiagram
 ## 6. aiti-agent 侧架构
 
 ```
-浏览器（唯一操作面）
+浏览器（主操作面；pi CLI / IDE 扩展经同一 agent 目录共享会话）
   │
   ▼
 aiti-agent (Next.js, 基于 pi-web)

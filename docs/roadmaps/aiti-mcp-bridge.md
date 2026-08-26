@@ -35,7 +35,7 @@ tags: [roadmap, aiti-mcp-bridge, ide]
 - [ ] **sessions 发现 API 文档化** + AI 引导 prompt（写入 skills/模板）
 - [ ] **AITI_* 环境变量收口**：`AITI_MCP_TOKEN`、`AITI_OPEN_CMD`、`AITI_BRIDGE_PORT`
 - [ ] **IDE 配置互操作**：`.vscode/mcp.json` / JetBrains `mcp.xml` 双向同步
-- [ ] **AI 窗口扩展点调研**：Copilot Chat Webview、JetBrains AI Assistant 插件 API（含回退方案 ai.html）
+- [ ] **AI 窗口扩展点调研**：Copilot Chat Webview、JetBrains AI Assistant 插件 API（回退统一走 cockpit）
 - [ ] **多 IDE 窗口**：同工程多窗口共享 instanceId；冲突时 secret 仲裁
 - [ ] **user_* 工具族体验打磨**：倒计时/暂停/通知/拒绝语义全链路测试
 

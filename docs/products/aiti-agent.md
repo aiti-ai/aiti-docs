@@ -7,7 +7,7 @@ tags: [product, aiti-agent, pi-web]
 
 # aiti-agent — Web 主战场
 
-> **一句话**：以 **pi** 为引擎、自托管的个人 AI 开发工作台 —— 浏览器是唯一操作面，`docker run` 一键起，`just get` 装工具。
+> **一句话**：以 **pi** 为引擎、自托管的个人 AI 开发工作台 —— 浏览器为主操作面（与 pi 同源兼容：pi CLI / pi IDE 扩展操作同一批会话），`docker run` 一键起，`just get` 装工具。
 > **来历**：构建于开源项目 pi-web 之上，越用越深、越改越多，最终按自己的方式发版（见[项目起源](/guide/origin.md)）。
 
 ## 1. 定位

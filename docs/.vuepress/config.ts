@@ -41,9 +41,8 @@ export default defineUserConfig({
         }),
       },
       server: {
-        // 放开 Host 限制（dev server 无妨）：支持任意隧道/代理域名访问
-        // （your-pi-web.example.com、trycloudflare.com 随机域名等），否则 vite 对非白名单
-        // Host 的模块请求返回 403（Blocked request）→ 页面 JS 加载失败。
+        // 放开 Host 限制（dev server 无妨）：支持任意隧道/代理域名访问，
+        // 否则 vite 对非白名单 Host 的模块请求返回 403（Blocked request）→ 页面 JS 加载失败。
         allowedHosts: true,
       },
     },

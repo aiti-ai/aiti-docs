@@ -1,5 +1,5 @@
 ---
-title: aiti-ui-env
+title: UI 环境 · 桌面/无头虚拟屏（aiti-ui-env）
 icon: 🖥️
 ext:
   id: aiti-ui-env
@@ -15,10 +15,9 @@ ext:
   website: https://aiti.pw
   repo: ""
   install: |
-    # 方案：docs/aiti-ui-env-extension-plan.md
     # 部署到 ~/.pi/web/extensions/aiti-ui-env/ 后 reload：
-    cd dev-repo/dev-repo/aiti-ui-env && node tools/deploy.mjs
-    curl -X POST http://127.0.0.1:30142/dev/api/extensions/reload
+    cd dev-repo/aiti-ui-env && node tools/deploy.mjs
+    curl -X POST http://127.0.0.1:<端口>/api/extensions/reload
     # 服务化（虚拟屏常驻）：
     cd scripts/linux && ./setup-linux.sh && ./install-service.sh
   license: MIT
@@ -33,8 +32,8 @@ ext:
 裁决「新启动的 MCP / GUI 应用」落在 **真实桌面** 还是 **Xvfb 无头虚拟屏**
 （openbox WM + AT-SPI 总线 + VNC-on-web），人在浏览器里也能看到/操作虚拟桌面。
 
-- 完整方案：`docs/aiti-ui-env-extension-plan.md`（含模式状态机、生效链路、Linux/Windows 服务化、justget 安装矩阵）
-- 前置参照：无头 AT-SPI 实测（`docs/archae-reader-cua-driver-verify.md`）、容器 VNC 蓝图（`docs/roadmap/remote-debug-workspace-2026-08.md`）
+- 完整方案：内部设计文档（含模式状态机、生效链路、Linux/Windows 服务化、安装矩阵）
+- 前置参照：无头 AT-SPI 实测与容器 VNC 蓝图（内部调研文档）
 
 ## 四种模式（随时切换，对新启动生效）
 
@@ -79,7 +78,7 @@ cua.ai **不在本扩展**——它挂本扩展的 AT-SPI 总线做独立扩展�
 # Linux：组件安装（apt + justget 兜底）+ 服务化（systemd user + linger 保活）
 cd scripts/linux && ./setup-linux.sh && ./install-service.sh
 # 浏览器看虚拟桌面（经站点 middleware，无新端口）
-open https://pi.example.com/dev/aiti-ui-env/vnc/vnc.html  # 面板点「打开查看」后新标签直访（URL 零凭据，30min cookie 会话）
+open https://<站点地址>/<basePath>/aiti-ui-env/vnc/vnc.html  # 面板点「打开查看」后新标签直访（URL 零凭据，30min cookie 会话）
 
 # Windows（管理员）：虚拟显示驱动 + 自动登录 + TightVNC + noVNC
 .\scripts\win\setup-windows.ps1
@@ -99,4 +98,4 @@ open https://pi.example.com/dev/aiti-ui-env/vnc/vnc.html  # 面板点「打开�
 
 ## 文档
 
-- [方案文档](/devtools/aiti-ui-env-extension-plan.md)
+- 方案文档：内部设计文档

@@ -1,5 +1,5 @@
 ---
-title: aiti-msg-smart
+title: 消息智能（aiti-msg-smart）
 icon: 💬
 ext:
   id: aiti-msg-smart
