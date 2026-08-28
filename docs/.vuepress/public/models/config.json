@@ -1,0 +1,24 @@
+{
+  "affiliate": {
+    "alibaba": {
+      "link": "",
+      "note": "阿里云百炼新客云大使返佣 25-45% 现金；注册即领"
+    },
+    "tencent-hunyuan": {
+      "link": "",
+      "note": "腾讯云混元推广大使 CPS：新客首单返佣 30%，综合最高 35% 现金"
+    },
+    "zhipu": {
+      "link": "",
+      "note": "智谱 GLM：新用户注册送 2000 万 GLM-4.5-Air Tokens（≈58 元）"
+    },
+    "siliconflow": {
+      "link": "",
+      "note": "硅基流动：新用户实名送券；邀请双方各得 16 元；充值消费 10% 代金券返还"
+    },
+    "moonshot": {
+      "link": "",
+      "note": "Kimi（月之暗面）：新用户注册送额度"
+    }
+  }
+}
