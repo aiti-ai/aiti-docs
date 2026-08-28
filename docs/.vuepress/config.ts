@@ -2,6 +2,7 @@ import { defineUserConfig } from 'vuepress';
 import { viteBundler } from '@vuepress/bundler-vite';
 import theme from './theme.ts';
 import extensionsCatalog from './plugins/extensions-catalog.ts';
+import { seoEnhance } from './plugins/seo-enhance.ts';
 
 export default defineUserConfig({
   base: '/',
@@ -52,6 +53,8 @@ export default defineUserConfig({
   plugins: [
     // 扩展注册表：扫描 docs/extensions/*.md 的 ext frontmatter → 生成 /extensions.json
     extensionsCatalog(),
+    // SEO 增强：keywords / og:image / twitter 卡片 / JSON-LD / llms.txt（依赖 extensions.json，须在其后）
+    seoEnhance(),
   ],
 
   locales: {

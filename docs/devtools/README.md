@@ -2,6 +2,7 @@
 title: aiti-devtools
 icon: 🛠️
 description: 页面内 AI 调试助手 — SDK 本体、框架集成、示例矩阵
+keywords: 页面内 AI 调试, 浏览器调试注入, CDP 命令, Vite 插件, webpack 插件, Nuxt Astro 集成, Inspector
 ---
 
 # aiti-devtools

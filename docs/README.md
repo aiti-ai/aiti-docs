@@ -4,6 +4,7 @@ title: aiti
 heroImage: /logo.svg
 heroText: aiti
 tagline: 以 pi 为引擎的个人 AI 开发工作台与本地调试注入生态
+keywords: AI 开发工作台, AI 调试, 页面注入, AI 进驻网页, 浏览器 AI 助手, MCP 桥, Claude Code 调试, Java 后端调试, Arthas, Vite 插件, AI agent, 自托管
 actions:
   - text: 产品矩阵
     link: /products/
@@ -36,6 +37,26 @@ features:
 copyright: false
 footer: MIT Licensed | Copyright © 2026 aiti-ai
 ---
+
+## ✨ 系统特色
+
+> 每一条特色背后都是开箱即用的扩展——点进去看实现。
+
+| 特色 | 一句话说明 | 对应扩展 |
+| --- | --- | --- |
+| 🤝 **AI 进驻网页，面对面调试** | AI 不再隔着屏幕猜页面：直接住进被调试网页，看得见、点得着、改得了，和你并肩作战 | [aiti-devtools](/extensions/aiti-devtools.md) |
+| 🤖 **全程 AI Helper** | 每个扩展、每个功能都长着「AI 帮助点」：一句话生成配置、AI 回填表单、审核后落地——哪个功能都能 AI 辅助完成 | [aiti-helper](/extensions/aiti-helper.md) |
+| 🌐 **端口映射 · 外部访问 · 调试注入** | 服务端口自动发现，一键暴露 http/https/tcp 隧道（TOTP 认证）；远程调试器一键注入——外部访问与调试注入，一键全解决 | [service-tunnels](/extensions/service-tunnels.md) · [aiti-debug-inject](/extensions/aiti-debug-inject.md) |
+| 🖥️ **终端 · VNC · RDP，远程无忧** | 真 PTY 命令终端；无头服务器虚拟屏 + 浏览器 VNC；浏览器直连 RDP 远程桌面——没有显示器，也有舞台 | [aiti-cmd](/extensions/aiti-cmd.md) · [aiti-ui-env](/extensions/aiti-ui-env.md) |
+| 📱 **全功能小屏适配** | 弹窗拖拽/缩放/持久化，小屏自动全屏；聊天与面板全面小屏优化——手机上开发从此不是梦；语音输入又快又顺，就是费电，记得配充电宝 🔋 | [aiti-float](/extensions/aiti-float.md) · [aiti-ai-input](/extensions/aiti-ai-input.md) |
+| 🧙 **模型管理一条龙** | 模型添加向导（目录搜索 / 贴地址反向匹配 / 自动探测）+ 多 key 粘性轮转 + 模型聚合（组合模型）+ 可用性探测（429 限流识别与恢复预测）——告别模型管理焦虑 | [aiti-model-wizard](/extensions/aiti-model-wizard.md) · [aiti-model-check](/extensions/aiti-model-check.md) |
+| 🌍 **跨宿主已适配** | 除本家 aiti-agent 外，aiti-devtools 已适配 DSH（DeepSeek Harness）/ OpenClaw / OpenCode——同款页面 AI 调试体验 | [DSH 适配](/extensions/aiti-devtools-dsh.md) · [OpenClaw 适配](/extensions/aiti-devtools-openclaw.md) · [OpenCode 适配](/extensions/aiti-devtools-opencode.md) |
+| 🕹️ **Java 后端直接调** | 给 AI 用的 Arthas++：JVM 内任意修改、Mock/SQL 拦截模拟、热更新 controller、诊断采样，40 工具全可逆——Spring Boot / Solon 调试不必重启 | [aiti-testagent](/extensions/aiti-testagent.md) |
+| 🤖🤖 **多 agent 同堂** | pi / Claude Code / Codex / Qoder / 任意 ACP agent 一个面板全看管——历史会话不是化石，点一下就复活 | [session-manager](/extensions/session-manager.md) · [claude-code](/extensions/aiti-claude-code-agent.md) · [codex](/extensions/aiti-codex-agent.md) · [qoder](/extensions/aiti-qoder-agent.md) |
+| 👥 **子代理舰队** | 一句话派活：scout 侦察 / worker 干活 / reviewer 审核 / oracle 顾问，并行或流水线，Fleet 面板盯进度 | [aiti-subagents](/extensions/aiti-subagents.md) |
+| 🛡️ **配置安全网** | AI/人改坏配置：有 diff 可看、一键回滚；系统崩了，命令行 watchdog 不依赖出问题的系统本身兜底恢复 | [aiti-configs](/extensions/aiti-configs.md) |
+| 💬 **IM 里遥控 AI** | 钉钉/飞书/微信接入工作台——人不在电脑前，群里发句话 AI 照样干活交差 | [aiti-channels](/extensions/aiti-channels.md) |
+| 🧩 **还有更多** | 消息导航、Token 用量看板、编辑器当场改码、草稿保护、prompt 收藏…… 40+ 扩展一次看全 | [扩展注册表](/extensions/) |
 
 ## 什么是 aiti？
 
@@ -77,6 +98,16 @@ flowchart TB
     D <-->|连桥 · role=ai| B[aiti-mcp-bridge]
     B <-->|MCP · page_* / user_* 工具| X["任意 AI agent<br/>Claude Code · Cursor · IDE AI"]
 ```
+
+#### 已适配宿主：DSH · OpenClaw · OpenCode
+
+aiti-devtools 不锁死在本家栈里——以下第三方 agent 宿主已有完整适配（均复用同款 launcher 与 16 个 `aiti_*` 工具，端到端已验证）：
+
+| 宿主 | 适配形态 | 亮点 |
+| --- | --- | --- |
+| **DSH**（DeepSeek Harness） | [`@aiti-ai/aiti-devtools-dsh`](/extensions/aiti-devtools-dsh.md) · Cordis 插件 | 进程内桥挂 `/aiti` 同端口 + `agent/pre-step` 占位符替换 + AI 窗候选条，官方 web UI 即 AI 窗 |
+| **OpenClaw** | [`@aiti-ai/aiti-devtools-openclaw`](/extensions/aiti-devtools-openclaw.md) · 插件直连跳过 MCP | 16 工具直调桥 REST + 会话自动上线 + chat.send 消息注入 + 答复回传 + 占位符对照表 |
+| **OpenCode** | [`@aiti-ai/aiti-devtools-opencode`](/extensions/aiti-devtools-opencode.md) · host 插件 | 16 工具进程内注册 + `messages.transform` 占位符改写；官方 web UI 即 AI 窗（反代注入，不 fork） |
 
 ### 快速体验
 

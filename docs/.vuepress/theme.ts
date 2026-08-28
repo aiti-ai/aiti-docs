@@ -172,6 +172,8 @@ export default hopeTheme({
     // SEO 插件
     seo: {
       canonical: "https://aiti.pw",
+      // og:image / Article JSON-LD image 兑底（无图时产空串，分享与富摘要缺图）
+      fallBackImage: "https://aiti.pw/og-image.png",
     },
   },
 });

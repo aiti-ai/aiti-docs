@@ -2,6 +2,7 @@
 title: 扩展
 icon: 🧩
 description: aiti 扩展注册表 — 分类扩展列表
+keywords: aiti 扩展, pi-web 扩展, AI 调试扩展, 页面注入扩展, 模型管理, 多 agent, 子代理, IM 接入, 终端 VNC RDP, 服务隧道
 ---
 
 # 扩展

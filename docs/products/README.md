@@ -2,6 +2,7 @@
 title: 产品矩阵
 icon: 🗂️
 description: aiti 完整产品矩阵 — 覆盖入口层 / 注入层 / 桥接层 / Agent 层
+keywords: aiti-agent, aiti-devtools, aiti-mcp-bridge, 自托管 AI 工作台, 页面注入 SDK, docker AI 开发
 ---
 
 # 产品矩阵
