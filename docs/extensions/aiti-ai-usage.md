@@ -4,7 +4,7 @@ icon: 📊
 ext:
   id: aiti-ai-usage
   name: aiti-ai-usage
-  description: AI token 用量统计 —— provider/model/key/session 四维报表，事件驱动零轮询，独立 SQLite 存储
+  description: AI token 用量统计 —— provider/model/key/session/workspace/时段多维报表，任意两维组合透视，事件驱动零轮询，独立 SQLite 存储
   soul: 用量不是账单来了才知道——每一枚 token 都该有去向。
   type: dev-repo
   category: 系统工具
@@ -24,7 +24,7 @@ ext:
 
 > ❝ **每一枚 token 都该有去向。** ❞
 
-AI token 用量统计扩展：provider / model / key / session 四维统计，Web 报表 + 月视图上卷查询，独立 SQLite（node:sqlite）存储（明细幂等 PK + 日汇总分区重算）。
+AI token 用量统计扩展：provider / model / key / session / workspace / 时段多维统计，支持任意两维组合透视（如每个 workspace 的 keys 分布、时段分布），Web 报表 + 月视图上卷查询，独立 SQLite（node:sqlite）存储（明细幂等 PK + 日汇总分区重算）。
 
 **数据三路汇入（全事件驱动，零轮询）**：
 
