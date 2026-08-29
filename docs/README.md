@@ -51,7 +51,7 @@ footer: MIT Licensed | Copyright © 2026 aiti-ai
 | 📱 **全功能小屏适配** | 弹窗拖拽/缩放/持久化，小屏自动全屏；聊天与面板全面小屏优化——手机上开发从此不是梦；语音输入又快又顺，就是费电，记得配充电宝 🔋 | [aiti-float](/extensions/aiti-float.md) · [aiti-ai-input](/extensions/aiti-ai-input.md) |
 | 🧙 **模型管理一条龙** | 模型添加向导（目录搜索 / 贴地址反向匹配 / 自动探测）+ 多 key 粘性轮转 + 模型聚合（组合模型）+ 可用性探测（429 限流识别与恢复预测）——告别模型管理焦虑 | [aiti-model-wizard](/extensions/aiti-model-wizard.md) · [aiti-model-check](/extensions/aiti-model-check.md) |
 | 🌍 **跨宿主已适配** | 除本家 aiti-agent 外，aiti-devtools 已适配 DSH（DeepSeek Harness）/ OpenClaw / OpenCode——同款页面 AI 调试体验 | [DSH 适配](/extensions/aiti-devtools-dsh.md) · [OpenClaw 适配](/extensions/aiti-devtools-openclaw.md) · [OpenCode 适配](/extensions/aiti-devtools-opencode.md) |
-| 🕹️ **Java 后端直接调** | 给 AI 用的 Arthas++：JVM 内任意修改、Mock/SQL 拦截模拟、热更新 controller、诊断采样，40 工具全可逆——Spring Boot / Solon 调试不必重启 | [aiti-testagent](/extensions/aiti-testagent.md) |
+| 🕹️ **Java 后端直接调** | 给 AI 用的 Arthas++：JVM 内任意修改、Mock/SQL 拦截模拟、热更新 controller、诊断采样、Tunnel 桥多端点纳管，52 工具全可逆——Spring Boot / Solon 调试不必重启 | [aiti-testagent](/extensions/aiti-testagent.md) |
 | 🤖🤖 **多 agent 同堂** | pi / Claude Code / Codex / Qoder / 任意 ACP agent 一个面板全看管——历史会话不是化石，点一下就复活 | [session-manager](/extensions/session-manager.md) · [claude-code](/extensions/aiti-claude-code-agent.md) · [codex](/extensions/aiti-codex-agent.md) · [qoder](/extensions/aiti-qoder-agent.md) |
 | 👥 **子代理舰队** | 一句话派活：scout 侦察 / worker 干活 / reviewer 审核 / oracle 顾问，并行或流水线，Fleet 面板盯进度 | [aiti-subagents](/extensions/aiti-subagents.md) |
 | 🛡️ **配置安全网** | AI/人改坏配置：有 diff 可看、一键回滚；系统崩了，命令行 watchdog 不依赖出问题的系统本身兜底恢复 | [aiti-configs](/extensions/aiti-configs.md) |

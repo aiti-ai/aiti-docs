@@ -4,7 +4,7 @@ icon: 🧪
 ext:
   id: aiti-testagent
   name: TestAgent
-  description: Java 后端 AI 调试 MCP + IDE —— 扫描 Java 进程/attach 一键连桥，JVM 内任意修改/Mock·SQL 拦截模拟/热更新/诊断采样，51 工具 8 组按需暴露，全可逆
+  description: Java 后端 AI 调试 MCP + IDE —— 扫描 Java 进程/attach 一键连桥/Tunnel 桥多端点纳管，JVM 内任意修改/Mock·SQL 拦截模拟/热更新/诊断采样，52 工具 8 组按需暴露，全可逆
   soul: 所有操作可逆（delete/stop 还原），AI 放心在运行中的 JVM 里做实验。
   type: bridge
   category: 调试
@@ -22,7 +22,7 @@ ext:
     # 3) 按组过滤暴露面（可选）：--tools "lifecycle observe jvm" --exclude ta_heapdump
     # 开关多时不必堆 -D：项目根放 testagent.properties（testagent.* 前缀），从子目录启动自动向上发现
   license: MIT
-  tags: [java, jvm, debug, hotswap, mcp, testagent, spring-boot, solon, arthas, mock, hot-reload]
+  tags: [java, jvm, debug, hotswap, mcp, testagent, spring-boot, solon, arthas, mock, hot-reload, tunnel, bridge, multi-endpoint]
 ---
 
 # aiti-testagent
@@ -33,11 +33,11 @@ TestAgent 2.0 —— **给 AI 用的 Arthas++**：教 AI 怎么调试运行中�
 
 除 MCP 外，TestAgent 自带 **Web 操作台**（React，与 API 同端口同源）：方法/代码热更新、声明式 Conf、Eval、Mock、SQL 拦截、Bean·XML、Arthas 诊断、Profiling、实时监控、ClassWatch、Terminal、配置历史——人看同一个端口，类名/方法名/URL/bean 全量输入补全。
 
-## 51 个工具，8 组
+## 52 个工具，8 组
 
 | 组 | 工具 | 干什么 |
 | --- | --- | --- |
-| `lifecycle` | ta_run / ta_ping / ta_attach / ta_discover / **ta_bridge** | 起停应用、探活、动态挂载 agent（自动等就绪）、发现实例、**一键连桥（扫描→attach→接通）** |
+| `lifecycle` | ta_run / ta_ping / ta_attach / ta_discover / **ta_bridge** / **ta_tunnel** | 起停应用、探活、动态挂载 agent（自动等就绪）、发现实例、**一键连桥（扫描→attach→接通）**、**隧道管理（status/connect/disconnect——运行时补连/经桥远程操作）** |
 | `observe` | ta_watch / ta_monitor / ta_tt / ta_trace | 观察参数/返回值/异常、调用统计、时空隧道录参、耗时链路子调用树 |
 | `jvm` | ta_metrics / ta_threads / ta_profile / ta_heapdump / ta_vmtool / ta_classloader / ta_mbean / ta_vmoption / ta_perfcounter / ta_dump | 线程栈（死锁检测/CPU 排序）、火焰图（cpu/alloc/wall）、堆转储、JVM flags、类加载器树 |
 | `inspect` | ta_sc / ta_sm / ta_jad / ta_fs | 类搜索、方法清单、CFR 反编译、容器内文件查看 |
@@ -69,11 +69,45 @@ TestAgent 2.0 —— **给 AI 用的 Arthas++**：教 AI 怎么调试运行中�
 | 线程卡死 / 想找死锁 | `ta_threads`（死锁检测、CPU 排序） |
 | 日志不起眼，先放大 | `ta_logger` 热调日志级别，不用重启 |
 | 不知道挂了几台、怎么连 | `ta_discover` / `ta_attach`（动态挂载）/ **`ta_bridge`（扫描+attach+接通一步到位，省略 pid 时自动选唯一候选）** |
+| **多进程/跨机器统一纳管调试** | **TaBridge 桥**：被调服务带 `-Dtestagent.bridge=ws://桥:8667` 全部自动上线；MCP `TESTAGENT_URL` 指桥 + `endpoint` 参数路由任意端点 |
+| 端点启动时没连桥，事后想接入 | `ta_tunnel connect`（运行时补连；经桥带 endpoint 即远程补连） |
 | 改过什么、想回滚 | `ta_history` / `ta_restore` |
 
 ## IDE 支持（pi-web 面板）
 
-aiti-testagent 同时是 pi-web 扩展：工具条 ☕ Java 按钮 → 面板——已挂载会话（在线点/httpPort/版本/cmd）+ 未挂载 Java 进程列表（ps 扫描，一键 **Attach**，agentmain 动态加载免重启，挂载后自动等 HTTP 就绪并补写 session 发现记录）。服务端与 MCP 共享 `lib/testagent-core.cjs`（发现/挂载/探活/一键连桥唯一实现）。
+aiti-testagent 同时是 pi-web 扩展：工具条 ☕ Java 按钮 → 面板——
+
+- **连接区三合一**：① 连现有桥（地址默认 127.0.0.1 + access token + 注册 token + ws 地址）；② **启动自己的桥**（端口 + 双 token，spawn TaBridge 同 jar 双角色，自动探活并回填连接）；③ 直连 TA（地址 + token ping）
+- **已挂载会话**表（在线点/httpPort/版本/cmd）+ 未挂载 Java 进程列表（ps 扫描，一键 **Attach**，agentmain 动态加载免重启，自动等就绪并补写 session 发现记录）；配置了桥 ws 地址时 **Attach 直接挂到桥**（含已挂载进程的运行时补连）
+- **⇄ 桥端点**区（配置桥后）：endpointId/pid/port/remoteIp/在线点 + 每行隧道状态按钮
+
+服务端与 MCP 共享 `lib/testagent-core.cjs`（发现/挂载/探活/一键连桥/桥端点唯一实现）。
+
+## Tunnel/Bridge：多端点纳管（TaBridge）
+
+多进程/子进程/跨机器调试统一纳管——**同一个 jar 双角色**：
+
+```bash
+# ① 桥（HTTP 8666 操作台+转发 / WS 8667 端点隧道；token 全可选）
+java -cp testagent.jar com.teesoft.testagent.bridge.TaBridge --reg-token reg-1 --use-token use-1
+# ② 被调服务（JAVA_TOOL_OPTIONS 全继承——主进程+子进程一网打尽）
+JAVA_TOOL_OPTIONS="-javaagent:testagent.jar=conf -Dtestagent.bridge=ws://桥:8667" ./run.sh
+# ③ 调用（与直连完全一致 + X-TA-Endpoint；token 见下）
+curl -H 'X-TA-Endpoint: <id>' http://bridge:8666/api/status
+```
+
+- **端点自动上线**：`-Dtestagent.bridge=ws://桥:8667`（或 ta_attach bridge 参数、env TESTAGENT_BRIDGE、运行时 `POST /api/tunnel connect` 补连）；endpointId=cmdline hash 派生（跨重启/跨桥稳定，同 cmdline 冲突随机后缀）
+- **调用零漂移**：与直连完全一致只多 `X-TA-Endpoint` header；MCP 桥模式（`TESTAGENT_URL` 指桥）下所有工具自动带 endpoint 路由，`ta_discover` 列全部端点（pid/cmd/remote ip 供识别）
+- **token 三分离**（全可选，默认零 token）：
+
+| token | 谁校验 | 传递 | 铁律 |
+| --- | --- | --- | --- |
+| 注册 token | 桥（hello 一次） | TA `testagent.bridge.token` ↔ 桥 `--reg-token` | 不匹配拒连；通道内永不再现 |
+| 桥使用 token | 桥（每个 /api 请求） | `X-TA-Bridge-Token` header | 校验后**剥离，绝不下发 TA** |
+| 端点 token（X-TA-Token） | TA | 直连：header/`?token=`；经桥：`X-TA-Endpoint-Token` 转换（仅 TA 声明 `needToken=true`） | 桥零感知；默认信任桥 WS 请求 |
+
+- **WS 通道进程内直调**：桥转发的请求在 TA 内直调路由（不经 HTTP token 校验层——注册即信任）；needToken=true 时由隧道入口自行校验
+- IDE 面板：桥地址/token 配置后显示全部桥端点（⇄ 区段）+ 一键把本机进程挂到桥
 
 ## 诊断面：对齐 Arthas
 
@@ -110,7 +144,7 @@ Arthas 主流命令均有对应端点：`sc`/`sm`/`jad`（CFR 源码级反编译
 
 ## 质量与文档
 
-自动化回归：核心功能 29 断言 + Arthas 差距补齐 26 断言（JDK8+spring2 与 JDK21+mybatis 双基线全绿）+ 自动登录 13 断言 + lazy-module/solon 专项 e2e。完整教程与 API 参数 Schema 见 TestAgent 仓 `docs/testagent-user-guide.md`（MCP 工具映射见其附录 B）。
+自动化回归：核心功能 29 断言 + Arthas 差距补齐 26 断言（JDK8+spring2 与 JDK21+mybatis 双基线全绿）+ 自动登录 13 断言 + lazy-module/solon 专项 e2e + **tunnel/bridge 30 断言**（端点纳管/token 三分离/并发/MCP 桥模式）+ MCP 协议 6 断言。完整教程与 API 参数 Schema 见 TestAgent 仓 `docs/testagent-user-guide.md`（MCP 工具映射见其附录 B）。
 
 ## 前置
 
