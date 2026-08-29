@@ -4,7 +4,7 @@ icon: 🧪
 ext:
   id: aiti-testagent
   name: TestAgent
-  description: Java 后端 AI 调试 MCP server —— 给 AI 用的 Arthas++：JVM 内任意修改/Mock·SQL 拦截模拟/热更新/诊断采样，40 工具 8 组按需暴露，全可逆
+  description: Java 后端 AI 调试 MCP + IDE —— 扫描 Java 进程/attach 一键连桥，JVM 内任意修改/Mock·SQL 拦截模拟/热更新/诊断采样，51 工具 8 组按需暴露，全可逆
   soul: 所有操作可逆（delete/stop 还原），AI 放心在运行中的 JVM 里做实验。
   type: bridge
   category: 调试
@@ -33,11 +33,11 @@ TestAgent 2.0 —— **给 AI 用的 Arthas++**：教 AI 怎么调试运行中�
 
 除 MCP 外，TestAgent 自带 **Web 操作台**（React，与 API 同端口同源）：方法/代码热更新、声明式 Conf、Eval、Mock、SQL 拦截、Bean·XML、Arthas 诊断、Profiling、实时监控、ClassWatch、Terminal、配置历史——人看同一个端口，类名/方法名/URL/bean 全量输入补全。
 
-## 40 个工具，8 组
+## 51 个工具，8 组
 
 | 组 | 工具 | 干什么 |
 | --- | --- | --- |
-| `lifecycle` | ta_run / ta_ping / ta_attach / ta_discover | 起停应用、探活、动态挂载 agent、发现实例 |
+| `lifecycle` | ta_run / ta_ping / ta_attach / ta_discover / **ta_bridge** | 起停应用、探活、动态挂载 agent（自动等就绪）、发现实例、**一键连桥（扫描→attach→接通）** |
 | `observe` | ta_watch / ta_monitor / ta_tt / ta_trace | 观察参数/返回值/异常、调用统计、时空隧道录参、耗时链路子调用树 |
 | `jvm` | ta_metrics / ta_threads / ta_profile / ta_heapdump / ta_vmtool / ta_classloader / ta_mbean / ta_vmoption / ta_perfcounter / ta_dump | 线程栈（死锁检测/CPU 排序）、火焰图（cpu/alloc/wall）、堆转储、JVM flags、类加载器树 |
 | `inspect` | ta_sc / ta_sm / ta_jad / ta_fs | 类搜索、方法清单、CFR 反编译、容器内文件查看 |
@@ -68,8 +68,12 @@ TestAgent 2.0 —— **给 AI 用的 Arthas++**：教 AI 怎么调试运行中�
 | 这方法到底怎么写的？ | `ta_jad`（CFR 源码级反编译） |
 | 线程卡死 / 想找死锁 | `ta_threads`（死锁检测、CPU 排序） |
 | 日志不起眼，先放大 | `ta_logger` 热调日志级别，不用重启 |
-| 不知道挂了几台、怎么连 | `ta_discover` / `ta_attach`（动态挂载） |
+| 不知道挂了几台、怎么连 | `ta_discover` / `ta_attach`（动态挂载）/ **`ta_bridge`（扫描+attach+接通一步到位，省略 pid 时自动选唯一候选）** |
 | 改过什么、想回滚 | `ta_history` / `ta_restore` |
+
+## IDE 支持（pi-web 面板）
+
+aiti-testagent 同时是 pi-web 扩展：工具条 ☕ Java 按钮 → 面板——已挂载会话（在线点/httpPort/版本/cmd）+ 未挂载 Java 进程列表（ps 扫描，一键 **Attach**，agentmain 动态加载免重启，挂载后自动等 HTTP 就绪并补写 session 发现记录）。服务端与 MCP 共享 `lib/testagent-core.cjs`（发现/挂载/探活/一键连桥唯一实现）。
 
 ## 诊断面：对齐 Arthas
 
