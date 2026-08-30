@@ -75,3 +75,29 @@ export PI_WEB_BRIDGE_AUTO=1                              # 任何 pi CLI 会话�
 | web All Sessions 里看不到会话 | 会话文件未落盘前（首条消息前）本就不在列表；或 registry 为空（`cat ~/.pi/agent/bridge-registry.json`，进程退出即清空属正常） |
 | `aiti_*` 工具连的不是想要的桥 | 未设 `PI_WEB_BRIDGE_BASE` 时走独立桥 8777；要合流某个 pi-web 实例就设它的 base（见上） |
 | registry 里有死条目（socket 指向已退出 pid） | 正常：硬杀（SIGTERM/kill）跳过清理所致，下次任意读写 registry 自动清扫 |
+
+### 已修复：首次打开连不上（竞态窗口双胞胎，2026-08-30）
+
+**现象**：TUI 刚起动（或浏览器 SSE 断线重连落在 TUI 重启空档）就点开该会话，
+「第一次连不上」——web 里发消息无流式回显，切到别的会话再切回来才通。
+
+**根因**（实测复现）：桥登记落在 `session_start` 后几毫秒，但会话行早已在
+pi-web 列表里（`pi -c` 恢复旧会话场景）——在这个**竞态窗口**内点开，SSE 路由
+`attachIfBridged` miss（registry 还没写）→ 兜底 `startRpcSession` 抢先起了一个
+**本地 runtime**（「双胞胎」，与 TUI 双写同一 jsonl）。桥随后登记完成，
+split-brain：POST prompt 走桥（attach 优先）、GET 状态/SSE 仍偏向本地双胞胎
+（`getRpcSession` 优先）——prompt 到了 TUI、流式却绑在双胞胎上，表现为「连不上」；
+切走再切回来 = SSE 重连时 attach 优先命中桥，所以「就通了」。残留一个僵尸双胞胎。
+
+**修复**（pi-web 三处）：
+
+1. `lib/session/index.ts` `attachIfBridged`：attach 成功即 `shutdownStrayLocalRuntime`——
+   关掉同会话的竞态窗口本地 wrapper（单写者恢复；日志 `bridge claimed … shutting down
+   stray local runtime`）；
+2. `app/api/agent/[id]/route.ts` GET：**socket 优先**（`resolveAttachBySessionId` 压过
+   `getRpcSession`）——状态轮询 ≤5s 内自愈回桥，无需刷新页面；
+3. `app/api/sessions/[id]/context/route.ts`：桥认领时上下文也走桥 `get_messages`
+   （磁盘文件可能落后 TUI 内存态，进行中的 turn 未 flush）。
+
+残留边界：竞态窗口内建立的那条 SSE 连接仍绑在已死双胞胎上（心跳保活不重连），
+下一次自然重挂载（切会话/刷新）即绑回桥——其余路由均已自愈。
