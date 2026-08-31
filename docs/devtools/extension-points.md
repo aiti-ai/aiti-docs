@@ -81,7 +81,7 @@ client bundle 里 `ctx.registerItems(slot, items)` 注册实际组件。
 
 | 插槽 | 挂载位置 | 承载 | 现有使用者 |
 |---|---|---|---|
-| `toolbar` | 顶部工具条（globe 旁） | 工具按钮（带图标/文案） | aiti-devtools（🧰 入口）、aiti-cmd |
+| `toolbar` | 顶部工具条（globe 旁） | 工具按钮（带图标/文案）；支持声明式条目（见下） | aiti-devtools（🧰 入口）、aiti-cmd、aiti-testagent（声明式） |
 | `sidebar` | 侧栏头部（New/Refresh 旁） | 面板入口按钮 + 运行中数量徽标 | session-manager |
 | `sidebarFooter` | 侧栏底部快捷操作行（模型/技能/插件同一排） | 快捷入口按钮（与内置同风格） | aiti-extman（🧩 扩展管理） |
 | `sessionTopbar` | 聊天顶部栏 | 当前会话 tag 区（chips + ★ + 编辑） | session-manager |
@@ -96,6 +96,41 @@ client bundle 里 `ctx.registerItems(slot, items)` 注册实际组件。
 
 插槽组件收到 `currentSession` 与插槽 extra（如 `onSelectSession` / `activeCwd` /
 `newSessionCwd`），感知当前选中的会话。
+
+### toolbar 声明式条目（2026-08 契约）
+
+工具条条目的外观（按钮/图标/分隔线）由**宿主统一渲染**，扩展不再各自手绘按钮 ——
+杜绝逐扩展复制的样式常量漂移（历史上方案先行绿色图标/Plan 采认 📥/Java 圆角三家不一致）。
+
+```js
+// 完全声明式（无 render）：宿主渲染标准 36×36 灰度按钮（右分隔线+hover），⋯ 菜单里同款图标槽+文字
+ctx.registerItems("toolbar", [{
+  id: "java",
+  meta: {
+    label: "Java",                         // ⋯ 菜单文字 + 兑底 title
+    title: t("at.title"),                  // 悬停提示（可选）
+    icon: { svg: '<path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/>' },
+    onClick: () => panel.open(),           // 点击回调（参数为点击事件）
+  },
+}]);
+
+// 带状态条目（有 render）：render 只负责工具条本体（徽标/状态色）；
+// meta.icon + meta.onClick 提供后，⋯ 菜单里的图标槽与点击归宿主，render 的 menu 分支不再被使用
+ctx.registerItems("toolbar", [{
+  id: "plan-review-open",
+  render: ToolbarButton,                   // 含 pending 徽标/高亮
+  meta: { label: "Plan 采认", icon: { svg: "..." }, onClick: () => setPanelOpen(true) },
+}]);
+```
+
+`meta.icon` 三种形态（`ExtUiItemIcon`）：
+
+- `{ svg: "..." }` —— 24×24 viewBox 的 SVG 内部标记字符串（lucide 线条风格，stroke=currentColor）
+- emoji 字符串（如 `"📥"`）
+- 扩展内 `.svg` 文件相对路径（如 `"icon.svg"`；CSS-mask 渲染，颜色随 currentColor）
+
+约束：声明式条目仅 `toolbar` 插槽支持；`sessionTopbar` 等交互 widget 槽仍必须提供 render。
+消费方统一用 `hasExtRender()` 收窄（ExtSlot/pathPicker/FileViewer 已内置过滤）。
 
 ### 插槽外扩展点
 

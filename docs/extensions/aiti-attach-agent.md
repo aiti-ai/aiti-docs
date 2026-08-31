@@ -95,9 +95,28 @@ split-brain：POST prompt 走桥（attach 优先）、GET 状态/SSE 仍偏向�
    关掉同会话的竞态窗口本地 wrapper（单写者恢复；日志 `bridge claimed … shutting down
    stray local runtime`）；
 2. `app/api/agent/[id]/route.ts` GET：**socket 优先**（`resolveAttachBySessionId` 压过
-   `getRpcSession`）——状态轮询 ≤5s 内自愈回桥，无需刷新页面；
+   `getRpcSession`）——状态对账 tick（前台 15s；切前台/网络恢复即时）内自愈回桥，无需刷新页面；
 3. `app/api/sessions/[id]/context/route.ts`：桥认领时上下文也走桥 `get_messages`
-   （磁盘文件可能落后 TUI 内存态，进行中的 turn 未 flush）。
+   （磁盘文件可能落后 TUI 内存态，进行中的 turn 未 flush）；
+4. `app/api/sessions/[id]/auto-name/route.ts`：桥认领时自动命名降级跳过（窗口期
+   原本会对双胞胎跑命名 LLM turn 双写文件）；
+5. `dev-repo/aiti-attach-agent/bridge-registry.ts`：registry 改 tmp+rename 原子写——
+   原直写非原子，并发读者（dev/prod 两 pi-web + 多 TUI 共享同一份文件）读到半截
+   JSON 会当空表，后续任意一次 read-modify-write 就把全部条目抹掉（attach 全体失效）。
+   已同步安装副本 `~/.pi/agent/extensions/pi-web-bridge/bridge-registry.ts`（对新起的
+   TUI 进程生效）。
 
 残留边界：竞态窗口内建立的那条 SSE 连接仍绑在已死双胞胎上（心跳保活不重连），
 下一次自然重挂载（切会话/刷新）即绑回桥——其余路由均已自愈。
+
+### 深审记录（2026-08-30 第二轮）
+
+| 项 | 结论 |
+|---|---|
+| queue-recovery / PATCH rename / DELETE / export | 只读或已有 provider 闸/attach-first ✓ 不需改 |
+| set_tools（`setRpcSessionTools`）| 窗口期会在闸门前 `appendSessionToolSelection` 直写文件一行（预存在，窄；已登记待办非本轮修） |
+| DELETE 窗口 | 窗口期内删 TUI 正要认领的文件理论上可能（需手动确认 + 秒级窗口）——接受 |
+| registry 跨进程 read-modify-write | 原子写消除了半截 JSON 损坏面；多进程并发改写丢更新仍可能（无锁）——写入频率极低，接受；彻底解需文件锁 |
+| registry 条目丢失后 TUI 不重登记 | 已知限制：条目只在 session_start/切会话时写；丢失后该会话 attach 失效到 TUI 切会话/重启（自愈清扫只删不补） |
+| 探针误杀活条目 | probe 走内核 backlog，TUI 仅“忙”不会失败（需真卡死/积压 511）——实践不可达 |
+| 回归测试 | 未加单测（twin 清理需 mock rpc-manager 动态导入，收益低）；已用 mock 桥 E2E 全链路验证 + 既有 providers/handle-adapter 测试通过 |
