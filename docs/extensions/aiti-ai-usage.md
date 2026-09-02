@@ -30,7 +30,7 @@ AI token 用量统计扩展：workspace / provider / model / key / 时段(0–23
 
 1. 启动/手动 sync：增量扫描活跃会话 JSONL + session-manager `.pwarc` 归档
 2. `server.agent.onAgentSession → subscribeEvent("message_end")` 实时摄入
-3. pi-models-respect v0.2.1+ key 日志：fs.watch tail（含 client→sessionId 归因）
+3. pi-models-combo v0.2.1+ key 日志：fs.watch tail（含 client→sessionId 归因）
 
 带 AI 自管理帮助点：AI 能帮用户解读用量报表、排查费用异常。
 
