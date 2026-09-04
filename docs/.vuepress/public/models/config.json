@@ -20,5 +20,31 @@
       "link": "",
       "note": "Kimi（月之暗面）：新用户注册送额度"
     }
+  },
+  "freeModels": {
+    "pi-opencode-free": {
+      "npm": "npm:pi-opencode-free",
+      "name": "OpenCode Free",
+      "desc": "免费 OpenCode 模型，开箱即用",
+      "note": "安装后自动注册免费模型，无需配置 API Key"
+    },
+    "pi-freeflow": {
+      "npm": "npm:pi-freeflow",
+      "name": "Freeflow",
+      "desc": "免费 Freeflow 模型",
+      "note": "安装后自动注册免费模型，无需配置 API Key"
+    },
+    "pi-free": {
+      "npm": "npm:pi-free",
+      "name": "Free",
+      "desc": "免费模型集合",
+      "note": "安装后自动注册免费模型，无需配置 API Key"
+    },
+    "pi-freerouter": {
+      "npm": "npm:pi-freerouter",
+      "name": "Freerouter",
+      "desc": "免费路由模型",
+      "note": "安装后自动注册免费模型，无需配置 API Key"
+    }
   }
 }
