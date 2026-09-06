@@ -33,8 +33,9 @@ ext:
 - 协议：`node zcode.cjs --json --mode build [--resume sess_xxx] --prompt <text>`
 - `--json` 为**单个 pretty JSON 对象**（exit 0 全量打印）：`{sessionId, traceId, turnId, response, usage{...}, projection{contextWindow}}`
 - 进程模型：每轮一个单发进程 + `--resume` 续聊（同 aiti-codex-agent 的 exec 模式）
-- 懒持久化：`sess_xxx` 首轮后可知 → `session_backend_ready` 换绑 `zcode:sess_xxx`
+- 懒持久化：`sess_xxx` 首轮后可知 → `session_backend_ready` 换绑 `zcode:sess_xxx`（core 双注册 handle + 站位文件跟随迁移）
 - 模型注入走官方 env 通道（`ZCODE_MODEL`/`ZCODE_BASE_URL`/`ZCODE_API_KEY`），**不写 `~/.zcode/cli/config.json`**
+- abort 两阶段：spawn 前（取消 runtime 解析/下载，AbortController）+ spawn 后（SIGTERM 杀子进程 → settled "aborted"）
 
 ## runtime 生命周期（按序尝试）
 
@@ -71,7 +72,7 @@ ext:
 | `zcode.runtimePath` | string | 空 | 指定 runtime（zcode.cjs/解压目录/AppImage） |
 | `zcode.autoDownload` | boolean | 开 | 探测不到时自动下载 AppImage（约 300MB） |
 | `zcode.mode` | string | build | 每轮 `--mode`：build/edit/plan/yolo |
-| `zcode.model` | string | bigmodel/GLM-5.3 | 新会话默认模型 ref |
+| `zcode.model` | string | 空 | 新会话默认模型 ref；**留空自动跟随已认证的套餐通道**（读 coding-plan-cache，避免 zai 用户被 bigmodel 默认卡住） |
 | `zcode.apiKeyOverride` | string | 空 | 手动提供编程套餐 API Key，跳过 OAuth 链 |
 
 ## 安全与边界
@@ -87,4 +88,6 @@ ext:
 node --test dev-repo/aiti-zcode-agent/zcode-core.test.mjs
 ```
 
-22 用例：`--json` 解析 / 错误提取 / 模型 ref 与 env 组装 / 凭据解密+换 key 全链路（注入 fetch，零网络）/ 假 AppImage 解压缓存 / handle wire 契约（换绑、resume、abort、错误帧、模型切换）。
+25 用例：`--json` 解析 / 错误提取 / 模型 ref 与 env 组装 / 凭据解密+换 key 全链路（注入 fetch，零网络）/ 下载原子性（.part + abort 取消）/ 通道探测 / 假 AppImage 解压缓存 / handle wire 契约（换绑、resume、abort、错误帧、模型切换、种子跟随）。
+
+> 真实 AppImage 补充实测：`--appimage-extract "resources/glm/*"` pattern 提取 3.11.2 → 47MB 产物（zcode.cjs 0.16.5）可执行，无需全量解压。
