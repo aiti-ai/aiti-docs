@@ -54,6 +54,7 @@ footer: MIT Licensed | Copyright © 2026 aiti-ai
 | 🕹️ **Java 后端直接调** | 给 AI 用的 Arthas++：JVM 内任意修改、Mock/SQL 拦截模拟、热更新 controller、诊断采样、Tunnel 桥多端点纳管，52 工具全可逆——Spring Boot / Solon 调试不必重启 | [aiti-testagent](/extensions/aiti-testagent.md) |
 | 🤖🤖 **多 agent 同堂** | pi / Claude Code / Codex / Qoder / 任意 ACP agent 一个面板全看管——历史会话不是化石，点一下就复活 | [session-manager](/extensions/session-manager.md) · [claude-code](/extensions/aiti-claude-code-agent.md) · [codex](/extensions/aiti-codex-agent.md) · [qoder](/extensions/aiti-qoder-agent.md) |
 | 👥 **子代理舰队** | 一句话派活：scout 侦察 / worker 干活 / reviewer 审核 / oracle 顾问，并行或流水线，Fleet 面板盯进度 | [aiti-subagents](/extensions/aiti-subagents.md) |
+| 🧬 **开发血缘** | git 记录改动的内容，血缘记录改动的因果：每行代码可归因到会话、prompt、方案与操作——可评审、可回滚、可检索 | [📖 理念](/guide/lineage.md) · [评审](/extensions/aiti-git-review.md) · [方案先行](/extensions/aiti-plan-first.md) |
 | 🛡️ **配置安全网** | AI/人改坏配置：有 diff 可看、一键回滚；系统崩了，命令行 watchdog 不依赖出问题的系统本身兜底恢复 | [aiti-configs](/extensions/aiti-configs.md) |
 | 💬 **IM 里遥控 AI** | 钉钉/飞书/微信接入工作台——人不在电脑前，群里发句话 AI 照样干活交差 | [aiti-channels](/extensions/aiti-channels.md) |
 | 🧩 **还有更多** | 消息导航、Token 用量看板、编辑器当场改码、草稿保护、prompt 收藏…… 40+ 扩展一次看全 | [扩展注册表](/extensions/) |

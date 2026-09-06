@@ -26,6 +26,7 @@ export const zhSidebar = sidebar({
       children: [
         "README.md",
         "what-is-aiti.md",
+        "lineage.md",
         "architecture.md",
         "quick-start.md",
         "origin.md",

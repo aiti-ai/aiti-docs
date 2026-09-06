@@ -2,7 +2,7 @@
 
 > 以 pi 为引擎的个人 AI 开发工作台与本地调试注入生态：aiti-agent（自托管 Web 工作台）· aiti-devtools（页面内 AI 调试助手，AI 进驻网页面对面调试）· aiti-mcp-bridge（任意 AI agent 经 MCP 操作页面）。
 
-AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 45+ 个可组合扩展（调试注入 / 多 agent / 终端·VNC·RDP / 隧道 / 模型管理 / 配置安全网 / IM 接入等），aiti-devtools 已适配 DSH / OpenClaw / OpenCode 宿主。
+AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 47+ 个可组合扩展（调试注入 / 多 agent / 终端·VNC·RDP / 隧道 / 模型管理 / 配置安全网 / IM 接入等），aiti-devtools 已适配 DSH / OpenClaw / OpenCode 宿主。
 
 ## 文档
 - [首页 · 系统特色](https://aiti.pw/): 生态全景与特色速览
@@ -48,9 +48,11 @@ AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 45+ 个
 - [aiti-prompts](https://aiti.pw/extensions/aiti-prompts.html): prompt 片段收藏 —— 收藏/分组/会话提取/输入即存
 - [aiti-qoder-agent](https://aiti.pw/extensions/aiti-qoder-agent.html): Qoder CLI 专属后端 —— 双区域 credits/listModels、WASM 签名请求、扩展 API 免开会话查询
 - [aiti-queue-keeper](https://aiti.pw/extensions/aiti-queue-keeper.html): 队列面板接管 —— 完整队列 UI（横幅/行操作/拖拽排序/回收站/撤销条/导入导出），core 回到上游同形兜底
+- [aiti-sheet-univer](https://aiti.pw/extensions/aiti-sheet-univer.html): .xlsx/.xlsm 在线预览+编辑（exceljs 数据面 + Univer 视图面）；.xls/.ods 只读预览与一键转 .xlsx
 - [aiti-subagents](https://aiti.pw/extensions/aiti-subagents.html): 子代理扩展 —— aiti_subagent 工具委托 scout/worker/reviewer/oracle 等，进程内会话零 spawn，Fleet 监控面板 + doctor 自检
 - [aiti-testagent](https://aiti.pw/extensions/aiti-testagent.html): Java 后端 AI 调试 MCP + IDE —— 扫描 Java 进程/attach 一键连桥/Tunnel 桥多端点纳管，JVM 内任意修改/Mock·SQL 拦截模拟/热更新/诊断采样，52 工具 8 组按需暴露，全可逆
 - [aiti-ui-env](https://aiti.pw/extensions/aiti-ui-env.html): 后台无头服务器 UI 调试的环境分配器 —— 4 态模式（优先桌面/优先无头/总是桌面/总是无头）裁决新启动 MCP/应用的显示环境，Xvfb+openbox+AT-SPI 虚拟屏 + VNC-on-web 浏览器查看，Linux/Windows 双平台服务化
+- [aiti-zcode-agent](https://aiti.pw/extensions/aiti-zcode-agent.html): 智谱 ZCode（桌面端内嵌 CLI runtime）驱动 —— --json + --resume 接入 All Sessions，合规吃 GLM 编程套餐
 - [demo](https://aiti.pw/extensions/demo.html): 全插槽演示扩展 —— 框架验证用，覆盖每个扩展点
 - [demo-lazy](https://aiti.pw/extensions/demo-lazy.html): 输入字数统计（懒加载演示扩展）
 - [ext-jsx-client](https://aiti.pw/extensions/ext-jsx-client.html): 扩展 client 用 JSX + TypeScript + npm 依赖的共享模板（vite lib mode + host-shim 委托）
