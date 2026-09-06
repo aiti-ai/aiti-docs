@@ -75,6 +75,13 @@ ext:
 | `zcode.model` | string | 空 | 新会话默认模型 ref；**留空自动跟随已认证的套餐通道**（读 coding-plan-cache，避免 zai 用户被 bigmodel 默认卡住） |
 | `zcode.apiKeyOverride` | string | 空 | 手动提供编程套餐 API Key，跳过 OAuth 链 |
 
+## All Sessions 接入（桌面端历史会话）
+
+- 解析器：session-manager `lib/agents/zcode.ts`（**唯一读取实现**，id "zcode"）——读 `~/.zcode/cli/db/db.sqlite`（opencode 同构 schema：session/message/part，WAL 安全复制到 /tmp 后只读查询）；part 类型 text/reasoning/step-*/tool，reasoning 跳过、tool 降级 `🛠 名称(参数) → 输出` 文本行
+- 源卡片：All Sessions 面板发现 ZCode 源（count = db 会话数），激活后历史行入索引；详情预览即 adapter.parse
+- 接管（open-live）：`zcode:sess_xxx` → 后端 createSession resume + **经 `services.sessions` 服务出口回放历史**（IndexedMessage → liveHistory）→ 主窗打开即有上下文，续聊 `--resume` 同一会话（实测：接管后问“上一条运行的什么命令”→ “pwd”）
+- 服务出口：session-manager entry `services.sessions.parseSession(compositeId)`（v1，进程内只读；消费方缺席 fail-silent，不得自行重实现各 agent 存储读取）
+
 ## 安全与边界
 
 - 换 key 只与本机用户自己的凭据 + 智谱官方域名交互；key 缓存 0600 且不入 git
