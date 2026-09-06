@@ -2,7 +2,7 @@
 
 > 以 pi 为引擎的个人 AI 开发工作台与本地调试注入生态：aiti-agent（自托管 Web 工作台）· aiti-devtools（页面内 AI 调试助手，AI 进驻网页面对面调试）· aiti-mcp-bridge（任意 AI agent 经 MCP 操作页面）。
 
-AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 44+ 个可组合扩展（调试注入 / 多 agent / 终端·VNC·RDP / 隧道 / 模型管理 / 配置安全网 / IM 接入等），aiti-devtools 已适配 DSH / OpenClaw / OpenCode 宿主。
+AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 45+ 个可组合扩展（调试注入 / 多 agent / 终端·VNC·RDP / 隧道 / 模型管理 / 配置安全网 / IM 接入等），aiti-devtools 已适配 DSH / OpenClaw / OpenCode 宿主。
 
 ## 文档
 - [首页 · 系统特色](https://aiti.pw/): 生态全景与特色速览
@@ -16,6 +16,7 @@ AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 44+ 个
 - [aiti-ai-input](https://aiti.pw/extensions/aiti-ai-input.html): 聊天输入框增强 —— L0 本地/L1 AI 两层自动补全 + 语音输入检测与转写修复
 - [aiti-ai-schedule](https://aiti.pw/extensions/aiti-ai-schedule.html): pi-web 常驻调度器 —— 扩展声明式定时任务 + AI 计划（cron/间隔/一次性）+ 三模式执行引擎 + AI 自建计划工具 + 管理页
 - [aiti-ai-usage](https://aiti.pw/extensions/aiti-ai-usage.html): AI token 用量统计 —— workspace/provider/model/key/时段多维报表，任意多维组合透视 + 桑基图 + CSV 导出，事件驱动零轮询，独立 SQLite 存储
+- [aiti-append-system](https://aiti.pw/extensions/aiti-append-system.html): 管理 pi 的 APPEND_SYSTEM.md（会话启动时追加进 system prompt）——全局 ~/.pi/agent/ 与项目 <cwd>/.pi/ 两份，网页面板在线编辑保存，🤖 AI 帮你起草并直接写入
 - [aiti-attach-agent](https://aiti.pw/extensions/aiti-attach-agent.html): Socket 附着已运行 agent 进程 —— 连接 pi TUI bridge；支持环境变量全自动（PI_WEB_BRIDGE_AUTO=1 任何 CLI 会话自动上桥）
 - [aiti-channels](https://aiti.pw/extensions/aiti-channels.html): IM 渠道接入 + cc-connect 大前端外壳 —— 托管 cc-connect 进程、概览/项目/通道/会话面板、socket API 出站发消息
 - [aiti-claude-code-agent](https://aiti.pw/extensions/aiti-claude-code-agent.html): 驱动 Claude Code CLI 会话 —— 从 All Sessions 恢复历史行（agentKey: claude）
