@@ -34,6 +34,8 @@ ext:
 - `--json` 为**单个 pretty JSON 对象**（exit 0 全量打印）：`{sessionId, traceId, turnId, response, usage{...}, projection{contextWindow}}`
 - 进程模型：每轮一个单发进程 + `--resume` 续聊（同 aiti-codex-agent 的 exec 模式）
 - 懒持久化：`sess_xxx` 首轮后可知 → `session_backend_ready` 换绑 `zcode:sess_xxx`（core 双注册 handle + 站位文件跟随迁移）
+- 站位命名：接管时写入真实标题（session-manager open-live 传 meta.name）；新会话首轮换绑后取首条 user 消息截断（core 通用）；刷新不丢
+- 历史回放：resume 时经 All Sessions 服务出口（session-manager `services.sessions`）回填 liveHistory——zcode 存储的唯一读取实现在 session-manager `lib/agents/zcode.ts`，本扩展不自建读取
 - 模型注入走官方 env 通道（`ZCODE_MODEL`/`ZCODE_BASE_URL`/`ZCODE_API_KEY`），**不写 `~/.zcode/cli/config.json`**
 - abort 两阶段：spawn 前（取消 runtime 解析/下载，AbortController）+ spawn 后（SIGTERM 杀子进程 → settled "aborted"）
 
