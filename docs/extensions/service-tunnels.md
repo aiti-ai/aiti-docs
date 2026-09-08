@@ -4,11 +4,11 @@ icon: 🌐
 ext:
   id: service-tunnels
   name: Service Tunnels
-  description: 服务端口发现与隧道 —— 端口列表 / 暴露与隧道 / 自暴露 / TOTP+用户认证 / 注入联动
+  description: 本机服务一键公网可达 —— 端口发现（服务识别/自定义名）/ 五种暴露模式（隧道·vhost·混合·路由器映射·IPv6 直连）/ 认证网关（portal·TOTP·人脸声纹）/ DDNS 自动解析 / 网络体检 doctor
   soul: 本地服务不该被防火墙关起来——在哪都应该可以安全访问。
   type: dev-repo
   category: 服务隧道
-  version: 0.3.0
+  version: 0.4.0
   status: active
   author: aiti-ai
   publisher: aiti-ai
@@ -19,7 +19,7 @@ ext:
     # 部署：node tools/deploy.mjs（构建客户端 + 拷贝 + 目标内 npm install --omit=dev）
     # 生效：POST /api/extensions/reload
   license: MIT
-  tags: [tunnels, ports, expose, auth, totp, inject]
+  tags: [tunnels, ports, expose, portmap, ipv6, ddns, auth, totp, biometric, doctor, inject]
 ---
 
 # service-tunnels
@@ -76,7 +76,7 @@ service-tunnels 扩展（~/.pi/web/extensions/service-tunnels/，完全自包含
   ├─ server.startup    → createServiceTunnels 单例（globalThis.__piServiceTunnels）+ PI_WEB_EXPOSE
   ├─ server.middleware → 服务 vhost 分支（st.proxy.parseHost/resolve）+ allowlocal 门禁
   ├─ server.api        → /api/extensions/service-tunnels/<action>（发现/暴露/隧道/用户/TOTP/自暴露）
-  ├─ ui.toolbar/dialogs/banners + client bundle → ServicesDialog（Ports/Self/Users 三页签）+ 🔴 自暴露告警
+  ├─ ui.toolbar/dialogs/banners + client bundle → ServicesDialog（五 tab：端口/Pi-web/用户/DDNS/体检，capabilities 门控）+ 🔴 自暴露告警
   └─ node_modules/service-tunnels/ —— 标准 npm 依赖（私有 npm 源，deploy 时
      `npm install --omit=dev` 安装；加载器按扩展目录解析裸说明符）
 ```
