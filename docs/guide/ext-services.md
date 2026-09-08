@@ -34,7 +34,7 @@ export default {
 
 **规范**：
 
-- key = `"<extId>.<name>"`；core 自己提供的服务用 `core.*` 前缀（如 `core.sessions`、`core.pageEvents`）。
+- key = `"<extId>.<name>"`；core 自己提供的服务用 `core.*` 前缀（如 `core.sessions`、`core.registry`）。
 - `provide` 返回 disposer，扩展 shutdown/reload 时 core 自动反卷。
 - **服务对象请用惰性 getter**（访问时现取），这样热重载/重装不会悬空——消费方每次拿到的都是活实例。
 - 方法语义写进文档（提供方扩展文档 + 消费方方案文档），红线：**出口只读**；消费方不得直读提供方 dataDir。参考：`services.trace` 契约表（`docs/aiti-git-trace-plan.md` §16.3）。
@@ -105,9 +105,19 @@ else { /* 提供方未加载/懒加载未就绪：降级 */ }
 
 | key | 提供方 | 用途 | 消费方 |
 |---|---|---|---|
-| `aiti-git-trace.trace` | aiti-git-trace | 台账 readOps/sessionStores/watchPaths/listMd + onOp 事件 | aiti-plan-first、aiti-msg-smart |
-| `session-manager.sessions` | session-manager | `parseSession(compositeId)` 各 agent 历史解析（只读） | aiti-zcode-agent |
-| `aiti-doc-center.docs` | aiti-doc-center | md 检索/词表/query | aiti-plan-first |
-| （规划中）`core.sessions` / `core.bridges` / `core.pageEvents` | core | 会话表/桥表/页面事件发布只读面 | 各外部 agent 扩展 |
+| `core.sessions` | core（registry 预置） | 会话 wrapper 只读视图 `{ ids(), has(id), get(id) }`（rpc-manager 单例惰性现取；wrapper 本体是运行面句柄，「只读」指不得增删改会话表） | （P1 起替代 `__piSessions` 直读） |
+| `core.registry` | core（registry 预置） | registry 只读投影 `{ ids(), get(id) → 元数据, ui(id), status() }`（不外发 ext entry 本体） | aiti-extman（插槽详情） |
+| `aiti-git-trace.trace` | aiti-git-trace | 台账 readOps/sessionStores/watchPaths/listMd + onOp 事件 | aiti-plan-first、aiti-doc-center、aiti-msg-smart |
+| `session-manager.sessions` | session-manager | `parseSession(compositeId)` 各 agent 历史解析 + `archivedIds()`（只读） | aiti-zcode/qoder/codex-agent、aiti-doc-center |
+| `session-manager.tags` | session-manager | `snapshot()` TagData 全量（乐观锁 version） | aiti-doc-center |
+| `session-manager.hotwords` | session-manager | ASR 热词提取 `get(params)` | aiti-ai-input |
+| `aiti-doc-center.docs` | aiti-doc-center | md 检索 tagsAll/search/query/docsOfSession | aiti-plan-first、aiti-folder、session-manager |
+| `aiti-plan-first.plans` | aiti-plan-first | `planDocs()` 会话→方案文档绑定映射（只读） | aiti-doc-center |
+| `service-tunnels.api` | service-tunnels | 库单例（enroll/注入注册等；middleware 仍走 `__piServiceTunnels` 保留口） | aiti-devtools |
+| `aiti-devtools.bridges` | aiti-devtools | 桥表 `get(key)`（单例复用语义） | （aiti-attach-agent 迁移中） |
+| `aiti-event-bus.publish` | aiti-event-bus | 页面事件总线发布 `{ publish(type, data) }`（唯一新 SSE `/events`；全局口 `__piPageEvents` 访问器接管并行） | plan-first / model-check / editor / git-review(gr:task) / ai-schedule(sched:*) |
+| `aiti-event-bus.subscribe` | aiti-event-bus | client 帧订阅 `subscribePageFrames(handler)`（缺席回退 `window.__piPageEventsClient`） | 各需实时推送的 client |
+
+> 以上服务均已上线（2026-09-07，dev 实例 status 服务清单可查）；生产实例待 pi-web 核心同步前，消费方均保留旧通道兜底（双轨）。
 
 > 上线新服务 = 在提供方扩展文档写方法语义表 + 本表加一行。
