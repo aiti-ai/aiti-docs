@@ -42,6 +42,7 @@ ai:
     - 新建/改名/删 prompt、建分组（POST/PUT/DELETE /prompts、/groups）
     - 会话提取：读历史会话 user 消息 → 批量小结入库（AI 最擅长）
     - 输入联想：suggest 候选=**命令（⚡）+ 收藏 prompt（📌）混合**，命中命令直接填/执行、不走 AI；仅无命中才轮到 AI 生成
+    - 系统自动创建的条目（非用户手存）默认**不参与**智能提示（可开关）
   storage_dir: <dataDir>（= ~/.pi/web/data/aiti-prompts）
   source_dir: dev-repo/aiti-prompts
   page: 工具栏 📌 Prompt → 收藏库

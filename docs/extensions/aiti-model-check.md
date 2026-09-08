@@ -34,6 +34,8 @@ ext:
 - **agent 工具**（`aiti_model_status/probe/history/config`）：AI 直接调，如「检查模型可用性」
 - **ai-helper 帮助点**（skills，🤖 弹窗可唤）：`model-check`（检查可用性）/ `model-config`（调配置），详见 aiti-helper 接入指南（内部文档）
 - **📡 网页面板**：状态总览（✅/🔴/⚠️/⚪ + 预计恢复）/ 一键探测 / 历史时间线
+- **mc:avail 事件驱动**：429/恢复经 `aiti-event-bus.publish` 广播 `mc:avail` 帧（持续限流按 key 2min 节流，消除事件风暴）；model-wizard 横幅直供数据免反查、后台不拉取
+- **服务化**：服务端 features 收口 `ctx.features`、客户端跨扩展服务双轨（`ctx.services` 优先 + 旧全局兜底），见 [ext-services](/guide/ext-services.html)
 
 ## agent 工具
 

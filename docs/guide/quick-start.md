@@ -90,3 +90,12 @@ AI：已修复 Form.vue:42 —— 增加空值兜底。
 - [MCP 桥 · 会话体系](/guide/mcp/session.md)
 - [MCP 桥 · 改造 AI agent](/guide/mcp/ai-agents.md)
 - [整体规划](/roadmaps/master-plan.md)
+
+## 另一条路：给 aiti-agent 写扩展
+
+如果你的目标是给 aiti-agent（pi-web 工作台）写扩展（而非接入页面调试）：
+
+1. 复制共享模板 `dev-repo/templates/ext-jsx-client/`（JSX + vite 构建，复制即用），或读 [扩展 client JSX 模板](/extensions/ext-jsx-client.md)；
+2. 声明 entry（id/ui 插槽/server hooks）——完整契约见 `dev-repo/docs/dev-repo-authoring-reference.md`（注册总纲）；
+3. 跨扩展调用与服务出口遵守 [扩展服务规范](/guide/ext-services.md)；弹窗标 `data-ext-float="1"` 自动获得浮窗能力；重 bundle 走 [懒加载契约](/guide/ext-lazy-loading.md)；
+4. 部署：`node tools/deploy.mjs` → `~/.pi/web/extensions/` → `POST /api/extensions/reload`。

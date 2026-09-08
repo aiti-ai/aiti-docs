@@ -201,3 +201,5 @@ aiti-git-trace 给每个会话建一个**编外追踪仓**（`.aiti-trace`，一
 > 相关阅读：[什么是 aiti](/guide/what-is-aiti.md) · [架构](/guide/architecture.md) · [代码评审](/extensions/aiti-git-review.md) · [方案先行](/extensions/aiti-plan-first.md)
 >
 > 📌 实现状态：本页是五维血缘的**愿景全景**。各项承诺的落地进度、已知缺口与收敛计划（git-trace ⇄ plan-sandbox 同质化、采认入账、跨维导航等）见 `dev-repo/docs/aiti-lineage-closure-plan.md`（开发血缘实现差距深审与优化方案）。
+>
+> ✅ **closure 进展（2026-09）**：深审 36 gap 中高伤项已止血并上线——**P0 三项**（逐 op 回滚契约、parent 链接线「家谱恒空」、终态持久）+ **P1**（记账合一/意图维/自检/跨维导航，GAP-1/2/3/4/5）；台账行 additive `planRel`（方案绑定入行，P1-2）；aiti-plan-review 扩展落地 Plan-Sandbox 采认收尾 UI。P2/P3 批次见 closure plan 台账。

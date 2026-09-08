@@ -8,7 +8,7 @@ ext:
   soul: 面板只管标一个属性，浮起来的一切交给它。
   type: dev-repo
   category: 聊天增强
-  version: 0.4.0
+  version: 0.4.7
   status: active
   author: aiti-ai
   publisher: aiti-ai
@@ -24,18 +24,33 @@ ext:
 
 > ❝ **面板只管标一个属性，浮起来的一切交给它。** ❞
 
-纯 client 扩展：凡根节点标 `data-ext-float="1"` 的弹窗面板，自动获得拖拽移动、边缘缩放、位置持久化、点按置前、双击复位；首个子元素作拖拽把手。v0.4.0 起还会自动往标题栏注入标准 ⛶/❐ **最大化按钮**（点击铺满视口，小屏全屏态自动隐藏；`data-ext-float-max="0"` 豁免）——扩展零代码。再加 `data-ext-float-full="1"` 即小屏（≤640px 宽或 ≤700px 高）自动铺满视口并停用手势/持久化，跨断点动态切换。
+纯 client 扩展：凡根节点标 `data-ext-float="1"` 的弹窗面板，自动获得拖拽移动、边缘缩放、位置持久化、点按置前、双击复位；首个子元素作拖拽把手。v0.4.0 起还会自动往标题栏注入标准 ⛶/❐ **最大化按钮**（点击铺满视口，小屏全屏态自动隐藏；`data-ext-float-max="0"` 豁免）——扩展零代码。再加 `data-ext-float-full="1"` 即小屏（≤640px 宽）自动铺满视口并停用手势/持久化，跨断点动态切换。v0.4.5 起**遮罩自动去除**：增强面板时祖先链上的半透明全屏遮罩自动变透明 + 点击穿透（浮窗不再挡消息区操作；真模态确认框加 `data-ext-float-keepmask="1"` 豁免，副作用=点外关闭失效）。
 
 未安装/禁用本扩展时，面板回退普通居中弹窗（自身 style 兜底）——接入方零逻辑零状态。
 
-契约详见内部设计文档「扩展弹窗浮动契约」（data-ext-float 一属性接管拖拽/缩放/持久化）。
+契约专题（属性全表 / 小屏全屏 / 手动最大化 API / keepmask 豁免 / pos / persist）见 `dev-repo/docs/aiti-web-ext-float-dialogs.md`；注册总纲 `docs/dev-repo-authoring-reference.md` §8.3。常用属性速查：
+
+| 属性 | 作用 |
+|---|---|
+| `data-ext-float` | `"1"` 移动+缩放；`"drag"`/`"resize"` 单项 |
+| `data-ext-float-w` / `-h` | 初始尺寸 px |
+| `data-ext-float-autoh` | `"1"` 高度随内容自适应（不持久化高度；异步增长型弹窗用） |
+| `data-ext-float-full` | 小屏（≤640px 宽）自动铺满视口——新弹窗小屏适配一律用它，勿自写 matchMedia |
+| `data-ext-float-max` | `"0"` 不注入自动最大化按钮 |
+| `data-ext-float-keepmask` | `"1"` 豁免遮罩自动去除（真模态确认框用） |
+| `data-ext-float-pos` | `"asis"` 首次出现保持渲染位置（锚定下拉用） |
+| `data-ext-float-persist` | `"0"` 禁用位置持久化（锚定下拉根治窄屏出屏） |
 
 ## 接入示例
 
 - 可运行参考：[demo](demo.md)、[ext-jsx-client 模板](ext-jsx-client.md)
-- 实际接入方：aiti-ui-env、aiti-ai-schedule 等扩展弹窗
+- 实际接入方：aiti-ui-env、extman、model-wizard、session-manager、plan-first 等全仓弹窗均已接入
 
 ## 版本历史
 
+- **0.4.7**：`data-ext-float-pos="asis"`（锚定出现位）+ `data-ext-float-persist="0"`（禁持久化）——锚定下拉类弹窗组合拳
+- **0.4.6**：出现置前——新挂载面板自动抬到已有浮层之上（修「后开弹窗被先开者压底」，实证：归档查看器被遮）
+- **0.4.5**：**遮罩自动去除**——祖先链半透明全屏遮罩自动透明+点击穿透（`data-ext-float-keepmask` 豁免）；性能红线：scan 自愈遇已标记祖先立即返回（稳态零强制重排）
+- **0.4.4**：性能事故修复——MutationObserver 回调禁微任务链（0.4.3 回归致主线程饿死页面冻结），改 rAF 调度 + style 同值守卫
 - **0.4.0**（2026-08-26）：自动注入标准最大化按钮 ⛶/❐（`data-ext-float-max` 豁免）；新增 `__piweFloat.isFull()`；extman / ai-usage / subagents 自备按钮已迁移
-- 0.3.x：小屏全屏 `data-ext-float-full`、手动最大化 API（`toggleMax/setMax/isMax`）
+- 0.3.x：小屏全屏 `data-ext-float-full`、手动最大化 API（`toggleMax/setMax/isMax`）、`data-ext-float-autoh`

@@ -27,6 +27,9 @@ ext:
 aiti-agent 的命令管理器扩展：node-pty 真 TTY 终端、常用命令 CRUD（参数化占位符）、消息点击识别执行（PopoverAction 扩展点）、append-only 审计日志、agent 会话运行中命令实时视图（pi-commands：进程内订阅 `tool_execution_*` 事件 → 列表/实时输出/中止，不打断 agent 思考）。
 
 - 面板三页签（📋 总览 / 命令 / 历史）：总览聚合 agent 命令 + 终端会话，点行进详情
+- **终端 dock 接管 / 页签**：终端可停靠 dock、多会话页签化（近期批次 1e7cd696/5f694b68/924ea6b9）
+- **智能提示豁免**：系统自动创建的条目（如 skill 导出）默认不参与 aiti-ai-input 智能提示
+- 已懒加载化（两段式转换，见 [懒加载契约](/guide/ext-lazy-loading.html)）
 - 设计文档：内部方案文档 §七（pi-commands 实时视图）、§7.6（pi-web `AgentSessionInfo` 契约补丁）、§8.1（总览制 UI）
 - 扩展框架见 [aiti-agent 扩展点](/devtools/extension-points.md)
 

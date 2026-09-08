@@ -101,6 +101,8 @@ else { /* 提供方未加载/懒加载未就绪：降级 */ }
 
 **core 保留全局口**（豁免清单，扩展不得新造同类）：`globalThis.__piWebExt`（registry 本体）、`__piPageEvents`、`__aitiTraceEmit`（pi 扩展生产者）、`__aitiInject`（middleware 跨 bundle）、`__piSessions` / `__aitiBridges`（core 内部单例）、`window.__piWebPendingComposer`。它们的共同点是**生产者或消费者在扩展 ctx 体系之外**（middleware 独立 bundle / pi 扩展装载器），ctx.services 触达不到——完整豁免理由见 plan 文档 §6。
 
+**灰名单强制（check-ext-globals）**：红线不是靠自觉——`dev-repo/_shared/check-ext-globals.mjs` 静态扫描全仓扩展源码，查三类违规：byId 穿透、feature 直调、未登记全局量。灰名单分三类（`core-保留口` / `dualtrack`（双轨迁移期待退役的旧通道）/ `internal`（扩展内部便道）），**新增全局量不在名单即 FAIL**，`--strict` 可进一步收紧。你的新代码撞线会直接被卡，别绕。
+
 ## 5. 已注册服务速查（持续更新）
 
 | key | 提供方 | 用途 | 消费方 |
@@ -118,6 +120,33 @@ else { /* 提供方未加载/懒加载未就绪：降级 */ }
 | `aiti-event-bus.publish` | aiti-event-bus | 页面事件总线发布 `{ publish(type, data) }`（唯一新 SSE `/events`；全局口 `__piPageEvents` 访问器接管并行） | plan-first / model-check / editor / git-review(gr:task) / ai-schedule(sched:*) |
 | `aiti-event-bus.subscribe` | aiti-event-bus | client 帧订阅 `subscribePageFrames(handler)`（缺席回退 `window.__piPageEventsClient`） | 各需实时推送的 client |
 
-> 以上服务均已上线（2026-09-07，dev 实例 status 服务清单可查）；生产实例待 pi-web 核心同步前，消费方均保留旧通道兜底（双轨）。
+> 以上服务均已上线（2026-09-07 dev；**生产 pi-web core 已同步，2026-09-08**）。消费方扩展均按「双轨」落地——`ctx.services` 优先 + 旧全局通道兜底；兜底在生产扩展全量同步后退役。
 
 > 上线新服务 = 在提供方扩展文档写方法语义表 + 本表加一行。
+
+## 6. 声明式依赖与能力模型（dependsOn / optionalDependsOn / provides / takeover）
+
+`ctx.services` 是**运行时**软依赖（判空降级）；扩展注册还支持一层**声明式**依赖与能力语言，由平台解析、extman 展示与裁决。两者互补：声明管「依赖谁/提供什么」的静态事实与 UI 提示，services 管运行时实际取用。权威设计 + 实施记录：`dev-repo/docs/aiti-ext-deps-capabilities-plan.md`（P0/P1/P2 已实施上线，2026-09-08 复核，含生产 core 同步）。
+
+entry 顶层（与 `conflicts`/`features` 同层）四个可选字段，旧扩展零改动：
+
+| 字段 | 强度 | 语义 |
+|---|---|---|
+| `dependsOn: string[]` | 硬 | 功能级依赖；元素 = 扩展 id 或能力名。被依赖者禁用/卸载时 extman 弹警告；解析失败标 missing |
+| `optionalDependsOn: string[]` | 软 | 可选依赖（npm `optionalDependencies` 语义）：存在→消费方可启用附加功能；缺席→完全不影响。**纯声明，不触发任何警告** |
+| `provides: string[]` | 多实现 | 声明提供的能力（capability）；同能力可多扩展同时提供 |
+| `takeover: string[]` | 独占 | 声明独占接管的特性；同特性多声明者按裁决取唯一生效者 |
+
+```ts
+export default {
+  id: "aiti-msg-smart",
+  optionalDependsOn: ["aiti-git-trace"],  // 有它展示变更追踪，没有也不影响
+  // dependsOn: ["cap.git-trace"],        // 能力名约定带 cap. 前缀（解析时 id 命中优先）
+  // provides: ["cap.msg-intelligence"],
+  // takeover: [],
+} as PiWebExtension;
+```
+
+**能力解析**：依赖元素先按扩展 id 精确命中；否则查提供者集合（`provides ∪ takeover`）——空集=missing（硬依赖标红、可选静默），多个提供者按 **用户 pin > takeover 声明者 > semver 最新 > id 字典序** 取生效提供者。同 id 多来源（user/dev/bundled 多根）裁决同序，dev 调试优先开关可切。
+
+**extman 呈现**：详情「依赖」区按边类型展示（硬/可选 `·optional`/能力边带解析链）；「能力」「冲突」两个视图按能力名分组看提供者/消费方/pin。警告只吃硬边——被可选依赖的操作不弹窗。详见 [aiti-extman](/extensions/aiti-extman.html)。

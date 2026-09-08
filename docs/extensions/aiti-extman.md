@@ -63,6 +63,25 @@ pi-web 的扩展管理器扩展：把扩展管理从宿主内置 UI 迁出，业
 
 插槽上下文定义在 `index.ts` 的 `SLOT_CONTEXT`（global: toolbar/sidebar/sidebarFooter/sessionTopbar/dialogs/banners/pages；context: sessionRowActions/chatInputTop）。
 
+对懒扩展（`clientImmediately:false`），「打开」按钮先 `ensureMaterialized` 物化再打开（旧宿主优雅降级为直接打开）。
+
+## 依赖反向视图（「被依赖」+ 影响确认）
+
+详情「依赖」区之外，每个扩展还能看**谁依赖我**（反向视图）：禁用/卸载某扩展时，若有启用的依赖者，弹自绘确认框列出受影响方（仅硬边警告，可选依赖不弹）。设计：`dev-repo/docs/aiti-extman-dependents-view-plan.md`（已实施 2026-09-05）。
+
+## 依赖与能力模型（三视图 + pin）
+
+基于 core 的声明式依赖与能力模型（`dependsOn`/`optionalDependsOn`/`provides`/`takeover`，规范见 [ext-services](/guide/ext-services.html) §6；已实施上线 2026-09-08，含生产 core 同步）：
+
+- **三视图**：`exts`（扩展列表）/ `caps`（能力表：按能力名分组——提供者列表（生效者高亮）、消费方、pin 下拉；missing 能力标红）/ `conflicts`（同 id 多来源组 + takeover 冲突组，可 pin、一键回「自动」）。
+- **边类型**：client（`clientDependsOn` 预取）/ hard-ext / optional-ext / hard-cap / optional-cap 五类（旧宿主降级仅 client 边）。依赖边展示解析结果链（如 `cap.git-trace → aiti-git-trace ✓`，missing ✗）。
+- **警告口径**：禁用/卸载警告只吃 hard 边；能力边附解析链文案。
+- **pin**：`extPins` 支持 `source:<extId>`（多来源指定）与 `capability:<name>`（能力生效者指定）双 key，`devPriority` 开关控制开发态工作区版本是否优先。解析裁决：pin > takeover 声明者 > semver 最新 > id 字典序。
+
+## 服务出口区
+
+扩展卡片详情新增「服务出口」区：读取 `statusPayload.services`，展示该扩展经 `ctx.services.provide` 注册的全部服务 key（含 core 预置）——谁对外提供了什么一眼可见（P3 已实施）。配合上节依赖视图，形成「我依赖谁 / 我被谁依赖 / 我提供什么 / 我消费什么」的完整闭环。
+
 ## AI 自管理能力
 
 > AI 能为你：**启停/安装/卸载扩展、逐项开特性，乃至直接新建或修改一个扩展。**

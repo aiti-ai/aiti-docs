@@ -29,6 +29,8 @@ export const zhSidebar = sidebar({
         "lineage.md",
         "architecture.md",
         "quick-start.md",
+        "ext-services.md",
+        "ext-lazy-loading.md",
         "origin.md",
       ],
     },

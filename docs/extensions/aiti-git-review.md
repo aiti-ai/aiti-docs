@@ -33,6 +33,8 @@ Git 代码审核扩展：审「未提交的全部变更」（`git diff HEAD` + u
 - **AI 预审**：`aiti_review_*` 工具（status/diff/comment/comments/comment_update/summarize）**只注入评审任务会话**（agentTools 按会话门控 + boundSessionId 持久化 + ai-prebind 懒绑定），日常会话零工具
 - **汇总终审清单**：`文件#行号 [severity] comment` 长结论 + +N/-M 统计，一键发当前会话 / 开新会话 / 复制
 - **重命名/二进制/untracked/无 HEAD 全兼容**：R 状态双路径 diff 保 rename 配对，binary 标记不进 diff，首个 commit 前空树基线降级
+- **trace 源 + 部分回滚**：评审源接入 aiti-git-trace 台账，评审内一键部分回滚（文件/行级，写路径收敛 git-trace）
+- **懒加载两段式转换**（M3批②，[懒加载契约](/guide/ext-lazy-loading.html)）；跨扩展拉起 editor/folder 首例（ensureMaterialized + 跨扩展注册时序修复）
 
 ## agent 工具（仅评审任务会话）
 

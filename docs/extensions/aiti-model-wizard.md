@@ -37,6 +37,9 @@ ext:
 - **apiKey 三形态**：字面量 / 环境变量名（全大写）/ `!shell命令`（取 stdout）——测试连接、探测、拉模型统一解析；models.json 存原始值由 pi 运行时解析
 - **元数据六源反填**：已配置条目 → 内置目录 → 厂商 /models 富字段 → models.dev → OpenRouter/LiteLLM 兕底 → **跨提供商同 id 互证**（本目录缺新模型时借其它网关同 id/命名变体条目，字段取共识多数派；cost 仅全部一致才带）；保存反馈展示逐字段来源「🪄 自动反填：…」
 - **maxTokens 实测校正（probe-cap）**：新保存的模型逐个发最小探针验证输出上限，虚报被拒解析报错自动下调并回写（ark-coding glm 修正表）；模型行 ⏳/✓↓/! 徽标
+- **三层临时禁用（2026-09）**：provider `/enable`、模型 `/model-enable`、key `enabled` 三级——向导 UI 禁用/启用按钮；core 透传/同步（apiKey 切到首个启用 key；combo 保存保留成员禁用态、全禁拒绝）。联动 pi-models-combo（provider 级不建代理、key 级不入轮转、模型级隐藏/组合成员跳过）
+- **状态面板事件驱动**：「聚合/多 key 运行状态」横幅走 `mc:avail` 帧直供数据（[aiti-model-check](aiti-model-check.md)），后台不拉取；`/proxy-status` 补报未构建 combo（成员解析探测：能出槽位=懒建待激活、0 槽=configError 标修复）
+- **UI 规范化 + 拆包**：功能菜单图标统一 lucide SVG；薄壳 entry 11.5K + 重 chunk 524K 按需（[懒加载契约](/guide/ext-lazy-loading.html) 路线 B）
 - **一级撤销**：保存/删除前快照受影响 provider 旧条目，「↩ 撤销上次保存」一键回滚（订阅登录型豁免）
 - **参数查看/编辑弹窗**：任意位置的 👁 打开——显示名/能力勾选/contextWindow/maxTokens/cost 四项/thinkingLevelMap 七级/DeepSeek 思考兼容/developer 角色/模型级 headers/API 覆盖；纯 key 条目与 OAuth·目录型 provider 也能看（后者只读 + 「目录反填」徽标）
 - **品牌图标**：@lobehub/icons 按需引入（订阅服务/浏览目录/推荐卡/已配置卡），未命中回退首字母方块
