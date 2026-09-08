@@ -58,7 +58,19 @@ ext:
 - middleware 在认证决策后的 HTML 响应上注入 aiti-devtools launcher（`globalThis.__aitiInject` 判定的注入端口白名单）
 - 被注入页面与隧道同源，注入/调试桥/隧道共用同一套 vhost 门禁
 
-### 6. 安全与记录
+### 6. 路由器映射 / IPv6 直连 / DDNS（0.4.0）
+
+- **portmap 模式**：UPnP/NAT-PMP/PCP/ssh-router 路由器映射；表单「探测路由器」判定（CGNAT→建议隧道、公网直连→免映射）；详情含外部 ip:port 与租约剩余
+- **ipv6 模式**：直连暴露（候选地址下拉 + 公网出口标注 + 手动输入）
+- **DDNS tab**：provider 凭据（120 家下拉）/ profile / 注册条目三层——portmap/tunnel 暴露自动更新 A/AAAA/CNAME/TXT；与库 CLI/自带 UI 同一 registry 文件双开互查
+
+### 7. 体验与治理（0.4.0）
+
+- capabilities 能力协商：库版本能力探测式门控，tab/表单项缺能力自动隐藏（0.3.66 部署面优雅降级）
+- 服务识别：端口卡主行 favicon/探测标题/用户自定义名（label > title 单源规则）+ ✎ 重命名
+- 公开方案（加密存储 + 上次使用回填 + 一键动作）、注入源勾选、Base Path 端口属性
+
+### 8. 安全与记录
 
 - **DNS-rebinding 门禁**（宿主 proxy.ts）：所有 API 请求先过门禁（fail-closed）
 - **allow-tool-download**：工具下载许可开关
@@ -104,3 +116,9 @@ node tools/deploy.mjs         # 构建客户端 + 拷贝源码 + 目标内 npm i
 > 依赖说明：`service-tunnels` 0.3.39+ 已把 justget 打包进自身 dist（零运行时依赖），
 > 扩展经标准 npm 依赖引入；pi-web 扩展加载器按扩展目录解析裸说明符（`lib/ext/loader.ts`
 > jiti id = 扩展入口），扩展可带标准 node_modules。
+
+## 双端单源与设计全文
+
+展示语义（modeOf/identityView/ddnsBadge/netcheckEventView/portmapProbeView）与 doctor 事件契约键（`ui.doctor.ev.*`）由库 `src/ui-shared.ts` 单源承载——库自带 `st ui` 面板与 pi-web 弹窗行为必然一致（漂移由测试钉死）。
+
+设计全文与实施记录：`dev-repo/docs/service-tunnels-ext-ui-integration-plan.md`（§11 真机验收：UPnP portmap / ipv6 失败路径 / DDNS 双端互查闭环）。
