@@ -2,7 +2,7 @@
 
 > 以 pi 为引擎的个人 AI 开发工作台与本地调试注入生态：aiti-agent（自托管 Web 工作台）· aiti-devtools（页面内 AI 调试助手，AI 进驻网页面对面调试）· aiti-mcp-bridge（任意 AI agent 经 MCP 操作页面）。
 
-AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 47+ 个可组合扩展（调试注入 / 多 agent / 终端·VNC·RDP / 隧道 / 模型管理 / 配置安全网 / IM 接入等），aiti-devtools 已适配 DSH / OpenClaw / OpenCode 宿主。
+AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 51+ 个可组合扩展（调试注入 / 多 agent / 终端·VNC·RDP / 隧道 / 模型管理 / 配置安全网 / IM 接入等），aiti-devtools 已适配 DSH / OpenClaw / OpenCode 宿主。
 
 ## 文档
 - [首页 · 系统特色](https://aiti.pw/): 生态全景与特色速览
@@ -31,6 +31,7 @@ AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 47+ 个
 - [aiti-draft-keeper](https://aiti.pw/extensions/aiti-draft-keeper.html): 草稿持久化 + 恢复接管 —— 多标签共享槽位、无贡献不回写防震荡、水合后恢复
 - [aiti-echo-agent](https://aiti.pw/extensions/aiti-echo-agent.html): Echo agent —— session-provider slot 演示（多 agent 前端最小示例）
 - [aiti-editor](https://aiti.pw/extensions/aiti-editor.html): 可扩展编辑器 —— Monaco 编辑接管 + 保存（mtime 冲突 409 + 白名单/大小校验）+ 压缩包解析
+- [aiti-event-bus](https://aiti.pw/extensions/aiti-event-bus.html): 页面事件总线归口——链式接管 __piPageEvents，全帧 SSE + publish/subscribe 服务出口，core 零改动
 - [aiti-extman](https://aiti.pw/extensions/aiti-extman.html): 扩展管理器 —— 搜索/启停/安装/在线注册表
 - [aiti-float](https://aiti.pw/extensions/aiti-float.html): data-ext-float 契约接管 —— 拖拽/边缘缩放/位置持久化/点按置前/双击复位/自动最大化按钮，小屏自动全屏
 - [aiti-folder](https://aiti.pw/extensions/aiti-folder.html): fileViewer folder 接管 + pathPicker 目录选择器 —— 浏览/回收站删除
@@ -43,6 +44,7 @@ AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 47+ 个
 - [aiti-msg-anchor](https://aiti.pw/extensions/aiti-msg-anchor.html): 消息区顶部常驻横幅 —— 展示「生成当前屏幕上内容的那条用户输入」，滚动跟随回合段；可切换为第一条输入 / 最近输入 / 会话标题
 - [aiti-msg-nav](https://aiti.pw/extensions/aiti-msg-nav.html): 消息区右侧的滚动导航条 —— 到最早 / 到最新 / 上一个 / 下一个用户输入，一键直达；长按「到最新」保持屏幕常亮
 - [aiti-msg-smart](https://aiti.pw/extensions/aiti-msg-smart.html): 消息点击识别 —— 段落/标题/代码行点击 → 引用/复制/选项弹层 + 子句/行高亮
+- [aiti-onlyoffice](https://aiti.pw/extensions/aiti-onlyoffice.html): .docx/.xlsx/.pptx 完整保真预览+编辑（OnlyOffice DocumentServer Docker 后端）。AGPL 社区版，feature 默认关
 - [aiti-pi-agent](https://aiti.pw/extensions/aiti-pi-agent.html): spawn pi --mode rpc 子进程作为会话 —— 多 agent 前端主路径
 - [aiti-plan-first](https://aiti.pw/extensions/aiti-plan-first.html): AI 开发先方案后动手 —— aiti-git-trace 事件感知（推-听架构零扫描）：md 变更弹绑定向导（方案命名优先）、大改未跟方案提醒、领先提醒「先做方案」、tags 闭环（front-matter 事实源 + 手工/自荐标签）、会话列表行前部 📋 绑定标
 - [aiti-prompts](https://aiti.pw/extensions/aiti-prompts.html): prompt 片段收藏 —— 收藏/分组/会话提取/输入即存
@@ -52,6 +54,8 @@ AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 47+ 个
 - [aiti-subagents](https://aiti.pw/extensions/aiti-subagents.html): 子代理扩展 —— aiti_subagent 工具委托 scout/worker/reviewer/oracle 等，进程内会话零 spawn，Fleet 监控面板 + doctor 自检
 - [aiti-testagent](https://aiti.pw/extensions/aiti-testagent.html): Java 后端 AI 调试 MCP + IDE —— 扫描 Java 进程/attach 一键连桥/Tunnel 桥多端点纳管，JVM 内任意修改/Mock·SQL 拦截模拟/热更新/诊断采样，52 工具 8 组按需暴露，全可逆
 - [aiti-ui-env](https://aiti.pw/extensions/aiti-ui-env.html): 后台无头服务器 UI 调试的环境分配器 —— 4 态模式（优先桌面/优先无头/总是桌面/总是无头）裁决新启动 MCP/应用的显示环境，Xvfb+openbox+AT-SPI 虚拟屏 + VNC-on-web 浏览器查看，Linux/Windows 双平台服务化
+- [aiti-word-docx-preview](https://aiti.pw/extensions/aiti-word-docx-preview.html): .docx 高保真只读预览（docx-preview：分页 / 页眉页脚 / 表格 / 图片 / 列表还原）
+- [aiti-word-superdoc](https://aiti.pw/extensions/aiti-word-superdoc.html): .docx 在线编辑（SuperDoc：ProseMirror docx 双向）。AGPL 隔离于本扩展，不装即无
 - [aiti-zcode-agent](https://aiti.pw/extensions/aiti-zcode-agent.html): 智谱 ZCode（桌面端内嵌 CLI runtime）驱动 —— --json + --resume 接入 All Sessions，合规吃 GLM 编程套餐
 - [demo](https://aiti.pw/extensions/demo.html): 全插槽演示扩展 —— 框架验证用，覆盖每个扩展点
 - [demo-lazy](https://aiti.pw/extensions/demo-lazy.html): 输入字数统计（懒加载演示扩展）

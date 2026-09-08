@@ -40,7 +40,7 @@ ext:
 ## 事件链（推-听，对 git-trace 零侵入）
 
 ```
-pi 扩展 appendRow 台账行 → globalThis.__aitiTraceEmit?（松耦合可选链）
+pi 扩展 appendRow 台账行 → globalThis.__aitiTraceEmit?（松耦合可选链；core §6 保留口——生产者 pi 扩展装载器在扩展 ctx 体系外）
   → aiti-git-trace sink → traceBus
      ├─ services.trace.onOp（v2 + onOp/SSE /events）  ← 本扩展进程内监听（主通道）
      ├─ GET /events（SSE）                            ← 浏览器

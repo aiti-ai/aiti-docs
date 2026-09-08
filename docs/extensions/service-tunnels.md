@@ -86,7 +86,7 @@ service-tunnels 扩展（~/.pi/web/extensions/service-tunnels/，完全自包含
 - **middleware 兼容**：宿主 proxy.ts 在核心门禁前调用扩展 middleware 钩子——vhost
   决策、allowlocal 门禁、自暴露隧道域名映射全部在扩展内（与迁移前同进程、同
   globalThis 单例）
-- **aiti-devtools 联动不变**：仍经 `globalThis.__piServiceTunnels` 读库实例做
+- **aiti-devtools 联动**：DI 方案 P1 起新通道 = `ctx.services.get("service-tunnels.api")`；`globalThis.__piServiceTunnels` 双轨保留（宿主 middleware 独立 bundle 仍走它）。读库实例做
   注入端口 enroll；middleware 的 aiti 注入经 `globalThis.__aitiInject` 读取
 - **无扩展时**：无 vhost/自暴露功能，`/api/extensions/service-tunnels/*` 404，
   核心门禁不受影响

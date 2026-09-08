@@ -35,7 +35,7 @@ ext:
 - 进程模型：每轮一个单发进程 + `--resume` 续聊（同 aiti-codex-agent 的 exec 模式）
 - 懒持久化：`sess_xxx` 首轮后可知 → `session_backend_ready` 换绑 `zcode:sess_xxx`（core 双注册 handle + 站位文件跟随迁移）
 - 站位命名：接管时写入真实标题（session-manager open-live 传 meta.name）；新会话首轮换绑后取首条 user 消息截断（core 通用）；刷新不丢
-- 历史回放：resume 时经 All Sessions 服务出口（session-manager `services.sessions`）回填 liveHistory——zcode 存储的唯一读取实现在 session-manager `lib/agents/zcode.ts`，本扩展不自建读取
+- 历史回放：resume 时经 All Sessions 服务出口（session-manager `services.sessions`）回填 liveHistory——zcode 存储的唯一读取实现在 session-manager `lib/agents/zcode.ts`，本扩展不自建读取；结构化工具行（IndexedMessage.tool）回放成 **pi 原生形状**（assistant.toolCall 块 + toolResult 消息按 toolCallId 配对）→ 前端按 pi 自家工具卡片渲染，不再退化 `🛠 {json}` 文本（2026-09-07）
 - 模型注入走官方 env 通道（`ZCODE_MODEL`/`ZCODE_BASE_URL`/`ZCODE_API_KEY`），**不写 `~/.zcode/cli/config.json`**
 - abort 两阶段：spawn 前（取消 runtime 解析/下载，AbortController）+ spawn 后（SIGTERM 杀子进程 → settled "aborted"）
 
@@ -79,10 +79,10 @@ ext:
 
 ## All Sessions 接入（桌面端历史会话）
 
-- 解析器：session-manager `lib/agents/zcode.ts`（**唯一读取实现**，id "zcode"）——读 `~/.zcode/cli/db/db.sqlite`（opencode 同构 schema：session/message/part，WAL 安全复制到 /tmp 后只读查询）；part 类型 text/reasoning/step-*/tool，reasoning 跳过、tool 降级 `🛠 名称(参数) → 输出` 文本行
+- 解析器：session-manager `lib/agents/zcode.ts`（**唯一读取实现**，id "zcode"）——读 `~/.zcode/cli/db/db.sqlite`（opencode 同构 schema：session/message/part，WAL 安全复制到 /tmp 后只读查询）；part 类型 text/reasoning/step-*/tool，reasoning 跳过、tool 降级 `🛠 名称(参数) → 输出` 文本行 + **结构化 tool 字段**（opencode-family 归纳器共享；output 超 20k 字符回放截断标注）
 - 源卡片：All Sessions 面板发现 ZCode 源（count = db 会话数），激活后历史行入索引；详情预览即 adapter.parse
 - 接管（open-live）：`zcode:sess_xxx` → 后端 createSession resume + **经 `services.sessions` 服务出口回放历史**（IndexedMessage → liveHistory）→ 主窗打开即有上下文，续聊 `--resume` 同一会话（实测：接管后问“上一条运行的什么命令”→ “pwd”）
-- 服务出口：session-manager entry `services.sessions.parseSession(compositeId)`（v1，进程内只读；消费方缺席 fail-silent，不得自行重实现各 agent 存储读取）
+- 服务出口：`ctx.services.get("session-manager.sessions").parseSession(compositeId)`（DI 方案 P1 key 契约；v1，进程内只读；消费方缺席 fail-silent，不得自行重实现各 agent 存储读取。旧 `__piWebExt.byId("session-manager")` 穿透为生产旧 core 过渡期兜底）
 
 ## 安全与边界
 
