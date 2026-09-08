@@ -2,7 +2,7 @@
 
 > 以 pi 为引擎的个人 AI 开发工作台与本地调试注入生态：aiti-agent（自托管 Web 工作台）· aiti-devtools（页面内 AI 调试助手，AI 进驻网页面对面调试）· aiti-mcp-bridge（任意 AI agent 经 MCP 操作页面）。
 
-AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 58+ 个可组合扩展（调试注入 / 多 agent / 终端·VNC·RDP / 隧道 / 模型管理 / 配置安全网 / IM 接入等），aiti-devtools 已适配 DSH / OpenClaw / OpenCode 宿主。
+AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 59+ 个可组合扩展（调试注入 / 多 agent / 终端·VNC·RDP / 隧道 / 模型管理 / 配置安全网 / IM 接入等），aiti-devtools 已适配 DSH / OpenClaw / OpenCode 宿主。
 
 ## 文档
 - [首页 · 系统特色](https://aiti.pw/): 生态全景与特色速览
@@ -24,7 +24,7 @@ AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 58+ 个
 - [aiti-cmd](https://aiti.pw/extensions/aiti-cmd.html): 命令管理器 —— 真 PTY 终端 + 常用命令 + 消息识别执行 + agent 命令实时观察
 - [aiti-codex-agent](https://aiti.pw/extensions/aiti-codex-agent.html): OpenAI Codex CLI driver —— exec --json + resume 接入 All Sessions
 - [aiti-configs](https://aiti.pw/extensions/aiti-configs.html): 配置的安全网 —— AI/人改配置、改扩展改坏了，有锅可回、有 diff 可看、一键恢复；系统崩了，命令行哨兵不依赖出问题系统本身兜底恢复
-- [aiti-cpu-meter](https://aiti.pw/extensions/aiti-cpu-meter.html): 主线程流畅度检测——读秒 + 0-100 分 + 颜色分层 + 最小化；可注入任意站点（内部版/外部版双产物）
+- [aiti-cpu-meter](https://aiti.pw/extensions/aiti-cpu-meter.html): 主线程流畅度检测——读秒 + 0-100 分 + 颜色分层 + 最小化 + AI 卡顿调试（aiti-helper 帮助点）；可注入任意站点（内部版/外部版双产物）
 - [aiti-crash-fatal](https://aiti.pw/extensions/aiti-crash-fatal.html): flag 写入 → startup throw → ⚠ 指示器 + restore-ext 幂等清除——崩溃自愈链路的演习工具
 - [aiti-cursor-agent](https://aiti.pw/extensions/aiti-cursor-agent.html): 驱动 Cursor Agent CLI 会话（agentKey: cursor）——stream-json print 模式 + --resume 多轮；Cursor IDE 会话只读解析
 - [aiti-debug-inject](https://aiti.pw/extensions/aiti-debug-inject.html): 极简远程调试注入 —— 把另一个 pi-web 实例的调试器注入本实例页面，服务地址是 extman 里的文本 feature，默认关闭
@@ -44,6 +44,7 @@ AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 58+ 个
 - [aiti-git-trace](https://aiti.pw/extensions/aiti-git-trace.html): 编外 AI 变更追踪——.git/aiti 独立追踪仓 + op 编号 before/after 双 commit + 文件⇄消息⇄操作全链路 + 回撤
 - [aiti-helper](https://aiti.pw/extensions/aiti-helper.html): 扩展的一句话 AI 能力 —— 声明式 AI 帮助点 + 输入/结果预览/审核回填 + 配置版本化
 - [aiti-inject](https://aiti.pw/extensions/aiti-inject.html): dev 实例专用 —— 在 pi-web dev 页面注入生产 aiti-devtools launcher（FAB）
+- [aiti-mail](https://aiti.pw/extensions/aiti-mail.html): pi-web 内通用「邮件发送出口」——零依赖 SMTP 客户端 + 发送记录（node:sqlite）+ 管理弹窗（配置/测试/记录）
 - [aiti-mcp-bridge](https://aiti.pw/extensions/aiti-mcp-bridge.html): MCP 桥 —— 让任意 AI agent 操作页面、直达 IDE AI 窗口
 - [aiti-model-check](https://aiti.pw/extensions/aiti-model-check.html): 模型健康度探测 —— 对每个模型发极小探针消息，看是否可用 / 429 限流 / 异常；解析限流恢复时间（Retry-After 等），记录历史识别可用窗口
 - [aiti-model-wizard](https://aiti.pw/extensions/aiti-model-wizard.html): 引导添加 AI 提供商/模型：目录搜索（models.dev + 国内 AI 目录，中英文，贴 API 地址也能反向搜到）→ 填 token → 测试（2xx/429 都算通过）→ 选/输模型 → 写 models.json；找不到用 baseUrl 反向匹配（任意文档/代码片段自动提取 URL）/ 自动探测（漏 v1/v2 也能补，命中带 key 拉模型列表 + OpenAPI/模型前缀品牌信号）；编辑时 token 打码不返回前端
@@ -67,7 +68,7 @@ AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 58+ 个
 - [demo](https://aiti.pw/extensions/demo.html): 全插槽演示扩展 —— 框架验证用，覆盖每个扩展点
 - [demo-lazy](https://aiti.pw/extensions/demo-lazy.html): 输入字数统计（懒加载演示扩展）
 - [ext-jsx-client](https://aiti.pw/extensions/ext-jsx-client.html): 扩展 client 用 JSX + TypeScript + npm 依赖的共享模板（vite lib mode + host-shim 委托）
-- [service-tunnels](https://aiti.pw/extensions/service-tunnels.html): 服务端口发现与隧道 —— 端口列表 / 暴露与隧道 / 自暴露 / TOTP+用户认证 / 注入联动
+- [service-tunnels](https://aiti.pw/extensions/service-tunnels.html): 本机服务一键公网可达 —— 端口发现（服务识别/自定义名）/ 五种暴露模式（隧道·vhost·混合·路由器映射·IPv6 直连）/ 认证网关（portal·TOTP·人脸声纹）/ DDNS 自动解析 / 网络体检 doctor
 - [session-manager](https://aiti.pw/extensions/session-manager.html): 跨项目会话面板 —— tag 树+颜色 / 收藏 / 搜索 / 归档 / 看板
 - [sm-demo-source](https://aiti.pw/extensions/sm-demo-source.html): session-manager 第三方 agent source 贡献方示例 —— §4.8 slot 契约最小可运行模板
 
