@@ -88,7 +88,7 @@ aiti 的取位很明确：
 - **All Sessions 面板**：pi / Claude Code / Codex / Qoder / 任意 ACP agent 同堂管理；历史会话不是化石，点一下复活。会话上挂的 tag 树就是**全系统统一的 tag 词表**——AI 打标、文档继承、界面补全都以它为准。
 - **子代理谱系**：子代理不是黑盒进程，而是 fork 出的完整落盘会话，`parentSession` 头标明父子关系；追踪仓同步记 `parent/forkFrom` 链，`/lineage` 聚合端点能按祖先根优先 + BFS + 代际把整棵家谱拼出来，时间线第三个 tab 直接树状渲染。
 - **tag 词表**：嵌套 tag（`项目A/模块B`）横向归组一切——会话、文档、方案共用一套词表，这是血缘图的「列索引」。
-- **⚠ 追踪边界**：op 台账/追踪仓仅覆盖 **pi 运行时会话**（tool_call 拦截所在处）。All Sessions 同堂管理的外部 agent（Claude Code / Codex / Qoder / ACP 桥接会话）**不在追踪范围内**——它们出现在会话维与家谱，但不产生操作维的 op 行。
+- **⚠ 追踪边界**：op 台账/追踪仓仅覆盖 **pi 运行时会话**（tool_call 拦截所在处）。All Sessions 同堂管理的外部 agent（Claude Code / Codex / Qoder / ACP 桥接会话）**不在追踪范围内**——它们出现在会话维与家谱，但不产生操作维的 op 行。中期方案：会话导入时补台账（轻量，另行评审）。
 
 ### ⚙️ 操作维：op 是原子单位
 
