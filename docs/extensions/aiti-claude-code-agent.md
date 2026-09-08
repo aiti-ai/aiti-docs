@@ -33,3 +33,12 @@ Claude Code CLI 会话后端：驱动 claude CLI 会话，从 All Sessions 恢�
 - 协议：stdin/stdout JSON 帧（`{"type":"user","message":{...}}`，claude 2.x 实测）
 
 > 待办：OpenAI↔Anthropic 协议代理（CC 模型目录受限时复用其他 provider）。
+
+## 🔑 受控登录（ext-controlled-login 标准，2026-09-08）
+
+工具条 **🔑 登录**（或本面板）一键发起：后端 spawn 官方 CLI 的无浏览器登录（`claude.com` 通道），把授权链接推到本弹窗——**在任意设备的浏览器打开完成授权即可**，凭据由官方 CLI 自动落盘，扩展现有凭据链路自动感知。
+
+- API：`POST /api/extensions/aiti-claude-code-agent/login/start`（幂等）· `GET /login/status` · `POST /login/cancel`
+- B 模式（paste-relay）：授权完成后页面显示一次性 code，复制粘回弹窗提交（也接受完整回调 URL）
+- 状态机：waiting（转圈）→ success ✅ / failed / timeout / cancelled，均带重试；弹窗打开期间 2s 轮询状态、关闭即停
+- 标准与五家 driver 契约：`docs/ext-controlled-login-standard.md`

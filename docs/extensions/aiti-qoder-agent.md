@@ -35,3 +35,11 @@ Qoder CLI（qodercli/qoderclicn）专属会话后端。二者是 claude-code 协
 **双区域**：variant 区分国内/国际两套 CLI 与网关。
 
 详见 `dev-repo/aiti-qoder-agent/README.md`；认证与 API 逆向见 `docs/qodercli-auth-api-analysis.md`。
+
+## 🔑 受控登录（ext-controlled-login 标准，2026-09-08）
+
+工具条 **🔑 登录**（或本面板）一键发起：后端 spawn 官方 CLI 的无浏览器登录（`qoder.com` 通道），把授权链接推到本弹窗——**在任意设备的浏览器打开完成授权即可**，凭据由官方 CLI 自动落盘，扩展现有凭据链路自动感知。
+
+- API：`POST /api/extensions/aiti-qoder-agent/login/start`（幂等）· `GET /login/status` · `POST /login/cancel`
+- 状态机：waiting（转圈）→ success ✅ / failed / timeout / cancelled，均带重试；弹窗打开期间 2s 轮询状态、关闭即停
+- 标准与五家 driver 契约：`docs/ext-controlled-login-standard.md`
