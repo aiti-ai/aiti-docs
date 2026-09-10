@@ -2,7 +2,7 @@
 
 > 以 pi 为引擎的个人 AI 开发工作台与本地调试注入生态：aiti-agent（自托管 Web 工作台）· aiti-devtools（页面内 AI 调试助手，AI 进驻网页面对面调试）· aiti-mcp-bridge（任意 AI agent 经 MCP 操作页面）。
 
-AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 59+ 个可组合扩展（调试注入 / 多 agent / 终端·VNC·RDP / 隧道 / 模型管理 / 配置安全网 / IM 接入等），aiti-devtools 已适配 DSH / OpenClaw / OpenCode 宿主。
+AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 61+ 个可组合扩展（调试注入 / 多 agent / 终端·VNC·RDP / 隧道 / 模型管理 / 配置安全网 / IM 接入等），aiti-devtools 已适配 DSH / OpenClaw / OpenCode 宿主。
 
 ## 文档
 - [首页 · 系统特色](https://aiti.pw/): 生态全景与特色速览
@@ -13,6 +13,7 @@ AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 59+ 个
 
 ## 扩展
 - [aiti-acp-agent](https://aiti.pw/extensions/aiti-acp-agent.html): 泛用 ACP 驱动 —— 一个适配器接所有 Agent Client Protocol agent
+- [aiti-agent-manager](https://aiti.pw/extensions/aiti-agent-manager.html): 统一聚合 6 家外部 agent（CodeBuddy/Claude/ZCode/Codex/Cursor/Qoder）登录态 + 登录操作代理——不实现任何登录协议
 - [aiti-ai-input](https://aiti.pw/extensions/aiti-ai-input.html): 聊天输入框增强 —— L0 本地/L1 AI 两层自动补全 + 语音输入检测与转写修复
 - [aiti-ai-schedule](https://aiti.pw/extensions/aiti-ai-schedule.html): pi-web 常驻调度器 —— 扩展声明式定时任务 + AI 计划（cron/间隔/一次性）+ 三模式执行引擎 + AI 自建计划工具 + 管理页
 - [aiti-ai-speek](https://aiti.pw/extensions/aiti-ai-speek.html): AI 输出语音朗读——可切音色/暂停/跳过/停止；默认浏览器 Web Speech，可选 edge-tts
@@ -22,6 +23,7 @@ AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 59+ 个
 - [aiti-channels](https://aiti.pw/extensions/aiti-channels.html): IM 渠道接入 + cc-connect 大前端外壳 —— 托管 cc-connect 进程、概览/项目/通道/会话面板、socket API 出站发消息
 - [aiti-claude-code-agent](https://aiti.pw/extensions/aiti-claude-code-agent.html): 驱动 Claude Code CLI 会话 —— 从 All Sessions 恢复历史行（agentKey: claude）
 - [aiti-cmd](https://aiti.pw/extensions/aiti-cmd.html): 命令管理器 —— 真 PTY 终端 + 常用命令 + 消息识别执行 + agent 命令实时观察
+- [aiti-codebuddy-agent](https://aiti.pw/extensions/aiti-codebuddy-agent.html): 腾讯 CodeBuddy Code CLI（cbc）驱动 —— 每轮单发 -p stream-json + --resume 接入 All Sessions，API-key env 登录
 - [aiti-codex-agent](https://aiti.pw/extensions/aiti-codex-agent.html): OpenAI Codex CLI driver —— exec --json + resume 接入 All Sessions
 - [aiti-configs](https://aiti.pw/extensions/aiti-configs.html): 配置的安全网 —— AI/人改配置、改扩展改坏了，有锅可回、有 diff 可看、一键恢复；系统崩了，命令行哨兵不依赖出问题系统本身兜底恢复
 - [aiti-cpu-meter](https://aiti.pw/extensions/aiti-cpu-meter.html): 主线程流畅度检测——读秒 + 0-100 分 + 颜色分层 + 最小化 + AI 卡顿调试（aiti-helper 帮助点）；可注入任意站点（内部版/外部版双产物）
