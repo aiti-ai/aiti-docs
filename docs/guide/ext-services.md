@@ -24,11 +24,11 @@ export default {
   server: {
     startup(ctx) {
       // key 强制 "<extId>.<name>" 前缀（core 校验，防止冒充别的扩展）
-      ctx.services.provide("aiti-git-trace.trace", traceService(ctx.dataDir));
+      ctx.services.provide("aiti-git-trace.trace", traceService(ctx.configDir));
     },
   },
   // 也可以挂在扩展出口上（惰性 getter，等价写法）：
-  // get services() { return { get trace() { return traceService(dataDir) } } }
+  // get services() { return { get trace() { return traceService(configDir) } } }
 };
 ```
 
@@ -37,7 +37,7 @@ export default {
 - key = `"<extId>.<name>"`；core 自己提供的服务用 `core.*` 前缀（如 `core.sessions`、`core.registry`）。
 - `provide` 返回 disposer，扩展 shutdown/reload 时 core 自动反卷。
 - **服务对象请用惰性 getter**（访问时现取），这样热重载/重装不会悬空——消费方每次拿到的都是活实例。
-- 方法语义写进文档（提供方扩展文档 + 消费方方案文档），红线：**出口只读**；消费方不得直读提供方 dataDir。参考：`services.trace` 契约表（`docs/aiti-git-trace-plan.md` §16.3）。
+- 方法语义写进文档（提供方扩展文档 + 消费方方案文档），红线：**出口只读**；消费方不得直读提供方 configDir（数据分层：配置区根级；可再生数据在 cache/）。参考：`services.trace` 契约表（`docs/aiti-git-trace-plan.md` §16.3）。
 
 ## 2. 服务端：消费能力
 
