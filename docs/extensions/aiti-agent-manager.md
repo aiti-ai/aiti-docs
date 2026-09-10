@@ -41,7 +41,7 @@ ext:
 
 ## 端点
 
-- `GET /api/extensions/aiti-agent-manager/agents`（别名 `/login-status`）→ 聚合清单：`{agent,label,modes,installed,authState,flowState,authSource,dependencyHint,ext?,tui?}`
+- `GET /api/extensions/aiti-agent-manager/agents`（别名 `/login-status`）→ 聚合清单：`{agents:[{agent,label,modes,installed,authState,flowState,authSource,dependencyHint,ext?,tui?}], piHost:[{provider,type,user,expires,expired}]}`
 - `POST /ctl/{agent}/start|cancel|submit` → 代理到受控登录标准 5 家的 `/login/*`
 - `POST /ctl/codebuddy/tui-start {site?}` · `GET /ctl/codebuddy/tui-status` · `POST /ctl/codebuddy/tui-input {text}` · `POST /ctl/codebuddy/tui-cancel` · `POST /ctl/codebuddy/set-key {apiKey?,authToken?,baseUrl?}` · `POST /ctl/codebuddy/clear`
 
@@ -51,4 +51,4 @@ ext:
 
 - 5 家受控登录扩展无「登出」标准端点——面板不提供其登出（codebuddy 有：清除凭据文件）。
 - fs 探测口径是「有凭据落盘/有 env」，不等价于「token 仍有效」——最终以各家 CLI 自身为准。
-- pi 宿主订阅 provider 状态（模型向导 OAuth）的并列展示为可选后续项（§9.5 步 5）。
+- ~~pi 宿主订阅 provider 并列展示~~ 已实现（§9.5 步 5）：`/agents` 响应带 `piHost` 段（auth.json 只读：provider/type/user/expires/expired，token 不出服务端），面板第二组展示并标过期。

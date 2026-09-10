@@ -22,7 +22,7 @@ AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 61+ 个
 - [aiti-attach-agent](https://aiti.pw/extensions/aiti-attach-agent.html): Socket 附着已运行 agent 进程 —— 连接 pi TUI bridge；支持环境变量全自动（PI_WEB_BRIDGE_AUTO=1 任何 CLI 会话自动上桥）
 - [aiti-channels](https://aiti.pw/extensions/aiti-channels.html): IM 渠道接入 + cc-connect 大前端外壳 —— 托管 cc-connect 进程、概览/项目/通道/会话面板、socket API 出站发消息
 - [aiti-claude-code-agent](https://aiti.pw/extensions/aiti-claude-code-agent.html): 驱动 Claude Code CLI 会话 —— 从 All Sessions 恢复历史行（agentKey: claude）
-- [aiti-cmd](https://aiti.pw/extensions/aiti-cmd.html): 命令管理器 —— 真 PTY 终端 + 常用命令 + 消息识别执行 + agent 命令实时观察
+- [aiti-cmd](https://aiti.pw/extensions/aiti-cmd.html): 命令管理器 —— 真 PTY 终端 + 常用命令 + 消息识别执行 + agent 命令实时观察 + 跨扩展统一执行出口
 - [aiti-codebuddy-agent](https://aiti.pw/extensions/aiti-codebuddy-agent.html): 腾讯 CodeBuddy Code CLI（cbc）驱动 —— 每轮单发 -p stream-json + --resume 接入 All Sessions，API-key env 登录
 - [aiti-codex-agent](https://aiti.pw/extensions/aiti-codex-agent.html): OpenAI Codex CLI driver —— exec --json + resume 接入 All Sessions
 - [aiti-configs](https://aiti.pw/extensions/aiti-configs.html): 配置的安全网 —— AI/人改配置、改扩展改坏了，有锅可回、有 diff 可看、一键恢复；系统崩了，命令行哨兵不依赖出问题系统本身兜底恢复

@@ -35,7 +35,7 @@ ext:
 - **stream-json 输出与 Claude Code 同形**：system/init（`session_id`/`model`/`tools`/`slash_commands`）+ stream_event（text_delta 增量）+ assistant + result（`is_error`/`usage`/`modelUsage.contextWindow`）
 - ⚠ 错误轮 exit code 也是 0 —— 成败只认 result 帧
 - 懒持久化：首轮 init 帧捕获真实 sid → `session_backend_ready` 换绑 `codebuddy:<uuid>`
-- 历史回放：复活路径经 All Sessions 服务出口（session-manager `services.sessions`；cbc 存储的唯一读取实现在其 `lib/agents/codebuddy.ts`——**存储 jsonl 与 claude 非同构**：顶层 role/content + 数字毫秒时间戳）
+- 历史回放：复活路径经 All Sessions 服务出口（session-manager `services.sessions`；cbc 存储的唯一读取实现在其 `lib/agents/codebuddy.ts`——**存储 jsonl 与 claude 非同构**：顶层 role/content + 数字毫秒时间戳 + `function_call`/`function_call_result`/`reasoning` 独立行型，工具调用折叠为结构化 tool 行 → 查看器原生工具卡（input/output 段），reasoning 不进时间线但提供真实模型）
 - CLI 解析：feature `codebuddy.cliPath` → PATH 上的 `cbc`/`codebuddy` → npx 兜底（`process.execPath` + npm npx-cli.js，免 systemd PATH 坑；首用有包下载延迟）
 - 队列：`_shared/backend-queue.ts` 共享层——运行中输入一律入本地 followUp 队列（单发模式无 steer 面），面板可见可撤回、settle 自动续轮
 
