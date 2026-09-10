@@ -37,21 +37,30 @@ ext:
 - **tag 标记「好用版本」**：安全盾历史 tab 🏷 打/列/删 tag + `configs_tag` 工具 + `GET/POST/DELETE /tag` API；回滚可直接指 tag（如 `good-v1`）
 - **暴露给其他扩展**：程序化 `POST /snapshot`、`POST/DELETE /tag`、`POST /commit` API + MCP 工具（status/commit/snapshot/restore/selfcheck/log/config/tag）——**其他扩展适配：声明 configs.includes 即自动入网（详见内部接入指南）**
 
-## 配置 `ai-configs.json`（放 aiti-configs dataDir，AI 可编辑）
+## 配置 `ai-configs.json`（2026-09 搬仓重构后位于 `~/.pi/configs-self/`，AI 可编辑）
+
+> 自身配置独立于扩展 dataDir（防 dataDir 被清连配置一起丢），并经 configs-self include 进备份面。
+> 旧位置（aiti-configs dataDir）的配置会在首次加载时一次性自动迁入，无需手工处理。
 
 ```jsonc
 {
-  "repo": "~/ai-configs",                 // 配置仓路径（自定义；git init 一次）
+  "repo": "~/.pi/configs",                // 配置仓路径（搬仓重构默认；旧仓归档 ~/.pi/configs-archive-*）
   "includes": [                           // 手写项（扩展声明自动聚合）
     { "path": "~/.pi/agent/settings.json", "dest": "pi/agent/settings.json" },
     { "path": "~/.pi/agent/models.json",   "dest": "pi/agent/models.json" },
     // 系统 skills（~/.pi/agent/skills/）不纳入——不污染系统 skills
-    { "path": "dev-repo/aiti-ai-created/**",  "dest": "src/ai-created/" }
+    { "path": "dev-repo/aiti-ai-created/**",  "dest": "src/ai-created/" },
+    { "path": "~/.pi/configs-self/**",     "dest": "self/" }   // 自身配置防自丢
   ],
   "hardExcludes": [ "**/auth.json", "**/*.key", "**/*token*", "**/sessions/**", "**/*.jsonl" ],
   "sizeLimitKB": 512
 }
 ```
+
+**数据分层（2026-09）**：web/data 已拆 `ctx.configDir`（配置区，备份范围）/ `ctx.cacheDir`（`<configDir>/cache/`，可删重建）；
+`ctx.dataDir` 已移除（访问即抛）。分层兜底 excludes（`**/cache/**` 等）已内置于默认配置。详见 authoring-reference §2.1/§2.2。
+
+**体积自防御**：`selfcheck` 含仓体积检查（工作区 >100M / .git >300M 报 bad）；`snapshot` 单次同步量 >50M（`snapshotGateMB` 可调）拒绝并提示查 excludes，`force:true` 豁免一次。
 
 ## watchdog CLI（崩溃时命令行兜底）
 
