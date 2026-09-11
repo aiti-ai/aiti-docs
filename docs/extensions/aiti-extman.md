@@ -34,6 +34,7 @@ pi-web 的扩展管理器扩展：把扩展管理从宿主内置 UI 迁出，业
 - **详情**：启停开关、版本、目录、插入点明细（**可点击打开**）、依赖、服务端能力、来源地址、**发行者**、卸载（仅用户根）
 - **在线注册表**：aiti.pw/extensions.json 代理拉取，浏览/一键安装/更新检查/文档跳转
 - **发行者信任（VSCode 式）**：安装前解析发行者并弹信任确认，未信任不安装；已信任发行者的后续安装自动放行
+- **共享依赖**：全部扩展声明的运行时依赖自动装进共享根 `<webRoot>/node_modules`（每实例一份），npm/git/zip 安装即用、无需手动装依赖；详情「npm 依赖」行逐项标注 ✓共享 / ●本地 / ✗缺失
 - **功能打开**：详情「插入点」区把扩展声明的每个 UI 注入点列成可点击条目——全局插槽（顶部工具条/侧栏/弹窗等）点「打开」直接触发页面上对应按钮；需上下文的插槽（会话行操作/聊天输入框）点「在哪操作」提示在哪个上下文使用
 
 安装后工具栏出现 🧩 扩展按钮。
@@ -53,6 +54,26 @@ pi-web 的扩展管理器扩展：把扩展管理从宿主内置 UI 迁出，业
 安装成功后把解析出的发行者写回扩展目录 package.json 的 `publisher` 字段，供面板展示。
 
 **信任门控**：安装（含 zip 上传）前先解析发行者——未在信任名单则**不安装**，返回 needsTrust，前端弹信任确认框（显示发行者名 + 可点击网站），点「信任并安装」才真正安装并记录信任；已信任发行者直接安装。信任名单持久化在 `<dataRoot>/aiti-extman/trusted-publishers.json`，可在添加面板「🤝 已信任发行者」区查看/撤销。
+
+## 共享依赖（共享 node_modules）
+
+扩展 server 端的运行时依赖不再「各扩展自带 node_modules」，而是统一装进**共享根**
+`<webRoot>/node_modules`（每实例一份：`~/.pi/web` 与 `~/.pi/web-dev` 各一）。原理：宿主
+jiti 从扩展目录逐级向上解析裸说明符，共享根一存在即对所有扩展生效；扩展本地
+`node_modules` 就近优先（存量未迁移的扩展照旧）。
+
+- **自动对齐（reconcile）**：安装 / 卸载 / zip 安装后自动把全部扩展 package.json
+  `dependencies`+`optionalDependencies` 的并集写进共享根的 package.json 并
+  `npm install --legacy-peer-deps`（同名冲突合并为 `spec1 || spec2`；卸载后自动裁剪
+  无人引用的包；`peerDependencies`/`devDependencies` 不装）。也可手动触发：
+  `POST /ops {"action":"reconcile-deps"}`（deploy 脚本经 `_shared/reconcile-deps.mjs`
+  通知，部署脚本不再自行 npm i）。
+- **标注视图**：详情「npm 依赖」行逐项标 ✓共享（绿，共享根命中）/ ●本地（灰，扩展
+  自带）/ ✗缺失（红，两边都没有——server 端 import 了未声明依赖），悬停看共享根路径。
+- **要点**：server 端要用的第三方包必须写进扩展 package.json 的 `dependencies`；共享
+  根的 package.json dependencies 字段由 extman 全权管理（每次 reconcile 按并集重写，
+  勿手改）。机制与存量迁移配方：`dev-repo/docs/dev-repo-shared-node-modules-plan.md`
+  （2026-09-10 实施，aiti-cmd 为已迁移样板）。
 
 ## 功能打开（注入点一键触发）
 
