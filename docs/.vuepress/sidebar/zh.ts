@@ -30,6 +30,7 @@ export const zhSidebar = sidebar({
         "architecture.md",
         "quick-start.md",
         "ext-services.md",
+        "ext-data.md",
         "ext-lazy-loading.md",
         "origin.md",
       ],

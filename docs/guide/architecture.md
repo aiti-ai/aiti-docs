@@ -117,7 +117,7 @@ sequenceDiagram
 aiti-agent (Next.js, 基于 pi-web)
   ├── 会话管理（共享 pi JSONL + queue 持久化）
   ├── 扩展运行时（registry + 17 插槽 + features 功能管理 + 懒加载两段式）
-  │     ├── ctx.services 定位器（跨扩展服务）· ctx.features（开关收口）
+  │     ├── ctx.services 定位器（跨扩展服务）· ctx.features（开关收口）· 数据分层（config/state/cache）
   │     ├── 依赖与能力模型（dependsOn/provides/takeover + extman 三视图裁决）
   │     └── aiti-event-bus（页面事件总线归口，全帧 SSE）
   ├── service-tunnels（HTTP vhost + TCP 隧道 + TOTP）
@@ -126,6 +126,6 @@ aiti-agent (Next.js, 基于 pi-web)
   └── 工具市场（just get: mise → apt → npx/pipx）
 ```
 
-扩展框架的完整契约（entry 字段/插槽/features/样式/部署 + 高频错误清单）见 [扩展服务与跨扩展调用规范](/guide/ext-services.md) 与 [懒加载契约](/guide/ext-lazy-loading.md)；注册总纲在 `dev-repo/docs/dev-repo-authoring-reference.md`。
+扩展框架的完整契约（entry 字段/插槽/features/样式/部署 + 高频错误清单）见 [扩展服务与跨扩展调用规范](/guide/ext-services.md)、[扩展数据与存储规范](/guide/ext-data.md) 与 [懒加载契约](/guide/ext-lazy-loading.md)；注册总纲在 `dev-repo/docs/dev-repo-authoring-reference.md`。
 
 > 相关：[产品矩阵](/products/README.md) · [MCP 桥 · 会话](/guide/mcp/session.md) · [开发者工具 · 注入原理](/devtools/inject.md)

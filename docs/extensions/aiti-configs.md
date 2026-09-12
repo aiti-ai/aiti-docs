@@ -57,8 +57,10 @@ ext:
 }
 ```
 
-**数据分层（2026-09）**：web/data 已拆 `ctx.configDir`（配置区，备份范围）/ `ctx.cacheDir`（`<configDir>/cache/`，可删重建）；
-`ctx.dataDir` 已移除（访问即抛）。分层兜底 excludes（`**/cache/**` 等）已内置于默认配置。详见 authoring-reference §2.1/§2.2。
+**数据分层（2026-09）**：web/data 拆三层 `ctx.configDir`（配置区，本扩展备份范围）/ `ctx.stateDir`（不可再生数据，排除出备份）/ `ctx.cacheDir`（`<configDir>/cache/`，可删重建，排除）；
+`ctx.dataDir` 已移除（访问即抛）。分层兜底 excludes（`**/cache/**`、`**/state/**` 等）内置于默认配置。
+state 类大数据（归档/历史）的备份由独立的 **aiti-backup** 扩展承接（规划中，快照+硬链接+保留轮转）——本扩展只负责配置/小数据版本化。
+详见 [扩展数据与存储规范](/guide/ext-data.md) 与 authoring-reference §2.1/§2.2。
 
 **体积自防御**：`selfcheck` 含仓体积检查（工作区 >100M / .git >300M 报 bad）；`snapshot` 单次同步量 >50M（`snapshotGateMB` 可调）拒绝并提示查 excludes，`force:true` 豁免一次。
 

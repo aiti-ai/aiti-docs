@@ -97,5 +97,6 @@ AI：已修复 Form.vue:42 —— 增加空值兜底。
 
 1. 复制共享模板 `dev-repo/templates/ext-jsx-client/`（JSX + vite 构建，复制即用），或读 [扩展 client JSX 模板](/extensions/ext-jsx-client.md)；
 2. 声明 entry（id/ui 插槽/server hooks）——完整契约见 `dev-repo/docs/dev-repo-authoring-reference.md`（注册总纲）；
-3. 跨扩展调用与服务出口遵守 [扩展服务规范](/guide/ext-services.md)；弹窗标 `data-ext-float="1"` 自动获得浮窗能力；重 bundle 走 [懒加载契约](/guide/ext-lazy-loading.md)；
-4. 部署：`node tools/deploy.mjs` → `~/.pi/web/extensions/` → `POST /api/extensions/reload`。
+3. **数据落盘先选层**：配置 → `ctx.configDir`；不可再生持久数据（归档/历史/统计）→ `ctx.stateDir`；可再生数据（索引/venv/日志）→ `ctx.cacheDir`——判定决策树与铁律见 [扩展数据与存储规范](/guide/ext-data.md)；
+4. 跨扩展调用与服务出口遵守 [扩展服务规范](/guide/ext-services.md)；弹窗标 `data-ext-float="1"` 自动获得浮窗能力；重 bundle 走 [懒加载契约](/guide/ext-lazy-loading.md)；
+5. 部署：`node tools/deploy.mjs` → `~/.pi/web/extensions/` → `POST /api/extensions/reload`。
