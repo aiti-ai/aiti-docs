@@ -94,6 +94,7 @@ export const zhSidebar = sidebar({
         "aiti-devtools-openclaw.md",
         "aiti-devtools-opencode.md",
         "session-manager.md",
+        "session-manager-archive.md",
         "sm-demo-source.md",
         "aiti-cmd.md",
         "aiti-extman.md",

@@ -25,7 +25,7 @@ ext:
 
 > ❝ **会话不是用完即走的流水，是每天都在累积的资产。** ❞
 
-aiti-agent（pi-web）的跨项目会话管理扩展：tag 树 + 颜色、收藏、FTS5 全文搜索、`.pwarc` 归档、看板视图。All Sessions 侧栏 dock 的承载扩展。
+aiti-agent（pi-web）的跨项目会话管理扩展：tag 树 + 颜色、收藏、FTS5 全文搜索、[`.pwarc` 归档](/extensions/session-manager-archive.html)、看板视图。All Sessions 侧栏 dock 的承载扩展。
 
 ## 近期能力（2026-08 下旬～09）
 
@@ -54,5 +54,9 @@ aiti-agent（pi-web）的跨项目会话管理扩展：tag 树 + 颜色、收藏
 | `session-find` AI 帮我找会话 | 描述会话特征 → AI 查会话列表找到它 | 纯建议（自然语言） |
 
 声明在 `index.ts` 的 `ai.helpers`，由 ai-helper 主动聚合（无需注册）。
+
+## 延伸阅读
+
+- [`.pwarc` 归档格式规范](/extensions/session-manager-archive.html) —— 二进制布局 / manifest / 完整性校验 / 设计决策记录
 
 - 扩展框架见 [aiti-agent 扩展点](/devtools/extension-points.md)
