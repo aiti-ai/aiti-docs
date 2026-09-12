@@ -2,7 +2,7 @@
 title: 扩展数据与存储规范
 icon: 💾
 description: pi-web 扩展数据的三层模型：config / state / cache——判定决策树、行为契约、迁移铁律、保护矩阵（写扩展必读）
-tags: [guide, ext, data, storage, extension]
+tags: [guide, ext, data, storage, extension, 方案/已实施]
 ---
 
 # 扩展数据与存储规范
@@ -36,7 +36,7 @@ tags: [guide, ext, data, storage, extension]
 
 - **数据库**：只含可重建索引 → `cache/`；含不可再生记录（历史、统计）→ `state/`；
 - **日志**：纯调试 → `cache/`；审计/历史价值 → `state/`；
-- **半可重建**（如可从原始数据重灌的统计库）：倾向 `state/` 并在扩展 README 注明；放 `cache/` 则必须在文档里显式声明「可丢弃」。
+- **可重建的索引/统计**：有完整重灌机制（可从原始数据/会话/归档重建）的库 → `cache/`——**重建能力本身就是「可再生」的证据**（实例：aiti-ai-usage 的 `usage.sqlite` 可从 pi 会话与 `.pwarc` 归档全量重灌，实测重灌结果比增量旧库更全）。判定要点：问「重灌源还在吗」——源在（sessions/归档/配置）→ cache；无重灌源的独有记录 → state。
 
 ## 2. 行为契约
 
@@ -57,7 +57,9 @@ tags: [guide, ext, data, storage, extension]
 
 ## 3. 宿主支持状态（`ctx.stateDir`）
 
-state 层随「数据分层第三层」方案落地（2026-09，实施中）。在尚未支持 `stateDir` 的宿主版本上访问会得到 `undefined`，请用回退写法：
+`ctx.stateDir` **已支持**（宿主 2026-09 `7e3e992` 起）：三层已在三台机器（48 / 155 / 23）全量落地，首批迁移覆盖 session-manager、aiti-git-trace、aiti-helper、aiti-ai-schedule、aiti-editor、aiti-channels、aiti-ai-usage、aiti-cmd、aiti-subagents（2026-09-12）。
+
+老宿主（未注入 `stateDir`）上的回退写法（语义一致，可长期使用）：
 
 ```ts
 import path from "node:path";
@@ -65,14 +67,14 @@ import path from "node:path";
 const stateDir = ctx.stateDir ?? path.join(ctx.configDir, "state");
 ```
 
-（回退写法与落地后行为一致，可放心长期使用；三层方案的背景见 `dev-repo/docs/dev-repo-data-layering-state-tier-plan.md`。）
+三层方案的背景与实施记录见 `dev-repo/docs/dev-repo-data-layering-state-tier-plan.md`（§9）。
 
 ## 4. 数据保护矩阵（谁替你兜底）
 
 | 层 | 备份机制 | 说明 |
 |---|---|---|
 | config | ✅ **aiti-configs** | git 仓版本化：diff 可看、可回滚、崩溃哨兵 |
-| state | ✅ **aiti-backup**（规划中） | 快照备份：硬链接增量 + 保留轮转 + 恢复；**放对层 = 自动被保护**，扩展零接入 |
+| state | ✅ **aiti-backup**（方案已评审，待实施） | 快照备份：硬链接增量 + 保留轮转 + 恢复；**放对层 = 自动被保护**，扩展零接入 |
 | cache | — | 不需要——删了自动重建 |
 
 写扩展时的分工口诀：**配置给 configs，数据给 backup，缓存谁也不给**。
@@ -82,10 +84,11 @@ const stateDir = ctx.stateDir ?? path.join(ctx.configDir, "state");
 改动数据路径或搬迁存量数据时，逐条对照：
 
 1. **写 == 读同源**：数据路径抽成单一常量/函数，写入侧与读取侧引用同一个来源——任何单侧路径改动都会造成「数据在但用不了」的静默故障（有扩展为此读写分裂、恢复功能静默挂了 30+ 小时）；
-2. **懒迁移逐条目判据**：`cache 路径不存在但旧路径存在 → 搬一次` 的双保险，**不得**用「目标目录是否存在」判断（目标目录常被预设为空目录，会把迁移永久冻结）；按**条目**判断与搬迁，幂等、失败不阻塞启动；
-3. **测试断言物理位置**：写入后断言文件**精确落点**（不只断言逻辑状态）——「生产写到哪」必须有测试覆盖；
-4. **不可再生数据不得留在 `rm -rf` 语义的目录**：迁移/重构前先确认数据的可再生产性，别把 state 类数据「顺手」搬进缓存区；
-5. **低频操作失败必须可见**：恢复/导出/回滚这类长尾操作的失败要有用户可见反馈（别静默回滚样式），并有回归用例。
+2. **迁移走一次性脚本（扩展不背包袱）**：存量搬迁由 `scripts/migrate-state-tier.mjs` 在部署流程中执行（停服 → 升级 → 迁移 → 重启），扩展代码**不含**运行时迁移逻辑；脚本逐条目、幂等、只搬不删——**不得**用「目标目录是否存在」判断已迁移（预设空目录会永久冻结迁移）；
+3. **双写分裂要合并而非覆盖**：若升级先于迁移（运行期写入），新位置会出现从零重建/新增的数据——按 key/行去重合并（参考 `scripts/merge-split-ledger.mjs` 与迁移脚本的 merge 型条目），绝不用较新文件直接覆盖；
+4. **测试断言物理位置**：写入后断言文件**精确落点**（不只断言逻辑状态）——「生产写到哪」必须有测试覆盖；
+5. **不可再生数据不得留在 `rm -rf` 语义的目录**：迁移/重构前先确认数据的可再生产性，别把 state 类数据「顺手」搬进缓存区；
+6. **低频操作失败必须可见**：恢复/导出/回滚这类长尾操作的失败要有用户可见反馈（别静默回滚样式），并有回归用例。
 
 ## 6. 常见错误清单
 
@@ -95,6 +98,7 @@ const stateDir = ctx.stateDir ?? path.join(ctx.configDir, "state");
 | 把归档/历史放 `cache/` | 一次清理 = 永久丢失 | `state/` |
 | 假设 `cache/` 永远在 | 清理后崩溃/报错 | 实现自愈重建 |
 | 假设 state 可重建 | 用户数据丢失 | 不得假设；按 §2 契约 |
+| 把可重建索引放 `state/`（如用量统计） | 语义错误：不可删层放可再生数据，重建/扩容两难 | 有重灌源 → `cache/`（§1 边界） |
 | 硬编码 `~/.pi/web/data` | dev/prod 隔离失效、迁移困难 | 一律用 `ctx.configDir` / `stateDir` / `cacheDir` |
 | 迁移用 `existsSync(to)` 判「已迁移」 | 迁移静默冻结 | 逐条目判断（§5.2） |
 | 写读路径各写一份 `join(...)` | 单侧改动 → 静默故障 | 单一路径常量（§5.1） |
@@ -104,4 +108,4 @@ const stateDir = ctx.stateDir ?? path.join(ctx.configDir, "state");
 - **注册总纲**（entry 字段/插槽/features/部署/高频错误）：`dev-repo/docs/dev-repo-authoring-reference.md`（§2.1 数据分层、§2.2 服务端红线）
 - **跨扩展调用**：[扩展服务与跨扩展调用规范](/guide/ext-services.md)
 - **懒加载**：[懒加载契约](/guide/ext-lazy-loading.md)
-- **方案与背景**：`dev-repo/docs/dev-repo-data-layering-configs-redesign-plan.md`（config/cache 拆分）、`dev-repo/docs/dev-repo-data-layering-state-tier-plan.md`（state 第三层）、`dev-repo/docs/dev-repo-data-backup-extension-plan.md`（aiti-backup 数据备份）
+- **方案与背景**：`dev-repo/docs/dev-repo-data-layering-configs-redesign-plan.md`（config/cache 拆分，已实施）、`dev-repo/docs/dev-repo-data-layering-state-tier-plan.md`（**state 第三层，已实施**，含三机迁移记录 §9）、`dev-repo/docs/dev-repo-data-backup-extension-plan.md`（aiti-backup 数据备份，方案已评审）
