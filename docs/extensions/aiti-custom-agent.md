@@ -39,8 +39,8 @@ ext:
 |---|---|
 | 显示名 / 标识 id | 选择器展示名 / provider type（slug 自动生成可改） |
 | 驱动类型 | 通用命令（generic one-shot）或协议委托（claude/codex/zcode/cursor/qoder/acp/codebuddy/pi——经基础扩展 `ctx.services` 的 `<extId>.launch` 服务，别名 agentKey 随基础扩展、直连优先认领；服务缺席不注册并 fail-loud） |
-| **前缀命令（勾选启用）** | 用包装工具顶替 `command`：docker / ssh / env / runsocks·proxychains；未勾选则「命令」就是直跑的可执行文件。勾选后出现该类型的结构字段（见下），改动任一项即刻重算「命令 + 参数前缀」并在面板里显示「实际执行：…」预览 |
-| 命令 + 探测 | 勾前缀命令时由包装类型自动填（`docker`/`ssh`/`env`/`runsocks`，可手改换 podman 等）；探测按钮即时验证可执行性（ENOENT 即失败） |
+| **前缀命令**（下拉） | 默认「无」= 直接跑「命令」；用 docker / ssh / env / proxychains **等**包装真实 CLI——选中任一项即用该包装工具顶替 `command` 并展开对应结构字段（选「自定义」可写任意包装命令：sudo / nix-shell / podman / timeout…）；改动任一项即时重算「命令 + 参数前缀」，面板显示「实际执行：…」预览 |
+| 命令 + 探测 | 选了包装类型时由它自动填（`docker`/`ssh`/`env`/`runsocks`，可手改换 podman 等）；探测按钮即时验证可执行性（ENOENT 即失败） |
 | 参数前缀 | 每行一个参数，拼在驱动内置参数之前；支持 `$VAR` / `${cwd}`（会话工作目录）。前缀命令启用时由结构字段生成，仍可手改（改结构字段会按模板重写） |
 | 环境变量 | 成员级 key-value，优先级最高；密钥建议 `$VAR` 引用父进程 env |
 | 桥模式 | 继承 / host.docker.internal（替换主机保留端口路径）/ 自定义 URL / 关闭 |
@@ -48,15 +48,20 @@ ext:
 
 ### 前缀命令：四类包装
 
-| 类型 | 结构字段 | 生成结果（`command` + 参数前缀） |
+### 前缀命令：四类包装
+
+| 前缀命令 | 结构字段 | 生成结果（`command` + 参数前缀） |
 |---|---|---|
 | docker | 运行方式下拉（`run --rm -i` / `run --rm -it` / `run --rm -i --network host` / `compose run --rm` / `exec -i`）、镜像或容器名、容器内命令、附加参数（带「＋ 常用选项」下拉：`--add-host=host.docker.internal:host-gateway`、`--network host`、`-v ${cwd}:${cwd} -w ${cwd}`、挂载宿主 `~/.claude` / `~/.codex`） | `docker run --rm -i -v ${cwd}:${cwd} -w ${cwd} --add-host=… aiti/aiti:core claude` |
 | ssh | 目标 `user@host`、端口（自动插 `-p`）、远端命令、附加选项（默认 `-t`） | `ssh -t -p 2222 wind@host claude` |
 | env | 临时变量行（`KEY=VALUE`）、被包装命令 | `env FOO=bar HTTPS_PROXY=$HTTPS_PROXY claude` |
+| 自定义 | 工具名填在「命令」框（任意可执行文件：sudo / nix-shell / podman / timeout / firejail…）、附加参数、被包装命令 | `sudo -E claude` / `nix-shell --run claude` |
 | runsocks | 代理工具下拉（runsocks / proxychains4 / proxychains）、附加参数（如 `-f` 配置文件）、被包装命令 | `proxychains4 -f /etc/proxychains.conf claude` |
 
+自定义是「等」的兜底：四类预设之外的包装命令都走它；设为预设类型时「命令」框自动填为工具名并只读（不会与模板脱钩），换 podman 之类请选「自定义」。
+
 存储不变（仍是 `command` + `argsPrefix` 两项），因此老配置照常工作；打开一条老成员时会反向还原结构字段（docker 的运行方式/镜像/带值选项全部保序回填），看不到裸露的多行参数。
-勾选瞬间的迁移规则：原「命令 + 参数前缀」整串自动搬进「容器内/远端/被包装命令」字段（含原参数），不丢配置；不同类型间切换时这段真实 CLI 跟着走。
+选择瞬间的迁移规则：原「命令 + 参数前缀」整串自动搬进「容器内/远端/被包装命令」字段（含原参数），不丢配置；不同包装之间切换时这段真实 CLI 跟着走（选回「无」则保留当前 command/参数原样交回用户手改）。
 
 ## generic 驱动语义
 
