@@ -9,14 +9,15 @@ tags: [guide, ext, data, storage, extension, 方案/已实施]
 
 > ❝ 写任何数据前先问一句：**删掉它，用户会失去什么？**——答案决定它住哪一层。 ❞
 
-每个扩展都有自己的数据目录 `~/.pi/web/data/<extId>/`（env `PI_WEB_DATA_DIR` 覆盖；dev 实例隔离在 `~/.pi/web-dev/data`）。宿主把它**按用途切成三层**（对齐 Linux 的 XDG / systemd 目录规范）：
+每个扩展都有自己的数据目录 `~/.pi/web/data/<extId>/`（env `PI_WEB_DATA_DIR` 覆盖；dev 实例隔离在 `~/.pi/web-dev/data`）。宿主把它**按用途切成三层**（对齐 Linux 的 XDG / systemd 目录规范；2026-09-13 起三目录对称）：
 
 | 层 | API | 位置 | 一句话定义 | 试金石 |
 |---|---|---|---|---|
-| 配置 | `ctx.configDir` | 根级 | 用户/管理员的设置输入 | 删了要**重新配置** |
+| 配置 | `ctx.configDir` | `config/` | 用户/管理员的设置输入 | 删了要**重新配置** |
 | 持久数据 | `ctx.stateDir` | `state/` | 不可再生的数据 | 删了**永久丢失** |
 | 缓存 | `ctx.cacheDir` | `cache/` | 可再生的数据 | 删了**自动重建** |
 
+> 目录形态：`data/<extId>/{config,state,cache}/`（三目录对称）。
 > `ctx.dataDir` 已移除（访问即抛）——旧代码请按本页迁移到三层。
 
 ## 1. 判定决策树
@@ -27,7 +28,7 @@ tags: [guide, ext, data, storage, extension, 方案/已实施]
 1. 删掉它，下次运行能自动重建吗？（索引/缩略图/venv/下载物/日志）
       能 ──────────────▶ ctx.cacheDir
 2. 它是「用户显式设置/输入的少量键值」吗？（settings/api-key/模型选择/标签/字典/热词）
-      是 ──────────────▶ ctx.configDir 根级
+      是 ──────────────▶ ctx.configDir（`config/` 子目录）
 3. 其余（归档/历史/统计记录/数据库/用户创作物/导出物）
       ──────────────────▶ ctx.stateDir
 ```
@@ -57,7 +58,8 @@ tags: [guide, ext, data, storage, extension, 方案/已实施]
 
 ## 3. 宿主支持状态（`ctx.stateDir`）
 
-`ctx.stateDir` **已支持**（宿主 2026-09 `7e3e992` 起）：三层已在三台机器（48 / 155 / 23）全量落地，首批迁移覆盖 session-manager、aiti-git-trace、aiti-helper、aiti-ai-schedule、aiti-editor、aiti-channels、aiti-ai-usage、aiti-cmd、aiti-subagents（2026-09-12）。
+`ctx.stateDir` **已支持**（宿主 2026-09 `7e3e992` 起）；**三目录对称（config/ + state/ + cache/）自 2026-09-13 起**（`ctx.configDir` = `data/<id>/config`，三台测试机全量迁移）。
+三层已在三台机器（48 / 155 / 23）全量落地。
 
 老宿主（未注入 `stateDir`）上的回退写法（语义一致，可长期使用）：
 
