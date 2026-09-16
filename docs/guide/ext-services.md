@@ -119,10 +119,38 @@ else { /* 提供方未加载/懒加载未就绪：降级 */ }
 | `aiti-devtools.bridges` | aiti-devtools | 桥表 `get(key)`（单例复用语义） | （aiti-attach-agent 迁移中） |
 | `aiti-event-bus.publish` | aiti-event-bus | 页面事件总线发布 `{ publish(type, data) }`（唯一新 SSE `/events`；全局口 `__piPageEvents` 访问器接管并行） | plan-first / model-check / editor / git-review(gr:task) / ai-schedule(sched:*) |
 | `aiti-event-bus.subscribe` | aiti-event-bus | client 帧订阅 `subscribePageFrames(handler)`（缺席回退 `window.__piPageEventsClient`） | 各需实时推送的 client |
+| `pi-web.ui` | **宿主 AppShell**（客户端 `registerExtClientService`） | 宿主导航/提及回调与组件工厂按名取：`get(name)`/`names()`——与 sidebarContent extra 同集 + `onLineMention`（见下 5.1） | aiti-folder（resolveHostFace 范式） |
+| `pi-web.composer` | **宿主 ChatInput**（客户端） | composer 回调/ref 按名取：`setInputValue`/`focusComposer`/`textareaRef`/`openSessionInfo`/`queueActions`（见下 5.1） | aiti-ctx-meter、aiti-ai-input、aiti-queue-keeper |
 
 > 以上服务均已上线（2026-09-07 dev；**生产 pi-web core 已同步，2026-09-08**）。消费方扩展均按「双轨」落地——`ctx.services` 优先 + 旧全局通道兜底；兜底在生产扩展全量同步后退役。
 
 > 上线新服务 = 在提供方扩展文档写方法语义表 + 本表加一行。
+
+### 5.1 宿主能力服务（slot extra 回调解耦，2026-09-16）
+
+**背景**：宿主曾逐插槽渲染点手拼 extra 回调，新渲染点/新字段漏拼 = 功能静默消失
+（右栏文件夹面板 @ 断链复盘）。拍板：**宿主插槽 extra 只喂数据；回调/ref/工厂一律
+注册为客户端服务**，扩展自带兜底。
+
+| 服务 | 提供方 | 字段契约 |
+|---|---|---|
+| `pi-web.ui` | AppShell（`hostUiRef` 委托最新渲染闭包） | sidebarContent extra 同集（回调+工厂）+ `onLineMention`；宿主源码 `lib/ext/host-ui-contract.ts` |
+| `pi-web.composer` | ChatInput（`composerUiRef`） | `setInputValue` / `focusComposer` / `textareaRef` / `openSessionInfo`（含先收小屏 InfoSheet）/ `queueActions`（与 queuePanel extra.actions 同集） |
+
+**红线**：服务只放**引用稳定**成员（useCallback 回调 / ref / 组件工厂）。随渲染变化的
+数据（sessionId/cwd/isStreaming/inputValue/context…）必须走插槽 extra props——服务
+`get` 是命令式快照，数据走服务会「冻结值」。
+
+**消费方范式**（rp 优先 → 服务兜底；参考 aiti-folder `resolveHostFace`）：
+
+```js
+const svc = ctx.getExtService?.("pi-web.composer");
+const openSessionInfo = rp.openSessionInfo ?? svc?.get?.("openSessionInfo");
+```
+
+宿主新插槽渲染点**只需喂数据**；回调缺席时扩展按「按钮不渲染」降级，与旧宿主
+rp 缺失行为一致（不劣化）。
+
 
 ## 6. 声明式依赖与能力模型（dependsOn / optionalDependsOn / provides / takeover）
 
