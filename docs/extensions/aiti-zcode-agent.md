@@ -99,6 +99,14 @@ ext:
 - 状态机：waiting（转圈）→ success ✅ / failed / timeout / cancelled，均带重试；弹窗打开期间 2s 轮询状态、关闭即停
 - 标准与五家 driver 契约：`docs/ext-controlled-login-standard.md`
 
+## 🔀 fork 能力：编辑从此处 / 分支（2026-09-18）
+
+`session/fork` 协议面接线（capability `fork`，仅 app-server 常驻通道；oneshot=false）。`ZcodeHandle.fork(entryId, {reset})`：
+- **编辑从此处**（reset=true，ChatWindow 发送路径按 capability 分流）：fork 子会话 → handle 换绑（rebindSessionId → session_backend_ready，宿主注册表/站位/队列 sidecar 全链路换绑）→ 历史从源重建 → 编辑消息就地续跑。等价 pi 的 navigate_tree 回退；zcode 无 truncate，fork-at-turn 是唯一协议面。首条消息（分支点空）= 根重建：丢通道清 sid，下轮 prompt 全新 create。
+- **分支**（reset=false，消息「分支」按钮）：纯 fork，当前会话不动，返回子会话复合 id 供前端跳转（冷 resume）。
+- 位置 id 映射：UI `ext-N` 与 liveHistory 严格 1:1（normalizeHandleMessages 直传 + 分页绝对索引）→ turnIndex = 前缀 user 计数 - 1。传分支点（上一条 assistant）= 不含被编辑消息；传消息自身 = 含该轮（分支语义）。已知局限：steer 注入的 user 气泡若服务端未持久化会致计数偏移（e8i 解析失败显式报错，不静默错位）。
+- 服务端限制「运行中不许 fork」原样上抛人话提示（能力保留、时机受限）；文件回滚走 zcode 自有 checkpoint 语义，不经 git-trace 门。capability 门控：无 fork 无 navigateTree 的外部后端，「编辑从此处」按钮隐藏（标示不支持）。
+
 ## 测试
 
 ```bash
