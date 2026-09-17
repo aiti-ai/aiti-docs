@@ -39,6 +39,7 @@ ext:
 - **maxTokens 实测校正（probe-cap）**：新保存的模型逐个发最小探针验证输出上限，虚报被拒解析报错自动下调并回写（ark-coding glm 修正表）；模型行 ⏳/✓↓/! 徽标
 - **三层临时禁用（2026-09）**：provider `/enable`、模型 `/model-enable`、key `enabled` 三级——向导 UI 禁用/启用按钮；core 透传/同步（apiKey 切到首个启用 key；combo 保存保留成员禁用态、全禁拒绝）。联动 pi-models-combo（provider 级不建代理、key 级不入轮转、模型级隐藏/组合成员跳过）
 - **状态面板事件驱动**：「聚合/多 key 运行状态」横幅走 `mc:avail` 帧直供数据（[aiti-model-check](aiti-model-check.md)），后台不拉取；`/proxy-status` 补报未构建 combo（成员解析探测：能出槽位=懒建待激活、0 槽=configError 标修复）
+- **成员承接类别（types，2026-09）**：组合成员可勾选承接的请求类别（**文本 / 图形 / 其他媒体**，多选，全不勾=承接全部）——图形专用成员只接带图请求、纯文本请求自动绕开它；文本专用成员不收带图/媒体。可在「🧩 模型聚合」编辑器按成员勾选，也可经 `model_wizard_combo_save` 工具写 `types: ["vision"]` 等。引擎侧按请求内容分类（openai/anthropic/google 三协议）路由；误配给 🟡 警告（无成员承接纯文本 / 勾了图形但模型无 vision 能力）
 - **UI 规范化 + 拆包**：功能菜单图标统一 lucide SVG；薄壳 entry 11.5K + 重 chunk 524K 按需（[懒加载契约](/guide/ext-lazy-loading.html) 路线 B）
 - **一级撤销**：保存/删除前快照受影响 provider 旧条目，「↩ 撤销上次保存」一键回滚（订阅登录型豁免）
 - **参数查看/编辑弹窗**：任意位置的 👁 打开——显示名/能力勾选/contextWindow/maxTokens/cost 四项/thinkingLevelMap 七级/DeepSeek 思考兼容/developer 角色/模型级 headers/API 覆盖；纯 key 条目与 OAuth·目录型 provider 也能看（后者只读 + 「目录反填」徽标）
@@ -54,6 +55,7 @@ aiti_model_wizard_detect    # baseUrl → 自动探测 api 类型 + 真实地址
 aiti_model_wizard_test      # 测试连接（2xx/429 均算通过）
 aiti_model_wizard_save      # 保存 provider+models 到 models.json
 aiti_model_wizard_delete    # 删除 provider
+aiti_model_wizard_combo_save # 创建/更新模型聚合组（成员可带 weight 权重 + types 承接类别）
 ```
 
 ## 🧙 面板
@@ -64,6 +66,18 @@ aiti_model_wizard_delete    # 删除 provider
 - **新模型检测与提醒**：后台扫描（启动 +3s 与每 30min，拉取有 key 的 provider /models，8s 超时静默失败）存两份快照（`dataDir/reminder.json`：`prev`=前日基线、`curr`=今日可用）；**新模型 = (今日 − 前日) − 已配置**，跨天自动推进 prev，首次运行只建基线不提醒。发现新增后：① 页面顶部 10s 绿色 toast（**点击 → 打开向导「已配置」页**）② provider 卡片显示「✨ 新增 N」徽标 ③ 编辑流「刷新可选模型」自动**预勾选**新模型（带「新」标，点保存即一键启用）
 - toast 频控（服务端持久化裁决，`GET /new-models?toast=1` 才消费额度）：每天 ≤ 3 次、相邻间隔 ≥ 2h；超限静默（徽标/预勾选仍可用，不影响）
 - 无模型时自动顶部 banner 引导
+
+## 🧩 模型聚合（组合模型）
+
+把多个真实模型组成**一个虚拟模型**暴露给 pi（由 [pi-models-combo](https://github.com/aiti-ai/pi-models-combo) 引擎接管路由）。「模型聚合」页签：聚合组列表卡（成员构成徽标 + 权重标注 + 聚合组级/虚拟模型/成员三层的临时禁用）＋ 组合编辑器：
+
+- **成员选择**：搜索已配置 provider×model（含运行时注册 provider 如 freeflow）点选入组，重复引用去重；同协议才能同组、聚合组不能嵌套作成员、contextWindow/maxTokens 取最小值、input 取并集、cost 取最贵估算
+- **权重（weight）**：每成员权重框（默认 10）——按权重占比随机选点（成员级语义，多 key 不放大）
+- **承接类别（types，新）**：每成员「承接」chips 多选——**文本 / 图形 / 其他媒体**（音频/视频/PDF）；全不勾 = 承接全部（现状行为）。**图形专用成员**配 `图形`：带图请求自动路由到它、纯文本请求不发给它；**仅文本成员**配 `文本`：带图/媒体请求避开它。引擎按请求体内容分类路由（openai `image_url`/`input_audio`、anthropic `image`/`document`、google `inline_data`/`file_data` mime）
+- **粘性空闲 TTL**（分钟，默认 15）：同会话 TTL 内固定同一成员，最大化 prompt cache；429 冷却自动切换
+- **误配警告分级**：🔴 阻止（空的/全禁成员、跨协议、失效引用）🟡 确认级（上下文悬殊、输出差异>20%、能力不一致、**无成员承接纯文本请求**、**勾了「图形」但模型无 vision 能力**）🟢 提示（全部成员无 vision）
+- **保存**：写入 models.json 的 `combo:true` 虚拟 provider（占位 baseUrl 运行时被引擎 override），保存后自动刷新运行中代理槽位 + 广播模型变更（新会话 dropdown 立即出现聚合模型）；「↩ 撤销上次保存」可用
+- models.json 手写示例：成员引用可带 `weight` 与 `types`（缺省 = 全收）——详见 pi-models-combo 仓库 README
 
 ## 新模型检测 API
 
