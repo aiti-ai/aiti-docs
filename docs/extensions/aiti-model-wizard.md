@@ -42,6 +42,10 @@ ext:
 - **成员承接类别（types，2026-09）**：组合成员按**模型能力**自动给出可勾选的承接类别（文本必选勾、图形仅当模型 input 含 image 时出现，**没有的能力不显示、不可勾**；默认可用的全部勾上 = 承接全部，与不限定等价）——取消「图形」= 该成员只接纯文本，带图请求自动绕开；**图形专用成员**（只勾图形）只接带图请求、纯文本请求不发给它。可在「🧩 模型聚合」编辑器按成员勾选，也可经 `model_wizard_combo_save` 工具写 `types: ["vision"]` 等（其他媒体类别音频/视频/PDF 不在 UI 出现，手写/工具仍支持）。引擎侧按请求内容分类（openai/anthropic/google 三协议）路由
 - **UI 规范化 + 拆包**：功能菜单图标统一 lucide SVG；薄壳 entry 11.5K + 重 chunk 524K 按需（[懒加载契约](/guide/ext-lazy-loading.html) 路线 B）
 - **一级撤销**：保存/删除前快照受影响 provider 旧条目，「↩ 撤销上次保存」一键回滚（订阅登录型豁免）
+- **一键体检 + 测试留存（2026-09-17）**：左树「🩺 一键体检」逐已配置 provider 串行发真实探针（跳过聚合组/禁用/无凭据；首个启用模型作聊天探针、列表有≠可推理），报告卡逐家显示 HTTP/延迟/明细、失败行「去修」直达详情；所有手动测试（添加流/编辑流/详情「重测」/体检）结论留存 `cache/last-test.json`（key 打码），树上徽标显示最近结论+延迟（model-check 有探测聚合时让位不重复）、详情健康条「🩺 通过 · 428ms [重测]」；`/test` 超时可在设置调
+- **订阅登出（2026-09-17）**：订阅页已登录卡「登出」按钮（危险确认）→ 服务端转发宿主 `/api/auth/logout/<pid>` 清 auth.json 凭据 + 失效模型缓存，全部模型立即不可用、可重登恢复；登录面板内同入口
+- **余额健康条（2026-09-17）**：provider 详情健康条显示余额——消费 [aiti-provider-usage](aiti-provider-usage.md) 新增的 `aiti-provider-usage.overview` **ctx.services** 服务（TTL 5min/并发 3 归它管，向导不自行拉上游；缺席静默降级），currency/percent/count bucket 短文案 + 全量桶 title 悬浮 + 「重查」强制刷新；未装 provider-usage 时回退 aiti-model-check 余额文案
+- **设置面板（2026-09-17）**：头部 ⚙ 打开 `/config` 三组可视化——新模型提醒（开关/扫描间隔/拉取超时/每日上限/toast 间隔与时长）、目录（主源/镜像 URL/TTL/立即刷新）、探测与测试（测试超时/探测超时/探针 maxTokens），保存即时生效（提醒扫描 timer 幂等重建）；`/config` 由「唯一无 UI 的 API」转正
 - **参数查看/编辑弹窗**：任意位置的 👁 打开——显示名/能力勾选/contextWindow/maxTokens/cost 四项/thinkingLevelMap 七级/DeepSeek 思考兼容/developer 角色/模型级 headers/API 覆盖；纯 key 条目与 OAuth·目录型 provider 也能看（后者只读 + 「目录反填」徽标）
 - **品牌图标**：@lobehub/icons 按需引入（订阅服务/浏览目录/推荐卡/已配置卡），未命中回退首字母方块
 
@@ -57,6 +61,13 @@ aiti_model_wizard_save      # 保存 provider+models 到 models.json
 aiti_model_wizard_delete    # 删除 provider
 aiti_model_wizard_combo_save # 创建/更新模型聚合组（成员可带 weight 权重 + types 承接类别）
 ```
+
+## 新增 API（2026-09-17）
+
+- `GET /last-test` → 各 provider 最近一次向导测试结论 `{ ts, providers: { <p>: { ts, pass, partial?, rateLimited, status, latencyMs, detail, keyName, masked, model } } }`（树上徽标/详情健康条）
+- `POST /checkup` → 一键体检：串行探针全部已配置 provider（跳过聚合组/禁用/无凭据），逐家写 last-test，返回 `{ ok, total, pass, rateLimited, fail, skip, results[] }`（globalThis 单飞，进行中 409）
+- `POST /oauth-logout {provider}` → 订阅登出：转发宿主 `/api/auth/logout/<pid>`（宿主清 auth.json + invalidateModelsCache；未登录/未知 provider 回宿主错误）
+- `GET /usage?provider=X&force=1` → 余额：软依赖 `aiti-provider-usage.overview` 服务，`{ ok, available, capturedAt?, entry? }`；`available:false` = provider-usage 未装（UI 降级）
 
 ## 🧙 面板
 
