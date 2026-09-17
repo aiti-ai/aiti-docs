@@ -39,7 +39,7 @@ ext:
 - **maxTokens 实测校正（probe-cap）**：新保存的模型逐个发最小探针验证输出上限，虚报被拒解析报错自动下调并回写（ark-coding glm 修正表）；模型行 ⏳/✓↓/! 徽标
 - **三层临时禁用（2026-09）**：provider `/enable`、模型 `/model-enable`、key `enabled` 三级——向导 UI 禁用/启用按钮；core 透传/同步（apiKey 切到首个启用 key；combo 保存保留成员禁用态、全禁拒绝）。联动 pi-models-combo（provider 级不建代理、key 级不入轮转、模型级隐藏/组合成员跳过）
 - **状态面板事件驱动**：「聚合/多 key 运行状态」横幅走 `mc:avail` 帧直供数据（[aiti-model-check](aiti-model-check.md)），后台不拉取；`/proxy-status` 补报未构建 combo（成员解析探测：能出槽位=懒建待激活、0 槽=configError 标修复）
-- **成员承接类别（types，2026-09）**：组合成员可勾选承接的请求类别（**文本 / 图形 / 其他媒体**，多选，全不勾=承接全部）——图形专用成员只接带图请求、纯文本请求自动绕开它；文本专用成员不收带图/媒体。可在「🧩 模型聚合」编辑器按成员勾选，也可经 `model_wizard_combo_save` 工具写 `types: ["vision"]` 等。引擎侧按请求内容分类（openai/anthropic/google 三协议）路由；误配给 🟡 警告（无成员承接纯文本 / 勾了图形但模型无 vision 能力）
+- **成员承接类别（types，2026-09）**：组合成员按**模型能力**自动给出可勾选的承接类别（文本必选勾、图形仅当模型 input 含 image 时出现，**没有的能力不显示、不可勾**；默认可用的全部勾上 = 承接全部，与不限定等价）——取消「图形」= 该成员只接纯文本，带图请求自动绕开；**图形专用成员**（只勾图形）只接带图请求、纯文本请求不发给它。可在「🧩 模型聚合」编辑器按成员勾选，也可经 `model_wizard_combo_save` 工具写 `types: ["vision"]` 等（其他媒体类别音频/视频/PDF 不在 UI 出现，手写/工具仍支持）。引擎侧按请求内容分类（openai/anthropic/google 三协议）路由
 - **UI 规范化 + 拆包**：功能菜单图标统一 lucide SVG；薄壳 entry 11.5K + 重 chunk 524K 按需（[懒加载契约](/guide/ext-lazy-loading.html) 路线 B）
 - **一级撤销**：保存/删除前快照受影响 provider 旧条目，「↩ 撤销上次保存」一键回滚（订阅登录型豁免）
 - **参数查看/编辑弹窗**：任意位置的 👁 打开——显示名/能力勾选/contextWindow/maxTokens/cost 四项/thinkingLevelMap 七级/DeepSeek 思考兼容/developer 角色/模型级 headers/API 覆盖；纯 key 条目与 OAuth·目录型 provider 也能看（后者只读 + 「目录反填」徽标）
@@ -73,9 +73,9 @@ aiti_model_wizard_combo_save # 创建/更新模型聚合组（成员可带 weigh
 
 - **成员选择**：搜索已配置 provider×model（含运行时注册 provider 如 freeflow）点选入组，重复引用去重；同协议才能同组、聚合组不能嵌套作成员、contextWindow/maxTokens 取最小值、input 取并集、cost 取最贵估算
 - **权重（weight）**：每成员权重框（默认 10）——按权重占比随机选点（成员级语义，多 key 不放大）
-- **承接类别（types，新）**：每成员「承接」chips 多选——**文本 / 图形 / 其他媒体**（音频/视频/PDF）；全不勾 = 承接全部（现状行为）。**图形专用成员**配 `图形`：带图请求自动路由到它、纯文本请求不发给它；**仅文本成员**配 `文本`：带图/媒体请求避开它。引擎按请求体内容分类路由（openai `image_url`/`input_audio`、anthropic `image`/`document`、google `inline_data`/`file_data` mime）
+- **承接类别（types）**：每成员「承接」chips——**按模型能力过滤**：文本恒可勾（基础类别）；**图形仅在模型支持图片输入时出现**（没声明的能力不显示也不可勾，**不允许误配**）；默认可用的全部勾上 = 承接全部（等价不写字段，将来新增类别自动承接）。取消「图形」= 仅文本（带图绕开）；纯文本模型取消后文本 chip🔒 锁定（无其他类别可承接）。**图形专用成员**：取消文本 chip → 只勾图形，带图请求自动路由到它、纯文本请求不发给它；仅文本成员（有图形能力但取消图形）→ 带图/媒体请求避开它。其他媒体（音频/视频/PDF）不进 UI，手写配置/工具仍支持。引擎按请求体内容分类路由（openai `image_url`/`input_audio`、anthropic `image`/`document`、google `inline_data`/`file_data` mime）
 - **粘性空闲 TTL**（分钟，默认 15）：同会话 TTL 内固定同一成员，最大化 prompt cache；429 冷却自动切换
-- **误配警告分级**：🔴 阻止（空的/全禁成员、跨协议、失效引用）🟡 确认级（上下文悬殊、输出差异>20%、能力不一致、**无成员承接纯文本请求**、**勾了「图形」但模型无 vision 能力**）🟢 提示（全部成员无 vision）
+- **误配警告分级**：🔴 阻止（空的/全禁成员、跨协议、失效引用）🟡 确认级（上下文悬殊、输出差异>20%、能力不一致、**无成员承接纯文本请求**）🟢 提示（全部成员无 vision）。UI 按能力过滤勾选项 → 勾选层不会产生能力误配；手写配置的错配（如无 vision 模型配 types 含 vision）由引擎 warn 防御
 - **保存**：写入 models.json 的 `combo:true` 虚拟 provider（占位 baseUrl 运行时被引擎 override），保存后自动刷新运行中代理槽位 + 广播模型变更（新会话 dropdown 立即出现聚合模型）；「↩ 撤销上次保存」可用
 - models.json 手写示例：成员引用可带 `weight` 与 `types`（缺省 = 全收）——详见 pi-models-combo 仓库 README
 
