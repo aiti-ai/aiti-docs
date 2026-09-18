@@ -31,6 +31,8 @@ Provider 余额/配额查询扩展（pi-web 去 fork 化 B1 外迁产物）：�
 - **18 家适配器**：DeepSeek / OpenRouter / Z.AI(+CN) / OpenCode(+Go/Zen) / Kimi Coding / OpenAI Codex / GitHub Copilot / Baseten / MiniMax(+CN) / Moonshot(+CN) / Vercel AI Gateway / SiliconFlow(+CN)——声明式 JSON 适配器一行加一家，复杂窗口协议（Z.AI 配额窗、OpenCode 限流态）独立适配器
 - **sessionInfoPanel 插槽**：会话信息面板整块余额区，当前会话 provider 置顶展开；严重度色阶进度条 + 窗口状态（限流/耗尽）+ 重置倒计时
 - **总览聚合**：TTL 5min 进程内缓存、并发 3、allSettled 一家失败不拖全家；手动刷新强制穿透
+- **多 key 轮转池**（2026-09-18）：provider 带 `apiKeys[]`（≥2 启用条目）时 pi-models-combo 会装本地代理并以 per-session dummy token 注册——额度查询改为读 models.json 真 key 池逐 key 查询，窗口按 key 标注（`Rolling · key-1`），单 key 失败降级为 notes；`enabled:false` 的 key 跳过
+- **OpenCode Zen / Go 两名分立**：`/zen/go/v1/usage` 只报 Go 套餐（Zen 是另一个产品、无公开额度端点）——`opencode-zen` 保持 **OpenCode Zen** 名不改（若其 key 带 Go 权益，行里显示的就是 Go 套餐窗口）；要看到 Go 额度行请用 `opencode-go` provider（多 key 时按 key 分组）
 - **认证零配置**：宿主 loader 把 `@earendil-works/*` alias 到宿主 node_modules，ModelRuntime.getAuth 与 core 同源
 - **feature 开关**：`providerUsage.enabled` 关停即时回落（上游同形 = 信息面板无余额区）
 
