@@ -126,6 +126,6 @@ aiti-agent (Next.js, 基于 pi-web)
   └── 工具市场（just get: mise → apt → npx/pipx）
 ```
 
-扩展框架的完整契约（entry 字段/插槽/features/样式/部署 + 高频错误清单）见 [扩展服务与跨扩展调用规范](/guide/ext-services.md)、[扩展数据与存储规范](/guide/ext-data.md) 与 [懒加载契约](/guide/ext-lazy-loading.md)；注册总纲在 `dev-repo/docs/dev-repo-authoring-reference.md`。
+扩展框架的完整契约（entry 字段/插槽/features/样式/部署 + 高频错误清单）见 [扩展开发规范](/extensions/spec.md)、[扩展数据与存储规范](/guide/ext-data.md) 与 [懒加载契约](/guide/ext-lazy-loading.md)（跨扩展服务调用另见 [扩展服务与跨扩展调用规范](/guide/ext-services.md)）；注册总纲在 `dev-repo/docs/dev-repo-authoring-reference.md`。
 
 > 相关：[产品矩阵](/products/README.md) · [MCP 桥 · 会话](/guide/mcp/session.md) · [开发者工具 · 注入原理](/devtools/inject.md)

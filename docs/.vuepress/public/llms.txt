@@ -2,7 +2,7 @@
 
 > 以 pi 为引擎的个人 AI 开发工作台与本地调试注入生态：aiti-agent（自托管 Web 工作台）· aiti-devtools（页面内 AI 调试助手，AI 进驻网页面对面调试）· aiti-mcp-bridge（任意 AI agent 经 MCP 操作页面）。
 
-AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 62+ 个可组合扩展（调试注入 / 多 agent / 终端·VNC·RDP / 隧道 / 模型管理 / 配置安全网 / IM 接入等），aiti-devtools 已适配 DSH / OpenClaw / OpenCode 宿主。
+AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 67+ 个可组合扩展（调试注入 / 多 agent / 终端·VNC·RDP / 隧道 / 模型管理 / 配置安全网 / IM 接入等），aiti-devtools 已适配 DSH / OpenClaw / OpenCode 宿主。
 
 ## 文档
 - [首页 · 系统特色](https://aiti.pw/): 生态全景与特色速览
@@ -13,7 +13,7 @@ AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 62+ 个
 
 ## 扩展
 - [aiti-acp-agent](https://aiti.pw/extensions/aiti-acp-agent.html): 泛用 ACP 驱动 —— 一个适配器接所有 Agent Client Protocol agent
-- [aiti-agent-manager](https://aiti.pw/extensions/aiti-agent-manager.html): 统一聚合 6 家外部 agent（CodeBuddy/Claude/ZCode/Codex/Cursor/Qoder）登录态 + 登录操作代理——不实现任何登录协议
+- [aiti-agent-manager](https://aiti.pw/extensions/aiti-agent-manager.html): 统一聚合外部 agent 登录态 + 登录操作代理 + 多账号档（备份/别名/一键切换）+ 账号额度显示——不实现任何登录协议
 - [aiti-ai-input](https://aiti.pw/extensions/aiti-ai-input.html): 聊天输入框增强 —— L0 本地/L1 AI 两层自动补全 + 语音输入检测与转写修复
 - [aiti-ai-schedule](https://aiti.pw/extensions/aiti-ai-schedule.html): pi-web 常驻调度器 —— 扩展声明式定时任务 + AI 计划（cron/间隔/一次性）+ 三模式执行引擎 + AI 自建计划工具 + 管理页
 - [aiti-ai-speek](https://aiti.pw/extensions/aiti-ai-speek.html): AI 输出语音朗读——可切音色/暂停/跳过/停止；默认浏览器 Web Speech，可选 edge-tts
@@ -38,11 +38,12 @@ AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 62+ 个
 - [aiti-doc-center](https://aiti.pw/extensions/aiti-doc-center.html): workspace md 收集/整理/检索——FTS5 trigram 中文全文 + tag 六来源两层 + 📚 float 弹窗四视图
 - [aiti-draft-keeper](https://aiti.pw/extensions/aiti-draft-keeper.html): 草稿持久化 + 恢复接管 —— 多标签共享槽位、无贡献不回写防震荡、水合后恢复
 - [aiti-echo-agent](https://aiti.pw/extensions/aiti-echo-agent.html): Echo agent —— session-provider slot 演示（多 agent 前端最小示例）
-- [aiti-editor](https://aiti.pw/extensions/aiti-editor.html): 可扩展编辑器 —— Monaco 编辑接管 + 保存（mtime 冲突 409 + 白名单/大小校验）+ 压缩包解析
+- [aiti-editor](https://aiti.pw/extensions/aiti-editor.html): 可扩展编辑器 —— Monaco 编辑接管 + 保存（mtime 冲突 409 + 白名单/大小校验）+ 压缩包解析 + 统一图片查看器（消息图片/文件图片合一，缩放·捏合·信息面板）
 - [aiti-event-bus](https://aiti.pw/extensions/aiti-event-bus.html): 页面事件总线归口——链式接管 __piPageEvents，全帧 SSE + publish/subscribe 服务出口，core 零改动
 - [aiti-extman](https://aiti.pw/extensions/aiti-extman.html): 扩展管理器 —— 搜索/启停/安装/在线注册表
 - [aiti-float](https://aiti.pw/extensions/aiti-float.html): data-ext-float 契约接管 —— 拖拽/边缘缩放/位置持久化/点按置前/双击复位/自动最大化按钮，小屏自动全屏
 - [aiti-folder](https://aiti.pw/extensions/aiti-folder.html): fileViewer folder 接管 + pathPicker 目录选择器 —— 浏览/回收站删除
+- [aiti-git-ops](https://aiti.pw/extensions/aiti-git-ops.html): 白名单 git 写引擎——checkout 预检 / stash / plan 断点 / 审计 / changed topic，供 folder 与 session-manager 消费
 - [aiti-git-review](https://aiti.pw/extensions/aiti-git-review.html): 专职审核未提交变更 —— Monaco diff 工作区（并排/合并/纯新/大纲）+ 行级标注（必须/建议/疑问）+ anchor 标志行重映射（边审边改不失效）+ 汇总终审清单 + AI 预审（aiti_review_* 工具只注入评审会话，日常零工具）
 - [aiti-git-trace](https://aiti.pw/extensions/aiti-git-trace.html): 编外 AI 变更追踪——.git/aiti 独立追踪仓 + op 编号 before/after 双 commit + 文件⇄消息⇄操作全链路 + 回撤
 - [aiti-helper](https://aiti.pw/extensions/aiti-helper.html): 扩展的一句话 AI 能力 —— 声明式 AI 帮助点 + 输入/结果预览/审核回填 + 配置版本化
@@ -50,17 +51,21 @@ AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 62+ 个
 - [aiti-mail](https://aiti.pw/extensions/aiti-mail.html): pi-web 内通用「邮件发送出口」——零依赖 SMTP 客户端 + 发送记录（node:sqlite）+ 管理弹窗（配置/测试/记录）
 - [aiti-mcp-bridge](https://aiti.pw/extensions/aiti-mcp-bridge.html): MCP 桥 —— 让任意 AI agent 操作页面、直达 IDE AI 窗口
 - [aiti-model-check](https://aiti.pw/extensions/aiti-model-check.html): 模型健康度探测 —— 对每个模型发极小探针消息，看是否可用 / 429 限流 / 异常；解析限流恢复时间（Retry-After 等），记录历史识别可用窗口
+- [aiti-model-recent](https://aiti.pw/extensions/aiti-model-recent.html): 模型选择器「最近使用」数据提供方——纯 service 扩展（零 UI），面板最近段同步取数 + pick 事件入库 LRU；localStorage key 与原实现一致零迁移
 - [aiti-model-wizard](https://aiti.pw/extensions/aiti-model-wizard.html): 引导添加 AI 提供商/模型：目录搜索（models.dev + 国内 AI 目录，中英文，贴 API 地址也能反向搜到）→ 填 token → 测试（2xx/429 都算通过）→ 选/输模型 → 写 models.json；找不到用 baseUrl 反向匹配（任意文档/代码片段自动提取 URL）/ 自动探测（漏 v1/v2 也能补，命中带 key 拉模型列表 + OpenAPI/模型前缀品牌信号）；编辑时 token 打码不返回前端
 - [aiti-msg-anchor](https://aiti.pw/extensions/aiti-msg-anchor.html): 消息区顶部常驻横幅 —— 展示「生成当前屏幕上内容的那条用户输入」，滚动跟随回合段；可切换为第一条输入 / 最近输入 / 会话标题
 - [aiti-msg-nav](https://aiti.pw/extensions/aiti-msg-nav.html): 消息区右侧的滚动导航条 —— 到最早 / 到最新 / 上一个 / 下一个用户输入，一键直达；长按「到最新」保持屏幕常亮
 - [aiti-msg-smart](https://aiti.pw/extensions/aiti-msg-smart.html): 消息点击识别 —— 段落/标题/代码行点击 → 引用/复制/选项弹层 + 子句/行高亮
 - [aiti-onlyoffice](https://aiti.pw/extensions/aiti-onlyoffice.html): .docx/.xlsx/.pptx 完整保真预览+编辑（OnlyOffice DocumentServer Docker 后端）。AGPL 社区版，feature 默认关
+- [aiti-opencode-agent](https://aiti.pw/extensions/aiti-opencode-agent.html): OpenCode CLI 专属驱动 —— 历史会话在 pi-web 打开、续聊（oneshot run -s --format json）
 - [aiti-pi-agent](https://aiti.pw/extensions/aiti-pi-agent.html): spawn pi --mode rpc 子进程作为会话 —— 多 agent 前端主路径
 - [aiti-plan-first](https://aiti.pw/extensions/aiti-plan-first.html): AI 开发先方案后动手 —— aiti-git-trace 事件感知（推-听架构零扫描）：md 变更弹绑定向导（方案命名优先）、大改未跟方案提醒、领先提醒「先做方案」、tags 闭环（front-matter 事实源 + 手工/自荐标签）、会话列表行前部 📋 绑定标
 - [aiti-plan-review](https://aiti.pw/extensions/aiti-plan-review.html): Plan-Sandbox 采认收尾 UI——读 review.json 契约（声明 vs 其他），点选采认/回滚/销毁
 - [aiti-prompts](https://aiti.pw/extensions/aiti-prompts.html): prompt 片段收藏 —— 收藏/分组/会话提取/输入即存
+- [aiti-provider-usage](https://aiti.pw/extensions/aiti-provider-usage.html): Provider 余额/配额查询 —— 18 家适配器（DeepSeek/OpenRouter/Z.AI/OpenCode/Kimi/Codex/Copilot 等），会话信息面板「剩余额度」区块当前会话置顶展开，5min TTL 总览 + 手动刷新，事件驱动零轮询
 - [aiti-qoder-agent](https://aiti.pw/extensions/aiti-qoder-agent.html): Qoder CLI 专属后端 —— 双区域 credits/listModels、WASM 签名请求、扩展 API 免开会话查询
 - [aiti-queue-keeper](https://aiti.pw/extensions/aiti-queue-keeper.html): 队列面板接管 —— 完整队列 UI（横幅/行操作/拖拽排序/回收站/撤销条/导入导出），core 回到上游同形兜底
+- [aiti-recovery](https://aiti.pw/extensions/aiti-recovery.html): 恢复 UI 扩展——队列恢复对话框（会话中断排队消息逐条决议）+ 重启恢复向导（中断会话两步处理），红线语义保留：绝不自动投递，续跑只发「继续」
 - [aiti-sheet-univer](https://aiti.pw/extensions/aiti-sheet-univer.html): .xlsx/.xlsm 在线预览+编辑（exceljs 数据面 + Univer 视图面）；.xls/.ods 只读预览与一键转 .xlsx
 - [aiti-subagents](https://aiti.pw/extensions/aiti-subagents.html): 子代理扩展 —— aiti_subagent 工具委托 scout/worker/reviewer/oracle 等，进程内会话零 spawn，Fleet 监控面板 + doctor 自检
 - [aiti-testagent](https://aiti.pw/extensions/aiti-testagent.html): Java 后端 AI 调试 MCP + IDE —— 扫描 Java 进程/attach 一键连桥/Tunnel 桥多端点纳管，JVM 内任意修改/Mock·SQL 拦截模拟/热更新/诊断采样，52 工具 8 组按需暴露，全可逆
