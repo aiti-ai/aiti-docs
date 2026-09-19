@@ -184,7 +184,7 @@ const off = ctx.onExtServiceChange?.((key, phase) => {
 
 | 服务 | 提供方 | 字段契约 |
 |---|---|---|
-| `pi-web.ui` | AppShell（`hostUiRef` 委托最新渲染闭包） | sidebarContent extra 同集（回调+工厂）+ `onLineMention`；宿主源码 `lib/ext/host-ui-contract.ts` |
+| `pi-web.ui` | AppShell（`hostUiRef` 委托最新渲染闭包） | sidebarContent extra 同集（回调+工厂）+ `onLineMention` + `closeTopPanels`（收回全部顶栏下拉面板；顶栏面板内的扩展条目调起别的全屏表面前调用，2026-09-19 增）；宿主源码 `lib/ext/host-ui-contract.ts` |
 | `pi-web.composer` | ChatInput（`composerUiRef`） | `setInputValue` / `focusComposer` / `textareaRef` / `openSessionInfo`（含先收小屏 InfoSheet）/ `queueActions`（与 queuePanel extra.actions 同集） |
 
 **红线**：服务只放**引用稳定**成员（useCallback 回调 / ref / 组件工厂）。随渲染变化的
