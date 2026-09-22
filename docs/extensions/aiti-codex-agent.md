@@ -31,6 +31,10 @@ OpenAI Codex CLI 会话后端：以 `exec --json` 驱动 codex CLI，支持 resu
 - 协议：`codex exec --json`（codex-cli 0.149 实测）
 - 事件流：`thread.started` → `item.completed`（agent_message / command_execution 等）→ `turn.completed`（含 usage）或 `turn.failed`
 - 支持 resume：从 thread_id 恢复既有会话
+- **接管/冷恢复回放**：历史经 session-manager codex adapter 解析 rollout（`function_call` 与 `function_call_output`
+  按 `call_id` 配成结构化工具行）→ `seedHistory` 经共享层 `@aiti-ai/ext-shared/seed-tool` 回放成 pi 原生工具卡（v0.1.1）；
+  会话根可 `AITI_CODEX_HOME` 覆盖；真实模型源是 `turn_context.payload.model`（codex 无 init 帧）
+- ⚠ **直播路径仍是 custom 卡**（`item.started`→🛠、`item.completed`→✅/❌）：接管后继续对话会同时出现回放的原生卡与直播的 custom 卡，统一化待做（`docs/aiti-codebuddy-agent-tool-result-fold-plan.md` §8）
 
 ## 🔑 受控登录（ext-controlled-login 标准，2026-09-08）
 

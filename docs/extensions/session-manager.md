@@ -42,7 +42,7 @@ aiti-agent（pi-web）的跨项目会话管理扩展：tag 树 + 颜色、收藏
 
 | key | 方法语义 | 消费方 |
 |---|---|---|
-| `session-manager.sessions` | `parseSession(compositeId)` 各 agent 历史解析（只读）+ `archivedIds()` 归档名单 | aiti-zcode/qoder/codex-agent、aiti-doc-center |
+| `session-manager.sessions` | `parseSession(compositeId)` 各 agent 历史解析（只读；`messages[].tool` 为结构化工具行——opencode 系 / claude-like 系 / codex adapter 产出，供后端回放成 pi 原生工具卡）+ `archivedIds()` 归档名单 | aiti-zcode/opencode/qoder/codebuddy/codex-agent（冷恢复 `seedHistory`）、aiti-doc-center |
 | `session-manager.tags` | `snapshot()` TagData 全量（乐观锁 version） | aiti-doc-center |
 | `session-manager.hotwords` | ASR 热词提取 `get(params)` | aiti-ai-input |
 
