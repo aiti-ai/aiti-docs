@@ -40,6 +40,13 @@ export interface ExtCatalogEntry {
   install?: string;
   license?: string;
   tags?: string[];
+  /**
+   * 可否作为 aiti-agent/pi-web 扩展安装（缺省 true）。
+   * false = 宿主适配器（DSH/OpenClaw/OpenCode）或独立桥（aiti-bridge）——**不进 extensions.json
+   * 的 extensions 数组**（extman / aiti-agent 自动发现只消费该数组），改归入 integrations 数组
+   * 保留文档信息；文档站扩展注册表页（__EXTENSIONS_CATALOG__ / ExtensionList）仍完整展示。
+   */
+  installable?: boolean;
 }
 
 /**
@@ -105,6 +112,7 @@ const extensionsCatalog = (): PluginObject => {
         install: raw.install ?? "",
         license: raw.license ?? "",
         tags: Array.isArray(raw.tags) ? raw.tags : [],
+        installable: raw.installable !== false,
         docs: `${docsPrefix}${pageName}`,
       });
     }
@@ -122,8 +130,13 @@ const extensionsCatalog = (): PluginObject => {
       schemaVersion: 2,
       generatedAt: new Date().toISOString(),
       count: 0,
-      extensions: readEntries(app),
-      integrations: readIntegrations(app),
+      // installable:false（宿主适配器/独立桥）不进 extensions 数组——extman / aiti-agent
+      // 自动发现只消费该数组；归入 integrations 保留文档信息（见 ExtCatalogEntry.installable）。
+      extensions: readEntries(app).filter((e) => e.installable !== false),
+      integrations: [
+        ...readIntegrations(app),
+        ...readEntries(app).filter((e) => e.installable === false),
+      ],
     };
     json.count = json.extensions.length;
     const outFile = resolve(app.dir.public(), "extensions.json");

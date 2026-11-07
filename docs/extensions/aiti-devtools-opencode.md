@@ -7,6 +7,7 @@ ext:
   description: OpenCode host 插件（16 工具进程内注册 + messages.transform 占位符改写）+ 官方 web UI 即 AI 窗（nginx 反代剥 CSP + sub_filter 注入，不 fork）
   soul: 官方的界面已经够好——我们只加一层，不抢整个门面。
   type: host-adapter
+  installable: false  # 宿主适配器——装进 OpenCode，不进 aiti-agent/pi-web：extman 不列出、extensions.json 不入 extensions 数组（归 integrations）
   category: 宿主适配
   version: 0.3.1
   status: active

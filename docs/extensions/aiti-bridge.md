@@ -7,6 +7,7 @@ ext:
   description: MCP 桥 —— 让任意 AI agent 操作页面、直达 IDE AI 窗口
   soul: 隔着玻璃看页面的 AI，永远只是个旁观者。
   type: bridge
+  installable: false  # 独立本地服务（npx 运行），不装进 aiti-agent/pi-web：extman 不列出、extensions.json 不入 extensions 数组（归 integrations）
   category: MCP 桥
   version: 0.2.0
   status: active

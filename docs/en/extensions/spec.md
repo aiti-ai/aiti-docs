@@ -58,9 +58,14 @@ ext:
 | type | Meaning |
 |---|---|
 | `dev-repo` | aiti-agent runtime extensions (`~/.pi/web/extensions/`) |
-| `bridge` | MCP bridge / local service |
+| `host-adapter` | **Host adapters** — installed into third-party agent hosts (DSH/OpenClaw/OpenCode), **not** into aiti-agent/pi-web; must set `installable: false` |
+| `bridge` | MCP bridge / local service (standalone runs like `npx @aiti-ai/aiti-bridge`, which are not pi-web extensions, must set `installable: false`; ones deployed with pi-web like aiti-testagent keep the default) |
 | `theme` / `skill` | Themes / skills (reserved in the pi / aiti-agent ecosystem) |
 | `other` | Other |
+
+### installable flag (host adapters / standalone services)
+
+`ext.installable: false` = the entry is **not an extension installed into aiti-agent/pi-web** (extman does not list it, aiti-agent auto-discovery never sees it): at compile time it is **removed from the `extensions` array** of `/extensions.json` and moved into the **`integrations` array** to preserve the documentation info (its docs link still points to the `/extensions/*.html` page); the docs extension registry page (ExtensionList) is unaffected and shows everything. Currently flagged: `aiti-devtools-dsh` / `aiti-devtools-openclaw` / `aiti-devtools-opencode` (host adapters), `aiti-bridge` (standalone bridge service).
 
 ## 1.5 integrations registration (aiti-devtools framework integrations)
 

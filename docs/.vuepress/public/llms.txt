@@ -2,7 +2,7 @@
 
 > 以 pi 为引擎的个人 AI 开发工作台与本地调试注入生态：aiti-agent（自托管 Web 工作台）· aiti-devtools（页面内 AI 调试助手，AI 进驻网页面对面调试）· aiti-bridge（任意 AI agent 经 MCP 操作页面）。
 
-AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 76+ 个可组合扩展（调试注入 / 多 agent / 终端·VNC·RDP / 隧道 / 模型管理 / 配置安全网 / IM 接入等），aiti-devtools 已适配 DSH / OpenClaw / OpenCode 宿主。
+AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 72+ 个可组合扩展（调试注入 / 多 agent / 终端·VNC·RDP / 隧道 / 模型管理 / 配置安全网 / IM 接入等），aiti-devtools 已适配 DSH / OpenClaw / OpenCode 宿主。
 
 ## 文档
 - [首页 · 系统特色](https://aiti.pw/): 生态全景与特色速览
@@ -22,7 +22,6 @@ AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 76+ 个
 - [aiti-append-system](https://aiti.pw/extensions/aiti-append-system.html): 管理 pi 的 APPEND_SYSTEM.md（会话启动时追加进 system prompt）——全局 ~/.pi/agent/ 与项目 <cwd>/.pi/ 两份，网页面板在线编辑保存，🤖 AI 帮你起草并直接写入
 - [aiti-attach-agent](https://aiti.pw/extensions/aiti-attach-agent.html): Socket 附着已运行 agent 进程 —— 连接 pi TUI bridge；支持环境变量全自动（PI_WEB_BRIDGE_AUTO=1 任何 CLI 会话自动上桥）；followUp 排队回显 + 图片附件透传 + 空闲超时退出
 - [aiti-backup](https://aiti.pw/extensions/aiti-backup.html): pi-web 数据备份扩展（state 层快照：硬链接增量 + 保留轮转 + 源严格只读；与 aiti-configs 互补）
-- [aiti-bridge](https://aiti.pw/extensions/aiti-bridge.html): MCP 桥 —— 让任意 AI agent 操作页面、直达 IDE AI 窗口
 - [aiti-bridge-probe](https://aiti.pw/extensions/aiti-bridge-probe.html): 手机端桥/SSE 连接探针（临时诊断）——页面侧采集生命周期/EventSource/fetch/心跳缺口证据落盘供 AI 分析；问题定位后应卸载
 - [aiti-channels](https://aiti.pw/extensions/aiti-channels.html): IM 渠道接入 + cc-connect 大前端外壳 —— 托管 cc-connect 进程、概览/项目/通道/会话面板、socket API 出站发消息
 - [aiti-claude-code-agent](https://aiti.pw/extensions/aiti-claude-code-agent.html): 驱动 Claude Code CLI 会话 —— 从 All Sessions 恢复历史行（agentKey: claude）；claude 2.1.318+ keyring 凭据三级裁决登录态
@@ -37,9 +36,6 @@ AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 76+ 个
 - [aiti-custom-agent](https://aiti.pw/extensions/aiti-custom-agent.html): UI 表单注册自定义会话后端——启动命令 + 参数前缀 + 成员 env + 桥模式，保存即热生效；generic 驱动 one-shot spawn（docker 化 / 命令包装 / 同一 CLI 多配置）
 - [aiti-debug-inject](https://aiti.pw/extensions/aiti-debug-inject.html): 极简远程调试注入 —— 把另一个 pi-web 实例的调试器注入本实例页面，服务地址是 extman 里的文本 feature，默认关闭
 - [aiti-devtools](https://aiti.pw/extensions/aiti-devtools.html): pi-web 扩展 —— 注入器/桥/MCP server 端 + 方案 M agent 工具进程内注入
-- [aiti-devtools-dsh](https://aiti.pw/extensions/aiti-devtools-dsh.html): 把 aiti-devtools 完整移植到 DeepSeek Harness（DSH）—— 同款 launcher + 16 工具 + agent/pre-step 占位符替换（[元素N]/[回答N]/[错误N]）+ AI 窗候选条（元素/回答/错误三色 chip），官方 web UI 即 AI 窗
-- [aiti-devtools-openclaw](https://aiti.pw/extensions/aiti-devtools-openclaw.html): OpenClaw 插件直连跳过 MCP —— 16 工具注册进 agent 会话 + 会话自动上线 + chat.send 消息注入 + 答复回传 + 占位符对照表，cockpit 伴生 AI 窗
-- [aiti-devtools-opencode](https://aiti.pw/extensions/aiti-devtools-opencode.html): OpenCode host 插件（16 工具进程内注册 + messages.transform 占位符改写）+ 官方 web UI 即 AI 窗（nginx 反代剥 CSP + sub_filter 注入，不 fork）
 - [aiti-doc-center](https://aiti.pw/extensions/aiti-doc-center.html): workspace md 收集/整理/检索——FTS5 trigram 中文全文 + tag 七来源两层 + 📚 float 弹窗四视图
 - [aiti-draft-keeper](https://aiti.pw/extensions/aiti-draft-keeper.html): 草稿持久化 + 恢复接管 —— composer 契约 v2 唯一所有者（applyIntent 唯一写入口）、多标签共享槽位、无贡献不回写防震荡、pruneStale 7 天清理、水合后恢复
 - [aiti-echo-agent](https://aiti.pw/extensions/aiti-echo-agent.html): Echo agent —— session-provider slot 演示（多 agent 前端最小示例）
@@ -96,3 +92,7 @@ AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 76+ 个
 - [aiti-devtools-vite](https://aiti.pw/devtools/integrations/vite.html): Vite 插件 —— dev 自动本地注入，一行插件 = 同源 /aiti/ 全套
 - [aiti-devtools-vue](https://aiti.pw/devtools/integrations/vue.html): Vue 工程插件 —— dev 自动本地注入（规划中）
 - [aiti-devtools-webpack](https://aiti.pw/devtools/integrations/webpack-rspack.html): webpack-dev-server 插件 —— 一个插件 = dev server 内置 MCP + 自动注入（Rspack 直接复用）
+- [aiti-bridge](https://aiti.pw/extensions/aiti-bridge.html): MCP 桥 —— 让任意 AI agent 操作页面、直达 IDE AI 窗口
+- [aiti-devtools-dsh](https://aiti.pw/extensions/aiti-devtools-dsh.html): 把 aiti-devtools 完整移植到 DeepSeek Harness（DSH）—— 同款 launcher + 16 工具 + agent/pre-step 占位符替换（[元素N]/[回答N]/[错误N]）+ AI 窗候选条（元素/回答/错误三色 chip），官方 web UI 即 AI 窗
+- [aiti-devtools-openclaw](https://aiti.pw/extensions/aiti-devtools-openclaw.html): OpenClaw 插件直连跳过 MCP —— 16 工具注册进 agent 会话 + 会话自动上线 + chat.send 消息注入 + 答复回传 + 占位符对照表，cockpit 伴生 AI 窗
+- [aiti-devtools-opencode](https://aiti.pw/extensions/aiti-devtools-opencode.html): OpenCode host 插件（16 工具进程内注册 + messages.transform 占位符改写）+ 官方 web UI 即 AI 窗（nginx 反代剥 CSP + sub_filter 注入，不 fork）
