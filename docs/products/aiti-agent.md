@@ -62,12 +62,39 @@ UI 层：会话/服务/终端/桌面/调试 统一界面
 
 ## 6. 使用入口
 
-```bash
-# Docker 一键（M1 后；镜像标签仅 core / full，无 lite）
-docker run -p 30142:30142 -v aiti-data:/opt/aiti -v ~/workspace:/workspace aiti/aiti:core
+npm 包 **`@aiti-ai/pi-web`**（自带 60+ 内置扩展），三种安装方式详见 **[安装指南](/guide/install.md)**：
 
+:::: tabs#install-short
+
+@tab npm
+
+```bash
+npm install -g @aiti-ai/pi-web@latest && pi-web
+```
+
+@tab macOS / Linux
+
+```bash
+curl -fsSL https://aiti.pw/install.sh | sh
+```
+
+@tab Windows
+
+```powershell
+irm https://aiti.pw/install.ps1 | iex
+```
+
+::::
+
+```bash
 # 浏览器打开（aiti.pw 是官网/文档站，工作台入口在本地端口）
-open http://localhost:30142
+open http://localhost:30141
+```
+
+Docker 一键（镜像标签仅 core / full，无 lite）：
+
+```bash
+docker run -p 30142:30142 -v aiti-data:/opt/aiti -v ~/workspace:/workspace aiti/aiti:core   # 📋 M1 规划中
 ```
 
 > 规划详见 [路线图 · aiti-agent](/roadmaps/aiti-agent.md) 与 [整体规划](/roadmaps/master-plan.md)。

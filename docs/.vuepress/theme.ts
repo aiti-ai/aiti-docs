@@ -60,6 +60,10 @@ export default hopeTheme({
     // 启用 CodeTabs
     codeTabs: true,
 
+    // 启用 Tabs（:::: tabs + @tab 容器）—— rc.102 键位在 markdown.* 下；
+    // 顶层 mdEnhance.tabs 是旧版键，会被静默忽略（安装页 tab 失效根因）
+    tabs: true,
+
     // 启用 Mermaid
     mermaid: true,
   },

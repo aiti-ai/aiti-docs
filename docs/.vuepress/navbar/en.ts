@@ -13,6 +13,11 @@ export const enNavbar = navbar([
     link: "/en/guide/",
   },
   {
+    text: "Install",
+    icon: "download",
+    link: "/en/guide/install.md",
+  },
+  {
     text: "aiti-devtools",
     icon: "screwdriver-wrench",
     link: "/en/devtools/",

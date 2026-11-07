@@ -9,6 +9,8 @@ tags: [guide, quick-start]
 
 5 分钟跑通「AI 操作你的页面」。
 
+> 找的是 **aiti Web 工作台**（浏览器操作 AI 会话）而不是页面调试工具链？安装见 **[安装指南](/guide/install.md)**（npm / 一键脚本三种方式）。
+
 ## 前置
 
 - Node.js ≥ 20

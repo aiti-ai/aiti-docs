@@ -13,6 +13,11 @@ export const zhNavbar = navbar([
     link: "/guide/",
   },
   {
+    text: "安装",
+    icon: "download",
+    link: "/guide/install.md",
+  },
+  {
     text: "aiti-devtools",
     icon: "screwdriver-wrench",
     link: "/devtools/",
