@@ -13,8 +13,8 @@
 #   AITI_INSTALL_DIR=~/.aiti       install root
 #   curl -fsSL https://aiti.pw/install.sh | AITI_RELEASE_REPO=you/fork sh
 
-# curl | sh guard: stop child processes from eating the rest of the pipe.
-exec </dev/null 2>/dev/null
+# curl | sh note: 本脚本不读 stdin（无交互、无子进程消费管道）——不要 exec </dev/null，
+# 那会关掉 sh 自身的 stdin（=管道=脚本源），curl|sh 形态下脚本立即截断退出。
 
 set -u
 
@@ -106,14 +106,14 @@ else
   [ -n "$TAG" ] || { bad "no tag_name in latest release."; exit 1; }
 fi
 ASSET="aiti-web-${TAG}-${OS_NAME}-${ARCH_NAME}.tar.gz"
-URL="$(sed -n 's/.*"browser_download_url": *"\([^"]*\)"*/\1/p' "$RELEASE_JSON" | grep "${ASSET}\"" | head -1)"
+URL="$(sed -n 's/.*"browser_download_url": *"\([^"]*\)"*/\1/p' "$RELEASE_JSON" | grep "${ASSET}\$" | head -1)"
 [ -n "$URL" ] || { bad "asset ${ASSET} not found in release ${TAG}."; say "  ${D}check https://github.com/${REPO}/releases${N}"; exit 1; }
 ok "release ${TAG}"
 
 # ---- download + verify ----
 say "Downloading ${D}${ASSET}${N} ..."
 fetch "$URL" "$TMP/$ASSET" || { bad "download failed: $URL"; exit 1; }
-CHECK_URL="$(sed -n 's/.*"browser_download_url": *"\([^"]*\)"*/\1/p' "$RELEASE_JSON" | grep 'checksums\.txt"' | head -1)"
+CHECK_URL="$(sed -n 's/.*"browser_download_url": *"\([^"]*\)"*/\1/p' "$RELEASE_JSON" | grep 'checksums\.txt$' | head -1)"
 if [ -n "$CHECK_URL" ] && command -v sha256sum >/dev/null 2>&1; then
   if fetch "$CHECK_URL" "$TMP/checksums.txt"; then
     WANT="$(grep " ${ASSET}\$" "$TMP/checksums.txt" | awk '{print $1}')"
