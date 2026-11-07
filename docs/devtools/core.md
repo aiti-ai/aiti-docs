@@ -1,7 +1,7 @@
 ---
 title: aiti-devtools 本体
 icon: 🛠️
-description: "@aiti-ai/aiti-devtools — 页面内 AI 调试助手 SDK"
+description: "aiti-devtools — 页面内 AI 调试助手 SDK（core+inject 资产形态）"
 tags: [devtools, inject, inspector, mcp]
 ---
 
@@ -11,14 +11,11 @@ tags: [devtools, inject, inspector, mcp]
 
 把 AI 请到页面开发现场：注入调试客户端（launcher UI）+ Inspector 悬浮组件 + MCP 桥，AI 和人真正在**同一个页面**上协作。
 
-- npm：`@aiti-ai/aiti-devtools`
-- 形态① 开发者主动适配（本包）→ ② 平台内置 → ③ [IDE 插件](/ide/)（vscode / idea，规划中）
+- 形态① 开发者主动适配 → ② 平台内置 → ③ [IDE 插件](/ide/)（vscode / idea，规划中）
 
-## 安装
+## 分发形态
 
-```bash
-pnpm add -D @aiti-ai/aiti-devtools
-```
+SDK 本体以 core+inject 资产形态由框架插件（`@aiti-ai/aiti-devtools-vite` 等）或独立桥 serve，无需单独安装。
 
 ## 手动接入（script 标签）
 

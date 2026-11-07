@@ -8,7 +8,7 @@ ext:
   soul: AI 说给你听。
   type: dev-repo
   category: 聊天增强
-  version: 0.1.0
+  version: "0.1.7"
   status: beta
   author: aiti-ai
   publisher: aiti-ai

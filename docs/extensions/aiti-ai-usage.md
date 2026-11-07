@@ -8,7 +8,7 @@ ext:
   soul: 用量不是账单来了才知道——每一枚 token 都该有去向。
   type: dev-repo
   category: 系统工具
-  version: 0.1.0
+  version: "0.1.7"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai
@@ -38,7 +38,7 @@ AI token 用量统计扩展：workspace / provider / model / key / 时段(0–23
 
 `GET matrix?dims=a,b,c,...&days=N|day=|month=|from=&to=`（兼容旧 `dim`/`dim2`）：
 
-- **维度池（去重后不限个数）**：`workspace`（会话 cwd）/ `provider` / `model` / `hour`（本地时区 0–23）/ `day` / `key`；dims 含 `key` → 自动切代理口径（key_req 经 client→session 归因 join sessions），否则会话口径（msg_usage join sessions）
+- **维度池（去重后不限个数）**：`workspace`（会话 cwd）/ `provider` / `model` / `hour`（本地时区 0–23）/ `day` / `key` / `agent`（外部 agent 归因）；dims 含 `key` → 自动切代理口径（key_req 经 client→session 归因 join sessions），否则会话口径（usage_caliber 统一视图 join sessions：pi ∪ 外部 agent 归因）
 - **每行返回全部指标列**：会话口径 `msgs/tokens/cost/input/output/cacheRead/cacheWrite/reasoning`；代理口径 `reqs/ok/err429/errOther/tokens/input/output/cacheRead/cacheWrite`
 - 兜底 `LIMIT 200000` 防组合爆炸；正常多维分组远小于此
 
@@ -47,3 +47,9 @@ AI token 用量统计扩展：workspace / provider / model / key / 时段(0–23
 排序规则：hour 按数值 0→23、day 按日期升序（自然序）；workspace/provider/model/key 等类别维度按指标值降序。
 
 时间范围：预设（今天/近7天/近30天/本月/全部）+ 自定义起止（`from`/`to`，YYYY-MM-DD 含端，可只给一端；跨度 >60 天趋势自动切月粒度）。
+
+## 报表标签页
+
+- **趋势**：维度值折线（≤12 条，未选默认 Top8；范围 >60 天自动月粒度）；`facets` 端点供筛选下拉
+- **输入**：用户输入分析——总数 / 引用率 / 引用格式分布（Markdown `>` / 嵌套 `>>` / Discord `>>>` / BBCode / 邮件回复头 / @file 提及）/ Top 工作区；机器注入识别（kind=human|agent|external）
+- **会话**：`GET sessions` 分页 + `session-keys/:id` 单会话 key 归因 + `POST sync` 手动重扫

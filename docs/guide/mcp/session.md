@@ -2,7 +2,7 @@
 title: 会话体系
 icon: 🪪
 description: pageId = instanceId/frameId、发现、复用、刷新不断线
-tags: [guide, mcp-bridge, session, pageId]
+tags: [guide, aiti-bridge, session, pageId]
 ---
 
 # 会话体系（pageId）

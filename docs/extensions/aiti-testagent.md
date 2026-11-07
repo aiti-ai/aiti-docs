@@ -4,11 +4,11 @@ icon: 🧪
 ext:
   id: aiti-testagent
   name: TestAgent
-  description: Java 后端 AI 调试 MCP + IDE —— 扫描 Java 进程/attach 一键连桥/Tunnel 桥多端点纳管，JVM 内任意修改/Mock·SQL 拦截模拟/热更新/诊断采样，52 工具 8 组按需暴露，全可逆
+  description: Java 后端 AI 调试 MCP + IDE —— 扫描 Java 进程/attach 一键连桥/Tunnel 桥多端点纳管，JVM 内任意修改/Mock·SQL 拦截模拟/热更新/诊断采样，57 工具 10 组按需暴露，全可逆
   soul: 所有操作可逆（delete/stop 还原），AI 放心在运行中的 JVM 里做实验。
   type: bridge
   category: 调试
-  version: 2.0
+  version: "0.1.7"
   status: active
   author: aiti-ai
   publisher: aiti-ai
@@ -33,17 +33,19 @@ TestAgent 2.0 —— **给 AI 用的 Arthas++**：教 AI 怎么调试运行中�
 
 除 MCP 外，TestAgent 自带 **Web 操作台**（React，与 API 同端口同源）：方法/代码热更新、声明式 Conf、Eval、Mock、SQL 拦截、Bean·XML、Arthas 诊断、Profiling、实时监控、ClassWatch、Terminal、配置历史——人看同一个端口，类名/方法名/URL/bean 全量输入补全。
 
-## 52 个工具，8 组
+## 57 个工具，10 组
 
 | 组 | 工具 | 干什么 |
 | --- | --- | --- |
-| `lifecycle` | ta_run / ta_ping / ta_attach / ta_discover / **ta_bridge** / **ta_tunnel** | 起停应用、探活、动态挂载 agent（自动等就绪）、发现实例、**一键连桥（扫描→attach→接通）**、**隧道管理（status/connect/disconnect——运行时补连/经桥远程操作）** |
-| `observe` | ta_watch / ta_monitor / ta_tt / ta_trace | 观察参数/返回值/异常、调用统计、时空隧道录参、耗时链路子调用树 |
-| `jvm` | ta_metrics / ta_threads / ta_profile / ta_heapdump / ta_vmtool / ta_classloader / ta_mbean / ta_vmoption / ta_perfcounter / ta_dump | 线程栈（死锁检测/CPU 排序）、火焰图（cpu/alloc/wall）、堆转储、JVM flags、类加载器树 |
-| `inspect` | ta_sc / ta_sm / ta_jad / ta_fs | 类搜索、方法清单、CFR 反编译、容器内文件查看 |
-| `write` | ta_code / ta_restore / ta_method / ta_eval / ta_conf / ta_xml / ta_classwatch / ta_bean / ta_logger | **写代码热更新、新建 controller**、方法级改行为、表达式求值、声明式 Conf、Bean·XML、改代码自动热替换、Spring bean 注入 mock、日志级别热调 |
+| `lifecycle` | ta_run / ta_ping / ta_attach / ta_discover / **ta_bridge** | 起停应用、探活、动态挂载 agent（自动等就绪）、发现实例、**一键连桥（扫描→attach→接通）**；ta_tunnel 恒暴露不入组（隧道管理 status/connect/disconnect） |
+| `observe` | ta_watch / ta_monitor / ta_tt / ta_trace / ta_job | 观察参数/返回值/异常、调用统计、时空隧道录参、耗时链路子调用树、后台常驻观测任务（watch/tt，TTL 到期自动摘除，since 游标拉增量） |
+| `jvm` | ta_metrics / ta_memory / ta_threads / ta_profile / ta_heapdump / ta_download / ta_vmtool / ta_classloader / ta_mbean / ta_vmoption / ta_perfcounter / ta_dump / ta_sysprop / ta_sysenv | 线程栈（死锁检测/CPU 排序）、火焰图（cpu/alloc/wall）、堆转储、内存分池明细、大文件取回、JVM flags、类加载器树、系统属性/环境变量 |
+| `inspect` | ta_sc / ta_sm / ta_jad / ta_fs / ta_urls | 类搜索、方法清单、CFR 反编译、容器内文件查看、REST 端点清单 |
+| `write` | ta_code / ta_restore / ta_method / ta_eval / ta_conf / ta_xml / ta_classwatch / ta_bean / ta_logger / ta_props / ta_spring / ta_solon / ta_addr | **写代码热更新、新建 controller**、方法级改行为、表达式求值、声明式 Conf、Bean·XML、改代码自动热替换、Spring bean 注入 mock、日志级别热调、Spring/Solon 组件热操作（springboot/solon 聚合开关配套）、地址透明替换 |
 | `mock` | ta_mock_url / ta_mock_method / ta_mock_results / ta_capture / ta_sql | URL/方法级 mock、返回值篡改、流量捕获、**SQL 拦截模拟** |
 | `startup` | ta_startup / ta_lazy_module | 启动耗时报告（慢 bean 直指）、模块级懒加载 |
+| `auth` | ta_login | 自动登录：进程内登录拿 token/cookie → 401 原请求自动重放（人/机免登录墙） |
+| `native` | ta_native_modules / ta_native_watch / ta_native_stack / ta_native_detach | testagent-native 薄代理——Windows 进程 native 层（模块枚举/Detours 挂钩/线程栈/卸载还原） |
 | `history` | ta_history / ta_status | 配置历史审计、实例状态 |
 
 暴露面可用 `--tools` / `--exclude`（组名/单名/通配，参数或 `TESTAGENT_TOOLS/EXCLUDE`）按组裁剪——只读调试场景排除 `write,mock` 两组即可，隐藏的工具直接从 tools/list 消失且服务端拒绝调用。
@@ -146,7 +148,7 @@ Arthas 主流命令均有对应端点：`sc`/`sm`/`jad`（CFR 源码级反编译
 
 ## 质量与文档
 
-自动化回归：核心功能 29 断言 + Arthas 差距补齐 26 断言（JDK8+spring2 与 JDK21+mybatis 双基线全绿）+ 自动登录 13 断言 + lazy-module/solon 专项 e2e + **tunnel/bridge 30 断言**（端点纳管/token 三分离/并发/MCP 桥模式）+ MCP 协议 6 断言。完整教程与 API 参数 Schema 见 TestAgent 仓 `docs/testagent-user-guide.md`（MCP 工具映射见其附录 B）。
+自动化回归：核心功能 29 断言 + Arthas 差距补齐 26 断言（JDK8+spring2 与 JDK21+mybatis 双基线全绿）+ 自动登录 16 断言 + lazy-module/solon 专项 e2e + **tunnel/bridge 48 断言**（端点纳管/token 三分离/wss/Origin/download/并发/MCP 桥模式）+ MCP 协议 6 断言；一键 run-all **120 + restmock 9 = 129 断言**。完整教程与 API 参数 Schema 见 TestAgent 仓 `docs/testagent-user-guide.md`（MCP 工具映射见其附录 B）。
 
 ## 前置
 

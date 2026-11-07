@@ -8,7 +8,7 @@ ext:
   soul: 作为人类，这是我对抗ai的最后倔犟了
   type: dev-repo
   category: 开发工具
-  version: 0.1.0
+  version: "0.2.7"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai
@@ -24,10 +24,11 @@ ext:
 
 > ❝ **作为人类，这是我对抗ai的最后倔犟了** ❞
 
-Git 代码审核扩展：审「未提交的全部变更」（`git diff HEAD` + untracked，git 概念对用户隐藏）。**只读 git 白名单**（status/diff/log/show/rev-parse/merge-base/ls-files/hash-object），无任何写子命令。
+Git 代码审核扩展：默认审「未提交的全部变更」（`git diff HEAD` + untracked，git 概念对用户隐藏），也支持**任意版本基线**——base（branch/tag/commitid，缺省 HEAD）与 ref2 两版本互比。**只读 git 白名单**（status/diff/log/show/rev-parse/merge-base/ls-files/hash-object/for-each-ref），无任何写子命令。
 
 - **三入口上下文感知**：顶部 toolbar 👁️（repo 全部）/ 文件工具条 👁️（该文件）/ 文件夹工具条 👁️（该目录）
-- **任务即一等公民**：选择器（新建·文件树勾选 + AI 预审选项 / 打开现有列表 / 删除 / 30 天空任务 GC），任务持久化 `dataDir/aiti-git-review/tasks/`
+- **任务即一等公民**：选择器（新建·文件树勾选 + AI 预审选项 / 打开现有列表 / 删除 / 30 天空任务 GC），任务持久化 `<extRoot>/state/aiti-git-review/tasks/`
+- **版本基线**：base（branch/tag/commitid，缺省 HEAD）与 ref2 两版本互比；/refs 列分支/tag/远程/近 100 commit 按天分组，选择器「工作区/两版本」切换
 - **Monaco diff 工作区**：并排/合并/纯新/大纲四视图一键切换，F7/Shift+F7 hunk 级导航跨文件，宽度桶布局记忆，小屏三区适配
 - **行级标注（人 + AI 同库）**：右键/✍ 模式/右侧流水线表单三入口；severity 必须/建议/疑问；**anchor 标志行快照 + 内容哈希漂移自动重映射**（边审边改行号不失效，找不到标 stale 保留原文）；revision 乐观锁
 - **AI 预审**：`aiti_review_*` 工具（status/diff/comment/comments/comment_update/summarize）**只注入评审任务会话**（agentTools 按会话门控 + boundSessionId 持久化 + ai-prebind 懒绑定），日常会话零工具
@@ -35,6 +36,7 @@ Git 代码审核扩展：审「未提交的全部变更」（`git diff HEAD` + u
 - **重命名/二进制/untracked/无 HEAD 全兼容**：R 状态双路径 diff 保 rename 配对，binary 标记不进 diff，首个 commit 前空树基线降级
 - **trace 源 + 部分回滚**：评审源接入 aiti-git-trace 台账，评审内一键部分回滚（文件/行级，写路径收敛 git-trace）
 - **懒加载两段式转换**（M3批②，[懒加载契约](/guide/ext-lazy-loading.html)）；跨扩展拉起 editor/folder 首例（ensureMaterialized + 跨扩展注册时序修复）
+- **services 出口**：`aiti-git-review.aiReview`——groupReview（提交分组 AI 精修，aiti-git-ops M4 消费）+ commitMessage（AI 生成提交信息，folder CommitDialog 消费）；spawn prompt 会话 + `agent.onAgentSettled` 事件驱动取回答（单 180s deadline，非轮询），缺席时消费方按钮隐藏
 
 ## agent 工具（仅评审任务会话）
 

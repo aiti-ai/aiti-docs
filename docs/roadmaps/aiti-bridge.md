@@ -1,13 +1,13 @@
 ---
-title: aiti-mcp-bridge 规划
+title: aiti-bridge 规划
 icon: 🔗
 description: 桥接层计划 — server、会话、IDE 插件、消息直达 IDE AI 窗口
-tags: [roadmap, aiti-mcp-bridge, ide]
+tags: [roadmap, aiti-bridge, ide]
 ---
 
-# aiti-mcp-bridge 规划（AI agent 改造层）
+# aiti-bridge 规划（AI agent 改造层）
 
-> 核心目标：**配置 aiti-devtools 使用**、**改造 AI agent**、支持 aiti-devtools 与 vscode/idea 插件完成注入、**mcp-bridge 直接发消息到 IDE 里的 AI agent 窗口**。
+> 核心目标：**配置 aiti-devtools 使用**、**改造 AI agent**、支持 aiti-devtools 与 vscode/idea 插件完成注入、**aiti-bridge 直接发消息到 IDE 里的 AI agent 窗口**。
 
 ## 阶段计划
 
@@ -33,7 +33,7 @@ tags: [roadmap, aiti-mcp-bridge, ide]
 
 - [ ] **claim/secret/TTL 回归测试**：reload 不断线、跨页面防串台、TTL 过期回收
 - [ ] **sessions 发现 API 文档化** + AI 引导 prompt（写入 skills/模板）
-- [ ] **AITI_* 环境变量收口**：`AITI_MCP_TOKEN`、`AITI_OPEN_CMD`、`AITI_BRIDGE_PORT`
+- [ ] **AITI_* 环境变量收口**：`AITI_BRIDGE_URL`（shim 接入）、`AITI_OPEN_CMD`、`AITI_BRIDGE_PORT`
 - [ ] **IDE 配置互操作**：`.vscode/mcp.json` / JetBrains `mcp.xml` 双向同步
 - [ ] **AI 窗口扩展点调研**：Copilot Chat Webview、JetBrains AI Assistant 插件 API（回退统一走 cockpit）
 - [ ] **多 IDE 窗口**：同工程多窗口共享 instanceId；冲突时 secret 仲裁
@@ -45,7 +45,7 @@ tags: [roadmap, aiti-mcp-bridge, ide]
 IDE AI agent 窗口 / Claude Code / Cursor / aiti-agent
         │ MCP (stdio / HTTP / SSE)
         ▼
-aiti-mcp-bridge（本地服务）→ pageId 会话 → SSE → aiti-devtools 注入页
+aiti-bridge（本地服务）→ pageId 会话 → SSE → aiti-devtools 注入页
         ▲
         └── 页面事件（open_file / 元素选中 / user_* 作答）实时回推 AI 窗口
 ```

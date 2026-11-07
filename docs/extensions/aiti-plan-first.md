@@ -8,7 +8,7 @@ ext:
   soul: 不强制不打断，只在 md 变了和大改跑偏时轻轻提一句：先有方案，再动手。
   type: dev-repo
   category: 开发工具
-  version: 0.2.0
+  version: "0.1.7"
   status: active
   author: aiti-ai
   publisher: aiti-ai
@@ -36,7 +36,7 @@ ext:
 3. **领先提醒**：未绑定 + 改了代码或任何非忽略文件 ≥ 1 → 弹「先做方案」（30min 独立冷却；写 skills 也算在改代码）
 4. **tags 闭环**：教（prompt/插入文本自带 front-matter tags 约定，含状态 tag 方案/评审中·已实施·已过时）→ AI 写（front-matter 事实源，标签可自荐不限词表）→ 自检（status/doctags 实时读文档 + followed 触发 doc-center scan）→ 手工（绑定态下拉 tags 行：chips × 移除 / 输入回车添加写回）
 5. **列表图标**：`sessionRowLeading` 行前部扩展槽（pi-web 新增通用位）——绑定会话行常驻 📋 绿标；All Sessions 面板与 doc-center 🧵 会话视图同样显示
-6. **进入会话检查**（0.3.0）：切会话 / 带 `?session=` 进入 → POST /check 一次性评台账——终端桥接/页面不在场错过的会话也弹绑定向导；**enter 检查评 stale** 是终端桥接会话唯一自动提醒通道（其事件过不了桥）
+6. **进入会话检查**（0.3.0，方案文档里程碑编号，≠ 包版本）：切会话 / 带 `?session=` 进入 → POST /check 一次性评台账——终端桥接/页面不在场错过的会话也弹绑定向导；**enter 检查评 stale** 是终端桥接会话唯一自动提醒通道（其事件过不了桥）
 7. **suggest-md 路径可点击**：疑似方案文档路径在提醒中是按钮，点击 openFile 开标签页核实
 
 ## 事件链（推-听，对 git-trace 零侵入）
@@ -61,3 +61,4 @@ pi 扩展 appendRow 台账行 → globalThis.__aitiTraceEmit?（松耦合可选�
 | plan.staleRemind | 开 | 大改未跟提醒 |
 | plan.bigFiles / plan.bigOps | 3 / 3 | 「改动很多」阈值 |
 | plan.mdIgnores | 空 | 追加 md 忽略（glob） |
+| plan.autoCloseSuggestSec / autoCloseStaleSec / autoCloseLeadSec | 0 / 30 / 10 | 提醒自动收起秒数（向导/失联/领先；0=常驻） |

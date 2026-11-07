@@ -8,7 +8,7 @@ ext:
   soul: 深度保真档——与桌面 Office 同引擎，复杂排版编辑不将就。
   type: dev-repo
   category: 开发工具
-  version: 0.1.0
+  version: "0.1.7"
   status: active
   author: aiti-ai
   publisher: aiti-ai
@@ -47,7 +47,7 @@ ext:
 ## 安全
 
 - download/callback URL 带一次性 HMAC token（path+expiry 签名）防穿越/盗链
-- JWT(HS256) 签名 editor config；secret 存 dataDir/jwt-secret（不入仓；onlyoffice-up.sh 读同一份给容器）
+- JWT(HS256) 签名 editor config；secret 存扩展 configDir（`~/.pi/web/data/aiti-onlyoffice/config/jwt-secret`，不入仓；onlyoffice-up.sh 读同一份给容器）
 - 保存白名单 = blob-save-route 同款（workspace + 用户根）
 
 ## 网络（部署固化，已落地）

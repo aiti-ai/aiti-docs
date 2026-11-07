@@ -8,7 +8,7 @@ ext:
   soul: ProseMirror 双向——打开即 docx 结构，导出即 docx 文件。
   type: dev-repo
   category: 开发工具
-  version: 0.1.0
+  version: "0.1.7"
   status: active
   author: aiti-ai
   publisher: aiti-ai
@@ -18,7 +18,7 @@ ext:
     # 部署到 ~/.pi/web/extensions/aiti-word-superdoc/ 后 reload
     # 依赖：aiti-editor（多编辑器仲裁宿主）
     # 注意：SuperDoc 为 AGPL-3.0——不安装本扩展即 pi-web 全局零 AGPL 前端组件
-  license: AGPL-3.0（SuperDoc，隔离于本扩展）+ 本扩展包装层 Apache-2.0
+  license: AGPL-3.0（SuperDoc，隔离于本扩展）+ 本扩展包装层 Apache-2.0（整包随 npm 按 AGPL-3.0 声明发布；源码侧 LICENSE 文件与 package.json 不一致——MIT vs AGPL-3.0，待统一）
   tags: [word, docx, editor, superdoc, prosemirror]
 ---
 
@@ -44,6 +44,8 @@ ext:
 
 SuperDoc 的 AGPL-3.0 义务**隔离在此单扩展**——不安装它即 pi-web 全局零 AGPL 前端组件：
 docx 预览走 `aiti-word-docx-preview`（Apache），深度编辑走 `aiti-onlyoffice`（可选 Docker 档）。
+
+> 许可注记：整包随 npm 按 AGPL-3.0 声明发布、SuperDoc 依赖隔离于本扩展目录；目录 LICENSE 文件（MIT）与 package.json（AGPL-3.0）不一致，待统一。
 
 ## 技术要点
 

@@ -8,7 +8,7 @@ ext:
   soul: config 有 aiti-configs，state 的大数据不该靠手动复制续命。
   type: dev-repo
   category: 系统工具
-  version: 0.1.0
+  version: "0.1.7"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai

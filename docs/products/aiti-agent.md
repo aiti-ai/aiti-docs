@@ -18,7 +18,7 @@ tags: [product, aiti-agent, pi-web]
 | 地基 | 构建于开源项目 agegr/pi-web（含全生态唯一的 service-tunnels / queue 恢复） |
 | 引擎 | pi（earendil-works/pi，每日发版，mise 管理版本） |
 | 差异化 | 共享 pi JSONL 会话 + 真实工作区 + 服务隧道 + 远程调试可视化（无人五层齐全） |
-| 形态 | Docker 单容器（lite/full）→ 浏览器 + 移动端 |
+| 形态 | Docker 单容器（core/full）→ 浏览器 + 移动端 |
 | 北极星 | 自己日常可用 → 外部 10+ 活跃用户 → 5+ 外部贡献者 |
 
 ## 2. 能力五层
@@ -35,11 +35,11 @@ UI 层：会话/服务/终端/桌面/调试 统一界面
 
 | 能力 | 状态 | 说明 |
 |---|---|---|
-| service-tunnels（隧道 + TOTP 认证） | ✅ 全生态唯一 | HTTP vhost + TCP 隧道，零改动暴露 30141/6080/7681/9222/5900 |
+| service-tunnels（隧道 + TOTP 认证） | ✅ 全生态唯一 | HTTP vhost + TCP 隧道，零改动暴露 30142/6080/7681/9222/5900 |
 | queue 持久化 / 崩溃恢复 | ✅ 全生态唯一 | 任务队列重启不丢 |
 | worktree 分组 / i18n 框架 | ✅ 领先 | 会话按工作区分组 |
 | 内置终端（ttyd / node-pty） | 📋 M1 | 远程执行服务端 Terminal |
-| Docker 一键（lite/full） | 📋 M1 | `docker run aiti` |
+| Docker 一键（core/full） | 📋 M1 | `docker run aiti` |
 | Chrome CDP 远程调试 | 📋 M2 | 9222 暴露 + DevTools + cdp 工具 |
 | CLI 桥接（Claude Code / Codex / OpenCode） | 📋 M2.5 | 任意 AI CLI 会话桥接进 Web |
 | noVNC 桌面可视化 | 📋 M3 | 任意 GUI 远程看/操作 |
@@ -63,11 +63,11 @@ UI 层：会话/服务/终端/桌面/调试 统一界面
 ## 6. 使用入口
 
 ```bash
-# Docker 一键（M1 后）
-docker run -p 30141:30141 -v aiti-data:/data aiti-ai/aiti:lite
+# Docker 一键（M1 后；镜像标签仅 core / full，无 lite）
+docker run -p 30142:30142 -v aiti-data:/opt/aiti -v ~/workspace:/workspace aiti/aiti:core
 
-# 浏览器打开
-open https://aiti.pw  # 或 http://localhost:30141
+# 浏览器打开（aiti.pw 是官网/文档站，工作台入口在本地端口）
+open http://localhost:30142
 ```
 
 > 规划详见 [路线图 · aiti-agent](/roadmaps/aiti-agent.md) 与 [整体规划](/roadmaps/master-plan.md)。

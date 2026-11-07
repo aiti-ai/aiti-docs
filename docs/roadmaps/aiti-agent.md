@@ -32,7 +32,7 @@ UI 层：会话/服务/终端/桌面/调试 统一界面
 
 ## 与 devtools/桥的协同
 
-- aiti-agent 会话内置 **aiti-mcp-bridge** 客户端：在 Web 工作台里直接操作任意注入页面
+- aiti-agent 会话内置 **aiti-bridge** 客户端：在 Web 工作台里直接操作任意注入页面
 - service-tunnels `transformResponse` 与 devtools 注入同语义 —— 隧道暴露的页面可复用同一套注入脚本
 - M2 的 CDP 链路与 devtools 的 `page_exec`（Browser 域）能力互补：远端完整 DevTools vs 页面内轻量命令集
 

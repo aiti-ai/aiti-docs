@@ -79,4 +79,4 @@ pnpm dev --port 5599
 curl -s http://localhost:5599/ | grep -o aiti-launcher   # HTML 里应出现 launcher 脚本
 ```
 
-可运行示例：[examples/aiti-nuxt-demo](examples.md)（端口 5599）
+可运行示例：[examples/aiti-nuxt-demo](../examples.md)（端口 5599）

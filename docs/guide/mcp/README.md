@@ -1,11 +1,11 @@
 ---
 title: MCP 桥
 icon: 🔗
-description: aiti-mcp-bridge / aiti-mcp-server 使用文档 —— 让任意 AI agent 操作页面、与用户协作
-tags: [guide, mcp-bridge, mcp, ai-agent]
+description: aiti-bridge 使用文档 —— 让任意 AI agent 操作页面、与用户协作
+tags: [guide, aiti-bridge, mcp, ai-agent]
 ---
 
-# MCP 桥（aiti-mcp-bridge）
+# MCP 桥（aiti-bridge）
 
 让 AI 与你的页面对话。配置 aiti-devtools 使用、改造任意 AI agent、直达 IDE AI 窗口、通用 AI 窗口（cockpit）接入引导。
 
@@ -19,21 +19,21 @@ tags: [guide, mcp-bridge, mcp, ai-agent]
 
 ## 一句话
 
-**aiti-mcp-bridge 把"页面调试能力"变成任意 AI agent 的标准 MCP 工具**：任何支持 MCP 的 agent（Claude Code / Cursor / IDE AI / aiti-agent / 任意 CLI）配置后即可操作页面、点选元素、询问用户；人侧的**通用 AI 窗口（cockpit）**负责显示/配置桥地址、引导 agent 接入、并在 MCP 降级方式下作为人机协作操作台。
+**aiti-bridge 把"页面调试能力"变成任意 AI agent 的标准 MCP 工具**：任何支持 MCP 的 agent（Claude Code / Cursor / IDE AI / aiti-agent / 任意 CLI）配置后即可操作页面、点选元素、询问用户；人侧的**通用 AI 窗口（cockpit）**负责显示/配置桥地址、引导 agent 接入、并在 MCP 降级方式下作为人机协作操作台。
 
 ## 快速开始
 
 ```bash
 # 1. 启动桥（本地服务，默认 8777）
-npx @aiti-ai/aiti-mcp-bridge --http 8777
+npx @aiti-ai/aiti-bridge --port 8777
 
 # 2. 页面注入 aiti-devtools（Vite 示例）
 pnpm add -D @aiti-ai/aiti-devtools-vite
 # vite.config.ts 启用插件，dev 页面右下角出现 💬 / 🎯
 
-# 3. 把桥配给任意 MCP 客户端
-# Claude Code:  claude mcp add aiti -- npx @aiti-ai/aiti-mcp-server --bridge http://localhost:8777
-# Cursor / IDE: MCP 设置添加 aiti-mcp-server（stdio）
+# 3. 把桥配给任意 MCP 客户端（一键注册 stdio shim，幂等）
+npx @aiti-ai/aiti-bridge --register-shim   # agent 启动带 env AITI_BRIDGE_URL 即接入
+# 或 MCP client 直连 HTTP 端点：http://127.0.0.1:8777/aiti/mcp/mcp
 
 # 4. 让 AI 开始调试
 # 「用 bridge_status 看有哪些 pageId，对 01234/f0 执行 page_snapshot」
@@ -49,4 +49,4 @@ pnpm add -D @aiti-ai/aiti-devtools-vite
 | `aiti_inbox` | **消息主通道**：人发消息/异步作答/页面事件进队列，agent 调工具取走——任何 agent 100% 可用（见 [接入 AI agent](/guide/mcp/ai-agents.md)） |
 | cockpit | 通用 AI 窗口：引导接入 + 地址配置 + 人侧操作台（见 [cockpit](/guide/mcp/cockpit.md)） |
 
-> 相关：[产品页 · aiti-mcp-bridge](/products/aiti-mcp-bridge.md) · [架构](/guide/architecture.md)
+> 相关：[产品页 · aiti-bridge](/products/aiti-bridge.md) · [架构](/guide/architecture.md)

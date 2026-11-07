@@ -2,23 +2,22 @@
 title: MCP Server
 icon: 🖥️
 description: 启动、端点、传输（含 Streamable HTTP）、MCP 工具参考（含 aiti_inbox）
-tags: [guide, mcp-bridge, server, reference]
+tags: [guide, aiti-bridge, server, reference]
 ---
 
-# aiti-mcp-server
+# MCP server（内置于 aiti-bridge）
 
 MCP 端点：**stdio + HTTP（stateless）+ Streamable HTTP（持久流）** 三 transport；桥侧另有会话登记/路由/广播 REST 端点。
 
 ## 启动
 
 ```bash
-# 桥（本地服务，含会话登记/路由/广播）
-npx @aiti-ai/aiti-mcp-bridge --http 8777
+# 桥（本地服务：会话登记/路由/广播 + MCP 端点）
+npx @aiti-ai/aiti-bridge --port 8777
 
-# 或直接跑 MCP server（等同，桥的 MCP 面）
-npx @aiti-ai/aiti-mcp-server --http 8777
-# stdio 模式（给 Claude Code / Cursor 等用）
-npx @aiti-ai/aiti-mcp-server --bridge http://localhost:8777
+# MCP 客户端接入
+npx @aiti-ai/aiti-bridge --register-shim   # 一键注册 stdio shim（aiti 条目，env AITI_BRIDGE_URL 接入，URL 不落配置）
+# 或直连 HTTP：http://127.0.0.1:8777/aiti/mcp/mcp
 ```
 
 ## 传输
@@ -109,10 +108,10 @@ npx @aiti-ai/aiti-mcp-server --bridge http://localhost:8777
 
 | 变量 | 默认 | 说明 |
 |---|---|---|
-| `AITI_MCP_TOKEN` | `dev` | 桥 token（兼容旧 `DBG_MCP_TOKEN`） |
+
 | `AITI_OPEN_CMD` | `code --goto file:line` | open_file 编辑器命令（fallback xdg-open） |
 | `AITI_BRIDGE_TTL` | `600000` | 断开后注册保留（ms） |
-| `--http` | — | 监听端口（默认 8777） |
+| `--port` / `AITI_BRIDGE_PORT` | `8777` | 桥监听端口（另有 `AITI_BRIDGE_HOST` / `AITI_BRIDGE_DATA_DIR`） |
 
 ## 安全
 

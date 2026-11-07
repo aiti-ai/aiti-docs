@@ -8,7 +8,7 @@ ext:
   soul: 各家还剩多少额度，一面看尽。
   type: dev-repo
   category: 系统工具
-  version: 0.1.0
+  version: "0.1.8"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai
@@ -40,6 +40,7 @@ Provider 余额/配额查询扩展（pi-web 去 fork 化 B1 外迁产物）：�
 
 - `POST /api/extensions/aiti-provider-usage/overview` `{force?}` → 全 provider 总览
 - `POST /api/extensions/aiti-provider-usage/query` `{providerId}` → 单家详报
+- **`ctx.services` 服务出口**：`provide "aiti-provider-usage.overview"`——`overview(force?) / query(providerId) / invalidate()` 三方法，复用同一份 TTL 缓存/并发闸门、不新增上游请求面（消费方如 model-wizard 余额健康条）；总线缺席静默，REST 兜底
 
 ## 来源
 

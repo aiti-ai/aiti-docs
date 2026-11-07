@@ -33,17 +33,17 @@ tags: [guide, concept]
 
 把 AI 请到页面开发现场。**嵌入各个主流开发工具**（Vite / Vue / Next / React / Svelte），**本地 inject**：
 
-- 注入 `aiti-devtools` 迷你 client + Inspector 悬浮 UI + 8 域 42 命令类 CDP 命令集
+- 注入 `aiti-devtools` 迷你 client + Inspector 悬浮 UI + 8 域 47 命令类 CDP 命令集
 - 框架源码定位：React/Next/Vue/Svelte dev 构建 → `{framework, file, line}`
 - 三种形态：主动适配（script 引入）/ Chrome 扩展 / IDE 插件
 
-### 主线 C：aiti-mcp-bridge — AI agent 改造
+### 主线 C：aiti-bridge — AI agent 改造
 
 桥接层产品，核心三件事：
 
 1. **配置 aiti-devtools 使用**：桥地址/token/pageId，配置最小化
 2. **改造 AI agent**：让 Claude Code / Cursor / IDE 内置 AI 拥有操作页面、询问用户的能力
-3. **直达 IDE AI 窗口**：支持 aiti-devtools、aiti-devtools-vscode/idea 等插件完成注入，**通过 mcp-bridge 直接把消息发到 IDE 里的 AI agent 窗口**
+3. **直达 IDE AI 窗口**：支持 aiti-devtools、aiti-devtools-vscode/idea（idea 规划中）等插件完成注入，**通过 aiti-bridge 直接把消息发到 IDE 里的 AI agent 窗口**
 
 ## 与 pi / pi-web 的关系
 
@@ -60,7 +60,7 @@ tags: [guide, concept]
                 │
    ┌────────────┼────────────┐
    ▼            ▼            ▼
-aiti-agent   aiti-devtools  aiti-mcp-bridge
+aiti-agent   aiti-devtools  aiti-bridge
 (Web 工作台)  (本地注入生态)  (AI agent 改造)
    │            │            │
    └───── pi 引擎（earendil-works/pi）─────┘

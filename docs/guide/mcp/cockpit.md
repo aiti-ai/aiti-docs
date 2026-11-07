@@ -2,7 +2,7 @@
 title: 通用 AI 窗口 cockpit
 icon: 🛰️
 description: 引导页 + 地址配置中枢 + 人机协作操作台；三条接入路径；消息窗
-tags: [guide, mcp-bridge, cockpit, ai-window]
+tags: [guide, aiti-bridge, cockpit, ai-window]
 ---
 
 # 通用 AI 窗口（cockpit.html）
@@ -41,7 +41,7 @@ tags: [guide, mcp-bridge, cockpit, ai-window]
 
 ## 3. 分发途径与同域
 
-- 分发：① aiti-devtools 扩展 assets ② mcp bridge 服务自带（`--http 8777` 静态目录）③ aiti.pw 官方托管 ④ CDN / 生态插件（aiti-devtools-vite 等）
+- 分发：① aiti-devtools 扩展 assets ② mcp bridge 服务自带（`--port 8777` 静态目录）③ aiti.pw 官方托管 ④ CDN / 生态插件（aiti-devtools-vite 等）
 - **硬性要求：与宿主 inject 同域**（或 CORS 可通信）——postMessage 协议、localStorage 记忆（aiUrl/bridge）、协议探测都依赖同域；跨域时提示改用扩展/aiti.pw 路径。
 
 ## 4. 消息窗（路径二成功后）

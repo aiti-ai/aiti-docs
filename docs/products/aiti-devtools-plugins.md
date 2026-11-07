@@ -157,4 +157,4 @@ IDE 插件（vscode/idea）可以**替代或叠加**这里的工程内插件：
 | 不想动工程、想零依赖注入 | IDE 插件自动注入（代理 dev server / 端口转发） |
 | 两者都有 | IDE 插件检测到已注入则跳过，避免双注入 |
 
-> 产品定位见 [aiti-mcp-bridge](/products/aiti-mcp-bridge.md)，IDE 插件见 [IDE 插件](/products/aiti-ide-plugins.md)，使用文档见 [aiti-devtools · 框架集成](/devtools/integrations/vite.md)。
+> 产品定位见 [aiti-bridge](/products/aiti-bridge.md)，IDE 插件见 [IDE 插件](/products/aiti-ide-plugins.md)，使用文档见 [aiti-devtools · 框架集成](/devtools/integrations/vite.md)。

@@ -8,7 +8,7 @@ ext:
   soul: 常用的模型，应当在指尖。
   type: dev-repo
   category: 聊天增强
-  version: 0.1.0
+  version: "0.1.8"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai

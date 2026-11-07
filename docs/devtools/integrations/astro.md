@@ -84,4 +84,4 @@ pnpm dev --port 5499
 curl -s http://localhost:5499/ | grep -o aiti-launcher   # HTML 里应出现 launcher 脚本
 ```
 
-可运行示例：[examples/aiti-astro-demo](examples.md)（端口 5499）
+可运行示例：[examples/aiti-astro-demo](../examples.md)（端口 5499）

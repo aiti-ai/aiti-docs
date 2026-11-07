@@ -8,7 +8,7 @@ ext:
   soul: 大脑留给思考，命令交给收藏夹。
   type: dev-repo
   category: 命令工具
-  version: 0.1.1
+  version: "0.1.8"
   status: beta
   author: aiti-ai
   publisher: aiti-ai
@@ -28,6 +28,7 @@ ext:
 
 - 面板三页签（📋 总览 / 命令 / 历史）：总览聚合 agent 命令 + 终端会话，点行进详情；历史页含**来源分布**过滤条（按来源审计追责）
 - **终端 dock 接管 / 页签**：终端可停靠 dock、多会话页签化（近期批次 1e7cd696/5f694b68/924ea6b9）
+- **终端实时流**：增量帧走 aiti-event-bus 主题 `cmd-<id>` 唯一下行（旧 per-session SSE 已删），初始回放/大消息走 REST 快照 `/sessions/{id}/buffered`（seq 去重衔接）；订阅保活 `POST /alive`（前端 15s 心跳，45s 未刷新发布侧停推）；`GET /sessions/{id}/cwd` 取 shell 实时目录（「＋ 新建」/「新 pi-web 会话」用）。审计按天分片保留（启动+每日清理超期日志）；suggest 静态 provider 启动即注册进程内处理器（ai-input 免 HTTP 自环），`GET /commands/suggest` 同逻辑兜底
 - **智能提示豁免**：系统自动创建的条目（如 skill 导出）默认不参与 aiti-ai-input 智能提示
 - 已懒加载化（两段式转换，见 [懒加载契约](/guide/ext-lazy-loading.html)）
 - 设计文档：内部方案文档 §七（pi-commands 实时视图）、§7.6（pi-web `AgentSessionInfo` 契约补丁）、§8.1（总览制 UI）、**执行链集成方案 §7（实施记录）**

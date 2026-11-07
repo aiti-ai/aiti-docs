@@ -4,11 +4,11 @@ icon: 🔌
 ext:
   id: aiti-attach-agent
   name: 附着会话后端
-  description: Socket 附着已运行 agent 进程 —— 连接 pi TUI bridge；支持环境变量全自动（PI_WEB_BRIDGE_AUTO=1 任何 CLI 会话自动上桥）
+  description: Socket 附着已运行 agent 进程 —— 连接 pi TUI bridge；支持环境变量全自动（PI_WEB_BRIDGE_AUTO=1 任何 CLI 会话自动上桥）；followUp 排队回显 + 图片附件透传 + 空闲超时退出
   soul: 不抢方向盘——agent 已经在跑，附着上去看就好。
   type: dev-repo
   category: 多 agent 后端
-  version: 0.1.0
+  version: "0.1.6"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai
@@ -47,13 +47,18 @@ export PI_WEB_BRIDGE_AUTO=1                              # 任何 pi CLI 会话�
 之后每个终端 `pi` 会话（含 `-c` / `--resume` 恢复）在 `session_start` 时自动执行等价
 `/web --attach --no-spawn --no-open`：起 socket rpc 桥 + 写 `~/.pi/agent/bridge-registry.json`，
 不 spawn 不开浏览器。pi-web（dev/prod 任一实例）打开该会话即自动 attach——All Sessions
-列表带 `tui-bridge` 标，实时流式旁观 + 双向 IO（可在 web 里发消息/steer/切换模型）。
+列表带 `tui-bridge` 标，实时流式旁观 + 双向 IO（可在 web 里发消息/steer/follow_up 排队/带图/切换模型）。
+
+**排队回显与附件（2026-10）**：pi 的 `queue_update` 不进扩展事件通道——桥自维护文本镜像**合成广播**：入队 = 桥命令忙时（prompt/steer/follow_up）+ TUI 终端本地入队（`input` 事件感知：回车=steer、Alt+Enter=followUp）；出队 = `message_start(user)` 同序弹匹配文本；`get_state` 见空队而镜像非空即自愈清空。`get_state` 携带 `steering/followUp` 文本 → attach handle 补只读 `queueManage(list)`（排队面板刷新/重连恢复，变更动作 fail-loud）。prompt/steer/follow_up **透传图片附件**（此前排队/插队带图静默丢）。
+
+**空闲超时退出（2026-09-15）**：CLI 全自动桥的 pi TUI 会话空闲超时后自动 `ctx.shutdown()` 退出（清挂起进程 + 桥 socket + 连接器重试）——同一 env 与 pi-web inprocess 会话对齐；到点有页面 attach 或模型在跑则续期；手动 `/web` 与 headless 子代理不自动退。
 
 | env | 谁设置 | 效果 |
 |---|---|---|
 | `PI_WEB_BRIDGE_AUTO=1` | 用户 shell（CLI 全自动）或 pi-web 宿主（子代理注入） | 会话起动自动起桥 |
 | `PI_WEB_BRIDGE_BASE=<url>` | 用户 shell（可选） | 指向已运行 pi-web：`aiti_*` 工具与该实例托管桥合流；不设则 attach 照常（走注册表），aiti_* 走独立桥 |
 | `PI_WEB_BRIDGE_PORT` / `PI_WEB_BRIDGE_LANG` | 可选 | 桥端口推导 / 提示文案语言 |
+| `PI_WEB_IDLE_TIMEOUT_MS` | 用户 shell（可选） | CLI 自动桥空闲超时退出（默认 10 分钟，0 禁用；到点有页面 attach / 模型在跑则续期；手动 /web 与子代理不自动退；非法值回退默认） |
 | `PI_WEB_CHILD_MARKER` | pi-web 自动 | 宿主印记：有它 + 非子代理 = pi-web 内嵌会话，**不**自动桥（本来就在 web 里）|
 
 边界与行为细则：

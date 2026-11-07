@@ -8,7 +8,7 @@ ext:
   soul: 六家 agent 登录态，一屏看尽；多账号轮换，一键切换。
   type: dev-repo
   category: 多 agent 后端
-  version: 0.2.0
+  version: "0.2.8"
   status: active
   author: aiti-ai
   publisher: aiti-ai

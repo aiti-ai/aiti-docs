@@ -29,7 +29,7 @@ pi-web 场景下 aiti-devtools 的服务端与接线层：
 
 - **注入器**：向经 pi-web 访问的页面注入 launcher（fab/HUD/工具条/AI 窗）+ client（选区、事件冻结、类 CDP 命令集）
 - **桥**：页面 ⇄ agent 的消息/会话核心（claim/SSE/result 协议，浏览器端在 `bridge-client.js`）
-- **MCP server 端**：`aiti_*` 工具族经方案 M（`server.agent` 扩展点）进程内注入每个 agent 会话，零 MCP 配置文件
+- **MCP server 端**：`aiti_*` 工具族经方案 M（`server.agent` 扩展点）进程内注入每个 agent 会话，零 MCP 配置文件；外部标准 MCP 宿主走 aiti stdio shim（core `mcp-config.ts` 注册，`AITI_BRIDGE_URL` 接入）
 
 ## AI 自管理能力
 

@@ -8,7 +8,7 @@ ext:
   soul: 只读档零依赖——Apache 链路看 Word，编辑交给 SuperDoc / OnlyOffice。
   type: dev-repo
   category: 开发工具
-  version: 0.1.0
+  version: "0.1.7"
   status: active
   author: aiti-ai
   publisher: aiti-ai
@@ -17,7 +17,7 @@ ext:
   install: |
     # 部署到 ~/.pi/web/extensions/aiti-word-docx-preview/ 后 reload
     # 依赖：aiti-editor（多编辑器仲裁宿主）
-  license: Apache-2.0（本扩展）/ docx-preview Apache-2.0 + JSZip MIT/GPLv3 双许可
+  license: Apache-2.0（本扩展；源码侧 package.json 与 LICENSE 文件不一致——LICENSE 为 MIT，待统一）/ docx-preview Apache-2.0 + JSZip MIT/GPLv3 双许可
   tags: [word, docx, preview, docx-preview, file-viewer]
 ---
 
@@ -40,3 +40,4 @@ ext:
 - vendor UMD 懒加载（docx-preview 75K + jszip 97K），打开 .docx 才拉取
 - 只装本扩展时点「编辑」→ 能力联动提示/路由（aiti-word-superdoc / aiti-onlyoffice 承接编辑）
 - 停用本扩展 → docx 预览回核心 mammoth（零回归）
+- 许可注记：package.json 声明 Apache-2.0，但目录 LICENSE 文件为 MIT——源码侧不一致，待统一

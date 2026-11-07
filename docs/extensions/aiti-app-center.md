@@ -8,7 +8,7 @@ ext:
   soul: 所有插件入口的家——折叠即开始菜单。
   type: dev-repo
   category: 系统与管理
-  version: 0.2.0
+  version: "0.2.8"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai
@@ -43,6 +43,7 @@ ext:
 - **形态自适应（v3）**：应用 ≤ 12 平铺全部；否则常用 +「更多」两段式——无钉住记录（首次态）「更多」默认展开；形态判断取**实际可见钉住数**（隐藏项/未注册条目不计）
 - **用户定制**：`pi:app-center:pinned:v1` / `pi:app-center:hidden:v1`（localStorage，客户端约定；只存应用卡）+ 同 tab `pi:app-center:store` 事件与跨 tab `storage` 同步；v1 残留的 `toggle:*` 记录由 `pruneToggleIds()` 在组件加载时一次性清洗（幂等、干净时零写入）
 - **移动端**：卡片触达 ≥40px、搜索不自动聚焦、chips 换行 tag 云、操作按钮 `hover:none` 常显；应用中心随侧栏抽屉全屏
+- **死入口防御（v0.2.x）**：feature 门控关闭的条目不进卡（宿主各消费方都会隐藏它，抽屉里留着 = 永远打不开）；面板卡 id 用宿主全序 dock key（`<extId>:<id>`）寻址、静态面板声明（`static:true`）不进卡；同扩展跨 kind 同名双卡去重（保留面板卡——present 语义最全，面板缺席回退动作卡）
 
 ## 架构
 

@@ -8,7 +8,7 @@ ext:
   soul: OpenCode 会话在 pi-web 里打开、续聊、回放。
   type: dev-repo
   category: 多 agent 后端
-  version: 0.1.0
+  version: "0.1.6"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai
@@ -22,7 +22,7 @@ ext:
 
 # aiti-opencode-agent
 
-> OpenCode（sst/opencode）CLI 会话后端扩展：All Sessions 里能看到并打开 opencode 历史会话、在 pi-web 里续聊。会话**读取**的权威实现仍在 session-manager（`lib/agents/opencode.ts`），本扩展只负责驱动。
+> OpenCode（sst/opencode）CLI 会话后端扩展：All Sessions 里能看到并打开 opencode 历史会话、在 pi-web 里续聊。会话**读取**的权威实现仍在 session-manager（`lib/agents/opencode.ts`——opencode 1.19.5 起新会话只写单 SQLite 库 `~/.local/share/opencode/opencode.db` 的 message+part 两表，modern 主路径 + 旧 session_message 恒空兜底），本扩展只负责驱动。
 
 ## 机制
 
@@ -34,7 +34,7 @@ ext:
 
 ## 能力面（v1 刻意收窄）
 
-核心四件套 + getMessages；模型跟随 opencode 配置默认（无 setModel/listModels，选择器隐藏）；steer/followUp/图片附件（`-f`）为后续项。
+prompt / abort / contextUsage / getMessages 四件套（followUp 刻意 false）；模型跟随 opencode 配置默认（无 setModel/listModels，选择器隐藏）；steer/图片附件为后续项。
 
 ## 认证
 

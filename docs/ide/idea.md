@@ -14,7 +14,7 @@ tags: [ide, idea, jetbrains]
 | 功能 | 说明 |
 |---|---|
 | 一键注入 | 代理 dev server 注入 aiti-devtools（与 VS Code 版同构） |
-| 自动起桥 | 启动/停止 `aiti-mcp-bridge`，端口可配 |
+| 自动起桥 | 启动/停止 `aiti-bridge`，端口可配 |
 | 自动配置 MCP | 写 JetBrains MCP 配置（`mcp.xml`），让 **AI Assistant** 具备页面工具 |
 | AI 窗口 aiti 面板 | Tool Window 嵌入：pageId、sessions、作答卡、事件日志 |
 | 作答卡直达 | `user_*` 交互直接在 AI Assistant 窗口作答 |

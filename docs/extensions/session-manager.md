@@ -4,11 +4,11 @@ icon: 📋
 ext:
   id: session-manager
   name: session-manager
-  description: 跨项目会话面板 —— tag 树+颜色 / 收藏 / 搜索 / 归档 / 看板
+  description: 跨项目会话面板 —— tag 树+颜色 / 收藏 / 搜索 / 归档 / 看板 / 新建会话分支·Worktree 选择器 / 23 家 agent 历史解析 / DockStack 编排
   soul: 会话不是用完即走的流水，是每天都在累积的资产。
   type: dev-repo
   category: 会话管理
-  version: 0.2.0
+  version: "0.2.14"
   status: active
   author: aiti-ai
   publisher: aiti-ai
@@ -18,7 +18,7 @@ ext:
     # 部署到 ~/.pi/web/extensions/session-manager/ 后 reload：
     curl -X POST http://127.0.0.1:<端口>/api/extensions/reload
   license: MIT
-  tags: [sessions, tag, search, archive]
+  tags: [sessions, tag, search, archive, worktree, dock, agents]
 ---
 
 # session-manager
@@ -27,8 +27,13 @@ ext:
 
 aiti-agent（pi-web）的跨项目会话管理扩展：tag 树 + 颜色、收藏、FTS5 全文搜索、[`.pwarc` 归档](/extensions/session-manager-archive.html)、看板视图。All Sessions 侧栏 dock 的承载扩展。
 
-## 近期能力（2026-08 下旬～09）
+## 近期能力（2026-09 中旬～11）
 
+- **新建会话「分支 / Worktree」选择器（2026-09-17）**：欢迎页 Workspace×Backend 之间（宿主 `newSessionSelectors`/`newSessionPreparers` 双插槽）——选择阶段零副作用，只暂存意图 + 显示意图条；发送首条消息时 preparer 统一执行写操作：建/复用 worktree 改写目标 cwd，或 checkout——遇 409 未提交文件冲突弹三选一卡（转 worktree / stash 后切 / 取消），**绝不丢文件**；远程分支先建同名本地分支。非 git 目录整器不渲染；aiti-git-ops 缺席（refs 404）→ 分支分区隐藏、worktree 模式强制按开。
+- **分支 chip + BranchPanel（共享 git-ops 客户端）**：折叠头 `⎇` 分支 chip 与选择器复用 `_shared/git-ops-client` BranchPanel（分支/worktree 管理、stash 交互、冲突卡）；模块级 refs 缓存，切回已探测目录零请求；数据零轮询——`aiti-git-ops:changed:*` topic 订阅驱动刷新。
+- **多 agent 解析器（lib/agents）**：**23 个内置 AgentAdapter**（claude-like 系 / codex / opencode 系 / zcode / codebuddy / cursor 系 / trae / kimi / gemini / openclaw / iflow / goose / amp…），`services.sessions.parseSession` 唯一权威实现；真归档名单按 snapshot+removeSession+putBack 三原语自动筛选驱动 📦 菜单。
+- **会话行数据帧化（2026-09-14/15）**：message_end 落盘即经 aiti-event-bus 广播 `sm:session-activity` 行数据帧，列表行消息数/时间实时 patch，零轮询零重拉。
+- **左栏 DockStack 编排**：区块栈容器由 `aiti-float.dockstack` 能力提供（`dependsOn` 硬依赖，extman 阻止 aiti-float 被单独禁用）；全折叠空白 filler = 快速上手引导卡（aiti-quickstart）+ 应用中心（aiti-app-center），二者 optionalDependsOn 缺席各自回退。
 - **外部 agent 行（ext 行）视图层管理**：dock/面板 📦 菜单对 zcode/cursor 等外部源行「从列表移除」——纯视图层收进**归档分组**，源数据不动，归档行可随时 reopen（恢复 + ⚡ 接管），永不丢数据；不提供彻底删除。
 - **tag 数据实时同步**：tag 变更经 aiti-event-bus 帧驱动刷新——跨 tab/实例即时生效，无轮询。
 - **高级搜索**（sider dock）：搜索框旁「高级」toggle——All Sessions 全量下按 agent/tag 过滤，结果行带 agent 徽标。

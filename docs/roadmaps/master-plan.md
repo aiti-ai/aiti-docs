@@ -8,7 +8,7 @@ description: aiti 整体规划 — 目标、产品矩阵、分层架构、里程
 
 > **活文档**：本文是 aiti 生态的唯一总纲，持续更新。每完成一步，更新对应状态标记（✅ 完成 / 🚧 进行中 / 📋 待定）。
 > 一句话：**以 pi 为引擎，构建「Web 工作台 + 本地注入 + MCP 桥接」三位一体的 AI 开发工具生态** ——
-> Web 工作台为主操作面、与 pi CLI / IDE 扩展同源兼容（aiti-agent），主流开发工具本地注入（aiti-devtools），任意 AI agent 直达 IDE 窗口（aiti-mcp-bridge）。
+> Web 工作台为主操作面、与 pi CLI / IDE 扩展同源兼容（aiti-agent），主流开发工具本地注入（aiti-devtools），任意 AI agent 直达 IDE 窗口（aiti-bridge）。
 
 ---
 
@@ -35,7 +35,7 @@ description: aiti 整体规划 — 目标、产品矩阵、分层架构、里程
 ├─────────────────────────────────────────────────────────────┤
 │ L3 Agent 层 Claude Code · Cursor · IDE AI · aiti-agent       │
 ├─────────────────────────────────────────────────────────────┤
-│ L2 桥接层  aiti-mcp-bridge · aiti-mcp-server                  │
+│ L2 桥接层  aiti-bridge（MCP 端点内置）          │
 ├─────────────────────────────────────────────────────────────┤
 │ L1 注入层  aiti-devtools · vite/vue/next/react/svelte 插件    │
 └─────────────────────────────────────────────────────────────┘
@@ -45,7 +45,7 @@ description: aiti 整体规划 — 目标、产品矩阵、分层架构、里程
 |---|---|---|---|
 | L1 | aiti-devtools（核心包） | ✅ 0.2.x 自检 21/21 | R1 稳定 + 发布 |
 | L1 | devtools-vite/vue/next/react/svelte | 📋 | R2 |
-| L2 | aiti-mcp-bridge / server | 🚧 桥链路已通 | R2 配置最小化收官 |
+| L2 | aiti-bridge / server | 🚧 桥链路已通 | R2 配置最小化收官 |
 | L3 | 任意 AI agent 接入 | ✅ 协议就绪 | 持续 |
 | L4 | aiti-agent（基于 pi-web） | 📋 M0 | M0-M4 |
 | L4 | devtools-vscode / idea | 📋 | R3 |
@@ -58,7 +58,7 @@ description: aiti 整体规划 — 目标、产品矩阵、分层架构、里程
 
 1. **主线 A · aiti-agent**：以 pi 为引擎的自托管 Web 工作台 —— 浏览器主操作面（兼容 pi CLI / IDE 扩展）、Docker 一键起、远程调试可视化。
 2. **主线 B · aiti-devtools**：嵌入各主流开发工具（Vite/Vue/Next/React/Svelte）、**本地 inject**、AI 与页面同场协作。
-3. **主线 C · aiti-mcp-bridge**：配置 aiti-devtools 使用、**改造 AI agent**、支持 aiti-devtools 与 vscode/idea 插件完成注入、**消息直达 IDE 的 AI agent 窗口**。
+3. **主线 C · aiti-bridge**：配置 aiti-devtools 使用、**改造 AI agent**、支持 aiti-devtools 与 vscode/idea 插件完成注入、**消息直达 IDE 的 AI agent 窗口**。
 
 ### 2.2 原则
 
@@ -79,7 +79,7 @@ timeline
     2026 Q4 R1 : devtools 稳定发布 · 框架插件
     2026 Q4 M0 : aiti-agent 地基（rebase v0.8.7）
     2027 Q1 M1 : Docker 一键 · ttyd 终端 · just get v1
-    2027 Q1 R2 : devtools 插件矩阵 · mcp-bridge 配置最小化
+    2027 Q1 R2 : devtools 插件矩阵 · aiti-bridge 配置最小化
     2027 Q2 M2 : Chrome CDP 远程调试 · CLI 桥接
     2027 Q2 R3 : IDE 插件 vscode/idea · 消息直达 AI 窗口
     2027 Q3 M3 : noVNC 桌面可视化 · 任意 GUI
@@ -92,7 +92,7 @@ timeline
 |---|---|---|---|
 | **R0 · 协议** | 注入/桥/会话协议打通 | 方案 B/C/D/E ✅；aiti-devtools 0.2.x（21 项自检）；桥端点全量 | ✅ |
 | **R1 · 核心可用** | 开发者开箱即用 | `@aiti-ai/aiti-devtools` 正式发布；README/demo 完善；`AITI_*` 环境变量统一 | 🚧 |
-| **R2 · 插件矩阵** | 嵌入主流开发工具 | devtools-vite/vue/next/react/svelte；mcp-bridge 配置最小化收官；Chrome 扩展 | 📋 |
+| **R2 · 插件矩阵** | 嵌入主流开发工具 | devtools-vite/vue/next/react/svelte；aiti-bridge 配置最小化收官；Chrome 扩展 | 📋 |
 | **R3 · IDE 插件** | 消息直达 IDE AI 窗口 | devtools-vscode / devtools-idea（注入 + 桥 + AI 窗口面板 + 作答卡） | 📋 |
 | **R4 · 平台化** | 生态开放 | 扩展市场（npm + MCP registry 数据源）、公开协议文档、贡献指南 | 📋 |
 
@@ -175,7 +175,7 @@ timeline
 
 - [ ] **aiti-devtools 1.0 前稳定**：0.2.x 发布打磨、`AITI_*` 收口、自检扩展（21 → 30+）
 - [ ] **devtools 插件矩阵**：vite 优先（R2），vue/next/react/svelte 跟进
-- [ ] **aiti-mcp-bridge 配置最小化收官**：claim/secret/TTL 全量验证；sessions 发现文档化
+- [ ] **aiti-bridge 配置最小化收官**：claim/secret/TTL 全量验证；sessions 发现文档化
 - [ ] **aiti-agent M0**：rebase v0.8.7、验证链、service-tunnels 公开化
 - [ ] **IDE 插件（R3）**：vscode 先行（注入 + 桥 + Copilot Chat 面板），idea 跟进
 - [ ] **域名/托管**：aiti.pw 解析生效后配置站点（海外托管免备案）
@@ -194,6 +194,6 @@ timeline
 | [产品矩阵](/products/README.md) | 14 个产品全景 |
 | [aiti-agent 规划](/roadmaps/aiti-agent.md) | Web 工作台阶段计划 |
 | [aiti-devtools 规划](/roadmaps/aiti-devtools.md) | 注入生态计划 |
-| [aiti-mcp-bridge 规划](/roadmaps/aiti-mcp-bridge.md) | 桥接层计划 |
+| [aiti-bridge 规划](/roadmaps/aiti-bridge.md) | 桥接层计划 |
 | [指南 · 架构](/guide/architecture.md) | 分层架构与数据流 |
 | [MCP 桥 · 会话](/guide/mcp/session.md) | pageId 会话体系 |

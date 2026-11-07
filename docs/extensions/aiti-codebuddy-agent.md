@@ -4,11 +4,11 @@ icon: 🔵
 ext:
   id: aiti-codebuddy-agent
   name: CodeBuddy Code 会话后端
-  description: 腾讯 CodeBuddy Code CLI（cbc）驱动 —— 每轮单发 -p stream-json + --resume 接入 All Sessions，API-key env 登录
+  description: 腾讯 CodeBuddy Code CLI（cbc）驱动 —— stream 长连接（默认）+ exec 兜底双模式 + --resume 接入 All Sessions，control_request 三通道，API-key env 登录
   soul: 腾讯 CodeBuddy 会话，哪儿都能接上聊。
   type: dev-repo
   category: 多 agent 后端
-  version: 0.1.0
+  version: "0.1.6"
   status: active
   author: aiti-ai
   publisher: aiti-ai
@@ -25,19 +25,19 @@ ext:
 
 > ❝ **腾讯 CodeBuddy 会话，哪儿都能接上聊。** ❞
 
-腾讯 CodeBuddy Code（WorkBuddy 桌面端剥离的官方 CLI，npm 包 `@tencent-ai/codebuddy-code`，命令 `cbc`）会话后端：每轮单发进程 + `--resume` 续聊（同 zcode/codex 的 exec 模式），接入 All Sessions 多 agent 前端——面板里的 cbc 历史行（`codebuddy:<sid>`）一键复活为 live 会话。
+腾讯 CodeBuddy Code（WorkBuddy 桌面端剥离的官方 CLI，npm 包 `@tencent-ai/codebuddy-code`，命令 `cbc`）会话后端：接入 All Sessions 多 agent 前端——面板里的 cbc 历史行（`codebuddy:<sid>`）一键复活为 live 会话。
 
-方案底稿：`docs/aiti-codebuddy-agent-plan.md`（2026-09-10 实测 2.148.0，§10 实施记录）。
+方案底稿：`docs/aiti-codebuddy-agent-plan.md`（2026-09-10 实测 2.148.0；**2.150.0 起转 stream 长连接**，§10 实施记录）。
 
-## 机制
+## 机制（进程模型双档，feature `codebuddy.connectionMode`）
 
-- 协议：`cbc -p <prompt> --output-format stream-json --include-partial-messages [--model M] [--permission-mode X] [--resume sid]`
+- **stream（默认，2.150.0 实测）**：单进程长连接多轮——stdin 续写 + `control_request` 三通道（interrupt / set_model / set_permission_mode **运行中即时生效**）+ `can_use_tool` 转前端授权卡（respondPermission ✅）
+- **exec（兼容档）**：`cbc -p <prompt> --output-format stream-json [--model M] [--permission-mode X] [--resume sid]` 每轮单发，模型/权限切换下轮生效，respondPermission:false（print 模式无审批面，`--permission-mode` 预放行）
 - **stream-json 输出与 Claude Code 同形**：system/init（`session_id`/`model`/`tools`/`slash_commands`）+ stream_event（text_delta 增量）+ assistant + result（`is_error`/`usage`/`modelUsage.contextWindow`）
 - ⚠ 错误轮 exit code 也是 0 —— 成败只认 result 帧
 - 懒持久化：首轮 init 帧捕获真实 sid → `session_backend_ready` 换绑 `codebuddy:<uuid>`
 - 历史回放：复活路径经 All Sessions 服务出口（session-manager `services.sessions`；cbc 存储的唯一读取实现在其 `lib/agents/codebuddy.ts`——**存储 jsonl 与 claude 非同构**：顶层 role/content + 数字毫秒时间戳 + `function_call`/`function_call_result`/`reasoning` 独立行型，工具调用折叠为结构化 tool 行 → 查看器原生工具卡（input/output 段），reasoning 不进时间线但提供真实模型）
 - CLI 解析：feature `codebuddy.cliPath` → PATH 上的 `cbc`/`codebuddy` → npx 兜底（`process.execPath` + npm npx-cli.js，免 systemd PATH 坑；首用有包下载延迟）
-- 队列：`_shared/backend-queue.ts` 共享层——运行中输入一律入本地 followUp 队列（单发模式无 steer 面），面板可见可撤回、settle 自动续轮
 
 ## 登录与凭据（双档齐备）
 
@@ -52,9 +52,9 @@ ext:
 - `POST /login/tui/input` `{text}`：站点选择等人工介入键入转发（进程仍在后端）；`POST /login/tui/cancel` 终止
 - 不实现 OAuth 协议、不碰凭据内容（受控登录标准哲学；`docs/aiti-codebuddy-agent-plan.md` §9.3）
 
-## 能力面（fail-loud）
+## 能力面（fail-loud，按通道分流）
 
-followUp / queueManage / setModel（下轮 `--model`）/ setPermissionMode（下轮 `--permission-mode`）/ listModels / getUsage / contextUsage（result.modelUsage）/ getMessages / listTools / getCommands ✅；steer / respondPermission（print 模式无审批面，`--permission-mode` 预放行）/ 文件附件 ❌
+followUp / queueManage / setModel / setPermissionMode / listModels / getUsage / contextUsage（result.modelUsage）/ getMessages / listTools / getCommands ✅；stream 模式 setModel/setPermissionMode 运行中即时生效 + **respondPermission ✅**（can_use_tool → 前端批准/拒绝）；exec 兼容档切换下轮生效、respondPermission ❌；steer / 文件附件 ❌
 
 ## 会话 recycle
 
@@ -65,6 +65,6 @@ followUp / queueManage / setModel（下轮 `--model`）/ setPermissionMode（下
 - `MCP_TARGETS` 已含 codebuddy（`~/.codebuddy/.mcp.json`）：`node dev-repo/bridge/bin/aiti-mcp-register.mjs --targets codebuddy` 注册 `aiti` shim 条目
 - spawn env：治理白名单透传服务进程的 `AITI_BRIDGE_URL`；feature `codebuddy.bridgeUrl` 显式覆盖（优先生效）。两者皆无 → cbc 会话不含 aiti_* 工具，不影响正常对话
 
-## 模型目录
+## 模型目录（动态，D13）
 
-cbc 内置（`--help` 实测）：default/fast/balanced/primary/deep 档位 + glm-5.3 / glm-5.2 / kimi-k3 / kimi-k2.6 / minimax-m3 / gemini-3.5-flash / gpt-5.6-{sol,terra,luna} / gpt-5.5 / gpt-5.4 / gpt-5.3-codex，并与 pi 目录合并展示。
+`cbc --help` 真实清单经共享解析器 `probeCbcCatalog` 探测 + cache 层（`<cacheDir>/cbc-model-catalog.json`，可再生）——**动态为准**，文档清单降级为 fallback seed（default/fast/balanced/primary/deep 档位 + glm-5.3 / glm-5.2 / kimi-k3 / kimi-k2.6 / minimax-m3 / gemini-3.5-flash / gpt-5.6-{sol,terra,luna} / gpt-5.5 / gpt-5.4 / gpt-5.3-codex…新 cbc 已含 hy4-preview / glm-5.3-flash / kimi-k3-1 / kimi-k2.8-preview 等 16 档），并与 pi 目录合并展示。

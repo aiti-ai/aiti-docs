@@ -15,11 +15,13 @@ tags: [guide, architecture]
 ├─────────────────────────────────────────────────────────────┤
 │ L3 Agent 层 任意 AI agent（MCP client）                        │
 ├─────────────────────────────────────────────────────────────┤
-│ L2 桥接层    aiti-mcp-bridge / aiti-mcp-server                 │
+│ L2 桥接层    aiti-bridge（MCP 端点内置）         │
 ├─────────────────────────────────────────────────────────────┤
-│ L1 注入层    aiti-devtools + vite/vue/next/react/svelte 插件    │
+│ L1 注入层    aiti-devtools + vite/webpack/nuxt 插件             │
 └─────────────────────────────────────────────────────────────┘
 ```
+
+> npm 插件包仅三个：`@aiti-ai/aiti-devtools-vite`（含 `/astro` 子导出）/ `@aiti-ai/aiti-devtools-webpack` / `@aiti-ai/aiti-devtools-nuxt`；Vue/SvelteKit 工程复用 Vite 插件，Next/Express 走 core 手动接线。
 
 | 层 | 关键组件 | 职责 |
 |---|---|---|
@@ -31,22 +33,22 @@ tags: [guide, architecture]
 ## 2. 注入链路（本地 inject）
 
 ```
-工程插件（vite/vue/next/...） 或 IDE 插件代理 或 Chrome 扩展
+工程插件（vite/webpack/nuxt/...） 或 IDE 插件代理 或 Chrome 扩展
         │ 注入（prepend / transformResponse 同语义）
         ▼
-createAitiLauncher → window.__aiti 暴露
+createDbgLauncher → window.__dbg 暴露
         │
-        ├── 宿主自身注入（__AITI_POST__ 回调，source='self'）
+        ├── 宿主自身注入（__DBG_POST__ 回调，source='self'）
         ├── 同源 iframe 注入（injectAllIframes + MutationObserver 兜底）
         └── 跨域 iframe 跳过（可枚举、不可定向执行）
         │
         ▼
-消息信封：{ __aiti:1, type:'aiti_*', payload, requestId, _f:frameId }
+消息信封：{ __dbg:1, type:'dbg_*', payload, requestId, _f:frameId }
 ```
 
-- 宿主 → iframe：`postMessage({__aiti:1, _f:frameId, ...}, '*')`
+- 宿主 → iframe：`postMessage({__dbg:1, _f:frameId, ...}, '*')`
 - iframe → 宿主：`parent.postMessage`，宿主按 `e.source` 识别来源
-- 异步命令：`execInPage(cmd, args, frameId)` → `requestId` 入 pending → 结果回 `aiti_exec_result{requestId,...}` resolve
+- 异步命令：`execInPage(cmd, args, frameId)` → `requestId` 入 pending → 结果回 `dbg_exec_result{requestId,...}` resolve
 
 ## 3. 桥链路（MCP ⇄ 页面）
 
@@ -54,19 +56,18 @@ createAitiLauncher → window.__aiti 暴露
 AI (MCP client)
   │ JSON-RPC (stdio / HTTP stateless / Streamable HTTP)
   ▼
-bridge: /mcp/mcp ── tools/list · tools/call(page_exec/page_snapshot/user_*/aiti_inbox)
-  │ SSE 推 {type:'exec', requestId, cmd, args}
+bridge: /mcp（旧 /mcp/mcp 形态仍兼容）── tools/list · tools/call(page_exec/page_snapshot/user_*/aiti_inbox)
+  │ SSE 下发 exec，页面 client（window.BridgeClient.connect 接入，EventSource 长连）接收
   ▼
-页面 client（mcpConnect 注册，EventSource 长连）
-  │ post({type:'aiti_mcp_exec'})
+exec 帧转发进页面：postMessage({__dbg:1, type:'dbg_exec', _f:frameId})
   ▼
 宿主 handleAiCommand → 危险命令确认 → execInPage 路由到 frameId
-  │ aiti_exec_result → POST /bridge/result {pageId, requestId, ok, result}
+  │ dbg_exec_result → POST /bridge/result {pageId, requestId, ok, result}
   ▼
 bridge 全局 pendingRequests resolve → MCP 响应回 AI
 ```
 
-- **Streamable HTTP**（2026-08）：`GET /mcp/mcp` 持久流 + `Mcp-Session-Id`——服务端可主动写消息（sampling 请求/进度）；pi 等现代 client 自动优先探测（详情见 [MCP Server](/guide/mcp/server.md)）。
+- **Streamable HTTP**（2026-08）：`GET /mcp` 持久流 + `Mcp-Session-Id`（`/mcp/mcp` 旧形态仍兼容）——服务端可主动写消息（sampling 请求/进度）；pi 等现代 client 自动优先探测（详情见 [MCP Server](/guide/mcp/server.md)）。
 - **消息主通道 `aiti_inbox`**（2026-08）：人发消息/异步作答/页面事件进 outbox 队列，agent 调工具取走（任何 agent 100% 可用；sampling 推仅 pi 等少数支持，见 [接入 AI agent](/guide/mcp/ai-agents.md)）。
 - **人侧界面 cockpit**（2026-08）：引导接入 + 地址配置中枢 + 操作台；无 aiUrl 时 AI 窗默认打开（见 [cockpit](/guide/mcp/cockpit.md)）。
 
@@ -91,7 +92,7 @@ pageId = instanceId/frameId
 sequenceDiagram
     participant U as 开发者(IDE)
     participant IDE as IDE AI 窗口
-    participant B as aiti-mcp-bridge
+    participant B as aiti-bridge
     participant P as 页面(aiti-devtools)
 
     U->>IDE: 「首页按钮没反应，帮我查」
@@ -116,7 +117,7 @@ sequenceDiagram
   ▼
 aiti-agent (Next.js, 基于 pi-web)
   ├── 会话管理（共享 pi JSONL + queue 持久化）
-  ├── 扩展运行时（registry + 17 插槽 + features 功能管理 + 懒加载两段式）
+  ├── 扩展运行时（registry + 29+ 插槽（持续新增 dock 类）+ features 功能管理 + 懒加载两段式）
   │     ├── ctx.services 定位器（跨扩展服务）· ctx.features（开关收口）· 数据分层（config/state/cache）
   │     ├── 依赖与能力模型（dependsOn/provides/takeover + extman 三视图裁决）
   │     └── aiti-event-bus（页面事件总线归口，全帧 SSE）

@@ -2,12 +2,12 @@
 title: 接入 AI agent
 icon: 🧠
 description: 能力矩阵、分 agent 接入与引导 prompt、aiti_inbox 主通道
-tags: [guide, mcp-bridge, ai-agent]
+tags: [guide, aiti-bridge, ai-agent]
 ---
 
 # 接入 AI agent
 
-aiti-mcp-bridge 的核心价值：**让任意 AI agent 拥有操作页面、询问用户、接收消息的能力**。接入 = 配置一个标准 MCP server；**任何 agent 100% 可用的消息通道是 `aiti_inbox`（agent 主动取）**，不是推送。
+aiti-bridge 的核心价值：**让任意 AI agent 拥有操作页面、询问用户、接收消息的能力**。接入 = 配置一个标准 MCP server；**任何 agent 100% 可用的消息通道是 `aiti_inbox`（agent 主动取）**，不是推送。
 
 ## 1. 能力矩阵（2026-08 调研实证）
 
@@ -33,7 +33,7 @@ aiti-mcp-bridge 的核心价值：**让任意 AI agent 拥有操作页面、询�
 ### Claude Code
 
 ```bash
-claude mcp add aiti -- npx @aiti-ai/aiti-mcp-server --bridge http://localhost:8777
+npx @aiti-ai/aiti-bridge --register-shim claude   # 注册 aiti 条目；启动 claude 带 env AITI_BRIDGE_URL 即接入
 claude mcp list   # 确认 aiti 已连接
 ```
 
@@ -44,8 +44,9 @@ claude mcp list   # 确认 aiti 已连接
   "servers": {
     "aiti": {
       "type": "stdio",
-      "command": "npx",
-      "args": ["@aiti-ai/aiti-mcp-server", "--bridge", "http://localhost:8777"]
+      "command": "node",
+      "args": ["<桥安装目录>/bin/aiti-mcp-shim.cjs"],
+      "env": { "AITI_BRIDGE_URL": "http://127.0.0.1:8777" }
     }
   }
 }

@@ -7,7 +7,7 @@ tags: [product, ide, vscode, idea]
 
 # aiti IDE 插件 — vscode / idea
 
-> **一句话**：IDE 插件是"注入 + 桥 + AI 窗口"的**最后一公里** —— 一键完成注入，经 mcp-bridge **直接把消息发到 IDE 里的 AI agent 窗口**（Copilot Chat / Cursor / JetBrains AI Assistant 等）。
+> **一句话**：IDE 插件是"注入 + 桥 + AI 窗口"的**最后一公里** —— 一键完成注入，经 aiti-bridge **直接把消息发到 IDE 里的 AI agent 窗口**（Copilot Chat / Cursor / JetBrains AI Assistant 等）。
 
 ## 1. 插件矩阵
 
@@ -25,7 +25,7 @@ tags: [product, ide, vscode, idea]
 - 跨端一致：注入脚本与工程内插件、Chrome 扩展**同一份**，桥协议不变
 
 ### ② 配置桥（Bridge）
-- 一键启动/停止 `aiti-mcp-bridge`（本地 8777，端口可配）
+- 一键启动/停止 `aiti-bridge`（本地 8777，端口可配）
 - 自动登记当前工程页面 → 生成 `pageId` → 写入 MCP 配置
 - 自动配置 IDE 内置 AI agent 的 MCP 客户端（VS Code 写 `.vscode/mcp.json` 或 settings；JetBrains 写 MCP 配置 XML）
 
@@ -39,7 +39,7 @@ tags: [product, ide, vscode, idea]
 
 ```
 1. 打开工程 → 命令面板 → "aiti: 启用页面调试"
-2. 插件启动 dev server 代理注入 + 拉起 mcp-bridge（自动配置 .vscode/mcp.json）
+2. 插件启动 dev server 代理注入 + 拉起 aiti-bridge（自动配置 .vscode/mcp.json）
 3. 在 Copilot Chat（或 Cursor）里直接问：
    「首页按钮点了没反应，帮我查一下」
 4. AI 调用 page_exec 点击按钮 → 采集 console 报错 → 回 IDE AI 窗口

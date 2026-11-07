@@ -1,11 +1,11 @@
 ---
 title: CDP 命令集
 icon: 🎛️
-description: page_exec 可执行的类 CDP 命令全集 —— 8 域 48 命令
+description: page_exec 可执行的类 CDP 命令全集 —— 8 域 47 命令
 tags: [devtools, cdp, commands]
 ---
 
-# CDP 命令集（8 域 48 命令）
+# CDP 命令集（8 域 47 命令）
 
 `page_exec` 在目标页面内执行类 CDP 命令：`{ cmd: "DOM.querySelector", args: {...} }`。命令由注入 client 在页面上下文本地实现（非 Chrome DevTools Protocol 原生转发），命名对齐 CDP 风格。
 

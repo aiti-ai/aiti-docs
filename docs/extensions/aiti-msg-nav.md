@@ -8,7 +8,7 @@ ext:
   soul: 千楼万楼的聊天记录，电梯比楼梯好用。
   type: dev-repo
   category: 聊天增强
-  version: 0.1.0
+  version: "0.1.7"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai
@@ -33,7 +33,8 @@ ext:
 
 - **纯前端扩展**：原为 pi-web 内置的 `ScrollToolbar`，整体抽离为扩展——core 只留一个 `chatOverlay` 插槽挂载点，全部交互/定位/滚动逻辑在 client bundle 里，靠两条 DOM 契约工作（`[data-chat-scroll]` 滚动容器 / `[data-chat-msg-role]` 消息节点），**零服务端 API**。
 - **依赖核心懒分页**：滚到顶部触发 sentinel → core 自动加载更早消息并保持视口；到最早已加载到底时在容器顶端延时重试。
-- **用户消息定位**：`getBoundingClientRect` 相对容器顶 + `scrollTop`，二分找锚点（`scrollTop + 8` 为视口顶部判定边界）。
+- **用户消息定位**：线性扫描找锚点（`getBoundingClientRect` 相对容器顶 + `scrollTop`，`scrollTop + 8` 为视口顶部判定边界）。
+- **拖拽换位**：整条导航条可拖到消息区任意位置（localStorage `pi-scroll-toolbar-pos` 持久化，与旧内置版同 key 保留用户习惯）。
 
 ## 功能管理（extman）
 

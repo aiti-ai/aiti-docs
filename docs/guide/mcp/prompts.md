@@ -2,7 +2,7 @@
 title: agent prompt 示例
 icon: 📋
 description: 无 aiti AI 窗直接集成时，MCP 工作流接入各 agent 的引导 prompt（复制即用）
-tags: [guide, mcp-bridge, prompt]
+tags: [guide, aiti-bridge, prompt]
 ---
 
 # agent prompt 示例
@@ -11,7 +11,7 @@ tags: [guide, mcp-bridge, prompt]
 > 在 Claude Code / Cursor / IDE 内置 AI 等 agent 的会话里粘贴下面的 prompt，
 > 让 AI 知道自己有 aiti-devtools 的 MCP 工具、以及标准工作流怎么走。
 >
-> 前提：已把 `aiti-mcp-server` 配进该 agent（接入方式见 [接入 AI agent](/guide/mcp/ai-agents.md)）。
+> 前提：已把桥（aiti-bridge）的 MCP 端点配进该 agent（接入方式见 [接入 AI agent](/guide/mcp/ai-agents.md)）。
 
 ## 一、通用模板（所有 agent——推荐从这里开始）
 

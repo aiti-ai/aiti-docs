@@ -8,7 +8,7 @@ ext:
   soul: 排队不可怕，可怕的是排完队忘了自己要说什么。
   type: dev-repo
   category: 聊天增强
-  version: 0.1.0
+  version: "0.1.8"
   status: active
   author: aiti-ai
   publisher: aiti-ai
@@ -73,7 +73,7 @@ QueueRecoveryDialog 合流；草稿「Re-queue」经 core queueFollowUp 入队�
 
 ```bash
 npm install            # 首次（vite）
-npm run build:client   # vite lib mode → client/aiti-queue-keeper.mjs
+npm run build:client   # vite lib mode → dist/aiti-queue-keeper.mjs
 node tools/deploy.mjs  # 构建 + 拷贝到 ~/.pi/web{,-dev}/extensions/
 ```
 

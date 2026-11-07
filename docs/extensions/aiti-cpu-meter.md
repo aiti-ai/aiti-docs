@@ -8,7 +8,7 @@ ext:
   soul: 卡不卡，让数字说话；元凶是谁，让 AI 说话。
   type: dev-repo
   category: 系统工具
-  version: 0.3.1
+  version: "0.2.7"
   status: active
   author: aiti-ai
   publisher: aiti-ai
@@ -21,9 +21,9 @@ ext:
 
 主线程流畅度检测器：实时读秒 + 0-100 流畅度分 + 颜色分层显示，FAB 可最小化。
 
-- **双产物**：内部版（pi-web 页面）+ 外部版（经 service-tunnels 注入任意站点）——排查 launcher 注入页卡顿时把同一把尺子带过去。
+- **双产物 + 三通道注入**：内部版（pi-web 页面）+ 外部版（standalone 单文件 aiti-cpu-meter.js，publicApi + meter-version 内容哈希强制拉新）——排查 launcher 注入页卡顿时把同一把尺子带过去。外部版三通道注入：① service-tunnels 公开页勾选注入（主路径）② bookmarklet 任意站点 ③ 跨实例注入（feature `inject.enabled` + `service.url`，参照 aiti-debug-inject）
 - **事件驱动**：rAF 采样，无定时轮询。
-- **问 AI（v0.3）**：面板 ✨ 按钮 → 现场报告（`report()`：评分/长任务/**LoAF 脚本归因**/卡顿快照/页面源码路径与主要区域）交 aiti-helper 建「调试页面卡顿」会话（帮助点 `jank-debug`：指标判读 + 本仓历史卡顿案例库 12 类 + 修复工具箱）。内部版走 aiti-helper（本扩展分组+预选）；外部版 prompt 弹窗 → POST ask-ai 两段式建会话 → 跳转 pi-web。
+- **问 AI（v0.3）**：面板 ✨ 按钮 → 现场报告（`report()`：评分/长任务/**LoAF 脚本归因**/卡顿快照/页面源码路径与主要区域）交 aiti-helper 建「调试页面卡顿」会话（帮助点 `jank-debug`：指标判读 + 本仓历史卡顿案例库 12 类 + 修复工具箱）。内部版走 aiti-helper（本扩展分组+预选）；外部版 prompt 弹窗 → gate.html 顶级导航过登录 → 同源 `POST ask-ai`（仅登录可用）两段式建会话 → 跳转 pi-web。
 
 ## 用途
 

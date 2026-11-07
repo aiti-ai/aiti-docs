@@ -8,7 +8,7 @@ ext:
   soul: 地址、token、注册页——散落四方的钥匙，串成一串。
   type: dev-repo
   category: AI 能力
-  version: 0.1.0
+  version: "0.1.10"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai
@@ -40,6 +40,8 @@ ext:
 - **三层临时禁用（2026-09）**：provider `/enable`、模型 `/model-enable`、key `enabled` 三级——向导 UI 禁用/启用按钮；core 透传/同步（apiKey 切到首个启用 key；combo 保存保留成员禁用态、全禁拒绝）。联动 pi-models-combo（provider 级不建代理、key 级不入轮转、模型级隐藏/组合成员跳过）
 - **状态面板事件驱动**：「聚合/多 key 运行状态」横幅走 `mc:avail` 帧直供数据（[aiti-model-check](aiti-model-check.md)），后台不拉取；`/proxy-status` 补报未构建 combo（成员解析探测：能出槽位=懒建待激活、0 槽=configError 标修复）
 - **成员承接类别（types，2026-09）**：组合成员按**模型能力**自动给出可勾选的承接类别（文本必选勾、图形仅当模型 input 含 image 时出现，**没有的能力不显示、不可勾**；默认可用的全部勾上 = 承接全部，与不限定等价）——取消「图形」= 该成员只接纯文本，带图请求自动绕开；**图形专用成员**（只勾图形）只接带图请求、纯文本请求不发给它。可在「🧩 模型聚合」编辑器按成员勾选，也可经 `model_wizard_combo_save` 工具写 `types: ["vision"]` 等（其他媒体类别音频/视频/PDF 不在 UI 出现，手写/工具仍支持）。引擎侧按请求内容分类（openai/anthropic/google 三协议）路由
+- **多 key 等间距节流（minIntervalMs，v0.4 起承接）**：每把 key 除 rpm 上限外可设「间隔ms」输入框——留空=auto（按 rpm 折算 60000÷rpm 匀速）、0=关闭匀速走突发滑窗、数字=固定间隔毫秒；与 rpm 同时生效取最大等待。添加流/编辑流 key 行与 `aiti_model_wizard_keys` 工具同款；「聚合/多 key 运行状态」面板按「间隔auto / 间隔2s」标注，上游 retry-after 透明展示（capped⚠=超内部封顶截断）
+- **脱敏导入导出**：`GET /export` + `POST /import`（差异预览/应用）；添加流搜索并入 pi 内置 provider（原生目录未收录的家也能补齐）；🧙 左侧导航内嵌「模型检查」页签（[aiti-model-check](aiti-model-check.md) 面板直达）
 - **UI 规范化 + 拆包**：功能菜单图标统一 lucide SVG；薄壳 entry 11.5K + 重 chunk 524K 按需（[懒加载契约](/guide/ext-lazy-loading.html) 路线 B）
 - **一级撤销**：保存/删除前快照受影响 provider 旧条目，「↩ 撤销上次保存」一键回滚（订阅登录型豁免）
 - **一键体检 + 测试留存（2026-09-17）**：左树「🩺 一键体检」逐已配置 provider 串行发真实探针（跳过聚合组/禁用/无凭据；首个启用模型作聊天探针、列表有≠可推理），报告卡逐家显示 HTTP/延迟/明细、失败行「去修」直达详情；所有手动测试（添加流/编辑流/详情「重测」/体检）结论留存 `cache/last-test.json`（key 打码），树上徽标显示最近结论+延迟（model-check 有探测聚合时让位不重复）、详情健康条「🩺 通过 · 428ms [重测]」；`/test` 超时可在设置调
@@ -57,8 +59,9 @@ aiti_model_wizard_search    # 搜索提供商（中英文），返回 api 地址
 aiti_model_wizard_provider  # 提供商详情（含已知模型）
 aiti_model_wizard_detect    # baseUrl → 自动探测 api 类型 + 真实地址（漏 v1/v2 也能补）
 aiti_model_wizard_test      # 测试连接（2xx/429 均算通过）
-aiti_model_wizard_save      # 保存 provider+models 到 models.json
+aiti_model_wizard_save      # 保存 provider+models 到 models.json（可带 keys[] 多 key / provider 级 headers；combo 组拒写走 combo_save）
 aiti_model_wizard_delete    # 删除 provider
+aiti_model_wizard_keys      # 多 key 管理（list/set/remove；同步 apiKey=首个 key）
 aiti_model_wizard_combo_save # 创建/更新模型聚合组（成员可带 weight 权重 + types 承接类别）
 ```
 

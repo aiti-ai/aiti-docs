@@ -107,6 +107,6 @@ curl -s http://localhost:5173/ | grep -o aiti-launcher   # HTML 里应出现 lau
 # 打开页面 → 工具条出现；/aiti/cockpit.html 可开操作台
 ```
 
-可运行示例：[examples/aiti-vite-demo](https://github.com/aiti-ai)（端口 5199）· [SvelteKit 示例](examples.md)
+可运行示例：[examples/aiti-vite-demo](https://github.com/aiti-ai)（端口 5199）· [SvelteKit 示例](../examples.md)
 
 > Astro 工程请用封装好的 [aitiAstro()](astro.md)——内部就是本插件 + head-inline 注入。

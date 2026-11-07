@@ -26,29 +26,24 @@ pnpm add -D @aiti-ai/aiti-devtools-vite
 // vite.config.ts
 import { aitiDevtools } from '@aiti-ai/aiti-devtools-vite';
 export default defineConfig({
-  plugins: [aitiDevtools({ bridge: { base: 'http://localhost:8777' } })],
+  plugins: [aitiDevtools({ bridgeUrl: 'http://localhost:8777' })],
 });
 ```
 
 ### 方式 B：直接引入（原生 HTML / 任意工程）
 
 ```html
-<script src="aiti-devtools/inject.js"></script>
-<script>
-  createAitiLauncher('http://localhost:3000/todo', {
-    bridgeBase: 'http://localhost:8777',
-  });
-</script>
+<script src="/aiti/aiti-launcher.js" data-ai-url="/aiti/cockpit.html" data-bridge-url="/aiti"></script>
 ```
+
+launcher 读取 `data-ai-url` / `data-bridge-url` 属性自动启动，无需手动调用。
 
 启动 dev server，页面右下角应出现 💬 / 🎯 两个按钮。
 
 ## 步骤 2：启动 MCP 桥
 
 ```bash
-npx @aiti-ai/aiti-mcp-bridge --http 8777
-# 或（等同，直接跑 server）
-npx @aiti-ai/aiti-mcp-server --http 8777
+npx @aiti-ai/aiti-bridge --port 8777   # MCP 端点内置于桥
 ```
 
 页面应自动连桥（也可刷新页面确认）。
@@ -58,7 +53,7 @@ npx @aiti-ai/aiti-mcp-server --http 8777
 ### Claude Code
 
 ```bash
-claude mcp add aiti -- npx @aiti-ai/aiti-mcp-server --bridge http://localhost:8777
+npx @aiti-ai/aiti-bridge --register-shim   # 一键注册 aiti 条目（幂等；agent 启动带 env AITI_BRIDGE_URL 即接入）
 ```
 
 ### Cursor / VS Code Copilot Chat
@@ -66,7 +61,7 @@ claude mcp add aiti -- npx @aiti-ai/aiti-mcp-server --bridge http://localhost:87
 在 MCP 设置中添加 stdio server：
 
 ```json
-{ "command": "npx", "args": ["@aiti-ai/aiti-mcp-server", "--bridge", "http://localhost:8777"] }
+{ "command": "node", "args": ["<桥安装目录>/bin/aiti-mcp-shim.cjs"], "env": { "AITI_BRIDGE_URL": "http://127.0.0.1:8777" } }
 ```
 
 ### aiti-agent（Web 工作台）

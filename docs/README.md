@@ -24,9 +24,9 @@ features:
   - title: aiti-devtools
     details: 页面内 AI 调试助手，Vite / Vue / Next 等主流开发工具本地注入，Inspector + CDP 命令集
     link: /products/aiti-devtools.md
-  - title: aiti-mcp-bridge
+  - title: aiti-bridge
     details: 改造任意 AI agent，经 MCP 桥操作页面/询问用户；aiti_inbox 消息主通道 + 通用 AI 窗口 cockpit
-    link: /products/aiti-mcp-bridge.md
+    link: /products/aiti-bridge.md
   - title: 本地注入
     details: 零成本接入现有工程，dev 模式自动注入 aiti-devtools，无需改业务代码
   - title: 会话体系
@@ -51,7 +51,7 @@ footer: MIT Licensed | Copyright © 2026 aiti-ai
 | 📱 **全功能小屏适配** | 弹窗拖拽/缩放/持久化，小屏自动全屏；聊天与面板全面小屏优化——手机上开发从此不是梦；语音输入又快又顺，就是费电，记得配充电宝 🔋 | [aiti-float](/extensions/aiti-float.md) · [aiti-ai-input](/extensions/aiti-ai-input.md) |
 | 🧙 **模型管理一条龙** | 模型添加向导（目录搜索 / 贴地址反向匹配 / 自动探测）+ 多 key 粘性轮转 + 模型聚合（组合模型，成员可配**承接类别**：图形/文本专用分工路由）+ 可用性探测（429 限流识别与恢复预测）——告别模型管理焦虑 | [aiti-model-wizard](/extensions/aiti-model-wizard.md) · [aiti-model-check](/extensions/aiti-model-check.md) |
 | 🌍 **跨宿主已适配** | 除本家 aiti-agent 外，aiti-devtools 已适配 DSH（DeepSeek Harness）/ OpenClaw / OpenCode——同款页面 AI 调试体验 | [DSH 适配](/extensions/aiti-devtools-dsh.md) · [OpenClaw 适配](/extensions/aiti-devtools-openclaw.md) · [OpenCode 适配](/extensions/aiti-devtools-opencode.md) |
-| 🕹️ **Java 后端直接调** | 给 AI 用的 Arthas++：JVM 内任意修改、Mock/SQL 拦截模拟、热更新 controller、诊断采样、Tunnel 桥多端点纳管，52 工具全可逆——Spring Boot / Solon 调试不必重启 | [aiti-testagent](/extensions/aiti-testagent.md) |
+| 🕹️ **Java 后端直接调** | 给 AI 用的 Arthas++：JVM 内任意修改、Mock/SQL 拦截模拟、热更新 controller、诊断采样、Tunnel 桥多端点纳管，57 工具全可逆——Spring Boot / Solon 调试不必重启 | [aiti-testagent](/extensions/aiti-testagent.md) |
 | 🤖🤖 **多 agent 同堂** | pi / Claude Code / Codex / Qoder / 任意 ACP agent 一个面板全看管——历史会话不是化石，点一下就复活 | [session-manager](/extensions/session-manager.md) · [claude-code](/extensions/aiti-claude-code-agent.md) · [codex](/extensions/aiti-codex-agent.md) · [qoder](/extensions/aiti-qoder-agent.md) |
 | 👥 **子代理舰队** | 一句话派活：scout 侦察 / worker 干活 / reviewer 审核 / oracle 顾问，并行或流水线，Fleet 面板盯进度 | [aiti-subagents](/extensions/aiti-subagents.md) |
 | 🧬 **开发血缘** | git 记录改动的内容，血缘记录改动的因果：每行代码可归因到会话、prompt、方案与操作——可评审、可回滚、可检索 | [📖 理念](/guide/lineage.md) · [评审](/extensions/aiti-git-review.md) · [方案先行](/extensions/aiti-plan-first.md) |
@@ -67,7 +67,7 @@ footer: MIT Licensed | Copyright © 2026 aiti-ai
   浏览器为主操作面，且因与 pi 同源兼容，pi CLI 与 pi IDE 扩展可操作同一批会话；Docker 一键启动，内置会话管理、服务隧道、远程调试可视化。
 - **开发工具嵌入**：`aiti-devtools` 注入到 Vite / Vue / Next / React / Svelte 等主流开发工具，
   把 AI 请到页面开发现场 —— 页面就是可调试、可交互、可回答 AI 问题的对象。
-- **AI agent 改造**：`aiti-mcp-bridge` 作为 MCP 桥，让 Claude Code / Cursor / IDE 内置 AI 等任意 agent
+- **AI agent 改造**：`aiti-bridge` 作为 MCP 桥，让 Claude Code / Cursor / IDE 内置 AI 等任意 agent
   拥有操作页面、点选元素、询问用户的能力，并把消息直接送达 IDE 的 AI agent 窗口。
 
 ### 一条链路看懂生态
@@ -90,19 +90,19 @@ flowchart TB
 
 #### 回退体验 · MCP 代理（aiti-cockpit 弱化平替）
 
-> 💡 **补充说明**：没有 web console 的 agent，经 **aiti-mcp-bridge 走 MCP 代理**即可适配任意 agent——但 **MCP 协议的消息及时度不够**（多数 agent 靠 `aiti_inbox` 拉取，非主动推送），可能**需要不时人工干预**，体验不如直连。
+> 💡 **补充说明**：没有 web console 的 agent，经 **aiti-bridge 走 MCP 代理**即可适配任意 agent——但 **MCP 协议的消息及时度不够**（多数 agent 靠 `aiti_inbox` 拉取，非主动推送），可能**需要不时人工干预**，体验不如直连。
 
 ```mermaid
 flowchart TB
     P[被调试网页] <-->|本地注入| D[aiti-devtools]
     C[🛰️ aiti-cockpit] <-->|AI 窗 · 双向直连| D
-    D <-->|连桥 · role=ai| B[aiti-mcp-bridge]
+    D <-->|连桥 · role=ai| B[aiti-bridge]
     B <-->|MCP · page_* / user_* 工具| X["任意 AI agent<br/>Claude Code · Cursor · IDE AI"]
 ```
 
 #### 已适配宿主：DSH · OpenClaw · OpenCode
 
-aiti-devtools 不锁死在本家栈里——以下第三方 agent 宿主已有完整适配（均复用同款 launcher 与 16 个 `aiti_*` 工具，端到端已验证）：
+aiti-devtools 不锁死在本家栈里——以下第三方 agent 宿主已有完整适配（均复用同款 launcher 与 16 个 MCP 工具（page_* / user_* / aiti_* 等），端到端已验证）：
 
 | 宿主 | 适配形态 | 亮点 |
 | --- | --- | --- |
@@ -118,10 +118,10 @@ pnpm add -D @aiti-ai/aiti-devtools-vite
 # 在 vite.config.ts 中启用插件，dev 启动后页面右下角出现 💬 / 🎯 按钮
 
 # 2. 启动 MCP 桥（改造你的 AI agent）
-npx @aiti-ai/aiti-mcp-bridge --http 8777
+npx @aiti-ai/aiti-bridge --port 8777
 
 # 3. 把桥配置给任意 MCP 客户端（Claude Code / Cursor / IDE 内置 AI）
-#   配置 aiti-mcp-server 后，AI 即可 page_exec / page_snapshot / user_confirm ...
+#   配置后 AI 即可 page_exec / page_snapshot / user_confirm ...
 ```
 
 ## 产品矩阵速览
@@ -130,7 +130,7 @@ npx @aiti-ai/aiti-mcp-bridge --http 8777
 |---|---|---|---|
 | 入口层 | aiti-agent | `@aiti-ai/aiti-agent` · Web + Docker | 自托管 AI 开发工作台（基于 pi-web） |
 | 注入层 | aiti-devtools 系列 | `@aiti-ai/aiti-devtools-*` · 插件/SDK | 嵌入主流开发工具，本地注入 |
-| 桥接层 | aiti-mcp-bridge | `@aiti-ai/aiti-mcp-bridge` · 本地服务 | 配置 devtools、改造 AI agent |
+| 桥接层 | aiti-bridge | `@aiti-ai/aiti-bridge` · 本地服务 | 配置 devtools、改造 AI agent |
 | Agent 层 | 任意 AI agent | Claude Code / Cursor / IDE AI | 经 MCP 操作页面、直达 IDE 窗口 |
 
 > 完整矩阵见 [产品矩阵](/products/)，整体规划见 [路线图](/roadmaps/master-plan.md)。

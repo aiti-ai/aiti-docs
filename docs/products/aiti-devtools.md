@@ -54,7 +54,7 @@ tags: [product, aiti-devtools, inject]
 React / Next / Vue / Svelte（dev 构建 `_debugSource` / `__file` / `__svelte_meta`）→ 统一输出 `{framework, file, line, component}` —— **AI 报错直接定位到源码文件**，配合桥的 `open_file` 事件在编辑器打开。
 
 ### MCP 桥
-- `node aiti-mcp-server --http 8777`（stdio + HTTP 双 transport + SSE 页面桥）
+- `node aiti-bridge --port 8777`（MCP 端点（stdio + HTTP + Streamable HTTP）+ SSE 页面桥）
 - MCP 工具：`page_exec` / `page_snapshot` / `bridge_status` / `user_*`（用户交互工具族）
 
 ### 刷新恢复

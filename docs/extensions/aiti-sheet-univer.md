@@ -8,7 +8,7 @@ ext:
   soul: 老格式不挡路——转换、派生、编辑各归其位。
   type: dev-repo
   category: 开发工具
-  version: 0.1.0
+  version: "0.1.7"
   status: active
   author: aiti-ai
   publisher: aiti-ai
@@ -17,7 +17,7 @@ ext:
   install: |
     # 部署到 ~/.pi/web/extensions/aiti-sheet-univer/ 后 reload
     # 依赖：aiti-editor（多编辑器仲裁宿主）；服务器端转换需 LibreOffice (soffice)
-  license: Apache-2.0（本扩展）/ exceljs MIT + Univer Apache-2.0
+  license: MIT（本扩展；exceljs MIT + Univer Apache-2.0 + @e965/xlsx Apache-2.0）
   tags: [excel, xlsx, spreadsheet, univer, editor, file-viewer]
 ---
 
@@ -33,7 +33,7 @@ ext:
 - **.xlsx / .xlsm**：Univer 预览 + 编辑（样式 / 公式 / 合并 / 冻结 / 行高列宽 / 多 sheet / 隐藏 sheet / tab 色），Ctrl+S 保存（409 冲突确认覆盖），保存前明示剥离项（图表 / 透视表 / 条件格式 / 富文本等）
 - **.xls / .ods**：只读表格预览 + 一键「转为 .xlsx 并打开」（`-fromxls` / `-fromods` 命名派生，重名 `(1)/(2)` 递增，绝不覆盖原文件）
 - **「关于编辑器」**：⋯ 菜单查看能力 / 限制 / 依赖 / 许可
-- 转换与预览依赖 LibreOffice (soffice)：缺失时给出安装 / 配置（aiti-editor 功能 `soffice.path`）/ 下载本机编辑 / 虚拟环境打开（aiti-ui-env）降级选项
+- 转换（.xls/.ods → .xlsx）依赖 LibreOffice (soffice)——预览为纯 JS 零安装解析（@e965/xlsx）；soffice 缺失时给出安装 / 配置（aiti-editor 功能 `soffice.path`）/ 下载本机编辑 / 虚拟环境打开（aiti-ui-env）降级选项
 
 ## 功能开关
 

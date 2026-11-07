@@ -9,7 +9,7 @@ ext:
   soul: 管扩展的，也该是个扩展。
   type: dev-repo
   category: 系统工具
-  version: 0.1.0
+  version: "0.1.8"
   status: beta
   author: aiti-ai
   publisher: aiti-ai
@@ -64,7 +64,7 @@ jiti 从扩展目录逐级向上解析裸说明符，共享根一存在即对所
 
 - **自动对齐（reconcile）**：安装 / 卸载 / zip 安装后自动把全部扩展 package.json
   `dependencies`+`optionalDependencies` 的并集写进共享根的 package.json 并
-  `npm install --legacy-peer-deps`（同名冲突合并为 `spec1 || spec2`；卸载后自动裁剪
+  `npm install --legacy-peer-deps`（同名冲突**同族区间取交集**——取下界最高者如 `^0.1.3`+`^0.1.5` → `^0.1.5`，单份物理拷贝也能满足所有声明者；区间互不相交/复杂 spec 才退 `||` 交 npm 自选；卸载后自动裁剪
   无人引用的包；`peerDependencies`/`devDependencies` 不装）。也可手动触发：
   `POST /ops {"action":"reconcile-deps"}`（deploy 脚本经 `_shared/reconcile-deps.mjs`
   通知，部署脚本不再自行 npm i）。
@@ -86,9 +86,9 @@ jiti 从扩展目录逐级向上解析裸说明符，共享根一存在即对所
 
 对懒扩展（`clientImmediately:false`），「打开」按钮先 `ensureMaterialized` 物化再打开（旧宿主优雅降级为直接打开）。
 
-## 依赖反向视图（「被依赖」+ 影响确认）
+## 依赖反向视图（「被依赖」+ 硬阻止）
 
-详情「依赖」区之外，每个扩展还能看**谁依赖我**（反向视图）：禁用/卸载某扩展时，若有启用的依赖者，弹自绘确认框列出受影响方（仅硬边警告，可选依赖不弹）。设计：`dev-repo/docs/aiti-extman-dependents-view-plan.md`（已实施 2026-09-05）。
+详情「依赖」区之外，每个扩展还能看**谁依赖我**（反向视图）。禁用/卸载时：**硬边**（`dependsOn` / 硬能力边，含生效提供者解析链）→ **硬阻止**——提示先禁用依赖者，不给「仍要禁用」按钮；仅 client 预取软边 → 自绘确认框列出受影响方可强行继续；可选边永不弹。设计：`dev-repo/docs/aiti-extman-dependents-view-plan.md`（已实施 2026-09-05；硬阻止升级见 sidebar 统一 dock 方案）。
 
 ## 依赖与能力模型（三视图 + pin）
 
@@ -96,8 +96,16 @@ jiti 从扩展目录逐级向上解析裸说明符，共享根一存在即对所
 
 - **三视图**：`exts`（扩展列表）/ `caps`（能力表：按能力名分组——提供者列表（生效者高亮）、消费方、pin 下拉；missing 能力标红）/ `conflicts`（同 id 多来源组 + takeover 冲突组，可 pin、一键回「自动」）。
 - **边类型**：client（`clientDependsOn` 预取）/ hard-ext / optional-ext / hard-cap / optional-cap 五类（旧宿主降级仅 client 边）。依赖边展示解析结果链（如 `cap.git-trace → aiti-git-trace ✓`，missing ✗）。
-- **警告口径**：禁用/卸载警告只吃 hard 边；能力边附解析链文案。
+- **警告口径**：禁用/卸载**硬阻止只吃 hard 边**（见上节）；能力边附解析链文案。管理器自身不允许禁用/卸载自己。
 - **pin**：`extPins` 支持 `source:<extId>`（多来源指定）与 `capability:<name>`（能力生效者指定）双 key，`devPriority` 开关控制开发态工作区版本是否优先。解析裁决：pin > takeover 声明者 > semver 最新 > id 字典序。
+
+## 扩展协议（aitiExtProtocol 徽标 + AI 升级）
+
+扩展 package.json 声明 `aitiExtProtocol` 协议版本（如 `"1.0"`，语义 = 写法所遵循的协议代际）；列表行与详情「协议」行出状态徽标——当前 / 兼容 / 待升级 / 不兼容 / 过新（需升级宿主）/ 未声明 / 非法。待升级条目出 **🤖 AI 升级**按钮：唤起 aiti-helper `ext-protocol-upgrade` skill（读 `docs/dev-repo-protocol.md` + 逐版本迁移手册路由）自动迁移；安装响应带回 protocolCheck（规范 §7 筛查占位）。规范与 bump 流程：`docs/dev-repo-protocol.md`。
+
+## ops 动作全集
+
+`POST /ops {"action":…}`：install / remove / enable / disable / reload / set-feature / **set-pin / set-dev-priority / trust / untrust / reconcile-deps**——aiti-app-center 的「一键禁用扩展」与开关视图消费的就是 enable/disable；`set-feature` 即逐项开停扩展声明的 features。
 
 ## 服务出口区
 
@@ -112,8 +120,7 @@ ai:
   manage: true
   skills:
     - 查看全量状态/在线注册表（GET /status、/registry）
-    - 安装（git:/npm:/本地路径）/删除/启停/reload（POST /ops）
-    - 特性开关：set-feature 逐项启停扩展声明的 features（如 aiti-devtools 的 aiti_* 工具）
+    - 安装（git:/npm:/本地路径）/删除/启停/reload/set-feature（POST /ops 全动作：set-pin / set-dev-priority / trust / untrust / reconcile-deps）
     - 新建/修改扩展：`create-from-template` 模板库起步（**可选，AI 自由创建也行**）；配**规范提示词**（entry 契约/store 约定/部署链/红线 + 各扩展点 demo 参考）——**默认不注册为 skills，创建/修改时单独喂给 AI** → 写业务源码 → deploy → reload（用户工具栏立即出现）
   install: git:/npm:/本地路径/zip
   storage_dir: <dataDir>

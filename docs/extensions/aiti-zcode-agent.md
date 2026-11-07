@@ -4,11 +4,11 @@ icon: 🟢
 ext:
   id: aiti-zcode-agent
   name: ZCode 会话后端
-  description: 智谱 ZCode（桌面端内嵌 CLI runtime）驱动 —— --json + --resume 接入 All Sessions，合规吃 GLM 编程套餐
+  description: 智谱 ZCode（桌面端内嵌 CLI runtime）驱动 —— app-server 长驻（默认，流式/工具卡/steer/附件）+ oneshot 兜底双通道，接入 All Sessions，合规吃 GLM 编程套餐
   soul: GLM 套餐在哪儿跑，面板就在哪儿看。
   type: dev-repo
   category: 多 agent 后端
-  version: 0.1.0
+  version: "0.1.9"
   status: active
   author: aiti-ai
   publisher: aiti-ai
@@ -28,11 +28,12 @@ ext:
 
 调研底稿：`docs/zcode-desktop-cli-agent-analysis.md`（2026-09-06 实测，runtime 0.16.5 / AppImage 3.11.2）。
 
-## 机制
+## 机制（传输通道双档，feature `zcode.transport`）
 
-- 协议：`node zcode.cjs --json --mode build [--resume sess_xxx] --prompt <text>`
+- **app-server（默认）**：长驻 ZCode Protocol（桌面端同款 NDJSON stdio）——流式打字机 / 原生工具卡 / steer 注入 / 热切模型 / 权限模式即时生效 / 文件附件 v4 上传，省每轮 ~5-6s 冷启动
+- **oneshot（兜底档）**：`node zcode.cjs --json --mode M [--resume sess_xxx] --prompt <text>` 每轮单发 + `--resume` 续聊
 - `--json` 为**单个 pretty JSON 对象**（exit 0 全量打印）：`{sessionId, traceId, turnId, response, usage{...}, projection{contextWindow}}`
-- 进程模型：每轮一个单发进程 + `--resume` 续聊（同 aiti-codex-agent 的 exec 模式）
+- **3.17+ CLI 启动闸**：CLI 新增 `prepareCliProviderRuntimeEnv`（tui/app-server/login 无 builtin provider config 即崩）——扩展 `providerRuntimeEnv()` 注入 `ZCODE_BUILTIN_PROVIDER_CONFIG_FILE`（runtime 同包 `resources/config/provider/zcode-builtin.json` 优先，回退桌面刷新副本）+ `ZCODE_PERSONAL_PROVIDER_CONFIG_FILE`（`~/.zcode/v2/provider_config.json`），buildTurnEnv 与受控登录 driver 同闸；AppImage glm-only 解压补提 `resources/config/*`
 - 懒持久化：`sess_xxx` 首轮后可知 → `session_backend_ready` 换绑 `zcode:sess_xxx`（core 双注册 handle + 站位文件跟随迁移）
 - 站位命名：接管时写入真实标题（session-manager open-live 传 meta.name）；新会话首轮换绑后取首条 user 消息截断（core 通用）；刷新不丢
 - 历史回放：resume 时经 All Sessions 服务出口（session-manager `services.sessions`）回填 liveHistory——zcode 存储的唯一读取实现在 session-manager `lib/agents/zcode.ts`，本扩展不自建读取；结构化工具行（IndexedMessage.tool）回放成 **pi 原生形状**（assistant.toolCall 块 + toolResult 消息按 toolCallId 配对）→ 前端按 pi 自家工具卡片渲染，不再退化 `🛠 {json}` 文本（2026-09-07）
@@ -52,30 +53,39 @@ ext:
 3. 解密 `~/.zcode/v2/credentials.json`（fallback secret 推导 + aes-256-gcm）→ 官方 login 同路径静默换 `zcode-api-key`（先查后建幂等）→ 缓存
 4. 未登录 → fail-loud + 三条指引（桌面端授权 / `login --no-browser` / 手动填 override key）
 
-## 能力面（fail-loud）
+## 能力面（fail-loud，按 `ZCODE_CAPABILITIES_BASE` + 通道分流）
 
 | 能力 | 值 | 说明 |
 |---|---|---|
-| prompt / followUp | ✅ | 每轮单发 + `--resume`，天然顺序语义 |
+| prompt / followUp | ✅ | app-server 流式打字机 + 顺序队列；oneshot 每轮单发 + `--resume` |
+| steer | ✅ | app-server（v4 `sendText{requestedDelivery:"guide"}` 运行中注入，模型间隙 drain）；oneshot 注入失败自动降级本地 followUp 队列 |
 | contextUsage | ✅ | usage.totalTokens / projection.contextWindow（1M 窗口套餐） |
-| setModel | ✅ | 下轮生效（ZCODE_MODEL 换 ref，bigmodel/zai 通道端点随动） |
-| abort | ✅ | SIGTERM 杀本轮子进程 → settled "aborted" |
-| steer | ❌ | 需 app-server 长驻协议（NDJSON stdio），P2 升级 |
+| setModel | ✅ | app-server 即时；oneshot 下轮生效（ZCODE_MODEL 换 ref，bigmodel/zai 通道端点随动） |
+| setPermissionMode | ✅ | app-server 即时生效 |
+| queueManage / respondInteraction | ✅ | ExitPlanMode、AskUserQuestion 反向请求卡 |
+| respondProviderHeaders | ✅ | provider_headers 验证码卡（见下「验证码桥」） |
+| getUsage / listModels | ✅ | 动态模型目录（桌面端注册表优先） |
+| fileAttachments | ✅ | app-server v4 attachment 上传 |
+| fork | ✅ | 仅 app-server（见「fork 能力」节） |
 | getTools / getCommands | ❌ | 内置工具集固定；commands list P2 |
 
 ## 模型目录
 
-`bigmodel/GLM-5.3`（默认）、`bigmodel/GLM-5.3-Flash`、`bigmodel/GLM-5-Turbo`；zai 通道同构（`zai/GLM-5.3` …）。模型通道决定凭据链（bigmodel/zai 两套 OAuth token 分离）与端点（`open.bigmodel.cn/api/anthropic` / `api.z.ai/api/anthropic`）。
+`bigmodel/GLM-5.3-Flash`（默认）、`bigmodel/GLM-5.3`、`bigmodel/GLM-5-Turbo`（seed 兜底三档）；目录以**桌面端注册表动态为准**（`buildZcodeCatalogRefs`），zai 通道同构。模型通道决定凭据链（bigmodel/zai 两套 OAuth token 分离）与端点（`open.bigmodel.cn/api/anthropic` / `api.z.ai/api/anthropic`）。
 
 ## 功能管理（extman features）
 
 | feature | 类型 | 默认 | 说明 |
 |---|---|---|---|
+| `zcode.transport` | string | app-server | 传输通道：app-server 长驻 / oneshot 单发兜底 |
 | `zcode.runtimePath` | string | 空 | 指定 runtime（zcode.cjs/解压目录/AppImage） |
 | `zcode.autoDownload` | boolean | 开 | 探测不到时自动下载 AppImage（约 300MB） |
-| `zcode.mode` | string | build | 每轮 `--mode`：build/edit/plan/yolo |
+| `zcode.mode` | string | **yolo** | 每轮 `--mode`：yolo/build/edit/plan（2026-09-06 应用户要求由 build 改 yolo） |
 | `zcode.model` | string | 空 | 新会话默认模型 ref；**留空自动跟随已认证的套餐通道**（读 coding-plan-cache，避免 zai 用户被 bigmodel 默认卡住） |
 | `zcode.apiKeyOverride` | string | 空 | 手动提供编程套餐 API Key，跳过 OAuth 链 |
+| `spawn.env` / `spawn.command` / `spawn.argsPrefix` | 继承 extman 共享声明器 | 空 | spawn 环境变量 / 启动命令覆盖（docker 化包装）/ 参数前缀 |
+
+另有隐藏 feature `zcode.ultraGateway`（默认开；false 回退 provider 直连不做 ultra 网关 mapping）。
 
 ## All Sessions 接入（桌面端历史会话）
 
@@ -89,7 +99,10 @@ ext:
 - 换 key 只与本机用户自己的凭据 + 智谱官方域名交互；key 缓存 0600 且不入 git
 - 不写 `~/.zcode/cli/config.json`，不写桌面端 `v2/` 任何文件
 - env 治理：spawn 仅透传 `governanceEnv("zcode")` 白名单（`ZCODE_MODEL/ZCODE_BASE_URL/...`）
-- `--mode yolo` 仅在 feature 显式配置时使用；默认显式 build（`--prompt` 缺省是 yolo）
+
+## 🧬 验证码桥（provider_headers 反向请求卡）
+
+ZCode 通道（start-plan 等）触发风控验证码时：client 自带 `CaptchaRequestCard`（自 pi-web core 外迁，「谁的能力谁渲染」——aiti-session-cards 仅保留交互元语/授权卡）。三态：**无感直通**（captchaVerifyParam 缓存 5min）/ **官方 AliyunCaptcha 滑块**（SDK 三元组缓存 1h）/ 失败取消；appserver 180s 超时兜底、轮次收口清卡。作答经 `respondProviderHeaders` 能力位回传。
 
 ## 🔑 受控登录（ext-controlled-login 标准，2026-09-08）
 
@@ -113,6 +126,6 @@ ext:
 node --test dev-repo/aiti-zcode-agent/zcode-core.test.mjs
 ```
 
-25 用例：`--json` 解析 / 错误提取 / 模型 ref 与 env 组装 / 凭据解密+换 key 全链路（注入 fetch，零网络）/ 下载原子性（.part + abort 取消）/ 通道探测 / 假 AppImage 解压缓存 / handle wire 契约（换绑、resume、abort、错误帧、模型切换、种子跟随）。
+52 用例（zcode-core.test.mjs）+ zcode-appserver(33) / handle-fork(6) / handle-queue(7) / cards(1) 四套件：`--json` 解析 / 错误提取 / 模型 ref 与 env 组装 / 凭据解密+换 key 全链路（注入 fetch，零网络）/ 下载原子性（.part + abort 取消）/ 通道探测 / 假 AppImage 解压缓存 / handle wire 契约（换绑、resume、abort、错误帧、模型切换、种子跟随）/ app-server 通道 / fork / 队列 / 验证码卡。
 
 > 真实 AppImage 补充实测：`--appimage-extract "resources/glm/*"` pattern 提取 3.11.2 → 47MB 产物（zcode.cjs 0.16.5）可执行，无需全量解压。

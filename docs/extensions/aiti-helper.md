@@ -4,11 +4,11 @@ icon: 🤖
 ext:
   id: aiti-helper
   name: AI Helper
-  description: 扩展的一句话 AI 能力 —— 声明式 AI 帮助点 + 输入/结果预览/审核回填 + 配置版本化
+  description: 全扩展的一句话 AI 能力入口 —— 声明式 AI 帮助点（pi skills 标准）+ 输入/结果预览/审核回填 + 流式进度总线交付 + 多轮追问 + 历史与后台任务 + 用户自定义 skills（配置版本化已独立为 aiti-configs）
   soul: AI 的工具该由 AI 自己接线、自己进化——人类的角色是掌舵，不是搬砖。
   type: dev-repo
   category: AI 能力
-  version: 0.1.0
+  version: "0.5.8"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai
@@ -17,7 +17,7 @@ ext:
   install: |
     # 部署到 ~/.pi/web/extensions/aiti-helper/ 后 reload
   license: MIT
-  tags: [ai, helper, generate, fill, versioning]
+  tags: [ai, helper, generate, fill, followup, history, user-skills, lazy-loading]
 ---
 
 # aiti-helper
@@ -32,10 +32,15 @@ ext:
 - **AI 输入框 + 结果预览**：弹窗输入 → AI 会话内生成 → schema 校验 → 可编辑预览 → 用户审核后「填入并执行 / 只复制 / 重来」
 - **发起方来源标注**：invoke 时把发起方报告给 AI——`发自: <pageId>（AI 主窗口/宿主页）` + `来源会话 ID: <当前 pi-web 会话 id>`（pages slot 传 selectedSession），多窗口场景 AI 知道用户从哪个窗口发起、可读对应会话历史
 - **AI 主动交互**：invoke 默认提示词内置「与用户交互」——AI 可用 `aiti_user_choose`（候选项让用户选）/`aiti_user_input`/`aiti_user_confirm`/`aiti_user_pick_element` 等工具在信息不足、需选择/确认时主动向你收集，而非猜测（如「列出所有 session 让我选择」会调 choose 弹候选卡）
-- **会话观察小窗**：扩展弹窗开着时，悬浮小窗实时显示当前 session 消息流（对话 + 工具调用滚动输出），可拖拽/折叠——掌握 session 全进程
+- **流式进度 + 结果总线交付**：进度与结果走 aiti-event-bus topics `helper-<sid>`（result 带全文直接落地；HTTP `/result` 降级为纯快照、永不持连接；3s 宽限后零产出轮发 no_result 帧——旧 long-poll 被 nginx 60s 掐断的链路已废）
+- **多轮追问**：弹窗内追问输入框 → `POST /followup` 同 agent 会话 steer 续问（上下文完整延续，会话回收后自动重建续跑）
+- **历史与后台任务**：invoke 历史 JSONL 落 `state/history.jsonl`（含落地标记 land）；后台执行发系统通知，重开弹窗列未结算任务（`/active`）、`/origin` 接回实时进度
+- **用户自定义 skills**：🤖「AI 帮我新增/修改 skill」→ `/user-skills` CRUD（存 data 目录、owner 归属扩展，不打扩展部署产物）+ 帮助点 `skill-manage`
+- **invoke 安全网**：invoke 前自动 `POST` aiti-configs `/snapshot` 固化现场（fire-and-forget，对标 etckeeper Pre-Invoke；配置版本化已 M4 独立化为 [aiti-configs](aiti-configs.md)，本扩展只留这一个接线）
+- **会话级工具启用**：帮助点 owner 扩展的 aiti_* 工具只注入本次 helper 会话（enableExtTools——无 feature 写、无竞态）；建会前 `ai-prebind` 预绑资源；ownerTools 统计
+- **懒加载 v2**：薄 entry 常驻（全局 🤖 按钮 + 稳定 invoke 入口即装），重 UI 弹窗首次 invoke 按需 import；发起页 boundPageId 绑定
 - **自由发挥**：不选预置帮助点时直接提问，结果可为文本/代码/JSON，回填到当前输入框/剪贴板
 - **AI 自管理清单**：读取各扩展 `ai` 段（自管理清单）→ 维护命令/prompt/扩展，乃至**新建一个扩展**（配合 aiti-extman）
-- **配置版本化（安全网）**：`configs_status` / `configs_commit` / `configs_restore` 把 ai 扩展与 pi 核心明文配置入 git——AI 改坏可回滚；**session 等巨大文件永不入仓**（硬排除 + 大小双拦截）；**崩溃自检恢复**：`ai-configs selfcheck/recover` 后台拉起 AI（带版本提示词）协助修复 + 🛡 安全盾：用户点选历史版本恢复，恢复不丢数据（先 commit+tag 再恢复，验证 OK 才写 HEAD），命令 + 网页双入口
 
 > 工作流与设计全文：内部方案文档（含 aiti-devtools「AI 管自己」自桥接、各扩展自管理清单、进化的 AI agent 理念、版本化设计）。
 >

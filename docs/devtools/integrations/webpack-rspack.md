@@ -112,4 +112,4 @@ pnpm dev
 curl -s http://localhost:5299/ | grep -o aiti-launcher   # HTML 里应出现 launcher 脚本
 ```
 
-可运行示例：[examples/aiti-webpack-demo](examples.md)（5299）· [aiti-rspack-demo](examples.md)（5399）
+可运行示例：[examples/aiti-webpack-demo](../examples.md)（5299）· [aiti-rspack-demo](../examples.md)（5399）

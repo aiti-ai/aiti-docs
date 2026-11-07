@@ -1,20 +1,19 @@
 ---
-title: aiti-mcp-bridge / aiti-mcp-server
+title: aiti-bridge
 icon: 🔗
 description: 配置 aiti-devtools 使用、改造 AI agent、消息直达 IDE AI agent 窗口
-tags: [product, aiti-mcp-bridge, mcp, ai-agent]
+tags: [product, aiti-bridge, mcp, ai-agent]
 ---
 
-# aiti-mcp-bridge / aiti-mcp-server — AI agent 改造层
+# aiti-bridge — AI agent 改造层
 
-> **一句话**：MCP 桥把"页面调试能力"变成**任意 AI agent 的工具** —— 配置 aiti-devtools 使用；改造 AI agent；支持 aiti-devtools、aiti-devtools-vscode/idea 等插件完成注入；**通过 mcp-bridge 直接把消息发到 IDE 里的 AI agent 窗口**。
+> **一句话**：MCP 桥把"页面调试能力"变成**任意 AI agent 的工具** —— 配置 aiti-devtools 使用；改造 AI agent；支持 aiti-devtools、aiti-devtools-vscode/idea 等插件完成注入；**通过 aiti-bridge 直接把消息发到 IDE 里的 AI agent 窗口**。
 
 ## 1. 产品构成
 
 | 包 | 形态 | 职责 |
 |---|---|---|
-| `@aiti-ai/aiti-mcp-bridge` | 本地桥服务（CLI） | 配置 aiti-devtools 的桥地址/token/pageId；会话登记与路由；事件广播；对接 IDE AI 窗口 |
-| `@aiti-ai/aiti-mcp-server` | MCP server | stdio + HTTP + SSE 三 transport 的 MCP 端点，暴露 `page_*` / `user_*` 工具族 |
+| `@aiti-ai/aiti-bridge` | 本地桥服务（CLI） | 桥地址/pageId 配置、会话登记与路由、事件广播、对接 IDE AI 窗口；**内置 MCP 端点**（stdio shim + HTTP + Streamable HTTP，暴露 `page_*` / `user_*` 工具族） |
 
 ## 2. 它解决了什么
 
@@ -34,7 +33,7 @@ IDE AI agent 窗口 / Claude Code / Cursor / aiti-agent
         │  MCP (stdio / HTTP / SSE)
         ▼
 ┌─────────────────────────────┐
-│ aiti-mcp-bridge（本地服务）      │  session 登记 / 路由 / 广播
+│ aiti-bridge（本地服务）      │  session 登记 / 路由 / 广播
 │  ├─ /bridge/claim             │  连接登记/复用（instanceId + secret）
 │  ├─ /bridge/sessions          │  发现：全部可操作 pageId
 │  ├─ /bridge/sse               │  持久连接（role=page|ai）
@@ -74,11 +73,11 @@ IDE AI agent 窗口 / Claude Code / Cursor / aiti-agent
 
 ```bash
 # 1. 启动桥
-npx @aiti-ai/aiti-mcp-bridge --http 8777
+npx @aiti-ai/aiti-bridge --port 8777
 
-# 2. 配置任意 MCP 客户端
-# Claude Code: claude mcp add aiti -- npx @aiti-ai/aiti-mcp-server --bridge http://localhost:8777
-# Cursor / IDE AI: 在 MCP 设置里添加 aiti-mcp-server（stdio）
+# 2. 配置任意 MCP 客户端（一键注册 stdio shim，幂等；agent 启动带 env AITI_BRIDGE_URL 即接入）
+npx @aiti-ai/aiti-bridge --register-shim
+# 或 MCP client 直连 HTTP 端点：http://127.0.0.1:8777/aiti/mcp/mcp
 
 # 3. 告诉 AI 目标页面
 # 「用 bridge_status 看一下当前有哪些 pageId，然后对 01234/f0 执行 page_snapshot」
@@ -89,7 +88,7 @@ npx @aiti-ai/aiti-mcp-bridge --http 8777
 - token/secret 认证（SSE / result / event 全部校验）
 - secret 防跨页面冲突：只有原页面能复用自己的 instanceId
 - 危险命令确认 + 手势桥（transient activation）
-- 桥端点默认本机监听，支持 `AITI_MCP_TOKEN` 环境变量
+- 桥端点默认仅本机监听（127.0.0.1）；页面连接经 claim/secret 校验
 - MCP 端点外网鉴权：计划适配 service-tunnels（auth + token 并存）
 
 ## 7. 2026-08 新增能力

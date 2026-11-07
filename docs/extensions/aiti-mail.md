@@ -8,7 +8,7 @@ ext:
   soul: 配置一次 SMTP，pi-web 里任何扩展和 AI 都能发邮件。
   type: dev-repo
   category: 系统工具
-  version: 0.1.0
+  version: "0.1.7"
   status: active
   author: aiti-ai
   publisher: aiti-ai
@@ -24,7 +24,7 @@ ext:
 
 > ❝ **配置一次 SMTP，pi-web 里任何扩展和 AI 都能发邮件。** ❝
 
-pi-web 内的通用邮件发送出口（v0.1.0）。首个消费方是 ⏰调度（`aiti-ai-schedule` v0.4.0 的任务结果邮件送达）。
+pi-web 内的通用邮件发送出口。首个消费方是 ⏰调度（`aiti-ai-schedule` v0.4.0 的任务结果邮件送达）。
 
 - 设计全文：`aiti-work/docs/aiti-ai-schedule-integration-plan.md` §4.6
 
@@ -32,9 +32,9 @@ pi-web 内的通用邮件发送出口（v0.1.0）。首个消费方是 ⏰调度
 
 | 能力 | 说明 |
 |---|---|
-| SMTP 客户端 | 零依赖（`net`/`tls`）：465 隐式 TLS / 587·25 STARTTLS 自动升级；AUTH PLAIN 优先 LOGIN 兜底；全程 25s 超时；不自动重试 |
+| SMTP 客户端 | 零依赖（`net`/`tls`）：465 隐式 TLS / 587·25 STARTTLS 自动升级 / `noStarttls` 明文直连档（25 内网中继，缺省关）；AUTH PLAIN 优先 LOGIN 兜底；全程 25s 超时；不自动重试 |
 | MIME | UTF-8 正文（base64 76 切行）；主题 RFC 2047 encoded-word；`Date`/`Message-ID`/`From`/`To` 头；DATA 阶段 dot-stuffing |
-| 发送记录 | `node:sqlite`（`dataDir/mails.db`）：时间/收件人/主题/状态/耗时/来源；90 天保留自动清理 |
+| 发送记录 | `node:sqlite`（`<extRoot>/cache/mails.db`，WAL）：时间/收件人/主题/状态/耗时/来源；90 天保留自动清理 |
 | 管理弹窗 | 工具条 ✉ → 两 tab（配置[SMTP 表单+发送测试] / 发送记录表格）；`data-ext-float` 浮窗契约 |
 
 ## API（registerHttpRoute，同源调用）
@@ -44,7 +44,7 @@ pi-web 内的通用邮件发送出口（v0.1.0）。首个消费方是 ⏰调度
 | `GET /config` | 当前配置（**`pass` 不回显，只回 `hasPass`**） |
 | `POST /config` | 保存（`pass` 缺省=保留旧值；文件 0600） |
 | `POST /test` | `{to}` 发测试邮件（source=test） |
-| `POST /send` | `{to, subject, body, source?}`；`to` 逗号/全角分隔，逐个发送逐条记录；返回 `{ok, results:[{to,status,error}]}` |
+| `POST /send` | `{to, subject, body, source?}`；`to` 逗号/全角分隔，逐个发送逐条记录；返回 `{ok, error?, results:[{to,status,messageId?,durationMs,error?}]}`（部分失败时顶层 ok:false，error 带「n/m 个收件人发送失败」） |
 | `GET /log` | 发送记录（默认 50 条倒序，可按 status 过滤） |
 
 ## AI 帮助点（M3）
