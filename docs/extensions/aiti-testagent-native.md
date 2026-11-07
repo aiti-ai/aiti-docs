@@ -6,7 +6,7 @@ ext:
   name: TestAgent Native 面板
   description: testagent-native（Windows 原生进程活体操控）可视面 —— broker 进程/会话/挂钩/事件流；原 aiti-wintrace（2026-11-07 改名）
   soul: 任意 Windows 进程→AI 可编程工具面：API/COM 调用级追踪、原生求值、mock 篡改、函数体热替换，全可逆审计。
-  type: panel
+  type: dev-repo
   category: 调试
   version: 0.1.8
   status: active
