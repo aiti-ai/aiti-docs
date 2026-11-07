@@ -2,11 +2,13 @@
 #
 #   irm https://aiti.pw/install.ps1 | iex
 #
-# Custom npm registry (intranet / mirror):
-#   $env:AITI_NPM_REGISTRY = "https://npm.example.com"; irm https://aiti.pw/install.ps1 | iex
+# Installs the prebuilt archive from GitHub Releases — no npm involved on
+# your machine. The archive bundles node_modules, so you only need the
+# Node.js runtime itself (>= 22.19).
 #
-# The script is read-only about your system: it checks Node.js, runs one
-# `npm install -g`, and prints next steps. No admin rights, no file changes.
+# Overrides:
+#   $env:AITI_RELEASE_REPO = "owner/repo"        (default aiti-ai/aiti-ai)
+#   $env:AITI_INSTALL_DIR  = "D:\aiti"           (default $env:LOCALAPPDATA\aiti)
 # Body wrapped in a scriptblock + `return` (never `exit`) so piping into iex
 # cannot kill the caller's shell.
 
@@ -19,13 +21,16 @@
 
     $needMajor = 22
     $needMinor = 19
+    $repo = if ($env:AITI_RELEASE_REPO) { $env:AITI_RELEASE_REPO } else { "aiti-ai/aiti-ai" }
+    $installRoot = if ($env:AITI_INSTALL_DIR) { $env:AITI_INSTALL_DIR } else { Join-Path $env:LOCALAPPDATA "aiti" }
+    $tag = $env:AITI_RELEASE_TAG   # pin a version, e.g. "v0.15.7" (default: latest release)
 
     Say ""
-    Say "aiti Web installer  (npm package: @aiti-ai/pi-web)"
+    Say "aiti Web installer  (GitHub Releases · prebuilt · no npm)"
     Say "----------------------------------------"
     Say ""
 
-    # ---- Node.js check ----
+    # ---- Node.js runtime check ----
     $nodeInfo = $null
     try {
         $raw = (& node --version) | Select-Object -First 1
@@ -36,7 +41,7 @@
     } catch { $nodeInfo = $null }
 
     if (-not $nodeInfo) {
-        Bad "Node.js not found. aiti Web needs Node.js >= $needMajor.$needMinor."
+        Bad "Node.js not found. aiti Web needs the Node.js runtime >= $needMajor.$needMinor."
         Say ""
         Say "  Install Node.js first, then re-run this installer:"
         Say "    winget install OpenJS.NodeJS.LTS"
@@ -46,32 +51,79 @@
     }
     if ($nodeInfo.Major -lt $needMajor -or ($nodeInfo.Major -eq $needMajor -and $nodeInfo.Minor -lt $needMinor)) {
         Bad "Node.js $($nodeInfo.Raw) is too old (need >= $needMajor.$needMinor)."
-        Say ""
-        Say "  Update Node.js, then re-run this installer:"
-        Say "    winget upgrade OpenJS.NodeJS"
-        Say ""
+        Say "  Update Node.js (winget upgrade OpenJS.NodeJS), then re-run this installer."
         return
     }
     Good "Node.js $($nodeInfo.Raw)"
 
-    # ---- install ----
-    $npmArgs = @("install", "-g", "@aiti-ai/pi-web@latest")
-    if ($env:AITI_NPM_REGISTRY) {
-        $npmArgs += @("--registry", $env:AITI_NPM_REGISTRY)
-        Say "  using registry: $($env:AITI_NPM_REGISTRY)"
-    }
-
-    Say "Installing @aiti-ai/pi-web (global) ..."
-    & npm @npmArgs
-    if ($LASTEXITCODE -ne 0) {
-        Bad "npm install failed (see output above)."
-        Say ""
-        Say "  Hit EACCES / permission errors? Prefer a user-writable global prefix:"
-        Say "    npm config set prefix ~\npm-global   # then add ~\npm-global to PATH"
-        Say ""
+    # ---- resolve release ----
+    $api = if ($tag) { "https://api.github.com/repos/$repo/releases/tags/$tag" } else { "https://api.github.com/repos/$repo/releases/latest" }
+    Say "Querying release from $repo ..."
+    try {
+        $release = Invoke-RestMethod -Uri $api -UseBasicParsing
+    } catch {
+        Bad "cannot reach GitHub API ($api)."
         return
     }
-    Good "Installed @aiti-ai/pi-web"
+    $tag = $release.tag_name
+    if (-not $tag) { Bad "no tag_name in release."; return }
+    $assetName = "aiti-web-$tag-win-x64.zip"
+    $asset = $release.assets | Where-Object { $_.name -eq $assetName } | Select-Object -First 1
+    if (-not $asset) {
+        Bad "asset $assetName not found in release $tag."
+        Say "  check https://github.com/$repo/releases"
+        return
+    }
+    Good "release $tag"
+
+    # ---- download + verify ----
+    $tmp = Join-Path $env:TEMP ("aiti-install-" + [guid]::NewGuid().ToString("N").Substring(0, 8))
+    New-Item -ItemType Directory -Path $tmp | Out-Null
+    Say "Downloading $($assetName) ..."
+    try {
+        Invoke-WebRequest -Uri $asset.browser_download_url -OutFile (Join-Path $tmp $assetName) -UseBasicParsing
+    } catch {
+        Bad "download failed: $($asset.browser_download_url)"
+        Remove-Item -Recurse -Force $tmp
+        return
+    }
+    $checksumAsset = $release.assets | Where-Object { $_.name -eq "checksums.txt" } | Select-Object -First 1
+    if ($checksumAsset) {
+        try {
+            Invoke-WebRequest -Uri $checksumAsset.browser_download_url -OutFile (Join-Path $tmp "checksums.txt") -UseBasicParsing
+            $want = (Get-Content (Join-Path $tmp "checksums.txt") | Where-Object { $_ -match [regex]::Escape($assetName) }) -split '\s+' | Select-Object -First 1
+            $got = (Get-FileHash (Join-Path $tmp $assetName) -Algorithm SHA256).Hash.ToLower()
+            if ($want -and $got -eq $want.ToLower()) { Good "sha256 verified" }
+            else { Bad "sha256 mismatch."; Remove-Item -Recurse -Force $tmp; return }
+        } catch { Say "  (checksum check skipped: $($_.Exception.Message))" }
+    }
+
+    # ---- install ----
+    $appDir = Join-Path $installRoot "aiti-web-$tag"
+    Say "Installing to $appDir ..."
+    $tmpExtract = Join-Path $tmp "extract"
+    try {
+        Expand-Archive -Path (Join-Path $tmp $assetName) -DestinationPath $tmpExtract -Force
+    } catch {
+        Bad "extract failed: $($_.Exception.Message)"
+        Remove-Item -Recurse -Force $tmp
+        return
+    }
+    if (Test-Path $appDir) { Remove-Item -Recurse -Force $appDir }
+    New-Item -ItemType Directory -Path $installRoot -Force | Out-Null
+    Move-Item (Join-Path $tmpExtract "aiti-web") $appDir
+    Good "installed aiti-web $tag"
+
+    # ---- pi-web.cmd shim (WindowsApps dir is on PATH by default) ----
+    $shimDir = Join-Path $env:LOCALAPPDATA "Microsoft\WindowsApps"
+    $shim = Join-Path $shimDir "pi-web.cmd"
+    try {
+        New-Item -ItemType Directory -Path $shimDir -Force | Out-Null
+        Set-Content -Path $shim -Value "@`"$appDir\bin\pi-web.js`" %*" -Encoding ASCII
+        Good "shim written: $shim"
+    } catch {
+        Say "  (shim write failed: $($_.Exception.Message) - run with: node `"$appDir\bin\pi-web.js`")"
+    }
 
     # ---- pi engine hint ----
     Say ""
@@ -84,13 +136,14 @@
         Say "    npm install -g @earendil-works/pi-coding-agent"
     }
 
-    # ---- next steps ----
+    Remove-Item -Recurse -Force $tmp -ErrorAction SilentlyContinue
+
     Say ""
     Say "Done! Start aiti Web with:"
     Say ""
     Say "    pi-web          # serves http://127.0.0.1:30141 and opens your browser"
     Say ""
-    Say "More commands:  pi-web status | stop | open | update"
-    Say "Docs:           https://aiti.pw/guide/install.html"
+    Say "Upgrade: re-run this installer (pi-web stop first)."
+    Say "Docs:    https://aiti.pw/guide/install.html"
     Say ""
 }

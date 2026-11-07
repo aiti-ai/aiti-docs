@@ -35,12 +35,18 @@ pi-web          # 启动服务并打开浏览器（默认 http://127.0.0.1:30141
 curl -fsSL https://aiti.pw/install.sh | sh
 ```
 
-脚本只做三件事：**检查 Node.js 版本 → `npm install -g @aiti-ai/pi-web@latest` → 检测 pi 引擎并提示**。不 sudo、不改系统文件，[脚本源码](https://aiti.pw/install.sh)可先审再跑。
+**不需要 npm**：脚本从 [GitHub Releases](https://github.com/aiti-ai/aiti-ai/releases) 下载预构建产物（含全部依赖，~180MB）→ 安装到 `~/.aiti/aiti-web-<版本>` → 在 `~/.local/bin` 创建 `pi-web` 启动器。下载经 sha256 校验；安装到用户目录，不 sudo、不碰系统文件，[脚本源码](https://aiti.pw/install.sh)可先审再跑。
 
-自定义 npm 源（内网 / 镜像）：
+固定版本：
 
 ```bash
-curl -fsSL https://aiti.pw/install.sh | AITI_NPM_REGISTRY=https://npm.example.com sh
+curl -fsSL https://aiti.pw/install.sh | sh -s -- --ref v0.15.7
+```
+
+环境变量覆盖：`AITI_RELEASE_REPO`（镜像仓）、`AITI_INSTALL_DIR`、`AITI_BIN_DIR`：
+
+```bash
+curl -fsSL https://aiti.pw/install.sh | AITI_INSTALL_DIR=~/apps/aiti sh
 ```
 
 @tab Windows
@@ -49,13 +55,15 @@ curl -fsSL https://aiti.pw/install.sh | AITI_NPM_REGISTRY=https://npm.example.co
 irm https://aiti.pw/install.ps1 | iex
 ```
 
-需要 PowerShell 5.1+（Windows 10/11 自带）。等价写法 `iwr -useb https://aiti.pw/install.ps1 | iex`。脚本同样只做检查 + 一次全局安装，[脚本源码](https://aiti.pw/install.ps1)。
+需要 PowerShell 5.1+（Windows 10/11 自带）。等价写法 `iwr -useb https://aiti.pw/install.ps1 | iex`。**不需要 npm**：脚本从 [GitHub Releases](https://github.com/aiti-ai/aiti-ai/releases) 下载预构建 zip（含全部依赖）→ 安装到 `%LOCALAPPDATA%\aiti\aiti-web-<版本>` → 写入 `pi-web.cmd` 启动器，下载经 sha256 校验，[脚本源码](https://aiti.pw/install.ps1)。
 
-自定义 npm 源（内网 / 镜像）：
+固定版本与环境变量覆盖：
 
 ```powershell
-$env:AITI_NPM_REGISTRY = "https://npm.example.com"; irm https://aiti.pw/install.ps1 | iex
+$env:AITI_RELEASE_TAG = "v0.15.7"; irm https://aiti.pw/install.ps1 | iex
 ```
+
+`AITI_RELEASE_REPO`（镜像仓）、`AITI_INSTALL_DIR` 同理可覆盖。
 
 ::::
 
@@ -90,14 +98,16 @@ CLI 在服务就绪后自动打开浏览器；未打开则访问 [http://127.0.0
 
 ## 脚本透明性
 
-一键脚本没有任何隐藏动作——两个脚本合计 ~150 行，核心只有一次 `npm install -g`：
+一键脚本没有任何隐藏动作——核心只是「查 GitHub API → 下载 release 产物 → sha256 校验 → 解压 + 创建启动器」：
 
 | 脚本 | 直链 |
 |---|---|
 | install.sh | https://aiti.pw/install.sh |
 | install.ps1 | https://aiti.pw/install.ps1 |
 
-环境变量 `AITI_NPM_REGISTRY` 可把安装源指到任意 npm registry（内网源 / 镜像源 / 测试源），不设则使用你本机 npm 的默认配置。
+产物由 [release 工作流](https://github.com/aiti-ai/aiti-ai/blob/main/.github/workflows/release.yml)在推 `v*` tag 时自动构建：4 平台（linux-x64 / darwin-x64 / darwin-arm64 / win-x64）各自打包「npm 包内容 + 生产依赖闭包」，每平台产 sha256，install 脚本按系统/架构自动选择并校验。
+
+升级：重跑安装器（先 `pi-web stop`）。npm 渠道安装的用 `pi-web update`。
 
 ## 下一步
 

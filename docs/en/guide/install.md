@@ -35,12 +35,18 @@ Prefer a throwaway run? `npx @aiti-ai/pi-web@latest` — no global install.
 curl -fsSL https://aiti.pw/install.sh | sh
 ```
 
-The script does three things only: **checks the Node.js version → runs `npm install -g @aiti-ai/pi-web@latest` → detects the pi engine and prints a hint**. No sudo, no system file changes. [Review the script](https://aiti.pw/install.sh) first if you like.
+**No npm required**: the script downloads the prebuilt archive from [GitHub Releases](https://github.com/aiti-ai/aiti-ai/releases) (all dependencies bundled, ~180MB) → installs to `~/.aiti/aiti-web-<version>` → creates a `pi-web` launcher in `~/.local/bin`. Downloads are sha256-verified; installs to your home directory, no sudo. [Review the script](https://aiti.pw/install.sh) first if you like.
 
-Custom npm registry (intranet / mirror):
+Pin a version:
 
 ```bash
-curl -fsSL https://aiti.pw/install.sh | AITI_NPM_REGISTRY=https://npm.example.com sh
+curl -fsSL https://aiti.pw/install.sh | sh -s -- --ref v0.15.7
+```
+
+Env overrides: `AITI_RELEASE_REPO` (mirror repo), `AITI_INSTALL_DIR`, `AITI_BIN_DIR`:
+
+```bash
+curl -fsSL https://aiti.pw/install.sh | AITI_INSTALL_DIR=~/apps/aiti sh
 ```
 
 @tab Windows
@@ -49,13 +55,15 @@ curl -fsSL https://aiti.pw/install.sh | AITI_NPM_REGISTRY=https://npm.example.co
 irm https://aiti.pw/install.ps1 | iex
 ```
 
-Requires PowerShell 5.1+ (built into Windows 10/11). Equivalent: `iwr -useb https://aiti.pw/install.ps1 | iex`. [Review the script](https://aiti.pw/install.ps1).
+Requires PowerShell 5.1+ (built into Windows 10/11). Equivalent: `iwr -useb https://aiti.pw/install.ps1 | iex`. **No npm required**: the script downloads the prebuilt zip from [GitHub Releases](https://github.com/aiti-ai/aiti-ai/releases) → installs to `%LOCALAPPDATA%\aiti\aiti-web-<version>` → writes a `pi-web.cmd` launcher; downloads are sha256-verified. [Review the script](https://aiti.pw/install.ps1).
 
-Custom npm registry:
+Pin a version:
 
 ```powershell
-$env:AITI_NPM_REGISTRY = "https://npm.example.com"; irm https://aiti.pw/install.ps1 | iex
+$env:AITI_RELEASE_TAG = "v0.15.7"; irm https://aiti.pw/install.ps1 | iex
 ```
+
+`AITI_RELEASE_REPO` and `AITI_INSTALL_DIR` work the same way.
 
 ::::
 
@@ -90,11 +98,13 @@ Update: `pi-web stop`, then `pi-web update`. Uninstall: `npm uninstall -g @aiti-
 
 ## Script transparency
 
-Both scripts total ~150 lines and the core is a single `npm install -g`:
+Both scripts do one thing: query the GitHub API → download the release asset → verify sha256 → extract + create a launcher:
 
 | Script | Direct link |
 |---|---|
 | install.sh | https://aiti.pw/install.sh |
 | install.ps1 | https://aiti.pw/install.ps1 |
 
-Set `AITI_NPM_REGISTRY` to point the installer at any npm registry; unset, it uses your machine's npm default.
+Assets are built automatically by the [release workflow](https://github.com/aiti-ai/aiti-ai/blob/main/.github/workflows/release.yml) whenever a `v*` tag is pushed: 4 platforms (linux-x64 / darwin-x64 / darwin-arm64 / win-x64), each bundling the npm package contents plus its production dependency closure, each with a sha256 that the installer verifies.
+
+Upgrade: re-run the installer (run `pi-web stop` first). npm-channel installs use `pi-web update`.
