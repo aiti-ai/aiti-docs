@@ -91,6 +91,8 @@ client bundle 里 `ctx.registerItems(slot, items)` 注册实际组件。
 | `pages` | AppShell tab 系统 | 全页视图 | session-manager（看板） |
 | `chatInputTop` | 聊天输入框上方 | 输入辅助区 | aiti-devtools（inspect 候选区）、demo-lazy（字数统计） |
 | `userMessageActions` | user 消息底部 hover 操作区 | 消息级行为按钮 | aiti-prompts（收藏 prompt）、demo（📌） |
+上表为**常用子集**——宿主插槽全表（**29+ 个**：上表 10 个之外还有 dock 族 `sidebarContent`/`sidebarProjects`/`rightFileDock`/`sidebarExplorerDock`/`terminalDock`/`compactLead`/`modelInfoLead`，聊天面 `chatOverlay`/`composerTools`/`assistantMessageActions`/`sessionRowMeta`/`userMessageActions`，模型/设置面 `modelSelector`/`sessionStats`/`settingsModels`/`settingsAgentsFeature`，新建会话面 `newSessionWidgets`/`newSessionSelectors`/`newSessionPreparers`/`newSessionBackendOptions`/`workspacePickerActions`/`queuePanel`/`fileViewer`/`pathPicker` 等）见扩展创作总纲 `docs/dev-repo-authoring-reference.md`「插槽全表」。
+
 
 ### 插槽上下文（render props）
 
