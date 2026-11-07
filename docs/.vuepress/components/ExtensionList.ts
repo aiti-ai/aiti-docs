@@ -112,6 +112,12 @@ export default defineComponent({
       }
     });
 
+    /** 展示层双语助手：闭包读 isEn.value（render 内经 this 调用，保证与路由同步）。 */
+    const t = (zhText, enText) => (isEn.value ? enText : zhText);
+    const typeLabel = (x) => (isEn.value ? TYPE_LABEL_EN[x] : TYPE_LABEL[x]) || x;
+    const statusLabel = (x) => (isEn.value ? STATUS_LABEL_EN[x] : STATUS_LABEL[x]) || x;
+    const linkOf = (e) => (isEn.value ? "/en" : "") + e.docs;
+
     const groups = computed(() => {
       const ext = catalog.value?.extensions ?? [];
       const map = new Map();
@@ -124,20 +130,19 @@ export default defineComponent({
       return [...map.entries()].sort((a, b) => a[0].localeCompare(b[0]));
     });
 
-    return { catalog, error, loading, groups };
+    return { catalog, error, loading, groups, t, typeLabel, statusLabel, linkOf };
   },
 
   render() {
     const { catalog, error, loading, groups } = this;
-    const en = this.isEn;
-    const typeLabel = (t) => (en ? TYPE_LABEL_EN[t] : TYPE_LABEL[t]) || t;
-    const statusLabel = (s) => (en ? STATUS_LABEL_EN[s] : STATUS_LABEL[s]) || s;
-    const t = (zh, enStr) => (en ? enStr : zh);
+    const typeLabel = (x) => this.typeLabel(x);
+    const statusLabel = (x) => this.statusLabel(x);
+    const t = (zhText, enText) => this.t(zhText, enText);
 
     const card = (e) =>
       h("article", { class: "ext-card", key: e.id }, [
         h("header", { class: "ext-card-head" }, [
-          h("a", { class: "ext-name", href: (en ? "/en" : "") + e.docs }, e.name),
+          h("a", { class: "ext-name", href: this.linkOf(e) }, e.name),
           e.name !== e.id ? h("code", { class: "ext-id" }, e.id) : null,
           h("span", { class: "ext-type" }, typeLabel(e.type)),
           h("span", { class: "ext-status " + e.status }, statusLabel(e.status)),
