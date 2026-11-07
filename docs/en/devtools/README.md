@@ -16,22 +16,24 @@ Bring AI to the page development scene: injected debug client + Inspector + MCP 
 | Document | Content |
 |---|---|
 | [Quick Start](quick-start.md) | The fastest way to get started |
-| [The SDK](core.md) | `@aiti-ai/aiti-devtools`: manual script wiring + integration matrix overview |
+| [The SDK](core.md) | SDK/asset distribution (core+inject, served via framework plugins or the standalone bridge — no standalone npm package): manual script wiring + integration matrix overview |
 | [Injection Mechanics](inject.md) | Local inject details, the three forms, host/iframe routing |
 | [CDP Command Set](cdp-commands.md) | Reference for commands across 8 domains |
 | [aiti-agent Extension Points](extension-points.md) | Extension framework: slots, contracts, lifecycle |
 
 ## Framework Integrations (integrations/)
 
-| Carrier | How to integrate | Docs | Status |
-|---|---|---|---|
-| Vite / SvelteKit / any Vite project | `aitiDevtools()` plugin | [vite](integrations/vite.md) | ✅ |
-| webpack-dev-server | `AitiDevtoolsWebpackPlugin` | [webpack-rspack](integrations/webpack-rspack.md) | ✅ |
-| Rspack | Reuses the webpack plugin (zero changes) | [webpack-rspack](integrations/webpack-rspack.md) | ✅ Verified |
-| Nuxt | `modules: ['@aiti-ai/aiti-devtools-nuxt']` | [nuxt](integrations/nuxt.md) | ✅ |
-| Astro | `integrations: [aitiAstro()]` | [astro](integrations/astro.md) | ✅ |
-| Vue projects | Falls back to the Vite plugin | [vue](integrations/vue.md) | 📋 Standalone package planned |
-| Express / Next / other Node services | Manual wiring via core middleware | [manual](integrations/manual.md) | ✅ Guide |
+| Carrier | npm package | How to integrate | Docs | Status |
+|---|---|---|---|---|
+| Vite / SvelteKit / any Vite project | `@aiti-ai/aiti-devtools-vite` | `aitiDevtools()` plugin | [vite](integrations/vite.md) | ✅ |
+| webpack-dev-server | `@aiti-ai/aiti-devtools-webpack` | `new AitiDevtoolsWebpackPlugin()` | [webpack-rspack](integrations/webpack-rspack.md) | ✅ |
+| Rspack | `@aiti-ai/aiti-devtools-webpack` (same package reused) | zero changes | [webpack-rspack](integrations/webpack-rspack.md) | ✅ Verified |
+| Nuxt | `@aiti-ai/aiti-devtools-nuxt` | one-line `modules: ['@aiti-ai/aiti-devtools-nuxt']` | [nuxt](integrations/nuxt.md) | ✅ |
+| Astro | `/astro` subpath export of `@aiti-ai/aiti-devtools-vite` | one-line `integrations: [aitiAstro()]` | [astro](integrations/astro.md) | ✅ |
+| Vue projects | reuses `@aiti-ai/aiti-devtools-vite` | Vite-plugin fallback | [vue](integrations/vue.md) | 📋 Standalone package planned |
+| Express / Next / other Node services | `@aiti-ai/aiti-devtools-core` | manual middleware wiring | [manual](integrations/manual.md) | ✅ Guide |
+
+> Full npm scope: `@aiti-ai/aiti-devtools-{vite,webpack,nuxt,core,inject,agent,pi}` + `@aiti-ai/aiti-bridge` — see the [plugin matrix](/en/products/aiti-devtools-plugins.md) for the package-to-carrier mapping.
 
 ## Examples
 

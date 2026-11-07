@@ -138,7 +138,7 @@ export default {
 ```
 插件注册 → dev server 响应（HTML 或首屏脚本）
   → prepend 注入（transformResponse 同一语义，最早执行）
-  → createAitiLauncher 初始化 → window.__aiti 暴露
+  → createDbgLauncher 初始化 → window.__dbg 暴露
   → Inspector UI 挂载 → (可选) 连 MCP 桥 SSE
   → 宿主页/同源 iframe 注入（injectAllIframes / MutationObserver 兜底动态 iframe）
   → 跨域 iframe 跳过（可枚举、不可定向执行）

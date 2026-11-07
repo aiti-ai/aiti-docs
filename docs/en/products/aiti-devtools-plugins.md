@@ -138,7 +138,7 @@ export default {
 ```
 plugin registers → dev server response (HTML or first-screen script)
   → prepend injection (same semantics as transformResponse, executes earliest)
-  → createAitiLauncher initializes → window.__aiti exposed
+  → createDbgLauncher initializes → window.__dbg exposed
   → Inspector UI mounts → (optional) connects to the MCP bridge over SSE
   → host page/same-origin iframe injection (injectAllIframes / MutationObserver fallback for dynamic iframes)
   → cross-origin iframes skipped (enumerable but not targetable for execution)
