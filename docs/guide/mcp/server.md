@@ -117,6 +117,6 @@ npx @aiti-ai/aiti-bridge --register-shim   # 一键注册 stdio shim（aiti 条�
 
 - token/secret 认证：SSE / result / event 全部校验
 - 兼容路径：不带 secret（老 client / dev token）放行
-- 危险命令确认 + 手势桥（见 [安全边界](/products/aiti-devtools.md#3-安全边界)）
+- 危险命令确认 + 手势桥（见 [安全边界](/products/aiti-devtools.md#_3-安全边界)）
 - **MCP 端点鉴权（TODO）**：公网暴露的桥无独立鉴权——计划适配 service-tunnels（改造为 auth + token 并存，token 作额外开关）；当前维持内网/隧道限定
 - 页面事件订阅默认不投递（显式订阅才推，防框架 error 噪音）

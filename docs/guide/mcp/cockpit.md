@@ -47,7 +47,7 @@ tags: [guide, aiti-bridge, cockpit, ai-window]
 ## 4. 消息窗（路径二成功后）
 
 - **消息列表**：来往消息（人 push 的话、agent 回答、页面事件），**滑动窗口显示**（默认最近 50 条，可翻页加载更多）
-- **消息消费状态**：每条显示 已送达 / 待消费 / 已消费（`pending → delivered → consumed`；consumed 历史持久保留，见 [MCP Server · 消息存储](/guide/mcp/server.md#消息-session-存储参照-pi-session-同款-jsonl)）
+- **消息消费状态**：每条显示 已送达 / 待消费 / 已消费（`pending → delivered → consumed`；consumed 历史持久保留，见 [MCP Server · 消息存储](/guide/mcp/server.md#消息-session-存储-参照-pi-session-同款-jsonl)）
 - **输入框 + 待选区**：发消息给 agent（`POST /bridge/push`），带 [元素N]/[回答N]/[错误N] 占位符替换
 - **一次性 prompt**：复制发送到 AI 会话，引导 AI 立即消费收件箱：
   ```

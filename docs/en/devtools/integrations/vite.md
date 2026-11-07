@@ -96,7 +96,7 @@ export default defineConfig({
 
 - dev-only: `astro build` / `vite build` production output gets zero injection
 - launcher injection = script prepended to the response HTML; bridge/MCP/console mounted same-origin under `/aiti/`
-- double-injection guard: skipped if `window.__aiti` already exists
+- double-injection guard: the launcher dedupes via the `#__dbg_launcher` element marker (`__dbgLauncher` property) and skips if already injected
 - framework detection: under Vite dev builds, React/Vue/Svelte automatically carry source-location info (`_debugSource`/`__file`/`__svelte_meta`)
 
 ## Verification

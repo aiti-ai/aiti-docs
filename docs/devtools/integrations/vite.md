@@ -96,7 +96,7 @@ export default defineConfig({
 
 - dev-only：`astro build` / `vite build` 生产产物零注入
 - launcher 注入 = 响应 HTML prepend 脚本；桥/MCP/操作台同源挂在 `/aiti/`
-- 双注入防护：`window.__aiti` 已存在则跳过
+- 双注入防护：launcher 以 `#__dbg_launcher` 元素标记判重（`__dbgLauncher` 属性），已注入则跳过
 - 框架识别：Vite dev 构建下 React/Vue/Svelte 自动带源码定位信息（`_debugSource`/`__file`/`__svelte_meta`）
 
 ## 验证

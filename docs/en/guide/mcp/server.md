@@ -116,6 +116,6 @@ Unified semantics: sync/async (`async:true` returns immediately, the result goes
 
 - token/secret authentication: validated on SSE / result / event
 - Compatibility path: requests without a secret (legacy clients / dev token) are allowed through
-- Dangerous-command confirmation + gesture bridge (see [security boundary](/en/products/aiti-devtools.md#3-security-boundaries))
+- Dangerous-command confirmation + gesture bridge (see [security boundary](/en/products/aiti-devtools.md#_3-security-boundaries))
 - **MCP endpoint authentication (TODO)**: a publicly exposed bridge has no standalone authentication — plan is to adapt service-tunnels (reworked so auth and token co-exist, with token as an extra switch); currently limited to intranet/tunnel use
 - Page event subscriptions are not delivered by default (pushed only on explicit subscription, to avoid framework error noise)

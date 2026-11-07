@@ -21,7 +21,7 @@ tags: [product, ide, vscode, idea]
 ### ① 完成注入（Inject）
 - 监听工程 dev server（Vite/Webpack/Next…），经**代理/端口转发**在响应里注入 aiti-devtools（与 `transformResponse` 同语义的 prepend）
 - 未检测到 dev server 时：启动内置代理或提示用户启动
-- 检测到页面已注入（`window.__aiti` 存在）→ 跳过，避免双注入
+- 检测到页面已注入（响应已含 aiti-launcher.js，或 launcher 标记 `#__dbg_launcher` 存在）→ 跳过，避免双注入
 - 跨端一致：注入脚本与工程内插件、Chrome 扩展**同一份**，桥协议不变
 
 ### ② 配置桥（Bridge）
@@ -52,7 +52,7 @@ tags: [product, ide, vscode, idea]
 
 | 要点 | 方案 |
 |---|---|
-| 注入检测 | 页面 `window.__aiti` / `performance.getEntriesByType('resource')` 探测 |
+| 注入检测 | 响应首 chunk 已含 aiti-launcher.js 则跳过（运行时另有 launcher 元素标记 `#__dbg_launcher` 判重） |
 | 代理 | 本地反向代理 dev server（Vite 默认 5173），响应 prepend 注入 |
 | 桥生命周期 | 插件管理子进程；IDE 关闭时优雅停桥（TTL 保留 pageId） |
 | 配置互操作 | `.vscode/mcp.json` / JetBrains `mcp.xml` 双向同步 |

@@ -21,7 +21,7 @@ tags: [product, ide, vscode, idea]
 ### ① Complete Injection (Inject)
 - Watch the project's dev server (Vite/Webpack/Next…) and inject aiti-devtools into responses via **proxy/port forwarding** (a prepend with the same semantics as `transformResponse`)
 - When no dev server is detected: start a built-in proxy or prompt the user to start one
-- When the page is already injected (`window.__aiti` present) → skip, avoiding double injection
+- When the page is already injected (the response already contains aiti-launcher.js, or the launcher marker `#__dbg_launcher` exists) → skip, avoiding double injection
 - Cross-platform consistency: the injection script is the **same one** as the in-project plugins and the Chrome extension, with the bridge protocol unchanged
 
 ### ② Configure the Bridge (Bridge)
@@ -52,7 +52,7 @@ tags: [product, ide, vscode, idea]
 
 | Aspect | Approach |
 |---|---|
-| Injection detection | probe via `window.__aiti` / `performance.getEntriesByType('resource')` |
+| Injection detection | skip when the first HTML chunk already contains aiti-launcher.js (runtime also dedupes via the launcher marker `#__dbg_launcher`) |
 | Proxy | local reverse proxy in front of the dev server (Vite defaults to 5173); responses get prepend injection |
 | Bridge lifecycle | the plugin manages the child process; the bridge stops gracefully when the IDE closes (TTL retains pageIds) |
 | Config interoperability | `.vscode/mcp.json` / JetBrains `mcp.xml` two-way sync |
