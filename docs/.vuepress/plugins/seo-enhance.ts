@@ -32,7 +32,7 @@ const DEFAULT_KEYWORDS = [
   "MCP 桥",
   "aiti-agent",
   "aiti-devtools",
-  "aiti-mcp-bridge",
+  "aiti-bridge",
   "pi",
 ];
 
@@ -135,13 +135,13 @@ export const seoEnhance = (): PluginObject => ({
     const lines: string[] = [
       "# aiti",
       "",
-      `> 以 pi 为引擎的个人 AI 开发工作台与本地调试注入生态：aiti-agent（自托管 Web 工作台）· aiti-devtools（页面内 AI 调试助手，AI 进驻网页面对面调试）· aiti-mcp-bridge（任意 AI agent 经 MCP 操作页面）。`,
+      `> 以 pi 为引擎的个人 AI 开发工作台与本地调试注入生态：aiti-agent（自托管 Web 工作台）· aiti-devtools（页面内 AI 调试助手，AI 进驻网页面对面调试）· aiti-bridge（任意 AI agent 经 MCP 操作页面）。`,
       "",
       `AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 ${catalog.extensions?.length ?? 0}+ 个可组合扩展（调试注入 / 多 agent / 终端·VNC·RDP / 隧道 / 模型管理 / 配置安全网 / IM 接入等），aiti-devtools 已适配 DSH / OpenClaw / OpenCode 宿主。`,
       "",
       "## 文档",
       "- [首页 · 系统特色](https://aiti.pw/): 生态全景与特色速览",
-      "- [产品矩阵](https://aiti.pw/products/): aiti-agent / aiti-devtools / aiti-mcp-bridge 全家福",
+      "- [产品矩阵](https://aiti.pw/products/): aiti-agent / aiti-devtools / aiti-bridge 全家福",
       "- [指南](https://aiti.pw/guide/): 架构、快速开始、MCP 桥",
       "- [aiti-devtools](https://aiti.pw/devtools/): 注入器、CDP 命令集、框架集成（Vite/webpack/Nuxt/Astro…）",
       "- [扩展注册表](https://aiti.pw/extensions/): 全部扩展分类浏览，机器可读 /extensions.json",

@@ -1,7 +1,7 @@
 import { hopeTheme } from "vuepress-theme-hope";
 
-import { zhNavbar } from "./navbar/index.js";
-import { zhSidebar } from "./sidebar/index.js";
+import { zhNavbar, enNavbar } from "./navbar/index.js";
+import { zhSidebar, enSidebar } from "./sidebar/index.js";
 
 export default hopeTheme({
   hostname: "https://aiti.pw",
@@ -129,6 +129,33 @@ export default hopeTheme({
         toggleSidebar: "切换侧边栏",
       },
     },
+    "/en/": {
+      navbar: enNavbar,
+      sidebar: enSidebar,
+
+      selectLanguageName: "English",
+      selectLanguageText: "Languages",
+      selectLanguageAriaLabel: "Select language",
+
+      meta: {
+        contributorsText: "Contributors",
+      },
+
+      notFound: [
+        "Nothing here.",
+        "How did we get here?",
+        "This is a 404 page.",
+        "Looks like we have wandered off the map.",
+      ],
+      backToHome: "Back to home",
+
+      a11y: {
+        darkMode: "Dark mode",
+        lightMode: "Light mode",
+        accessible: "Accessible site",
+        toggleSidebar: "Toggle sidebar",
+      },
+    },
   },
 
   plugins: {
@@ -146,6 +173,7 @@ export default hopeTheme({
           getter: (page) => page.data.frontmatter.tags ?? [],
           formatter: {
             '/': '标签：$content',
+            '/en/': 'Tags: $content',
           },
         },
       ],
@@ -165,6 +193,22 @@ export default hopeTheme({
           emptyHistory: "无搜索历史",
           emptyResult: "没有找到结果",
           loading: "正在加载搜索索引..."
+        },
+        "/en/": {
+          cancel: "Cancel",
+          placeholder: "Search",
+          search: "Search",
+          searching: "Searching",
+          defaultTitle: "Docs",
+          select: "Select",
+          navigate: "Navigate",
+          autocomplete: "Autocomplete",
+          exit: "Close",
+          queryHistory: "Search history",
+          resultHistory: "History",
+          emptyHistory: "No search history",
+          emptyResult: "No results",
+          loading: "Loading search index..."
         },
       },
     },

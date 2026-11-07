@@ -7,7 +7,7 @@ import { seoEnhance } from './plugins/seo-enhance.ts';
 export default defineUserConfig({
   base: '/',
   title: 'aiti',
-  description: '以 pi 为引擎的个人 AI 开发工作台与本地调试注入生态 — aiti-agent / aiti-devtools / aiti-mcp-bridge',
+  description: '以 pi 为引擎的个人 AI 开发工作台与本地调试注入生态 — aiti-agent / aiti-devtools / aiti-bridge',
   head: [
     ['link', { rel: 'icon', href: '/favicon.svg' }],
     ['meta', { name: 'theme-color', content: '#7c3aed' }],
@@ -39,6 +39,13 @@ export default defineUserConfig({
             viewChangelog: '查看所有更新日志',
             latestUpdateAt: '最近更新',
           },
+          '/en/': {
+            contributors: 'Contributors',
+            changelog: 'Changelog',
+            timeOn: 'on',
+            viewChangelog: 'View full changelog',
+            latestUpdateAt: 'Last updated',
+          },
         }),
       },
       server: {
@@ -63,6 +70,12 @@ export default defineUserConfig({
       lang: 'zh-CN',
       title: 'aiti',
       description: '以 pi 为引擎的个人 AI 开发工作台与本地调试注入生态',
+    },
+    // 英文镜像（docs/en/）
+    '/en/': {
+      lang: 'en-US',
+      title: 'aiti',
+      description: 'Personal AI dev workbench powered by pi, plus a local debug-injection ecosystem — aiti-agent / aiti-devtools / aiti-bridge',
     },
   },
 });
