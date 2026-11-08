@@ -109,17 +109,20 @@ aiti-devtools is not locked to its own stack — these third-party agent hosts h
 
 ### Quick taste
 
-```bash
-# 1. Add the devtools injection to your project (Vite example)
-pnpm add -D @aiti-ai/aiti-devtools-vite
-# Enable the plugin in vite.config.ts; after dev server starts, 💬 / 🎯 buttons appear bottom-right
+> This is the condensed version of the [Quick start](/en/guide/quick-start.md) page (5 minutes to "AI operates your page"; full steps and the manual Cursor/Copilot config live there). Looking to install the **aiti web workbench** itself? See the [install guide](/en/guide/install.md) (npm / one-click scripts).
 
-# 2. Start the MCP bridge (retrofit your AI agent)
+```bash
+# 1. Inject (Vite example; plain HTML can also load the launcher via <script>)
+pnpm add -D @aiti-ai/aiti-devtools-vite      # vite.config.ts: plugins: [aitiDevtools()]
+
+# 2. Start the bridge (MCP endpoint built in)
 npx @aiti-ai/aiti-bridge --port 8777
 
-# 3. Point any MCP client at the bridge (Claude Code / Cursor / IDE built-in AI)
-#   Once the bridge is configured, the AI can page_exec / page_snapshot / user_confirm ...
+# 3. Connect an AI agent — one-line stdio shim registration for Claude Code (manual Cursor / Copilot config on the quick-start page)
+npx @aiti-ai/aiti-bridge --register-shim
 ```
+
+When the dev server runs, 💬 / 🎯 appear bottom-right — tell the AI "use bridge_status to list the pageIds" and start debugging.
 
 ## Product matrix at a glance
 

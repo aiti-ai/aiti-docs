@@ -112,17 +112,20 @@ aiti-devtools 不锁死在本家栈里——以下第三方 agent 宿主已有�
 
 ### 快速体验
 
-```bash
-# 1. 在工程里装 devtools 注入（Vite 示例）
-pnpm add -D @aiti-ai/aiti-devtools-vite
-# 在 vite.config.ts 中启用插件，dev 启动后页面右下角出现 💬 / 🎯 按钮
+> 本节是 [快速开始](/guide/quick-start.md) 的精简版（5 分钟跑通「AI 操作页面」，完整步骤与 Cursor/Copilot 手动配置见那页）；要装的是 **aiti Web 工作台**本身？见 [安装指南](/guide/install.md)（npm / 一键脚本）。
 
-# 2. 启动 MCP 桥（改造你的 AI agent）
+```bash
+# 1. 注入（Vite 示例；原生 HTML 也可直接 <script> 引入 launcher）
+pnpm add -D @aiti-ai/aiti-devtools-vite      # vite.config.ts: plugins: [aitiDevtools()]
+
+# 2. 起桥（MCP 端点内置于桥）
 npx @aiti-ai/aiti-bridge --port 8777
 
-# 3. 把桥配置给任意 MCP 客户端（Claude Code / Cursor / IDE 内置 AI）
-#   配置后 AI 即可 page_exec / page_snapshot / user_confirm ...
+# 3. 接入 AI agent —— Claude Code 一键注册 stdio shim（Cursor / Copilot 手动配置见快速开始页）
+npx @aiti-ai/aiti-bridge --register-shim
 ```
+
+dev server 起来后页面右下角出现 💬 / 🎯，对 AI 说「用 bridge_status 看看有哪些 pageId」即可开调。
 
 ## 产品矩阵速览
 
