@@ -18,6 +18,7 @@ keywords: 页面内 AI 调试, 浏览器调试注入, CDP 命令, Vite 插件, w
 | [快速开始](quick-start.md) | 最快接入路径 |
 | [SDK 本体](core.md) | SDK/资产形态（core+inject，经框架插件或独立桥分发，无独立 npm 包）：手动 script 接入 + 集成矩阵总览 |
 | [注入原理](inject.md) | 本地 inject 细节、三种形态、宿主/iframe 路由 |
+| [浏览器扩展](browser-ext.md) | 任意网页零改造注入（Chrome / Edge / Firefox，含 Android）|
 | [CDP 命令集](cdp-commands.md) | 8 域命令参考 |
 | [aiti-agent 扩展点](extension-points.md) | 扩展框架：插槽、契约、生命周期 |
 

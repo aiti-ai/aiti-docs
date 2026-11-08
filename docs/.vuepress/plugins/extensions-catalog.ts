@@ -119,10 +119,13 @@ const extensionsCatalog = (): PluginObject => {
     return entries.sort((a, b) => a.id.localeCompare(b.id));
   };
 
-  /** pi-web 扩展（docs/extensions/）与 aiti-devtools 框架集成（docs/devtools/integrations/）分开扫描 */
+  /** pi-web 扩展（docs/extensions/）与 aiti-devtools 集成（docs/devtools/integrations/ + devtools 顶层带 ext 块的页）分开扫描 */
   const readEntries = (app: AppLike) => readDirEntries(app, "extensions", "/extensions/");
-  const readIntegrations = (app: AppLike) =>
-    readDirEntries(app, join("devtools", "integrations"), "/devtools/integrations/");
+  const readIntegrations = (app: AppLike) => [
+    ...readDirEntries(app, join("devtools", "integrations"), "/devtools/integrations/"),
+    // devtools 顶层页（如 browser-ext 浏览器扩展）——无 ext 块的页被 readDirEntries 的 id 守卫自动跳过
+    ...readDirEntries(app, "devtools", "/devtools/"),
+  ];
 
   /** 写 public/extensions.json（schemaVersion 2：extensions 只含 pi-web 扩展；integrations 独立数组） */
   const generate = (app: AppLike) => {
@@ -163,6 +166,7 @@ const extensionsCatalog = (): PluginObject => {
       return [
         resolve(app.dir.source(), "extensions", "**", "*.md"),
         resolve(app.dir.source(), "devtools", "integrations", "**", "*.md"),
+        resolve(app.dir.source(), "devtools", "*.md"),
       ];
     },
 

@@ -18,6 +18,7 @@ Bring AI to the page development scene: injected debug client + Inspector + MCP 
 | [Quick Start](quick-start.md) | The fastest way to get started |
 | [The SDK](core.md) | SDK/asset distribution (core+inject, served via framework plugins or the standalone bridge — no standalone npm package): manual script wiring + integration matrix overview |
 | [Injection Mechanics](inject.md) | Local inject details, the three forms, host/iframe routing |
+| [Browser extension](browser-ext.md) | inject into any webpage with zero changes (Chrome / Edge / Firefox, incl. Android) |
 | [CDP Command Set](cdp-commands.md) | Reference for commands across 8 domains |
 | [aiti-agent Extension Points](extension-points.md) | Extension framework: slots, contracts, lifecycle |
 

@@ -47,6 +47,7 @@ export const enSidebar = sidebar({
         "quick-start.md",
         "core.md",
         "inject.md",
+        "browser-ext.md",
         "cdp-commands.md",
         "extension-points.md",
         {
