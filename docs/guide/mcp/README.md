@@ -29,7 +29,7 @@ npx @aiti-ai/aiti-bridge --port 8777
 
 # 2. 页面注入 aiti-devtools（Vite 示例）
 pnpm add -D @aiti-ai/aiti-devtools-vite
-# vite.config.ts 启用插件，dev 页面右下角出现 💬 / 🎯
+# vite.config.ts 启用插件，dev 页面右下角出现 💬 / 十字准星（Inspector）
 
 # 3. 把桥配给任意 MCP 客户端（一键注册 stdio shim，幂等）
 npx @aiti-ai/aiti-bridge --register-shim   # agent 启动带 env AITI_BRIDGE_URL 即接入

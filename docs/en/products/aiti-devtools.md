@@ -24,7 +24,7 @@ tags: [product, aiti-devtools, inject]
 </script>
 ```
 
-Two buttons — 💬 AI messages / 🎯 Inspector — appear at the bottom-right corner of the page; capabilities are plug-and-play.
+Two buttons — 💬 AI messages / crosshair (Inspector) — appear at the bottom-right corner of the page; capabilities are plug-and-play.
 
 ## 2. Capability List
 

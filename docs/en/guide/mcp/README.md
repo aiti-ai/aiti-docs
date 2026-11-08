@@ -29,7 +29,7 @@ npx @aiti-ai/aiti-bridge --port 8777
 
 # 2. Inject aiti-devtools into the page (Vite example)
 pnpm add -D @aiti-ai/aiti-devtools-vite
-# enable the plugin in vite.config.ts; 💬 / 🎯 appear at the bottom-right of dev pages
+# enable the plugin in vite.config.ts; the 💬 / crosshair (Inspector) buttons appear at the bottom-right of dev pages
 
 # 3. Point any MCP client at the bridge (one-shot stdio shim registration, idempotent)
 npx @aiti-ai/aiti-bridge --register-shim   # agents connect via the AITI_BRIDGE_URL env var

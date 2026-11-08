@@ -92,6 +92,7 @@ AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 72+ 个
 - [aiti-devtools-vite](https://aiti.pw/devtools/integrations/vite.html): Vite 插件 —— dev 自动本地注入，一行插件 = 同源 /aiti/ 全套
 - [aiti-devtools-vue](https://aiti.pw/devtools/integrations/vue.html): Vue 工程插件 —— dev 自动本地注入（规划中）
 - [aiti-devtools-webpack](https://aiti.pw/devtools/integrations/webpack-rspack.html): webpack-dev-server 插件 —— 一个插件 = dev server 内置 MCP + 自动注入（Rspack 直接复用）
+- [aiti-devtools-browser-ext](https://aiti.pw/devtools/browser-ext.html): 任意网页零改造注入 aiti-devtools——Chrome / Edge / Firefox（含 Android）MV3 扩展：FAB + Inspector + AI 窗，配合桥即可让 pi / claude / opencode 操作任意页面
 - [aiti-bridge](https://aiti.pw/extensions/aiti-bridge.html): MCP 桥 —— 让任意 AI agent 操作页面、直达 IDE AI 窗口
 - [aiti-devtools-dsh](https://aiti.pw/extensions/aiti-devtools-dsh.html): 把 aiti-devtools 完整移植到 DeepSeek Harness（DSH）—— 同款 launcher + 16 工具 + agent/pre-step 占位符替换（[元素N]/[回答N]/[错误N]）+ AI 窗候选条（元素/回答/错误三色 chip），官方 web UI 即 AI 窗
 - [aiti-devtools-openclaw](https://aiti.pw/extensions/aiti-devtools-openclaw.html): OpenClaw 插件直连跳过 MCP —— 16 工具注册进 agent 会话 + 会话自动上线 + chat.send 消息注入 + 答复回传 + 占位符对照表，cockpit 伴生 AI 窗

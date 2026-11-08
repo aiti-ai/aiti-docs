@@ -42,7 +42,7 @@ launcher 读取 `data-ai-url` / `data-bridge-url` 属性自动启动，无需手
 
 安装 `aiti-devtools-vscode`（[已发布 MVP](/ide/vscode.md)，代理 dev server 一键注入）；idea 规划中。
 
-启动 dev server，页面右下角应出现 💬 / 🎯 两个按钮。
+启动 dev server，页面右下角应出现 💬（AI）/ 十字准星（Inspector）两个按钮。
 
 ## 步骤 2：启动 MCP 桥
 

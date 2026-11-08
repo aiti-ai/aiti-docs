@@ -95,7 +95,7 @@ npx @aiti-ai/aiti-bridge --port 8777
 npx @aiti-ai/aiti-bridge --register-shim
 ```
 
-dev server 起来后页面右下角出现 💬 / 🎯，对 AI 说「用 bridge_status 看看有哪些 pageId」即可开调。
+dev server 起来后页面右下角出现 💬 / 十字准星（Inspector），对 AI 说「用 bridge_status 看看有哪些 pageId」即可开调。
 
 ## 相关
 

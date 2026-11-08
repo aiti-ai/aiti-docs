@@ -24,7 +24,7 @@ tags: [product, aiti-devtools, inject]
 </script>
 ```
 
-页面右下角出现 💬 AI 消息 / 🎯 Inspector 两按钮，能力即插即用。
+页面右下角出现 💬 AI 消息 / 十字准星（crosshair）Inspector 两按钮，能力即插即用。
 
 ## 2. 能力清单
 

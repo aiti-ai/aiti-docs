@@ -27,7 +27,7 @@ ext:
 
 > ❝ Someone else's webpage is still my debugging scene. ❞
 
-The aiti-devtools browser extension (MV3): **inject the in-page AI debugging assistant into any webpage — with zero changes to the target app** (FAB 💬+🎯, Inspector picking, AI window); together with the aiti-devtools bridge (local standalone bridge or pi-web), pi / claude / opencode agents can operate any page.
+The aiti-devtools browser extension (MV3): **inject the in-page AI debugging assistant into any webpage — with zero changes to the target app** (FAB 💬 AI + crosshair Inspector, element picking, AI window); together with the aiti-devtools bridge (local standalone bridge or pi-web), pi / claude / opencode agents can operate any page.
 
 ## Capabilities
 
@@ -48,7 +48,7 @@ cd browser-ext && npm run build      # → dist/chrome dist/edge dist/firefox
 
 ## Usage
 
-1. After installing, the FAB (💬 AI + 🎯 Inspector) appears on any webpage
+1. After installing, the FAB (💬 AI + crosshair Inspector) appears on any webpage
 2. Click 💬 to open the AI window (default = the bridge's cockpit console)
 3. Connect the agent side (pick one): **pi** (install aiti-devtools-pi, same bridge) / **stdio shim** (env `AITI_BRIDGE_URL`, one-click copy on the options page) / **MCP** (`{ type:"http", url:"<bridgeUrl>/mcp/mcp" }`)
 

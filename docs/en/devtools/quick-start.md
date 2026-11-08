@@ -42,7 +42,7 @@ The launcher reads the `data-ai-url` / `data-bridge-url` attributes and starts a
 
 Install `aiti-devtools-vscode` ([shipped MVP](/en/ide/vscode.md), proxies the dev server and injects in one click); idea is planned.
 
-Start the dev server — 💬 / 🎯 buttons should appear bottom-right on the page.
+Start the dev server — the 💬 (AI) and crosshair (Inspector) buttons should appear bottom-right on the page.
 
 ## Step 2: Start the MCP bridge
 
