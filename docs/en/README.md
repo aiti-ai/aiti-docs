@@ -86,7 +86,7 @@ footer: MIT Licensed | Copyright © 2026 aiti-ai
 
 > Full install guide: **[Installation](/en/guide/install.md)** (three methods / system requirements / common commands / script transparency).
 
-:::: code-tabs
+:::: tabs#install
 
 @tab npm
 
@@ -96,14 +96,14 @@ npm install -g @aiti-ai/pi-web@latest
 pi-web          # starts the service and opens the browser (default http://127.0.0.1:30141)
 ```
 
-@tab macOS / Linux one-liner
+@tab macOS / Linux
 
 ```bash
 # no npm needed: prebuilt GitHub Releases artifact + sha256 verification, installs into your home directory
 curl -fsSL https://aiti.pw/install.sh | sh
 ```
 
-@tab Windows PowerShell
+@tab Windows
 
 ```powershell
 # PowerShell 5.1+ (built into Windows 10/11)

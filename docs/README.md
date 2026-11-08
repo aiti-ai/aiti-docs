@@ -86,7 +86,7 @@ footer: MIT Licensed | Copyright © 2026 aiti-ai
 
 > 完整安装指南见 **[安装](/guide/install.md)**（三种方式 / 系统要求 / 常用命令 / 脚本透明性）。
 
-:::: code-tabs
+:::: tabs#install
 
 @tab npm
 
@@ -96,14 +96,14 @@ npm install -g @aiti-ai/pi-web@latest
 pi-web          # 启动服务并打开浏览器（默认 http://127.0.0.1:30141）
 ```
 
-@tab macOS / Linux 一键脚本
+@tab macOS / Linux
 
 ```bash
 # 无需 npm：GitHub Releases 预构建产物 + sha256 校验，装到用户目录
 curl -fsSL https://aiti.pw/install.sh | sh
 ```
 
-@tab Windows PowerShell
+@tab Windows
 
 ```powershell
 # PowerShell 5.1+（Windows 10/11 自带）
