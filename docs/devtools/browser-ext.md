@@ -19,6 +19,7 @@ ext:
     cd browser-ext && npm run build   # → dist/chrome dist/edge dist/firefox
     # Chrome/Edge：chrome://extensions 开发者模式 → 加载已解压扩展程序 → dist/chrome（Edge 选 dist/edge）
     # Firefox：about:debugging → 临时载入附加组件 → dist/firefox/manifest.json（Android 需 ≥128）
+    # Firefox 永久：npm run package → dist/aiti-devtools-firefox.xpi（ESR/DevEdition/Nightly 免签安装；正式版/Android 需 AMO 签名）
   license: MIT
   tags: [chrome, edge, firefox, mv3, content-script, injection, any-page]
 ---
@@ -31,7 +32,7 @@ aiti-devtools 浏览器扩展（MV3）：**任意网页——无需目标应用�
 
 ## 能力
 
-- **三浏览器**：Chrome / Edge（111+）/ Firefox（128+，含 **Firefox for Android ≥128** 完整支持）；`npm run build` 产出 dist/{chrome,edge,firefox}，`npm run package` 出 zip
+- **三浏览器**：Chrome / Edge（111+）/ Firefox（128+，含 **Firefox for Android ≥128** 完整支持）；`npm run build` 产出 dist/{chrome,edge,firefox}，`npm run package` 出 zip + **firefox .xpi**
 - **注入机制**：`world:"MAIN"` content script——launcher 源码构建时内联进 content/main.js，文件顶层执行**不受页面 CSP 约束**；配置走隔离世界（storage.sync → localStorage 跨 world 共享 → MAIN world document_idle 同步读）
 - **防重复注入**：`__dbgLauncherInstalled` 守卫——页面本身有 launcher（如 pi-web）时不双注入
 - **options 配置页（v2）**：**AI 目标**三档（pi-web 工作台 / 兼容 agent 宿主 / cockpit 兜底）+ 目标地址 + **一键探测本机 pi-web**（HEAD launcher 资产，30141/30142 自动预填，pi-web 选中联动预填同源桥地址）；**站点规则**（默认关 + 白名单/排除正则，deny 优先）；**高级**（桥地址 / AITI_BRIDGE_URL 一键复制）；保存后刷新页面生效
@@ -43,8 +44,8 @@ cd browser-ext && npm run build      # → dist/chrome dist/edge dist/firefox
 ```
 
 - **Chrome / Edge**：`chrome://extensions`（或 `edge://extensions`）→ 开发者模式 → 加载已解压扩展程序 → `dist/chrome`（Edge 选 `dist/edge`）
-- **Firefox**：`about:debugging#/runtime/this-firefox` → 临时载入附加组件 → `dist/firefox/manifest.json`
-- **Firefox for Android**：需 ≥128（world:MAIN 注入依赖；MV3 本身 120+）；永久安装需签名的稳定 gecko id `aiti-devtools@aiti.ai`
+- **Firefox（临时载入）**：`about:debugging#/runtime/this-firefox` → 临时载入附加组件 → `dist/firefox/manifest.json`（重启后消失）
+- **Firefox（永久 xpi）**：`npm run package` → `dist/aiti-devtools-firefox.xpi`——ESR / DevEdition / Nightly 开 `xpinstall.signatures.required=false` 后「从文件安装」永久使用；正式版 / Android 需 AMO 签名（`web-ext sign --channel=unlisted` 或 AMO 后台 unlisted 上传；稳定 gecko id `aiti-devtools@aiti.ai` 已固定；world:MAIN 注入依赖 ≥128）
 
 ## 使用
 

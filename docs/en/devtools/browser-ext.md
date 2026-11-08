@@ -19,6 +19,7 @@ ext:
     cd browser-ext && npm run build   # → dist/chrome dist/edge dist/firefox
     # Chrome/Edge: chrome://extensions developer mode → load unpacked → dist/chrome (Edge: dist/edge)
     # Firefox: about:debugging → load temporary add-on → dist/firefox/manifest.json (Android needs ≥128)
+    # Firefox permanent: npm run package → dist/aiti-devtools-firefox.xpi (ESR/DevEdition/Nightly signature-free; release/Android needs AMO signing)
   license: MIT
   tags: [chrome, edge, firefox, mv3, content-script, injection, any-page]
 ---
@@ -31,7 +32,7 @@ The aiti-devtools browser extension (MV3): **inject the in-page AI debugging ass
 
 ## Capabilities
 
-- **Three browsers**: Chrome / Edge (111+) / Firefox (128+, incl. full **Firefox for Android ≥128** support); `npm run build` produces dist/{chrome,edge,firefox}, `npm run package` produces zips
+- **Three browsers**: Chrome / Edge (111+) / Firefox (128+, incl. full **Firefox for Android ≥128** support); `npm run build` produces dist/{chrome,edge,firefox}, `npm run package` produces zips + the **firefox .xpi**
 - **Injection mechanism**: a `world:"MAIN"` content script — the launcher source is inlined into content/main.js at build time and executed at file top level, **unconstrained by page CSP**; configuration lives in the isolated world (storage.sync → localStorage shared across worlds → read synchronously in the MAIN world at document_idle)
 - **Double-injection guard**: the `__dbgLauncherInstalled` sentinel — pages that already run a launcher (like pi-web) are not injected twice
 - **options page (v2)**: **AI target** with three kinds (pi-web workbench / compatible agent host / cockpit fallback) + target address + **one-click local pi-web probe** (HEAD of the launcher asset on ports 30141/30142, auto-prefill; selecting pi-web also prefills the same-origin bridge address); **site rules** (default off + allowlist/deny regexes, deny wins); **advanced** (bridge address / AITI_BRIDGE_URL one-click copy); refresh the page after saving to take effect
@@ -43,8 +44,8 @@ cd browser-ext && npm run build      # → dist/chrome dist/edge dist/firefox
 ```
 
 - **Chrome / Edge**: `chrome://extensions` (or `edge://extensions`) → developer mode → load unpacked → `dist/chrome` (Edge: `dist/edge`)
-- **Firefox**: `about:debugging#/runtime/this-firefox` → load temporary add-on → `dist/firefox/manifest.json`
-- **Firefox for Android**: needs ≥128 (world:MAIN injection dependency; MV3 itself 120+); permanent installs require the signed stable gecko id `aiti-devtools@aiti.ai`
+- **Firefox (temporary load)**: `about:debugging#/runtime/this-firefox` → load temporary add-on → `dist/firefox/manifest.json` (gone on restart)
+- **Firefox (permanent xpi)**: `npm run package` → `dist/aiti-devtools-firefox.xpi` — on ESR / DevEdition / Nightly set `xpinstall.signatures.required=false` and install from file for a permanent install; release / Android needs AMO signing (`web-ext sign --channel=unlisted` or upload as unlisted on AMO; stable gecko id `aiti-devtools@aiti.ai` is pinned; world:MAIN injection needs ≥128)
 
 ## Usage
 
