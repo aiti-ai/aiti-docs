@@ -8,8 +8,14 @@
 # your machine. The archive bundles node_modules, so you only need the
 # Node.js runtime itself (>= 22.19).
 #
+# Release sources: GitHub primary, Gitee mirror as fallback for CN networks
+# (identical assets + checksums; archives above the Gitee 100 MB per-file cap
+# are published as .part-N pieces + a .split manifest and reassembled here).
+#
 # Overrides:
-#   AITI_RELEASE_REPO=owner/repo   another GitHub repo (default aiti-ai/aiti-ai)
+#   AITI_MIRROR=auto|github|gitee  source order (default auto: GitHub, then Gitee)
+#   AITI_RELEASE_REPO=owner/repo   GitHub repo (default aiti-ai/aiti-ai)
+#   AITI_GITEE_REPO=owner/repo     Gitee mirror repo (default justdb-mirrors/aiti-web)
 #   AITI_INSTALL_DIR=~/.aiti       install root
 #   curl -fsSL https://aiti.pw/install.sh | AITI_RELEASE_REPO=you/fork sh
 
@@ -29,7 +35,9 @@ bad() { printf "%b\n" "${R}✗${N} $1"; }
 
 NEED_MAJOR=22
 NEED_MINOR=19
-REPO="${AITI_RELEASE_REPO:-aiti-ai/aiti-ai}"
+GH_REPO="${AITI_RELEASE_REPO:-aiti-ai/aiti-ai}"
+GE_REPO="${AITI_GITEE_REPO:-justdb-mirrors/aiti-web}"
+MIRROR="${AITI_MIRROR:-auto}"
 INSTALL_ROOT="${AITI_INSTALL_DIR:-$HOME/.aiti}"
 BIN_DIR="${AITI_BIN_DIR:-$HOME/.local/bin}"
 
@@ -43,7 +51,7 @@ while [ $# -gt 0 ]; do
 done
 
 say ""
-say "${B}aiti Web installer${N}  ${D}(GitHub Releases · prebuilt · no npm)${N}"
+say "${B}aiti Web installer${N}  ${D}(prebuilt · no npm)${N}"
 say "${D}----------------------------------------${N}"
 say ""
 
@@ -72,7 +80,7 @@ ok "Node.js ${NODE_VERSION}"
 
 # ---- download tool ----
 fetch() { # fetch <url> <outfile>
-  if command -v curl >/dev/null 2>&1; then curl -fsSL "$1" -o "$2"
+  if command -v curl >/dev/null 2>&1; then curl -fsSL --retry 2 --connect-timeout 20 "$1" -o "$2"
   elif command -v wget >/dev/null 2>&1; then wget -qO "$2" "$1"
   else return 127; fi
 }
@@ -91,36 +99,101 @@ case "$(uname -m)" in
 esac
 ok "platform ${OS_NAME}-${ARCH_NAME}"
 
-# ---- resolve release ----
-API="https://api.github.com/repos/${REPO}"
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
-if [ -n "$REF" ]; then
-  TAG="$REF"
-  RELEASE_JSON="$TMP/release.json"
-  fetch "${API}/releases/tags/${TAG}" "$RELEASE_JSON" || { bad "release ${TAG} not found in ${REPO}."; exit 1; }
-else
-  RELEASE_JSON="$TMP/release.json"
-  fetch "${API}/releases/latest" "$RELEASE_JSON" || { bad "cannot reach GitHub API (${API}/releases/latest)."; exit 1; }
-  TAG="$(sed -n 's/.*"tag_name": *"\([^"]*\)".*/\1/p' "$RELEASE_JSON" | head -1)"
-  [ -n "$TAG" ] || { bad "no tag_name in latest release."; exit 1; }
-fi
-ASSET="aiti-web-${TAG}-${OS_NAME}-${ARCH_NAME}.tar.gz"
-URL="$(sed -n 's/.*"browser_download_url": *"\([^"]*\)"*/\1/p' "$RELEASE_JSON" | grep "${ASSET}\$" | head -1)"
-[ -n "$URL" ] || { bad "asset ${ASSET} not found in release ${TAG}."; say "  ${D}check https://github.com/${REPO}/releases${N}"; exit 1; }
-ok "release ${TAG}"
 
-# ---- download + verify ----
-say "Downloading ${D}${ASSET}${N} ..."
-fetch "$URL" "$TMP/$ASSET" || { bad "download failed: $URL"; exit 1; }
-CHECK_URL="$(sed -n 's/.*"browser_download_url": *"\([^"]*\)"*/\1/p' "$RELEASE_JSON" | grep 'checksums\.txt$' | head -1)"
-if [ -n "$CHECK_URL" ] && command -v sha256sum >/dev/null 2>&1; then
-  if fetch "$CHECK_URL" "$TMP/checksums.txt"; then
-    WANT="$(grep " ${ASSET}\$" "$TMP/checksums.txt" | awk '{print $1}')"
-    GOT="$(sha256sum "$TMP/$ASSET" | awk '{print $1}')"
-    if [ -n "$WANT" ] && [ "$WANT" = "$GOT" ]; then ok "sha256 verified"
-    else bad "sha256 mismatch (want $WANT, got $GOT)"; exit 1; fi
+# ---- release sources (GitHub primary, Gitee mirror fallback) ----
+# resolve_release <src> → sets TAG (global); release JSON lands in $TMP/release-<src>.json
+resolve_release() {
+  if [ "$1" = gh ]; then
+    API="https://api.github.com/repos/${GH_REPO}"
+  else
+    API="https://gitee.com/api/v5/repos/${GE_REPO}"
   fi
+  URL="${API}/releases/latest"
+  [ -n "$REF" ] && URL="${API}/releases/tags/${REF}"
+  fetch "$URL" "$TMP/release-$1.json" || return 1
+  TAG="$(sed -n 's/.*"tag_name": *"\([^"]*\)".*/\1/p' "$TMP/release-$1.json" | head -1)"
+  [ -n "$TAG" ] || return 1
+  return 0
+}
+
+# asset_url <src> <asset-name> → prints the browser_download_url, or empty
+asset_url() {
+  sed -n 's/.*"browser_download_url": *"\([^"]*\)"*/\1/p' "$TMP/release-$1.json" | grep "${2}\$" | head -1
+}
+
+# download_asset <src> <asset-name> <dest-file>
+# Handles split uploads: when <asset-name>.split exists (a tiny manifest holding
+# the part count, used on hosts with per-file size caps), the parts
+# <asset-name>.part-1..N are fetched and concatenated in order.
+download_asset() {
+  SPLIT_URL="$(asset_url "$1" "$2.split")"
+  if [ -n "$SPLIT_URL" ]; then
+    fetch "$SPLIT_URL" "$TMP/split.txt" || return 1
+    PARTS="$(tr -cd '0-9' < "$TMP/split.txt")"
+    case "$PARTS" in ''|*[!0-9]*|0) return 1 ;; esac
+    say "  ${D}split upload: ${PARTS} part(s)${N}"
+    : > "$3"
+    i=1
+    while [ "$i" -le "$PARTS" ]; do
+      P_URL="$(asset_url "$1" "$2.part-$i")"
+      [ -n "$P_URL" ] || { bad "split part $i missing on source $1."; return 1; }
+      fetch "$P_URL" "$TMP/part-$i" || return 1
+      cat "$TMP/part-$i" >> "$3"
+      i=$((i + 1))
+    done
+    return 0
+  fi
+  URL="$(asset_url "$1" "$2")"
+  [ -n "$URL" ] || return 1
+  fetch "$URL" "$3"
+}
+
+case "$MIRROR" in
+  github|gh) SOURCES="gh" ;;
+  gitee|ge)  SOURCES="ge" ;;
+  *)         SOURCES="gh ge" ;;
+esac
+
+# ---- resolve + download + verify (first source that fully works wins) ----
+TAG=""
+FETCHED=""
+for SRC in $SOURCES; do
+  if [ "$SRC" = gh ]; then SRC_LABEL="GitHub (${GH_REPO})"; else SRC_LABEL="Gitee (${GE_REPO})"; fi
+  say "Querying release from ${SRC_LABEL} ..."
+  resolve_release "$SRC" || { say "${Y}  source unavailable, trying next ...${N}"; continue; }
+  ASSET="aiti-web-${TAG}-${OS_NAME}-${ARCH_NAME}.tar.gz"
+  if ! download_asset "$SRC" "$ASSET" "$TMP/$ASSET" || [ ! -s "$TMP/$ASSET" ]; then
+    say "${Y}  download failed on ${SRC_LABEL}, trying next ...${N}"
+    continue
+  fi
+  CHECK_URL="$(asset_url "$SRC" "checksums.txt")"
+  if [ -n "$CHECK_URL" ] && command -v sha256sum >/dev/null 2>&1; then
+    if fetch "$CHECK_URL" "$TMP/checksums.txt"; then
+      WANT="$(grep " ${ASSET}\$" "$TMP/checksums.txt" | awk '{print $1}')"
+      GOT="$(sha256sum "$TMP/$ASSET" | awk '{print $1}')"
+      if [ -n "$WANT" ] && [ "$WANT" = "$GOT" ]; then
+        ok "sha256 verified  ${D}(${SRC_LABEL}, release ${TAG})${N}"
+        FETCHED="$SRC"
+        break
+      fi
+      bad "sha256 mismatch on ${SRC_LABEL} — trying next source ..."
+      continue
+    fi
+    say "${Y}  checksums.txt unreachable on ${SRC_LABEL} — skipping verification${N}"
+    FETCHED="$SRC"
+    break
+  fi
+  say "${Y}  no checksums.txt / sha256sum on ${SRC_LABEL} — skipping verification${N}"
+  FETCHED="$SRC"
+  break
+done
+if [ -z "$FETCHED" ]; then
+  bad "all release sources failed. check:"
+  say "  ${D}https://github.com/${GH_REPO}/releases${N}"
+  say "  ${D}https://gitee.com/${GE_REPO}/releases${N}"
+  exit 1
 fi
 
 # ---- install ----

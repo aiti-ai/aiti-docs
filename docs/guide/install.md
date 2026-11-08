@@ -65,6 +65,8 @@ $env:AITI_RELEASE_TAG = "v0.15.7"; irm https://aiti.pw/install.ps1 | iex
 
 `AITI_RELEASE_REPO`（镜像仓）、`AITI_INSTALL_DIR` 同理可覆盖。
 
+国内网络加速：脚本默认先走 GitHub Releases，失败自动回退 Gitee 镜像仓（[justdb-mirrors/aiti-web](https://gitee.com/justdb-mirrors/aiti-web/releases)，资产与校验和一致；超出 Gitee 单文件 100 MB 上限的归档以 `.part-N` 分片 + `.split` 清单发布，脚本自动拼接）。可用 `AITI_MIRROR=gitee`（或 `github`）强制指定源、`AITI_GITEE_REPO` 覆盖镜像仓。
+
 ::::
 
 ## 系统要求
