@@ -131,4 +131,5 @@ CLI 在服务就绪后自动打开浏览器；未打开则访问 [http://127.0.0
 
 - [aiti-agent · 产品总览](/products/aiti-agent.md) —— 能力全景与定位
 - [项目起源](/guide/origin.md) —— pi-web → aiti 的来龙去脉
-- [快速开始（aiti-devtools）](/guide/quick-start.md) —— 如果你想要的是「AI 操作页面」调试工具链
+- [快速开始（aiti-agent 工作台）](/guide/quick-start.md) —— 装好后的第一步上手
+- [devtools 快速开始](/devtools/quick-start.md) —— 如果你想要的是「AI 操作页面」调试工具链

@@ -126,3 +126,10 @@ Both scripts do one thing: query the GitHub API → download the release asset �
 Assets are built automatically by the [release workflow](https://github.com/aiti-ai/aiti-ai/blob/main/.github/workflows/release.yml) whenever a `v*` tag is pushed: 4 platforms (linux-x64 / darwin-x64 / darwin-arm64 / win-x64), each bundling the npm package contents plus its production dependency closure, each with a sha256 that the installer verifies.
 
 Upgrade: re-run the installer (run `pi-web stop` first). npm-channel installs use `pi-web update`.
+
+## Next steps
+
+- [Quick Start (aiti-agent workbench)](/en/guide/quick-start.md) — the first steps after installing
+- [devtools quick start](/en/devtools/quick-start.md) — if what you want is the "AI operates your page" debugging toolchain
+- [aiti-agent · product overview](/en/products/aiti-agent.md) — capabilities and positioning
+- [Project origin](/en/guide/origin.md) — how pi-web became aiti

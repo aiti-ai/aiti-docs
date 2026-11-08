@@ -25,6 +25,7 @@ export const zhSidebar = sidebar({
       collapsible: true,
       children: [
         "README.md",
+        "install.md",
         "what-is-aiti.md",
         "lineage.md",
         "architecture.md",

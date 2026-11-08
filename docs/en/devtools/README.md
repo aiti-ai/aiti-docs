@@ -81,7 +81,7 @@ aiti-devtools is not locked to its own stack — these third-party agent hosts h
 
 ## Quick taste (5 minutes to "AI operates your page")
 
-> This is the condensed version of [Quick start](/en/guide/quick-start.md) (full steps and the manual Cursor / Copilot config live there). Looking to install the **aiti web workbench** itself? See the [install guide](/en/guide/install.md).
+> This is the condensed version of the [devtools quick start](/en/devtools/quick-start.md) (full steps and the manual Cursor / Copilot config live there). Looking to install the **aiti web workbench** itself? See the [install guide](/en/guide/install.md).
 
 ```bash
 # 1. Inject (Vite example; plain HTML can also load the launcher via <script>)

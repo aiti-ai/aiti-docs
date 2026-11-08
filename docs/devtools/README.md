@@ -81,7 +81,7 @@ aiti-devtools 不锁死在本家栈里——以下第三方 agent 宿主已有�
 
 ## 快速体验（5 分钟跑通「AI 操作页面」）
 
-> 本节是 [快速开始](/guide/quick-start.md) 的精简版（完整步骤与 Cursor/Copilot 手动配置见那页）。要装的是 **aiti Web 工作台**本身？见 [安装指南](/guide/install.md)。
+> 本节是 [devtools 快速开始](/devtools/quick-start.md) 的精简版（完整步骤与 Cursor/Copilot 手动配置见那页）。要装的是 **aiti Web 工作台**本身？见 [安装指南](/guide/install.md)。
 
 ```bash
 # 1. 注入（Vite 示例；原生 HTML 也可直接 <script> 引入 launcher）

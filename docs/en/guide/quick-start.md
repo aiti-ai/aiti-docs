@@ -1,97 +1,86 @@
 ---
-title: Quick Start
+title: Quick Start (aiti-agent workbench)
 icon: 🚀
-description: "Get aiti running in 5 minutes: install the plugin → start the bridge → connect AI"
-tags: [guide, quick-start]
+description: Install aiti-agent → launch → first-run config → daily entries, up and running in 5 minutes
+tags: [guide, quick-start, pi-web, workbench]
 ---
 
-# Quick Start
+# Quick Start (aiti-agent workbench)
 
-Get "AI operating your page" running in 5 minutes.
+Get **aiti-agent** (the self-hosted web workbench, npm package `@aiti-ai/pi-web`) installed and chatting in 5 minutes.
 
-## Prerequisites
+> Looking for the **page-debugging toolchain** (aiti-devtools: inject → bridge → connect AI)? That's the other main line: the [devtools quick start](/en/devtools/quick-start.md). Full install details (three methods / system requirements / common commands / script transparency) live on [Installation](/en/guide/install.md).
 
-- Node.js ≥ 20
-- A runnable web project (Vite / Vue / Next / plain HTML all work)
+## 1. Install (pick one)
 
-## Step 1: Injection (pick one)
+:::: tabs#install
 
-### Option A: Build plugin (recommended, Vite example)
-
-```bash
-pnpm add -D @aiti-ai/aiti-devtools-vite
-```
-
-```ts
-// vite.config.ts
-import { aitiDevtools } from '@aiti-ai/aiti-devtools-vite';
-export default defineConfig({
-  plugins: [aitiDevtools({ bridgeUrl: 'http://localhost:8777' })],
-});
-```
-
-### Option B: Direct include (plain HTML / any project)
-
-```html
-<script src="/aiti/aiti-launcher.js" data-ai-url="/aiti/cockpit.html" data-bridge-url="/aiti"></script>
-```
-
-The launcher reads the `data-ai-url` / `data-bridge-url` attributes and starts automatically — no manual invocation needed.
-
-Start the dev server; two buttons 💬 / 🎯 should appear at the bottom-right of the page.
-
-## Step 2: Start the MCP Bridge
+@tab npm
 
 ```bash
-npx @aiti-ai/aiti-bridge --port 8777   # MCP endpoint is built into the bridge
+# Node.js ≥ 22.19
+npm install -g @aiti-ai/pi-web@latest
 ```
 
-The page should connect to the bridge automatically (refresh the page to confirm if needed).
-
-## Step 3: Connect an AI agent
-
-### Claude Code
+@tab macOS / Linux
 
 ```bash
-npx @aiti-ai/aiti-bridge --register-shim   # one-shot registration of the `aiti` entry (idempotent; agents connect via the AITI_BRIDGE_URL env var)
+# no npm needed: prebuilt GitHub Releases artifact + sha256 verification, installs into your home directory
+curl -fsSL https://aiti.pw/install.sh | sh
 ```
 
-### Cursor / VS Code Copilot Chat
+@tab Windows
 
-Add a stdio server in MCP settings:
-
-```json
-{ "command": "node", "args": ["<bridge-install-dir>/bin/aiti-mcp-shim.cjs"], "env": { "AITI_BRIDGE_URL": "http://127.0.0.1:8777" } }
+```powershell
+# PowerShell 5.1+ (built into Windows 10/11)
+irm https://aiti.pw/install.ps1 | iex
 ```
 
-### aiti-agent (Web workbench)
+@tab Docker
 
-Configure the same bridge address in an aiti-agent session (or expose it via service-tunnels).
-
-## Step 4: Start the Conversation
-
+```bash
+docker run -d -p 30142:30142 \
+  -v aiti-data:/opt/aiti -v ~/workspace:/workspace \
+  aitiai/pi-web:core        # GUI / voice / tunnels all-in-one → :full
 ```
-Me: Use bridge_status to see which pageIds exist, then run page_snapshot on the default pageId
-AI: Current page: http://localhost:5173 (Vue app, frameId=host), ready.
-Me: Click the "Submit" button, then show me the console errors
-AI: Clicked. Console error: TypeError: Cannot read properties of undefined (reading 'name') at src/components/Form.vue:42
-Me: (user_confirm pops up a confirmation card automatically) Approve the fix
-AI: Fixed Form.vue:42 — added a null-value fallback.
+
+::::
+
+## 2. Launch
+
+```bash
+pi-web
 ```
+
+The CLI opens the browser automatically once the service is ready (default [http://127.0.0.1:30141](http://127.0.0.1:30141); Docker uses 30142). Open it manually if it doesn't.
+
+## 3. First-run configuration
+
+- **Models**: sign in or fill an API key in the **Models** panel; or use the 🧙 wizard's "import from other agents" (auto-scans existing codex / zcode / opencode configs)
+- **Session engine**: the [pi coding agent](https://github.com/earendil-works/pi) CLI is auto-detected by the install scripts (if missing you'll be prompted to `npm install -g @earendil-works/pi-coding-agent`)
+
+## 4. Out of the box (60+ built-in extensions)
+
+No per-extension installs needed — the common entries are one glance away:
+
+| Entry | What it does |
+|---|---|
+| 🧩 Extensions | Extension manager: enable/disable / online install / feature switches |
+| 📋 Sessions | All multi-agent sessions managed in one place (All Sessions) |
+| ⚡ Commands | Real PTY terminal + favorite commands |
+| 🧙 Models | Model wizard / availability check / balance panel |
+| 🔀 Tunnels | Expose ports to the outside world (TOTP) |
+| 📡 Model check | Availability probing / rate-limit reminders |
+
+The full list and docs live in the [extension registry](/en/extensions/).
+
+## 5. Connect more agents (optional)
+
+Agents whose CLIs are installed (Claude Code / Codex / Cursor / ZCode / Qoder / any ACP…) **appear automatically** in the new-session backend list; controlled logins start from the [Agent Management](/en/extensions/aiti-agent-manager.md) panel. IM (DingTalk / Feishu / WeCom) connects via [aiti-channels](/en/extensions/aiti-channels.md) so group messages can delegate work too.
 
 ## Next steps
 
-- [Developer Tools · Injection Principles](/en/devtools/inject.md)
-- [MCP Bridge · Session System](/en/guide/mcp/session.md)
-- [MCP Bridge · Adapting AI agents](/en/guide/mcp/ai-agents.md)
-- [Master Plan](/en/roadmaps/master-plan.md)
-
-## Another Path: Writing Extensions for aiti-agent
-
-If your goal is to write extensions for aiti-agent (the pi-web workbench) rather than wiring up page debugging:
-
-1. Copy the shared template `dev-repo/templates/ext-jsx-client/` (JSX + vite build, ready to use on copy), or read [Extension client JSX template](/en/extensions/ext-jsx-client.md);
-2. Declare the entry (id / UI slots / server hooks) — the full contract is in `dev-repo/docs/dev-repo-authoring-reference.md` (the authoring reference);
-3. **Pick the data tier before persisting**: config → `ctx.configDir`; non-regenerable persistent data (archives/history/statistics) → `ctx.stateDir`; regenerable data (indexes/venvs/logs) → `ctx.cacheDir` — the decision tree and iron rules are in [Extension Data and Storage Specification](/en/guide/ext-data.md);
-4. Follow [Extension Services Specification](/en/guide/ext-services.md) for cross-extension calls and service exports; mark dialogs with `data-ext-float="1"` to get floating-window capability automatically; heavy bundles go through the [Lazy-Loading Contract](/en/guide/ext-lazy-loading.md);
-5. Deploy: `node tools/deploy.mjs` → `~/.pi/web/extensions/` → `POST /api/extensions/reload`.
+- [aiti-agent · product overview](/en/products/aiti-agent.md) — capabilities and positioning
+- [Extension registry](/en/extensions/) — all 76 extensions by category
+- [Development lineage](/en/guide/lineage.md) — full-chain traceability of AI changes
+- [devtools quick start](/en/devtools/quick-start.md) — the "AI operates your page" debugging toolchain (the other main line)

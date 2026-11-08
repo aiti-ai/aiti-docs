@@ -1,99 +1,86 @@
 ---
-title: 快速开始
+title: 快速开始（aiti-agent 工作台）
 icon: 🚀
-description: 5 分钟跑通 aiti：装插件 → 起桥 → 接 AI
-tags: [guide, quick-start]
+description: 安装 aiti-agent → 启动 → 首启配置 → 日常入口，5 分钟上手 Web 工作台
+tags: [guide, quick-start, pi-web, workbench]
 ---
 
-# 快速开始
+# 快速开始（aiti-agent 工作台）
 
-5 分钟跑通「AI 操作你的页面」。
+5 分钟装好 **aiti-agent**（自托管 Web 工作台，npm 包 `@aiti-ai/pi-web`）并开聊。
 
-> 找的是 **aiti Web 工作台**（浏览器操作 AI 会话）而不是页面调试工具链？安装见 **[安装指南](/guide/install.md)**（npm / 一键脚本三种方式）。
+> 想要的是「AI 操作网页」的**调试工具链**（aiti-devtools：注入 → 起桥 → 接 AI）？那是另一条主线：[devtools 快速开始](/devtools/quick-start.md)。安装方式的完整说明（三种方式 / 系统要求 / 常用命令 / 脚本透明性）见 [安装](/guide/install.md)。
 
-## 前置
+## 1. 安装（选一种）
 
-- Node.js ≥ 20
-- 一个可跑的 Web 工程（Vite / Vue / Next / 原生 HTML 均可）
+:::: tabs#install
 
-## 步骤 1：注入（选一种）
-
-### 方式 A：工程插件（推荐，Vite 示例）
+@tab npm
 
 ```bash
-pnpm add -D @aiti-ai/aiti-devtools-vite
+# Node.js ≥ 22.19
+npm install -g @aiti-ai/pi-web@latest
 ```
 
-```ts
-// vite.config.ts
-import { aitiDevtools } from '@aiti-ai/aiti-devtools-vite';
-export default defineConfig({
-  plugins: [aitiDevtools({ bridgeUrl: 'http://localhost:8777' })],
-});
-```
-
-### 方式 B：直接引入（原生 HTML / 任意工程）
-
-```html
-<script src="/aiti/aiti-launcher.js" data-ai-url="/aiti/cockpit.html" data-bridge-url="/aiti"></script>
-```
-
-launcher 读取 `data-ai-url` / `data-bridge-url` 属性自动启动，无需手动调用。
-
-启动 dev server，页面右下角应出现 💬 / 🎯 两个按钮。
-
-## 步骤 2：启动 MCP 桥
+@tab macOS / Linux
 
 ```bash
-npx @aiti-ai/aiti-bridge --port 8777   # MCP 端点内置于桥
+# 无需 npm：GitHub Releases 预构建产物 + sha256 校验，装到用户目录
+curl -fsSL https://aiti.pw/install.sh | sh
 ```
 
-页面应自动连桥（也可刷新页面确认）。
+@tab Windows
 
-## 步骤 3：接入 AI agent
+```powershell
+# PowerShell 5.1+（Windows 10/11 自带）
+irm https://aiti.pw/install.ps1 | iex
+```
 
-### Claude Code
+@tab Docker
 
 ```bash
-npx @aiti-ai/aiti-bridge --register-shim   # 一键注册 aiti 条目（幂等；agent 启动带 env AITI_BRIDGE_URL 即接入）
+docker run -d -p 30142:30142 \
+  -v aiti-data:/opt/aiti -v ~/workspace:/workspace \
+  aitiai/pi-web:core        # GUI/语音/隧道全家桶 → :full
 ```
 
-### Cursor / VS Code Copilot Chat
+::::
 
-在 MCP 设置中添加 stdio server：
+## 2. 启动
 
-```json
-{ "command": "node", "args": ["<桥安装目录>/bin/aiti-mcp-shim.cjs"], "env": { "AITI_BRIDGE_URL": "http://127.0.0.1:8777" } }
+```bash
+pi-web
 ```
 
-### aiti-agent（Web 工作台）
+CLI 在服务就绪后自动打开浏览器（默认 [http://127.0.0.1:30141](http://127.0.0.1:30141)；Docker 为 30142）。未打开则手动访问。
 
-在 aiti-agent 的会话里配置同一桥地址即可（或经 service-tunnels 暴露）。
+## 3. 首启配置
 
-## 步骤 4：开始对话
+- **模型**：左侧 **Models** 面板登录订阅或填 API key；也可以在 🧙 向导里用「从其他 agent 导入」（自动扫描 codex / zcode / opencode 的现有配置）
+- **会话引擎**：[pi coding agent](https://github.com/earendil-works/pi) CLI 安装脚本会自动检测（缺失时提示 `npm install -g @earendil-works/pi-coding-agent`）
 
-```
-我：用 bridge_status 看一下有哪些 pageId，然后对默认 pageId 执行 page_snapshot
-AI：当前页面：http://localhost:5173（Vue 应用，frameId=host），已就绪。
-我：点击「提交」按钮，然后把 console 报错给我
-AI：已点击，控制台报错：TypeError: Cannot read properties of undefined (reading 'name') at src/components/Form.vue:42
-我：（user_confirm 自动弹出确认卡）批准修复
-AI：已修复 Form.vue:42 —— 增加空值兜底。
-```
+## 4. 开箱即用（60+ 内置扩展）
+
+无需逐个安装，常用的入口一眼可见：
+
+| 入口 | 干什么 |
+|---|---|
+| 🧩 扩展 | 扩展管理器：启停 / 在线安装 / 功能开关 |
+| 📋 会话面板 | 多 agent 会话统一看管（All Sessions） |
+| ⚡ 命令 | 真 PTY 终端 + 常用命令收藏 |
+| 🧙 模型 | 模型向导 / 可用性检查 / 余额面板 |
+| 🔀 服务隧道 | 端口暴露给外网（TOTP） |
+| 📡 模型检查 | 可用性探测 / 限流提醒 |
+
+全部清单与文档见 [扩展注册表](/extensions/)。
+
+## 5. 接入更多 agent（可选）
+
+装了对应 CLI 的 agent（Claude Code / Codex / Cursor / ZCode / Qoder / 任意 ACP…）会**自动出现**在新建会话的后端列表里；受控登录统一在 [Agent 管理](/extensions/aiti-agent-manager.md) 面板发起。IM（钉钉/飞书/微信）经 [aiti-channels](/extensions/aiti-channels.md) 接入后群里也能派活。
 
 ## 下一步
 
-- [开发者工具 · 注入原理](/devtools/inject.md)
-- [MCP 桥 · 会话体系](/guide/mcp/session.md)
-- [MCP 桥 · 改造 AI agent](/guide/mcp/ai-agents.md)
-- [整体规划](/roadmaps/master-plan.md)
-
-## 另一条路：给 aiti-agent 写扩展
-
-如果你的目标是给 aiti-agent（pi-web 工作台）写扩展（而非接入页面调试）：
-
-1. 复制共享模板 `dev-repo/templates/ext-jsx-client/`（JSX + vite 构建，复制即用），或读 [扩展 client JSX 模板](/extensions/ext-jsx-client.md)；
-2. 声明 entry（id/ui 插槽/server hooks）——完整契约见 `dev-repo/docs/dev-repo-authoring-reference.md`（注册总纲）；
-3. **数据落盘先选层**：配置 → `ctx.configDir`；不可再生持久数据（归档/历史/统计）→ `ctx.stateDir`；可再生数据（索引/venv/日志）→ `ctx.cacheDir`——判定决策树与铁律见 [扩展数据与存储规范](/guide/ext-data.md)；
-4. 跨扩展调用与服务出口遵守 [扩展服务规范](/guide/ext-services.md)；弹窗标 `data-ext-float="1"` 自动获得浮窗能力；重 bundle 走 [懒加载契约](/guide/ext-lazy-loading.md)；
-5. 部署：`node tools/deploy.mjs` → `~/.pi/web/extensions/` → `POST /api/extensions/reload`。
+- [aiti-agent · 产品总览](/products/aiti-agent.md) —— 能力全景与定位
+- [扩展注册表](/extensions/) —— 76 个扩展按分类浏览
+- [开发血缘](/guide/lineage.md) —— AI 改动的全链路溯源
+- [devtools 快速开始](/devtools/quick-start.md) —— 「AI 操作网页」调试工具链（另一条主线）
