@@ -81,7 +81,7 @@ $env:AITI_RELEASE_TAG = "v0.15.7"; irm https://aiti.pw/install.ps1 | iex
 
 `AITI_RELEASE_REPO` and `AITI_INSTALL_DIR` work the same way.
 
-CN network acceleration: installers try GitHub Releases first and fall back to the Gitee mirror ([justdb-mirrors/aiti-web](https://gitee.com/justdb-mirrors/aiti-web/releases), identical assets and checksums; archives above Gitee's 100 MB per-file cap are published as `.part-N` pieces + a `.split` manifest and reassembled automatically). Force a source with `AITI_MIRROR=gitee` (or `github`); override the mirror repo with `AITI_GITEE_REPO`.
+CN network acceleration: installers try GitHub Releases first and fall back to the Gitee mirror ([aiti-ai/aiti-ai](https://gitee.com/aiti-ai/aiti-ai/releases), identical assets and checksums; archives above Gitee's 100 MB per-file cap are published as `.part-N` pieces + a `.split` manifest and reassembled automatically). Force a source with `AITI_MIRROR=gitee` (or `github`); override the mirror repo with `AITI_GITEE_REPO`.
 
 ::::
 

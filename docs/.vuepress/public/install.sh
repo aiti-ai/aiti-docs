@@ -15,7 +15,7 @@
 # Overrides:
 #   AITI_MIRROR=auto|github|gitee  source order (default auto: GitHub, then Gitee)
 #   AITI_RELEASE_REPO=owner/repo   GitHub repo (default aiti-ai/aiti-ai)
-#   AITI_GITEE_REPO=owner/repo     Gitee mirror repo (default justdb-mirrors/aiti-web)
+#   AITI_GITEE_REPO=owner/repo     Gitee mirror repo (default aiti-ai/aiti-ai)
 #   AITI_INSTALL_DIR=~/.aiti       install root
 #   curl -fsSL https://aiti.pw/install.sh | AITI_RELEASE_REPO=you/fork sh
 
@@ -36,7 +36,7 @@ bad() { printf "%b\n" "${R}✗${N} $1"; }
 NEED_MAJOR=22
 NEED_MINOR=19
 GH_REPO="${AITI_RELEASE_REPO:-aiti-ai/aiti-ai}"
-GE_REPO="${AITI_GITEE_REPO:-justdb-mirrors/aiti-web}"
+GE_REPO="${AITI_GITEE_REPO:-aiti-ai/aiti-ai}"
 MIRROR="${AITI_MIRROR:-auto}"
 INSTALL_ROOT="${AITI_INSTALL_DIR:-$HOME/.aiti}"
 BIN_DIR="${AITI_BIN_DIR:-$HOME/.local/bin}"

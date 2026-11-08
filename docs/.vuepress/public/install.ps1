@@ -13,7 +13,7 @@
 # Overrides:
 #   $env:AITI_MIRROR       = "auto|github|gitee"   (default auto: GitHub, then Gitee)
 #   $env:AITI_RELEASE_REPO = "owner/repo"          (default aiti-ai/aiti-ai)
-#   $env:AITI_GITEE_REPO   = "owner/repo"          (default justdb-mirrors/aiti-web)
+#   $env:AITI_GITEE_REPO   = "owner/repo"          (default aiti-ai/aiti-ai)
 #   $env:AITI_INSTALL_DIR  = "D:\aiti"             (default $env:LOCALAPPDATA\aiti)
 #   $env:AITI_RELEASE_TAG  = "v0.15.7"             (pin a version, default: latest)
 # Body wrapped in a scriptblock + `return` (never `exit`) so piping into iex
@@ -29,7 +29,7 @@
     $needMajor = 22
     $needMinor = 19
     $ghRepo = if ($env:AITI_RELEASE_REPO) { $env:AITI_RELEASE_REPO } else { "aiti-ai/aiti-ai" }
-    $geRepo = if ($env:AITI_GITEE_REPO) { $env:AITI_GITEE_REPO } else { "justdb-mirrors/aiti-web" }
+    $geRepo = if ($env:AITI_GITEE_REPO) { $env:AITI_GITEE_REPO } else { "aiti-ai/aiti-ai" }
     $mirror = if ($env:AITI_MIRROR) { $env:AITI_MIRROR } else { "auto" }
     $installRoot = if ($env:AITI_INSTALL_DIR) { $env:AITI_INSTALL_DIR } else { Join-Path $env:LOCALAPPDATA "aiti" }
     $tag = $env:AITI_RELEASE_TAG   # pin a version, e.g. "v0.15.7" (default: latest release)
