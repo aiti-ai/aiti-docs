@@ -27,7 +27,7 @@ ext:
 
 > ❝ 别人的网页，也是我的调试现场。 ❞
 
-aiti-devtools 浏览器扩展（MV3）：**任意网页——无需目标应用任何改造——一键注入页面内 AI 调试助手**（FAB 💬 AI + 十字准星 Inspector、点选、AI 窗），配合 aiti-devtools 桥（本地独立桥或 pi-web）即可用 pi / claude / opencode 等 agent 操作任意页面。
+aiti-devtools 浏览器扩展（MV3）：**任意网页——无需目标应用任何改造——一键注入页面内 AI 调试助手**（FAB 💬 AI + <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px"><path d="M22 12h-4"/><path d="M6 12H2"/><path d="M12 6V2"/><path d="M12 22v-4"/><path d="M12 12"/></svg> Inspector、点选、AI 窗），配合 aiti-devtools 桥（本地独立桥或 pi-web）即可用 pi / claude / opencode 等 agent 操作任意页面。
 
 ## 能力
 
@@ -48,7 +48,7 @@ cd browser-ext && npm run build      # → dist/chrome dist/edge dist/firefox
 
 ## 使用
 
-1. 装好后，任意网页自动出现右下角 FAB（💬 AI + 十字准星 Inspector）
+1. 装好后，任意网页自动出现右下角 FAB（💬 AI + <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px"><path d="M22 12h-4"/><path d="M6 12H2"/><path d="M12 6V2"/><path d="M12 22v-4"/><path d="M12 12"/></svg> Inspector）
 2. 点 💬 打开 AI 窗（默认 = 桥同源的 cockpit 操作台）
 3. agent 端接入（三选一）：**pi**（装 aiti-devtools-pi，连同一桥）/ **stdio shim**（env `AITI_BRIDGE_URL`，options 页一键复制）/ **MCP**（`{ type:"http", url:"<bridgeUrl>/mcp/mcp" }`）
 

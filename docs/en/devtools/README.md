@@ -95,7 +95,7 @@ npx @aiti-ai/aiti-bridge --port 8777
 npx @aiti-ai/aiti-bridge --register-shim
 ```
 
-When the dev server runs, the 💬 / crosshair (Inspector) buttons appear bottom-right — tell the AI "use bridge_status to list the pageIds" and start debugging.
+When the dev server runs, the 💬 / <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px"><path d="M22 12h-4"/><path d="M6 12H2"/><path d="M12 6V2"/><path d="M12 22v-4"/><path d="M12 12"/></svg> (Inspector) buttons appear bottom-right — tell the AI "use bridge_status to list the pageIds" and start debugging.
 
 ## See Also
 

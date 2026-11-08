@@ -35,6 +35,8 @@ export default hopeTheme({
 
   // Markdown 增强
   markdown: {
+    // 允许文档内嵌原始 HTML/SVG（如 Inspector crosshair 图标与按钮同款渲染；内容全部自有可控）
+    html: true,
     // Shiki syntax highlighting
     highlighter: {
       type: "shiki",

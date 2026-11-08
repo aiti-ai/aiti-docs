@@ -23,7 +23,7 @@ tags: [devtools, inject, architecture]
 HTML 响应（prepend，最早执行）
   → createAitiLauncher(aiUrl, {bridgeBase, bridgeToken})
   → 初始化 aiti-devtools 迷你 client（DOM/CSS/Input/Page/Runtime/Storage/Performance/Browser 8 域）
-  → Inspector UI 挂载（右下角 💬/十字准星）
+  → Inspector UI 挂载（右下角 💬/<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px"><path d="M22 12h-4"/><path d="M6 12H2"/><path d="M12 6V2"/><path d="M12 22v-4"/><path d="M12 12"/></svg>）
   → 宿主自身 client 注入（__AITI_POST__ 回调，source='self'）
   → 同源 iframe 批量注入（injectAllIframes + MutationObserver 兜底动态 iframe）
   → (可选) 连 MCP 桥 SSE（mcpConnect 注册，EventSource 长连）

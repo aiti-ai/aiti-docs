@@ -24,7 +24,7 @@ tags: [product, aiti-devtools, inject]
 </script>
 ```
 
-页面右下角出现 💬 AI 消息 / 十字准星（crosshair）Inspector 两按钮，能力即插即用。
+页面右下角出现 💬 AI 消息 / <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px"><path d="M22 12h-4"/><path d="M6 12H2"/><path d="M12 6V2"/><path d="M12 22v-4"/><path d="M12 12"/></svg>（crosshair）Inspector 两按钮，能力即插即用。
 
 ## 2. 能力清单
 
