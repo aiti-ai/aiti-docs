@@ -94,7 +94,7 @@ open http://localhost:30141
 Docker 一键（镜像标签仅 core / full，无 lite）：
 
 ```bash
-docker run -p 30142:30142 -v aiti-data:/opt/aiti -v ~/workspace:/workspace aiti/aiti:core   # 📋 M1 规划中
+docker run -d -p 30142:30142 -v aiti-data:/opt/aiti -v ~/workspace:/workspace aitiai/pi-web:core   # 已发布（Docker Hub；GUI/语音/隧道 → :full）
 ```
 
 > 规划详见 [路线图 · aiti-agent](/roadmaps/aiti-agent.md) 与 [整体规划](/roadmaps/master-plan.md)。

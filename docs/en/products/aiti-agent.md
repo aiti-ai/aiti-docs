@@ -64,7 +64,7 @@ Data layer: shared pi JSONL + queue persistence + worktree              ← exis
 
 ```bash
 # One-command Docker (after M1; image tags are core / full only, no lite)
-docker run -p 30142:30142 -v aiti-data:/opt/aiti -v ~/workspace:/workspace aiti/aiti:core
+docker run -d -p 30142:30142 -v aiti-data:/opt/aiti -v ~/workspace:/workspace aitiai/pi-web:core   # published on Docker Hub (GUI / voice / tunnels → :full)
 
 # Open in the browser (aiti.pw is the website/docs site; the workbench entry is the local port)
 open http://localhost:30142

@@ -50,7 +50,7 @@ ext:
 
 | 前缀命令 | 结构字段 | 生成结果（`command` + 参数前缀） |
 |---|---|---|
-| docker | 运行方式下拉（`run --rm -i` / `run --rm -it` / `run --rm -i --network host` / `compose run --rm` / `exec -i`）、镜像或容器名、容器内命令、附加参数（带「＋ 常用选项」下拉：`--add-host=host.docker.internal:host-gateway`、`--network host`、`-v ${cwd}:${cwd} -w ${cwd}`、挂载宿主 `~/.claude` / `~/.codex`） | `docker run --rm -i -v ${cwd}:${cwd} -w ${cwd} --add-host=… aiti/aiti:core claude` |
+| docker | 运行方式下拉（`run --rm -i` / `run --rm -it` / `run --rm -i --network host` / `compose run --rm` / `exec -i`）、镜像或容器名、容器内命令、附加参数（带「＋ 常用选项」下拉：`--add-host=host.docker.internal:host-gateway`、`--network host`、`-v ${cwd}:${cwd} -w ${cwd}`、挂载宿主 `~/.claude` / `~/.codex`） | `docker run --rm -i -v ${cwd}:${cwd} -w ${cwd} --add-host=… <镜像> claude` |
 | ssh | 目标 `user@host`、端口（自动插 `-p`）、远端命令、附加选项（默认 `-t`） | `ssh -t -p 2222 wind@host claude` |
 | env | 临时变量行（`KEY=VALUE`）、被包装命令 | `env FOO=bar HTTPS_PROXY=$HTTPS_PROXY claude` |
 | 自定义 | 工具名填在「命令」框（任意可执行文件：sudo / nix-shell / podman / timeout / firejail…）、附加参数、被包装命令 | `sudo -E claude` / `nix-shell --run claude` |

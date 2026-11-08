@@ -49,6 +49,22 @@ curl -fsSL https://aiti.pw/install.sh | sh -s -- --ref v0.15.7
 curl -fsSL https://aiti.pw/install.sh | AITI_INSTALL_DIR=~/apps/aiti sh
 ```
 
+@tab Docker
+
+镜像发布在 Docker Hub（推 `v*` tag 随 GitHub Releases 自动构建）：
+
+```bash
+docker run -d -p 30142:30142 \
+  -v aiti-data:/opt/aiti -v ~/workspace:/workspace \
+  aitiai/pi-web:core
+# 浏览器开 http://localhost:30142（工作目录 /workspace，数据独立于 ~/.pi）
+```
+
+- `core`（约 3GB）：fork pi-web + 全部扩展 + node/git + justget 工具市场；
+- `full`（约 8.6GB）：加 GUI/语音（funasr）/Chrome/隧道等全功能；
+- 版本 tag：`aitiai/pi-web:v<版本>-{core,full}`，滚动 `core`/`full`/`latest`；
+- docker compose 一键与手册见仓库 [`docker/`](https://github.com/aiti-ai/aiti-ai/tree/main/docker)（compose.yaml / MANUAL.md）。
+
 @tab Windows
 
 ```powershell

@@ -49,6 +49,22 @@ Env overrides: `AITI_RELEASE_REPO` (mirror repo), `AITI_INSTALL_DIR`, `AITI_BIN_
 curl -fsSL https://aiti.pw/install.sh | AITI_INSTALL_DIR=~/apps/aiti sh
 ```
 
+@tab Docker
+
+Images are published to Docker Hub (built automatically on `v*` tags alongside GitHub Releases):
+
+```bash
+docker run -d -p 30142:30142 \
+  -v aiti-data:/opt/aiti -v ~/workspace:/workspace \
+  aitiai/pi-web:core
+# open http://localhost:30142 (workdir /workspace, data isolated from ~/.pi)
+```
+
+- `core` (~3 GB): fork of pi-web + all extensions + node/git + the justget tool market;
+- `full` (~8.6 GB): adds GUI / voice (funasr) / Chrome / tunnels — the all-in-one image;
+- version tags: `aitiai/pi-web:v<version>-{core,full}`, rolling `core`/`full`/`latest`;
+- one-command docker compose and the manual live in the repo [`docker/`](https://github.com/aiti-ai/aiti-ai/tree/main/docker) directory (compose.yaml / MANUAL.md).
+
 @tab Windows
 
 ```powershell
