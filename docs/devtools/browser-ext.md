@@ -34,7 +34,7 @@ aiti-devtools 浏览器扩展（MV3）：**任意网页——无需目标应用�
 - **三浏览器**：Chrome / Edge（111+）/ Firefox（128+，含 **Firefox for Android ≥128** 完整支持）；`npm run build` 产出 dist/{chrome,edge,firefox}，`npm run package` 出 zip
 - **注入机制**：`world:"MAIN"` content script——launcher 源码构建时内联进 content/main.js，文件顶层执行**不受页面 CSP 约束**；配置走隔离世界（storage.sync → localStorage 跨 world 共享 → MAIN world document_idle 同步读）
 - **防重复注入**：`__dbgLauncherInstalled` 守卫——页面本身有 launcher（如 pi-web）时不双注入
-- **options 配置页**：桥地址（默认 `http://127.0.0.1:8777/aiti`，可指向远程 pi-web）/ AI 窗地址（默认 cockpit）/ 全局开关 / 排除站点（每行一个正则）/ AITI_BRIDGE_URL 一键复制；保存后刷新页面生效
+- **options 配置页（v2）**：**AI 目标**三档（pi-web 工作台 / 兼容 agent 宿主 / cockpit 兜底）+ 目标地址 + **一键探测本机 pi-web**（HEAD launcher 资产，30141/30142 自动预填，pi-web 选中联动预填同源桥地址）；**站点规则**（默认关 + 白名单/排除正则，deny 优先）；**高级**（桥地址 / AITI_BRIDGE_URL 一键复制）；保存后刷新页面生效
 
 ## 安装
 
@@ -54,9 +54,9 @@ cd browser-ext && npm run build      # → dist/chrome dist/edge dist/firefox
 
 > 前置：桥在跑（`systemctl start aiti-bridge` 或 `node dev-repo/bridge/bin/aiti-bridge.mjs`）。
 
-## v2 增强规划（进行中）
+## v2 增强（P0 已实施）
 
-> v1 默认全站注入 + AI 窗裸桥 cockpit。**v2 重新规划**：①默认关——白名单按站点启用 / popup 一键按需启动（本次）；②AI 窗默认指向 **pi-web 等兼容 AI agent**（首跑自动探测预填，cockpit 降为兜底）；③v1 配置自动迁移、权限面不变。详见 `aiti-docs` 同仓 `docs/aiti-devtools-browser-ext-v2-plan.md`。
+> v1 默认全站注入 + AI 窗裸桥 cockpit——与动机错位。**v2 重构**：①**默认关**——popup「⚡ 本页启用（本次）」（纯运行时消息，导航后失效，优先于排除规则）+「★ 总是启用此站点」白名单 / 排除正则（deny 优先）；②AI 窗默认指向 **pi-web**（设置页一键探测本机 30141/30142 预填，选中联动预填同源桥地址）/ 兼容 agent 宿主 / cockpit 兜底；③v1 配置自动迁移（enabled→defaultEnabled、excludes→denySites、自定义 aiUrl→cockpitUrl）、**权限面不变**（storage/activeTab/scripting/<all_urls>）。P1/P2（快捷键、连通性自检 UI、per-site 目标、严格隐私模式）见 `docs/aiti-devtools-browser-ext-v2-plan.md`（两轮深审定稿）。
 
 ## 方案
 

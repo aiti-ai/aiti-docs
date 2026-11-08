@@ -34,7 +34,7 @@ The aiti-devtools browser extension (MV3): **inject the in-page AI debugging ass
 - **Three browsers**: Chrome / Edge (111+) / Firefox (128+, incl. full **Firefox for Android ≥128** support); `npm run build` produces dist/{chrome,edge,firefox}, `npm run package` produces zips
 - **Injection mechanism**: a `world:"MAIN"` content script — the launcher source is inlined into content/main.js at build time and executed at file top level, **unconstrained by page CSP**; configuration lives in the isolated world (storage.sync → localStorage shared across worlds → read synchronously in the MAIN world at document_idle)
 - **Double-injection guard**: the `__dbgLauncherInstalled` sentinel — pages that already run a launcher (like pi-web) are not injected twice
-- **options page**: bridge address (default `http://127.0.0.1:8777/aiti`, can point at a remote pi-web) / AI window address (default cockpit) / global switch / excluded sites (one regex per line) / one-click copy of AITI_BRIDGE_URL; refresh the page after saving to take effect
+- **options page (v2)**: **AI target** with three kinds (pi-web workbench / compatible agent host / cockpit fallback) + target address + **one-click local pi-web probe** (HEAD of the launcher asset on ports 30141/30142, auto-prefill; selecting pi-web also prefills the same-origin bridge address); **site rules** (default off + allowlist/deny regexes, deny wins); **advanced** (bridge address / AITI_BRIDGE_URL one-click copy); refresh the page after saving to take effect
 
 ## Install
 
@@ -54,9 +54,9 @@ cd browser-ext && npm run build      # → dist/chrome dist/edge dist/firefox
 
 > Prerequisite: the bridge is running (`systemctl start aiti-bridge` or `node dev-repo/bridge/bin/aiti-bridge.mjs`).
 
-## v2 enhancement (planned)
+## v2 enhancement (P0 shipped)
 
-> v1 defaults to injecting on every page with the AI window pointed at the bare bridge + cockpit. **v2 replans this**: (1) default off — per-site allowlist or one-click on-demand injection; (2) the AI window defaults to **pi-web or any compatible aiti-devtools-enabled agent** (auto-detected on first run; cockpit becomes the explicit fallback); (3) v1 settings migrate automatically, permission set unchanged. See `docs/aiti-devtools-browser-ext-v2-plan.md` in the repo.
+> v1 defaulted to injecting on every page with the AI window pointed at the bare bridge + cockpit — misaligned with the motivation. **v2 rebuilds this**: (1) **default off** — popup "⚡ Enable on this page (once)" (runtime-only message, gone on navigation, wins over deny rules) + "★ Always enable this site" allowlist / deny regexes (deny wins); (2) the AI window defaults to **pi-web** (options-page one-click probe of local 30141/30142 with prefill; selecting pi-web also prefills the same-origin bridge address) / compatible agent host / cockpit fallback; (3) v1 settings migrate automatically (enabled→defaultEnabled, excludes→denySites, custom aiUrl→cockpitUrl), **permission set unchanged** (storage/activeTab/scripting/<all_urls>). P1/P2 (shortcut, connectivity self-check UI, per-site targets, strict-privacy mode) are specified in `docs/aiti-devtools-browser-ext-v2-plan.md` (finalized after two review rounds).
 
 ## Plan
 
