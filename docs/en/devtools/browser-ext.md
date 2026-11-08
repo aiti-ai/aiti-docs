@@ -18,7 +18,7 @@ ext:
   install: |
     cd browser-ext && npm run build   # → dist/chrome dist/edge dist/firefox
     # Chrome/Edge: chrome://extensions developer mode → load unpacked → dist/chrome (Edge: dist/edge)
-    # Firefox: about:debugging → load temporary add-on → dist/firefox/manifest.json (Android needs ≥120)
+    # Firefox: about:debugging → load temporary add-on → dist/firefox/manifest.json (Android needs ≥128)
   license: MIT
   tags: [chrome, edge, firefox, mv3, content-script, injection, any-page]
 ---
@@ -31,7 +31,7 @@ The aiti-devtools browser extension (MV3): **inject the in-page AI debugging ass
 
 ## Capabilities
 
-- **Three browsers**: Chrome / Edge (111+) / Firefox (128+, incl. full **Firefox for Android ≥120** support); `npm run build` produces dist/{chrome,edge,firefox}, `npm run package` produces zips
+- **Three browsers**: Chrome / Edge (111+) / Firefox (128+, incl. full **Firefox for Android ≥128** support); `npm run build` produces dist/{chrome,edge,firefox}, `npm run package` produces zips
 - **Injection mechanism**: a `world:"MAIN"` content script — the launcher source is inlined into content/main.js at build time and executed at file top level, **unconstrained by page CSP**; configuration lives in the isolated world (storage.sync → localStorage shared across worlds → read synchronously in the MAIN world at document_idle)
 - **Double-injection guard**: the `__dbgLauncherInstalled` sentinel — pages that already run a launcher (like pi-web) are not injected twice
 - **options page**: bridge address (default `http://127.0.0.1:8777/aiti`, can point at a remote pi-web) / AI window address (default cockpit) / global switch / excluded sites (one regex per line) / one-click copy of AITI_BRIDGE_URL; refresh the page after saving to take effect
@@ -44,7 +44,7 @@ cd browser-ext && npm run build      # → dist/chrome dist/edge dist/firefox
 
 - **Chrome / Edge**: `chrome://extensions` (or `edge://extensions`) → developer mode → load unpacked → `dist/chrome` (Edge: `dist/edge`)
 - **Firefox**: `about:debugging#/runtime/this-firefox` → load temporary add-on → `dist/firefox/manifest.json`
-- **Firefox for Android**: needs ≥120; permanent installs require the signed stable gecko id `aiti-devtools@aiti.ai`
+- **Firefox for Android**: needs ≥128 (world:MAIN injection dependency; MV3 itself 120+); permanent installs require the signed stable gecko id `aiti-devtools@aiti.ai`
 
 ## Usage
 

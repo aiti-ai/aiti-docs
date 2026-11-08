@@ -18,7 +18,7 @@ ext:
   install: |
     cd browser-ext && npm run build   # → dist/chrome dist/edge dist/firefox
     # Chrome/Edge：chrome://extensions 开发者模式 → 加载已解压扩展程序 → dist/chrome（Edge 选 dist/edge）
-    # Firefox：about:debugging → 临时载入附加组件 → dist/firefox/manifest.json（Android 需 ≥120）
+    # Firefox：about:debugging → 临时载入附加组件 → dist/firefox/manifest.json（Android 需 ≥128）
   license: MIT
   tags: [chrome, edge, firefox, mv3, content-script, injection, any-page]
 ---
@@ -31,7 +31,7 @@ aiti-devtools 浏览器扩展（MV3）：**任意网页——无需目标应用�
 
 ## 能力
 
-- **三浏览器**：Chrome / Edge（111+）/ Firefox（128+，含 **Firefox for Android ≥120** 完整支持）；`npm run build` 产出 dist/{chrome,edge,firefox}，`npm run package` 出 zip
+- **三浏览器**：Chrome / Edge（111+）/ Firefox（128+，含 **Firefox for Android ≥128** 完整支持）；`npm run build` 产出 dist/{chrome,edge,firefox}，`npm run package` 出 zip
 - **注入机制**：`world:"MAIN"` content script——launcher 源码构建时内联进 content/main.js，文件顶层执行**不受页面 CSP 约束**；配置走隔离世界（storage.sync → localStorage 跨 world 共享 → MAIN world document_idle 同步读）
 - **防重复注入**：`__dbgLauncherInstalled` 守卫——页面本身有 launcher（如 pi-web）时不双注入
 - **options 配置页**：桥地址（默认 `http://127.0.0.1:8777/aiti`，可指向远程 pi-web）/ AI 窗地址（默认 cockpit）/ 全局开关 / 排除站点（每行一个正则）/ AITI_BRIDGE_URL 一键复制；保存后刷新页面生效
@@ -44,7 +44,7 @@ cd browser-ext && npm run build      # → dist/chrome dist/edge dist/firefox
 
 - **Chrome / Edge**：`chrome://extensions`（或 `edge://extensions`）→ 开发者模式 → 加载已解压扩展程序 → `dist/chrome`（Edge 选 `dist/edge`）
 - **Firefox**：`about:debugging#/runtime/this-firefox` → 临时载入附加组件 → `dist/firefox/manifest.json`
-- **Firefox for Android**：需 ≥120；永久安装需签名的稳定 gecko id `aiti-devtools@aiti.ai`
+- **Firefox for Android**：需 ≥128（world:MAIN 注入依赖；MV3 本身 120+）；永久安装需签名的稳定 gecko id `aiti-devtools@aiti.ai`
 
 ## 使用
 
