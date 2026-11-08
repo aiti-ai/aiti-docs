@@ -34,7 +34,7 @@ Custom agent registry (plan `dev-repo/docs/aiti-custom-agent-plan.md`): the tool
 
 | Prefix command | Structured fields | Generated result (`command` + args prefix) |
 |---|---|---|
-| docker | Run-mode dropdown (`run --rm -i` / `run --rm -it` / `run --rm -i --network host` / `compose run --rm` / `exec -i`), image or container name, in-container command, extra args (with a "＋ common options" dropdown: `--add-host=host.docker.internal:host-gateway`, `--network host`, `-v ${cwd}:${cwd} -w ${cwd}`, host `~/.claude` / `~/.codex` mounts) | `docker run --rm -i -v ${cwd}:${cwd} -w ${cwd} --add-host=… aiti/aiti:core claude` |
+| docker | Run-mode dropdown (`run --rm -i` / `run --rm -it` / `run --rm -i --network host` / `compose run --rm` / `exec -i`), image or container name, in-container command, extra args (with a "＋ common options" dropdown: `--add-host=host.docker.internal:host-gateway`, `--network host`, `-v ${cwd}:${cwd} -w ${cwd}`, host `~/.claude` / `~/.codex` mounts) | `docker run --rm -i -v ${cwd}:${cwd} -w ${cwd} --add-host=… <image> claude` |
 | ssh | Target `user@host`, port (auto-inserts `-p`), remote command, extra options (default `-t`) | `ssh -t -p 2222 wind@host claude` |
 | env | Temp var lines (`KEY=VALUE`), wrapped command | `env FOO=bar HTTPS_PROXY=$HTTPS_PROXY claude` |
 | Custom | Tool name goes in the "Command" box (any executable: sudo / nix-shell / podman / timeout / firejail…), extra args, wrapped command | `sudo -E claude` / `nix-shell --run claude` |
