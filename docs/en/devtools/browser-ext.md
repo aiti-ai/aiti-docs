@@ -54,6 +54,10 @@ cd browser-ext && npm run build      # → dist/chrome dist/edge dist/firefox
 
 > Prerequisite: the bridge is running (`systemctl start aiti-bridge` or `node dev-repo/bridge/bin/aiti-bridge.mjs`).
 
+## v2 enhancement (planned)
+
+> v1 defaults to injecting on every page with the AI window pointed at the bare bridge + cockpit. **v2 replans this**: (1) default off — per-site allowlist or one-click on-demand injection; (2) the AI window defaults to **pi-web or any compatible aiti-devtools-enabled agent** (auto-detected on first run; cockpit becomes the explicit fallback); (3) v1 settings migrate automatically, permission set unchanged. See `docs/aiti-devtools-browser-ext-v2-plan.md` in the repo.
+
 ## Plan
 
 `docs/aiti-devtools-browser-ext-plan.md` (plan/implemented 2026-09-16: three-browser builds + end-to-end injection verified). Positioning: fills the "any webpage, no carrier" gap — project plugins only cover apps that adopt them, the pi-web extension only covers pi-web, port injection only covers proxied ports; the browser extension pushes coverage to **all web pages**.

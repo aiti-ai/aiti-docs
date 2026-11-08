@@ -54,6 +54,10 @@ cd browser-ext && npm run build      # → dist/chrome dist/edge dist/firefox
 
 > 前置：桥在跑（`systemctl start aiti-bridge` 或 `node dev-repo/bridge/bin/aiti-bridge.mjs`）。
 
+## v2 增强规划（进行中）
+
+> v1 默认全站注入 + AI 窗裸桥 cockpit。**v2 重新规划**：①默认关——白名单按站点启用 / popup 一键按需启动（本次）；②AI 窗默认指向 **pi-web 等兼容 AI agent**（首跑自动探测预填，cockpit 降为兜底）；③v1 配置自动迁移、权限面不变。详见 `aiti-docs` 同仓 `docs/aiti-devtools-browser-ext-v2-plan.md`。
+
 ## 方案
 
 `docs/aiti-devtools-browser-ext-plan.md`（方案/已实施 2026-09-16：三浏览器构建 + 产物端到端注入验证通过）。定位：填补「任意网页无载体可注入」缺口——工程插件只覆盖接插件的应用、pi-web 扩展只覆盖 pi-web、端口注入只覆盖被代理端口，浏览器扩展把覆盖面推到**全部网页**。
