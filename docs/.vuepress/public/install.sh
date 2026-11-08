@@ -103,6 +103,8 @@ TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
 
 # ---- release sources (GitHub primary, Gitee mirror fallback) ----
+# JSON extraction is line-structure agnostic (grep -o): the Gitee API returns
+# the whole release object on ONE line, GitHub pretty-prints it.
 # resolve_release <src> → sets TAG (global); release JSON lands in $TMP/release-<src>.json
 resolve_release() {
   if [ "$1" = gh ]; then
@@ -113,14 +115,16 @@ resolve_release() {
   URL="${API}/releases/latest"
   [ -n "$REF" ] && URL="${API}/releases/tags/${REF}"
   fetch "$URL" "$TMP/release-$1.json" || return 1
-  TAG="$(sed -n 's/.*"tag_name": *"\([^"]*\)".*/\1/p' "$TMP/release-$1.json" | head -1)"
+  TAG="$(grep -o '"tag_name": *"[^"]*"' "$TMP/release-$1.json" | head -1 | sed 's/.*"\([^"]*\)"$/\1/')"
   [ -n "$TAG" ] || return 1
   return 0
 }
 
 # asset_url <src> <asset-name> → prints the browser_download_url, or empty
 asset_url() {
-  sed -n 's/.*"browser_download_url": *"\([^"]*\)"*/\1/p' "$TMP/release-$1.json" | grep "${2}\$" | head -1
+  grep -o '"browser_download_url": *"[^"]*"' "$TMP/release-$1.json" \
+    | sed 's/^"browser_download_url": *"\(.*\)"$/\1/' \
+    | grep "${2}\$" | head -1
 }
 
 # download_asset <src> <asset-name> <dest-file>
