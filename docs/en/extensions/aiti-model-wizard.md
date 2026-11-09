@@ -67,7 +67,7 @@ aiti_model_wizard_combo_save # create/update model combo groups (members can car
 
 ## 🧩 Model Combo (combined models)
 
-Combines multiple real models into **one virtual model** exposed to pi (routing taken over by the [pi-models-combo](https://github.com/aiti-ai/pi-models-combo) engine). The "Model Combo" tab: a list of combo-group cards (member composition badges + weight annotations + three-tier temporary disable at combo-group/virtual-model/member level) + the combo editor:
+Combines multiple real models into **one virtual model** exposed to pi (routing taken over by the [pi-models-combo](https://github.com/aiti-ai/aiti-ai/tree/main/pi-plugins/pi-models-combo) engine). The "Model Combo" tab: a list of combo-group cards (member composition badges + weight annotations + three-tier temporary disable at combo-group/virtual-model/member level) + the combo editor:
 
 - **Member selection**: search configured provider×model pairs (including runtime-registered providers like freeflow) and click to add; duplicate references deduped; same protocol required within one group, combo groups can't nest as members, contextWindow/maxTokens take the minimum, input takes the union, cost takes the most expensive estimate
 - **Weight (weight)**: a weight box per member (default 10) — random selection proportional to weights (member-level semantics, not amplified by multi-key)

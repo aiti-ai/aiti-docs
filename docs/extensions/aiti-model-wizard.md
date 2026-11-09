@@ -83,7 +83,7 @@ aiti_model_wizard_combo_save # 创建/更新模型聚合组（成员可带 weigh
 
 ## 🧩 模型聚合（组合模型）
 
-把多个真实模型组成**一个虚拟模型**暴露给 pi（由 [pi-models-combo](https://github.com/aiti-ai/pi-models-combo) 引擎接管路由）。「模型聚合」页签：聚合组列表卡（成员构成徽标 + 权重标注 + 聚合组级/虚拟模型/成员三层的临时禁用）＋ 组合编辑器：
+把多个真实模型组成**一个虚拟模型**暴露给 pi（由 [pi-models-combo](https://github.com/aiti-ai/aiti-ai/tree/main/pi-plugins/pi-models-combo) 引擎接管路由）。「模型聚合」页签：聚合组列表卡（成员构成徽标 + 权重标注 + 聚合组级/虚拟模型/成员三层的临时禁用）＋ 组合编辑器：
 
 - **成员选择**：搜索已配置 provider×model（含运行时注册 provider 如 freeflow）点选入组，重复引用去重；同协议才能同组、聚合组不能嵌套作成员、contextWindow/maxTokens 取最小值、input 取并集、cost 取最贵估算
 - **权重（weight）**：每成员权重框（默认 10）——按权重占比随机选点（成员级语义，多 key 不放大）
