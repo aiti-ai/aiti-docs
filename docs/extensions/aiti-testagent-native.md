@@ -37,7 +37,7 @@ ext:
 - **D 热更新**：函数体级 hotpatch（dll_bypass apply/revert）+ quickjs-ng 沙箱脚本（ACG 进程可用）
 - **E 可逆审计**：hook/patch 登记强制度 + `tan_restore` 一键回滚 + history 审计
 
-工具面 45 项 = 38 `tan_*` + 7 `app_*`（「任意应用→MCP」服务层）；旧名 `wintrace_*` 经 broker/MCP 双别名层过渡兼容（退役条件见 testagent-native 仓 rename-exec §P6）。
+工具面 **57 项 = 50 `tan_*` + 7 `app_*`**（2026-11-10 快照；「任意应用→MCP」服务层 + 跨平台对象模型 OM 系列：`tan_dbus_*`×4 / `tan_gir_*`×2 / `tan_objc_*`×3 / `tan_vtable_*`×3，随 OM 五期持续扩展）；旧名 `wintrace_*` 经 broker/MCP 双别名层过渡兼容（退役条件见 testagent-native 仓 rename-exec §P6）。
 
 ## 数据源与配置
 

@@ -18,7 +18,7 @@ Capability model = the native replica of TestAgent's six primitives (see the tes
 - **D Hot-update**: function-body hotpatching (dll_bypass apply/revert) + quickjs-ng sandboxed scripts (works on ACG-protected processes)
 - **E Reversible audit**: mandatory registration of every hook/patch + `tan_restore` one-click rollback + history audit
 
-Tool surface: 45 tools = 38 `tan_*` + 7 `app_*` (the "any app → MCP" service layer); the legacy `wintrace_*` names remain compatible through broker/MCP dual alias layers (retirement criteria in the testagent-native repo, rename-exec §P6).
+Tool surface: **57 tools = 50 `tan_*` + 7 `app_*`** (snapshot 2026-11-10; the "any app → MCP" service layer plus the cross-platform object-model OM families: `tan_dbus_*`×4 / `tan_gir_*`×2 / `tan_objc_*`×3 / `tan_vtable_*`×3, growing with the OM phases); the legacy `wintrace_*` names remain compatible through broker/MCP dual alias layers (retirement criteria in the testagent-native repo, rename-exec §P6).
 
 ## Data source & configuration
 
