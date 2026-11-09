@@ -4,11 +4,11 @@ icon: 🔗
 ext:
   id: aiti-acp-agent
   name: ACP 会话后端
-  description: 泛用 ACP 驱动 —— 一个适配器接所有 Agent Client Protocol agent（10 家内置自动探测 + 自定义后端面板 + 授权卡/队列/模型目录）
+  description: 泛用 ACP 驱动 —— 一个适配器接所有 Agent Client Protocol agent（25 家内置自动探测，对齐 agent-shell 全量清单 + 自定义后端面板 + 授权卡/队列/模型目录）
   soul: 协议统一了，适配器只需要写一次。
   type: dev-repo
   category: 多 agent 后端
-  version: "0.3.7"
+  version: "0.3.8"
   status: active
   author: aiti-ai
   publisher: aiti-ai
@@ -30,7 +30,8 @@ ext:
 
 - ACP 是 Zed 主导的 agent↔编辑器 JSON-RPC stdio 标准——协议统一了，适配器只需要写一次
 - **装机才接原则**：启动时探测 PATH，装了对应 CLI 才注册该后端
-- **内置后端自动探测（10 家）**：**`claude-agent-acp`**（agentKey `claude`；包已由 @zed-industries/claude-code-acp 更名 **@agentclientprotocol/claude-agent-acp**，bin 同步改名，0.16→0.100.0 全握手复测协议面 v1 不变，resolve 新 bin 优先旧 bin 兜底）、`gemini --experimental-acp`、`opencode acp`、`cbc --acp`（codebuddy，npx 兜底）、copilot（`--acp`）/ qwen / iflow / kimi / goose / cline
+- **内置后端自动探测（25 家，2026-11-08 对齐 xenodium/agent-shell 全量清单）**：**`claude-agent-acp`**（agentKey `claude`；包已由 @zed-industries/claude-code-acp 更名 **@agentclientprotocol/claude-agent-acp**，bin 同步改名，0.16→0.100.0 全握手复测协议面 v1 不变，resolve 新 bin 优先旧 bin 兜底）、`gemini --experimental-acp`、`opencode acp`、`cbc --acp`（codebuddy，npx 兜底）、copilot（`--acp`）/ qwen / iflow / kimi / goose / cline，以及本轮新增：**codex**（官方桥 `@agentclientprotocol/codex-acp`，npx 兜底；治理白名单映射到 codex 键放行 OPENROUTER_API_KEY——家族默认 `acp` 键会剥掉它致轮次失败）、**cursor**（`cursor-agent acp`）、antigravity（`agy acp`）、grok（`grok agent stdio`）、auggie（`--acp`）、deepseek（`dsh --profile acp`）、droid（`droid exec --output-format acp`）、hermes（`hermes acp`）、junie（`--acp true`）、kiro（`kiro-cli acp`）、mistral（`vibe-acp`）、omp（`omp acp`）、openclaw（`openclaw acp`）、pi（`pi-acp` 适配器）、qoder（`--acp`）
+- **治理 env 白名单按后端映射**（`governanceCliFor`）：codex → codex 键；其余 → `acp` 家族键（仅 ACP_* + 基础键）；AcpHandle 构造器带 cwd（info 面 spawn 竞态窗口也有真实工作区）
 - **自定义后端**：「ACP Agents」管理面板 + `acp-agents.json`——任意讲 ACP 的 CLI 一行接入
 - **能力面**：核心四件套 + followUp/queueManage/setModel/respondPermission（session/request_permission 授权卡）/getUsage（usage_update 帧）/listModels/fileAttachments（按 promptCapabilities.image 实例级收敛）/contextUsage/getMessages；steer ❌
 - **模型目录（D15）**：cache 层 + 启动后台真实获取、上次使用置顶；claude-code 后端 order:10 保持下拉首位
