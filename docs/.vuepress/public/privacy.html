@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>aiti devtools · 隐私说明 | Privacy Policy</title>
+<style>
+  :root { --bg:#0f172a; --panel:#1e293b; --border:#334155; --text:#e2e8f0; --muted:#94a3b8; --accent:#7c3aed; color-scheme: dark; }
+  @media (prefers-color-scheme: light) {
+    :root { --bg:#f8fafc; --panel:#ffffff; --border:#e2e8f0; --text:#0f172a; --muted:#64748b; color-scheme: light; }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: system-ui,-apple-system,"Segoe UI",sans-serif; background:var(--bg); color:var(--text); line-height:1.7; }
+  .brand { display:flex; align-items:center; gap:10px; padding:28px 24px 0; max-width:760px; margin:0 auto; }
+  .brand img { width:32px; height:32px; border-radius:8px; }
+  .brand b { font-size:18px; }
+  main { max-width:760px; margin:0 auto; padding:16px 24px 64px; }
+  h1 { font-size:24px; margin:12px 0 4px; }
+  .tagline { color:var(--muted); font-size:13px; margin:0 0 28px; }
+  h2 { font-size:16px; margin:32px 0 10px; }
+  p, li { font-size:14px; }
+  code { background:var(--panel); padding:1px 6px; border-radius:4px; font-size:13px; }
+  .en { color:var(--muted); }
+  .card { background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:16px 20px; margin:12px 0; }
+  .foot { margin-top:48px; color:var(--muted); font-size:12px; border-top:1px solid var(--border); padding-top:16px; }
+  a { color:var(--accent); }
+</style>
+</head>
+<body>
+<div class="brand"><img src="/logo.svg" alt="aiti"><b>aiti devtools</b></div>
+<main>
+  <h1>隐私说明 · Privacy Policy</h1>
+  <p class="tagline">aiti-devtools 浏览器扩展（Chrome / Edge / Firefox）—— 最近更新 / Last updated: 2026-11-09</p>
+
+  <h2>一句话结论</h2>
+  <p><b>本扩展不收集、不上传任何遥测或个人数据。</b>所有配置仅保存在你的浏览器本地；运行时通信只发往<b>你自己配置</b>的服务地址。</p>
+  <p class="en"><b>TL;DR</b>: This extension collects no telemetry and no personal data. All settings stay in your browser's local storage, and runtime traffic goes only to service addresses <b>you configure</b>.</p>
+
+  <h2>数据存储 / Data storage</h2>
+  <p>配置（AI 目标地址、站点白名单/排除规则、桥地址）通过 <code>storage.sync</code> 保存在你的浏览器账号下；运行态缓存在页面本地 <code>localStorage</code> / <code>storage.session</code>。没有任何数据发往 aiti 或第三方。</p>
+  <p class="en">Settings (AI target address, site allowlist/denylist, bridge address) are stored via <code>storage.sync</code> under your own browser account; runtime caches live in page-local <code>localStorage</code> / <code>storage.session</code>. Nothing is sent to aiti or any third party.</p>
+
+  <h2>网络通信 / Network traffic</h2>
+  <p>扩展只与<b>你自己配置</b>的服务地址通信——默认为本机 <code>127.0.0.1</code> 上的本地桥 / pi-web 工作台（也可改为你自己局域网/服务器上的地址）。通信内容为被调试页面的调试信息（快照、控制台输出、点选元素），且由你显式操作触发。扩展默认<b>不注入任何页面</b>——注入仅在你按需启用或加入白名单后发生。</p>
+  <p class="en">The extension talks only to services <b>you configure</b> — by default a local bridge / pi-web workbench on <code>127.0.0.1</code> (changeable to your own LAN/server addresses). Traffic is debugging information about the page under inspection (snapshots, console output, picked elements), triggered by your explicit actions. Injection is <b>off by default</b> and only happens per your explicit enable or allowlist.</p>
+
+  <h2>关于被调试页面 / About debugged pages</h2>
+  <p>被调试页面的内容（DOM/控制台/网络）仅在调试会话期间发送给你选择的 AI agent（pi / Claude Code / opencode 等——它们是你自己的账号与服务）。aiti 不经手、不存储这些内容。</p>
+  <p class="en">Debugged-page content (DOM / console / network) is only sent to the AI agent <b>you chose</b> for the debugging session (pi / Claude Code / opencode — your own accounts and services). aiti never sees or stores it.</p>
+
+  <h2>权限用途 / Permissions</h2>
+  <p><code>storage</code>=本地保存设置；<code>activeTab</code>+<code>scripting</code>=按需向当前被调试页注入调试助手；<code>host_permissions</code>=任意网页可作为调试目标（默认关，用户显式启用）。</p>
+  <p class="en"><code>storage</code>=local settings; <code>activeTab</code>+<code>scripting</code>=on-demand injection into the page being debugged; <code>host_permissions</code>=any webpage can be a debugging target (off by default, user-enabled).</p>
+
+  <div class="foot">
+    <p>aiti-devtools · <a href="https://aiti.pw" target="_blank" rel="noopener">aiti.pw</a> · 生态仓库 <a href="https://github.com/aiti-ai/aiti-ai" target="_blank" rel="noopener">aiti-ai/aiti-ai</a> · 工作台 <a href="https://github.com/aiti-ai/pi-web" target="_blank" rel="noopener">aiti-ai/pi-web</a></p>
+    <p>MIT Licensed · © 2026 aiti-ai</p>
+  </div>
+</main>
+</body>
+</html>
