@@ -4,7 +4,7 @@ icon: 🧪
 ext:
   id: aiti-testagent
   name: TestAgent
-  description: Java 后端 AI 调试 MCP + IDE —— 扫描 Java 进程/attach 一键连桥/Tunnel 桥多端点纳管，JVM 内任意修改/Mock·SQL 拦截模拟/热更新/诊断采样，57 工具 10 组按需暴露，全可逆
+  description: Java 后端 AI 调试 MCP + IDE —— 扫描 Java 进程/attach 一键连桥/Tunnel 桥多端点纳管，JVM 内任意修改/Mock·SQL 拦截模拟/热更新/诊断采样，58 工具 10 组按需暴露，全可逆
   soul: 所有操作可逆（delete/stop 还原），AI 放心在运行中的 JVM 里做实验。
   type: bridge
   category: 调试
@@ -33,7 +33,7 @@ TestAgent 2.0 —— **给 AI 用的 Arthas++**：教 AI 怎么调试运行中�
 
 除 MCP 外，TestAgent 自带 **Web 操作台**（React，与 API 同端口同源）：方法/代码热更新、声明式 Conf、Eval、Mock、SQL 拦截、Bean·XML、Arthas 诊断、Profiling、实时监控、ClassWatch、Terminal、配置历史——人看同一个端口，类名/方法名/URL/bean 全量输入补全。
 
-## 57 个工具，10 组
+## 58 个工具，10 组
 
 | 组 | 工具 | 干什么 |
 | --- | --- | --- |
@@ -41,7 +41,7 @@ TestAgent 2.0 —— **给 AI 用的 Arthas++**：教 AI 怎么调试运行中�
 | `observe` | ta_watch / ta_monitor / ta_tt / ta_trace / ta_job | 观察参数/返回值/异常、调用统计、时空隧道录参、耗时链路子调用树、后台常驻观测任务（watch/tt，TTL 到期自动摘除，since 游标拉增量） |
 | `jvm` | ta_metrics / ta_memory / ta_threads / ta_profile / ta_heapdump / ta_download / ta_vmtool / ta_classloader / ta_mbean / ta_vmoption / ta_perfcounter / ta_dump / ta_sysprop / ta_sysenv | 线程栈（死锁检测/CPU 排序）、火焰图（cpu/alloc/wall）、堆转储、内存分池明细、大文件取回、JVM flags、类加载器树、系统属性/环境变量 |
 | `inspect` | ta_sc / ta_sm / ta_jad / ta_fs / ta_urls | 类搜索、方法清单、CFR 反编译、容器内文件查看、REST 端点清单 |
-| `write` | ta_code / ta_restore / ta_method / ta_eval / ta_conf / ta_xml / ta_classwatch / ta_bean / ta_logger / ta_props / ta_spring / ta_solon / ta_addr | **写代码热更新、新建 controller**、方法级改行为、表达式求值、声明式 Conf、Bean·XML、改代码自动热替换、Spring bean 注入 mock、日志级别热调、Spring/Solon 组件热操作（springboot/solon 聚合开关配套）、地址透明替换 |
+| `write` | ta_code / ta_restore / ta_method / ta_eval / ta_conf / ta_xml / ta_classwatch / ta_bean / ta_logger / ta_props / ta_i18n / ta_spring / ta_solon / ta_addr | **写代码热更新、新建 controller**、方法级改行为、表达式求值、声明式 Conf、Bean·XML、改代码自动热替换、Spring bean 注入 mock、日志级别热调、Spring/Solon 组件热操作（springboot/solon 聚合开关配套）、地址透明替换 |
 | `mock` | ta_mock_url / ta_mock_method / ta_mock_results / ta_capture / ta_sql | URL/方法级 mock、返回值篡改、流量捕获、**SQL 拦截模拟** |
 | `startup` | ta_startup / ta_lazy_module | 启动耗时报告（慢 bean 直指）、模块级懒加载 |
 | `auth` | ta_login | 自动登录：进程内登录拿 token/cookie → 401 原请求自动重放（人/机免登录墙） |
