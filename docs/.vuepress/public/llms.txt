@@ -12,7 +12,7 @@ AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 72+ 个
 - [扩展注册表](https://aiti.pw/extensions/): 全部扩展分类浏览，机器可读 /extensions.json
 
 ## 扩展
-- [aiti-acp-agent](https://aiti.pw/extensions/aiti-acp-agent.html): 泛用 ACP 驱动 —— 一个适配器接所有 Agent Client Protocol agent（10 家内置自动探测 + 自定义后端面板 + 授权卡/队列/模型目录）
+- [aiti-acp-agent](https://aiti.pw/extensions/aiti-acp-agent.html): 泛用 ACP 驱动 —— 一个适配器接所有 Agent Client Protocol agent（25 家内置自动探测，对齐 agent-shell 全量清单 + 自定义后端面板 + 授权卡/队列/模型目录）
 - [aiti-agent-manager](https://aiti.pw/extensions/aiti-agent-manager.html): 统一聚合外部 agent 登录态 + 登录操作代理 + 多账号档（备份/别名/一键切换）+ 账号额度显示——不实现任何登录协议
 - [aiti-ai-input](https://aiti.pw/extensions/aiti-ai-input.html): 聊天输入框增强 —— L0/L1 两层自动补全 + 收藏联想 + 🎤 实时 ASR 语音输入（多引擎可插拔/热词/2-pass 精修）+ 听写检测修复
 - [aiti-ai-schedule](https://aiti.pw/extensions/aiti-ai-schedule.html): pi-web 常驻调度器 —— 扩展声明式定时任务 + AI 计划（cron/间隔/一次性）+ 三模式执行引擎 + AI 自建计划工具 + 管理页
@@ -72,7 +72,7 @@ AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 72+ 个
 - [aiti-session-cards](https://aiti.pw/extensions/aiti-session-cards.html): 会话请求卡扩展——交互元语卡（zcode 方案审批 / AskUser / omp OAuth / generic 兜底）与工具授权卡完整 UI，自 pi-web core 外迁（agent 能力 UI 去核化 P1）
 - [aiti-sheet-univer](https://aiti.pw/extensions/aiti-sheet-univer.html): .xlsx/.xlsm 在线预览+编辑（exceljs 数据面 + Univer 视图面）；.xls/.ods 只读预览与一键转 .xlsx
 - [aiti-subagents](https://aiti.pw/extensions/aiti-subagents.html): 子代理舰队 Fleet 观测/运行控制/Agent 管理/并发配置——fork 引擎，工具归上游 pi-subagents
-- [aiti-testagent](https://aiti.pw/extensions/aiti-testagent.html): Java 后端 AI 调试 MCP + IDE —— 扫描 Java 进程/attach 一键连桥/Tunnel 桥多端点纳管，JVM 内任意修改/Mock·SQL 拦截模拟/热更新/诊断采样，57 工具 10 组按需暴露，全可逆
+- [aiti-testagent](https://aiti.pw/extensions/aiti-testagent.html): Java 后端 AI 调试 MCP + IDE —— 扫描 Java 进程/attach 一键连桥/Tunnel 桥多端点纳管，JVM 内任意修改/Mock·SQL 拦截模拟/热更新/诊断采样，58 工具 10 组按需暴露，全可逆
 - [aiti-testagent-native](https://aiti.pw/extensions/aiti-testagent-native.html): testagent-native（Windows 原生进程活体操控）可视面 —— broker 进程/会话/挂钩/事件流；原 aiti-wintrace（2026-11-07 改名）
 - [aiti-ui-env](https://aiti.pw/extensions/aiti-ui-env.html): 后台无头服务器 UI 调试的环境分配器 —— 4 态模式裁决新启动 MCP/应用的显示环境，Xvfb+openbox+AT-SPI 虚拟屏 + VNC-on-web + RDP-on-web，Linux/Windows/macOS 三平台服务化；VNC 密码由 VNC server 自己认证（桥纯透传）
 - [aiti-word-docx-preview](https://aiti.pw/extensions/aiti-word-docx-preview.html): .docx 高保真只读预览（docx-preview：分页 / 页眉页脚 / 表格 / 图片 / 列表还原）
