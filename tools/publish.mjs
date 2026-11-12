@@ -61,8 +61,6 @@ import re as _re
 _MAP = ${JSON.stringify(map)}
 _RULES = ${JSON.stringify(rules)}
 _msg = commit.message.decode("utf-8", "replace")
-for _old, _new in _RULES:
-    _msg = _msg.replace(_old, _new)
 if "\\n" in _msg:
     _subject, _body = _msg.split("\\n", 1)
 else:
@@ -70,6 +68,11 @@ else:
 _key = commit.original_id.decode("ascii", "replace")[:8] if commit.original_id else ""
 if _key in _MAP:
     _subject = _MAP[_key]
+_msg = _subject + "\\n" + _body
+# scrub rules run LAST so translated subjects are covered too
+for _old, _new in _RULES:
+    _msg = _msg.replace(_old, _new)
+_subject, _body = _msg.split("\\n", 1)
 _body = "\\n".join(l for l in _body.split("\\n") if not _re.search(r"[\\u4e00-\\u9fff]", l))
 _body = _re.sub(r"\\n{3,}", "\\n\\n", _body).strip("\\n")
 commit.message = (_subject + ("\\n\\n" + _body if _body else "")).encode("utf-8")
