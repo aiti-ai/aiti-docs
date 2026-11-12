@@ -10,7 +10,6 @@ description: Driven by Zhipu ZCode (CLI runtime embedded in the desktop AppImage
 
 Zhipu ZCode session backend: drives the official ZCode CLI (`resources/glm/zcode.cjs` embedded in the desktop AppImage, run directly with node) and plugs into the All Sessions multi-agent frontend. Coding plan quota is restricted to the official tool whitelist (Claude Code/Codex/ZCode/…) — **going through the official CLI itself = consuming the plan compliantly**; all HTTP calls (UA/fingerprint/tool definitions) are constructed by the official CLI, and this extension only does protocol-level driving.
 
-Research notes: `docs/zcode-desktop-cli-agent-analysis.md` (field-tested 2026-09-06, runtime 0.16.5 / AppImage 3.11.2).
 
 ## Mechanism (dual transport channels, feature `zcode.transport`)
 
@@ -94,7 +93,6 @@ One click from the toolbar **🔑 Login** (or this panel): the backend spawns th
 
 - API: `POST /api/extensions/aiti-zcode-agent/login/start` (idempotent) · `GET /login/status` · `POST /login/cancel`
 - State machine: waiting (spinner) → success ✅ / failed / timeout / cancelled, all retryable; status is polled every 2s while the dialog is open and stops when it closes
-- The standard and the five-driver contract: `docs/ext-controlled-login-standard.md`
 
 ## 🔀 Fork capability: Edit from Here / Branch (2026-09-18)
 

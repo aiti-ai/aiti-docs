@@ -8,7 +8,7 @@ description: Register custom session backends with a UI form — launch command 
 
 > ❝ **One command line, one backend.** ❞
 
-Custom agent registry (plan `dev-repo/docs/aiti-custom-agent-plan.md`): the toolbar 🧩 opens the management panel (list + form), registering "launch command + args prefix + env vars + bridge mode" as backends for new sessions — **no JSON writing at all**, hot effective on save (unregister/register hot update; on failure, fall back to an extension reload).
+Custom agent registry: the toolbar 🧩 opens the management panel (list + form), registering "launch command + args prefix + env vars + bridge mode" as backends for new sessions — **no JSON writing at all**, hot effective on save (unregister/register hot update; on failure, fall back to an extension reload).
 
 ## Typical scenarios
 

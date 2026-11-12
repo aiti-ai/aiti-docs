@@ -26,7 +26,6 @@ ext:
 
 智谱 ZCode 会话后端：驱动 ZCode 官方 CLI（桌面端 AppImage 内嵌的 `resources/glm/zcode.cjs`，node 直接跑），接入 All Sessions 多 agent 前端。编程套餐额度仅限官方工具白名单（Claude Code/Codex/ZCode/…）——**借道官方 CLI 本体 = 合规吃套餐**；所有 HTTP 调用（UA/指纹/工具定义）由官方 CLI 构造，扩展只做协议层驱动。
 
-调研底稿：`docs/zcode-desktop-cli-agent-analysis.md`（2026-09-06 实测，runtime 0.16.5 / AppImage 3.11.2）。
 
 ## 机制（传输通道双档，feature `zcode.transport`）
 
@@ -110,7 +109,6 @@ ZCode 通道（start-plan 等）触发风控验证码时：client 自带 `Captch
 
 - API：`POST /api/extensions/aiti-zcode-agent/login/start`（幂等）· `GET /login/status` · `POST /login/cancel`
 - 状态机：waiting（转圈）→ success ✅ / failed / timeout / cancelled，均带重试；弹窗打开期间 2s 轮询状态、关闭即停
-- 标准与五家 driver 契约：`docs/ext-controlled-login-standard.md`
 
 ## 🔀 fork 能力：编辑从此处 / 分支（2026-09-18）
 

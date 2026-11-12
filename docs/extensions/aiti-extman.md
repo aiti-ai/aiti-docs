@@ -72,7 +72,7 @@ jiti 从扩展目录逐级向上解析裸说明符，共享根一存在即对所
   自带）/ ✗缺失（红，两边都没有——server 端 import 了未声明依赖），悬停看共享根路径。
 - **要点**：server 端要用的第三方包必须写进扩展 package.json 的 `dependencies`；共享
   根的 package.json dependencies 字段由 extman 全权管理（每次 reconcile 按并集重写，
-  勿手改）。机制与存量迁移配方：`dev-repo/docs/dev-repo-shared-node-modules-plan.md`
+  勿手改）。
   （2026-09-10 实施，aiti-cmd 为已迁移样板）。
 
 ## 功能打开（注入点一键触发）
@@ -88,7 +88,7 @@ jiti 从扩展目录逐级向上解析裸说明符，共享根一存在即对所
 
 ## 依赖反向视图（「被依赖」+ 硬阻止）
 
-详情「依赖」区之外，每个扩展还能看**谁依赖我**（反向视图）。禁用/卸载时：**硬边**（`dependsOn` / 硬能力边，含生效提供者解析链）→ **硬阻止**——提示先禁用依赖者，不给「仍要禁用」按钮；仅 client 预取软边 → 自绘确认框列出受影响方可强行继续；可选边永不弹。设计：`dev-repo/docs/aiti-extman-dependents-view-plan.md`（已实施 2026-09-05；硬阻止升级见 sidebar 统一 dock 方案）。
+详情「依赖」区之外，每个扩展还能看**谁依赖我**（反向视图）。禁用/卸载时：**硬边**（`dependsOn` / 硬能力边，含生效提供者解析链）→ **硬阻止**——提示先禁用依赖者，不给「仍要禁用」按钮；仅 client 预取软边 → 自绘确认框列出受影响方可强行继续；可选边永不弹（设计于 2026-09-05 实施）。
 
 ## 依赖与能力模型（三视图 + pin）
 
@@ -101,7 +101,7 @@ jiti 从扩展目录逐级向上解析裸说明符，共享根一存在即对所
 
 ## 扩展协议（aitiExtProtocol 徽标 + AI 升级）
 
-扩展 package.json 声明 `aitiExtProtocol` 协议版本（如 `"1.0"`，语义 = 写法所遵循的协议代际）；列表行与详情「协议」行出状态徽标——当前 / 兼容 / 待升级 / 不兼容 / 过新（需升级宿主）/ 未声明 / 非法。待升级条目出 **🤖 AI 升级**按钮：唤起 aiti-helper `ext-protocol-upgrade` skill（读 `docs/dev-repo-protocol.md` + 逐版本迁移手册路由）自动迁移；安装响应带回 protocolCheck（规范 §7 筛查占位）。规范与 bump 流程：`docs/dev-repo-protocol.md`。
+扩展 package.json 声明 `aitiExtProtocol` 协议版本（如 `"1.0"`，语义 = 写法所遵循的协议代际）；列表行与详情「协议」行出状态徽标——当前 / 兼容 / 待升级 / 不兼容 / 过新（需升级宿主）/ 未声明 / 非法。待升级条目出 **🤖 AI 升级**按钮：唤起 aiti-helper `ext-protocol-upgrade` skill 读内置逐版本迁移手册自动迁移；安装响应带回 protocolCheck（规范 §7 筛查占位）。规范与 bump 流程见扩展开发规范。
 
 ## ops 动作全集
 

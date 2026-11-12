@@ -25,4 +25,4 @@ Input-area context ratio-bar indicator: on desktop the `compactLead` vertical ba
 
 ## Origin
 
-Launched 2026-09-13; plan `docs/aiti-ctx-meter-plan.md` (implemented; host passes through `contextUsage`/`onSessionStatsPanelOpen` + the `lib/ext/types.ts` contract).
+Launched 2026-09-13 (implemented; host passes through `contextUsage`/`onSessionStatsPanelOpen` + the `lib/ext/types.ts` contract).

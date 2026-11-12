@@ -26,4 +26,3 @@ Plan-Sandbox 采认收尾 UI：方案沙箱试跑后的采认界面。服务端 
 - **采认安全**：manifest.baseHashes 工作区漂移检测（缺键拒绝采认）+ 门禁失败整单回滚；采认/丢弃落 aiti-git-trace 台账（plan-accept / plan-discard），终态副本存 configDir cache/ 供事后追溯。
 - **lineage 关联**：是 lineage closure 中「沙箱采认绕过追踪」缺口（GAP-3）的收口环节；台账行 additive `planRel`（方案绑定入行）已实施（2026-09，P1-2）。
 
-设计文档：`dev-repo/docs/aiti-lineage-closure-plan.md`。

@@ -51,7 +51,7 @@ jiti resolves bare specifiers level by level upward from the extension directory
   by the extension) / ✗missing (red, in neither — the server imports a dependency it never declared); hover to see the shared root path.
 - **Key point**: third-party packages used on the server side must be declared in the extension package.json `dependencies`; the shared
   root's package.json dependencies field is fully managed by extman (rewritten from the union on every reconcile —
-  do not hand-edit). Mechanism and migration recipe: `dev-repo/docs/dev-repo-shared-node-modules-plan.md`
+  do not hand-edit).
   (implemented 2026-09-10; aiti-cmd is the migrated sample).
 
 ## Feature launch (one-click insertion point trigger)
@@ -67,7 +67,7 @@ For lazy extensions (`clientImmediately:false`), the "Open" button calls `ensure
 
 ## Reverse dependency view ("dependents" + hard block)
 
-Beyond the details "dependencies" section, each extension can also show **who depends on me** (reverse view). On disable/uninstall: **hard edges** (`dependsOn` / hard capability edges, including the effective-provider resolution chain) → **hard block** — the user is told to disable dependents first, with no "disable anyway" button; client-prefetch soft edges only → a custom confirm dialog lists affected parties and allows forcing through; optional edges never pop. Design: `dev-repo/docs/aiti-extman-dependents-view-plan.md` (implemented 2026-09-05; hard-block upgrade covered in the sidebar unified dock plan).
+Beyond the details "dependencies" section, each extension can also show **who depends on me** (reverse view). On disable/uninstall: **hard edges** (`dependsOn` / hard capability edges, including the effective-provider resolution chain) → **hard block** — the user is told to disable dependents first, with no "disable anyway" button; client-prefetch soft edges only → a custom confirm dialog lists affected parties and allows forcing through; optional edges never pop (designed and implemented 2026-09-05).
 
 ## Dependency and capability model (three views + pin)
 
@@ -80,7 +80,7 @@ Built on the core's declarative dependency and capability model (`dependsOn`/`op
 
 ## Extension protocol (aitiExtProtocol badge + AI upgrade)
 
-An extension's package.json declares the `aitiExtProtocol` protocol version (e.g. `"1.0"`, meaning the protocol generation its code follows); the list row and the details "protocol" row show a status badge — current / compatible / needs upgrade / incompatible / too new (host upgrade required) / undeclared / invalid. Entries needing upgrade get an **🤖 AI upgrade** button: it invokes the aiti-helper `ext-protocol-upgrade` skill (reads `docs/dev-repo-protocol.md` + per-version migration manual routing) to migrate automatically; the install response carries protocolCheck back (spec §7 screening placeholder). Spec and bump process: `docs/dev-repo-protocol.md`.
+An extension's package.json declares the `aitiExtProtocol` protocol version (e.g. `"1.0"`, meaning the protocol generation its code follows); the list row and the details "protocol" row show a status badge — current / compatible / needs upgrade / incompatible / too new (host upgrade required) / undeclared / invalid. Entries needing upgrade get an **🤖 AI upgrade** button: it invokes the aiti-helper `ext-protocol-upgrade` skill, which reads the built-in per-version migration manual to migrate automatically; the install response carries protocolCheck back (spec §7 screening placeholder). Spec and bump process: see the extension authoring spec.
 
 ## Full set of ops actions
 

@@ -38,9 +38,8 @@ Qoder CLI（qodercli/qoderclicn）专属会话后端。二者是 claude-code 协
 
 **接管/冷恢复回放**：历史里的工具调用回放成 pi 原生工具卡（与直播同形，不再只剩 `🛠 {json}` 文本行）——
 生产端 = session-manager claude-like adapter（`tool_use`/`tool_result` 按 id 配对），消费端 = `seedHistory`
-走共享层 `@aiti-ai/ext-shared/seed-tool`。机制与取证见 `docs/aiti-codebuddy-agent-tool-result-fold-plan.md` §7.4。
+走共享层 `@aiti-ai/ext-shared/seed-tool`。
 
-详见 `dev-repo/aiti-qoder-agent/README.md`；认证与 API 逆向见 `docs/qodercli-auth-api-analysis.md`。
 
 ## 🔑 受控登录（ext-controlled-login 标准，2026-09-08）
 
@@ -48,4 +47,3 @@ Qoder CLI（qodercli/qoderclicn）专属会话后端。二者是 claude-code 协
 
 - API：`POST /api/extensions/aiti-qoder-agent/login/start`（幂等）· `GET /login/status` · `POST /login/cancel`
 - 状态机：waiting（转圈）→ success ✅ / failed / timeout / cancelled，均带重试；弹窗打开期间 2s 轮询状态、关闭即停
-- 标准与五家 driver 契约：`docs/ext-controlled-login-standard.md`

@@ -94,7 +94,7 @@ curl -H 'X-TA-Endpoint: <id>' http://bridge:8666/api/status
 
 ## Diagnostics surface: aligned with Arthas
 
-Mainstream Arthas commands all have corresponding endpoints: `sc`/`sm`/`jad` (CFR source-level decompilation) / `watch` (with call stack) / `trace` (sub-call tree cost+maxDepth) / `monitor` / `tt` (recording) / `heapdump` / `profiler` (cpu+alloc+wall) / `mbean` / `vmoption` (whitelisted writable flags + audit) / `logger` / `classloader` / `ognl` (ta_eval) / `getstatic` / `thread` (deadlock detection, CPU ordering, state filter, utilization) — for the difference comparison see `docs/testagent-vs-arthas.md` and `docs/arthas-parity-plan.md` in the TestAgent repo.
+Mainstream Arthas commands all have corresponding endpoints: `sc`/`sm`/`jad` (CFR source-level decompilation) / `watch` (with call stack) / `trace` (sub-call tree cost+maxDepth) / `monitor` / `tt` (recording) / `heapdump` / `profiler` (cpu+alloc+wall) / `mbean` / `vmoption` (whitelisted writable flags + audit) / `logger` / `classloader` / `ognl` (ta_eval) / `getstatic` / `thread` (deadlock detection, CPU ordering, state filter, utilization).
 
 ## The "modify" surface: what Arthas doesn't have
 
@@ -127,7 +127,7 @@ Mainstream Arthas commands all have corresponding endpoints: `sc`/`sm`/`jad` (CF
 
 ## Quality and docs
 
-Automated regression: 29 assertions for core features + 26 assertions for Arthas gap closure (both JDK8+spring2 and JDK21+mybatis baselines fully green) + 16 assertions for auto login + lazy-module/solon dedicated e2e + **48 assertions for tunnel/bridge** (endpoint management / three-way token separation / wss / Origin / download / concurrency / MCP bridge mode) + 6 MCP protocol assertions; one-click run-all **120 + restmock 9 = 129 assertions**. For the full tutorial and API parameter schemas see `docs/testagent-user-guide.md` in the TestAgent repo (MCP tool mapping in its Appendix B).
+Automated regression: 29 assertions for core features + 26 assertions for Arthas gap closure (both JDK8+spring2 and JDK21+mybatis baselines fully green) + 16 assertions for auto login + lazy-module/solon dedicated e2e + **48 assertions for tunnel/bridge** (endpoint management / three-way token separation / wss / Origin / download / concurrency / MCP bridge mode) + 6 MCP protocol assertions; one-click run-all **120 + restmock 9 = 129 assertions**. The full tutorial and API parameter schemas live in the official TestAgent documentation.
 
 ## Prerequisites
 

@@ -9,7 +9,6 @@ description: "High-fidelity read-only .docx preview (docx-preview: pagination / 
 > ❝ Read-only tier with zero dependencies — view Word on the Apache path, leave editing to SuperDoc / OnlyOffice. ❞
 
 The Word pure-preview implementation extension of the multi-editor mechanism (aiti-editor M0), following the naming convention `aiti-<filetype>-<impl>`.
-Plan: `docs/aiti-editor-office-plan.md` §2.2.
 
 ## Capabilities
 

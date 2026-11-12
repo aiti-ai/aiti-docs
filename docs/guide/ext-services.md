@@ -11,7 +11,6 @@ tags: [guide, ext, services, extension, dependency-injection]
 
 pi-web 扩展开发中，**跨扩展调用能力/数据**只有一条正道：core 注入的 `ctx.services`（服务端）/ `ctx.registerExtService` 族（客户端）。本指南说明怎么提供、怎么消费、怎么降级，以及哪些全局量是 core 保留口（不许新造）。
 
-设计依据与完整背景：`dev-repo/docs/dev-repo-dependency-injection-plan.md`（2026-09 评审拍板）。
 
 ## 1. 服务端：提供能力
 
@@ -39,7 +38,7 @@ export default {
 - `provide` 幂等：同 key 重复 provide 是**原地替换 impl、不重发 up**。
 - **服务对象请用惰性 getter**（访问时现取），这样热重载/重装不会悬空——消费方每次拿到的都是活实例。
 - **提供通用能力的服务请同步声明 `provides`**（§6）——能力索引只认声明，没声明的服务不进 extman 能力视图与依赖解析。
-- 方法语义写进文档（提供方扩展文档 + 消费方方案文档），红线：**出口只读**；消费方不得直读提供方 configDir（数据分层：配置根级 / 不可再生数据 state/ / 可再生 cache/——见 [扩展数据与存储规范](/guide/ext-data.md)）。参考：`services.trace` 契约表（`docs/aiti-git-trace-plan.md` §16.3）。
+- 方法语义写进文档（提供方扩展文档 + 消费方方案文档），红线：**出口只读**；消费方不得直读提供方 configDir（数据分层：配置根级 / 不可再生数据 state/ / 可再生 cache/——见 [扩展数据与存储规范](/guide/ext-data.md)）。参考：`services.trace` 契约表。
 
 ## 2. 服务端：消费能力
 
@@ -180,7 +179,7 @@ const off = ctx.onExtServiceChange?.((key, phase) => {
 
 **背景**：宿主曾逐插槽渲染点手拼 extra 回调，新渲染点/新字段漏拼 = 功能静默消失
 （右栏文件夹面板 @ 断链复盘）。拍板：**宿主插槽 extra 只喂数据；回调/ref/工厂一律
-注册为客户端服务**，扩展自带兜底。设计出处：`dev-repo/docs/pi-web-slot-extra-callback-decoupling-plan.md`（已实施；宿主改动属 pi-web core，**生产同步待批准**）。
+注册为客户端服务**，扩展自带兜底。
 
 | 服务 | 提供方 | 字段契约 |
 |---|---|---|
@@ -203,7 +202,7 @@ rp 缺失行为一致（不劣化）。
 
 ## 6. 声明式依赖与能力模型（dependsOn / optionalDependsOn / provides / takeover）
 
-`ctx.services` 是**运行时**软依赖（判空降级）；扩展注册还支持一层**声明式**依赖与能力语言，由平台解析、extman 展示与裁决。两者互补：声明管「依赖谁/提供什么」的静态事实与 UI 提示，services 管运行时实际取用。权威设计 + 实施记录：`dev-repo/docs/aiti-ext-deps-capabilities-plan.md`（**P0/P1/P2 已实施上线，2026-09-08 复核，含生产 core 同步；P3 未实施另行评审**——硬依赖预取联动、ui.provides 收编、dev 优先开关初值）。
+`ctx.services` 是**运行时**软依赖（判空降级）；扩展注册还支持一层**声明式**依赖与能力语言，由平台解析、extman 展示与裁决。两者互补：声明管「依赖谁/提供什么」的静态事实与 UI 提示，services 管运行时实际取用（P0/P1/P2 已实施上线；P3 未实施另行评审——硬依赖预取联动、ui.provides 收编、dev 优先开关初值）。
 
 entry 顶层（与 `conflicts`/`features` 同层）四个可选字段，旧扩展零改动：
 

@@ -7,7 +7,7 @@ tags: [guide, ext, lazy-loading, extension, performance]
 
 # Extension Client Lazy-Loading Contract (v2 Two-Phase)
 
-Marking an extension's client as `ui.clientImmediately: false` makes it a lazy extension: **your client bundle is not loaded on cold start** until some explicit channel pulls it up. 15+ extensions across the repo are already lazy (cold-start requests 42→28). Authoritative details and implementation status: `dev-repo/docs/aiti-ext-lazy-loading-plan.md` (M1-M3/D1/D3 implemented).
+Marking an extension's client as `ui.clientImmediately: false` makes it a lazy extension: **your client bundle is not loaded on cold start** until some explicit channel pulls it up. 15+ extensions across the repo are already lazy (cold-start requests 42→28); M1-M3/D1/D3 implemented.
 
 ## 1. Materialization Rules (Host Mechanism)
 

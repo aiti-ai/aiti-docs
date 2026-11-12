@@ -27,4 +27,4 @@ ext:
 
 ## 用途
 
-aiti-float 0.4.4 冻结事故（微任务风暴烧主线程）的排障即由它实证定位——检测器分数骤降 + 页面 CDP 超时 = 疑似主线程饿死。相关教训见 `dev-repo/docs/aiti-web-ext-float-dialogs.md` 机制节。
+aiti-float 0.4.4 冻结事故（微任务风暴烧主线程）的排障即由它实证定位——检测器分数骤降 + 页面 CDP 超时 = 疑似主线程饿死。相关教训见 aiti-float 文档机制节。

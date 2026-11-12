@@ -24,7 +24,7 @@ ext:
 
 > ❝ **一行命令，一个后端。** ❞
 
-自定义 agent 注册中心（方案 `dev-repo/docs/aiti-custom-agent-plan.md`）：工具条 🧩 打开管理面板（列表 + 表单），把「启动命令 + 参数前缀 + 环境变量 + 桥模式」注册成新建会话的后端，**全程不写 JSON**，保存即热生效（unregister/register 热更新，失败可回退扩展 reload）。
+自定义 agent 注册中心：工具条 🧩 打开管理面板（列表 + 表单），把「启动命令 + 参数前缀 + 环境变量 + 桥模式」注册成新建会话的后端，**全程不写 JSON**，保存即热生效（unregister/register 热更新，失败可回退扩展 reload）。
 
 ## 典型场景
 

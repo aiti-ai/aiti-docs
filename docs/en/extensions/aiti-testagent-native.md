@@ -10,7 +10,7 @@ description: Visual panel for testagent-native (live Windows-native process cont
 
 **testagent-native panel** (formerly `aiti-wintrace`, renamed with the project on 2026-11-07) — the in-IDE visual surface: tan broker status / process scan + attach / sessions + eject / hook form / live event stream. The server proxies the broker HTTP API (`8766 /api/rpc`, all methods, 1:1 with the testagent-native-mcp tools).
 
-Capability model = the native replica of TestAgent's six primitives (see the testagent-native repo's `docs/MCP-PLAN.md`):
+Capability model = the native replica of TestAgent's six primitives:
 
 - **A Access**: two-hop injection (NtCreateThreadEx→CRT fallback, bitness-matched), attach to any process
 - **B Inspect**: libclang signature library for named argument decoding + COM four-layer auto-discovery + `proc.stack` frames with exported-symbol names

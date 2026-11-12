@@ -27,4 +27,3 @@ Self-managed by the CLI: `~/.local/share/opencode/auth.json` (`opencode auth log
 ## Relations
 
 - Coexists with `aiti-acp-agent`'s `ACP: opencode` under the same agentKey (`opencode`): this extension resolves first at priority 10, and ACP automatically drops to fallback (fail-over)
-- Plan and troubleshooting notes: dev-repo `docs/dev-repoernal-session-paging-plan.md` (§ cross-agent troubleshooting)

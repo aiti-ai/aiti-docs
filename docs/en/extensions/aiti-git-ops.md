@@ -18,4 +18,4 @@ Connected consumers: session-manager (collapsed-header `⎇` branch chip panel, 
 
 Field-tested on three platforms (Linux/Apple Git 2.24/Windows Git 2.55); data: audit at `state/aiti-git-ops/`, quarantine at `cache/aiti-git-ops/discarded/`.
 
-Plans: `docs/aiti-git-ops-shared-plan.md` (implemented, including the git-review aiReview service AI-refinement closed loop) + `docs/aiti-git-ops-commit-card-plan.md` (commit detail card).
+Implemented: includes the git-review aiReview service AI-refinement closed loop + the commit detail card.

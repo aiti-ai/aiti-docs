@@ -9,7 +9,6 @@ description: "Online .docx editing (SuperDoc: ProseMirror bidirectional docx). T
 > ❝ ProseMirror both ways — opening gives docx structure, exporting gives a docx file. ❞
 
 The Word editing implementation extension (M1b) of the multi-editor mechanism (aiti-editor M0).
-Plan: `docs/aiti-editor-office-plan.md` §2.3.
 
 ## Capabilities
 

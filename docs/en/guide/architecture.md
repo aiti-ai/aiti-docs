@@ -127,6 +127,6 @@ aiti-agent (Next.js, built on pi-web)
   └── Tool marketplace (just get: mise → apt → npx/pipx)
 ```
 
-For the extension framework's complete contract (entry fields/slots/features/styles/deployment + common-mistakes list), see [Extension Development Specification](/en/extensions/spec.md), [Extension Data and Storage Specification](/en/guide/ext-data.md), and [Lazy-Loading Contract](/en/guide/ext-lazy-loading.md) (for cross-extension service calls also see [Extension Services and Cross-Extension Call Specification](/en/guide/ext-services.md)); the authoring reference lives at `dev-repo/docs/dev-repo-authoring-reference.md`.
+For the extension framework's complete contract (entry fields/slots/features/styles/deployment + common-mistakes list), see [Extension Development Specification](/en/extensions/spec.md), [Extension Data and Storage Specification](/en/guide/ext-data.md), and [Lazy-Loading Contract](/en/guide/ext-lazy-loading.md) (for cross-extension service calls also see [Extension Services and Cross-Extension Call Specification](/en/guide/ext-services.md)).
 
 > Related: [Product Matrix](/en/products/README.md) · [MCP Bridge · Sessions](/en/guide/mcp/session.md) · [Developer Tools · Injection Principles](/en/devtools/inject.md)

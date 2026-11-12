@@ -24,7 +24,7 @@ ext:
 
 > ❝ **排队不可怕，可怕的是排完队忘了自己要说什么。** ❞
 
-pi-web 去 fork 化 P3 的产物（`docs/pi-web-queue-cluster-ext-plan.md`）：把 ChatInput 内
+pi-web 去 fork 化 P3 的产物：把 ChatInput 内
 ~900–1000 行队列增强 UI 外迁为独立扩展；core 回到「上游同形机制 + 薄接入」——
 实测 ChatInput fork 行 +2556 → +1617（净减 939），队列关键词行 112 ≤ 150 退出标准。
 

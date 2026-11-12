@@ -47,4 +47,3 @@ OpenAI Codex CLI 会话后端：以 `exec --json` 驱动 codex CLI，支持 resu
 
 - API：`POST /api/extensions/aiti-codex-agent/login/start`（幂等）· `GET /login/status` · `POST /login/cancel`
 - 状态机：waiting（转圈）→ success ✅ / failed / timeout / cancelled，均带重试；弹窗打开期间 2s 轮询状态、关闭即停
-- 标准与五家 driver 契约：`docs/ext-controlled-login-standard.md`

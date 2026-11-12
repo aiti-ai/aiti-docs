@@ -24,7 +24,7 @@ ext:
 
 > ❝ **看到不对的代码，当场就能改——不用切出去开 IDE。** ❞
 
-pi-web 文件编辑器扩展（可扩展编辑器架构，设计见 `docs/pi-web-file-editor-design.md`）：
+pi-web 文件编辑器扩展（可扩展编辑器架构）：
 
 - **fileViewer slot 接管**：文本类文件由扩展组件渲染（Monaco 编辑），非文本交核心旧查看器
 - **图片预览统一承载（2026-09-17）**：消息列表/输入框/markdown 点出的图片（base64/API URL，无磁盘路径）与磁盘图片文件共用同一套全功能查看器（缩放·pinch·平移·旋转·信息面板·复制·下载）。宿主经 `__aitiEditor.openImagePreview(src,{alt})` 调起（宿主侧无图片容器/image tab；懒扩展由入口桥幂等物化）；扩展以浮窗呈现——dialogs 插槽 + aiti-float 契约（拖拽/小屏全屏），未装 aiti-float 时自身 fixed 兑底；宿主侧扩展不可用回退上游原生 lightbox。小屏工具条换行限宽不溢出、棋盘格背景跟随宿主主题。

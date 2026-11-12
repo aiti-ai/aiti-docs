@@ -9,7 +9,6 @@ description: Full-fidelity preview + editing for .docx/.xlsx/.pptx (OnlyOffice D
 > ❝ The deep-fidelity tier — the same engine as desktop Office, no compromise on complex-layout editing. ❞
 
 The deep-fidelity implementation extension of the multi-editor mechanism (aiti-editor M0) (M2, a multi-domain exception to the `aiti-<filetype>-<impl>` naming convention).
-Plan: `docs/aiti-editor-office-plan.md` §2.4.
 
 ## Capabilities
 

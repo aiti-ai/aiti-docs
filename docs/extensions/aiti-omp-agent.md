@@ -49,4 +49,4 @@ ready 后拉 aiti-devtools 桥 MCP（`AITI_BRIDGE_URL`）`tools/list` → 按 **
 
 ## 关系
 
-aiti-pi-agent（拆分来源，专一 pi）；session-manager（消费 rebind 帧）；aiti-devtools（host tools 桥源）；aiti-custom-agent（提供标准 `.launch` 委托服务形状，暂无 omp 驱动消费方）。方案 `docs/omp-backend-migration-research.md` / `docs/aiti-omp-agent-id-rebind-design.md`。
+aiti-pi-agent（拆分来源，专一 pi）；session-manager（消费 rebind 帧）；aiti-devtools（host tools 桥源）；aiti-custom-agent（提供标准 `.launch` 委托服务形状，暂无 omp 驱动消费方）。

@@ -14,7 +14,7 @@ When this extension is not installed/disabled, panels fall back to an ordinary c
 
 Since v0.5.0, when a panel is open on a small screen (≤640px), **system back closes the panel first** (Android back button / iOS edge swipe, consuming the host's `pi-web.overlayBack` pop-stack service, zero code for integrators; panels without a ✕ don't register, old hosts/desktop degrade automatically). v0.5 also registers the **`aiti-float.dockstack` service** — the unified sidebar block-stack container (persistent blocks + dockable items, user ordering/collapse persistence, alignment grouping, single-expand accordion, lazy extensions materialize their static shell only on expand; **`filler` prop v2 = the filler shown when everything is collapsed**); session-manager's sidebar take-over is orchestrated by it, and it `dependsOn` this capability (extman prevents disabling this extension on its own). There is also the `aiti-float.dock-header` service (dock header toolbar store; third-party extensions access it via getExtService).
 
-Contract deep-dive (full attribute table / small-screen fullscreen / manual maximize API / keepmask opt-out / pos / persist): see `dev-repo/docs/aiti-web-ext-float-dialogs.md`; authoring overview `docs/dev-repo-authoring-reference.md` §8.3. Common attributes quick reference:
+Contract deep-dive (full attribute table / small-screen fullscreen / manual maximize API / keepmask opt-out / pos / persist). Common attributes quick reference:
 
 | Attribute | Effect |
 |---|---|

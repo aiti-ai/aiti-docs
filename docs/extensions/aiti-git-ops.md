@@ -35,4 +35,4 @@ ext:
 
 三平台实测（Linux/Apple Git 2.24/Windows Git 2.55）；数据：审计 `state/aiti-git-ops/`、隔离区 `cache/aiti-git-ops/discarded/`。
 
-方案：`docs/aiti-git-ops-shared-plan.md`（已实施，含 git-review aiReview 服务 AI 精修闭环）+ `docs/aiti-git-ops-commit-card-plan.md`（commit 详情卡）。
+已实施：含 git-review aiReview 服务 AI 精修闭环 + commit 详情卡。

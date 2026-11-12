@@ -26,7 +26,6 @@ ext:
 > ❝ 只读档零依赖——Apache 链路看 Word，编辑交给 SuperDoc / OnlyOffice。 ❞
 
 多编辑器机制（aiti-editor M0）的 Word 纯预览实现扩展，命名规范 `aiti-<filetype>-<impl>`。
-方案：`docs/aiti-editor-office-plan.md` §2.2。
 
 ## 能力
 

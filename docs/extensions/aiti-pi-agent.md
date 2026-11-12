@@ -26,4 +26,3 @@ ext:
 
 多 agent 前端的 pi 会话后端：spawn `pi --mode rpc` 子进程作为会话，实现 session-provider 契约接入 All Sessions 面板。是多 agent 前端的主路径（其他 `aiti-*-agent` 后端与它同构）。
 
-- 设计 + 结合点见 `docs/all-sessions-multi-agent-plan.md`；后端抽象层在 `pi-web/lib/session/`

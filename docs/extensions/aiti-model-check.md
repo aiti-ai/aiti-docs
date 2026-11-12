@@ -32,7 +32,7 @@ ext:
 - **记录**：history.jsonl 全量 + state.json 每模型最近状态 / 20 条时间线 / 连续 429 计数 / `recoveredAt` 恢复时间
 - **后台哨兵（默认关，`watch.enabled` 开启）**：每 60s 只复测 429/异常 的模型，远期限流按 `watch.farFactor` 自动降频 → 自动识别"什么时候恢复"
 - **运行期观测 + 分 key（带外零探测）**：多 key provider 逐 key 状态；tail pi-models-combo 代理日志 + 直连会话事件摄入的 429/402/401/5xx（key 归因、1h/24h 窗口、只提示不标记）；`POST /blocked-execution`「大量 429 且真阻断」的执行上报 → 标记模型不可用（`runtime.minBlockCount` 默认 3）；OAuth 订阅型做 provider 级状态检查（如 qoder 配额/登录态）
-- **限流到期提醒（recover，2026-09-19）**：长期限流（已持续 ≥ 阈值，默认 72h=3 天）的模型在 429 记录的预计恢复时间到点时提醒——**纯本地时间检查零探测**：浏览器通知 + 面板「⏰ 待验证」清单 + 逐模型/provider 🔔 开关（模型级 > provider 级 > `recover.notifyDefault`，`POST /recover-notify`）；到期检查默认 30min 一轮、启动与面板加载幂等补发（`POST /recover-check`）。方案：`docs/aiti-model-check-recovery-notify-plan.md`
+- **限流到期提醒（recover，2026-09-19）**：长期限流（已持续 ≥ 阈值，默认 72h=3 天）的模型在 429 记录的预计恢复时间到点时提醒——**纯本地时间检查零探测**：浏览器通知 + 面板「⏰ 待验证」清单 + 逐模型/provider 🔔 开关（模型级 > provider 级 > `recover.notifyDefault`，`POST /recover-notify`）；到期检查默认 30min 一轮、启动与面板加载幂等补发（`POST /recover-check`）。
 - **agent 工具**（8 个，见下，整组默认禁用）：AI 直接调，如「检查模型可用性」
 - **ai-helper 帮助点**（skills，🤖 弹窗可唤）：`model-check`（检查可用性）/ `model-config`（调配置），详见 aiti-helper 接入指南（内部文档）
 - **📡 网页面板**：状态总览（✅/🔴/⚠️/⚪ + 预计恢复）/ 一键探测 / 历史时间线

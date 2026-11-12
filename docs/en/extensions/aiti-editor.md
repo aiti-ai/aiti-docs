@@ -8,7 +8,7 @@ description: Extensible editor — Monaco editing take over + save (mtime confli
 
 > ❝ **See wrong code, fix it on the spot — no switching out to open an IDE.** ❞
 
-pi-web file editor extension (extensible editor architecture, design in `docs/pi-web-file-editor-design.md`):
+pi-web file editor extension (extensible editor architecture):
 
 - **fileViewer slot take over**: text-like files are rendered by the extension component (Monaco editing); non-text goes to the core's legacy viewer
 - **Unified image preview hosting (2026-09-17)**: images popped from the message list/input box/markdown (base64/API URLs, no disk path) share the same full-featured viewer with on-disk image files (zoom · pinch · pan · rotate · info panel · copy · download). The host invokes it via `__aitiEditor.openImagePreview(src,{alt})` (the host side has no image container/image tab; lazy extensions are materialized idempotently by the entry bridge); the extension presents it as a floating window — dialogs slot + aiti-float contract (drag / small-screen fullscreen); without aiti-float installed, its own fixed positioning serves as the fallback; when the extension is unavailable on the host side it falls back to the upstream native lightbox. On small screens the toolbar wraps with bounded width and no overflow; the checkerboard background follows the host theme.

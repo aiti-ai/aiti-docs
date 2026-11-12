@@ -11,7 +11,6 @@ tags: [guide, ext, services, extension, dependency-injection]
 
 In pi-web extension development, there is exactly one sanctioned path for **calling capabilities/data across extensions**: the core-injected `ctx.services` (server side) / the `ctx.registerExtService` family (client side). This guide explains how to provide, how to consume, how to degrade, and which globals are core-reserved slots (creating new ones of the same kind is forbidden).
 
-Design basis and full background: `dev-repo/docs/dev-repo-dependency-injection-plan.md` (signed off at the 2026-09 review).
 
 ## 1. Server Side: Providing Capabilities
 
@@ -39,7 +38,7 @@ export default {
 - `provide` is idempotent: providing the same key again **replaces the impl in place and does not re-emit up**.
 - **Use lazy getters for service objects** (fetched on access), so hot reload/reinstall doesn't leave dangling references — the consumer always gets a live instance.
 - **Services exposing general-purpose capabilities must declare `provides` alongside** (§6) — the capability index only honors declarations; undeclared services don't enter the extman capability view or dependency resolution.
-- Write method semantics into documentation (the provider extension's docs + the consumer's plan document). Red line: **service exports are read-only**; consumers must not read the provider's configDir directly (data layering: config at root / non-regenerable data under state/ / regenerable data under cache/ — see [Extension Data and Storage Conventions](/en/guide/ext-data.md)). Reference: the `services.trace` contract table (`docs/aiti-git-trace-plan.md` §16.3).
+- Write method semantics into documentation (the provider extension's docs + the consumer's plan document). Red line: **service exports are read-only**; consumers must not read the provider's configDir directly (data layering: config at root / non-regenerable data under state/ / regenerable data under cache/ — see [Extension Data and Storage Conventions](/en/guide/ext-data.md)). Reference: the `services.trace` contract table.
 
 ## 2. Server Side: Consuming Capabilities
 
@@ -178,7 +177,7 @@ const off = ctx.onExtServiceChange?.((key, phase) => {
 
 ### 5.1 Host capability services (slot extra callback decoupling, 2026-09-16)
 
-**Background**: the host used to hand-assemble extra callbacks at each slot render point; a missed assembly at a new render point/new field = the feature silently disappearing (postmortem of the broken @ link in the right-sidebar folder panel). The decision: **host slot extras feed data only; callbacks/refs/factories are all registered as client services**, with extensions carrying their own fallback. Design origin: `dev-repo/docs/pi-web-slot-extra-callback-decoupling-plan.md` (implemented; the host changes belong to pi-web core, **production sync pending approval**).
+**Background**: the host used to hand-assemble extra callbacks at each slot render point; a missed assembly at a new render point/new field = the feature silently disappearing (postmortem of the broken @ link in the right-sidebar folder panel). The decision: **host slot extras feed data only; callbacks/refs/factories are all registered as client services**, with extensions carrying their own fallback.
 
 | Service | Provider | Field contract |
 |---|---|---|
@@ -198,7 +197,7 @@ New host slot render points **only need to feed data**; when callbacks are absen
 
 ## 6. Declarative Dependencies and the Capability Model (dependsOn / optionalDependsOn / provides / takeover)
 
-`ctx.services` is the **runtime** soft dependency (null-check + degrade); extension registration also supports a **declarative** layer of dependency and capability language, resolved by the platform and surfaced/adjudicated by extman. The two complement each other: declarations govern the static facts of "who depends on what / who provides what" and UI hints, while services govern actual runtime fetching. Authoritative design + implementation record: `dev-repo/docs/aiti-ext-deps-capabilities-plan.md` (**P0/P1/P2 implemented and live, reviewed 2026-09-08, including production core sync; P3 not implemented, to be reviewed separately** — hard-dependency prefetch linkage, folding in ui.provides, dev-priority toggle initial values).
+`ctx.services` is the **runtime** soft dependency (null-check + degrade); extension registration also supports a **declarative** layer of dependency and capability language, resolved by the platform and surfaced/adjudicated by extman. The two complement each other: declarations govern the static facts of "who depends on what / who provides what" and UI hints, while services govern actual runtime fetching (P0/P1/P2 implemented and live; P3 not yet implemented, to be reviewed separately — hard-dependency prefetch linkage, folding in ui.provides, dev-priority toggle initial values).
 
 Four optional fields at the entry top level (same level as `conflicts`/`features`); existing extensions need zero changes:
 

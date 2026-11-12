@@ -59,5 +59,5 @@ ext:
 
 ## 方案
 
-- `dev-repo docs/aiti-app-center-plan.md`（2026-09-19 立项即实施；v2 分类体系重设计、v3 形态自适应）
-- `dev-repo docs/aiti-app-center-refactor-plan.md`（v0.2.0 重构：视图分置不占行 / hover 快捷钉 + 信息页 / 编辑模式恢复 / 一键禁用状态机 / `toggle:*` 迁移，2026-09-22 实施）
+- v2 分类体系重设计、v3 形态自适应（2026-09-19 立项即实施）
+- v0.2.0 重构（2026-09-22 实施）：视图分置不占行 / hover 快捷钉 + 信息页 / 编辑模式恢复 / 一键禁用状态机 / `toggle:*` 迁移

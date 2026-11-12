@@ -14,4 +14,4 @@ Main-thread smoothness detector: real-time second counter + 0-100 smoothness sco
 
 ## Use cases
 
-The aiti-float 0.4.4 freeze incident (a microtask storm burning the main thread) was pinpointed empirically by this tool — a sudden detector score drop + page CDP timeouts = suspected main-thread starvation. For the related lessons see the mechanism section of `dev-repo/docs/aiti-web-ext-float-dialogs.md`.
+The aiti-float 0.4.4 freeze incident (a microtask storm burning the main thread) was pinpointed empirically by this tool — a sudden detector score drop + page CDP timeouts = suspected main-thread starvation. For the related lessons see the mechanism section of the aiti-float documentation.

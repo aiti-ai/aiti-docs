@@ -27,7 +27,6 @@ ext:
 > ❝ ProseMirror 双向——打开即 docx 结构，导出即 docx 文件。 ❞
 
 多编辑器机制（aiti-editor M0）的 Word 编辑实现扩展（M1b）。
-方案：`docs/aiti-editor-office-plan.md` §2.3。
 
 ## 能力
 

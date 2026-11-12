@@ -29,7 +29,7 @@ ext:
 
 **testagent-native 面板**（原名 `aiti-wintrace`，2026-11-07 随项目改名）——IDE 内可视面：tan broker 状态/进程扫描+attach/会话+eject/挂钩表单/实时事件流。服务端代理 broker HTTP（`8766 /api/rpc` 全方法，= testagent-native-mcp 工具 1:1）。
 
-能力模型 = TestAgent 六原语的 native 复刻（详见 testagent-native 仓 `docs/MCP-PLAN.md`）：
+能力模型 = TestAgent 六原语的 native 复刻：
 
 - **A 接入**：两跳注入（NtCreateThreadEx→CRT 回退，位数匹配），attach 任意进程
 - **B 看现场**：libclang 签名库参数具名解码 + COM 四层自发现 + proc.stack 导出符号具名帧
@@ -37,7 +37,7 @@ ext:
 - **D 热更新**：函数体级 hotpatch（dll_bypass apply/revert）+ quickjs-ng 沙箱脚本（ACG 进程可用）
 - **E 可逆审计**：hook/patch 登记强制度 + `tan_restore` 一键回滚 + history 审计
 
-工具面 **57 项 = 50 `tan_*` + 7 `app_*`**（2026-11-10 快照；「任意应用→MCP」服务层 + 跨平台对象模型 OM 系列：`tan_dbus_*`×4 / `tan_gir_*`×2 / `tan_objc_*`×3 / `tan_vtable_*`×3，随 OM 五期持续扩展）；旧名 `wintrace_*` 经 broker/MCP 双别名层过渡兼容（退役条件见 testagent-native 仓 rename-exec §P6）。
+工具面 **57 项 = 50 `tan_*` + 7 `app_*`**（2026-11-10 快照；「任意应用→MCP」服务层 + 跨平台对象模型 OM 系列：`tan_dbus_*`×4 / `tan_gir_*`×2 / `tan_objc_*`×3 / `tan_vtable_*`×3，随 OM 五期持续扩展）；旧名 `wintrace_*` 经 broker/MCP 双别名层过渡兼容。
 
 ## 数据源与配置
 

@@ -57,8 +57,8 @@ cd browser-ext && npm run build      # → dist/chrome dist/edge dist/firefox
 
 ## v2 增强（P0 已实施）
 
-> v1 默认全站注入 + AI 窗裸桥 cockpit——与动机错位。**v2 重构**：①**默认关**——popup「⚡ 本页启用（本次）」（纯运行时消息，导航后失效，优先于排除规则）+「★ 总是启用此站点」白名单 / 排除正则（deny 优先）；②AI 窗默认指向 **pi-web**（设置页一键探测本机 30141/30142 预填，选中联动预填同源桥地址）/ 兼容 agent 宿主 / cockpit 兜底；③v1 配置自动迁移（enabled→defaultEnabled、excludes→denySites、自定义 aiUrl→cockpitUrl）、**权限面不变**（storage/activeTab/scripting/<all_urls>）。P1/P2（快捷键、连通性自检 UI、per-site 目标、严格隐私模式）见 `docs/aiti-devtools-browser-ext-v2-plan.md`（两轮深审定稿）。
+> v1 默认全站注入 + AI 窗裸桥 cockpit——与动机错位。**v2 重构**：①**默认关**——popup「⚡ 本页启用（本次）」（纯运行时消息，导航后失效，优先于排除规则）+「★ 总是启用此站点」白名单 / 排除正则（deny 优先）；②AI 窗默认指向 **pi-web**（设置页一键探测本机 30141/30142 预填，选中联动预填同源桥地址）/ 兼容 agent 宿主 / cockpit 兜底；③v1 配置自动迁移（enabled→defaultEnabled、excludes→denySites、自定义 aiUrl→cockpitUrl）、**权限面不变**（storage/activeTab/scripting/<all_urls>）。P1/P2（快捷键、连通性自检 UI、per-site 目标、严格隐私模式）已在方案中定稿，滚动实施。
 
 ## 方案
 
-`docs/aiti-devtools-browser-ext-plan.md`（方案/已实施 2026-09-16：三浏览器构建 + 产物端到端注入验证通过）。定位：填补「任意网页无载体可注入」缺口——工程插件只覆盖接插件的应用、pi-web 扩展只覆盖 pi-web、端口注入只覆盖被代理端口，浏览器扩展把覆盖面推到**全部网页**。
+已实施（2026-09-16：三浏览器构建 + 产物端到端注入验证通过）。定位：填补「任意网页无载体可注入」缺口——工程插件只覆盖接插件的应用、pi-web 扩展只覆盖 pi-web、端口注入只覆盖被代理端口，浏览器扩展把覆盖面推到**全部网页**。

@@ -136,7 +136,6 @@ EOF-8               [u32 LE: manifest 字节长度][u32 LE: magic 0x43524157 →
 1. **需求原点**（2026-08-08 09:54，用户原话）：*"长期运行……消息归档就是要真归档，打包，压缩，节省资源，但是相关搜索和查看如果归档前有索引，可以快速搜索或浏览到。"*
 2. **首版方案是 tar.gz**（同日 09:56）：`<cwdKey>-<年月>.tar.gz` + manifest（每文件 sha256）。
 3. **格式转向**（同日 10:14，逐文件独立 brotli 块的设计推导）：按需解包要随机访问 → tar.gz 顺序解是痛点；Node 无内置 zip/tar（实测）→ 自定义容器；brotli 实测优于 gzip。
-4. **落盘方案**（同日 10:15–10:16）：写入 `docs/all-sessions-panel.zh-CN.md` §5.5.2/5.5.3，含与 gzip / brotli / zstd / zip / tar 的对比表；代码于 2026-08-16 提交（`dev-repo` `25967cd2`）。
+4. **落盘方案**（同日 10:15–10:16）：压缩对比选型（gzip / brotli / zstd / zip / tar）；代码于 2026-08-16 提交。
 
 - 原始会话记录：`~/.pi/agent/sessions/--home-wind-workspace-pi-web--/2026-08-06T07-38-25-787Z_019fd602-587b-76c7-85b3-fc96401d7f49.jsonl`（2026-08-08 09:54–10:22 段）
-- 方案文档：仓库内 `docs/all-sessions-panel.zh-CN.md` §5.5.2 / §5.5.3

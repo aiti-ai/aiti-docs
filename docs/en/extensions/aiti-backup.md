@@ -33,4 +33,3 @@ curl -s localhost:30142$base/runs                                     # run hist
 
 - Source toggles: `POST config {"sourceOverrides":{"pi-sessions":{"enabled":false}}}`; custom sources: `custom:[{id,path}]`.
 - The destination is the user's choice (external drive/NAS); **backup contents are not encrypted** — session content contains privacy, keep it on a disk you control.
-- Division of labor with aiti-configs, milestones and acceptance criteria: `docs/dev-repo-data-backup-extension-plan.md`.

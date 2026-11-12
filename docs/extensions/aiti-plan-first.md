@@ -49,7 +49,7 @@ pi 扩展 appendRow 台账行 → globalThis.__aitiTraceEmit?（松耦合可选�
      └─ readOps                                      ← 跳号补洞 + 降级，非常态
 ```
 
-设计全文：`dev-repo/docs/aiti-plan-first-plan.md`（含冷启动种子、跳号补洞、三档降级、buffer 容量、终端桥接会话边界等）。
+设计要点：冷启动种子、跳号补洞、三档降级、buffer 容量、终端桥接会话边界等。
 
 ## 门控（extman 功能开关）
 

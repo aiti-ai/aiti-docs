@@ -69,7 +69,6 @@ import path from "node:path";
 const stateDir = ctx.stateDir ?? path.join(ctx.configDir, "state");
 ```
 
-Background and implementation record of the three-tier scheme: `dev-repo/docs/dev-repo-data-layering-state-tier-plan.md` (§9).
 
 ## 4. Data Protection Matrix (Who Provides Your Fallback)
 
@@ -107,7 +106,6 @@ When changing data paths or relocating existing data, check against these one by
 
 ## 7. References
 
-- **Authoring reference** (entry fields/slots/features/deployment/common mistakes): `dev-repo/docs/dev-repo-authoring-reference.md` (§2.1 data tiering, §2.2 server-side red lines)
 - **Cross-extension calls**: [Extension Services and Cross-Extension Call Specification](/en/guide/ext-services.md)
 - **Lazy loading**: [Lazy-Loading Contract](/en/guide/ext-lazy-loading.md)
-- **Plans and background**: `dev-repo/docs/dev-repo-data-layering-configs-redesign-plan.md` (config/cache split, implemented), `dev-repo/docs/dev-repo-data-layering-state-tier-plan.md` (**state as the third tier, implemented**, incl. three-machine migration record §9), `dev-repo/docs/dev-repo-data-backup-extension-plan.md` (aiti-backup data backup, design reviewed)
+- **Plans and background**: config/cache split (implemented); state as the third tier (**implemented**, incl. the three-machine migration record); data backup handled by aiti-backup (design reviewed)

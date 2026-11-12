@@ -8,7 +8,7 @@ description: The single outlet for page events — chained take-over of __piPage
 
 > ❝ **One bus, every frame.** ❞
 
-The page event bus consolidation extension — the landed deliverable of dependency-injection refactor batch **P0.5** (plan and decision: `dev-repo/docs/dev-repo-dependency-injection-plan.md` §4-E, 2026-09-06).
+The page event bus consolidation extension — the landed deliverable of dependency-injection refactor batch **P0.5** (signed off 2026-09-06).
 
 The bus implementation is owned by this extension; core `lib/agent-page-events.ts` is neither deleted nor changed, demoted to a fallback host + a core-internal channel (SessionSidebar running frames).
 

@@ -49,4 +49,3 @@ curl -s localhost:30142$base/runs                                     # 运行�
 
 - 源开关：`POST config {"sourceOverrides":{"pi-sessions":{"enabled":false}}}`；自定义源：`custom:[{id,path}]`。
 - 目的地由用户自选（外接盘/NAS），**备份内容未加密**——会话内容含隐私，请放在自己控制的盘上。
-- 与 aiti-configs 的分工、里程碑与验收标准：`docs/dev-repo-data-backup-extension-plan.md`。

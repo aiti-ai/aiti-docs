@@ -41,4 +41,4 @@ ext:
 
 ## 来源
 
-2026-09-13 上线；方案 `docs/aiti-ctx-meter-plan.md`（已实施，宿主透传 `contextUsage`/`onSessionStatsPanelOpen` + `lib/ext/types.ts` 契约）。
+2026-09-13 上线（已实施，宿主透传 `contextUsage`/`onSessionStatsPanelOpen` + `lib/ext/types.ts` 契约）。

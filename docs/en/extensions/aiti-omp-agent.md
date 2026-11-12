@@ -31,4 +31,4 @@ After ready, pull the aiti-devtools bridge MCP (`AITI_BRIDGE_URL`) `tools/list` 
 
 ## Relationships
 
-aiti-pi-agent (split source, pi-only); session-manager (consumes rebind frames); aiti-devtools (host tools bridge source); aiti-custom-agent (provides the standard `.launch` delegation service shape; no omp-driver consumer yet). Plans: `docs/omp-backend-migration-research.md` / `docs/aiti-omp-agent-id-rebind-design.md`.
+aiti-pi-agent (split source, pi-only); session-manager (consumes rebind frames); aiti-devtools (host tools bridge source); aiti-custom-agent (provides the standard `.launch` delegation service shape; no omp-driver consumer yet).

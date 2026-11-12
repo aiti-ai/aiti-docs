@@ -13,4 +13,3 @@ The Plan-Sandbox adoption wrap-up UI: the adoption interface after a plan sandbo
 - **Adoption safety**: manifest.baseHashes workspace-drift detection (a missing key rejects adoption) + full order rollback when the gate fails; adopt/discard lands in the aiti-git-trace ledger (plan-accept / plan-discard), and a terminal-state copy is kept under configDir cache/ for retrospective tracing.
 - **lineage relation**: it is the closing piece of the "sandbox adoption bypassing tracking" gap (GAP-3) in lineage closure; the ledger row's additive `planRel` (binding the plan into the row) is implemented (2026-09, P1-2).
 
-Design doc: `dev-repo/docs/aiti-lineage-closure-plan.md`.

@@ -24,7 +24,7 @@ ext:
 
 > ❝ **一条总线，全部帧。** ❞
 
-页面事件总线归口扩展——依赖注入改造 **P0.5** 批次的落地（方案与拍板：`dev-repo/docs/dev-repo-dependency-injection-plan.md` §4-E，2026-09-06）。
+页面事件总线归口扩展——依赖注入改造 **P0.5** 批次的落地（2026-09-06 拍板）。
 
 总线实现归本扩展持有；core `lib/agent-page-events.ts` 不删不改，退为兜底宿主 + core 自用通道（SessionSidebar running 帧）。
 

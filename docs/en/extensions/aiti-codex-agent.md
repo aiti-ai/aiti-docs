@@ -31,4 +31,3 @@ The toolbar **🔑 Login** (initiated via the aiti-agent-manager panel) in one c
 
 - API: `POST /api/extensions/aiti-codex-agent/login/start` (idempotent) · `GET /login/status` · `POST /login/cancel`
 - State machine: waiting (spinner) → success ✅ / failed / timeout / cancelled, all with retry; while the dialog is open it polls status every 2s and stops on close
-- Standard and the five-driver contract: `docs/ext-controlled-login-standard.md`

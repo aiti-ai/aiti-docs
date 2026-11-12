@@ -42,5 +42,5 @@ The large blank space in the left column after all DockStack blocks are collapse
 
 ## Plans
 
-- `dev-repo docs/aiti-app-center-plan.md` (started and implemented 2026-09-19; v2 category scheme redesign, v3 shape adaptation)
-- `dev-repo docs/aiti-app-center-refactor-plan.md` (v0.2.0 refactor: separate views taking no extra row / hover quick-pin + info page / edit-mode restore / one-click disable state machine / `toggle:*` migration, implemented 2026-09-22)
+- v2 category scheme redesign, v3 shape adaptation (started and implemented 2026-09-19)
+- v0.2.0 refactor (implemented 2026-09-22): separate views taking no extra row / hover quick-pin + info page / edit-mode restore / one-click disable state machine / `toggle:*` migration

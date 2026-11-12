@@ -130,7 +130,7 @@ Lineage doesn't just record; it also answers "which changes count":
 | Question | The lineage system's answer |
 |---|---|
 | **Who changed it?** | Session `S-3f2a` (pi · 2026-09-12 14:32), a sub-agent "retry-refactor" forked from `S-1d09` — a tree in the family-tree view |
-| **Why?** | User prompt: "change fixed retries to exponential backoff"; the session is bound to plan `docs/retry-plan.md`, tag: `方案/已实施` |
+| **Why?** | User prompt: "change fixed retries to exponential backoff"; the session is bound to a plan and tagged `implemented` |
 | **How?** | op #47, before/after dual snapshots; the diff shows ±6 lines, including this line |
 | **Does it still hold?** | The line has one line-level comment in review; no rollback has occurred → currently in effect |
 | **What else is related?** | Under the same tag `retry` there are 3 more documents and 2 more sessions; every update to this plan lives in the document timeline |
@@ -180,10 +180,10 @@ The difference: PROV stayed in papers and standards; here every relation has **o
 |---|---|---|---|
 | Session | [All Sessions](/en/extensions/session-manager.md) | Multi-agent side by side + unified tag vocabulary | Extension page |
 | Session | [Sub-agents](/en/extensions/aiti-subagents.md) | Sub-agent = forked session, parentSession lineage | Extension page |
-| Operation | aiti-git-trace | Out-of-band trace repo, op ledger, family tree `/lineage` | `dev-repo/docs/aiti-git-trace-plan.md` |
+| Operation | aiti-git-trace | Out-of-band trace repo, op ledger, family tree `/lineage` | — |
 | Intent | [Plan-first](/en/extensions/aiti-plan-first.md) | Plan binding, lifecycle tags, drift reminders | Extension page |
-| Knowledge | aiti-doc-center | Six tag sources, doc⇄session, PageRank, FTS | `dev-repo/docs/aiti-doc-center-plan.md` |
-| Admission | plan-sandbox | Disposable snapshots, deliverable acceptance via hard protocol | `dev-repo/docs/pi-plan-sandbox-final-design.md` |
+| Knowledge | aiti-doc-center | Six tag sources, doc⇄session, PageRank, FTS | — |
+| Admission | plan-sandbox | Disposable snapshots, deliverable acceptance via hard protocol | — |
 | Admission | [Code review](/en/extensions/aiti-git-review.md) | Trace-sourced review, line-level partial rollback | Extension page |
 | Isomorphic instance | [Config safety net](/en/extensions/aiti-configs.md) | The same versioning and rollback applied to the config domain | Extension page |
 
@@ -200,6 +200,6 @@ The current form of lineage covers a single machine, a single repo, development 
 
 > Further reading: [What is aiti](/en/guide/what-is-aiti.md) · [Architecture](/en/guide/architecture.md) · [Code review](/en/extensions/aiti-git-review.md) · [Plan-first](/en/extensions/aiti-plan-first.md)
 >
-> 📌 Implementation status: this page is the **vision panorama** of the five-dimension lineage. For landing progress of each promise, known gaps, and the convergence plan (git-trace ⇄ plan-sandbox homogenization, acceptance bookkeeping, cross-dimension navigation, etc.), see `dev-repo/docs/aiti-lineage-closure-plan.md` (deep audit of development-lineage implementation gaps and optimization plan).
+> 📌 Implementation status: this page is the **vision panorama** of the five-dimension lineage. Landing progress, known gaps, and the convergence plan (git-trace ⇄ plan-sandbox homogenization, acceptance bookkeeping, cross-dimension navigation, etc.) keep evolving.
 >
 > ✅ **Closure progress (2026-09)**: among the 36 gaps found in the deep audit, the high-impact items have been triaged and shipped — **three P0 items** (per-op rollback contract, parent-chain wiring fixing the "family tree always empty" bug, terminal-state persistence) + **P1** (ledger unification / intent dimension / self-check / cross-dimension navigation, GAP-1/2/3/4/5); ledger rows gained the additive `planRel` field (plan binding written into rows, P1-2); the aiti-plan-review extension landed the Plan-Sandbox acceptance wrap-up UI. P2/P3 batches are tracked in the closure plan ledger.

@@ -33,4 +33,4 @@ Product of the agent-capability-UI de-coring P1 migration (~630 lines of compone
 
 ## Provenance
 
-Migrated out 2026-09-16; plan `docs/pi-web-agent-capability-ui-ext-plan.md` (implemented). Future agent capabilities like task are barred from the core — all go through the extension channel.
+Migrated out 2026-09-16 (implemented). Future agent capabilities like task are barred from the core — all go through the extension channel.

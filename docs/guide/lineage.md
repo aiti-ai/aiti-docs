@@ -130,7 +130,7 @@ aiti-git-trace 给每个会话建一个**编外追踪仓**（`.aiti-trace`，一
 | 问题 | 血缘体系的回答 |
 |---|---|
 | **谁改的？** | 会话 `S-3f2a`（pi · 2026-09-12 14:32），fork 自 `S-1d09` 的子代理「retry-refactor」——家谱视图里是一棵树 |
-| **为什么？** | 用户 prompt「把固定重试改成指数退避」；该会话绑定方案 `docs/retry-plan.md`，tag：`方案/已实施` |
+| **为什么？** | 用户 prompt「把固定重试改成指数退避」；该会话绑定方案并标记 `已实施` tag |
 | **怎么改的？** | op #47，before/after 双快照，diff 显示 ±6 行，含该行 |
 | **现在还作数吗？** | 评审里该行有一条行级注释；未发生过回滚 → 现行有效 |
 | **还关联什么？** | 同 tag `retry` 下还有 3 份文档、2 条会话；这份方案的每次更新都在文档时间线里 |
@@ -180,10 +180,10 @@ aiti-git-trace 给每个会话建一个**编外追踪仓**（`.aiti-trace`，一
 |---|---|---|---|
 | 会话维 | [All Sessions](/extensions/session-manager.md) | 多 agent 同堂 + tag 统一词表 | 扩展页 |
 | 会话维 | [子代理](/extensions/aiti-subagents.md) | 子代理 = fork 会话，parentSession 谱系 | 扩展页 |
-| 操作维 | aiti-git-trace | 编外追踪仓、op 台账、家谱 `/lineage` | `dev-repo/docs/aiti-git-trace-plan.md` |
+| 操作维 | aiti-git-trace | 编外追踪仓、op 台账、家谱 `/lineage` | — |
 | 意图维 | [方案先行](/extensions/aiti-plan-first.md) | 方案绑定、生命周期 tag、漂移提醒 | 扩展页 |
-| 知识维 | aiti-doc-center | tag 六来源、文档⇄会话、PageRank、FTS | `dev-repo/docs/aiti-doc-center-plan.md` |
-| 准入维 | plan-sandbox | 可丢弃快照、交付物硬协议采认 | `dev-repo/docs/pi-plan-sandbox-final-design.md` |
+| 知识维 | aiti-doc-center | tag 六来源、文档⇄会话、PageRank、FTS | — |
+| 准入维 | plan-sandbox | 可丢弃快照、交付物硬协议采认 | — |
 | 准入维 | [代码评审](/extensions/aiti-git-review.md) | trace 源评审、行级部分回滚 | 扩展页 |
 | 同构实例 | [配置安全网](/extensions/aiti-configs.md) | 配置域的同款版本化与回滚 | 扩展页 |
 
@@ -200,6 +200,6 @@ aiti-git-trace 给每个会话建一个**编外追踪仓**（`.aiti-trace`，一
 
 > 相关阅读：[什么是 aiti](/guide/what-is-aiti.md) · [架构](/guide/architecture.md) · [代码评审](/extensions/aiti-git-review.md) · [方案先行](/extensions/aiti-plan-first.md)
 >
-> 📌 实现状态：本页是五维血缘的**愿景全景**。各项承诺的落地进度、已知缺口与收敛计划（git-trace ⇄ plan-sandbox 同质化、采认入账、跨维导航等）见 `dev-repo/docs/aiti-lineage-closure-plan.md`（开发血缘实现差距深审与优化方案）。
+> 📌 实现状态：本页是五维血缘的**愿景全景**。各项承诺的落地进度、已知缺口与收敛计划（git-trace ⇄ plan-sandbox 同质化、采认入账、跨维导航等）持续演进中。
 >
 > ✅ **closure 进展（2026-09）**：深审 36 gap 中高伤项已止血并上线——**P0 三项**（逐 op 回滚契约、parent 链接线「家谱恒空」、终态持久）+ **P1**（记账合一/意图维/自检/跨维导航，GAP-1/2/3/4/5）；台账行 additive `planRel`（方案绑定入行，P1-2）；aiti-plan-review 扩展落地 Plan-Sandbox 采认收尾 UI。P2/P3 批次见 closure plan 台账。

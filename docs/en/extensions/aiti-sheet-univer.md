@@ -9,7 +9,6 @@ description: In-browser preview + editing for .xlsx/.xlsm (exceljs data layer + 
 > ❝ Old formats don't block the road — conversion, derivation and editing each in their place. ❞
 
 The Excel implementation extension of the multi-editor mechanism (aiti-editor M0), named per the `aiti-<filetype>-<impl>` convention.
-Plan: `docs/aiti-editor-office-plan.md` §2.1.
 
 ## Capabilities
 

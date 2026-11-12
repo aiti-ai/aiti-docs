@@ -44,4 +44,3 @@ OAuth 凭据已迁出 `~/.claude/.credentials.json`（系统 keyring，路径不
 - API：`POST /api/extensions/aiti-claude-code-agent/login/start`（幂等）· `GET /login/status` · `POST /login/cancel`
 - B 模式（paste-relay）：授权完成后页面显示一次性 code，复制粘回弹窗提交（也接受完整回调 URL）
 - 状态机：waiting（转圈）→ success ✅ / failed / timeout / cancelled，均带重试；弹窗打开期间 2s 轮询状态、关闭即停
-- 标准与五家 driver 契约：`docs/ext-controlled-login-standard.md`

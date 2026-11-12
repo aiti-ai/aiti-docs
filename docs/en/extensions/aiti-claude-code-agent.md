@@ -28,4 +28,3 @@ Toolbar **🔑 Login** (initiated via the aiti-agent-manager panel; the controll
 - API: `POST /api/extensions/aiti-claude-code-agent/login/start` (idempotent) · `GET /login/status` · `POST /login/cancel`
 - B mode (paste-relay): after authorization completes the page shows a one-time code; copy and paste it back into the dialog to submit (a full callback URL is also accepted)
 - State machine: waiting (spinner) → success ✅ / failed / timeout / cancelled, all with retry; while the dialog is open the status polls every 2s and stops the moment it closes
-- Standard and the contract across the five drivers: `docs/ext-controlled-login-standard.md`

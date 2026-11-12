@@ -22,9 +22,8 @@ Session backend exclusive to the Qoder CLI (qodercli/qoderclicn). Both are membe
 
 **Takeover/cold-restore replay**: tool calls in history are replayed into pi-native tool cards (same shape as live, no longer just `🛠 {json}` text lines) —
 producer = session-manager claude-like adapter (`tool_use`/`tool_result` paired by id), consumer = `seedHistory`
-via the shared layer `@aiti-ai/ext-shared/seed-tool`. Mechanism and forensics: `docs/aiti-codebuddy-agent-tool-result-fold-plan.md` §7.4.
+via the shared layer `@aiti-ai/ext-shared/seed-tool`.
 
-See `dev-repo/aiti-qoder-agent/README.md` for details; auth and API reverse-engineering in `docs/qodercli-auth-api-analysis.md`.
 
 ## 🔑 Controlled login (ext-controlled-login standard, 2026-09-08)
 
@@ -32,4 +31,3 @@ Toolbar **🔑 Login** (initiated via the aiti-agent-manager panel): spawns the 
 
 - API: `POST /api/extensions/aiti-qoder-agent/login/start` (idempotent) · `GET /login/status` · `POST /login/cancel`
 - State machine: waiting (spinner) → success ✅ / failed / timeout / cancelled, all retryable; status is polled every 2s while the dialog is open and stops when it closes
-- The standard and the five-driver contract: `docs/ext-controlled-login-standard.md`

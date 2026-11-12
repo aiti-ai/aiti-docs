@@ -136,7 +136,6 @@ Endpoint prefix: `/api/extensions/session-manager/`
 1. **Requirement origin** (2026-08-08 09:54, user's own words): *"For long-term operation… message archiving must be true archiving — pack, compress, save resources; but for search and viewing, if there is an index before archiving, you can quickly search or browse to them."*
 2. **First proposal was tar.gz** (same day 09:56): `<cwdKey>-<YYYY-MM>.tar.gz` + manifest (sha256 per file).
 3. **Format pivot** (same day 10:14, derivation of per-file independent brotli blocks): on-demand unpacking needs random access → tar.gz's sequential decompression was the pain point; Node has no built-in zip/tar (verified) → custom container; brotli measured better than gzip.
-4. **Written down** (same day 10:15–10:16): recorded in `docs/all-sessions-panel.zh-CN.md` §5.5.2/5.5.3, including the comparison table of gzip / brotli / zstd / zip / tar; code committed on 2026-08-16 (`dev-repo` `25967cd2`).
+4. **Written down** (same day 10:15–10:16): compression benchmark for the choice (gzip / brotli / zstd / zip / tar); code committed on 2026-08-16.
 
 - Original session record: `~/.pi/agent/sessions/--home-wind-workspace-pi-web--/2026-08-06T07-38-25-787Z_019fd602-587b-76c7-85b3-fc96401d7f49.jsonl` (segment 2026-08-08 09:54–10:22)
-- Plan document: `docs/all-sessions-panel.zh-CN.md` §5.5.2 / §5.5.3 in the repo

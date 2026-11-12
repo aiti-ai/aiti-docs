@@ -13,7 +13,6 @@ A unified agent management surface: the toolbar 🤖 opens a panel that aggregat
 
 **Dynamic discovery (the six agents are not hard-coded)**: each agent extension self-reports at startup via `ctx.services.provide("<extId>.agent", descriptor)`
 (label/modes/fs probe table/credential slots/login actions/quota toggles); the manager collects them dynamically by walking the host extension list.
-Integration contract (new-agent checklist + current status/TODO) → **`docs/dev-repo-agent-account-contract.md`**.
 
 ## Panel Capabilities
 

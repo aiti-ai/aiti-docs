@@ -115,7 +115,7 @@ curl -H 'X-TA-Endpoint: <id>' http://bridge:8666/api/status
 
 ## 诊断面：对齐 Arthas
 
-Arthas 主流命令均有对应端点：`sc`/`sm`/`jad`（CFR 源码级反编译）/`watch`（含调用栈）/`trace`（子调用树 cost+maxDepth）/`monitor`/`tt`（录制）/`heapdump`/`profiler`（cpu+alloc+wall）/`mbean`/`vmoption`（白名单可写 flags + 审计）/`logger`/`classloader`/`ognl`（ta_eval）/`getstatic`/`thread`（死锁检测、CPU 排序、状态过滤、利用率）——差异对照见 TestAgent 仓 `docs/testagent-vs-arthas.md` 与 `docs/arthas-parity-plan.md`。
+Arthas 主流命令均有对应端点：`sc`/`sm`/`jad`（CFR 源码级反编译）/`watch`（含调用栈）/`trace`（子调用树 cost+maxDepth）/`monitor`/`tt`（录制）/`heapdump`/`profiler`（cpu+alloc+wall）/`mbean`/`vmoption`（白名单可写 flags + 审计）/`logger`/`classloader`/`ognl`（ta_eval）/`getstatic`/`thread`（死锁检测、CPU 排序、状态过滤、利用率）。
 
 ## 「改」的面：Arthas 没有的
 
@@ -148,7 +148,7 @@ Arthas 主流命令均有对应端点：`sc`/`sm`/`jad`（CFR 源码级反编译
 
 ## 质量与文档
 
-自动化回归：核心功能 29 断言 + Arthas 差距补齐 26 断言（JDK8+spring2 与 JDK21+mybatis 双基线全绿）+ 自动登录 16 断言 + lazy-module/solon 专项 e2e + **tunnel/bridge 48 断言**（端点纳管/token 三分离/wss/Origin/download/并发/MCP 桥模式）+ MCP 协议 6 断言；一键 run-all **120 + restmock 9 = 129 断言**。完整教程与 API 参数 Schema 见 TestAgent 仓 `docs/testagent-user-guide.md`（MCP 工具映射见其附录 B）。
+自动化回归：核心功能 29 断言 + Arthas 差距补齐 26 断言（JDK8+spring2 与 JDK21+mybatis 双基线全绿）+ 自动登录 16 断言 + lazy-module/solon 专项 e2e + **tunnel/bridge 48 断言**（端点纳管/token 三分离/wss/Origin/download/并发/MCP 桥模式）+ MCP 协议 6 断言；一键 run-all **120 + restmock 9 = 129 断言**。完整教程与 API 参数 Schema 见 TestAgent 官方文档。
 
 ## 前置
 

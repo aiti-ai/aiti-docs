@@ -48,4 +48,4 @@ ext:
 
 ## 来源
 
-方案 `docs/aiti-models-import-plan.md`；计划中的 M2 源（openclaw / claude 档案等）未实施。
+计划中的 M2 源（openclaw / claude 档案等）未实施。

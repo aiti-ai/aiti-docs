@@ -16,4 +16,3 @@ workspace markdown collection/organization/search extension: node:sqlite FTS5 tr
 - **AI tools**: `aiti_doc_search` (FTS full-text + weight-fused ranking, with snippet) and `aiti_doc_tags_set` (writes tags back into front-matter) — off by default (enable via `agentTools.enabled`); there is also a doc-search skill that goes through `GET /search`.
 - On the plan-first side, the "🏷 Add tags" and "Update plan doc" one-click inserts both go through this extension's vocabulary and search.
 
-Plan document: `dev-repo/docs/aiti-doc-center-plan.md` (v2 implemented); archived-session linkage `docs/aiti-doc-center-archived-sessions-plan.md`.

@@ -25,7 +25,6 @@ Cursor CLI 会话接入扩展：把 Cursor Agent CLI 会话纳入 All Sessions �
 - **能力面**：prompt/abort/followUp/queueManage/setModel（下轮 `-m`）/listModels/setPermissionMode（`--mode plan|ask` + `--yolo` 下轮生效）/getMessages ✅；steer/getUsage/contextUsage/fileAttachments ❌。CLI 版本基线 cursor 2026.10.22（3.17 实测口径已过；格式回归测试哨兵在 `session-manager/lib/agents/cursor-cli-store.test.mjs`）。
 - **只读解析**：**Cursor Agent CLI 会话**经共享层 `cursor-cli-store.ts`（`~/.cursor/chats/<workspaceKey>/<chatId>/store.db` blob 图解码优先 + jsonl 兜底；fixture 钉死 wire 假设；单一事实源 `dev-repo/_shared/`，扩展与 session-manager 同走 `@aiti-ai/ext-shared/cursor-cli-store`）；**Cursor IDE（state.vscdb）会话由 session-manager cursor adapter 另路解析**——两条链路分立。
 
-设计文档：`dev-repo/docs/aiti-cursor-cli-sessions.md`（存储格式逆向 + 排障对照表）。
 
 ## 🔑 受控登录（ext-controlled-login 标准，2026-09-08）
 
@@ -33,4 +32,3 @@ Cursor CLI 会话接入扩展：把 Cursor Agent CLI 会话纳入 All Sessions �
 
 - API：`POST /api/extensions/aiti-cursor-agent/login/start`（幂等）· `GET /login/status` · `POST /login/cancel`
 - 状态机：waiting（转圈）→ success ✅ / failed / timeout / cancelled，均带重试；弹窗打开期间 2s 轮询状态、关闭即停
-- 标准与五家 driver 契约：`docs/ext-controlled-login-standard.md`

@@ -121,4 +121,4 @@ node tools/deploy.mjs         # 构建客户端 + 拷贝源码 + 目标内 npm i
 
 展示语义（modeOf/identityView/ddnsBadge/netcheckEventView/portmapProbeView）与 doctor 事件契约键（`ui.doctor.ev.*`）由库 `src/ui-shared.ts` 单源承载——库自带 `st ui` 面板与 pi-web 弹窗行为必然一致（漂移由测试钉死）。
 
-设计全文与实施记录：`dev-repo/docs/service-tunnels-ext-ui-integration-plan.md`（§11 真机验收：UPnP portmap / ipv6 失败路径 / DDNS 双端互查闭环）。
+真机验收覆盖 UPnP portmap / ipv6 失败路径 / DDNS 双端互查闭环。

@@ -26,7 +26,6 @@ ext:
 > ❝ 老格式不挡路——转换、派生、编辑各归其位。 ❞
 
 多编辑器机制（aiti-editor M0）的 Excel 实现扩展，命名规范 `aiti-<filetype>-<impl>`。
-方案：`docs/aiti-editor-office-plan.md` §2.1。
 
 ## 能力
 

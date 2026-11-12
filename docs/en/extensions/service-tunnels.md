@@ -103,4 +103,4 @@ node tools/deploy.mjs         # build client + copy sources + in-target npm inst
 
 Display semantics (modeOf/identityView/ddnsBadge/netcheckEventView/portmapProbeView) and the doctor event contract keys (`ui.doctor.ev.*`) are carried single-source by the library's `src/ui-shared.ts` — the library's own `st ui` panel and the pi-web dialog necessarily behave identically (drift is pinned by tests).
 
-Full design text and implementation record: `dev-repo/docs/service-tunnels-ext-ui-integration-plan.md` (§11 real-machine acceptance: UPnP portmap / ipv6 failure paths / DDNS dual-end cross-check closed loop).
+Real-machine acceptance covers UPnP portmap / ipv6 failure paths / DDNS dual-end cross-check closed loop.

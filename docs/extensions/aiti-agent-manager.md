@@ -29,7 +29,6 @@ ext:
 
 **动态发现（不写死六家）**：各家 agent 扩展在 startup `ctx.services.provide("<extId>.agent", descriptor)` 自报家门
 （label/modes/fs 探测表/凭据槽位/登录动作/额度开关），manager 遍历宿主扩展清单动态收集。
-接入契约（新 agent 清单 + 现状/待办）→ **`docs/dev-repo-agent-account-contract.md`**。
 
 ## 面板能力
 

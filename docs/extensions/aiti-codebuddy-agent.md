@@ -27,7 +27,7 @@ ext:
 
 腾讯 CodeBuddy Code（WorkBuddy 桌面端剥离的官方 CLI，npm 包 `@tencent-ai/codebuddy-code`，命令 `cbc`）会话后端：接入 All Sessions 多 agent 前端——面板里的 cbc 历史行（`codebuddy:<sid>`）一键复活为 live 会话。
 
-方案底稿：`docs/aiti-codebuddy-agent-plan.md`（2026-09-10 实测 2.148.0；**2.150.0 起转 stream 长连接**，§10 实施记录）。
+（2026-09-10 实测 2.148.0；**2.150.0 起转 stream 长连接**）。
 
 ## 机制（进程模型双档，feature `codebuddy.connectionMode`）
 
@@ -50,7 +50,7 @@ ext:
 - `POST /login/tui` `{site?}`：经 aiti-cmd `services.runner` 后台建 cbc 交互 TUI 会话（**进程所有权在服务端**，sid 共享给 aiti-cmd 前端 xterm 渲染），程序化喂 `/login`（可选 `site` 序号自动选站）
 - `GET /login/tui/status`：`waiting|success|failed|timeout|idle` + 授权 URL（OSC8 还原 + SSO 提示词过滤，sticky）；完成以 `~/.codebuddy` 落盘指纹变化判定（settings.json + local_storage/ mtime）；330s 兜底超时
 - `POST /login/tui/input` `{text}`：站点选择等人工介入键入转发（进程仍在后端）；`POST /login/tui/cancel` 终止
-- 不实现 OAuth 协议、不碰凭据内容（受控登录标准哲学；`docs/aiti-codebuddy-agent-plan.md` §9.3）
+- 不实现 OAuth 协议、不碰凭据内容（受控登录标准哲学）
 
 ## 能力面（fail-loud，按通道分流）
 

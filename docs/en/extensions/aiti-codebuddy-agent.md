@@ -10,7 +10,7 @@ description: Tencent CodeBuddy Code CLI (cbc) driver — stream long connection 
 
 Tencent CodeBuddy Code (the official CLI carved out of the WorkBuddy desktop app; npm package `@tencent-ai/codebuddy-code`, command `cbc`) session backend: plugs into the All Sessions multi-agent frontend — a cbc history row in the panel (`codebuddy:<sid>`) revives into a live session with one click.
 
-Plan draft: `docs/aiti-codebuddy-agent-plan.md` (verified on 2.148.0, 2026-09-10; **stream long connection from 2.150.0**, §10 implementation record).
+(verified on 2.148.0, 2026-09-10; **stream long connection from 2.150.0**).
 
 ## Mechanism (two process tiers, feature `codebuddy.connectionMode`)
 
@@ -33,7 +33,7 @@ Plan draft: `docs/aiti-codebuddy-agent-plan.md` (verified on 2.148.0, 2026-09-10
 - `POST /login/tui` `{site?}`: via aiti-cmd `services.runner`, starts a cbc interactive TUI session in the background (**process ownership on the server side**; the sid is shared with aiti-cmd's frontend xterm rendering), feeds `/login` programmatically (optional `site` index auto-selects the site)
 - `GET /login/tui/status`: `waiting|success|failed|timeout|idle` + authorization URL (OSC8 restoration + SSO prompt filtering, sticky); completion is judged by fingerprint changes in `~/.codebuddy` (settings.json + local_storage/ mtime); 330s fallback timeout
 - `POST /login/tui/input` `{text}`: forwards manual keystrokes such as site selection (the process stays in the backend); `POST /login/tui/cancel` terminates
-- Implements no OAuth protocol, touches no credential content (controlled-login standard philosophy; `docs/aiti-codebuddy-agent-plan.md` §9.3)
+- Implements no OAuth protocol, touches no credential content (controlled-login standard philosophy)
 
 ## Capability surface (fail-loud, routed per channel)
 

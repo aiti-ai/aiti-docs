@@ -31,4 +31,4 @@ Scans the provider·model configs of other coding agents on this machine into dr
 
 ## Sources
 
-Plan `docs/aiti-models-import-plan.md`; planned M2 sources (openclaw / claude archives etc.) not implemented.
+Planned M2 sources (openclaw / claude archives etc.) not implemented.

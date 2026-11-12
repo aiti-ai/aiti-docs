@@ -28,7 +28,6 @@ ext:
 > ❝ 深度保真档——与桌面 Office 同引擎，复杂排版编辑不将就。 ❞
 
 多编辑器机制（aiti-editor M0）的深度保真实现扩展（M2，`aiti-<filetype>-<impl>` 命名规范的多域例外）。
-方案：`docs/aiti-editor-office-plan.md` §2.4。
 
 ## 能力
 

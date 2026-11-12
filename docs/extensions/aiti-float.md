@@ -30,7 +30,7 @@ ext:
 
 v0.5.0 起小屏（≤640px）面板打开时**系统返回优先关闭面板**（Android 返回键 / iOS 侧滑，消费宿主 `pi-web.overlayBack` 退栈服务，接入方零代码；无 ✕ 面板不注册，旧宿主/桌面自动降级）。v0.5 另注册 **`aiti-float.dockstack` 服务**——左栏统一区块栈容器（常驻 blocks + dockable items、用户排序/折叠持久化、对齐分组、单展开手风琴、懒扩展静态壳展开才物化；**`filler` prop v2 = 全折叠空白填充物**），session-manager 侧栏接管即由它编排，且 `dependsOn` 本能力（extman 阻止本扩展被单独禁用）。另有 `aiti-float.dock-header` 服务（dock 头工具条 store，第三方扩展经 getExtService 接入）。
 
-契约专题（属性全表 / 小屏全屏 / 手动最大化 API / keepmask 豁免 / pos / persist）见 `dev-repo/docs/aiti-web-ext-float-dialogs.md`；注册总纲 `docs/dev-repo-authoring-reference.md` §8.3。常用属性速查：
+契约专题（属性全表 / 小屏全屏 / 手动最大化 API / keepmask 豁免 / pos / persist）。常用属性速查：
 
 | 属性 | 作用 |
 |---|---|

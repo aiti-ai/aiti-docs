@@ -30,7 +30,7 @@ pi extension appendRow ledger row → globalThis.__aitiTraceEmit? (loosely coupl
      └─ readOps                                       ← seq-gap filling + downgrade, not the normal path
 ```
 
-Full design: `dev-repo/docs/aiti-plan-first-plan.md` (cold-start seeding, seq-gap filling, three-tier degradation, buffer capacity, terminal-bridged session boundaries, etc.).
+Design essentials: cold-start seeding, seq-gap filling, three-tier degradation, buffer capacity, terminal-bridged session boundaries, etc.
 
 ## Gating (extman feature switches)
 

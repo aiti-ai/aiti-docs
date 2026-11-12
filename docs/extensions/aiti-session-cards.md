@@ -49,4 +49,4 @@ agent 能力 UI 去核化 P1 外迁产物（组件 ~630 行自 pi-web core 迁�
 
 ## 来源
 
-2026-09-16 外迁；方案 `docs/pi-web-agent-capability-ui-ext-plan.md`（已实施）。task 等未来 agent 能力禁进核，一律走扩展通道承接。
+2026-09-16 外迁（已实施）。task 等未来 agent 能力禁进核，一律走扩展通道承接。

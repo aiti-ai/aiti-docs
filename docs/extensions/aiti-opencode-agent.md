@@ -43,4 +43,3 @@ CLI 自理：`~/.local/share/opencode/auth.json`（`opencode auth login`）。�
 ## 关联
 
 - 与 `aiti-acp-agent` 的 `ACP: opencode` 同 agentKey（`opencode`）共存：本扩展 priority 10 解析优先，ACP 自动降为兜底（fail-over）
-- 方案与排查记录：dev-repo `docs/dev-repoernal-session-paging-plan.md`（§跨 agent 排查）

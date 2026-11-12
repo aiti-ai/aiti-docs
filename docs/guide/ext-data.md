@@ -69,7 +69,6 @@ import path from "node:path";
 const stateDir = ctx.stateDir ?? path.join(ctx.configDir, "state");
 ```
 
-三层方案的背景与实施记录见 `dev-repo/docs/dev-repo-data-layering-state-tier-plan.md`（§9）。
 
 ## 4. 数据保护矩阵（谁替你兜底）
 
@@ -107,7 +106,6 @@ const stateDir = ctx.stateDir ?? path.join(ctx.configDir, "state");
 
 ## 7. 参考
 
-- **注册总纲**（entry 字段/插槽/features/部署/高频错误）：`dev-repo/docs/dev-repo-authoring-reference.md`（§2.1 数据分层、§2.2 服务端红线）
 - **跨扩展调用**：[扩展服务与跨扩展调用规范](/guide/ext-services.md)
 - **懒加载**：[懒加载契约](/guide/ext-lazy-loading.md)
-- **方案与背景**：`dev-repo/docs/dev-repo-data-layering-configs-redesign-plan.md`（config/cache 拆分，已实施）、`dev-repo/docs/dev-repo-data-layering-state-tier-plan.md`（**state 第三层，已实施**，含三机迁移记录 §9）、`dev-repo/docs/dev-repo-data-backup-extension-plan.md`（aiti-backup 数据备份，方案已评审）
+- **方案与背景**：config/cache 拆分（已实施）；state 第三层（**已实施**，含三机迁移记录）；数据备份由 aiti-backup 承接（方案已评审）

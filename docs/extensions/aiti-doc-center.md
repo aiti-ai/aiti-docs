@@ -29,4 +29,3 @@ workspace markdown 收集/整理/检索扩展：node:sqlite FTS5 trigram 中文�
 - **AI 工具**：`aiti_doc_search`（FTS 全文 + 权重融合排序，带 snippet）与 `aiti_doc_tags_set`（写回 front-matter tags）——默认关（`agentTools.enabled` 开）；另有 doc-search skill 走 `GET /search`。
 - plan-first 侧「🏷 添加 tags」「更新方案文档」一键插入均走本扩展词表与检索。
 
-方案文档：`dev-repo/docs/aiti-doc-center-plan.md`（v2 已实施）；归档会话联动 `docs/aiti-doc-center-archived-sessions-plan.md`。

@@ -8,7 +8,7 @@ description: Queue panel take over — full queue UI (banner / row actions / dra
 
 > ❝ **Queuing isn't scary; what's scary is forgetting what you wanted to say after queuing.** ❞
 
-Product of pi-web deforking P3 (`docs/pi-web-queue-cluster-ext-plan.md`): moves the ~900–1000-line queue enhancement UI out of ChatInput into a standalone extension; core returns to "upstream-shaped mechanism + thin integration" —
+Product of pi-web deforking P3: moves the ~900–1000-line queue enhancement UI out of ChatInput into a standalone extension; core returns to "upstream-shaped mechanism + thin integration" —
 measured ChatInput fork lines +2556 → +1617 (net −939), queue-keyword lines 112 ≤ the 150 exit threshold.
 
 ## Features (takeover state)

@@ -7,7 +7,7 @@ tags: [guide, ext, lazy-loading, extension, performance]
 
 # 扩展客户端懒加载契约（v2 两段式）
 
-把扩展 client 标为 `ui.clientImmediately: false` 即懒扩展：**冷启动不加载你的 client bundle**，直到某条显式通道拉起。全仓 15+ 扩展已懒化（冷启动请求 42→28）。权威细节与实施状态：`dev-repo/docs/aiti-ext-lazy-loading-plan.md`（M1-M3/D1/D3 已实施）。
+把扩展 client 标为 `ui.clientImmediately: false` 即懒扩展：**冷启动不加载你的 client bundle**，直到某条显式通道拉起。全仓 15+ 扩展已懒化（冷启动请求 42→28），M1-M3/D1/D3 已实施。
 
 ## 1. 物化规则（宿主机制）
 
