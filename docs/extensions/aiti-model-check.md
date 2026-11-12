@@ -6,7 +6,7 @@ ext:
   name: 模型可用性管理
   description: 模型健康度探测 —— 对每个模型发极小探针消息，看是否可用 / 429 限流 / 异常；解析限流恢复时间（Retry-After 等），记录历史识别可用窗口；长期限流到期提醒（纯本地时间检查零探测）
   soul: 模型在不在家，敲门问问它。
-  type: dev-repo
+  type: aiti-ext
   category: AI 能力
   version: "0.1.7"
   status: experimental

@@ -6,7 +6,7 @@ ext:
   name: 模型配置导入
   description: 其他 agent models 配置导入——扫描 codex/ZCode/OpenCode 的 provider·模型配置成草稿，首启弹窗一次性引导导入；落盘一律经 aiti-model-wizard saveBatch（可一步撤销），绝不直写 models.json
   soul: 不抄配置，只搬家。
-  type: dev-repo
+  type: aiti-ext
   category: AI 能力
   version: "0.1.9"
   status: active
@@ -16,7 +16,6 @@ ext:
   repo: ""
   npm: "@aiti-ai/aiti-models-import"
   install: |
-    node dev-repo/aiti-models-import/tools/deploy.mjs   # vite 构建 + 双实例部署 + reconcile + reload
   license: MIT
   tags: [models, import, migration, codex, zcode, opencode, onboarding, wizard]
 ---

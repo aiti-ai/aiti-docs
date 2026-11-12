@@ -103,7 +103,6 @@ ai:
     - Create/modify extensions: start from the `create-from-template` template library (**optional; AI free-form creation is fine too**); with the **spec prompts** (entry contract/store conventions/deploy chain/red lines + per-extension-point demo references) — **not registered as skills by default; fed to the AI separately when creating/modifying** → write the business source → deploy → reload (button appears in the user's toolbar immediately)
   install: git:/npm:/local path/zip
   storage_dir: <dataDir>
-  source_dir: dev-repo/<each extension's source>
   page: Toolbar 🧩 Extensions → Manager
 ```
 

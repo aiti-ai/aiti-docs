@@ -6,7 +6,7 @@ ext:
   name: 附着会话后端
   description: Socket 附着已运行 agent 进程 —— 连接 pi TUI bridge；支持环境变量全自动（PI_WEB_BRIDGE_AUTO=1 任何 CLI 会话自动上桥）；followUp 排队回显 + 图片附件透传 + 空闲超时退出
   soul: 不抢方向盘——agent 已经在跑，附着上去看就好。
-  type: dev-repo
+  type: aiti-ext
   category: 多 agent 后端
   version: "0.1.6"
   status: experimental
@@ -105,7 +105,7 @@ split-brain：POST prompt 走桥（attach 优先）、GET 状态/SSE 仍偏向�
    （磁盘文件可能落后 TUI 内存态，进行中的 turn 未 flush）；
 4. `app/api/sessions/[id]/auto-name/route.ts`：桥认领时自动命名降级跳过（窗口期
    原本会对双胞胎跑命名 LLM turn 双写文件）；
-5. `dev-repo/aiti-attach-agent/bridge-registry.ts`：registry 改 tmp+rename 原子写——
+5. `bridge-registry.ts`：registry 改 tmp+rename 原子写——
    原直写非原子，并发读者（dev/prod 两 pi-web + 多 TUI 共享同一份文件）读到半截
    JSON 会当空表，后续任意一次 read-modify-write 就把全部条目抹掉（attach 全体失效）。
    已同步安装副本 `~/.pi/agent/extensions/pi-web-bridge/bridge-registry.ts`（对新起的

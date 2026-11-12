@@ -6,7 +6,7 @@ ext:
   name: aiti-model-recent
   description: 模型选择器「最近使用」数据提供方——纯 service 扩展（零 UI），面板最近段同步取数 + pick 事件入库 LRU；localStorage key 与原实现一致零迁移
   soul: 常用的模型，应当在指尖。
-  type: dev-repo
+  type: aiti-ext
   category: 聊天增强
   version: "0.1.8"
   status: experimental

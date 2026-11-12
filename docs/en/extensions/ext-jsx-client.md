@@ -27,7 +27,7 @@ The template adds one vite build step for the client, unblocking both paths. For
 
 ```bash
 # 1. Copy the template
-cd dev-repo && cp -r templates/ext-jsx-client <your-ext> && cd <your-ext>
+cd <dev-repo> && cp -r templates/ext-jsx-client <your-ext> && cd <your-ext>
 
 # 2. Change three places
 #    - vite.config.ts: build.lib.fileName → "<your-ext>.mjs" (= index.ts's client field)

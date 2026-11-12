@@ -6,7 +6,7 @@ ext:
   name: 文档中心
   description: workspace md 收集/整理/检索——FTS5 trigram 中文全文 + tag 七来源两层 + 📚 float 弹窗四视图
   soul: 文档不检索，等于没写。
-  type: dev-repo
+  type: aiti-ext
   category: 知识管理
   version: "0.1.9"
   status: active

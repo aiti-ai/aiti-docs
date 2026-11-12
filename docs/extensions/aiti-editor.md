@@ -6,7 +6,7 @@ ext:
   name: 文件编辑器
   description: 可扩展编辑器 —— Monaco 编辑接管 + 保存（mtime 冲突 409 + 白名单/大小校验）+ 压缩包解析 + 统一图片查看器（消息图片/文件图片合一，缩放·捏合·信息面板）
   soul: 看到不对的代码，当场就能改——不用切出去开 IDE。
-  type: dev-repo
+  type: aiti-ext
   category: 开发工具
   version: "1.0.7"
   status: active

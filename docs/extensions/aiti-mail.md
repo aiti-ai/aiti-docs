@@ -6,7 +6,7 @@ ext:
   name: aiti-mail
   description: pi-web 内通用「邮件发送出口」——零依赖 SMTP 客户端 + 发送记录（node:sqlite）+ 管理弹窗（配置/测试/记录）
   soul: 配置一次 SMTP，pi-web 里任何扩展和 AI 都能发邮件。
-  type: dev-repo
+  type: aiti-ext
   category: 系统工具
   version: "0.1.7"
   status: active
@@ -15,7 +15,6 @@ ext:
   website: https://aiti.pw
   repo: ""
   install: |
-    node dev-repo/aiti-mail/tools/deploy.mjs   # 双实例部署 + 热重载
   license: MIT
   tags: [mail, smtp, email, notify, sqlite]
 ---

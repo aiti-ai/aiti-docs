@@ -6,7 +6,7 @@ ext:
   name: UI 环境（桌面/无头虚拟屏）
   description: 后台无头服务器 UI 调试的环境分配器 —— 4 态模式裁决新启动 MCP/应用的显示环境，Xvfb+openbox+AT-SPI 虚拟屏 + VNC-on-web + RDP-on-web，Linux/Windows/macOS 三平台服务化；VNC 密码由 VNC server 自己认证（桥纯透传）
   soul: 没有显示器，也可以有舞台。
-  type: dev-repo
+  type: aiti-ext
   category: 调试
   version: "0.1.7"
   status: active
@@ -16,7 +16,6 @@ ext:
   repo: ""
   install: |
     # 部署到 ~/.pi/web/extensions/aiti-ui-env/ 后 reload：
-    cd dev-repo/aiti-ui-env && node tools/deploy.mjs
     curl -X POST http://127.0.0.1:<端口>/api/extensions/reload
     # 服务化（虚拟屏常驻）：
     cd scripts/linux && ./setup-linux.sh && ./install-service.sh

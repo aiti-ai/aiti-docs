@@ -18,7 +18,7 @@ ext:
     # 1) 目标 JVM 挂载 agent（httpPort 开出 HTTP API；也可运行后用 ta_attach 动态挂载）
     java -javaagent:testagent.jar=conf-dir -Dtestagent.httpPort=8564 -jar app.jar
     # 2) MCP 客户端（~/.config/mcp/mcp.json）加：
-    "aiti-testagent": { "command": "node", "args": ["<dev-repo>/aiti-testagent/mcp-testagent.cjs"] }
+    "aiti-testagent": { "command": "node", "args": ["<dev-repo>/mcp-testagent.cjs"] }
     # 3) 按组过滤暴露面（可选）：--tools "lifecycle observe jvm" --exclude ta_heapdump
     # 开关多时不必堆 -D：项目根放 testagent.properties（testagent.* 前缀），从子目录启动自动向上发现
   license: MIT

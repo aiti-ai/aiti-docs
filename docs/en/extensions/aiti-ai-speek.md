@@ -17,4 +17,4 @@ The pi-web "follow-read mode" extension: reads AI output text aloud with speech.
 - **Dual-SSE dual-push merge (Plan A)**: the text-stream and playback-progress SSE channels merged into a single channel with dual pushes, eliminating out-of-order/duplicate frames; extman pre-materializes lazy extensions (opening the panel spins up the client).
 - The extension is lazy-loaded (`clientImmediately:false`).
 
-Plan docs: `dev-repo/docs/aiti-ai-speek-*.md` (4 plans).
+

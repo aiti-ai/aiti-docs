@@ -30,7 +30,6 @@ ai:
     - AI manages itself: the **AI main window (non-iframe)** additionally registers its own pageId `xxx/ai` into the bridge → CDP its own window (read dialogs / fill extension dialog forms / screenshot for review); **when there is no host, the main window itself is also under management (`xxx/ai` present, channel present)**
     - User interaction: element pick / confirm / option / input / presence probing / notification
   storage_dir: <dataDir>
-  source_dir: dev-repo/aiti-devtools (core in dev-repo/core)
   page: Toolbar 🧰 AITI
 ```
 

@@ -49,7 +49,7 @@ Migration rule at selection time: the original "command + args prefix" string is
 
 One-shot task type: `prompt` goes to stdin → stdout streams block by block (`message_update`) → process exit wraps up (`message_end` + `agent_settled`); abort kills the process (SIGTERM → 3s → SIGKILL). The capability surface is declared honestly: only the core four + getMessages; model/permission/fork/queue etc. are all false. History in local JSONL (`<configDir>/sessions/<id>.jsonl`); at P1 it does not enter All Sessions (provider carries no agentKey, host writes no placeholder file).
 
-Launch resolution reuses the shared layer `dev-repo/_shared/agent-spawn-env.ts`'s `resolveCliLaunch` (same recipe for this extension and the 8 agent extensions: env merge order = base/governance passthrough → auto `AITI_BRIDGE_URL` → member env → bridge rewrite; `$VAR`/`${cwd}` expanded at spawn).
+Launch resolution reuses the shared layer `agent-spawn-env.ts` (shared layer)'s `resolveCliLaunch` (same recipe for this extension and the 8 agent extensions: env merge order = base/governance passthrough → auto `AITI_BRIDGE_URL` → member env → bridge rewrite; `$VAR`/`${cwd}` expanded at spawn).
 
 ## Endpoints
 

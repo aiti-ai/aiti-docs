@@ -33,7 +33,7 @@ A standalone extension for config versioning + crash self-check (the M4 split-ou
     { "path": "~/.pi/agent/settings.json", "dest": "pi/agent/settings.json" },
     { "path": "~/.pi/agent/models.json",   "dest": "pi/agent/models.json" },
     // System skills (~/.pi/agent/skills/) are not included — don't pollute system skills
-    { "path": "dev-repo/aiti-ai-created/**",  "dest": "src/ai-created/" },
+    { "path": "extensions/aiti-ai-created/**", "dest": "src/ai-created/" },
     { "path": "~/.pi/configs-self/**",     "dest": "self/" }   // The extension's own config, protected from self-loss
   ],
   "hardExcludes": [ "**/auth.json", "**/*.key", "**/*token*", "**/sessions/**", "**/*.jsonl" ],

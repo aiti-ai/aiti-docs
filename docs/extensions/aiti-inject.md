@@ -6,7 +6,7 @@ ext:
   name: aiti-inject
   description: dev 实例专用 —— 在 pi-web dev 页面注入生产 aiti-devtools launcher（FAB）
   soul: 调试的第一步不该是读文档。
-  type: dev-repo
+  type: aiti-ext
   category: 页面调试注入
   version: 0.3.0
   status: experimental

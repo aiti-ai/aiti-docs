@@ -6,7 +6,7 @@ ext:
   name: 页面事件总线
   description: 页面事件总线归口——链式接管 __piPageEvents，v0.2 主题订阅（按 type 白名单过滤转发）+ publish-local 高频直连 + subscribe-topics 客户端出口，core 零改动；topics 唯一、禁止任何兜底
   soul: 一条总线，全部帧。
-  type: dev-repo
+  type: aiti-ext
   category: 系统工具
   version: "0.1.7"
   status: active
@@ -15,7 +15,6 @@ ext:
   website: https://aiti.pw
   repo: ""
   install: |
-    node dev-repo/aiti-event-bus/tools/deploy.mjs   # 部署到 ~/.pi/web{,-dev}/extensions/ 后 reload
   license: MIT
   tags: [event-bus, sse, page-events, services, infrastructure]
 ---

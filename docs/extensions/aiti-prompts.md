@@ -6,7 +6,7 @@ ext:
   name: aiti prompt 片段收藏库
   description: prompt 片段收藏 —— 收藏/分组/会话提取/输入即存
   soul: 我的输入是我宝贵的财富——好话不说二遍。
-  type: dev-repo
+  type: aiti-ext
   category: 命令工具
   version: "0.1.7"
   status: experimental
@@ -47,7 +47,6 @@ ai:
     - 输入联想：suggest 候选=**命令（⚡）+ 收藏 prompt（📌）混合**，命中命令直接填/执行、不走 AI；仅无命中才轮到 AI 生成
     - 会话提取（source=session）条目缺省 **suggest:false**（不参与智能提示）
   storage_dir: ~/.pi/web/data/aiti-prompts/config（prompts.json）
-  source_dir: dev-repo/aiti-prompts
   page: 左栏收藏库 / 右栏 dock / 对话框（工具栏 📌 按钮待源码修复 toolbar 重复键后恢复）
 ```
 

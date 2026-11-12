@@ -6,7 +6,7 @@ ext:
   name: ACP 会话后端
   description: 泛用 ACP 驱动 —— 一个适配器接所有 Agent Client Protocol agent（25 家内置自动探测，对齐 agent-shell 全量清单 + 自定义后端面板 + 授权卡/队列/模型目录）
   soul: 协议统一了，适配器只需要写一次。
-  type: dev-repo
+  type: aiti-ext
   category: 多 agent 后端
   version: "0.3.8"
   status: active

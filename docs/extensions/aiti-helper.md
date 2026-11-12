@@ -6,7 +6,7 @@ ext:
   name: AI Helper
   description: 全扩展的一句话 AI 能力入口 —— 声明式 AI 帮助点（pi skills 标准）+ 输入/结果预览/审核回填 + 流式进度总线交付 + 多轮追问 + 历史与后台任务 + 用户自定义 skills（配置版本化已独立为 aiti-configs）
   soul: AI 的工具该由 AI 自己接线、自己进化——人类的角色是掌舵，不是搬砖。
-  type: dev-repo
+  type: aiti-ext
   category: AI 能力
   version: "0.5.8"
   status: experimental

@@ -6,7 +6,7 @@ ext:
   name: 消息锚点横幅
   description: 消息区顶部常驻横幅 —— 展示「生成当前屏幕上内容的那条用户输入」，滚动跟随回合段；可切换为第一条输入 / 最近输入 / 会话标题
   soul: 回错了人的话，比叫错名字还尴尬。
-  type: dev-repo
+  type: aiti-ext
   category: 聊天增强
   version: "0.1.7"
   status: experimental

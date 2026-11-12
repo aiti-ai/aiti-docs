@@ -6,7 +6,7 @@ ext:
   name: aiti-ai-schedule
   description: pi-web 常驻调度器 —— 扩展声明式定时任务 + AI 计划（cron/间隔/一次性）+ 三模式执行引擎 + AI 自建计划工具 + 管理页
   soul: 别再每个扩展自造 setInterval 了——声明即调度，AI 也能自己排班。
-  type: dev-repo
+  type: aiti-ext
   category: 系统工具
   version: "0.4.7"
   status: active
@@ -95,7 +95,7 @@ export default {
 ## 文件结构
 
 ```
-dev-repo/aiti-ai-schedule/
+the internal dev repo
 ├─ index.ts              # 入口装配（api / agent 钩子 / schedule_task 工具）
 ├─ sched/cron.ts         # 零依赖 cron·interval·once 时间计算
 ├─ sched/store.ts        # plans/state/runs 持久化

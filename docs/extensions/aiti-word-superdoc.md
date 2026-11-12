@@ -6,7 +6,7 @@ ext:
   name: Word 文档编辑器
   description: .docx 在线编辑（SuperDoc：ProseMirror docx 双向）。AGPL 隔离于本扩展，不装即无
   soul: ProseMirror 双向——打开即 docx 结构，导出即 docx 文件。
-  type: dev-repo
+  type: aiti-ext
   category: 开发工具
   version: "0.1.7"
   status: active

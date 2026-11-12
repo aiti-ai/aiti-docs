@@ -6,7 +6,7 @@ ext:
   name: Queue Keeper
   description: 队列面板接管 —— 完整队列 UI（横幅/行操作/拖拽排序/回收站/撤销条/导入导出），core 回到上游同形兜底
   soul: 排队不可怕，可怕的是排完队忘了自己要说什么。
-  type: dev-repo
+  type: aiti-ext
   category: 聊天增强
   version: "0.1.8"
   status: active
@@ -15,7 +15,6 @@ ext:
   website: https://aiti.pw
   repo: ""
   install: |
-    cd dev-repo/aiti-queue-keeper && npm install && node tools/deploy.mjs
   license: MIT
   tags: [queue, panel, drag-sort, trash, import-export, defork]
 ---

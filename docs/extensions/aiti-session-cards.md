@@ -6,7 +6,7 @@ ext:
   name: 会话请求卡
   description: 会话请求卡扩展——交互元语卡（zcode 方案审批 / AskUser / omp OAuth / generic 兜底）与工具授权卡完整 UI，自 pi-web core 外迁（agent 能力 UI 去核化 P1）
   soul: agent 求你作答的卡片，长什么样由扩展说了算。
-  type: dev-repo
+  type: aiti-ext
   category: 聊天增强
   version: "0.1.9"
   status: active
@@ -15,7 +15,6 @@ ext:
   website: https://aiti.pw
   repo: ""
   install: |
-    node dev-repo/aiti-session-cards/tools/deploy.mjs   # vite 构建 + 双实例部署 + reload
   license: MIT
   tags: [session-request-card, plan-approval, ask-user, tool-auth, oauth, interaction, permission]
 ---

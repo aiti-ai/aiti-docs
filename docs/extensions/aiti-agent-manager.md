@@ -6,7 +6,7 @@ ext:
   name: Agent 管理界面
   description: 统一聚合外部 agent 登录态 + 登录操作代理 + 多账号档（备份/别名/一键切换）+ 账号额度显示——不实现任何登录协议
   soul: 六家 agent 登录态，一屏看尽；多账号轮换，一键切换。
-  type: dev-repo
+  type: aiti-ext
   category: 多 agent 后端
   version: "0.2.8"
   status: active

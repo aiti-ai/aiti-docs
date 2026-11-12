@@ -6,7 +6,7 @@ ext:
   name: 桥连接探针
   description: 手机端桥/SSE 连接探针（临时诊断）——页面侧采集生命周期/EventSource/fetch/心跳缺口证据落盘供 AI 分析；问题定位后应卸载
   soul: SSE 断在哪一环，让证据说话。
-  type: dev-repo
+  type: aiti-ext
   category: 调试
   version: "0.1.0"
   status: experimental
@@ -15,7 +15,6 @@ ext:
   website: https://aiti.pw
   repo: ""
   install: |
-    node dev-repo/aiti-bridge-probe/tools/deploy.mjs   # 临时诊断工具，不进部署 git；问题定位后卸载
   license: MIT
   tags: [debug, bridge, sse, mobile, diagnostics]
 ---

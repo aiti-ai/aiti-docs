@@ -79,7 +79,7 @@ First integrator: [aiti-configs](./aiti-configs.md) — crash sentinel (60s) / s
 ## File structure
 
 ```
-dev-repo/aiti-ai-schedule/
+the internal dev repo
 ├─ index.ts              # entry assembly (api / agent hooks / schedule_task tool)
 ├─ sched/cron.ts         # zero-dependency cron·interval·once time math
 ├─ sched/store.ts        # plans/state/runs persistence

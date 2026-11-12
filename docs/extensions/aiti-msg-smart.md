@@ -6,7 +6,7 @@ ext:
   name: 消息智能
   description: 消息点击识别 —— 段落/标题/代码行点击 → 引用/复制/选项弹层 + 子句/行高亮
   soul: AI 说得再好，抄起来也挺费劲。
-  type: dev-repo
+  type: aiti-ext
   category: 聊天增强
   version: "0.1.7"
   status: experimental
@@ -69,7 +69,6 @@ ai:
     - 新增可点语义块：core CLICKABLE_TAGS 候选内 + 扩展 ph.tags 声明（不写死 core 业务）
     - 弹层定位：tr/pre 走 portal fixed（扩展自管 anchorRect + scroll 跟随）；p/li/h 走 in-flow sibling
   storage_dir: 无（无服务端存储；仅一个 resolve-roots 只读 API，进程内消费 aiti-git-trace 出口供跨仓分辨；optionalDependsOn aiti-git-trace）
-  source_dir: dev-repo/aiti-msg-smart
   page: 聊天消息段落/代码块直接点击
 ```
 

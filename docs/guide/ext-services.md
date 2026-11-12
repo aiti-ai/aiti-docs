@@ -114,7 +114,7 @@ const off = ctx.onExtServiceChange?.((key, phase) => {
 
 **core 保留全局口**（豁免清单，扩展不得新造同类）：`globalThis.__piWebExt`（registry 本体）、`__piPageEvents`、`__aitiTraceEmit`（pi 扩展生产者）、`__aitiInject`（middleware 跨 bundle）、`__piSessions` / `__aitiBridges`（core 内部单例）、`window.__piWebPendingComposer`。它们的共同点是**生产者或消费者在扩展 ctx 体系之外**（middleware 独立 bundle / pi 扩展装载器），ctx.services 触达不到——完整豁免理由见 plan 文档 §6。命名收敛：core 保留口统一 `__piWeb*` 前缀（检查脚本按前缀放行），存量 `__aiti*` 保留口不强制改名；客户端侧完整豁免名单以 `check-ext-globals.mjs` 灰名单为权威（另含 `__piPageEventsClient`、`__runningEventsBroker`、`__PIBASE` 等 core 侧量）。
 
-**灰名单强制（check-ext-globals）**：红线不是靠自觉——`dev-repo/_shared/check-ext-globals.mjs` 静态扫描全仓扩展源码，查三类违规：byId 穿透、feature 直调、未登记全局量；**已接入统一测试入口 `scripts/test-web-ext.mjs`**（每次测试先跑门禁，撞线整轮 FAIL，`--list` 跳过）。灰名单分四类：`core-保留口`（上述豁免清单）/ `dualtrack`（双轨迁移期待退役的旧通道）/ `internal`（扩展内部便道，收敛为模块内单例另开批次）/ `framework`（框架级聚合豁免：aiti-configs / aiti-ai-schedule / aiti-helper 读全部扩展声明的机制）。**新增全局量不在名单即 FAIL**——确需新增的正当流程：先在 DI plan §6/本文档登记理由 → 更新脚本灰名单（带类别注）→ 再合码。手动跑 `--strict` 可把 dualtrack 旧通道也计为 FAIL（评估兜底退役进度用，默认不开）。
+**灰名单强制（check-ext-globals）**：红线不是靠自觉——检查门禁（check-ext-globals）静态扫描全仓扩展源码，查三类违规：byId 穿透、feature 直调、未登记全局量；**已接入统一测试入口**（每次测试先跑门禁，撞线整轮 FAIL，`--list` 跳过）。灰名单分四类：`core-保留口`（上述豁免清单）/ `dualtrack`（双轨迁移期待退役的旧通道）/ `internal`（扩展内部便道，收敛为模块内单例另开批次）/ `framework`（框架级聚合豁免：aiti-configs / aiti-ai-schedule / aiti-helper 读全部扩展声明的机制）。**新增全局量不在名单即 FAIL**——确需新增的正当流程：先在 DI plan §6/本文档登记理由 → 更新脚本灰名单（带类别注）→ 再合码。手动跑 `--strict` 可把 dualtrack 旧通道也计为 FAIL（评估兜底退役进度用，默认不开）。
 
 ## 5. 已注册服务速查（持续更新）
 
@@ -252,5 +252,5 @@ key 强制 `<extId>.` 前缀（core 用字面 `core.*`，宿主客户端用 `pi-
 ## 8. 测试与门禁
 
 - **宿主单测范式**：pi-web `lib/ext/services.test.mjs`——覆盖 up/down、同 key 重 provide 不重发 up、down 后 reload 重新上线、require 启动等待、disposer 竞态守卫。给服务行为改动补断言照它抄。
-- **全局量门禁**：`scripts/test-web-ext.mjs` 每次测试前先跑 `check-ext-globals.mjs`（含 `--only` 过滤跑；`--list` 跳过），撞线整轮 FAIL——见 §4 灰名单段。
-- **退役评估**：手动 `node dev-repo/_shared/check-ext-globals.mjs --strict` 把 dualtrack 旧通道也计 FAIL，数一数还剩几处即兜底退役进度。
+- **全局量门禁**：统一测试入口每次测试前先跑 `check-ext-globals.mjs`（含 `--only` 过滤跑；`--list` 跳过），撞线整轮 FAIL——见 §4 灰名单段。
+- **退役评估**：手动以 `--strict` 跑检查门禁，把 dualtrack 旧通道也计 FAIL，数一数还剩几处即兜底退役进度。

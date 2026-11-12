@@ -6,7 +6,7 @@ ext:
   name: Git 代码审核
   description: 专职审核未提交变更 —— Monaco diff 工作区（并排/合并/纯新/大纲）+ 行级标注（必须/建议/疑问）+ anchor 标志行重映射（边审边改不失效）+ 汇总终审清单 + AI 预审（aiti_review_* 工具只注入评审会话，日常零工具）
   soul: 作为人类，这是我对抗ai的最后倔犟了
-  type: dev-repo
+  type: aiti-ext
   category: 开发工具
   version: "0.2.7"
   status: experimental

@@ -16,7 +16,7 @@ ext:
   repo: ""
   install: |
     # 这不是可安装扩展，而是源码模板 —— 复制到你的扩展目录后用：
-    cd dev-repo && cp -r templates/ext-jsx-client <your-ext> && cd <your-ext>
+    cd <dev-repo> && cp -r templates/ext-jsx-client <your-ext> && cd <your-ext>
     npm install && npm run build:client
   license: MIT
   tags: [template, jsx, vite, client, 模板, 脚手架]
@@ -45,7 +45,7 @@ ext:
 
 ```bash
 # 1. 复制模板
-cd dev-repo && cp -r templates/ext-jsx-client <your-ext> && cd <your-ext>
+cd <dev-repo> && cp -r templates/ext-jsx-client <your-ext> && cd <your-ext>
 
 # 2. 改三处
 #    - vite.config.ts：build.lib.fileName → "<your-ext>.mjs"（= index.ts 的 client 字段）

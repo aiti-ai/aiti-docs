@@ -34,10 +34,11 @@ const doPush = !args.has("--no-push");
 const run = (cmd, opts = {}) =>
   execSync(cmd, { stdio: "inherit", cwd: target, shell: "/bin/bash", ...opts });
 
-// 1. fresh clone of the monorepo
+// 1. fresh clone of the monorepo (main branch only — stray branches/tags in
+//    the monorepo must never leak into the published repo)
 rmSync(target, { recursive: true, force: true });
 console.log(`[1/5] cloning ${repoRoot} -> ${target}`);
-execSync(`git clone --no-local --no-hardlinks -q "${repoRoot}" "${target}"`, { stdio: "inherit" });
+execSync(`git clone --no-local --no-hardlinks --single-branch -q "${repoRoot}" "${target}"`, { stdio: "inherit" });
 
 // 2. build the commit-callback: translate subjects by original hash, strip
 //    Chinese lines from bodies (code/links/English lines survive).
@@ -49,10 +50,19 @@ for (const line of readFileSync(msgMapPath, "utf8").split("\n")) {
   if (idx < 0) continue;
   map[line.slice(0, idx).trim()] = line.slice(idx + 1);
 }
+// commit messages go through the same scrub rules as file blobs, so a message
+// describing a scrub can never leak the original values it replaced
+const rules = readFileSync(rulesPath, "utf8")
+  .split("\n")
+  .filter((l) => l.includes("==>"))
+  .map((l) => [l.slice(0, l.indexOf("==>")), l.slice(l.indexOf("==>") + 3)]);
 const callback = `
 import re as _re
 _MAP = ${JSON.stringify(map)}
+_RULES = ${JSON.stringify(rules)}
 _msg = commit.message.decode("utf-8", "replace")
+for _old, _new in _RULES:
+    _msg = _msg.replace(_old, _new)
 if "\\n" in _msg:
     _subject, _body = _msg.split("\\n", 1)
 else:

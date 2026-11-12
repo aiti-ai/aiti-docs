@@ -6,7 +6,7 @@ ext:
   name: aiti devtools
   description: pi-web 扩展 —— 注入器/桥/MCP server 端 + 方案 M agent 工具进程内注入
   soul: AI 不该对着屏幕瞎猜，它该真正看见页面。
-  type: dev-repo
+  type: aiti-ext
   category: 页面调试注入
   version: 0.2.2
   status: active
@@ -43,7 +43,6 @@ ai:
     - AI 管自己：**AI 主窗口（非 iframe）** 多注册自己 pageId `xxx/ai` 进桥 → CDP 自己的窗口（读 dialog/填扩展弹窗表单/截屏审核）；**没有 host 宿主时主窗口自己也在被管理之列（`xxx/ai` 在，通道就在）**
     - 用户交互：点选元素/确认/选项/输入/在场探测/通知
   storage_dir: <dataDir>
-  source_dir: dev-repo/aiti-devtools（core 在 dev-repo/core）
   page: 工具栏 🧰 AITI
 ```
 

@@ -6,7 +6,7 @@ ext:
   name: aiti-ctx-meter
   description: 输入区上下文比例条指示器——桌面 compactLead 竖向比例条 + 小屏 modelInfoLead 前导位，urgency 四档色阶 + critical 呼吸，点击开宿主会话统计面板
   soul: 上下文还剩多少，看一眼电池就知道。
-  type: dev-repo
+  type: aiti-ext
   category: 聊天增强
   version: "0.1.12"
   status: active
@@ -15,7 +15,6 @@ ext:
   website: https://aiti.pw
   repo: ""
   install: |
-    node dev-repo/aiti-ctx-meter/tools/deploy.mjs   # 构建产物拷贝 + 双实例部署 + reload
   license: MIT
   tags: [context, meter, compact-lead, model-info-lead, urgency, breathing, session-stats]
 ---

@@ -6,7 +6,7 @@ ext:
   name: AITI Debug Inject
   description: 极简远程调试注入 —— 把另一个 pi-web 实例的调试器注入本实例页面，服务地址是 extman 里的文本 feature，默认关闭
   soul: 调试器该穿在哪件衣服里，由你说了算。
-  type: dev-repo
+  type: aiti-ext
   category: 页面调试注入
   version: "0.3.7"
   status: experimental

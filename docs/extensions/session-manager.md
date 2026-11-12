@@ -6,7 +6,7 @@ ext:
   name: session-manager
   description: 跨项目会话面板 —— tag 树+颜色 / 收藏 / 搜索 / 归档 / 看板 / 新建会话分支·Worktree 选择器 / 23 家 agent 历史解析 / DockStack 编排
   soul: 会话不是用完即走的流水，是每天都在累积的资产。
-  type: dev-repo
+  type: aiti-ext
   category: 会话管理
   version: "0.2.14"
   status: active

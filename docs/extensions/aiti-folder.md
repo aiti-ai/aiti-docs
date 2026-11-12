@@ -6,7 +6,7 @@ ext:
   name: 文件夹浏览器
   description: fileViewer folder 接管 + pathPicker 目录选择器 —— 浏览/回收站删除 + git 工具条与分组提交计划（软依赖 aiti-git-ops）
   soul: 目录树不是导航的终点，是操作的起点。
-  type: dev-repo
+  type: aiti-ext
   category: 开发工具
   version: "0.1.7"
   status: active

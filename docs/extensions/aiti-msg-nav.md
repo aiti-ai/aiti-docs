@@ -6,7 +6,7 @@ ext:
   name: 消息滚动导航
   description: 消息区右侧的滚动导航条 —— 到最早 / 到最新 / 上一个 / 下一个用户输入，一键直达；长按「到最新」保持屏幕常亮
   soul: 千楼万楼的聊天记录，电梯比楼梯好用。
-  type: dev-repo
+  type: aiti-ext
   category: 聊天增强
   version: "0.1.7"
   status: experimental

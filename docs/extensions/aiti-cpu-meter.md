@@ -6,7 +6,7 @@ ext:
   name: 流畅度检测器
   description: 主线程流畅度检测——读秒 + 0-100 分 + 颜色分层 + 最小化 + AI 卡顿调试（aiti-helper 帮助点）；可注入任意站点（内部版/外部版双产物）
   soul: 卡不卡，让数字说话；元凶是谁，让 AI 说话。
-  type: dev-repo
+  type: aiti-ext
   category: 系统工具
   version: "0.2.7"
   status: active

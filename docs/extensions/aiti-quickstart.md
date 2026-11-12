@@ -6,7 +6,7 @@ ext:
   name: 快速上手
   description: 空白态引导扩展——新建会话欢迎页 widget（上手步骤 / 快捷操作 / 示例提示词，走宿主 newSessionWidgets 插槽可 ⚙ 自定义）+ 左栏 DockStack 全折叠空白引导卡（与应用中心同屏共存，✕ 可关闭）+ v2 工作区获取 Hub（Git 克隆 / 上传压缩包 / 本地目录 / 新建）+ 侧栏「快速上手」静态条目（应用中心可钉住卡片，点击重返 quickstart 欢迎页）
   soul: 空白不可怕，第一句从这里开始。
-  type: dev-repo
+  type: aiti-ext
   category: 会话与项目
   version: "0.2.1"
   status: experimental
@@ -15,7 +15,6 @@ ext:
   website: https://aiti.pw
   repo: ""
   install: |
-    node dev-repo/aiti-quickstart/tools/deploy.mjs   # 双实例部署 + reload；
     # 消费方 session-manager（optionalDependsOn 软依赖）经 aiti-quickstart.api 服务渲染进 DockStack filler（上半，应用中心在下）；
     # 另软依赖 aiti-event-bus（clone 进度帧）与 aiti-model-wizard（配置模型深链，缺席降级）
   license: MIT

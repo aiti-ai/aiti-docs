@@ -6,7 +6,7 @@ ext:
   name: Qoder 会话后端
   description: Qoder CLI 专属后端 —— 双区域 credits/listModels、WASM 签名请求、扩展 API 免开会话查询
   soul: 别人走 ACP 大路，它偏要走签名的独木桥——因为风景在对面。
-  type: dev-repo
+  type: aiti-ext
   category: 多 agent 后端
   version: "0.4.9"
   status: active

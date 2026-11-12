@@ -7,7 +7,7 @@ ext:
   name: demo-lazy
   description: 输入字数统计（懒加载演示扩展）
   soul: 懒加载的最好演示，是用户根本感觉不到它存在。
-  type: dev-repo
+  type: aiti-ext
   category: 系统工具
   version: 0.2.0
   status: beta

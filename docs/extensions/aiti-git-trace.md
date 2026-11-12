@@ -6,7 +6,7 @@ ext:
   name: AI 变更追踪
   description: 编外 AI 变更追踪——仓根 .aiti-trace 独立追踪仓（无 git 也可 autoInit）+ op 编号 before/after 双 commit + 文件⇄消息⇄操作全链路 + 回撤 + 影子仓瘦身 compact
   soul: AI 改过的每一行都有账。
-  type: dev-repo
+  type: aiti-ext
   category: 系统工具
   version: "0.2.11"
   status: active

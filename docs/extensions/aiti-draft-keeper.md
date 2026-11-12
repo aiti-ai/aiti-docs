@@ -6,7 +6,7 @@ ext:
   name: 草稿保管员
   description: 草稿持久化 + 恢复接管 —— composer 契约 v2 唯一所有者（applyIntent 唯一写入口）、多标签共享槽位、无贡献不回写防震荡、pruneStale 7 天清理、水合后恢复
   soul: 崩溃可以带走页面，带不走你打到一半的话。
-  type: dev-repo
+  type: aiti-ext
   category: 聊天增强
   version: "0.1.7"
   status: active

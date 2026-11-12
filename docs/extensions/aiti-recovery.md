@@ -6,7 +6,7 @@ ext:
   name: aiti-recovery
   description: 恢复 UI 扩展——队列恢复对话框（会话中断排队消息逐条决议）+ 重启恢复向导（中断会话两步处理），红线语义保留：绝不自动投递，续跑只发「继续」
   soul: 中断不可怕，可怕的是找不到回去的路。
-  type: dev-repo
+  type: aiti-ext
   category: 聊天增强
   version: "0.1.8"
   status: experimental

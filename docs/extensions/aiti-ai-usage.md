@@ -6,7 +6,7 @@ ext:
   name: aiti-ai-usage
   description: AI token 用量统计 —— workspace/provider/model/key/时段多维报表，任意多维组合透视 + 桑基图 + CSV 导出，事件驱动零轮询，独立 SQLite 存储
   soul: 用量不是账单来了才知道——每一枚 token 都该有去向。
-  type: dev-repo
+  type: aiti-ext
   category: 系统工具
   version: "0.1.7"
   status: experimental

@@ -88,7 +88,6 @@ service-tunnels extension (~/.pi/web/extensions/service-tunnels/, fully self-con
 ## Development and deployment
 
 ```bash
-cd dev-repo/service-tunnels
 node tools/build-client.mjs   # client bundle (esbuild, react→host-shim externalized)
 npm install                  # dev dependencies (esbuild)
 node tools/deploy.mjs         # build client + copy sources + in-target npm install --omit=dev

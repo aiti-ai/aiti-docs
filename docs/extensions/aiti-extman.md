@@ -7,7 +7,7 @@ ext:
   name: aiti-extman
   description: 扩展管理器 —— 搜索/启停/安装/在线注册表
   soul: 管扩展的，也该是个扩展。
-  type: dev-repo
+  type: aiti-ext
   category: 系统工具
   version: "0.1.8"
   status: beta
@@ -124,7 +124,6 @@ ai:
     - 新建/修改扩展：`create-from-template` 模板库起步（**可选，AI 自由创建也行**）；配**规范提示词**（entry 契约/store 约定/部署链/红线 + 各扩展点 demo 参考）——**默认不注册为 skills，创建/修改时单独喂给 AI** → 写业务源码 → deploy → reload（用户工具栏立即出现）
   install: git:/npm:/本地路径/zip
   storage_dir: <dataDir>
-  source_dir: dev-repo/<各扩展源码>
   page: 工具栏 🧩 扩展 → 管理器
 ```
 

@@ -6,7 +6,7 @@ ext:
   name: aiti-cmd
   description: 命令管理器 —— 真 PTY 终端 + 常用命令 + 消息识别执行 + agent 命令实时观察 + 跨扩展统一执行出口
   soul: 大脑留给思考，命令交给收藏夹。
-  type: dev-repo
+  type: aiti-ext
   category: 命令工具
   version: "0.1.8"
   status: beta
@@ -66,7 +66,6 @@ ai:
     - 执行命令会话（agent 工具 aiti_cmd_run：AI 会话内经后端 runner 起常驻 PTY，输出进面板，危险命令二次确认）
     - 导出 skill：skill=true 的命令同步写 ~/.pi/agent/skills/aiti-cmd-<name>/SKILL.md
   storage_dir: <configDir>（= ~/.pi/web/data/aiti-cmd；审计日志/沙箱在 <cacheDir> = …/cache）
-  source_dir: dev-repo/aiti-cmd
   page: 工具栏 ⚡ 命令 → 命令面板
 ```
 

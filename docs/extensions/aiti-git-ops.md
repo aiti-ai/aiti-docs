@@ -6,7 +6,7 @@ ext:
   name: Git Ops 共享引擎
   description: 白名单 git 写引擎——checkout 预检 / stash / plan 断点 / 审计 / changed topic，供 folder 与 session-manager 消费
   soul: 一处写仓，处处安全。
-  type: dev-repo
+  type: aiti-ext
   category: 服务端引擎
   version: "0.1.7"
   status: active
@@ -16,7 +16,6 @@ ext:
   repo: ""
   install: |
     # 部署到 ~/.pi/web/extensions/aiti-git-ops/ 后 reload
-    node dev-repo/aiti-git-ops/tools/deploy.mjs
   license: MIT
   tags: [git, server-side, engine]
 ---

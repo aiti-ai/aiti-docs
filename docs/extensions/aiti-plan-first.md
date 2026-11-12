@@ -6,7 +6,7 @@ ext:
   name: 方案先行
   description: AI 开发先方案后动手 —— aiti-git-trace 事件感知（推-听架构零扫描）：md 变更弹绑定向导（方案命名优先）、大改未跟方案提醒、领先提醒「先做方案」、tags 闭环（front-matter 事实源 + 手工/自荐标签）、会话列表行前部 📋 绑定标
   soul: 不强制不打断，只在 md 变了和大改跑偏时轻轻提一句：先有方案，再动手。
-  type: dev-repo
+  type: aiti-ext
   category: 开发工具
   version: "0.1.7"
   status: active
@@ -16,7 +16,6 @@ ext:
   repo: ""
   install: |
     # 依赖：aiti-git-trace ≥0.2.0（services.trace v2 事件出口；缺席自动休眠，手动绑定仍可用）
-    # 部署：node dev-repo/aiti-plan-first/tools/deploy.mjs 后 POST /api/extensions/reload
     # pi 扩展 emit 需重启 pi 进程生效（终端桥接会话不触发自动提醒——见方案文档 §9）；另需
     #   aiti-prompts（slogan 提示词编辑）、aiti-doc-center（tag 词表/🧵 会话视图消费绑定标）
   license: MIT

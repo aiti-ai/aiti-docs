@@ -6,7 +6,7 @@ ext:
   name: ZCode 会话后端
   description: 智谱 ZCode（桌面端内嵌 CLI runtime）驱动 —— app-server 长驻（默认，流式/工具卡/steer/附件）+ oneshot 兜底双通道，接入 All Sessions，合规吃 GLM 编程套餐
   soul: GLM 套餐在哪儿跑，面板就在哪儿看。
-  type: dev-repo
+  type: aiti-ext
   category: 多 agent 后端
   version: "0.1.9"
   status: active
@@ -121,7 +121,6 @@ ZCode 通道（start-plan 等）触发风控验证码时：client 自带 `Captch
 ## 测试
 
 ```bash
-node --test dev-repo/aiti-zcode-agent/zcode-core.test.mjs
 ```
 
 52 用例（zcode-core.test.mjs）+ zcode-appserver(33) / handle-fork(6) / handle-queue(7) / cards(1) 四套件：`--json` 解析 / 错误提取 / 模型 ref 与 env 组装 / 凭据解密+换 key 全链路（注入 fetch，零网络）/ 下载原子性（.part + abort 取消）/ 通道探测 / 假 AppImage 解压缓存 / handle wire 契约（换绑、resume、abort、错误帧、模型切换、种子跟随）/ app-server 通道 / fork / 队列 / 验证码卡。

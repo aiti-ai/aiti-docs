@@ -105,7 +105,6 @@ Wired to the `session/fork` protocol surface (capability `fork`, resident app-se
 ## Testing
 
 ```bash
-node --test dev-repo/aiti-zcode-agent/zcode-core.test.mjs
 ```
 
 52 cases (zcode-core.test.mjs) + four suites zcode-appserver(33) / handle-fork(6) / handle-queue(7) / cards(1): `--json` parsing / error extraction / model ref and env assembly / full credential decrypt + key exchange chain (fetch injected, zero network) / download atomicity (.part + abort cancel) / channel probing / fake AppImage extraction cache / handle wire contract (rebind, resume, abort, error frames, model switching, seed follow) / app-server channel / fork / queue / captcha card.

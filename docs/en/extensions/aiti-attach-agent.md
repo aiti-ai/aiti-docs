@@ -89,7 +89,7 @@ switching away and back = on SSE reconnect attach priority hits the bridge, so "
    (the disk file may lag the TUI in-memory state; an in-progress turn is not flushed);
 4. `app/api/sessions/[id]/auto-name/route.ts`: when the bridge claims, auto-naming degrades to skip (within the window it would
    otherwise run a naming LLM turn against the twin, double-writing the file);
-5. `dev-repo/aiti-attach-agent/bridge-registry.ts`: registry changed to tmp+rename atomic write —
+5. `bridge-registry.ts`: registry changed to tmp+rename atomic write —
    the previous direct write was non-atomic; concurrent readers (dev/prod, two pi-web + multiple TUIs sharing the same file) reading half a
    JSON would treat it as an empty table, and any subsequent read-modify-write would wipe all entries (attach fails entirely).
    Also synced to the installed copy `~/.pi/agent/extensions/pi-web-bridge/bridge-registry.ts` (effective for newly

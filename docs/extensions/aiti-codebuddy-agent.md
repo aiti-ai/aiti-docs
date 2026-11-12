@@ -6,7 +6,7 @@ ext:
   name: CodeBuddy Code 会话后端
   description: 腾讯 CodeBuddy Code CLI（cbc）驱动 —— stream 长连接（默认）+ exec 兜底双模式 + --resume 接入 All Sessions，control_request 三通道，API-key env 登录
   soul: 腾讯 CodeBuddy 会话，哪儿都能接上聊。
-  type: dev-repo
+  type: aiti-ext
   category: 多 agent 后端
   version: "0.1.6"
   status: active

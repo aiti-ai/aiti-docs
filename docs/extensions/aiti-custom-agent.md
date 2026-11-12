@@ -6,7 +6,7 @@ ext:
   name: 自定义 Agent
   description: UI 表单注册自定义会话后端——启动命令 + 参数前缀 + 成员 env + 桥模式，保存即热生效；generic 驱动 one-shot spawn（docker 化 / 命令包装 / 同一 CLI 多配置）
   soul: 一行命令，一个后端；docker 里跑 agent，从此不再手写配置。
-  type: dev-repo
+  type: aiti-ext
   category: 多 agent 后端
   version: "0.1.8"
   status: active
@@ -65,7 +65,7 @@ ext:
 
 one-shot 任务型：`prompt` 写进 stdin → stdout 逐块流式（`message_update`）→ 进程退出收口（`message_end` + `agent_settled`）；abort 杀进程（SIGTERM → 3s → SIGKILL）。能力面诚实声明：仅核心四件套 + getMessages；模型/权限/fork/队列等全部 false。历史本地 JSONL（`<configDir>/sessions/<id>.jsonl`），P1 不进 All Sessions（provider 不带 agentKey，宿主不落站位文件）。
 
-launch 解析复用共享层 `dev-repo/_shared/agent-spawn-env.ts` 的 `resolveCliLaunch`（本扩展与 8 家 agent 扩展同款：env 合并顺序 = 基底/治理透传 → 自动 `AITI_BRIDGE_URL` → 成员 env → bridge 重写；`$VAR`/`${cwd}` spawn 时展开）。
+launch 解析复用共享层 `agent-spawn-env.ts` (shared layer) 的 `resolveCliLaunch`（本扩展与 8 家 agent 扩展同款：env 合并顺序 = 基底/治理透传 → 自动 `AITI_BRIDGE_URL` → 成员 env → bridge 重写；`$VAR`/`${cwd}` spawn 时展开）。
 
 ## 端点
 

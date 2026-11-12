@@ -29,7 +29,7 @@ function ssrCatalog() {
 /** 英文 locale（/en/ 前缀）下的标签与文案——中文注册表仍是唯一数据源，这里只做展示层翻译。 */
 const TYPE_LABEL_EN = {
   "devtools-plugin": "Devtools plugin",
-  "dev-repo": "aiti-agent extension",
+  "aiti-ext": "aiti-agent extension",
   bridge: "MCP bridge",
   "ide-plugin": "IDE plugin",
   theme: "Theme",
@@ -72,7 +72,7 @@ const CATEGORY_EN = {
 
 const TYPE_LABEL = {
   "devtools-plugin": "开发工具插件",
-  "dev-repo": "aiti-agent 扩展",
+  "aiti-ext": "aiti-agent 扩展",
   bridge: "MCP 桥",
   "ide-plugin": "IDE 插件",
   theme: "主题",

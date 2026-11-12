@@ -6,7 +6,7 @@ ext:
   name: Excel 表格编辑器
   description: .xlsx/.xlsm 在线预览+编辑（exceljs 数据面 + Univer 视图面）；.xls/.ods 只读预览与一键转 .xlsx
   soul: 老格式不挡路——转换、派生、编辑各归其位。
-  type: dev-repo
+  type: aiti-ext
   category: 开发工具
   version: "0.1.7"
   status: active

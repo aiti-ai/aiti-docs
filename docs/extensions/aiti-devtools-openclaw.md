@@ -18,7 +18,6 @@ ext:
   npm: "@aiti-ai/aiti-devtools-openclaw"
   install: |
     # 源码安装（--link 本地目录）
-    openclaw plugins install <dev-repo/aiti-devtools-openclaw> --link
     openclaw plugins enable aiti-devtools && 重启 gateway
     # openclaw 2026.10.10+ 两道门：先 openclaw doctor --fix（state 库迁移，先备份 ~/.openclaw/state/）；
     # 升级后插件报 requires capability consent → openclaw plugins enable aiti-devtools --accept-capabilities + 重启即清

@@ -6,7 +6,7 @@ ext:
   name: Echo 会话后端
   description: Echo agent —— session-provider slot 演示（多 agent 前端最小示例）
   soul: 先让一声回声上线，再让千军万马接入。
-  type: dev-repo
+  type: aiti-ext
   category: 多 agent 后端
   version: "0.1.6"
   status: experimental

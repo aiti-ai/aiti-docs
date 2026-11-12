@@ -6,7 +6,7 @@ ext:
   name: 子代理
   description: 子代理舰队 Fleet 观测/运行控制/Agent 管理/并发配置——fork 引擎，工具归上游 pi-subagents
   soul: 主 agent 负责思考，脏活累活分给专职的它。
-  type: dev-repo
+  type: aiti-ext
   category: AI 能力
   version: "0.4.7"
   status: active

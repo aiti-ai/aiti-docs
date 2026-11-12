@@ -6,7 +6,7 @@ ext:
   name: Service Tunnels
   description: 本机服务一键公网可达 —— 端口发现（服务识别/自定义名）/ 五种暴露模式（隧道·vhost·混合·路由器映射·IPv6 直连）/ 认证网关（portal·TOTP·人脸声纹）/ DDNS 自动解析 / 网络体检 doctor
   soul: 本地服务不该被防火墙关起来——在哪都应该可以安全访问。
-  type: dev-repo
+  type: aiti-ext
   category: 服务隧道
   version: "0.3.9"
   status: active
@@ -15,7 +15,7 @@ ext:
   website: https://aiti.pw
   repo: ""
   install: |
-    # 源码：dev-repo/service-tunnels/
+    # 源码：the internal dev repo
     # 部署：node tools/deploy.mjs（构建客户端 + 拷贝 + 目标内 npm install --omit=dev）
     # 生效：POST /api/extensions/reload
   license: MIT
@@ -106,7 +106,6 @@ service-tunnels 扩展（~/.pi/web/extensions/service-tunnels/，完全自包含
 ## 开发与部署
 
 ```bash
-cd dev-repo/service-tunnels
 node tools/build-client.mjs   # 客户端 bundle（esbuild，react→host-shim 外部化）
 npm install                  # 开发依赖（esbuild）
 node tools/deploy.mjs         # 构建客户端 + 拷贝源码 + 目标内 npm install --omit=dev

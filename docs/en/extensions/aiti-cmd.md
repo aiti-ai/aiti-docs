@@ -50,7 +50,6 @@ ai:
     - run command session (agent tool aiti_cmd_run: start a long-lived PTY via the backend runner inside an AI session, output lands in the panel, dangerous commands double-confirm)
     - export skill: commands with skill=true are synced to ~/.pi/agent/skills/aiti-cmd-<name>/SKILL.md
   storage_dir: <configDir> (= ~/.pi/web/data/aiti-cmd; audit logs/sandbox in <cacheDir> = …/cache)
-  source_dir: dev-repo/aiti-cmd
   page: toolbar ⚡ Commands → command panel
 ```
 

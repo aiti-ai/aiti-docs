@@ -6,7 +6,7 @@ ext:
   name: 模型添加向导
   description: 引导添加 AI 提供商/模型：目录搜索（models.dev + 国内 AI 目录，中英文，贴 API 地址也能反向搜到）→ 填 token → 测试（2xx/429 都算通过）→ 选/输模型 → 写 models.json；找不到用 baseUrl 反向匹配（任意文档/代码片段自动提取 URL）/ 自动探测（漏 v1/v2 也能补，命中带 key 拉模型列表 + OpenAPI/模型前缀品牌信号）；编辑时 token 打码不返回前端
   soul: 地址、token、注册页——散落四方的钥匙，串成一串。
-  type: dev-repo
+  type: aiti-ext
   category: AI 能力
   version: "0.1.10"
   status: experimental

@@ -6,7 +6,7 @@ ext:
   name: AI 输入增强
   description: 聊天输入框增强 —— L0/L1 两层自动补全 + 收藏联想 + 🎤 实时 ASR 语音输入（多引擎可插拔/热词/2-pass 精修）+ 听写检测修复
   soul: 你还没打完的字，它已经替你想到一半了。
-  type: dev-repo
+  type: aiti-ext
   category: 聊天增强
   version: "0.4.10"
   status: active

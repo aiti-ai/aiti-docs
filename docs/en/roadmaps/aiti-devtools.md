@@ -33,7 +33,6 @@ tags: [roadmap, aiti-devtools]
 ## Tech Debt and Todos
 
 - [ ] `DBG_*` → `AITI_*` env var unification (`DBG_OPEN_CMD` → `AITI_OPEN_CMD`)
-- [x] Sync pipeline unified: the old `packages/` publish copies + `dbg-launcher.js` monolith have been deleted — the sole development source is `dev-repo/inject/src/` + `dev-repo/`, build and deploy go through `dev-repo/inject/tools/build.mjs` → `dev-repo/aiti-devtools/tools/deploy.mjs`
 - [ ] Self-check expansion: cross-origin iframe enumeration, SSE reconnection, TTL reuse regression
 - [ ] npm package split: client/launcher (`aiti-launcher.js`) and mcp-server/client under independent versioning
 - [ ] Standardized dual-injection mutual-exclusion detection (`window.__aiti` probing + debounce)

@@ -6,7 +6,7 @@ ext:
   name: IM 渠道
   description: IM 渠道接入 + cc-connect 大前端外壳 —— 托管 cc-connect 进程、概览/项目/通道/会话面板、socket API 出站发消息
   soul: AI 不该被锁在网页里——钉钉/飞书/微信都是它的窗口。
-  type: dev-repo
+  type: aiti-ext
   category: IM 渠道
   version: "0.1.7"
   status: active

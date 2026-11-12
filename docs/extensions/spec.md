@@ -21,7 +21,7 @@ ext:
   name: aiti helper             # 展示名（缺省 = id）
   description: 一句话描述        # 列表卡片副标题
   soul: 一句话灵魂描述          # 设计源动力（卡片斜体标注，可选但推荐）
-  type: dev-repo              # 类型枚举（见下）
+  type: aiti-ext              # 类型枚举（见下）
   category: 页面调试注入         # 列表分组（自定义中文分类）
   version: 0.2.1                # 当前版本
   status: active                # active / beta / experimental / archived
@@ -57,7 +57,7 @@ ext:
 
 | type | 含义 |
 |---|---|
-| `dev-repo` | aiti-agent 运行时扩展（`~/.pi/web/extensions/`） |
+| `aiti-ext` | aiti-agent 运行时扩展（`~/.pi/web/extensions/`） |
 | `host-adapter` | **宿主适配器**——装进第三方 agent 宿主（DSH/OpenClaw/OpenCode），**不装进 aiti-agent/pi-web**；须配 `installable: false` |
 | `bridge` | MCP 桥 / 本地服务（独立运行如 `npx @aiti-ai/aiti-bridge`，非 pi-web 扩展形态的须配 `installable: false`；随 pi-web 部署的如 aiti-testagent 保持默认） |
 | `theme` / `skill` | 主题 / 技能（pi / aiti-agent 生态预留） |
@@ -120,7 +120,7 @@ ext:
       "id": "aiti-helper",
       "name": "aiti helper",
       "description": "…",
-      "type": "dev-repo",
+      "type": "aiti-ext",
       "docs": "/extensions/aiti-helper.html"
     }
   ],

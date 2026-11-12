@@ -67,28 +67,4 @@ AI window open/closed state + position/size, allow plan, viewport, and target UR
 - Browser-restricted operations go through the gesture bridge (a real user click, required every time)
 - The bridge authenticates with a token; right-click/middle-click allowed; cross-origin iframes skip injection
 
-## 4. File Structure
-
-The development source lives in `dev-repo/inject/` (esbuild builds the injection artifacts); the release form is an **aiti-agent extension** (`dev-repo/aiti-devtools/`, deployed to `~/.pi/web/extensions/aiti-devtools/`).
-
-| File | Responsibility |
-|---|---|
-| `dev-repo/inject/src/client/index.js` | the injected mini `aiti-devtools` client (element profile: size/styles/component source and location/call sites/pageId/url) |
-| `dev-repo/inject/src/launcher/` | host launcher (widget UI / inspector / MCP bridge / interaction panel, modular) |
-| `dev-repo/inject/src/mcp/bridge-client.js` | generic bridge client (pages/AI windows connecting to the bridge) |
-| `dev-repo/inject/tools/build.mjs` | builds the single-file `dist/aiti-launcher.js` (client + launcher bundled) |
-| `dev-repo/bridge/dev-repo/bridge/bin/aiti-bridge.mjs` | MCP bridge (stdio + HTTP + page SSE) standalone edition |
-| `dev-repo/aiti-devtools/` | aiti-agent extension: `bridge.ts` (MCP bridge) / `inject.ts` (service-tunnels injection) / `client/aiti-client.mjs` (AI window) |
-| `dev-repo/aiti-devtools/tools/deploy.mjs` | builds the launcher + deploys the extension to `~/.pi/web/extensions/aiti-devtools/` |
-
-## 5. Development / Running
-
-```bash
-node dev-repo/inject/tools/build.mjs          # → inject/dist/aiti-launcher.js (injection single file) + bridge-client.js + cdp-core.js
-node dev-repo/core/tools/build-assets.mjs     # rebuild core/assets (central build artifact dir; read by bridge/carrier plugins)
-node dev-repo/aiti-devtools/tools/deploy.mjs              # → ~/.pi/web/extensions/aiti-devtools/ (aiti-agent hot reload)
-node dev-repo/bridge/dev-repo/bridge/bin/aiti-bridge.mjs --port 8777   # standalone MCP bridge
-node dev-repo/pi-ext/tools/build.mjs              # → dev-repo/pi-ext/dist/aiti-devtools-pi.js (pi extension)
-```
-
 > Plugin matrix: [aiti-devtools plugins](/en/products/aiti-devtools-plugins.md); usage docs: [aiti-devtools](/en/devtools/).

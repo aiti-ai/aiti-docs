@@ -6,7 +6,7 @@ ext:
   name: 追加系统提示词
   description: 管理 pi 的 APPEND_SYSTEM.md（会话启动时追加进 system prompt）——全局 ~/.pi/agent/ 与项目 <cwd>/.pi/ 两份，网页面板在线编辑保存，🤖 AI 帮你起草并直接写入
   soul: 一句提醒，次次生效。
-  type: dev-repo
+  type: aiti-ext
   category: 效率工具
   version: 0.1.0
   status: experimental

@@ -6,7 +6,7 @@ description: session-manager「真归档」的容器格式规范 —— brotli �
 
 # `.pwarc` 归档格式
 
-> session-manager「真归档」的容器格式规范。实现：`dev-repo/session-manager/lib/session-archive.ts`（读写唯一权威源）。
+> session-manager「真归档」的容器格式规范。实现：`session-archive.ts`（读写唯一权威源）。
 
 ## 1. 一句话与设计动机
 

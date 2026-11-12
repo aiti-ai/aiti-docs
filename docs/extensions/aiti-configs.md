@@ -6,7 +6,7 @@ ext:
   name: 配置版本化 + 崩溃自检
   description: 配置的安全网 —— AI/人改配置、改扩展改坏了，有锅可回、有 diff 可看、一键恢复；系统崩了，命令行哨兵不依赖出问题系统本身兜底恢复
   soul: AI 敢乱改，因为身后有一整个 git 当后悔药。
-  type: dev-repo
+  type: aiti-ext
   category: AI 能力
   version: "0.1.7"
   status: experimental
@@ -51,7 +51,7 @@ ext:
   "includes": [                           // 手写项（扩展声明自动聚合；首装默认模板为黑名单制目录通配）
     { "path": "~/.pi/agent/**",      "dest": "pi/agent/" },
     { "path": "~/.pi/web/**",        "dest": "web/" },
-    { "path": "dev-repo/aiti-ai-created/**", "dest": "src/ai-created/" },
+    { "path": "extensions/aiti-ai-created/**", "dest": "src/ai-created/" },
     { "path": "~/.pi/configs-self/**", "dest": "self/" }   // 自身配置防自丢
   ],
   "hardExcludes": [ "**/.git/**", "**/.aiti-trace/**" ],      // 仅仓元数据

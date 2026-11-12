@@ -6,7 +6,7 @@ ext:
   name: aiti-provider-usage
   description: Provider 余额/配额查询 —— 16 个适配器 id（DeepSeek/OpenRouter/Z.AI/OpenCode Go/Kimi/Codex/Copilot 等），会话信息面板「剩余额度」区块当前会话置顶展开，5min TTL 总览 + 手动刷新，事件驱动零轮询
   soul: 各家还剩多少额度，一面看尽。
-  type: dev-repo
+  type: aiti-ext
   category: 系统工具
   version: "0.1.8"
   status: experimental

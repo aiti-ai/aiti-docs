@@ -53,7 +53,6 @@ ai:
     - Adding clickable semantic blocks: within the core CLICKABLE_TAGS candidates + declared in the extension's ph.tags (no hardcoding core business)
     - Popup positioning: tr/pre go through portal fixed (the extension manages anchorRect + scroll following itself); p/li/h go in-flow sibling
   storage_dir: none (no server-side storage; only a resolve-roots read-only API, consuming the aiti-git-trace outlet in-process for cross-repo file resolution; optionalDependsOn aiti-git-trace)
-  source_dir: dev-repo/aiti-msg-smart
   page: direct clicks on chat message paragraphs/code blocks
 ```
 

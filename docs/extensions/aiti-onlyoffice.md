@@ -6,7 +6,7 @@ ext:
   name: OnlyOffice 深度保真编辑
   description: .docx/.xlsx/.pptx 完整保真预览+编辑（OnlyOffice DocumentServer Docker 后端）。AGPL 社区版，feature 默认关
   soul: 深度保真档——与桌面 Office 同引擎，复杂排版编辑不将就。
-  type: dev-repo
+  type: aiti-ext
   category: 开发工具
   version: "0.1.7"
   status: active

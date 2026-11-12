@@ -31,7 +31,6 @@ ai:
     - Input suggestions: suggest candidates = **commands (⚡) + favorite prompts (📌) mixed**; a command hit fills/executes directly, not via AI; only with no hit does AI generation step in
     - Session-extracted entries (source=session) default to **suggest:false** (excluded from smart suggestions)
   storage_dir: ~/.pi/web/data/aiti-prompts/config (prompts.json)
-  source_dir: dev-repo/aiti-prompts
   page: left sidebar library / right file dock / dialogs (the toolbar 📌 button returns once the source's duplicate toolbar key is fixed)
 ```
 

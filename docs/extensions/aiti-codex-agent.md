@@ -6,7 +6,7 @@ ext:
   name: Codex 会话后端
   description: OpenAI Codex CLI driver —— exec --json + resume 接入 All Sessions；认证双轨（auth.json OAuth / openrouter env），直播与冷回放同形原生工具卡
   soul: Codex 在哪儿跑，面板就在哪儿看。
-  type: dev-repo
+  type: aiti-ext
   category: 多 agent 后端
   version: "0.1.8"
   status: experimental

@@ -6,7 +6,7 @@ ext:
   name: 崩溃演习
   description: flag 写入 → startup throw → ⚠ 指示器 + restore-ext 幂等清除——崩溃自愈链路的演习工具
   soul: 崩溃要演，不要等。
-  type: dev-repo
+  type: aiti-ext
   category: 系统工具
   version: "0.0.3"
   status: dev-only

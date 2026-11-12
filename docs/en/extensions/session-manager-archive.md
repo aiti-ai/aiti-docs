@@ -6,7 +6,7 @@ description: Container format specification for session-manager's "true archive"
 
 # `.pwarc` Archive Format
 
-> Container format specification for session-manager's "true archive". Implementation: `dev-repo/session-manager/lib/session-archive.ts` (the single authoritative source for reads and writes).
+> Container format specification for session-manager's "true archive". Implementation: `session-archive.ts` (the single authoritative source for reads and writes).
 
 ## 1. One-liner and Design Motivation
 

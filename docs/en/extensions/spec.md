@@ -21,7 +21,7 @@ ext:
   name: aiti helper             # display name (default = id)
   description: one-line description  # list card subtitle
   soul: one-line soul statement      # the design's driving force (italic note on the card, optional but recommended)
-  type: dev-repo              # type enum (see below)
+  type: aiti-ext              # type enum (see below)
   category: page debug injection     # list grouping (custom Chinese category)
   version: 0.2.1                # current version
   status: active                # active / beta / experimental / archived
@@ -57,7 +57,7 @@ ext:
 
 | type | Meaning |
 |---|---|
-| `dev-repo` | aiti-agent runtime extensions (`~/.pi/web/extensions/`) |
+| `aiti-ext` | aiti-agent runtime extensions (`~/.pi/web/extensions/`) |
 | `host-adapter` | **Host adapters** — installed into third-party agent hosts (DSH/OpenClaw/OpenCode), **not** into aiti-agent/pi-web; must set `installable: false` |
 | `bridge` | MCP bridge / local service (standalone runs like `npx @aiti-ai/aiti-bridge`, which are not pi-web extensions, must set `installable: false`; ones deployed with pi-web like aiti-testagent keep the default) |
 | `theme` / `skill` | Themes / skills (reserved in the pi / aiti-agent ecosystem) |
@@ -120,7 +120,7 @@ The `/extensions.json` structure (`schemaVersion: 2` — **split**: `extensions`
       "id": "aiti-helper",
       "name": "aiti helper",
       "description": "…",
-      "type": "dev-repo",
+      "type": "aiti-ext",
       "docs": "/extensions/aiti-helper.html"
     }
   ],

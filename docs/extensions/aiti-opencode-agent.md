@@ -6,7 +6,7 @@ ext:
   name: OpenCode 会话后端
   description: OpenCode CLI 专属驱动 —— 历史会话在 pi-web 打开、续聊（oneshot run -s --format json）
   soul: OpenCode 会话在 pi-web 里打开、续聊、回放。
-  type: dev-repo
+  type: aiti-ext
   category: 多 agent 后端
   version: "0.1.6"
   status: experimental

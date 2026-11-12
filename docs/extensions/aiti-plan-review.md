@@ -6,7 +6,7 @@ ext:
   name: 方案评审
   description: Plan-Sandbox 采认收尾 UI——读 review.json 契约（声明 vs 其他），采认选中并关闭沙箱 / 仅保存（保留沙箱）/ 全部丢弃 + 沙箱历史（重新提取/重用/销毁）
   soul: 方案落地前，最后一道闸。
-  type: dev-repo
+  type: aiti-ext
   category: 系统工具
   version: "0.1.7"
   status: beta

@@ -6,7 +6,7 @@ ext:
   name: 跟读模式
   description: AI 输出语音朗读——可切音色/暂停/跳过/停止；默认浏览器 Web Speech，可选 edge-tts
   soul: AI 说给你听。
-  type: dev-repo
+  type: aiti-ext
   category: 聊天增强
   version: "0.1.7"
   status: beta
@@ -30,4 +30,4 @@ pi-web「跟读模式」扩展：把 AI 输出的文本用语音朗读出来。
 - **双 SSE 双推合并（方案A）**：文本流与播放进度两条 SSE 通道合并为单通道双推，消除乱序/重复；extman 对懒扩展前置物化（打开面板即拉起 client）。
 - 扩展已懒加载化（`clientImmediately:false`）。
 
-方案文档：`dev-repo/docs/aiti-ai-speek-*.md`（4 份 plan）。
+
