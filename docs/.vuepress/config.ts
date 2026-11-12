@@ -4,6 +4,12 @@ import theme from './theme.ts';
 import extensionsCatalog from './plugins/extensions-catalog.ts';
 import { seoEnhance } from './plugins/seo-enhance.ts';
 
+// Privacy guard: vuepress-theme-hope force-enables @vuepress/plugin-git on build
+// (even when plugins.git is false), compiling contributor names/emails into every
+// page bundle. Registering a no-op placeholder under the same name makes its
+// "already installed" check skip the injection.
+const blockGitPlugin = { name: "@vuepress/plugin-git" };
+
 export default defineUserConfig({
   base: '/',
   title: 'aiti',
@@ -58,6 +64,7 @@ export default defineUserConfig({
   theme,
 
   plugins: [
+    blockGitPlugin,
     // 扩展注册表：扫描 docs/extensions/*.md 的 ext frontmatter → 生成 /extensions.json
     extensionsCatalog(),
     // SEO 增强：keywords / og:image / twitter 卡片 / JSON-LD / llms.txt（依赖 extensions.json，须在其后）

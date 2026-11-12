@@ -2,7 +2,7 @@
 
 aiti 官方文档站 —— 以 **pi** 为引擎的个人 AI 开发工作台与本地调试注入生态。
 
-- 官网：<https://aiti.py>
+- 官网：<https://aiti.pw>
 - GitHub：<https://github.com/aiti-ai>
 - npm scope：`@aiti-ai/*`
 

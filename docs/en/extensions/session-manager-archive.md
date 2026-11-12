@@ -51,7 +51,7 @@ EOF-8               [u32 LE: manifest byte length][u32 LE: magic 0x43524157 → 
   "files": [
     {
       "sessionId": "<sessionId>",
-      "path": "/home/<user>/.pi/agent/sessions/--home-<user>-workspace-myproj--/xxx.jsonl",
+      "path": "/home/<user>/.pi/agent/sessions/--home-<user>-workspace-myproj--/<sessionId>.jsonl",
       "offset": 7,
       "size": 693504,
       "brotliSize": 136662,

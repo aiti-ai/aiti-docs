@@ -165,6 +165,9 @@ export default hopeTheme({
   },
 
   plugins: {
+    // Privacy: no git metadata (contributors email / timestamps) compiled into page bundles
+    git: false,
+
     // 组件插件
     components: {
       components: ["Badge", "VPCard"],

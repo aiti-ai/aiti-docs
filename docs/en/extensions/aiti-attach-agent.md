@@ -24,8 +24,8 @@ Don't want to type `/web` manually every time? Export this in your shell config 
 export PI_WEB_BRIDGE_AUTO=1                              # any pi CLI session auto-starts the bridge on launch
 # Optional: route aiti_* tools through the managed bridge of a specific pi-web instance
 # (unset = use the resident standalone bridge 127.0.0.1:8777; attach is unaffected, it follows the registry)
-# export PI_WEB_BRIDGE_BASE=https://pi.example.com/dev    # dev instance
-# export PI_WEB_BRIDGE_BASE=https://pi.example.com        # prod instance
+# export PI_WEB_BRIDGE_BASE=https://your-pi-web.example.com/dev    # dev instance
+# export PI_WEB_BRIDGE_BASE=https://your-pi-web.example.com        # prod instance
 ```
 
 Afterwards every terminal `pi` session (including `-c` / `--resume` restores) automatically executes the equivalent of

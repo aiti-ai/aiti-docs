@@ -40,8 +40,8 @@ Socket 附着型会话后端：连接一个已在运行的 agent 进程（pi TUI
 export PI_WEB_BRIDGE_AUTO=1                              # 任何 pi CLI 会话起动即自动起桥
 # 可选：aiti_* 工具改走指定 pi-web 实例的托管桥
 # （不设 = 走常驻独立桥 127.0.0.1:8777；attach 不受影响，按注册表走）
-# export PI_WEB_BRIDGE_BASE=https://pi.example.com/dev    # dev 实例
-# export PI_WEB_BRIDGE_BASE=https://pi.example.com        # prod 实例
+# export PI_WEB_BRIDGE_BASE=https://your-pi-web.example.com/dev    # dev 实例
+# export PI_WEB_BRIDGE_BASE=https://your-pi-web.example.com        # prod 实例
 ```
 
 之后每个终端 `pi` 会话（含 `-c` / `--resume` 恢复）在 `session_start` 时自动执行等价

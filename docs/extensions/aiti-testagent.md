@@ -79,7 +79,7 @@ TestAgent 2.0 —— **给 AI 用的 Arthas++**：教 AI 怎么调试运行中�
 
 aiti-testagent 同时是 pi-web 扩展：工具条 ☕ Java 按钮 → 面板。**桥为中心的管理模式**：
 
-- **桥管理卡片**：默认**自建桥**（同 jar 双角色，保存即自动拉起/幂等探活；端口 + 注册/access token 可配），也可切**外部桥**（地址 + ws + token）；[🖥 打开操作台] 经 service-tunnels proxy（无认证 open binding）把桥端口挂到 pi-web 域（`https://<桥端口>.your-pi-web.example.com/dev` 前缀/根）直接开完整操作台，右上角端点下拉切目标；🎟 邀请票据签发保留
+- **桥管理卡片**：默认**自建桥**（同 jar 双角色，保存即自动拉起/幂等探活；端口 + 注册/access token 可配），也可切**外部桥**（地址 + ws + token）；[🖥 打开操作台] 经 service-tunnels proxy（无认证 open binding）把桥端口挂到 pi-web 域（`https://<桥端口>.<pi-web 域名>/dev` 前缀/根）直接开完整操作台，右上角端点下拉切目标；🎟 邀请票据签发保留
 - **JAVA_OPTS 自动挂载开关**：一键写 `~/.bashrc` + `~/.profile` 标记块（`JAVA_TOOL_OPTIONS=-javaagent:…-Dtestagent.bridge=ws://…-Dtestagent.httpPort=0`）——**所有新启动的 Java 进程自动挂 agent 并连桥**，设好后等 ta client 自动注册即可；关掉即移除块。注意影响所有新 Java 进程（含 maven/gradle），自担开销
 - **⇄ 桥端点区**：endpointId/pid/port/remoteIp/在线点；每行 [🖥] 打开桥操作台（选端点）/ 隧道状态 / 离线移除
 - **已挂载会话表**：每行 **[🖥 打开操作台]**（service-tunnels proxy no-auth 挂该端点自己的 httpPort，URL 保留 TA basePath 1:1 透传；双实例自动同步登记）+ ⛓✕ 取消挂载；未挂载 Java 进程一键 Attach（配置桥后自动上桥）

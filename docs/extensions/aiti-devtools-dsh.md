@@ -17,7 +17,7 @@ ext:
   repo: ""
   npm: "@aiti-ai/aiti-devtools-dsh"
   install: |
-    # npm（npm-registry.example.com 镜像），装进 DSH web profile：
+    # npm，装进 DSH web profile：
     dsh plugin --profile web add @aiti-ai/aiti-devtools-dsh
     # npm 11 arborist 坑：peerDeps `*` 会崩，须 --legacy-peer-deps
     # profile 根级 core 是独立依赖行，core 升级后须显式：
