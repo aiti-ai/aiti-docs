@@ -19,6 +19,10 @@ export default defineUserConfig({
     ['meta', { name: 'theme-color', content: '#7c3aed' }],
     ['meta', { name: 'apple-mobile-web-app-capable', content: 'yes' }],
     ['meta', { name: 'apple-mobile-web-app-status-bar-style', content: 'black' }],
+    // Baidu Analytics (tongji.baidu.com) — equivalent of the official snippet:
+    // define _hmt first (sync), then load hm.js async.
+    ['script', {}, 'var _hmt = _hmt || [];'],
+    ['script', { async: true, src: 'https://hm.baidu.com/hm.js?a708f5b3da36a2aeb0402c8cccc8f33b' }],
   ],
   port: 8082,
 
