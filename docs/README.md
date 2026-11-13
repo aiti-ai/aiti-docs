@@ -50,12 +50,12 @@ copyright: false
 footer: MIT Licensed | Copyright © 2026 aiti-ai
 ---
 
-<p align="center">
-  <a href="https://www.npmjs.com/package/@aiti-ai/pi-web"><img alt="npm version" src="https://img.shields.io/npm/v/@aiti-ai/pi-web?label=%40aiti-ai%2Fpi-web"></a>
-  <a href="https://www.npmjs.com/package/@aiti-ai/pi-web"><img alt="npm downloads" src="https://img.shields.io/npm/dm/@aiti-ai/pi-web"></a>
-  <a href="https://github.com/aiti-ai/aiti-ai"><img alt="GitHub stars" src="https://img.shields.io/github/stars/aiti-ai/aiti-ai?style=flat&logo=github"></a>
-  <a href="https://www.npmjs.com/package/@aiti-ai/pi-web"><img alt="license" src="https://img.shields.io/npm/l/@aiti-ai/pi-web"></a>
-</p>
+<div style="display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 8px">
+  <a href="https://www.npmjs.com/package/@aiti-ai/pi-web"><img style="display:inline-block" alt="npm version" src="https://img.shields.io/npm/v/@aiti-ai/pi-web?label=%40aiti-ai%2Fpi-web"></a>
+  <a href="https://www.npmjs.com/package/@aiti-ai/pi-web"><img style="display:inline-block" alt="npm downloads" src="https://img.shields.io/npm/dm/@aiti-ai/pi-web"></a>
+  <a href="https://github.com/aiti-ai/aiti-ai"><img style="display:inline-block" alt="GitHub stars" src="https://img.shields.io/github/stars/aiti-ai/aiti-ai?style=flat&logo=github"></a>
+  <a href="https://www.npmjs.com/package/@aiti-ai/pi-web"><img style="display:inline-block" alt="license" src="https://img.shields.io/npm/l/@aiti-ai/pi-web"></a>
+</div>
 
 
 ### 一条命令，浏览器即用
