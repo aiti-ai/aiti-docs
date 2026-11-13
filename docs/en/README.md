@@ -57,7 +57,6 @@ footer: MIT Licensed | Copyright © 2026 aiti-ai
   <a href="https://www.npmjs.com/package/@aiti-ai/pi-web"><img alt="license" src="https://img.shields.io/npm/l/@aiti-ai/pi-web"></a>
 </p>
 
-<img src="/hero-workbench.png" alt="aiti-agent web workbench: projects and multi-agent session list on the left, conversation, tool-call details and usage stats on the right" style="width:100%;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.15);border:1px solid rgba(128,128,128,.25)">
 
 ### One command, browser-first
 
