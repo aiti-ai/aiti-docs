@@ -67,7 +67,7 @@ AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 72+ 个
 - [aiti-provider-usage](https://aiti.pw/extensions/aiti-provider-usage.html): Provider 余额/配额查询 —— 16 个适配器 id（DeepSeek/OpenRouter/Z.AI/OpenCode Go/Kimi/Codex/Copilot 等），会话信息面板「剩余额度」区块当前会话置顶展开，5min TTL 总览 + 手动刷新，事件驱动零轮询
 - [aiti-qoder-agent](https://aiti.pw/extensions/aiti-qoder-agent.html): Qoder CLI 专属后端 —— 双区域 credits/listModels、WASM 签名请求、扩展 API 免开会话查询
 - [aiti-queue-keeper](https://aiti.pw/extensions/aiti-queue-keeper.html): 队列面板接管 —— 完整队列 UI（横幅/行操作/拖拽排序/回收站/撤销条/导入导出），core 回到上游同形兜底
-- [aiti-quickstart](https://aiti.pw/extensions/aiti-quickstart.html): 空白态引导扩展——新建会话欢迎页 widget（上手步骤 / 快捷操作 / 示例提示词，走宿主 newSessionWidgets 插槽可 ⚙ 自定义）+ 左栏 DockStack 全折叠空白引导卡（与应用中心同屏共存，✕ 可关闭）+ v2 工作区获取 Hub（Git 克隆 / 上传压缩包 / 本地目录 / 新建）+ 侧栏「快速上手」静态条目（应用中心可钉住卡片，点击重返 quickstart 欢迎页）
+- [aiti-quickstart](https://aiti.pw/extensions/aiti-quickstart.html): 空白态引导扩展——新建会话欢迎页 widget（上手步骤 / 快捷操作 / 任务运行时 / 示例提示词，走宿主 newSessionWidgets 插槽可 ⚙ 自定义）+ 左栏 DockStack 全折叠空白引导卡（与应用中心同屏共存，✕ 可关闭）+ v2 工作区获取 Hub（Git 克隆 / 上传压缩包 / 本地目录 / 新建）+ 侧栏「快速上手」静态条目（应用中心可钉住卡片，点击重返 quickstart 欢迎页）
 - [aiti-recovery](https://aiti.pw/extensions/aiti-recovery.html): 恢复 UI 扩展——队列恢复对话框（会话中断排队消息逐条决议）+ 重启恢复向导（中断会话两步处理），红线语义保留：绝不自动投递，续跑只发「继续」
 - [aiti-session-cards](https://aiti.pw/extensions/aiti-session-cards.html): 会话请求卡扩展——交互元语卡（zcode 方案审批 / AskUser / omp OAuth / generic 兜底）与工具授权卡完整 UI，自 pi-web core 外迁（agent 能力 UI 去核化 P1）
 - [aiti-sheet-univer](https://aiti.pw/extensions/aiti-sheet-univer.html): .xlsx/.xlsm 在线预览+编辑（exceljs 数据面 + Univer 视图面）；.xls/.ods 只读预览与一键转 .xlsx

@@ -112,7 +112,7 @@ CLI 在服务就绪后自动打开浏览器；未打开则访问 [http://127.0.0
 | `pi-web open [--port N]` | 在浏览器打开运行中的服务 |
 | `pi-web update [--check]` | 更新全局安装 |
 
-更新：`pi-web stop` 后执行 `pi-web update`（或重跑安装命令）。卸载：`npm uninstall -g @aiti-ai/pi-web`。
+更新步骤详见[更新](./update.md)。卸载：`npm uninstall -g @aiti-ai/pi-web`。
 
 ## 脚本透明性
 
@@ -125,10 +125,11 @@ CLI 在服务就绪后自动打开浏览器；未打开则访问 [http://127.0.0
 
 产物由 [release 工作流](https://github.com/aiti-ai/aiti-ai/blob/main/.github/workflows/release.yml)在推 `v*` tag 时自动构建：4 平台（linux-x64 / darwin-x64 / darwin-arm64 / win-x64）各自打包「npm 包内容 + 生产依赖闭包」，每平台产 sha256，install 脚本按系统/架构自动选择并校验。
 
-升级：重跑安装器（先 `pi-web stop`）。npm 渠道安装的用 `pi-web update`。
+升级：见[更新](./update.md)（一键脚本渠道可重跑安装器，先 `pi-web stop`）。
 
 ## 下一步
 
+- [更新](/guide/update.md) —— 版本号方案与各安装形态的更新步骤
 - [aiti-agent · 产品总览](/products/aiti-agent.md) —— 能力全景与定位
 - [项目起源](/guide/origin.md) —— pi-web → aiti 的来龙去脉
 - [快速开始（aiti-agent 工作台）](/guide/quick-start.md) —— 装好后的第一步上手

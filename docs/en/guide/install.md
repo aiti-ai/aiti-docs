@@ -112,7 +112,7 @@ The CLI opens your browser once the server is ready; if it does not, open [http:
 | `pi-web open [--port N]` | open a running server in the browser |
 | `pi-web update [--check]` | update a global install |
 
-Update: `pi-web stop`, then `pi-web update`. Uninstall: `npm uninstall -g @aiti-ai/pi-web`.
+Update: see [Update](update.md). Uninstall: `npm uninstall -g @aiti-ai/pi-web`.
 
 ## Script transparency
 
@@ -125,10 +125,11 @@ Both scripts do one thing: query the GitHub API → download the release asset �
 
 Assets are built automatically by the [release workflow](https://github.com/aiti-ai/aiti-ai/blob/main/.github/workflows/release.yml) whenever a `v*` tag is pushed: 4 platforms (linux-x64 / darwin-x64 / darwin-arm64 / win-x64), each bundling the npm package contents plus its production dependency closure, each with a sha256 that the installer verifies.
 
-Upgrade: re-run the installer (run `pi-web stop` first). npm-channel installs use `pi-web update`.
+Upgrade: see [Update](update.md) (installer-channel users can re-run the installer; run `pi-web stop` first).
 
 ## Next steps
 
+- [Update](/en/guide/update.md) — the version scheme and update steps for every install shape
 - [Quick Start (aiti-agent workbench)](/en/guide/quick-start.md) — the first steps after installing
 - [devtools quick start](/en/devtools/quick-start.md) — if what you want is the "AI operates your page" debugging toolchain
 - [aiti-agent · product overview](/en/products/aiti-agent.md) — capabilities and positioning
