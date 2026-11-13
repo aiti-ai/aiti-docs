@@ -26,7 +26,7 @@ export default defineUserConfig({
     // Counterscale (self-hosted on Cloudflare Workers, stats.justdb.ai) —
     // ad-blocker-proof first-party-ish analytics; tracker.js patches history
     // API so SPA route changes are tracked automatically.
-    ['script', { async: true, 'data-site-id': 'aiti.pw', src: 'https://stats.justdb.ai/tracker.js' }],
+    ['script', { async: true, id: 'counterscale-script', 'data-site-id': 'aiti.pw', src: 'https://stats.justdb.ai/tracker.js' }],
   ],
   port: 8082,
 
