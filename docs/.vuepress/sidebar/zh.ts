@@ -154,7 +154,6 @@ export const zhSidebar = sidebar({
         "aiti-claude-code-agent.md",
         "aiti-codex-agent.md",
         "aiti-acp-agent.md",
-        "aiti-opencode-agent.md",
         "aiti-zcode-agent.md",
         "aiti-cursor-agent.md",
         "aiti-qoder-agent.md",

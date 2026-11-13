@@ -59,7 +59,6 @@ AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 72+ 个
 - [aiti-msg-smart](https://aiti.pw/extensions/aiti-msg-smart.html): 消息点击识别 —— 段落/标题/代码行点击 → 引用/复制/选项弹层 + 子句/行高亮
 - [aiti-omp-agent](https://aiti.pw/extensions/aiti-omp-agent.html): Oh My Pi (omp.sh)——pi 最大 fork 的 RPC spawn 后端（拆分自 aiti-pi-agent 专一 omp）：omp --mode rpc 子进程 + ready 握手 / get_state 能力面 / host tools / login / branch
 - [aiti-onlyoffice](https://aiti.pw/extensions/aiti-onlyoffice.html): .docx/.xlsx/.pptx 完整保真预览+编辑（OnlyOffice DocumentServer Docker 后端）。AGPL 社区版，feature 默认关
-- [aiti-opencode-agent](https://aiti.pw/extensions/aiti-opencode-agent.html): OpenCode CLI 专属驱动 —— 历史会话在 pi-web 打开、续聊（oneshot run -s --format json）
 - [aiti-pi-agent](https://aiti.pw/extensions/aiti-pi-agent.html): spawn pi --mode rpc 子进程作为会话 —— 多 agent 前端主路径
 - [aiti-plan-first](https://aiti.pw/extensions/aiti-plan-first.html): AI 开发先方案后动手 —— aiti-git-trace 事件感知（推-听架构零扫描）：md 变更弹绑定向导（方案命名优先）、大改未跟方案提醒、领先提醒「先做方案」、tags 闭环（front-matter 事实源 + 手工/自荐标签）、会话列表行前部 📋 绑定标
 - [aiti-plan-review](https://aiti.pw/extensions/aiti-plan-review.html): Plan-Sandbox 采认收尾 UI——读 review.json 契约（声明 vs 其他），采认选中并关闭沙箱 / 仅保存（保留沙箱）/ 全部丢弃 + 沙箱历史（重新提取/重用/销毁）
