@@ -23,6 +23,10 @@ export default defineUserConfig({
     // define _hmt first (sync), then load hm.js async.
     ['script', {}, 'var _hmt = _hmt || [];'],
     ['script', { async: true, src: 'https://hm.baidu.com/hm.js?a708f5b3da36a2aeb0402c8cccc8f33b' }],
+    // Counterscale (self-hosted on Cloudflare Workers, stats.justdb.ai) —
+    // ad-blocker-proof first-party-ish analytics; tracker.js patches history
+    // API so SPA route changes are tracked automatically.
+    ['script', { async: true, 'data-site-id': 'aiti.pw', src: 'https://stats.justdb.ai/tracker.js' }],
   ],
   port: 8082,
 
