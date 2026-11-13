@@ -1,19 +1,17 @@
 ---
 home: true
-title: aiti
+title: 自托管 AI 开发工作台 · pi-web 增强发行版
+description: 基于开源 pi-web 打造的自托管 AI 开发工作台：pi / Claude Code / Codex / Qoder 多 agent 一个面板全看管，60+ 内置扩展开箱即用，模型多 key 轮转与聚合，终端/VNC/RDP 远程无忧，IM 里遥控 AI——一条命令安装，浏览器即用。
 heroImage: /logo.svg
-heroText: aiti
-tagline: 自托管个人 AI 开发工作台 —— 以 pi 为引擎，60+ 内置扩展，一条命令安装、浏览器即用
-keywords: 自托管, AI 工作台, aiti-agent, pi-web, 多 agent, 模型聚合, 多 key 轮转, IM 遥控, 终端, VNC, RDP, AI 调试, 页面注入, MCP 桥, Claude Code, AI agent
+heroText: 自托管 AI 开发工作台
+tagline: "aiti（发音 /aiti/）—— 基于 pi-web 增强：多 agent 同堂 · 60+ 内置扩展 · 一条命令安装、浏览器即用"
+keywords: 自托管, AI 工作台, aiti-agent, pi-web, pi web ui, 多 agent, 模型聚合, 多 key 轮转, IM 遥控, 终端, VNC, RDP, AI 调试, 页面注入, MCP 桥, Claude Code, AI agent
 actions:
   - text: 快速安装
     link: /guide/install.md
     type: primary
   - text: 产品矩阵
     link: /products/
-    type: secondary
-  - text: 整体规划
-    link: /roadmaps/master-plan.md
     type: secondary
 
 features:
@@ -52,6 +50,37 @@ copyright: false
 footer: MIT Licensed | Copyright © 2026 aiti-ai
 ---
 
+<p align="center">
+  <a href="https://www.npmjs.com/package/@aiti-ai/pi-web"><img alt="npm version" src="https://img.shields.io/npm/v/@aiti-ai/pi-web?label=%40aiti-ai%2Fpi-web"></a>
+  <a href="https://www.npmjs.com/package/@aiti-ai/pi-web"><img alt="npm downloads" src="https://img.shields.io/npm/dm/@aiti-ai/pi-web"></a>
+  <a href="https://github.com/aiti-ai/aiti-ai"><img alt="GitHub stars" src="https://img.shields.io/github/stars/aiti-ai/aiti-ai?style=flat&logo=github"></a>
+  <a href="https://www.npmjs.com/package/@aiti-ai/pi-web"><img alt="license" src="https://img.shields.io/npm/l/@aiti-ai/pi-web"></a>
+</p>
+
+<img src="/hero-workbench.png" alt="aiti-agent Web 工作台：左侧项目与多 agent 会话列表，右侧对话、工具调用详情与用量统计" style="width:100%;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.15);border:1px solid rgba(128,128,128,.25)">
+
+### 一条命令，浏览器即用
+
+```bash
+# Node.js ≥ 22.19
+npm install -g @aiti-ai/pi-web@latest && pi-web
+```
+
+首启后在 **Models** 面板登录或填 API key 即可开聊——60+ 内置扩展已就位，无需逐个安装。三种安装方式（npm / curl / PowerShell）见 **[安装指南](/guide/install.md)**。
+
+## 为什么选 aiti？
+
+> [pi-web](https://github.com/agegr/pi-web) 是出色的 pi Web UI。aiti 在**同源兼容**的基础上（pi CLI / IDE 扩展操作同一批会话），把它扩展成一个开箱即用的完整工作台：
+
+| 能力 | 原版 pi-web | aiti |
+| --- | :---: | :---: |
+| Web UI · 会话 / 项目 / worktree 管理 | ✅ | ✅ 同源兼容 |
+| **多 agent 同堂**（一个面板全看管） | — | ✅ pi / Claude Code / Codex / Qoder / 任意 ACP agent |
+| **60+ 内置扩展** | 插件机制 | ✅ 开箱即用：终端 / VNC / RDP / IM 接入 / 隧道…… |
+| **模型管理一条龙** | — | ✅ 添加向导 + 多 key 粘性轮转 + 聚合 + 可用性探测 |
+| **页面调试注入**（AI 进驻网页） | — | ✅ aiti-devtools：Vite / webpack / Nuxt / Astro 插件 |
+| **配置安全网** | — | ✅ diff 查看 / 一键回滚 / 崩溃 watchdog 自恢复 |
+
 ## ✨ 系统特色
 
 > 每一条特色背后都是开箱即用的扩展——点进去看实现。页面调试工具链（aiti-devtools）的特色见 [/devtools/](/devtools/)。
@@ -82,9 +111,9 @@ footer: MIT Licensed | Copyright © 2026 aiti-ai
 - **页面调试工具链**：`aiti-devtools` 注入到 Vite / Vue / Next / Svelte 等主流开发工具，`aiti-bridge` 作为 MCP 桥改造任意 AI agent——
   把 AI 请到页面开发现场，页面就是可调试、可交互、可回答 AI 问题的对象。详见 **[/devtools/](/devtools/)**。
 
-### 快速安装（aiti-agent Web 工作台）
+### 安装方式（npm / 脚本 / Docker）
 
-> 完整安装指南见 **[安装](/guide/install.md)**（三种方式 / 系统要求 / 常用命令 / 脚本透明性）。
+> 三种方式任选，详见 **[安装指南](/guide/install.md)**（系统要求 / 常用命令 / 脚本透明性）。
 
 :::: tabs#install
 
@@ -111,8 +140,6 @@ irm https://aiti.pw/install.ps1 | iex
 ```
 
 ::::
-
-首启后在 **Models** 面板登录或填 API key 即可开聊——60+ 内置扩展已就位，无需逐个安装。
 
 ## 产品矩阵速览
 

@@ -13,7 +13,7 @@ const blockGitPlugin = { name: "@vuepress/plugin-git" };
 export default defineUserConfig({
   base: '/',
   title: 'aiti',
-  description: '以 pi 为引擎的个人 AI 开发工作台与本地调试注入生态 — aiti-agent / aiti-devtools / aiti-bridge',
+  description: '自托管 AI 开发工作台（基于 pi-web 增强）——多 agent 同堂 · 60+ 内置扩展 · aiti-agent / aiti-devtools / aiti-bridge',
   head: [
     ['link', { rel: 'icon', href: '/favicon.svg' }],
     ['meta', { name: 'theme-color', content: '#7c3aed' }],
@@ -80,13 +80,13 @@ export default defineUserConfig({
     '/': {
       lang: 'zh-CN',
       title: 'aiti',
-      description: '以 pi 为引擎的个人 AI 开发工作台与本地调试注入生态',
+      description: '自托管 AI 开发工作台（基于 pi-web 增强）——多 agent 同堂 · 60+ 内置扩展 · 模型多 key 轮转 · 终端/VNC/RDP · IM 遥控 · 页面调试注入',
     },
     // 英文镜像（docs/en/）
     '/en/': {
       lang: 'en-US',
       title: 'aiti',
-      description: 'Personal AI dev workbench powered by pi, plus a local debug-injection ecosystem — aiti-agent / aiti-devtools / aiti-bridge',
+      description: 'Self-hosted AI dev workbench enhanced from pi-web — all agents in one panel, 60+ built-in extensions, multi-key model rotation, terminal/VNC/RDP, remote-control AI from IM, page-debug injection',
     },
   },
 });

@@ -1,19 +1,17 @@
 ---
 home: true
-title: aiti
+title: Self-Hosted AI Dev Workbench · Enhanced pi-web
+description: A self-hosted AI development workbench built on the open-source pi-web — pi / Claude Code / Codex / Qoder agents managed in one panel, 60+ built-in extensions out of the box, multi-key model rotation & aggregation, terminal/VNC/RDP, remote-control AI from IM. One command to install, browser-first.
 heroImage: /logo.svg
-heroText: aiti
-tagline: Self-hosted personal AI development workbench — powered by pi, 60+ built-in extensions, one command to install
-keywords: self-hosted, AI workbench, aiti-agent, pi-web, multi-agent, model aggregation, multi-key rotation, IM remote control, terminal, VNC, RDP, AI debugging, page injection, MCP bridge, Claude Code, AI agent
+heroText: Self-hosted AI dev workbench
+tagline: "aiti (pronounced /aiti/) — enhanced pi-web: all your agents in one panel, 60+ built-in extensions, one command to install"
+keywords: self-hosted, AI workbench, aiti-agent, pi-web, pi web ui, multi-agent, model aggregation, multi-key rotation, IM remote control, terminal, VNC, RDP, AI debugging, page injection, MCP bridge, Claude Code, AI agent
 actions:
   - text: Quick install
     link: /en/guide/install.md
     type: primary
   - text: Product matrix
     link: /en/products/
-    type: secondary
-  - text: Master plan
-    link: /en/roadmaps/master-plan.md
     type: secondary
 
 features:
@@ -52,6 +50,37 @@ copyright: false
 footer: MIT Licensed | Copyright © 2026 aiti-ai
 ---
 
+<p align="center">
+  <a href="https://www.npmjs.com/package/@aiti-ai/pi-web"><img alt="npm version" src="https://img.shields.io/npm/v/@aiti-ai/pi-web?label=%40aiti-ai%2Fpi-web"></a>
+  <a href="https://www.npmjs.com/package/@aiti-ai/pi-web"><img alt="npm downloads" src="https://img.shields.io/npm/dm/@aiti-ai/pi-web"></a>
+  <a href="https://github.com/aiti-ai/aiti-ai"><img alt="GitHub stars" src="https://img.shields.io/github/stars/aiti-ai/aiti-ai?style=flat&logo=github"></a>
+  <a href="https://www.npmjs.com/package/@aiti-ai/pi-web"><img alt="license" src="https://img.shields.io/npm/l/@aiti-ai/pi-web"></a>
+</p>
+
+<img src="/hero-workbench.png" alt="aiti-agent web workbench: projects and multi-agent session list on the left, conversation, tool-call details and usage stats on the right" style="width:100%;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.15);border:1px solid rgba(128,128,128,.25)">
+
+### One command, browser-first
+
+```bash
+# Node.js ≥ 22.19
+npm install -g @aiti-ai/pi-web@latest && pi-web
+```
+
+On first launch, sign in or fill an API key in the **Models** panel and start chatting — the 60+ built-in extensions are already in place. Three install methods (npm / curl / PowerShell) in the **[install guide](/en/guide/install.md)**.
+
+## Why aiti?
+
+> [pi-web](https://github.com/agegr/pi-web) is a great web UI for pi. Starting from the **same lineage** (pi CLI / IDE extensions operate the same sessions), aiti grows it into a complete, ready-to-use workbench:
+
+| Capability | vanilla pi-web | aiti |
+| --- | :---: | :---: |
+| Web UI · sessions / projects / worktrees | ✅ | ✅ same lineage |
+| **All agents in one panel** | — | ✅ pi / Claude Code / Codex / Qoder / any ACP agent |
+| **60+ built-in extensions** | plugin mechanism | ✅ out of the box: terminal / VNC / RDP / IM / tunnels … |
+| **Model management, end to end** | — | ✅ wizard + multi-key sticky rotation + aggregation + probing |
+| **Page-debug injection** (AI in the page) | — | ✅ aiti-devtools: Vite / webpack / Nuxt / Astro plugins |
+| **Config safety net** | — | ✅ diff view / one-click rollback / crash watchdog |
+
 ## ✨ Highlights
 
 > Behind every highlight stands a ready-to-use extension — click through to see the implementation. The page-debugging toolchain (aiti-devtools) highlights live on [/devtools/](/en/devtools/).
@@ -82,9 +111,9 @@ footer: MIT Licensed | Copyright © 2026 aiti-ai
 - **Page-debugging toolchain**: `aiti-devtools` injects into Vite / Vue / Next / Svelte and other mainstream dev tools, and `aiti-bridge` retrofits any AI agent as an MCP bridge —
   bringing the AI to the page development front line, where the page itself becomes debuggable, interactive, and answerable. See **[/devtools/](/en/devtools/)**.
 
-### Quick install (aiti-agent web workbench)
+### Install methods (npm / scripts / Docker)
 
-> Full install guide: **[Installation](/en/guide/install.md)** (three methods / system requirements / common commands / script transparency).
+> Pick one — details in the **[install guide](/en/guide/install.md)** (system requirements / common commands / script transparency).
 
 :::: tabs#install
 
@@ -111,8 +140,6 @@ irm https://aiti.pw/install.ps1 | iex
 ```
 
 ::::
-
-On first launch, sign in or fill an API key in the **Models** panel and start chatting — the 60+ built-in extensions are already in place, no per-extension installs needed.
 
 ## Product matrix at a glance
 
