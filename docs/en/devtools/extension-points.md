@@ -9,6 +9,10 @@ description: The aiti-agent extension framework — slots, contracts, lifecycle,
 > All business features of aiti-agent are implemented as **extensions**, interacting with the core only through **extension points**.
 > If you want to build your own features or add something to aiti, read this page first.
 
+> 📘 This page is the framework overview; the **full extension development manual** (from-zero
+> tutorial / contract & API reference / slot tables / features / AI integration / deployment)
+> lives under [Extension Development](/en/ext-dev/).
+
 ## 1. Overall Model
 
 ```
@@ -50,15 +54,26 @@ so hot reload takes effect).
 export default {
   id: "my-ext",               // must match the directory name
   name: "My Extension",
-  version: "0.1.0",
+  // ⚠️ do not hand-write version: the source of truth is package.json (maintained by the
+  //    release flow); this entry value is only a fallback when package.json has none —
+  //    new extensions must not declare it
   icon: "🧰",                 // optional, marks the extension's identity in the UI
+  category: "debug",          // optional, app-center category tag
+  description: "one-liner",   // optional, falls back to package.json description
   client: "client/bundle.mjs",// optional, relative path to the frontend bundle (precompiled ESM)
 
   server: {
-    async startup(ctx) {},       // startup hook: open connections / start timers / initialize
-    async shutdown(ctx) {},      // shutdown hook: cleanup / persist (called on hot reload/exit)
-    async api(req, ctx) {},      // API dispatch: /api/extensions/<id>/<path...>
-    async middleware(req) {},    // optional: global middleware hook (fail-closed)
+    async startup(ctx) {},        // startup hook: open connections / start timers / initialize
+    async shutdown(ctx) {},       // shutdown hook: cleanup / persist (called on hot reload/exit)
+    async api(req, ctx) {},       // API dispatch: /api/extensions/<id>/<path...>
+    async middleware(req) {},     // optional: global middleware hook (fail-closed)
+    async rescanBackends(ctx) {}, // optional: POST /api/session-backends/rescan rescan (backend extensions)
+    agent: {                      // optional: per-agent-session extension point
+      agentTools(info) {},        //   inject custom tools into every agent session
+      onAgentSession(info) {},    //   session created (⚠️ re-fired after idle GC/hot reload — must be idempotent)
+      onAgentSessionEnd(info) {}, //   wrapper destroyed (reason: shutdown/fork/idle, ≠ session file deleted)
+      onAgentSettled(info) {},    //   an agent turn finished
+    },
   },
 
   ui: {                          // slot metadata (the actual UI is rendered by the client bundle)
@@ -70,10 +85,28 @@ export default {
     banners: [{ id }],
     pages: [{ id }],
     chatInputTop: [{ id }],
-    i18n: { en: {...}, "zh-CN": {...} },
+    i18n: { en: {...}, "zh-CN": {...} }, // looked up by the client ctx.t(key)
+    clientImmediately: true,     // default true; false = lazy (bundle materializes on first slot render)
+    clientDependsOn: [],         // other extensions the client bundle depends on (prefetch hint, not a correctness dependency)
+    provides: [],                // take over host built-in capabilities (EXT_PROVIDES, e.g. "session-delete")
   },
+
+  features: [                    // optional: feature management (per-item toggles in extman, state in features.json)
+    { id: "tool.my_tool", label: "Injected tool", type: "boolean", default: true },
+    // type: "boolean"(default) | "string"(text setting) | "textlist"(multi-line text)
+    // convention: tool-level feature id = "tool.<injected tool name>", host filters disabled tools automatically
+  ],
+  conflicts: ["pi-subagents"],   // optional: conflicting extensions (platform removes them wholesale by npm package name)
+  dependsOn: ["aiti-float"],     // optional: hard dependencies (extension id or cap.* capability name; declarative warning, does not block loading)
+  optionalDependsOn: [],         // optional: soft dependencies (extra capability when present, no warning when absent)
+  provides: ["cap.viewer"],      // optional: provided capabilities (multiple declarers allowed; platform arbitrates the effective provider: user pin > takeover declarer > newest semver > id lexicographic)
+  takeover: ["cap.viewer"],      // optional: exclusive takeover declaration (multiple declarers = conflict-panel note; one effective winner is arbitrated)
+  startupPriority: 0,            // optional: server startup priority (higher starts earlier, shutdown in reverse; infrastructure extensions like event-bus use high values)
+  publicApi: ["assets/x.js"],    // optional: cross-origin GET whitelist for API paths (exact match; for injecting into arbitrary pages server-side)
 };
 ```
+
+> Full field semantics: the host source of truth is `lib/ext/types.ts` (`PiWebExtension`).
 
 ## 4. Slot Overview
 
@@ -157,30 +190,67 @@ Besides slots, the client-side `register(ctx)` also provides two behavior-level 
 | `shutdown(ctx)` | Hot reload/exit | Cleanup, persist |
 | `api(req, ctx)` | `/api/extensions/<id>/<path...>` hit | The extension's own API (returning `null` = 404) |
 | `middleware(req)` | Every request, before the DNS-rebinding gate | vhost branching, gating, etc. (**throwing = fail-closed 403**) |
+| `rescanBackends(ctx)` | POST `/api/session-backends/rescan` | Backend extensions re-run probe+register (idempotent; startup scans once, newly installed CLIs are picked up via this) |
+| `agent.agentTools(info)` / `agent.onAgentSession(info)` / `agent.onAgentSessionEnd(info)` / `agent.onAgentSettled(info)` | Every agent session (plan M, in-process zero-config injection) | Inject custom tools / session lifecycle callbacks (⚠️ idle GC and hot reload re-fire onAgentSession — implementations must be idempotent; the host reclaims the previous round of subscribeEvent subscriptions before re-attaching) |
 
-`ctx` (server side): `{ id, dir, dataDir, core }`, where:
+`ctx` (server side): `{ id, dir, configDir, stateDir, cacheDir, core, services, features, sessionProviders, sessionAnnotations, invokeAI? }`, where:
 
 - `dir`: the extension code directory (read-only, for static assets);
-- `dataDir`: `~/.pi/web/data/<id>/` (guaranteed to exist by the framework);
-- `core`: the core data contract — extensions must **not implement themselves** session reading / running state / file access:
+- `configDir` / `stateDir` / `cacheDir`: the **three-tier data directories** (since 2026-09,
+  `config/` / `state/` / `cache/` under `~/.pi/web/data/<id>/` = configuration / non-regenerable data /
+  regenerable cache); **`ctx.dataDir` has been removed (accessing it throws)** — see the
+  [extension data & storage guide](/en/guide/ext-data.md) for the decision tree;
+- `services`: the cross-extension service locator (provide/get/require/onChange) — the only sanctioned
+  path, see the [extension services guide](/en/guide/ext-services.md);
+- `features`: feature state read/write (get/on — the extman-managed per-item toggles);
+- `sessionProviders` / `sessionAnnotations`: session backend registration slot / session-list annotation slot
+  (multi-agent frontend);
+- `invokeAI?`: generic AI invocation (system+messages → `{ text, usage }`; zero business logic and zero
+  accounting in the core — assembly/billing are entirely the caller's responsibility);
+- `core`: the core data contract — extensions must **not implement themselves** session reading /
+  running state / file access:
 
 ```ts
 interface ExtCoreApi {
-  listSessions();                 // session list (incremental cache)
+  listSessions(options?);         // session list (incremental cache; { refresh: true } bypasses the 5s scan cache)
   getRunningSessionIds();         // RPC running set
+  getAliveSessionIds();           // alive (incl. idle) rpc sessions — disk-write guards must include these
+  stopAliveSession?(id);          // release an alive idle session (may be absent on older hosts — check first)
   getHomeDir();
   readSession(id);                // full session context (messages + entry ids)
+  readModelsConfig();             // read models.json (always via this API, cache invalidation included)
+  writeModelsConfig(data);        // write models.json (normalized + effective immediately)
   fileAccess: { allowRoot(root); isAllowed(p); }  // reuses aiti-agent's file safety rules
 }
 ```
 
 ## 6. Client Bundle Protocol
 
-- `ui.client` points to **a single precompiled ESM file** (can be bundled with esbuild, or hand-written as `.mjs`).
-- the bundle does `default export function register(ctx)`; ctx provides:
-  `{ h, useState, useEffect, useRef, useCallback, useMemo, t(key, params), apiUrl(path), registerItems(slot, items), registerChatHook(hook), registerPopoverAction(provider) }`.
-- **no react imports**: `h` and the hooks are passed in by the host (single React instance, provided via importmap).
-- component = `(props) => ReactNode` (props include `currentSession` and slot extras).
+- `ui.client` points to **a single precompiled ESM file** (can be bundled with esbuild, or hand-written as
+  `.mjs`; for JSX/npm dependencies use the [ext-jsx-client template](/en/extensions/ext-jsx-client.md)).
+- the bundle does `default export function register(ctx)`; main ctx member groups (full list in the host's
+  `components/ExtSlots.tsx`, `ExtClientContext`):
+
+  - **React toolkit**: `h` + all hooks (useState/useEffect/useLayoutEffect/useRef/useCallback/useMemo/
+    useContext/useId/createContext/forwardRef/memo…) + `createPortal` (escape fixed positioning out of
+    transformed ancestors);
+  - **i18n / network**: `t(key, params)` (looks up the extension's own `ui.i18n` table), `apiUrl(path)`,
+    `getLocale()`;
+  - **slots**: `registerItems(slot, items)` / `disposeItems(slot, ids)` / `useSlotItems(slot)` /
+    `renderSlot(name, props)` (embed a host slot inside the extension's own tree);
+  - **behavior-level extension points**: `registerChatHook` (pre-send rewrite), `registerParagraphClick`
+    (paragraph-click broadcast), `registerSessionForkGate` (pre-fork gate), `registerComposerEnhancement`
+    (composer enhancement chain), `registerRecoveryItemsProvider` / `registerDraftApi` /
+    `registerQueuePanelController` (three de-coring takeover surfaces);
+  - **cross-extension**: `registerExtService` / `getExtService` / `onExtServiceChange` (client services),
+    `registerTopicItem` / `getTopicItems` (topic items);
+  - **host capabilities**: `openFile` / `openFolder` / `revealDir` / `getFileTabs` / `closeFileTabs` /
+    `appendText` / `writeComposerValue` / `restoreComposerDraft` / `sendChatMessage` / `queueFollowUp`;
+  - **features / lifecycle**: `getFeatures()` / `onFeatureChange(cb)` / `reloadExtensions()` /
+    `ensureMaterialized(id)` / `ensureSlotMaterialized(slot)`.
+- **no react imports**: `h` and the hooks are passed in by the host (single React instance, host-shim delegation).
+- component = `(props) => ReactNode` (props include `currentSession` and slot extras; **extras carry data only —
+  callbacks always go through services**).
 - **Rules of Hooks**: hooks must be called before any conditional returns.
 
 ## 7. Lifecycle

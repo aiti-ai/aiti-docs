@@ -13,6 +13,11 @@ export const zhNavbar = navbar([
     link: "/guide/",
   },
   {
+    text: "扩展开发",
+    icon: "wrench",
+    link: "/ext-dev/",
+  },
+  {
     text: "安装",
     icon: "download",
     link: "/guide/install.md",

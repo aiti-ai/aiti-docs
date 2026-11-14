@@ -18,6 +18,7 @@ description: aiti 指南总览
 | [扩展服务与跨扩展调用规范](/guide/ext-services.md) | 🔌 ctx.services 定位器：怎么提供/消费/降级；全局量红线（写扩展必读） |
 | [扩展数据与存储规范](/guide/ext-data.md) | 💾 三层数据模型 config/state/cache：判定决策树、行为契约、迁移铁律、保护矩阵（写扩展必读） |
 | [懒加载契约](/guide/ext-lazy-loading.md) | 两段式转换：薄 entry 常驻 + 重 UI 按需物化 |
+| [扩展开发手册](/ext-dev/) | 🔧 完整手册：从零教程 / 契约与 API 参考 / 插槽全表 / feature / AI 集成 / 部署发布 |
 | [快速开始（aiti-agent 工作台）](/guide/quick-start.md) | 工作台快速上手：安装 → 启动 → 首启配置 → 日常入口 |
 | [devtools 快速开始](/devtools/quick-start.md) | 5 分钟跑通「AI 操作页面」：注入 → 起桥 → 接 AI（调试工具链主线，详见 [/devtools/](/devtools/)） |
 | [MCP 桥](/guide/mcp/) | 让任意 AI agent 操作页面、与用户协作（Server / 会话 / 接入 agent / cockpit） |
