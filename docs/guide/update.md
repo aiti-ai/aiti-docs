@@ -74,11 +74,11 @@ npx @aiti-ai/pi-web@latest
 @tab Docker
 
 ```bash
-docker pull aitiai/pi-web:latest
-# 然后按原启动方式重建容器
+docker pull aitiai/pi-web:latest   # 国内可换 registry.cn-hangzhou.aliyuncs.com/aiti-ai/pi-web:latest
+# 然后按原启动方式重建容器（同名卷携带数据，扩展随镜像刷新）
 ```
 
-版本 tag 形如 `aitiai/pi-web:v<版本>-{core,full}`，滚动 tag `core` / `full` / `latest`。
+版本 tag 形如 `aitiai/pi-web:v<版本>-{core,full}`，滚动 tag `core` / `full` / `latest`。卷持久化与升级细节见 [Docker 部署](./docker.md) §8。
 
 @tab 源码部署
 

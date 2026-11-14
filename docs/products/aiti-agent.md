@@ -91,10 +91,10 @@ irm https://aiti.pw/install.ps1 | iex
 open http://localhost:30141
 ```
 
-Docker 一键（镜像标签仅 core / full，无 lite）：
+Docker 一键（镜像标签仅 core / full，无 lite，已发布在 Docker Hub）：
 
 ```bash
-docker run -d -p 30142:30142 -v aiti-data:/opt/aiti -v ~/workspace:/workspace aitiai/pi-web:core   # 已发布（Docker Hub；GUI/语音/隧道 → :full）
+docker run -d --name aiti --init -p 30142:30142 -v aiti_data:/opt/aiti/data -v aiti_agent:/opt/aiti/agent -v ~/workspace:/workspace aitiai/pi-web:core   # GUI/语音/隧道 → :full；国内可换 registry.cn-hangzhou.aliyuncs.com/aiti-ai/pi-web（阿里云 ACR）；完整指南见 guide/docker.md
 ```
 
 > 规划详见 [路线图 · aiti-agent](/roadmaps/aiti-agent.md) 与 [整体规划](/roadmaps/master-plan.md)。

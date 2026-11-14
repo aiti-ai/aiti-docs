@@ -39,10 +39,13 @@ irm https://aiti.pw/install.ps1 | iex
 @tab Docker
 
 ```bash
-docker run -d -p 30142:30142 \
-  -v aiti-data:/opt/aiti -v ~/workspace:/workspace \
+docker run -d --name aiti --init -p 30142:30142 \
+  -v aiti_data:/opt/aiti/data -v aiti_agent:/opt/aiti/agent \
+  -v ~/workspace:/workspace \
   aitiai/pi-web:core        # GUI / voice / tunnels all-in-one → :full
 ```
+
+Slow pulls in China? swap the image for `registry.cn-hangzhou.aliyuncs.com/aiti-ai/pi-web:core` (Aliyun ACR, same tags as Docker Hub).
 
 ::::
 

@@ -39,10 +39,13 @@ irm https://aiti.pw/install.ps1 | iex
 @tab Docker
 
 ```bash
-docker run -d -p 30142:30142 \
-  -v aiti-data:/opt/aiti -v ~/workspace:/workspace \
+docker run -d --name aiti --init -p 30142:30142 \
+  -v aiti_data:/opt/aiti/data -v aiti_agent:/opt/aiti/agent \
+  -v ~/workspace:/workspace \
   aitiai/pi-web:core        # GUI/语音/隧道全家桶 → :full
 ```
+
+国内拉取慢？镜像名换 `registry.cn-hangzhou.aliyuncs.com/aiti-ai/pi-web:core`（阿里云 ACR，tag 与 Docker Hub 一致）。完整 docker run 指南（端口/环境变量/反向代理/升级运维）见 [Docker 部署](./docker.md)。
 
 ::::
 

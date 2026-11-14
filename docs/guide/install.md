@@ -51,19 +51,22 @@ curl -fsSL https://aiti.pw/install.sh | AITI_INSTALL_DIR=~/apps/aiti sh
 
 @tab Docker
 
-镜像发布在 Docker Hub（推 `v*` tag 随 GitHub Releases 自动构建）：
+镜像发布在 Docker Hub（推 `v*` tag 随 GitHub Releases 自动构建），并逐 tag 同步一份到阿里云 ACR（国内加速）：
 
 ```bash
-docker run -d -p 30142:30142 \
-  -v aiti-data:/opt/aiti -v ~/workspace:/workspace \
+docker run -d --name aiti --init -p 30142:30142 \
+  -v aiti_data:/opt/aiti/data -v aiti_agent:/opt/aiti/agent \
+  -v ~/workspace:/workspace \
   aitiai/pi-web:core
 # 浏览器开 http://localhost:30142（工作目录 /workspace，数据独立于 ~/.pi）
 ```
 
-- `core`（约 3GB）：fork pi-web + 全部扩展 + node/git + justget 工具市场；
-- `full`（约 8.6GB）：加 GUI/语音（funasr）/Chrome/隧道等全功能；
+- `core`（约 2.1GB）：fork pi-web + 全部扩展 + node/git + justget 工具市场；
+- `full`（约 7.8GB）：加 GUI/语音（funasr）/Chrome/隧道等全功能（需 ≥8GB 内存）；
 - 版本 tag：`aitiai/pi-web:v<版本>-{core,full}`，滚动 `core`/`full`/`latest`；
-- docker compose 一键与手册见仓库 [`docker/`](https://github.com/aiti-ai/aiti-ai/tree/main/docker)（compose.yaml / MANUAL.md）。
+- ⚠ 卷只挂 `/opt/aiti` 子路径，勿挂整个 `/opt/aiti` 根（挂根会让镜像升级后扩展永不更新）；
+- 国内拉取慢？镜像名换 `registry.cn-hangzhou.aliyuncs.com/aiti-ai/pi-web:core`（阿里云 ACR，tag 与 Docker Hub 一致）；
+- 完整指南（端口/环境变量/反向代理/升级运维/compose）见 [Docker 部署](./docker.md)；compose 一键与手册见仓库 [`docker/`](https://github.com/aiti-ai/aiti-ai/tree/main/docker)。
 
 @tab Windows
 

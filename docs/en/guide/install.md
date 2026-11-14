@@ -51,19 +51,22 @@ curl -fsSL https://aiti.pw/install.sh | AITI_INSTALL_DIR=~/apps/aiti sh
 
 @tab Docker
 
-Images are published to Docker Hub (built automatically on `v*` tags alongside GitHub Releases):
+Images are published to Docker Hub (built automatically on `v*` tags alongside GitHub Releases) and mirrored tag-for-tag to Aliyun ACR for faster pulls in China:
 
 ```bash
-docker run -d -p 30142:30142 \
-  -v aiti-data:/opt/aiti -v ~/workspace:/workspace \
+docker run -d --name aiti --init -p 30142:30142 \
+  -v aiti_data:/opt/aiti/data -v aiti_agent:/opt/aiti/agent \
+  -v ~/workspace:/workspace \
   aitiai/pi-web:core
 # open http://localhost:30142 (workdir /workspace, data isolated from ~/.pi)
 ```
 
-- `core` (~3 GB): fork of pi-web + all extensions + node/git + the justget tool market;
-- `full` (~8.6 GB): adds GUI / voice (funasr) / Chrome / tunnels — the all-in-one image;
+- `core` (~2.1 GB): fork of pi-web + all extensions + node/git + the justget tool market;
+- `full` (~7.8 GB): adds GUI / voice (funasr) / Chrome / tunnels — needs ≥8 GB RAM;
 - version tags: `aitiai/pi-web:v<version>-{core,full}`, rolling `core`/`full`/`latest`;
-- one-command docker compose and the manual live in the repo [`docker/`](https://github.com/aiti-ai/aiti-ai/tree/main/docker) directory (compose.yaml / MANUAL.md).
+- slow pulls in China? swap the image for `registry.cn-hangzhou.aliyuncs.com/aiti-ai/pi-web:core` (Aliyun ACR, same tags as Docker Hub);
+- ⚠ mount only sub-paths of `/opt/aiti`, never the root itself (a root mount shadows the new image on upgrade — extensions would never refresh);
+- full ports/env vars/reverse-proxy/upgrade guide: the manual in the repo [`docker/`](https://github.com/aiti-ai/aiti-ai/tree/main/docker) directory (compose.yaml / README.md).
 
 @tab Windows
 
