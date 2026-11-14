@@ -17,9 +17,9 @@ ext:
   installable: false
   install: |
     cd browser-ext && npm run build   # → dist/chrome dist/edge dist/firefox
+    # Firefox（推荐）: AMO 直接安装 https://addons.mozilla.org/firefox/addon/aiti-devtools/（正式版/Android 免签）
     # Chrome/Edge：chrome://extensions 开发者模式 → 加载已解压扩展程序 → dist/chrome（Edge 选 dist/edge）
-    # Firefox：about:debugging → 临时载入附加组件 → dist/firefox/manifest.json（Android 需 ≥128）
-    # Firefox 永久：npm run package → dist/aiti-devtools-firefox.xpi（ESR/DevEdition/Nightly 免签安装；正式版/Android 需 AMO 签名）
+    # Firefox 临时/自建：about:debugging → 临时载入 dist/firefox/manifest.json；或 npm run package 出 .xpi（ESR/DevEdition/Nightly 免签）
   license: MIT
   tags: [chrome, edge, firefox, mv3, content-script, injection, any-page]
 ---
@@ -39,13 +39,15 @@ aiti-devtools 浏览器扩展（MV3）：**任意网页——无需目标应用�
 
 ## 安装
 
+- **Firefox（推荐）**：[AMO · aiti-devtools](https://addons.mozilla.org/firefox/addon/aiti-devtools/) 一键安装——正式版 Firefox / Firefox for Android（≥128）免签直装；自建构建可走下方 xpi 路线
+
 ```bash
 cd browser-ext && npm run build      # → dist/chrome dist/edge dist/firefox
 ```
 
 - **Chrome / Edge**：`chrome://extensions`（或 `edge://extensions`）→ 开发者模式 → 加载已解压扩展程序 → `dist/chrome`（Edge 选 `dist/edge`）
 - **Firefox（临时载入）**：`about:debugging#/runtime/this-firefox` → 临时载入附加组件 → `dist/firefox/manifest.json`（重启后消失）
-- **Firefox（永久 xpi）**：`npm run package` → `dist/aiti-devtools-firefox.xpi`——ESR / DevEdition / Nightly 开 `xpinstall.signatures.required=false` 后「从文件安装」永久使用；正式版 / Android 需 AMO 签名（`web-ext sign --channel=unlisted` 或 AMO 后台 unlisted 上传；稳定 gecko id `aiti-devtools@aiti.ai` 已固定；world:MAIN 注入依赖 ≥128）
+- **Firefox（永久 xpi，自建）**：`npm run package` → `dist/aiti-devtools-firefox.xpi`——ESR / DevEdition / Nightly 开 `xpinstall.signatures.required=false` 后「从文件安装」永久使用（稳定 gecko id `aiti-devtools@aiti.ai` 已固定；world:MAIN 注入依赖 ≥128）
 
 ## 使用
 

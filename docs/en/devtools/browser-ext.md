@@ -17,9 +17,9 @@ ext:
   installable: false
   install: |
     cd browser-ext && npm run build   # → dist/chrome dist/edge dist/firefox
+    # Firefox (recommended): install from AMO https://addons.mozilla.org/firefox/addon/aiti-devtools/ (release/Android, signature-free)
     # Chrome/Edge: chrome://extensions developer mode → load unpacked → dist/chrome (Edge: dist/edge)
-    # Firefox: about:debugging → load temporary add-on → dist/firefox/manifest.json (Android needs ≥128)
-    # Firefox permanent: npm run package → dist/aiti-devtools-firefox.xpi (ESR/DevEdition/Nightly signature-free; release/Android needs AMO signing)
+    # Firefox temporary/self-built: about:debugging → load temporary add-on → dist/firefox/manifest.json; or npm run package → .xpi (ESR/DevEdition/Nightly signature-free)
   license: MIT
   tags: [chrome, edge, firefox, mv3, content-script, injection, any-page]
 ---
@@ -39,13 +39,15 @@ The aiti-devtools browser extension (MV3): **inject the in-page AI debugging ass
 
 ## Install
 
+- **Firefox (recommended)**: one-click install from [AMO · aiti-devtools](https://addons.mozilla.org/firefox/addon/aiti-devtools/) — release Firefox / Firefox for Android (≥128) install signature-free; self-built builds can take the xpi route below
+
 ```bash
 cd browser-ext && npm run build      # → dist/chrome dist/edge dist/firefox
 ```
 
 - **Chrome / Edge**: `chrome://extensions` (or `edge://extensions`) → developer mode → load unpacked → `dist/chrome` (Edge: `dist/edge`)
 - **Firefox (temporary load)**: `about:debugging#/runtime/this-firefox` → load temporary add-on → `dist/firefox/manifest.json` (gone on restart)
-- **Firefox (permanent xpi)**: `npm run package` → `dist/aiti-devtools-firefox.xpi` — on ESR / DevEdition / Nightly set `xpinstall.signatures.required=false` and install from file for a permanent install; release / Android needs AMO signing (`web-ext sign --channel=unlisted` or upload as unlisted on AMO; stable gecko id `aiti-devtools@aiti.ai` is pinned; world:MAIN injection needs ≥128)
+- **Firefox (permanent xpi, self-built)**: `npm run package` → `dist/aiti-devtools-firefox.xpi` — on ESR / DevEdition / Nightly set `xpinstall.signatures.required=false` and install from file for a permanent install (stable gecko id `aiti-devtools@aiti.ai` is pinned; world:MAIN injection needs ≥128)
 
 ## Usage
 
