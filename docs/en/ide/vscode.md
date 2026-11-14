@@ -7,6 +7,8 @@ tags: [ide, vscode]
 
 # aiti-devtools-vscode
 
+> Marketplace: [VS Code Marketplace · aiti-ai.aiti-devtools-vscode](https://marketplace.visualstudio.com/items?itemName=aiti-ai.aiti-devtools-vscode) (submitted, installable once approved; covers VS Code / Cursor / Windsurf).
+>
 > Status: 🚧 **MVP implemented** (2026-11-07, repo dir `vscode-ext/`, tests 7/7 green). Delivered: four commands + dev-server reverse-proxy injection + bridge lifecycle + automatic `.vscode/mcp.json` config + bridge panel (manual refresh, zero polling).
 > Remaining R3 items (planned): inline answer cards in Copilot Chat, `open_file` source jump, AI-window aiti panel Webview.
 

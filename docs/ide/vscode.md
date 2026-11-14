@@ -7,6 +7,8 @@ tags: [ide, vscode]
 
 # aiti-devtools-vscode
 
+> 应用市场：[VS Code Marketplace · aiti-ai.aiti-devtools-vscode](https://marketplace.visualstudio.com/items?itemName=aiti-ai.aiti-devtools-vscode)（已提交，审核通过后可直接安装，覆盖 VS Code / Cursor / Windsurf）。
+>
 > 状态：🚧 **MVP 已实施**（2026-11-07，本仓 `vscode-ext/`，测试 7/7 全绿）。已交付：四命令 + dev server 反向代理注入 + 桥生命周期 + `.vscode/mcp.json` 自动配置 + 桥面板（手动刷新，零轮询）。
 > R3 余项（规划中）：Copilot Chat 内嵌作答卡（`user_*` 直答）、`open_file` 源码直达、AI 窗口 aiti 面板 Webview 嵌入。
 

@@ -21,7 +21,7 @@ aiti 不是单一产品，而是一个 **AI 开发工具生态**。所有产品�
 | 4 | **aiti-devtools-webpack** | [`@aiti-ai/aiti-devtools-webpack`](https://www.npmjs.com/package/@aiti-ai/aiti-devtools-webpack) | Webpack/Rspack 插件 | dev server 注入（setupMiddlewares + html-webpack-plugin），Rspack 直接复用 | ✅ 0.1.x |
 | 5 | **aiti-devtools-nuxt** | [`@aiti-ai/aiti-devtools-nuxt`](https://www.npmjs.com/package/@aiti-ai/aiti-devtools-nuxt) | Nuxt 模块 | `modules` 一行接入：挂桥 + head 自动注入 | ✅ 0.1.x |
 | 6 | **aiti-bridge** | [`@aiti-ai/aiti-bridge`](https://www.npmjs.com/package/@aiti-ai/aiti-bridge) | 本地桥服务（CLI） | 把页面调试能力变成任意 AI agent 的 MCP 工具（`page_*` / `user_*`），消息直达 IDE AI 窗口 | ✅ 0.2.x |
-| 7 | **aiti-devtools-vscode** | 源码就绪（VS Code / Cursor / Windsurf，应用市场未发布） | VS Code 扩展 | 完成注入 + 直连 IDE 内置 AI agent 窗口 | 🚧 MVP |
+| 7 | **aiti-devtools-vscode** | [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=aiti-ai.aiti-devtools-vscode)（已提交审核）（VS Code / Cursor / Windsurf） | VS Code 扩展 | 完成注入 + 直连 IDE 内置 AI agent 窗口 | 🚧 MVP |
 | 8 | **aiti-devtools-idea** | 📋 规划 | JetBrains 插件 | 同上（IntelliJ / PyCharm / WebStorm / GoLand） | 📋 |
 | 9 | **aiti-devtools-chrome** | 📋 规划 | Chrome 扩展 | 免改代码注入（形态②），任意站点可调试 | 📋 |
 | 10 | **aiti-devtools-vue / -react / -svelte** | 📋 规划（Vue / SvelteKit 现阶段直接复用 Vite 插件） | 框架专属插件 | 组件层级信息等框架深度集成 | 📋 |
