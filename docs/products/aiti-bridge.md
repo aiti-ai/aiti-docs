@@ -1,13 +1,13 @@
 ---
 title: aiti-bridge
 icon: 🔗
-description: 配置 aiti-devtools 使用、改造 AI agent、消息直达 IDE AI agent 窗口
+description: 把页面调试能力变成任意 AI agent 的 MCP 工具，消息直达 IDE AI agent 窗口
 tags: [product, aiti-bridge, mcp, ai-agent]
 ---
 
 # aiti-bridge — AI agent 改造层
 
-> **一句话**：MCP 桥把"页面调试能力"变成**任意 AI agent 的工具** —— 配置 aiti-devtools 使用；改造 AI agent；支持 aiti-devtools、aiti-devtools-vscode/idea 等插件完成注入；**通过 aiti-bridge 直接把消息发到 IDE 里的 AI agent 窗口**。
+> **一句话**：MCP 桥把“页面调试能力”变成**任意 AI agent 的工具** —— `page_*` / `user_*` 工具族直连任意 MCP 客户端；为 aiti-devtools 及 aiti-devtools-vscode/idea 等插件提供桥接配套；**通过 aiti-bridge 直接把消息发到 IDE 里的 AI agent 窗口**。
 
 ## 1. 产品构成
 
@@ -39,7 +39,7 @@ IDE AI agent 窗口 / Claude Code / Cursor / aiti-agent
 │  ├─ /bridge/sse               │  持久连接（role=page|ai）
 │  ├─ /bridge/result            │  执行结果回桥
 │  ├─ /bridge/event             │  页面事件（open_file 等）
-│  └─ /mcp/mcp              │  MCP JSON-RPC（tools/list / tools/call；Streamable HTTP）
+│  └─ /mcp/mcp                 │  MCP JSON-RPC（tools/list / tools/call；Streamable HTTP）
 └────────────┬────────────────┘
              │ SSE
              ▼
@@ -91,7 +91,7 @@ npx @aiti-ai/aiti-bridge --register-shim
 - 桥端点默认仅本机监听（127.0.0.1）；页面连接经 claim/secret 校验
 - MCP 端点外网鉴权：计划适配 service-tunnels（auth + token 并存）
 
-## 7. 2026-08 新增能力
+## 7. 近期新增能力
 
 | 能力 | 说明 | 文档 |
 |---|---|---|

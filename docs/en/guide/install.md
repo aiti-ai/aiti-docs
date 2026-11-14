@@ -7,7 +7,7 @@ tags: [guide, install]
 
 # Installation
 
-aiti Web (npm package **`@aiti-ai/pi-web`**) is a self-hosted AI development workbench: one command to start, ready in your browser, with 60+ bundled extensions out of the box.
+aiti Web (npm package **`@aiti-ai/pi-web`**) is a self-hosted AI development workbench: one command to start, ready in your browser, with 63+ bundled extensions out of the box.
 
 ## Install (pick one)
 

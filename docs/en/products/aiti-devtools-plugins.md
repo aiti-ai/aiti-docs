@@ -59,7 +59,7 @@ bun add -D @aiti-ai/aiti-devtools-vite
 
 ```bash
 # npm
-npm install -D aiti-devtools-webpack html-webpack-plugin
+npm install -D @aiti-ai/aiti-devtools-webpack html-webpack-plugin
 # yarn
 yarn add -D @aiti-ai/aiti-devtools-webpack html-webpack-plugin
 # pnpm
@@ -72,7 +72,7 @@ bun add -D @aiti-ai/aiti-devtools-webpack html-webpack-plugin
 
 ```bash
 # npm
-npm install -D aiti-devtools-nuxt
+npm install -D @aiti-ai/aiti-devtools-nuxt
 # yarn
 yarn add -D @aiti-ai/aiti-devtools-nuxt
 # pnpm

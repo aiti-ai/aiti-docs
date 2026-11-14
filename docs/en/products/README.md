@@ -11,44 +11,55 @@ aiti is not a single product but an **AI development tool ecosystem**. All produ
 
 ## 1. Matrix Overview
 
-| # | Product | npm Package | Form | One-Line Positioning | Status |
+> Status legend: ✅ published & usable · 🚧 source ready / in progress · 📋 planned
+
+| # | Product | npm Package / Release Form | Form | One-Line Positioning | Status |
 |---|---|---|---|---|---|
-| 1 | **aiti-agent** | `@aiti-ai/aiti-agent` | Web app + Docker image | Self-hosted personal AI development workbench (**built on pi-web**), browser as the primary operating surface, compatible with and same-source as pi CLI / pi IDE extensions | 🚧 M0-M4 |
-| 2 | **aiti-core** | `@aiti-ai/aiti` | SDK (protocol/types/shared library) | Shared by all products: bridge protocol, `pageId` session model, injection script, MCP tool definitions | 📋 |
-| 3 | **aiti-devtools** | `@aiti-ai/aiti-devtools` | Injection SDK (`inject.js`) | In-page AI debugging assistant: `aiti-devtools` + Inspector + MCP bridge (form ① active adaptation) | ✅ 0.2.x |
-| 4 | **aiti-devtools-vite** | `@aiti-ai/aiti-devtools-vite` | Vite plugin | dev server auto injection, **local inject** | 📋 |
-| 5 | **aiti-devtools-vue** | `@aiti-ai/aiti-devtools-vue` | Vue plugin | Injection inside Vue apps (one-line `app.use`) | 📋 |
-| 6 | **aiti-devtools-next** | `@aiti-ai/aiti-devtools-next` | Next.js plugin | Framework-level injection (dev build + `_debugSource` source locating) | 📋 |
-| 7 | **aiti-devtools-react** | `@aiti-ai/aiti-devtools-react` | React plugin | Injection into React projects | 📋 |
-| 8 | **aiti-devtools-svelte** | `@aiti-ai/aiti-devtools-svelte` | Svelte plugin | Injection into Svelte projects | 📋 |
-| 9 | **aiti-bridge** | `@aiti-ai/aiti-bridge` | Local bridge service (CLI) | **Configures aiti-devtools usage**, enables any AI agent, delivers messages straight into IDE AI windows | 🚧 bridge working |
-| 10 | **aiti-devtools-vscode** | `@aiti-ai/aiti-devtools-vscode` | VS Code extension | Completes injection + connects straight to the IDE's built-in AI agent window | 🚧 MVP |
-| 11 | **aiti-devtools-idea** | `@aiti-ai/aiti-devtools-idea` | JetBrains plugin | Same as above (IntelliJ / PyCharm / WebStorm / GoLand) | 📋 |
-| 12 | **aiti-devtools-chrome** | `@aiti-ai/aiti-devtools-chrome` | Chrome extension | Code-free injection (form ②), any site debuggable | 📋 |
-| 13 | **aiti-docs** | `@aiti-ai/aiti-docs` | Documentation site (this website) | VuePress docs + product matrix + roadmaps | ✅ this page |
+| 1 | **aiti-agent** | [`@aiti-ai/pi-web`](https://www.npmjs.com/package/@aiti-ai/pi-web) · Docker [`aitiai/pi-web`](https://hub.docker.com/r/aitiai/pi-web) (core/full) | Web app + Docker image | Self-hosted personal AI development workbench (**built on pi-web**, ships 63+ bundled extensions); the browser is the primary operating surface, same-source compatible with pi CLI / pi IDE extensions | ✅ 0.15.x |
+| 2 | **aiti-devtools** | shipped as a bundled pi-web extension + carrier plugins (no standalone npm package) | Injection SDK (`aiti-launcher.js`) | In-page AI debugging assistant: client + Inspector + MCP bridge (form ① active adaptation) | ✅ 0.2.x |
+| 3 | **aiti-devtools-vite** | [`@aiti-ai/aiti-devtools-vite`](https://www.npmjs.com/package/@aiti-ai/aiti-devtools-vite) | Vite plugin | dev-server auto injection (includes the Astro integration; SvelteKit reuses it directly), **local injection** | ✅ 0.1.x |
+| 4 | **aiti-devtools-webpack** | [`@aiti-ai/aiti-devtools-webpack`](https://www.npmjs.com/package/@aiti-ai/aiti-devtools-webpack) | Webpack/Rspack plugin | dev-server injection (setupMiddlewares + html-webpack-plugin); Rspack reuses it directly | ✅ 0.1.x |
+| 5 | **aiti-devtools-nuxt** | [`@aiti-ai/aiti-devtools-nuxt`](https://www.npmjs.com/package/@aiti-ai/aiti-devtools-nuxt) | Nuxt module | one-line `modules` integration: mounts the bridge + auto head injection | ✅ 0.1.x |
+| 6 | **aiti-bridge** | [`@aiti-ai/aiti-bridge`](https://www.npmjs.com/package/@aiti-ai/aiti-bridge) | Local bridge service (CLI) | Turns page debugging into MCP tools for any AI agent (`page_*` / `user_*`); delivers messages straight into IDE AI windows | ✅ 0.2.x |
+| 7 | **aiti-devtools-vscode** | source ready (VS Code / Cursor / Windsurf; marketplace release pending) | VS Code extension | Completes injection + connects straight to the IDE's built-in AI agent window | 🚧 MVP |
+| 8 | **aiti-devtools-idea** | 📋 planned | JetBrains plugin | Same as above (IntelliJ / PyCharm / WebStorm / GoLand) | 📋 |
+| 9 | **aiti-devtools-chrome** | 📋 planned | Chrome extension | Code-free injection (form ②), any site debuggable | 📋 |
+| 10 | **aiti-devtools-vue / -react / -svelte** | 📋 planned (Vue / SvelteKit reuse the Vite plugin for now) | Framework-specific plugins | Deep framework integration such as component hierarchy info | 📋 |
+| 11 | **aiti-core** | 📋 planned (`@aiti-ai/aiti`) | SDK (protocol/types/shared library) | Shared by all products: bridge protocol, `pageId` session model, injection script, MCP tool definitions | 📋 |
+| 12 | **Extension ecosystem** | published npm `@aiti-ai/*` extension packages + 63+ bundled in pi-web | pi-web extensions | session-manager / git toolchain / multi-agent backends (Claude Code, Codex, Cursor…) / model wizard / service-tunnels / document viewers… | ✅ [browse all](/en/extensions/) |
+| 13 | **Standalone pieces** | [GitHub `aiti-ai` org](https://github.com/orgs/aiti-ai/repositories) | services / CLIs / libraries | service-tunnels (port tunnels), pi-subagents (pi subagent orchestration), grdpwasm (Web RDP), pi-models-respect, ddns | ✅ |
+| 14 | **aiti-docs** | [github.com/aiti-ai/aiti-docs](https://github.com/aiti-ai/aiti-docs) (source of this site) | Documentation site (this website) | VuePress docs + product matrix + roadmaps | ✅ this page |
 
 > Brand and identity: GitHub org `aiti-ai` · website `https://aiti.pw` · npm scope `@aiti-ai` · MIT license.
+
+**Usable right now**:
+
+```bash
+# Self-hosted workbench (pick one)
+npx @aiti-ai/pi-web@latest                       # run straight from npm, no install
+curl -fsSL https://aiti.pw/install.sh | sh       # macOS / Linux (no npm needed)
+docker run -d -p 30142:30142 aitiai/pi-web:core  # Docker (:full adds GUI / voice / tunnels)
+
+# Local MCP bridge (connect any AI agent to in-page debugging)
+npx @aiti-ai/aiti-bridge --port 8777
+```
 
 ## 2. Layered Architecture
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│ L4 Entry      aiti-agent (Web workbench) · IDE plugins ·     │
-│               Chrome ext                                     │
-│               Unified surface: sessions / services /         │
-│               terminal / desktop / debugging                 │
-├─────────────────────────────────────────────────────────────┤
-│ L3 Agent      Enable any AI agent (MCP client)               │
-│               Claude Code · Cursor · IDE built-in AI · aiti-agent │
-├─────────────────────────────────────────────────────────────┤
-│ L2 Bridge     aiti-bridge              │
-│               Configures aiti-devtools · pageId sessions ·   │
-│               SSE page bridge                                │
-├─────────────────────────────────────────────────────────────┤
-│ L1 Injection  aiti-devtools + vite/vue/next/react/svelte     │
-│               aiti-devtools client · Inspector · CDP-like    │
-│               command set · local injection                  │
-└─────────────────────────────────────────────────────────────┘
+┌ L4 Entry layer ─────────────────────────────────────
+│ aiti-agent (web workbench) · IDE plugins · Chrome extension
+│ Unified surface: sessions / services / terminal / desktop / debugging
+├ L3 Agent layer ─────────────────────────────────────
+│ Upgrade any AI agent (MCP client)
+│ Claude Code · Cursor · IDE built-in AI · aiti-agent
+├ L2 Bridge layer ────────────────────────────────────
+│ aiti-bridge (MCP endpoint built in)
+│ Bridges aiti-devtools · pageId sessions · SSE page bridge
+├ L1 Injection layer ─────────────────────────────────
+│ aiti-devtools + vite / webpack / nuxt plugins
+│ client · Inspector · CDP-like command set · local injection
+└─────────────────────────────────────────────────────
 ```
 
 ### Layer Responsibilities
@@ -62,26 +73,26 @@ aiti is not a single product but an **AI development tool ecosystem**. All produ
 
 ## 3. Three Main Lines
 
-### Main Line A: aiti-agent — the Main Web Battleground
+### Main Line A: aiti-agent — the Main Web Workbench
 
-A self-hosted personal AI development workbench powered by **pi**. Built on the open-source project **agegr/pi-web** (including the ecosystem's only service-tunnels / queue recovery), with an independent product identity. See [Project Origin](/en/guide/origin.md) for the backstory.
+A self-hosted personal AI development workbench powered by **pi** (npm package **`@aiti-ai/pi-web`**). Built on the open-source project **agegr/pi-web** (including the ecosystem's only service-tunnels / queue recovery), with an independent product identity. See [Project Origin](/en/guide/origin.md) for the backstory.
 
-- Form: single Docker container (lite/full) → browser + mobile
+- Form: npm global install / one-line script / single Docker container (core/full) → browser + mobile
+- Status: ✅ published (0.15.x) — three install entries in [aiti-agent](/en/products/aiti-agent.md) and the [Install Guide](/en/guide/install.md)
 - Five capability layers: UI layer → debug visualization layer (CDP/VNC/ttyd) → exposure layer (service-tunnels) → execution layer (pi agent SDK) → data layer (shared JSONL + queue persistence)
-- Details: [aiti-agent](/en/products/aiti-agent.md)
 
 ### Main Line B: aiti-devtools — the Local Injection Ecosystem
 
-Bringing AI to the live scene of page development. **Embedded into every mainstream development tool** (Vite / Vue / Next / React / Svelte), **local injection**, no business code changes needed.
+Bringing AI to the live scene of page development. **Embedded into every mainstream development tool** (Vite / Webpack / Nuxt / Astro; Next / Express / SvelteKit via core), **local injection**, no business code changes needed.
 
-- Form ①: active adaptation by developers (`<script src="aiti-devtools/inject.js">`)
-- Form ②: Chrome extension / platform built-in (no code changes)
-- Form ③: IDE plugins (vscode / idea) auto injection
+- Form ①: active adaptation by developers (`<script src="…/aiti-launcher.js" defer></script>`)
+- Form ②: Chrome extension / platform built-in (no code changes, planned)
+- Form ③: IDE plugins (vscode source ready / idea planned) auto injection
 - Details: [aiti-devtools](/en/products/aiti-devtools.md) and the [devtools plugin matrix](/en/products/aiti-devtools-plugins.md)
 
-### Main Line C: aiti-bridge — AI Agent Enablement
+### Main Line C: aiti-bridge — Upgrade Any AI Agent
 
-The bridge-layer product. **Configures aiti-devtools usage**, **enables AI agents**, and supports aiti-devtools and plugins such as aiti-devtools-vscode/idea to **complete injection**; through **aiti-bridge, messages are sent directly to the AI agent window inside the IDE**.
+The bridge-layer product. **Turns page debugging into MCP tools for any AI agent** (`page_*` / `user_*`), provides the bridge plumbing for aiti-devtools and plugins such as aiti-devtools-vscode/idea, and **delivers messages directly to the AI agent window inside the IDE**.
 
 - Details: [aiti-bridge](/en/products/aiti-bridge.md) and [IDE plugins](/en/products/aiti-ide-plugins.md)
 
@@ -100,8 +111,9 @@ IDE opens the project → aiti-devtools-vscode injects automatically (dev server
 ### Scenario 2: aiti-agent remote debugging
 
 ```
-docker run aiti → open the workbench in the browser → the page's dev environment gets aiti-devtools injected
-  → the workbench AI session is exposed via service-tunnels → CDP 9222 / noVNC 6080 visual remote debugging
+docker run -d -p 30142:30142 aitiai/pi-web:core → open the workbench in the browser
+  → the page's dev environment gets aiti-devtools injected → the workbench AI session is exposed via service-tunnels
+  → CDP 9222 / noVNC 6080 visual remote debugging
 ```
 
 ## 5. Protocols and Conventions

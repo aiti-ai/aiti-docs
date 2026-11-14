@@ -39,7 +39,7 @@ UI 层：会话/服务/终端/桌面/调试 统一界面
 | queue 持久化 / 崩溃恢复 | ✅ 全生态唯一 | 任务队列重启不丢 |
 | worktree 分组 / i18n 框架 | ✅ 领先 | 会话按工作区分组 |
 | 内置终端（ttyd / node-pty） | 📋 M1 | 远程执行服务端 Terminal |
-| Docker 一键（core/full） | 📋 M1 | `docker run aiti` |
+| Docker 一键（core/full） | ✅ 已发布 | `docker run -d -p 30142:30142 aitiai/pi-web:core`（GUI/语音/隧道 → `:full`） |
 | Chrome CDP 远程调试 | 📋 M2 | 9222 暴露 + DevTools + cdp 工具 |
 | CLI 桥接（Claude Code / Codex / OpenCode） | 📋 M2.5 | 任意 AI CLI 会话桥接进 Web |
 | noVNC 桌面可视化 | 📋 M3 | 任意 GUI 远程看/操作 |
@@ -62,7 +62,7 @@ UI 层：会话/服务/终端/桌面/调试 统一界面
 
 ## 6. 使用入口
 
-npm 包 **`@aiti-ai/pi-web`**（自带 60+ 内置扩展），三种安装方式详见 **[安装指南](/guide/install.md)**：
+npm 包 **`@aiti-ai/pi-web`**（自带 63+ 内置扩展），三种安装方式详见 **[安装指南](/guide/install.md)**：
 
 :::: tabs#install-short
 

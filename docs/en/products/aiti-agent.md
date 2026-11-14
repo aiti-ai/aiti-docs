@@ -1,11 +1,11 @@
 ---
 title: aiti-agent
 icon: 🤖
-description: Self-hosted personal AI development workbench (built on pi-web), the main Web battleground
+description: Self-hosted personal AI development workbench (built on pi-web), the primary web workbench
 tags: [product, aiti-agent, pi-web]
 ---
 
-# aiti-agent — the Main Web Battleground
+# aiti-agent — the Main Web Workbench
 
 > **In one sentence**: a self-hosted personal AI development workbench powered by **pi** — the browser as the primary operating surface (same-source compatible with pi: pi CLI / pi IDE extensions operate the same set of sessions), one-command `docker run` startup, `just get` to install tools.
 > **Backstory**: built on top of the open-source project pi-web; the deeper it was used and the more it was modified, the more it grew into its own release line (see [Project Origin](/en/guide/origin.md)).
@@ -39,7 +39,7 @@ Data layer: shared pi JSONL + queue persistence + worktree              ← exis
 | queue persistence / crash recovery | ✅ unique in the ecosystem | task queues survive restarts |
 | worktree grouping / i18n framework | ✅ ahead | sessions grouped by workspace |
 | Built-in terminal (ttyd / node-pty) | 📋 M1 | remote server-side Terminal execution |
-| One-command Docker (core/full) | 📋 M1 | `docker run aiti` |
+| One-command Docker (core/full) | ✅ published | `docker run -d -p 30142:30142 aitiai/pi-web:core` (GUI / voice / tunnels → `:full`) |
 | Chrome CDP remote debugging | 📋 M2 | 9222 exposure + DevTools + cdp tools |
 | CLI bridging (Claude Code / Codex / OpenCode) | 📋 M2.5 | bridge any AI CLI session into the Web |
 | noVNC desktop visualization | 📋 M3 | view/operate any GUI remotely |
@@ -62,12 +62,40 @@ Data layer: shared pi JSONL + queue persistence + worktree              ← exis
 
 ## 6. Getting Started
 
-```bash
-# One-command Docker (after M1; image tags are core / full only, no lite)
-docker run -d -p 30142:30142 -v aiti-data:/opt/aiti -v ~/workspace:/workspace aitiai/pi-web:core   # published on Docker Hub (GUI / voice / tunnels → :full)
+npm package **`@aiti-ai/pi-web`** (ships 63+ bundled extensions); three ways to install — see the [Install Guide](/en/guide/install.md):
 
+:::: tabs#install-short
+
+@tab npm
+
+```bash
+npm install -g @aiti-ai/pi-web@latest && pi-web
+```
+
+@tab macOS / Linux
+
+```bash
+curl -fsSL https://aiti.pw/install.sh | sh
+```
+
+@tab Windows
+
+```powershell
+irm https://aiti.pw/install.ps1 | iex
+```
+
+::::
+
+```bash
 # Open in the browser (aiti.pw is the website/docs site; the workbench entry is the local port)
-open http://localhost:30142
+open http://localhost:30141
+```
+
+Docker one-command (image tags are core / full only, no lite):
+
+```bash
+docker run -d -p 30142:30142 -v aiti-data:/opt/aiti -v ~/workspace:/workspace aitiai/pi-web:core   # published on Docker Hub (GUI / voice / tunnels → :full)
+# open http://localhost:30142
 ```
 
 > Full plan: [Roadmap · aiti-agent](/en/roadmaps/aiti-agent.md) and the [Master Plan](/en/roadmaps/master-plan.md).

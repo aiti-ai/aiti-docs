@@ -7,7 +7,7 @@ tags: [guide, install]
 
 # 安装
 
-aiti Web（npm 包名 **`@aiti-ai/pi-web`**）是自托管的 AI 开发工作台：一条命令启动，浏览器即用，自带 60+ 内置扩展，无需逐个安装。
+aiti Web（npm 包名 **`@aiti-ai/pi-web`**）是自托管的 AI 开发工作台：一条命令启动，浏览器即用，自带 63+ 内置扩展，无需逐个安装。
 
 ## 安装（选一种）
 

@@ -13,8 +13,8 @@ tags: [product, ide, vscode, idea]
 
 | Plugin | Package / Marketplace Name | Target IDEs | Status |
 |---|---|---|---|
-| aiti-devtools-vscode | `@aiti-ai/aiti-devtools-vscode` | VS Code / Cursor / Windsurf | 📋 |
-| aiti-devtools-idea | `@aiti-ai/aiti-devtools-idea` | IntelliJ / PyCharm / WebStorm / GoLand / Android Studio | 📋 |
+| aiti-devtools-vscode | source in `vscode-ext/` (marketplace release pending) | VS Code / Cursor / Windsurf | 🚧 MVP |
+| aiti-devtools-idea | 📋 planned (named `aiti-devtools-idea`) | IntelliJ / PyCharm / WebStorm / GoLand / Android Studio | 📋 |
 
 ## 2. Three Core Responsibilities
 

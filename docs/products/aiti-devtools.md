@@ -13,18 +13,19 @@ tags: [product, aiti-devtools, inject]
 
 ## 1. 快速接入（形态①）
 
+工程内接入**优先用载体插件**（Vite / Webpack / Nuxt 一行接入，见 [插件矩阵](/products/aiti-devtools-plugins.md)）。手动接入只需一个 `<script>`（先 `npx @aiti-ai/aiti-bridge --port 8777` 起本地桥）：
+
 ```html
-<script src="aiti-devtools/inject.js"></script>
-<script>
-  createAitiLauncher('http://localhost:3000/todo', {
-    aiUrl: 'http://localhost:30141/ai/chat?session=abc', // AI 会话页（可选）
-    bridgeBase: 'http://localhost:8777',                   // MCP 桥（可选）
-    bridgeToken: 'dev',
-  });
-</script>
+<script
+  src="http://127.0.0.1:8777/aiti/aiti-launcher.js"
+  data-bridge-url="http://127.0.0.1:8777"
+  data-ai-url="http://127.0.0.1:8777/aiti/cockpit.html"
+  defer
+></script>
 ```
 
-页面右下角出现 💬 AI 消息 / <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px"><path d="M22 12h-4"/><path d="M6 12H2"/><path d="M12 6V2"/><path d="M12 22v-4"/><path d="M12 12"/></svg>（crosshair）Inspector 两按钮，能力即插即用。
+- `data-bridge-url`：桥地址（缺省 = 脚本同源）；`data-ai-url`：AI 窗地址（缺省 = 桥同源 `cockpit.html`）；也可用全局 `window.__AITI_BRIDGE_URL` / `window.__AITI_AI_URL`。
+- 加载后右下角出现 💬 AI 消息 / 🎯（crosshair 准星）Inspector 两按钮，能力即插即用——脚本自动启动 `createDbgLauncher`，无需写任何 JS。
 
 ## 2. 能力清单
 
@@ -54,7 +55,7 @@ tags: [product, aiti-devtools, inject]
 React / Next / Vue / Svelte（dev 构建 `_debugSource` / `__file` / `__svelte_meta`）→ 统一输出 `{framework, file, line, component}` —— **AI 报错直接定位到源码文件**，配合桥的 `open_file` 事件在编辑器打开。
 
 ### MCP 桥
-- `node aiti-bridge --port 8777`（MCP 端点（stdio + HTTP + Streamable HTTP）+ SSE 页面桥）
+- `npx @aiti-ai/aiti-bridge --port 8777`（MCP 端点（stdio + HTTP + Streamable HTTP）+ SSE 页面桥）
 - MCP 工具：`page_exec` / `page_snapshot` / `bridge_status` / `user_*`（用户交互工具族）
 
 ### 刷新恢复
@@ -66,5 +67,29 @@ AI 窗开关 + 位置尺寸、放行方案、视口、目标 URL 全部持久化
 - 危险命令（removeNode/reload/navigate/localStorage 持久类）弹确认卡 + 确认队列
 - 浏览器受限操作走手势桥（用户真实点击，每次都要）
 - 桥用 token 认证；右键/中键放行；跨源 iframe 跳过注入
+
+## 4. 文件结构
+
+开发源在 `dev-repo/inject/`（esbuild 构建注入产物），发布形态为 **aiti-agent 扩展**（`dev-repo/aiti-devtools/`，部署 `~/.pi/web/extensions/aiti-devtools/`）。
+
+| 文件 | 职责 |
+|---|---|
+| `dev-repo/inject/src/client/index.js` | 注入的迷你 `aiti-devtools` client（元素画像：尺寸/样式/组件源码与位置/调用处/pageId/url） |
+| `dev-repo/inject/src/launcher/` | 宿主 launcher（widget UI / inspector / MCP 桥 / 交互面板，模块化） |
+| `dev-repo/inject/src/mcp/bridge-client.js` | 通用桥客户端（页面/AI 窗连桥） |
+| `dev-repo/inject/tools/build.mjs` | 构建单文件 `dist/aiti-launcher.js`（client + launcher 打包） |
+| `dev-repo/bridge/bin/aiti-bridge.mjs` | MCP 桥（stdio + HTTP + 页面 SSE）独立运行版 |
+| `dev-repo/aiti-devtools/` | aiti-agent 扩展：`bridge.ts`（MCP 桥）/ `inject.ts`（service-tunnels 注入）/ `client/aiti-client.mjs`（AI 窗口） |
+| `dev-repo/aiti-devtools/tools/deploy.mjs` | 构建 launcher + 部署扩展到 `~/.pi/web/extensions/aiti-devtools/` |
+
+## 5. 开发 / 运行
+
+```bash
+node dev-repo/inject/tools/build.mjs          # → inject/dist/aiti-launcher.js（注入单文件）+ bridge-client.js + cdp-core.js
+node dev-repo/core/tools/build-assets.mjs     # 重建 core/assets（构建产物集中地，桥/载体插件读它）
+node dev-repo/aiti-devtools/tools/deploy.mjs              # → ~/.pi/web/extensions/aiti-devtools/（aiti-agent 热重载）
+node dev-repo/bridge/bin/aiti-bridge.mjs --port 8777   # 独立 MCP 桥
+node dev-repo/pi-ext/tools/build.mjs              # → dev-repo/pi-ext/dist/aiti-devtools-pi.js（pi 扩展）
+```
 
 > 插件矩阵见 [aiti-devtools 插件](/products/aiti-devtools-plugins.md)，使用文档见 [aiti-devtools](/devtools/)。
