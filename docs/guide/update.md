@@ -74,7 +74,7 @@ npx @aiti-ai/pi-web@latest
 @tab Docker
 
 ```bash
-docker pull aitiai/pi-web:latest   # 国内可换 registry.cn-hangzhou.aliyuncs.com/aiti-ai/pi-web:latest
+docker pull aitiai/pi-web:latest
 # 然后按原启动方式重建容器（同名卷携带数据，扩展随镜像刷新）
 ```
 

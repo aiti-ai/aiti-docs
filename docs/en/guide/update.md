@@ -74,7 +74,7 @@ npx @aiti-ai/pi-web@latest
 @tab Docker
 
 ```bash
-docker pull aitiai/pi-web:latest   # in China: registry.cn-hangzhou.aliyuncs.com/aiti-ai/pi-web:latest
+docker pull aitiai/pi-web:latest
 # then recreate the container the same way it was originally started
 ```
 

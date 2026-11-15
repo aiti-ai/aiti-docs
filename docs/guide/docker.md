@@ -7,7 +7,7 @@ tags: [guide, docker, deploy, pi-web]
 
 # Docker 部署（官方镜像）
 
-不想装 Node/npm？直接用官方镜像把整套工作台跑起来：一个容器装下 **pi-web + 全部内置扩展 + pi 引擎 + Node/git + aiti-bridge**；`full` 版再加网页桌面（noVNC、Chrome/CDP）、语音与隧道。镜像发布在 [Docker Hub](https://hub.docker.com/r/aitiai/pi-web)（推 `v*` tag 随 GitHub Releases 自动构建），并逐 tag 同步一份到阿里云 ACR（国内拉取加速）：`registry.cn-hangzhou.aliyuncs.com/aiti-ai/pi-web`。
+不想装 Node/npm？直接用官方镜像把整套工作台跑起来：一个容器装下 **pi-web + 全部内置扩展 + pi 引擎 + Node/git + aiti-bridge**；`full` 版再加网页桌面（noVNC、Chrome/CDP）、语音与隧道。镜像发布在 [Docker Hub](https://hub.docker.com/r/aitiai/pi-web)（随 GitHub Releases 同版本发布）。
 
 ## 1. 快速开始（docker run）
 
@@ -22,9 +22,6 @@ docker run -d --name aiti --init \
   aitiai/pi-web:core
 # 浏览器打开 http://localhost:30142
 ```
-
-> **国内拉取慢？** 把镜像名换成阿里云仓即可，tag 与 Docker Hub 完全一致：
-> `registry.cn-hangzhou.aliyuncs.com/aiti-ai/pi-web:core`（ACR 镜像随每次发布自动同步）。
 
 - 两个命名卷携带全部状态：`aiti_data`（扩展运行时数据）与 `aiti_agent`（pi 会话 / 模型配置）——**升级镜像不丢数据**；
 - `-v ~/my-project:/workspace` 挂载宿主项目目录，容器以它为启动默认工作区；
@@ -44,7 +41,7 @@ docker run -d --name aiti --init \
 | 内存下限 | 1GB | **8GB**（full + 语音；2–6GB 会 OOM） |
 
 - 版本 tag：`aitiai/pi-web:v<版本>-{core,full}`；滚动 tag：`core` / `full` / `latest`；
-- 阿里云 ACR 同 tag 镜像：`registry.cn-hangzhou.aliyuncs.com/aiti-ai/pi-web:v<版本>-{core,full}`（与 Docker Hub 逐 tag 同步）；
+- 镜像当前仅提供 linux/amd64 架构（Apple Silicon / ARM 主机可加 `--platform linux/amd64` 以模拟运行，性能有折损）；
 - `full` 的额外阶段由 `AITI_PHASES` 控制（见 §5）。
 
 ## 3. 数据持久化（卷）
@@ -135,7 +132,7 @@ compose 默认跑 `full` 镜像（`AITI_MODE: full`），只映射 30142/8777（
 ## 8. 升级与运维
 
 ```bash
-docker pull aitiai/pi-web:latest        # ① 拉新镜像（国内可换 registry.cn-hangzhou.aliyuncs.com/aiti-ai/pi-web:latest）
+docker pull aitiai/pi-web:latest        # ① 拉新镜像
 docker stop aiti && docker rm aiti      # ② 删旧容器（卷保留）
 # ③ 按原命令重建容器 → 数据由同名卷携带，扩展随镜像刷新
 ```

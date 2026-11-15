@@ -118,7 +118,7 @@ npm install -g @aiti-ai/pi-web@latest && pi-web
 
 ### 安装方式（npm / 脚本 / Docker）
 
-> 三种方式任选，详见 **[安装指南](/guide/install.md)**（系统要求 / 常用命令 / 脚本透明性）。
+> 多种方式任选，详见 **[安装指南](/guide/install.md)**（系统要求 / 常用命令 / 脚本透明性）。
 
 :::: tabs#install
 
@@ -135,6 +135,16 @@ pi-web          # 启动服务并打开浏览器（默认 http://127.0.0.1:30141
 ```bash
 # 无需 npm：GitHub Releases 预构建产物 + sha256 校验，装到用户目录
 curl -fsSL https://aiti.pw/install.sh | sh
+```
+
+@tab Docker
+
+```bash
+docker run -d --name aiti --init -p 30142:30142 \
+  -v aiti_data:/opt/aiti/data -v aiti_agent:/opt/aiti/agent \
+  -v ~/workspace:/workspace \
+  aitiai/pi-web:core
+# 浏览器开 http://localhost:30142（工作目录 /workspace；GUI/语音全家桶 → :full）
 ```
 
 @tab Windows

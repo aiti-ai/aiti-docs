@@ -137,6 +137,16 @@ pi-web          # starts the service and opens the browser (default http://127.0
 curl -fsSL https://aiti.pw/install.sh | sh
 ```
 
+@tab Docker
+
+```bash
+docker run -d --name aiti --init -p 30142:30142 \
+  -v aiti_data:/opt/aiti/data -v aiti_agent:/opt/aiti/agent \
+  -v ~/workspace:/workspace \
+  aitiai/pi-web:core
+# open http://localhost:30142 in the browser (project dir /workspace; GUI/voice bundle → :full)
+```
+
 @tab Windows
 
 ```powershell
