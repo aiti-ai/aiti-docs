@@ -95,7 +95,7 @@ open http://localhost:30141
 Docker one-command (image tags are core / full only, no lite):
 
 ```bash
-docker run -d --name aiti --init -p 30142:30142 -v aiti_data:/opt/aiti/data -v aiti_agent:/opt/aiti/agent -v ~/workspace:/workspace aitiai/pi-web:core   # published on Docker Hub (GUI / voice / tunnels → :full)
+docker run -d --name aiti --init -p 30142:30142 -v aiti_data:/opt/aiti/data -v aiti_agent:/opt/aiti/agent -v ~/workspace:/workspace aitiai/pi-web:core   # published on Docker Hub + mirrored to the public Aliyun ACR (registry.cn-hangzhou.aliyuncs.com/aiti-ai/pi-web; GUI / voice / tunnels → :full)
 # open http://localhost:30142
 ```
 

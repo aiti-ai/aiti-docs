@@ -45,6 +45,8 @@ docker run -d --name aiti --init -p 30142:30142 \
   aitiai/pi-web:core        # GUI / voice / tunnels all-in-one → :full
 ```
 
+Slow pulls in China? swap the image for `registry.cn-hangzhou.aliyuncs.com/aiti-ai/pi-web:core` (Aliyun ACR, same tags as Docker Hub).
+
 ::::
 
 ## 2. Launch
