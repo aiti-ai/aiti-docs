@@ -14,8 +14,9 @@
  * Version source resolution order (first existing package.json wins):
  *   1. $AITI_AI_DIR/extensions/<id>/package.json      — pi-web extensions (62+)
  *   2. $AITI_AI_DIR/pi-plugins/<id>/package.json      — pi plugins (pi-git-trace, pi-models-combo, pi-secret-mask)
- *   3. $AITI_AI_DIR/integrations/<id>/package.json    — integrations, flat (dsh-secret-mask)
- *   4. $AITI_AI_DIR/integrations/<repo>/<id>/package.json — integrations, per-repo layout (DSH/OpenClaw/OpenCode host adapters)
+ *   3. $AITI_AI_DIR/packages/<id>/package.json        — bridge & shared packages (aiti-bridge, secret-mask-core)
+ *   4. $AITI_AI_DIR/integrations/<id>/package.json    — integrations, flat (dsh-secret-mask)
+ *   5. $AITI_AI_DIR/integrations/<repo>/<id>/package.json — integrations, per-repo layout (DSH/OpenClaw/OpenCode host adapters)
  * AITI_AI_DIR defaults to ../aiti-ai (workflow layout; override for local runs).
  * Entries with no source there (git-pullkeep: SKILL.md carries no version
  * metadata) are reported as skipped and left untouched.
@@ -36,6 +37,7 @@ const AITI_AI_DIR = resolve(REPO, process.env.AITI_AI_DIR || "../aiti-ai");
 const SOURCE_ROOTS = [
   join(AITI_AI_DIR, "extensions"),
   join(AITI_AI_DIR, "pi-plugins"),
+  join(AITI_AI_DIR, "packages"), // aiti-bridge, secret-mask-core, ...
   join(AITI_AI_DIR, "integrations"), // flat (dsh-secret-mask) + per-repo layout via perRepoRoots
 ];
 const SKIP_FILES = new Set(["README.md", "spec.md"]); // same skip list as extensions-catalog.ts

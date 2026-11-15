@@ -9,7 +9,7 @@ ext:
   type: bridge
   installable: false  # 独立本地服务（npx 运行），不装进 aiti-agent/pi-web：extman 不列出、extensions.json 不入 extensions 数组（归 integrations）
   category: MCP 桥
-  version: 0.2.0
+  version: 0.2.5
   status: active
   author: aiti-ai
   publisher: aiti-ai
