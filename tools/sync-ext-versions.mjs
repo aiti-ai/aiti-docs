@@ -12,12 +12,13 @@
  * workflow picks it up and republishes the site.
  *
  * Version source resolution order (first existing package.json wins):
- *   1. $AITI_AI_DIR/extensions/<id>/package.json   — pi-web extensions (62+)
- *   2. $AITI_AI_DIR/pi-plugins/<id>/package.json   — pi plugins (pi-git-trace, pi-models-combo, pi-secret-mask)
+ *   1. $AITI_AI_DIR/extensions/<id>/package.json      — pi-web extensions (62+)
+ *   2. $AITI_AI_DIR/pi-plugins/<id>/package.json      — pi plugins (pi-git-trace, pi-models-combo, pi-secret-mask)
+ *   3. $AITI_AI_DIR/integrations/<id>/package.json    — integrations, flat (dsh-secret-mask)
+ *   4. $AITI_AI_DIR/integrations/<repo>/<id>/package.json — integrations, per-repo layout (DSH/OpenClaw/OpenCode host adapters)
  * AITI_AI_DIR defaults to ../aiti-ai (workflow layout; override for local runs).
- * Entries with no source there (host adapters, aiti-bridge, skills, doc-only
- * templates) are reported as skipped and left untouched — those are managed
- * by the pi-work side script instead.
+ * Entries with no source there (git-pullkeep: SKILL.md carries no version
+ * metadata) are reported as skipped and left untouched.
  *
  * Usage:
  *   node tools/sync-ext-versions.mjs                  # rewrite drifted versions
@@ -32,7 +33,11 @@ import { fileURLToPath } from "node:url";
 const REPO = resolve(join(fileURLToPath(import.meta.url), "..", ".."));
 const DOCS_EXT_DIR = join(REPO, "docs", "extensions");
 const AITI_AI_DIR = resolve(REPO, process.env.AITI_AI_DIR || "../aiti-ai");
-const SOURCE_ROOTS = [join(AITI_AI_DIR, "extensions"), join(AITI_AI_DIR, "pi-plugins")];
+const SOURCE_ROOTS = [
+  join(AITI_AI_DIR, "extensions"),
+  join(AITI_AI_DIR, "pi-plugins"),
+  join(AITI_AI_DIR, "integrations"), // flat (dsh-secret-mask) + per-repo layout via perRepoRoots
+];
 const SKIP_FILES = new Set(["README.md", "spec.md"]); // same skip list as extensions-catalog.ts
 
 const argv = process.argv.slice(2);
@@ -45,13 +50,21 @@ for (let i = onlyIdx; i !== -1 && argv[i + 1] && !argv[i + 1].startsWith("--"); 
 }
 
 /** Locate the authoritative package.json version for an extension id (or null). */
+const INTEGRATIONS_DIR = join(AITI_AI_DIR, "integrations");
+// integrations/<repo>/<pkg> per-repo layout (DSH/OpenClaw/OpenCode host adapters)
+const perRepoRoots = existsSync(INTEGRATIONS_DIR)
+  ? readdirSync(INTEGRATIONS_DIR, { withFileTypes: true })
+      .filter((e) => e.isDirectory())
+      .map((e) => join(INTEGRATIONS_DIR, e.name))
+  : [];
 function sourceVersion(id) {
-  for (const root of SOURCE_ROOTS) {
-    const pkg = join(root, id, "package.json");
+  const pkgs = SOURCE_ROOTS.map((r) => join(r, id, "package.json"));
+  for (const root of perRepoRoots) pkgs.push(join(root, id, "package.json"));
+  for (const pkg of pkgs) {
     if (!existsSync(pkg)) continue;
     try {
       const v = JSON.parse(readFileSync(pkg, "utf8")).version;
-      if (typeof v === "string" && v) return { version: v, source: root };
+      if (typeof v === "string" && v) return { version: v, source: pkg };
     } catch {
       /* unreadable package.json — keep looking */
     }
@@ -138,7 +151,7 @@ if (JSON_OUT) {
     list(result.updated, (u) => `${u.id}: ${u.from} -> ${u.to}`);
   }
   if (result.skipped.length) {
-    console.log("\nskipped (no version source under AITI_AI_DIR — managed on the pi-work side):");
+    console.log("\nskipped (no version source under AITI_AI_DIR):");
     list(result.skipped, (s) => `${s.id} (doc=${s.docVersion})`);
   }
 }
