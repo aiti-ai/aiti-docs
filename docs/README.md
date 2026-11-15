@@ -1,11 +1,11 @@
 ---
 home: true
 title: 自托管 AI 开发工作台 · pi-web 增强发行版
-description: 基于开源 pi-web 打造的自托管 AI 开发工作台：pi / Claude Code / Codex / Qoder 多 agent 一个面板全看管，60+ 内置扩展开箱即用，模型多 key 轮转与聚合，终端/VNC/RDP 远程无忧，IM 里遥控 AI——一条命令安装，浏览器即用。
+description: 基于开源 pi-web 打造的自托管 AI 开发工作台：pi / Claude Code / Codex / Qoder 多 agent 一个面板全看管，60+ 内置扩展开箱即用，AI 脱敏（随手贴，不泄密），模型多 key 轮转与聚合，终端/VNC/RDP 远程无忧，IM 里遥控 AI——一条命令安装，浏览器即用。
 heroImage: /logo.svg
 heroText: 自托管 AI 开发工作台
 tagline: "aiti（发音 /aiti/）—— 基于 pi-web 增强：多 agent 同堂 · 60+ 内置扩展 · 一条命令安装、浏览器即用"
-keywords: 自托管, AI 工作台, aiti-agent, pi-web, pi web ui, 多 agent, 模型聚合, 多 key 轮转, IM 遥控, 终端, VNC, RDP, AI 调试, 页面注入, MCP 桥, Claude Code, AI agent
+keywords: 自托管, AI 工作台, aiti-agent, pi-web, pi web ui, 多 agent, AI 脱敏, 密钥脱敏, API key 保护, 模型聚合, 多 key 轮转, IM 遥控, 终端, VNC, RDP, AI 调试, 页面注入, MCP 桥, Claude Code, AI agent
 actions:
   - text: 快速安装
     link: /guide/install.md
@@ -26,6 +26,10 @@ features:
     icon: 🧙
     details: 添加向导（目录搜索 / 贴地址反向匹配）+ 多 key 粘性轮转 + 模型聚合 + 可用性探测——告别模型管理焦虑
     link: /extensions/aiti-model-wizard.md
+  - title: AI 脱敏开箱即用
+    icon: 🛡️
+    details: 贴进 prompt 的 token、密钥发送模型前自动变占位符，工具执行时自动还原真值——随手贴，不泄密（Paste-safe by default），默认预装
+    link: /guide/install.md
   - title: 扩展注册表
     icon: 🧩
     details: 76 个扩展按分类浏览，aiti-agent 自动发现；每个功能都长着「AI 帮助点」——一句话生成配置、AI 回填表单、审核后落地
@@ -77,6 +81,7 @@ npm install -g @aiti-ai/pi-web@latest && pi-web
 | **多 agent 同堂**（一个面板全看管） | — | ✅ pi / Claude Code / Codex / Qoder / 任意 ACP agent |
 | **60+ 内置扩展** | 插件机制 | ✅ 开箱即用：终端 / VNC / RDP / IM 接入 / 隧道…… |
 | **模型管理一条龙** | — | ✅ 添加向导 + 多 key 粘性轮转 + 聚合 + 可用性探测 |
+| **AI 脱敏**（随手贴，不泄密） | — | ✅ 贴进 prompt 的密钥发送模型前变占位符、工具执行时还原真值 |
 | **页面调试注入**（AI 进驻网页） | — | ✅ aiti-devtools：Vite / webpack / Nuxt / Astro 插件 |
 | **配置安全网** | — | ✅ diff 查看 / 一键回滚 / 崩溃 watchdog 自恢复 |
 
@@ -97,6 +102,7 @@ npm install -g @aiti-ai/pi-web@latest && pi-web
 | 🕹️ **Java 后端直接调** | 给 AI 用的 Arthas++：JVM 内任意修改、Mock/SQL 拦截模拟、热更新 controller、诊断采样、Tunnel 桥多端点纳管，57 工具全可逆——Spring Boot / Solon 调试不必重启 | [aiti-testagent](/extensions/aiti-testagent.md) |
 | 🧬 **开发血缘** | git 记录改动的内容，血缘记录改动的因果：每行代码可归因到会话、prompt、方案与操作——可评审、可回滚、可检索 | [📖 理念](/guide/lineage.md) · [评审](/extensions/aiti-git-review.md) · [方案先行](/extensions/aiti-plan-first.md) |
 | 🛡️ **配置安全网** | AI/人改坏配置：有 diff 可看、一键回滚；系统崩了，命令行 watchdog 不依赖出问题的系统本身兜底恢复 | [aiti-configs](/extensions/aiti-configs.md) |
+| 🛡️ **AI 脱敏（Paste-safe by default）** | 贴进 prompt 的 token、密钥发送模型前自动变占位符，工具执行时自动还原真值——随手贴，不泄密；中文关键词原生支持，每次发送可出线上证据 | 第一方 pi 插件 [pi-secret-mask](/guide/install.md)（默认预装） |
 | 🧩 **还有更多** | 消息导航、Token 用量看板、编辑器当场改码、草稿保护、prompt 收藏…… 76 个扩展一次看全 | [扩展注册表](/extensions/) |
 | 🛠️ **页面调试工具链（aiti-devtools）** | AI 进驻网页，面对面调试——看得见、点得着、改得了；已适配 DSH / OpenClaw / OpenCode 跨宿主 | [aiti-devtools 总览 →](/devtools/) |
 

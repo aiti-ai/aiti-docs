@@ -1,7 +1,7 @@
 ---
 home: true
 title: Self-Hosted AI Dev Workbench · Enhanced pi-web
-description: A self-hosted AI development workbench built on the open-source pi-web — pi / Claude Code / Codex / Qoder agents managed in one panel, 60+ built-in extensions out of the box, multi-key model rotation & aggregation, terminal/VNC/RDP, remote-control AI from IM. One command to install, browser-first.
+description: A self-hosted AI development workbench built on the open-source pi-web — pi / Claude Code / Codex / Qoder agents managed in one panel, 60+ built-in extensions out of the box, AI secret masking (paste-safe by default), multi-key model rotation & aggregation, terminal/VNC/RDP, remote-control AI from IM. One command to install, browser-first.
 heroImage: /logo.svg
 heroText: Self-hosted AI dev workbench
 tagline: "aiti (pronounced /aiti/) — enhanced pi-web: all your agents in one panel, 60+ built-in extensions, one command to install"
@@ -26,6 +26,10 @@ features:
     icon: 🧙
     details: Add wizard (catalog search / paste-URL reverse match) + multi-key sticky rotation + model aggregation + availability probing — say goodbye to model-management anxiety
     link: /en/extensions/aiti-model-wizard.md
+  - title: AI secret masking, out of the box
+    icon: 🛡️
+    details: Keys and tokens pasted into prompts become placeholders before the model sees them and are restored for tool execution — paste-safe by default, pre-installed
+    link: /en/guide/install.md
   - title: Extension registry
     icon: 🧩
     details: 76 extensions browsable by category, auto-discovered by aiti-agent; every feature grows an "AI help point" — one sentence to draft config, AI fills the form, you review and commit
@@ -77,6 +81,7 @@ On first launch, sign in or fill an API key in the **Models** panel and start ch
 | **All agents in one panel** | — | ✅ pi / Claude Code / Codex / Qoder / any ACP agent |
 | **60+ built-in extensions** | plugin mechanism | ✅ out of the box: terminal / VNC / RDP / IM / tunnels … |
 | **Model management, end to end** | — | ✅ wizard + multi-key sticky rotation + aggregation + probing |
+| **AI secret masking** (paste-safe by default) | — | ✅ keys pasted into prompts become placeholders before the model sees them, restored for tool execution |
 | **Page-debug injection** (AI in the page) | — | ✅ aiti-devtools: Vite / webpack / Nuxt / Astro plugins |
 | **Config safety net** | — | ✅ diff view / one-click rollback / crash watchdog |
 
@@ -97,6 +102,7 @@ On first launch, sign in or fill an API key in the **Models** panel and start ch
 | 🕹️ **Java backends, directly debugged** | Arthas++ for AI: arbitrary in-JVM changes, Mock/SQL interception, hot controller updates, diagnostic sampling, multi-endpoint bridge management, 57 reversible tools — Spring Boot / Solon debugging without restarts | [aiti-testagent](/en/extensions/aiti-testagent.md) |
 | 🧬 **Development lineage** | git records what changed; lineage records why: every line of code traceable to the session, prompt, plan and operation — reviewable, rollbackable, searchable | [📖 Concept](/en/guide/lineage.md) · [Review](/en/extensions/aiti-git-review.md) · [Plan-first](/en/extensions/aiti-plan-first.md) |
 | 🛡️ **Config safety net** | AI or human breaks a config: there's a diff to inspect and one-click rollback; if the system crashes, the CLI watchdog recovers without depending on the broken system itself | [aiti-configs](/en/extensions/aiti-configs.md) |
+| 🛡️ **AI secret masking (Paste-safe by default)** | keys/tokens pasted into prompts become placeholders before the model sees them and are restored for tool execution — CJK keywords supported, per-send wire evidence available | first-party pi plugin [pi-secret-mask](/en/guide/install.md) (pre-installed) |
 | 🧩 **And more** | Message navigation, token usage dashboard, in-place code editing, draft protection, prompt bookmarks … see all 76 extensions in one place | [Extension registry](/en/extensions/) |
 | 🛠️ **Page-debugging toolchain (aiti-devtools)** | The AI moves into the web page, face-to-face debugging — sees it, clicks it, changes it; adapted to DSH / OpenClaw / OpenCode across hosts | [aiti-devtools overview →](/en/devtools/) |
 
