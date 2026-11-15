@@ -23,6 +23,9 @@ export default hopeTheme({
 
   docsDir: "docs",
 
+  // 每页底部「在 GitHub 上编辑此页」链接（github.com/aiti-ai/aiti-docs/edit/main/docs/...）
+  editLink: true,
+
   // 导航栏
   navbar: zhNavbar,
 
@@ -220,6 +223,20 @@ export default hopeTheme({
           loading: "Loading search index..."
         },
       },
+    },
+
+    // Giscus 评论（GitHub Discussions）：repoId/categoryId 由 GitHub GraphQL API 生成；
+    // 评论语言跟随页面 locale（zh-CN / en），暗黑模式自动跟随主题。
+    // 前置：仓库需装 Giscus App（https://github.com/apps/giscus）并开启 Discussions（已开启）。
+    comment: {
+      provider: "Giscus",
+      repo: "aiti-ai/aiti-docs",
+      repoId: "R_kgDOVrUinw",
+      category: "Announcements",
+      categoryId: "DIC_kwDOVrUin84DLKw5",
+      // 每个页面路径映射一个 Discussion；输入框放评论区底部
+      mapping: "pathname",
+      inputPosition: "bottom",
     },
 
     // SEO 插件
