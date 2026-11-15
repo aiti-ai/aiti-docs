@@ -122,6 +122,7 @@ export const zhSidebar = sidebar({
         // pi 插件（装进 ~/.pi/agent，不可安装为 aiti-agent 扩展）
         "pi-models-combo.md",
         "pi-subagents.md",
+        "pi-secret-mask.md",
         "pi-session-search.md",
         "pi-git-trace.md",
         // 会话与项目

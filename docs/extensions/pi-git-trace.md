@@ -16,10 +16,9 @@ ext:
   repo: ""
   npm: "@aiti-ai/pi-git-trace"
   install: |
-    # settings.json 本地路径直连（改源码即生效，无需部署）：
-    pi -e ~/workspace/dev-repo/pi-git-trace/src/index.ts
-    # 或 npm：
     pi install npm:@aiti-ai/pi-git-trace
+    # 或本地路径（源码 checkout）:
+    pi -e /path/to/pi-git-trace/src/index.ts
   license: MIT
   tags: [pi, plugin, git, trace, audit, rollback, lineage, .aiti-trace]
   installable: false  # pi 插件——装进 ~/.pi/agent，不进 aiti-agent/pi-web 扩展体系：extman 不列出、extensions.json 归 integrations

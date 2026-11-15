@@ -67,7 +67,7 @@ ext:
 
 ### installable 标记（宿主适配器 / 独立服务）
 
-`ext.installable: false` = 该条目**不是装进 aiti-agent/pi-web 的扩展**（extman 不列出、aiti-agent 自动发现不可见）：编译时从 `/extensions.json` 的 **`extensions` 数组剔除**，归入 **`integrations` 数组**保留文档信息（docs 链接仍指向 `/extensions/*.html` 页面）；文档站扩展注册表页（ExtensionList）不受影响、全量展示。当前标记：`aiti-devtools-dsh` / `aiti-devtools-openclaw` / `aiti-devtools-opencode`（宿主适配器）、`aiti-bridge`（独立桥服务）、`git-pullkeep`（独立 CLI 工具）、`pi-models-combo` / `pi-subagents` / `pi-session-search` / `pi-git-trace`（pi 插件）。
+`ext.installable: false` = 该条目**不是装进 aiti-agent/pi-web 的扩展**（extman 不列出、aiti-agent 自动发现不可见）：编译时从 `/extensions.json` 的 **`extensions` 数组剔除**，归入 **`integrations` 数组**保留文档信息（docs 链接仍指向 `/extensions/*.html` 页面）；文档站扩展注册表页（ExtensionList）不受影响、全量展示。当前标记：`aiti-devtools-dsh` / `aiti-devtools-openclaw` / `aiti-devtools-opencode`（宿主适配器）、`aiti-bridge`（独立桥服务）、`git-pullkeep`（独立 CLI 工具）、`pi-models-combo` / `pi-subagents` / `pi-session-search` / `pi-git-trace` / `pi-secret-mask`（pi 插件）。
 
 ## 1.5 integrations 注册（aiti-devtools 框架集成）
 
