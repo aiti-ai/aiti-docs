@@ -38,10 +38,20 @@ AI 聊天输入框的输入增强扩展（长期保留，非临时测试）。
 
 输入框敲前缀弹候选面板：
 
-- **候选静态优先**：命令 ⚡ rank0 + prompt 📌 rank1；无命中时 `aiFallback` 兜底
+- **候选静态优先**：命令 ⚡ rank0 + prompt 📌 rank1 + 应用（app-center 应用清单，点击/↑↓+Enter 直接执行不填入）；无命中时 `aiFallback` 兜底
 - **后端扩展点**：`POST /providers {id,path,label,rank}` 注册联想源
 - **`POST /suggest`**：聚合各 provider 结果 + 短输入严格过滤（`suggest.looseLen` 默认 10）
 - **⚡ 一键执行**：feature `ai-input.suggestRun` 默认关（extman 开）
+- **桌面/小屏双形态**：桌面固定弹窗（↑↓/Tab/Enter/Esc 键盘导航），小屏文档流建议条（点按生效）；标签文案走 `ui.i18n`（suggest.tag*）
+
+### 小屏换行胶囊（⏎ 换行）
+
+手机软键盘的 Enter 被定义为发送（微信式 enterKeyHint="send"），手机键盘没有便捷的 Shift+Enter —— 小屏输入框上方常驻一个「⏎ 换行」胶囊：
+
+- **显示条件**：输入框聚焦且光标不在开头（行首插换行无意义）→ 建议条常驻显示（有联想/续写/语音候选时排最后，无候选时独占一条）；失焦/光标回行首/发送后清空自动收起
+- **点按行为**：光标处插入换行（React 受控安全写入），光标落新行行首；继续输入后联想自动重排
+- **仅触屏（pointer:coarse）渲染**：桌面 Shift+Enter 直接可用，完全不受影响
+- **无独立开关**：跟随扩展启用（挂在建议条容器上），不受收藏联想 suggest 开关门控
 
 ### 语音输入（三层）
 
