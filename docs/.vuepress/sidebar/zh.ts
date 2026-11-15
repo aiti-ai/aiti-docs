@@ -117,6 +117,8 @@ export const zhSidebar = sidebar({
         "aiti-devtools-dsh.md",
         "aiti-devtools-openclaw.md",
         "aiti-devtools-opencode.md",
+        // 独立 CLI 工具（不可安装为扩展）
+        "git-pullkeep.md",
         // 会话与项目
         "session-manager.md",
         "session-manager-archive.md",

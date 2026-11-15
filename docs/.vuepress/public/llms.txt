@@ -94,5 +94,6 @@ AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 71+ 个
 - [aiti-devtools-browser-ext](https://aiti.pw/devtools/browser-ext.html): 任意网页零改造注入 aiti-devtools——Chrome / Edge / Firefox（含 Android）MV3 扩展：FAB + Inspector + AI 窗，配合桥即可让 pi / claude / opencode 操作任意页面
 - [aiti-bridge](https://aiti.pw/extensions/aiti-bridge.html): MCP 桥 —— 让任意 AI agent 操作页面、直达 IDE AI 窗口
 - [aiti-devtools-dsh](https://aiti.pw/extensions/aiti-devtools-dsh.html): 把 aiti-devtools 完整移植到 DeepSeek Harness（DSH）—— 同款 launcher + 16 工具 + agent/pre-step 占位符替换（[元素N]/[回答N]/[错误N]）+ AI 窗候选条（元素/回答/错误三色 chip），官方 web UI 即 AI 窗
+- [git-pullkeep](https://aiti.pw/extensions/git-pullkeep.html): git pull 被脏工作区挡住时，只把真正挡路的文件收进带标记的临时提交，拉完拆回未提交状态——staged 状态保留、未跟踪文件挪 aside 保住、其余脏文件全程不动；git pull 全选项透传的 drop-in 替代（--rebase 场景等价替代 pull --rebase --autostash）
 - [aiti-devtools-openclaw](https://aiti.pw/extensions/aiti-devtools-openclaw.html): OpenClaw 插件直连跳过 MCP —— 16 工具注册进 agent 会话 + 会话自动上线 + chat.send 消息注入 + 答复回传 + 占位符对照表，cockpit 伴生 AI 窗
 - [aiti-devtools-opencode](https://aiti.pw/extensions/aiti-devtools-opencode.html): OpenCode host 插件（16 工具进程内注册 + messages.transform 占位符改写）+ 官方 web UI 即 AI 窗（nginx 反代剥 CSP + sub_filter 注入，不 fork）

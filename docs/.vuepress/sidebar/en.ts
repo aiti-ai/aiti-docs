@@ -116,6 +116,8 @@ export const enSidebar = sidebar({
         "aiti-devtools-dsh.md",
         "aiti-devtools-openclaw.md",
         "aiti-devtools-opencode.md",
+        // Standalone CLI tools (not installable as extensions)
+        "git-pullkeep.md",
         // Sessions & projects
         "session-manager.md",
         "session-manager-archive.md",
