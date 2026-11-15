@@ -8,7 +8,7 @@ ext:
   soul: 本地服务不该被防火墙关起来——在哪都应该可以安全访问。
   type: aiti-ext
   category: 服务隧道
-  version: "0.3.9"
+  version: "0.3.86"
   status: active
   author: aiti-ai
   publisher: aiti-ai

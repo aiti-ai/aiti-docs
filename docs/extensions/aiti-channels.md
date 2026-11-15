@@ -8,7 +8,7 @@ ext:
   soul: AI 不该被锁在网页里——钉钉/飞书/微信都是它的窗口。
   type: aiti-ext
   category: IM 渠道
-  version: "0.1.7"
+  version: "0.1.8"
   status: active
   author: aiti-ai
   publisher: aiti-ai

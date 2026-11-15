@@ -8,7 +8,7 @@ ext:
   soul: ProseMirror 双向——打开即 docx 结构，导出即 docx 文件。
   type: aiti-ext
   category: 开发工具
-  version: "0.1.7"
+  version: "0.1.8"
   status: active
   author: aiti-ai
   publisher: aiti-ai

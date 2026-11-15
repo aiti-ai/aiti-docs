@@ -8,7 +8,7 @@ ext:
   soul: 崩溃可以带走页面，带不走你打到一半的话。
   type: aiti-ext
   category: 聊天增强
-  version: "0.1.7"
+  version: "0.1.8"
   status: active
   author: aiti-ai
   publisher: aiti-ai

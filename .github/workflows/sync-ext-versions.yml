@@ -1,0 +1,64 @@
+# Sync docs/extensions/*.md version fields from the aiti-ai release repo, then
+# push — the deploy workflow republishes the site automatically.
+#
+# Triggers:
+# - repository_dispatch (event_type: pi-web-published) — fired by aiti-ai's
+#   publish-npm workflow after a successful official (npmjs) publish; requires
+#   the AITI_DOCS_TOKEN secret on the aiti-ai side (fine-grained PAT with
+#   contents:write on this repo).
+# - workflow_dispatch — manual run; optionally pass the aiti-ai ref to read.
+name: sync-ext-versions
+
+on:
+  repository_dispatch:
+    types: [pi-web-published]
+  workflow_dispatch:
+    inputs:
+      aiti_ai_ref:
+        description: "aiti-ai ref to read extension versions from"
+        required: false
+        default: "main"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-ext-versions
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Read-only mirror checkout: extensions/ + pi-plugins/ package.json files
+      # are the version sources. Public repo — the default token is enough.
+      - uses: actions/checkout@v4
+        with:
+          repository: aiti-ai/aiti-ai
+          ref: ${{ inputs.aiti_ai_ref || 'main' }}
+          path: aiti-ai
+          persist-credentials: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Sync extension doc versions
+        env:
+          AITI_AI_DIR: ${{ github.workspace }}/aiti-ai
+        run: node tools/sync-ext-versions.mjs --json
+
+      - name: Commit & push (skip when already in sync)
+        run: |
+          if git diff --quiet docs/extensions/; then
+            echo "already in sync — nothing to commit"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          SHA=$(git -C aiti-ai rev-parse --short HEAD)
+          git add docs/extensions/
+          git commit -m "docs(extensions): sync extension versions from aiti-ai@${SHA}"
+          git push

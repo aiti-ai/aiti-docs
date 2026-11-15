@@ -8,7 +8,7 @@ ext:
   soul: 回错了人的话，比叫错名字还尴尬。
   type: aiti-ext
   category: 聊天增强
-  version: "0.1.7"
+  version: "0.1.8"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai

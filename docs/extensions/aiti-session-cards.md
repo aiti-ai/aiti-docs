@@ -8,7 +8,7 @@ ext:
   soul: agent 求你作答的卡片，长什么样由扩展说了算。
   type: aiti-ext
   category: 聊天增强
-  version: "0.1.9"
+  version: "0.1.11"
   status: active
   author: aiti-ai
   publisher: aiti-ai

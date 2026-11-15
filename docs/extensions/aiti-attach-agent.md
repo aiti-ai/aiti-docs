@@ -8,7 +8,7 @@ ext:
   soul: 不抢方向盘——agent 已经在跑，附着上去看就好。
   type: aiti-ext
   category: 多 agent 后端
-  version: "0.1.6"
+  version: "0.1.7"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai

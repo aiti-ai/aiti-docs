@@ -8,7 +8,7 @@ ext:
   soul: 面板只管标一个属性，浮起来的一切交给它。
   type: aiti-ext
   category: 聊天增强
-  version: "0.5.9"
+  version: "0.5.10"
   status: active
   author: aiti-ai
   publisher: aiti-ai

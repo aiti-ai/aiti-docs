@@ -9,7 +9,7 @@ ext:
   soul: 管扩展的，也该是个扩展。
   type: aiti-ext
   category: 系统工具
-  version: "0.1.8"
+  version: "0.1.11"
   status: beta
   author: aiti-ai
   publisher: aiti-ai

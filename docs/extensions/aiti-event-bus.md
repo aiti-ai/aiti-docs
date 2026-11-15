@@ -8,7 +8,7 @@ ext:
   soul: 一条总线，全部帧。
   type: aiti-ext
   category: 系统工具
-  version: "0.1.7"
+  version: "0.1.8"
   status: active
   author: aiti-ai
   publisher: aiti-ai

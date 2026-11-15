@@ -8,7 +8,7 @@ ext:
   soul: AI 说得再好，抄起来也挺费劲。
   type: aiti-ext
   category: 聊天增强
-  version: "0.1.7"
+  version: "0.1.8"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai

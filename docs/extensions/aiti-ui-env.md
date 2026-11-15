@@ -8,7 +8,7 @@ ext:
   soul: 没有显示器，也可以有舞台。
   type: aiti-ext
   category: 调试
-  version: "0.1.7"
+  version: "0.1.8"
   status: active
   author: aiti-ai
   publisher: aiti-ai
