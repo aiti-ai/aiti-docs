@@ -36,6 +36,7 @@ Data layer: shared pi JSONL + queue persistence + worktree              ← exis
 | Capability | Status | Notes |
 |---|---|---|
 | service-tunnels (tunnels + TOTP auth) | ✅ unique in the ecosystem | HTTP vhost + TCP tunnels, exposing 30142/6080/7681/9222/5900 with zero changes |
+| AI secret masking (pi-secret-mask, auto-provisioned) | ✅ unique in the ecosystem | keys pasted into prompts become placeholders before the model sees them and are restored for tool execution — **Paste-safe by default.** |
 | queue persistence / crash recovery | ✅ unique in the ecosystem | task queues survive restarts |
 | worktree grouping / i18n framework | ✅ ahead | sessions grouped by workspace |
 | Built-in terminal (ttyd / node-pty) | 📋 M1 | remote server-side Terminal execution |

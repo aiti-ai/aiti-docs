@@ -36,6 +36,7 @@ UI 层：会话/服务/终端/桌面/调试 统一界面
 | 能力 | 状态 | 说明 |
 |---|---|---|
 | service-tunnels（隧道 + TOTP 认证） | ✅ 全生态唯一 | HTTP vhost + TCP 隧道，零改动暴露 30142/6080/7681/9222/5900 |
+| AI 脱敏（pi-secret-mask，默认预配） | ✅ 全生态唯一 | 贴进 prompt 的密钥发送模型前变占位符、工具执行时还原真值——**随手贴，不泄密** · *Paste-safe by default.* |
 | queue 持久化 / 崩溃恢复 | ✅ 全生态唯一 | 任务队列重启不丢 |
 | worktree 分组 / i18n 框架 | ✅ 领先 | 会话按工作区分组 |
 | 内置终端（ttyd / node-pty） | 📋 M1 | 远程执行服务端 Terminal |

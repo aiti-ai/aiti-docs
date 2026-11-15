@@ -105,6 +105,19 @@ pi-web
 
 CLI 在服务就绪后自动打开浏览器；未打开则访问 [http://127.0.0.1:30141](http://127.0.0.1:30141)。默认只监听 `127.0.0.1`，监听其它地址请用 `pi-web start -H <host>` 并自行保证传输安全（HTTPS / 可信内网）。
 
+## 内置 pi 插件（自动预配）
+
+aiti Web 启动时自动把**第一方 pi 插件**预配进你的 pi 设置（经官方包管理器安装，TUI / Web / CLI 会话共用）：
+
+| 插件 | 作用 |
+|---|---|
+| `@aiti-ai/pi-models-combo` | 模型列表治理 + 多 key 轮转防 429 + 模型聚合 |
+| `@aiti-ai/pi-secret-mask` | **AI 脱敏**——贴进 prompt 的 token / 密钥发送模型前自动替换占位符，工具执行时自动还原（**随手贴，不泄密** · *Paste-safe by default.*） |
+| `@aiti-ai/pi-git-trace` | AI 变更带外追踪与回滚 |
+| `@aiti-ai/pi-web-bridge` | pi-web 桥接 |
+
+细节：声明先行（安装失败时声明保留，pi 自身启动对账自动重试，离线自愈）；维护者机器手工管理本地副本、不经此流程；`AITI_SKIP_PI_PLUGINS=1` 可整体跳过。
+
 ## 常用命令
 
 | 命令 | 作用 |

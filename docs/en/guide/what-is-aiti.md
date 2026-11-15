@@ -27,6 +27,7 @@ A self-hosted personal AI development workbench powered by **pi**. Built on top 
 
 - The browser is the primary operating surface; one-click start with `docker run` (same-origin compatible with pi: pi CLI / pi IDE extensions operate the same set of sessions)
 - The ecosystem's only service-tunnels (HTTP vhost + TCP tunneling + TOTP) and queue crash recovery
+- **AI secret masking out of the box**: the first-party pi plugin pi-secret-mask ships pre-provisioned — keys pasted into prompts become placeholders before the model sees them and are restored for tool execution (**Paste-safe by default.**)
 - Roadmap: built-in terminal → Chrome CDP remote debugging → CLI bridging → noVNC desktop → tool marketplace
 
 ### Line B: aiti-devtools — The Local Injection Ecosystem

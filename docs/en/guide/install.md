@@ -105,6 +105,19 @@ pi-web
 
 The CLI opens your browser once the server is ready; if it does not, open [http://127.0.0.1:30141](http://127.0.0.1:30141). The server listens on `127.0.0.1` only by default — use `pi-web start -H <host>` to listen elsewhere and secure the transport yourself.
 
+## Bundled pi plugins (auto-provisioned)
+
+On startup aiti Web auto-provisions **first-party pi plugins** into your pi settings (installed via the official package manager; shared by TUI / Web / CLI sessions):
+
+| Plugin | What it does |
+|---|---|
+| `@aiti-ai/pi-models-combo` | model list governance + multi-key rotation against 429s + combo models |
+| `@aiti-ai/pi-secret-mask` | **AI secret masking** — keys/tokens pasted into prompts become placeholders before the model sees them and are restored for tool execution (**Paste-safe by default.**) |
+| `@aiti-ai/pi-git-trace` | out-of-band AI change tracking and rollback |
+| `@aiti-ai/pi-web-bridge` | pi-web bridge |
+
+Details: declarations persist before install (a failed install self-heals on the next pi startup via pi's own reconcile); maintainer machines manage local copies manually and skip this path; set `AITI_SKIP_PI_PLUGINS=1` to opt out entirely.
+
 ## Commands
 
 | Command | Purpose |

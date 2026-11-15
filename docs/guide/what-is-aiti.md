@@ -27,6 +27,7 @@ tags: [guide, concept]
 
 - 浏览器是主操作面，`docker run` 一键起（与 pi 同源兼容：pi CLI / pi IDE 扩展操作同一批会话）
 - 全生态唯一的 service-tunnels（HTTP vhost + TCP 隧道 + TOTP）与 queue 崩溃恢复
+- **AI 脱敏开箱即用**：第一方 pi 插件 pi-secret-mask 默认预配——贴进 prompt 的 token/密钥发送模型前自动变占位符、工具执行时自动还原真值（**随手贴，不泄密** · *Paste-safe by default.*）
 - 规划：内置终端 → Chrome CDP 远程调试 → CLI 桥接 → noVNC 桌面 → 工具市场
 
 ### 主线 B：aiti-devtools — 本地注入生态
