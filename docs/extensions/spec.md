@@ -60,13 +60,14 @@ ext:
 | `aiti-ext` | aiti-agent 运行时扩展（`~/.pi/web/extensions/`） |
 | `host-adapter` | **宿主适配器**——装进第三方 agent 宿主（DSH/OpenClaw/OpenCode），**不装进 aiti-agent/pi-web**；须配 `installable: false` |
 | `cli-tool` | **独立命令行工具**——不依赖 aiti-agent/pi-web 运行时的 CLI（如 `git-pullkeep`），自有仓库/发布渠道；须配 `installable: false` |
+| `pi-plugin` | **pi 编码代理插件**——装进 `~/.pi/agent`（pi-plugins/extensions，如 `pi-models-combo`/`pi-subagents`），**不装进 aiti-agent/pi-web**；须配 `installable: false` |
 | `bridge` | MCP 桥 / 本地服务（独立运行如 `npx @aiti-ai/aiti-bridge`，非 pi-web 扩展形态的须配 `installable: false`；随 pi-web 部署的如 aiti-testagent 保持默认） |
 | `theme` / `skill` | 主题 / 技能（pi / aiti-agent 生态预留） |
 | `other` | 其他 |
 
 ### installable 标记（宿主适配器 / 独立服务）
 
-`ext.installable: false` = 该条目**不是装进 aiti-agent/pi-web 的扩展**（extman 不列出、aiti-agent 自动发现不可见）：编译时从 `/extensions.json` 的 **`extensions` 数组剔除**，归入 **`integrations` 数组**保留文档信息（docs 链接仍指向 `/extensions/*.html` 页面）；文档站扩展注册表页（ExtensionList）不受影响、全量展示。当前标记：`aiti-devtools-dsh` / `aiti-devtools-openclaw` / `aiti-devtools-opencode`（宿主适配器）、`aiti-bridge`（独立桥服务）、`git-pullkeep`（独立 CLI 工具）。
+`ext.installable: false` = 该条目**不是装进 aiti-agent/pi-web 的扩展**（extman 不列出、aiti-agent 自动发现不可见）：编译时从 `/extensions.json` 的 **`extensions` 数组剔除**，归入 **`integrations` 数组**保留文档信息（docs 链接仍指向 `/extensions/*.html` 页面）；文档站扩展注册表页（ExtensionList）不受影响、全量展示。当前标记：`aiti-devtools-dsh` / `aiti-devtools-openclaw` / `aiti-devtools-opencode`（宿主适配器）、`aiti-bridge`（独立桥服务）、`git-pullkeep`（独立 CLI 工具）、`pi-models-combo` / `pi-subagents` / `pi-session-search` / `pi-git-trace`（pi 插件）。
 
 ## 1.5 integrations 注册（aiti-devtools 框架集成）
 

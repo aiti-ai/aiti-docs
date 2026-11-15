@@ -97,3 +97,7 @@ AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 71+ 个
 - [aiti-devtools-openclaw](https://aiti.pw/extensions/aiti-devtools-openclaw.html): OpenClaw 插件直连跳过 MCP —— 16 工具注册进 agent 会话 + 会话自动上线 + chat.send 消息注入 + 答复回传 + 占位符对照表，cockpit 伴生 AI 窗
 - [aiti-devtools-opencode](https://aiti.pw/extensions/aiti-devtools-opencode.html): OpenCode host 插件（16 工具进程内注册 + messages.transform 占位符改写）+ 官方 web UI 即 AI 窗（nginx 反代剥 CSP + sub_filter 注入，不 fork）
 - [git-pullkeep](https://aiti.pw/extensions/git-pullkeep.html): git pull 被脏工作区挡住时，只把真正挡路的文件收进带标记的临时提交，拉完拆回未提交状态——staged 状态保留、未跟踪文件挪 aside 保住、其余脏文件全程不动；git pull 全选项透传的 drop-in 替代（--rebase 场景等价替代 pull --rebase --autostash）
+- [pi-git-trace](https://aiti.pw/extensions/pi-git-trace.html): pi 编码代理的 AI 变更带外追踪——repo 根 .aiti-trace 独立追踪仓（无 git 也能 autoInit）+ op 编号 before/after 双提交 + 文件⇄消息⇄操作全 lineage + 回滚 + 影子仓瘦身 compact
+- [pi-models-combo](https://aiti.pw/extensions/pi-models-combo.html): pi 编码代理的模型治理插件——模型列表过滤治理 + apiKeys 多 key 粘性轮转防 429 + 多 provider 聚合（combo 虚拟模型）+ 质量监控；装进 ~/.pi/agent/pi-plugins/
+- [pi-session-search](https://aiti.pw/extensions/pi-session-search.html): 给 pi 编码代理加 session_search / session_read 只读工具——跨历史会话全文搜索（经 pi-web session-manager 索引可覆盖所有 agent 家族）+ 读原始消息，恢复被 compaction 吃掉的上下文、找回"上次怎么做的"
+- [pi-subagents](https://aiti.pw/extensions/pi-subagents.html): pi 编码代理的子 agent 委派插件（aiti fork）——单 agent 委派 + 脚本化多 agent 工作流（并行/后台/council 顾问团/saved workflow/worktree 隔离），代码评审、并行审计、实现分工的第二三双眼睛

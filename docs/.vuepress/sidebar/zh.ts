@@ -119,6 +119,11 @@ export const zhSidebar = sidebar({
         "aiti-devtools-opencode.md",
         // 独立 CLI 工具（不可安装为扩展）
         "git-pullkeep.md",
+        // pi 插件（装进 ~/.pi/agent，不可安装为 aiti-agent 扩展）
+        "pi-models-combo.md",
+        "pi-subagents.md",
+        "pi-session-search.md",
+        "pi-git-trace.md",
         // 会话与项目
         "session-manager.md",
         "session-manager-archive.md",
