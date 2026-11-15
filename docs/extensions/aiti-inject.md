@@ -4,26 +4,28 @@ icon: 💉
 ext:
   id: aiti-inject
   name: aiti-inject
-  description: dev 实例专用 —— 在 pi-web dev 页面注入生产 aiti-devtools launcher（FAB）
+  description: （已归档）dev 实例专用注入 FAB —— 已由 aiti-debug-inject 演变取代，源码 dev-exts/aiti-inject 已删除
   soul: 调试的第一步不该是读文档。
   type: aiti-ext
   category: 页面调试注入
   version: 0.3.0
-  status: experimental
+  status: archived
+  installable: false
   author: aiti-ai
   publisher: aiti-ai
   website: https://aiti.pw
   repo: ""
   install: |
-    # dev 分支启动时作为 extra 扩展根注入：
-    PI_WEB_EXTRA_EXTENSIONS_DIRS=/path/to/dev-exts npm run dev
+    # 已归档：功能由 aiti-debug-inject（可配置远程调试注入）承接
   license: MIT
-  tags: [dev, inject, launcher, fab]
+  tags: [dev, inject, launcher, fab, archived]
 ---
 
 # aiti-inject
 
 > ❝ **调试的第一步不该是读文档。** ❞
+
+> ⚠️ **已归档（2026-11-15）**：功能已由 **aiti-debug-inject**（可配置远程调试注入）演变承接，源码 `dev-exts/aiti-inject/` 已删除。本页仅存档，不再安装/更新。
 
 **pi-web dev 分支专用**扩展：打开 dev 页面时把**生产** aiti-devtools 的 launcher（inject JS）注入页面，dev 界面出现生产的 FAB（调试器入口）。
 
