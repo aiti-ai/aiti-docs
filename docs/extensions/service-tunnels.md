@@ -47,6 +47,12 @@ ext:
 - **allowhosts**：自暴露 host 白名单管理
 - 自暴露访问地址查询（getSelfAccessUrls）
 
+### 3.5 手机访问（Mobile，2026-11-15）
+
+- **侧栏底行「手机」按钮**（模型/技能/设置/扩展 右侧，`sidebarFooter` slot）→ 一张简单卡：探测可用暴露方案（`GET self-reco` 只读端点：vhost 域名 / cloudflared 隧道 / 局域网直连 TCP 探测；portmap/ipv6 仅展开清单时探测）→ 首次填用户名+密码（登录方式三档：仅密码 / 密码+刷脸【仅 https 候选】/ 密码+TOTP）→ 出大二维码手机扫码直达；把 7 步自暴露压到 3 步
+- **fail-closed**：无安全候选不出码；无认证直连必弹确认且永不推荐；已暴露多通道不新开不停旧只挑一条出码；记住的方案失效自动回落推荐并 toast
+- 端口页结果块 / 暴露详情弹窗每条链接配迷你二维码（点击才生成；登录中间页不出码）
+
 ### 4. 认证（Users / TOTP）
 
 - **用户管理**：user-add / remove / list / set-password / managers / summary（Basic 认证）
