@@ -115,6 +115,7 @@ export const zhSidebar = sidebar({
         "aiti-devtools.md",
         "aiti-bridge.md",
         "aiti-devtools-dsh.md",
+        "dsh-secret-mask.md",
         "aiti-devtools-openclaw.md",
         "aiti-devtools-opencode.md",
         // 独立 CLI 工具（不可安装为扩展）
@@ -123,6 +124,7 @@ export const zhSidebar = sidebar({
         "pi-models-combo.md",
         "pi-subagents.md",
         "pi-secret-mask.md",
+        "secret-mask-core.md",
         "pi-session-search.md",
         "pi-git-trace.md",
         // 会话与项目

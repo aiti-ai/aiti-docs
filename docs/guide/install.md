@@ -95,7 +95,7 @@ $env:AITI_RELEASE_TAG = "v0.15.7"; irm https://aiti.pw/install.ps1 | iex
 |---|---|
 | 操作系统 | macOS / Linux / Windows |
 | Node.js | ≥ 22.19.0（`node --version`） |
-| 会话引擎 | [pi coding agent](https://github.com/earendil-works/pi) CLI（安装脚本会自动检测；缺失时提示 `npm install -g @earendil-works/pi-coding-agent`） |
+| 会话引擎 | 随包内置，开箱即用（默认本地引擎经 SDK 进程内运行，无需单独安装）。可选装全局 [pi coding agent](https://github.com/earendil-works/pi) CLI——仅在需要 TUI、attach/spawn 后端或终端共用配置时安装（`npm install -g @earendil-works/pi-coding-agent`） |
 | 模型 | 首启后在 **Models** 面板登录或填 API key |
 
 ## 启动

@@ -114,6 +114,7 @@ export const enSidebar = sidebar({
         "aiti-devtools.md",
         "aiti-bridge.md",
         "aiti-devtools-dsh.md",
+        "dsh-secret-mask.md",
         "aiti-devtools-openclaw.md",
         "aiti-devtools-opencode.md",
         // Standalone CLI tools (not installable as extensions)
@@ -122,6 +123,7 @@ export const enSidebar = sidebar({
         "pi-models-combo.md",
         "pi-subagents.md",
         "pi-secret-mask.md",
+        "secret-mask-core.md",
         "pi-session-search.md",
         "pi-git-trace.md",
         // Sessions & projects

@@ -8,7 +8,7 @@ ext:
   soul: 方案落地前，最后一道闸。
   type: aiti-ext
   category: 系统工具
-  version: "0.1.7"
+  version: "0.1.8"
   status: beta
   author: aiti-ai
   publisher: aiti-ai

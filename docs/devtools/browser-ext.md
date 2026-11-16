@@ -68,7 +68,7 @@ npm run package    # → dist/*.zip + dist/aiti-devtools-firefox.xpi
    - **stdio shim**：env `AITI_BRIDGE_URL`（options 页一键复制）
    - **MCP**：`{ type:"http", url:"<bridgeUrl>/mcp/mcp" }`
 
-> 前置：桥在跑（`systemctl start aiti-bridge` 或 `node dev-repo/bridge/bin/aiti-bridge.mjs`）。
+> 前置：桥在跑（`systemctl start aiti-bridge` 或 `node >dev-repo/bridge/bin/aiti-bridge.mjs`）。
 
 ## 默认关闭与站点规则
 

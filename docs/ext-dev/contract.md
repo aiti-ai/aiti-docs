@@ -76,7 +76,7 @@ tags: [ext-dev, contract, reference]
 宿主侧 TS 文件可通过 module augmentation 获得插槽 props / i18n key 的类型检查：
 
 ```ts
-declare module "dev-repo/ext" {
+declare module ">dev-repo/ext" {
   interface ExtSlotContractMap {
     chatInputTop: { props: { inputValue: string } };
   }

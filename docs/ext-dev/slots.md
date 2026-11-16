@@ -123,7 +123,7 @@ props 退化为宽松 `Record<string, unknown>`（向后兼容）。扩展（TS 
 augmentation 补充/覆盖自己用到的插槽契约：
 
 ```ts
-declare module "dev-repo/ext" {
+declare module ">dev-repo/ext" {
   interface ExtSlotContractMap {
     chatInputTop: { props: { inputValue: string } };
   }

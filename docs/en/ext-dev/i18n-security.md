@@ -30,7 +30,7 @@ ui: {
 Declaring `LocaleNamespaceMap` gives `t(key)` compile-time key checking:
 
 ```ts
-declare module "dev-repo/ext" {
+declare module ">dev-repo/ext" {
   interface LocaleNamespaceMap {
     "my-extension": { "my-ext.greet": string };
   }

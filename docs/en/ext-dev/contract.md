@@ -78,7 +78,7 @@ contract. Source of truth: host `lib/ext/types.ts` (`PiWebExtension`).
 Host-side TS files can gain slot-props / i18n-key type checking via module augmentation:
 
 ```ts
-declare module "dev-repo/ext" {
+declare module ">dev-repo/ext" {
   interface ExtSlotContractMap {
     chatInputTop: { props: { inputValue: string } };
   }

@@ -95,7 +95,7 @@ CN network acceleration: installers try GitHub Releases first and fall back to t
 |---|---|
 | OS | macOS / Linux / Windows |
 | Node.js | ≥ 22.19.0 |
-| Session engine | [pi coding agent](https://github.com/earendil-works/pi) CLI (auto-detected by the installer; hint: `npm install -g @earendil-works/pi-coding-agent`) |
+| Session engine | Bundled out of the box — the default local engine runs in-process via the SDK, no separate install needed. Optional: the global [pi coding agent](https://github.com/earendil-works/pi) CLI, only for the TUI, attach/spawn backends, or sharing config with terminal use (`npm install -g @earendil-works/pi-coding-agent`) |
 | Models | sign in or add an API key in the **Models** panel on first run |
 
 ## Start

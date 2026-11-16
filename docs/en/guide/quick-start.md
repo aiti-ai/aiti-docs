@@ -60,7 +60,7 @@ The CLI opens the browser automatically once the service is ready (default [http
 ## 3. First-run configuration
 
 - **Models**: sign in or fill an API key in the **Models** panel; or use the 🧙 wizard's "import from other agents" (auto-scans existing codex / zcode / opencode configs)
-- **Session engine**: the [pi coding agent](https://github.com/earendil-works/pi) CLI is auto-detected by the install scripts (if missing you'll be prompted to `npm install -g @earendil-works/pi-coding-agent`)
+- **Session engine**: bundled out of the box — the default local engine runs in-process via the SDK. Optionally install the global [pi coding agent](https://github.com/earendil-works/pi) CLI (for the TUI, attach/spawn backends, or sharing config with terminal use: `npm install -g @earendil-works/pi-coding-agent`)
 
 ## 4. Out of the box (60+ built-in extensions)
 

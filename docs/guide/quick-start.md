@@ -60,7 +60,7 @@ CLI 在服务就绪后自动打开浏览器（默认 [http://127.0.0.1:30141](ht
 ## 3. 首启配置
 
 - **模型**：左侧 **Models** 面板登录订阅或填 API key；也可以在 🧙 向导里用「从其他 agent 导入」（自动扫描 codex / zcode / opencode 的现有配置）
-- **会话引擎**：[pi coding agent](https://github.com/earendil-works/pi) CLI 安装脚本会自动检测（缺失时提示 `npm install -g @earendil-works/pi-coding-agent`）
+- **会话引擎**：默认本地引擎随包内置（SDK 进程内运行），开箱即用；可选装全局 [pi coding agent](https://github.com/earendil-works/pi) CLI（TUI / attach/spawn 后端 / 终端共用配置，`npm install -g @earendil-works/pi-coding-agent`）
 
 ## 4. 开箱即用（60+ 内置扩展）
 

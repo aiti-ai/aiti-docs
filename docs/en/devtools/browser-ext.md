@@ -68,7 +68,7 @@ npm run package    # → dist/*.zip + dist/aiti-devtools-firefox.xpi
    - **stdio shim**: env `AITI_BRIDGE_URL` (one-click copy on the options page)
    - **MCP**: `{ type:"http", url:"<bridgeUrl>/mcp/mcp" }`
 
-> Prerequisite: the bridge is running (`systemctl start aiti-bridge` or `node dev-repo/bridge/bin/aiti-bridge.mjs`).
+> Prerequisite: the bridge is running (`systemctl start aiti-bridge` or `node >dev-repo/bridge/bin/aiti-bridge.mjs`).
 
 ## Default-off and site rules
 

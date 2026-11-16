@@ -16,7 +16,7 @@ ext:
   repo: ""
   npm: "@aiti-ai/pi-subagents"
   install: |
-    # settings.json npm 直连（发新版走 dev-repo/tools/publish-all.mjs）：
+    # settings.json npm 直连（发新版走 >dev-repo/tools/publish-all.mjs）：
     pi install npm:@aiti-ai/pi-subagents
   license: MIT
   tags: [pi, plugin, subagents, delegation, workflow, council, parallel, fork]

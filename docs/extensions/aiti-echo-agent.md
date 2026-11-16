@@ -8,7 +8,7 @@ ext:
   soul: 先让一声回声上线，再让千军万马接入。
   type: aiti-ext
   category: 多 agent 后端
-  version: "0.1.6"
+  version: "0.1.7"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai

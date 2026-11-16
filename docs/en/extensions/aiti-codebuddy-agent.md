@@ -45,7 +45,7 @@ followUp / queueManage / setModel / setPermissionMode / listModels / getUsage / 
 
 ## Bridge tool injection (Adapter C)
 
-- `MCP_TARGETS` already includes codebuddy (`~/.codebuddy/.mcp.json`): `node dev-repo/bridge/bin/aiti-mcp-register.mjs --targets codebuddy` registers the `aiti` shim entry
+- `MCP_TARGETS` already includes codebuddy (`~/.codebuddy/.mcp.json`): `node >dev-repo/bridge/bin/aiti-mcp-register.mjs --targets codebuddy` registers the `aiti` shim entry
 - Spawn env: the governance whitelist passes the service process's `AITI_BRIDGE_URL` through; the feature `codebuddy.bridgeUrl` provides an explicit override (takes priority). With neither, cbc sessions simply lack aiti_* tools and normal chat is unaffected
 
 ## Model catalog (dynamic, D13)

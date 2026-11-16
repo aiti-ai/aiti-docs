@@ -28,7 +28,7 @@ ui: {
 声明 `LocaleNamespaceMap` 后，`t(key)` 的 key 获得编译期检查：
 
 ```ts
-declare module "dev-repo/ext" {
+declare module ">dev-repo/ext" {
   interface LocaleNamespaceMap {
     "my-extension": { "my-ext.greet": string };
   }

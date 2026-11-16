@@ -125,7 +125,7 @@ undeclared slots degrade to a loose `Record<string, unknown>` (backwards compati
 (TS-authored clients) can add contracts for the slots they use via augmentation:
 
 ```ts
-declare module "dev-repo/ext" {
+declare module ">dev-repo/ext" {
   interface ExtSlotContractMap {
     chatInputTop: { props: { inputValue: string } };
   }

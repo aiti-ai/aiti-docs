@@ -8,7 +8,7 @@ ext:
   soul: 不强制不打断，只在 md 变了和大改跑偏时轻轻提一句：先有方案，再动手。
   type: aiti-ext
   category: 开发工具
-  version: "0.1.7"
+  version: "0.1.8"
   status: active
   author: aiti-ai
   publisher: aiti-ai

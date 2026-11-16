@@ -62,7 +62,7 @@ followUp / queueManage / setModel / setPermissionMode / listModels / getUsage / 
 
 ## 桥工具注入（适配 C）
 
-- `MCP_TARGETS` 已含 codebuddy（`~/.codebuddy/.mcp.json`）：`node dev-repo/bridge/bin/aiti-mcp-register.mjs --targets codebuddy` 注册 `aiti` shim 条目
+- `MCP_TARGETS` 已含 codebuddy（`~/.codebuddy/.mcp.json`）：`node >dev-repo/bridge/bin/aiti-mcp-register.mjs --targets codebuddy` 注册 `aiti` shim 条目
 - spawn env：治理白名单透传服务进程的 `AITI_BRIDGE_URL`；feature `codebuddy.bridgeUrl` 显式覆盖（优先生效）。两者皆无 → cbc 会话不含 aiti_* 工具，不影响正常对话
 
 ## 模型目录（动态，D13）
