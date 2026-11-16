@@ -51,6 +51,8 @@ ext:
 
 - **侧栏底行「手机」按钮**（模型/技能/设置/扩展 右侧，`sidebarFooter` slot）→ 一张简单卡：探测可用暴露方案（`GET self-reco` 只读端点：vhost 域名 / cloudflared 隧道 / 局域网直连 TCP 探测；portmap/ipv6 仅展开清单时探测）→ 首次填用户名+密码（登录方式三档：仅密码 / 密码+刷脸【仅 https 候选】/ 密码+TOTP）→ 出大二维码手机扫码直达；把 7 步自暴露压到 3 步
 - **fail-closed**：无安全候选不出码；无认证直连必弹确认且永不推荐；已暴露多通道不新开不停旧只挑一条出码；记住的方案失效自动回落推荐并 toast
+- **二维码来源切换（2026-11-16）**：卡顶部分段切换 **pi-web** / **端口服务** / **链接**（仅带参弹入时出现）——端口服务 tab 列出端口里导出的所有已暴露服务地址（`GET status?exposes-only=1` 轻量清单；noAuth 带 ⚠ 徽标 + 显式点选才出码；`loginUrl` 不出码）；上次选择记忆在 localStorage（失效回落第一条并提示）
+- **参数化弹出服务 `service-tunnels.mobile`（2026-11-16）**：其他扩展经 `ctx.getExtService("service-tunnels.mobile")` 弹卡或带参弹入——无参 = 现状；`{ url, title? }` 直出任意链接的二维码（协议限 http/https）；`{ query, title? }` 在 pi-web 就绪通道上附加查询参数（深链分享，如 `{ query: "pair=1" }` → `https://…/?pair=1`）；消费方需判空降级（本扩展为懒扩展，client 未物化时服务不存在）
 - 端口页结果块 / 暴露详情弹窗每条链接配迷你二维码（点击才生成；登录中间页不出码）
 
 ### 4. 认证（Users / TOTP）
