@@ -21,6 +21,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Sanitize check — no internal values in the public source
+        run: |
+          if grep -rnE 'alot\.pw|/home/wind|192\.168\.[0-9]|Rolling · liyong|01a095d2-6994-7345|packages/pi-web-ext|packages/aiti-bridge|packages/aiti-devtools|dsh-web-ext|openclaw-web-ext' docs --include='*.md' --include='*.ts' --include='*.mjs' --include='*.json'; then
+            echo '::error::Internal values found in the public docs source — remove them before merging.'
+            exit 1
+          fi
+
       - uses: pnpm/action-setup@v4
         with:
           version: 10
