@@ -8,7 +8,7 @@ ext:
   soul: 一双手忙不过来时，派几双专注的眼睛。
   type: pi-plugin
   category: pi 插件
-  version: 0.88.0-aiti.1
+  version: 0.88.1-aiti.1
   status: active
   author: aiti-ai
   publisher: aiti-ai
