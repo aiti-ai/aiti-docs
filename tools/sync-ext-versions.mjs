@@ -29,6 +29,7 @@
  */
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
+import { homedir } from "node:os";
 import { fileURLToPath } from "node:url";
 
 const REPO = resolve(join(fileURLToPath(import.meta.url), "..", ".."));
@@ -59,7 +60,20 @@ const perRepoRoots = existsSync(INTEGRATIONS_DIR)
       .filter((e) => e.isDirectory())
       .map((e) => join(INTEGRATIONS_DIR, e.name))
   : [];
+/**
+ * Base-library packages that live in their own repositories under ~/workspace
+ * (published to npmjs independently, not mirrored into aiti-ai).
+ * Explicit list on purpose — a wildcard would match unrelated checkouts.
+ */
+const EXTERNAL_PKG_DIRS = { "content-share": resolve(homedir(), "workspace", "content-share") };
 function sourceVersion(id) {
+  const ext = EXTERNAL_PKG_DIRS[id];
+  if (ext && existsSync(join(ext, "package.json"))) {
+    try {
+      const v = JSON.parse(readFileSync(join(ext, "package.json"), "utf8")).version;
+      if (typeof v === "string" && v) return { version: v, source: ext };
+    } catch { /* fall through to the in-repo roots */ }
+  }
   const pkgs = SOURCE_ROOTS.map((r) => join(r, id, "package.json"));
   for (const root of perRepoRoots) pkgs.push(join(root, id, "package.json"));
   for (const pkg of pkgs) {
