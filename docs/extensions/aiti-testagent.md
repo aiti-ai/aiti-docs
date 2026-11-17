@@ -42,7 +42,7 @@ TestAgent 2.0 —— **给 AI 用的 Arthas++**：教 AI 怎么调试运行中�
 | `jvm` | ta_metrics / ta_memory / ta_threads / ta_profile / ta_heapdump / ta_download / ta_vmtool / ta_classloader / ta_mbean / ta_vmoption / ta_perfcounter / ta_dump / ta_sysprop / ta_sysenv | 线程栈（死锁检测/CPU 排序）、火焰图（cpu/alloc/wall）、堆转储、内存分池明细、大文件取回、JVM flags、类加载器树、系统属性/环境变量 |
 | `inspect` | ta_sc / ta_sm / ta_jad / ta_fs / ta_urls | 类搜索、方法清单、CFR 反编译、容器内文件查看、REST 端点清单 |
 | `write` | ta_code / ta_restore / ta_method / ta_eval / ta_conf / ta_xml / ta_classwatch / ta_bean / ta_logger / ta_props / ta_i18n / ta_spring / ta_solon / ta_addr | **写代码热更新、新建 controller**、方法级改行为、表达式求值、声明式 Conf、Bean·XML、改代码自动热替换、Spring bean 注入 mock、日志级别热调、Spring/Solon 组件热操作（springboot/solon 聚合开关配套）、地址透明替换 |
-| `mock` | ta_mock_url / ta_mock_method / ta_mock_results / ta_capture / ta_sql | URL/方法级 mock、返回值篡改、流量捕获、**SQL 拦截模拟** |
+| `mock` | ta_mock_url / ta_mock_method / ta_mock_results / ta_capture / ta_sql | URL/方法级 mock、返回值打桩、流量捕获、**SQL 拦截模拟** |
 | `startup` | ta_startup / ta_lazy_module | 启动耗时报告（慢 bean 直指）、模块级懒加载 |
 | `auth` | ta_login | 自动登录：进程内登录拿 token/cookie → 401 原请求自动重放（人/机免登录墙） |
 | `native` | ta_native_modules / ta_native_watch / ta_native_stack / ta_native_detach | testagent-native 薄代理——Windows 进程 native 层（模块枚举/Detours 挂钩/线程栈/卸载还原） |
