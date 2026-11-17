@@ -5,7 +5,7 @@ ext:
   id: aiti-testagent-native
   name: TestAgent Native 面板
   description: testagent-native（Windows 原生进程活体操控）可视面 —— broker 进程/会话/挂钩/事件流；原 aiti-wintrace（2026-11-07 改名）
-  soul: 任意 Windows 进程→AI 可编程工具面：API/COM 调用级追踪、原生求值、mock 篡改、函数体热替换，全可逆审计。
+  soul: 任意 Windows 进程→AI 可编程工具面：API/COM 调用级追踪、原生求值、mock 改写、函数体热替换，全可逆审计。
   type: aiti-ext
   category: 调试
   version: "0.1.10"
@@ -25,7 +25,7 @@ ext:
 
 # aiti-testagent-native
 
-> ❝ 任意 Windows 进程→AI 可编程工具面：API/COM 调用级追踪、原生求值、mock 篡改、函数体热替换，全可逆审计。 ❞
+> ❝ 任意 Windows 进程→AI 可编程工具面：API/COM 调用级追踪、原生求值、mock 改写、函数体热替换，全可逆审计。 ❞
 
 **testagent-native 面板**（原名 `aiti-wintrace`，2026-11-07 随项目改名）——IDE 内可视面：tan broker 状态/进程扫描+attach/会话+eject/挂钩表单/实时事件流。服务端代理 broker HTTP（`8766 /api/rpc` 全方法，= testagent-native-mcp 工具 1:1）。
 
@@ -33,7 +33,7 @@ ext:
 
 - **A 接入**：两跳注入（NtCreateThreadEx→CRT 回退，位数匹配），attach 任意进程
 - **B 看现场**：libclang 签名库参数具名解码 + COM 四层自发现 + proc.stack 导出符号具名帧
-- **C 求值/篡改**：外部编译+远程执行（clang→COFF 重定位→arena→远程线程）；API 级 mock（skip/改返/last_error）
+- **C 求值/改写**：外部编译+远程执行（clang→COFF 重定位→arena→远程线程）；API 级 mock（skip/改返/last_error）
 - **D 热更新**：函数体级 hotpatch（dll_bypass apply/revert）+ quickjs-ng 沙箱脚本（ACG 进程可用）
 - **E 可逆审计**：hook/patch 登记强制度 + `tan_restore` 一键回滚 + history 审计
 
