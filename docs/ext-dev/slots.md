@@ -116,6 +116,20 @@ ctx.registerItems("sessionTopbar", [{
 | `sidebarExplorerDock` | 侧栏文件区下方竖向 dock | 折叠头 + 条目竖排（无条目整块不渲染） |
 | `rightFileDock` | 右栏 dock | 每条目派生 TabBar tab（`dock:<extId>:<itemId>`；与文件/终端 tab 互斥切换） |
 
+**左栏区块折叠头图标**（2026-11-26 契约）：真 face 用 `_shared`（npm `@aiti-ai/ext-shared`）
+`DockBody` 的 `icon` prop；懒扩展未物化期的静态壳图标走 manifest `ui.sidebarExplorerDock[]`
+条目的 `icon` 字段（与 toolbar `ExtUiItem.icon` 同形）。两处均支持五种形式，第三方扩展
+无需依赖内置图标表、完全自持有：
+
+1. React 元素（真 face；`h()`/JSX 自绘 SVG）；
+2. `{ svg: "<path …/>" }` — 内联 SVG markup（24×24，stroke=currentColor）；
+3. `{ url: "<完整 URL>" }` — 资产 URL CSS mask（currentColor 上色）；
+4. 内置图标名（`aiti-ai-logo`（项目）/`folder`/`clock`/`bot`/`library`/`shield-check`/`git-branch`/`history`/`file`/`plug`/`mic`/`box`…，单一数据源 `_shared/dock-icons.ts`）；
+5. 其他字符串 — emoji/文本字符兜底。
+
+静态条目的裸相对路径形式 `icon: "icons/x.svg"` 由宿主派生为完整 URL（`meta.iconUrl`，
+basePath 感知）供静态壳使用；老宿主无派生时静态壳不渲染图标（渐退）。
+
 ## 3. 类型契约（ExtSlotContractMap）
 
 已声明 props 类型的插槽在 `ExtSlotContractMap` 里带契约（上表「契约」列）；未声明的插槽

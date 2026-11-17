@@ -118,6 +118,22 @@ ctx.registerItems("sessionTopbar", [{
 | `sidebarExplorerDock` | Vertical dock below the sidebar file area | Collapsed header + stacked items (whole block not rendered with no items) |
 | `rightFileDock` | Right-column dock | Each item derives a TabBar tab (`dock:<extId>:<itemId>`; mutually exclusive switching with file/terminal tabs) |
 
+**Sidebar block collapsed-header icon** (contract since 2026-11-26): the real face uses the
+`icon` prop of the shared `DockBody` (npm `@aiti-ai/ext-shared`); the static shell (shown while a
+lazy extension is not yet materialized) reads the `icon` field of the manifest
+`ui.sidebarExplorerDock[]` entry (same shape as the toolbar `ExtUiItem.icon`). Both accept five
+forms — third-party extensions carry their own icons without depending on the built-in name table:
+
+1. React element (real face; self-drawn SVG via `h()`/JSX);
+2. `{ svg: "<path …/>" }` — inline SVG markup (24×24, stroke=currentColor);
+3. `{ url: "<complete URL>" }` — asset URL rendered as a CSS mask (currentColor tint);
+4. built-in icon name (`aiti-ai-logo` (projects)/`folder`/`clock`/`bot`/`library`/`shield-check`/`git-branch`/`history`/`file`/`plug`/`mic`/`box`…, single source `_shared/dock-icons.ts`);
+5. any other string — emoji/text glyph fallback.
+
+A bare relative path `icon: "icons/x.svg"` on a static entry is resolved by the host into a
+complete URL (`meta.iconUrl`, basePath-aware) for the static shell; on an older host without the
+derivation the shell simply renders no icon (graceful degradation).
+
 ## 3. Type contracts (ExtSlotContractMap)
 
 Slots with declared props carry a contract in `ExtSlotContractMap` (the "contract" column above);
