@@ -8,7 +8,7 @@ ext:
   soul: AI 改了什么、为什么改、怎么改回去——trace 仓全记着。
   type: pi-plugin
   category: pi 插件
-  version: 0.1.8
+  version: 0.1.9
   status: active
   author: aiti-ai
   publisher: aiti-ai
