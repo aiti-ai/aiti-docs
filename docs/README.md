@@ -32,7 +32,7 @@ features:
     link: /guide/install.md
   - title: 扩展注册表
     icon: 🧩
-    details: 76 个扩展按分类浏览，aiti-agent 自动发现；每个功能都长着「AI 帮助点」——一句话生成配置、AI 回填表单、审核后落地
+    details: 71 个扩展按分类浏览，aiti-agent 自动发现；每个功能都长着「AI 帮助点」——一句话生成配置、AI 回填表单、审核后落地
     link: /extensions/
   - title: 终端 · VNC · RDP
     icon: 🖥️
@@ -103,7 +103,8 @@ npm install -g @aiti-ai/pi-web@latest && pi-web
 | 🧬 **开发血缘** | git 记录改动的内容，血缘记录改动的因果：每行代码可归因到会话、prompt、方案与操作——可评审、可回滚、可检索 | [📖 理念](/guide/lineage.md) · [评审](/extensions/aiti-git-review.md) · [方案先行](/extensions/aiti-plan-first.md) |
 | 🛡️ **配置安全网** | AI/人改坏配置：有 diff 可看、一键回滚；系统崩了，命令行 watchdog 不依赖出问题的系统本身兜底恢复 | [aiti-configs](/extensions/aiti-configs.md) |
 | 🛡️ **AI 脱敏（Paste-safe by default）** | 贴进 prompt 的 token、密钥发送模型前自动变占位符，工具执行时自动还原真值——随手贴，不泄密；中文关键词原生支持，每次发送可出线上证据 | 第一方 pi 插件 [pi-secret-mask](/guide/install.md)（默认预装） |
-| 🧩 **还有更多** | 消息导航、Token 用量看板、编辑器当场改码、草稿保护、prompt 收藏…… 76 个扩展一次看全 | [扩展注册表](/extensions/) |
+| 📤 **分享到公网** | 工作台在自己机器上、外网进不来——选一段会话/消息/文件，经分享目标（Gitee/图床/OSS/笔记库，161 个内置）换回公网 URL，上传前自动脱敏，结果附二维码 | [aiti-msg-share](/extensions/aiti-msg-share.md) · [content-share](/extensions/content-share.md) |
+| 🧩 **还有更多** | 消息导航、Token 用量看板、编辑器当场改码、草稿保护、prompt 收藏…… 71 个扩展一次看全 | [扩展注册表](/extensions/) |
 | 🛠️ **页面调试工具链（aiti-devtools）** | AI 进驻网页，面对面调试——看得见、点得着、改得了；已适配 DSH / OpenClaw / OpenCode 跨宿主 | [aiti-devtools 总览 →](/devtools/) |
 
 ## 什么是 aiti？

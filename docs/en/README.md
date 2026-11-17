@@ -32,7 +32,7 @@ features:
     link: /en/guide/install.md
   - title: Extension registry
     icon: 🧩
-    details: 76 extensions browsable by category, auto-discovered by aiti-agent; every feature grows an "AI help point" — one sentence to draft config, AI fills the form, you review and commit
+    details: 71 extensions browsable by category, auto-discovered by aiti-agent; every feature grows an "AI help point" — one sentence to draft config, AI fills the form, you review and commit
     link: /en/extensions/
   - title: Terminal · VNC · RDP
     icon: 🖥️
@@ -103,7 +103,8 @@ On first launch, sign in or fill an API key in the **Models** panel and start ch
 | 🧬 **Development lineage** | git records what changed; lineage records why: every line of code traceable to the session, prompt, plan and operation — reviewable, rollbackable, searchable | [📖 Concept](/en/guide/lineage.md) · [Review](/en/extensions/aiti-git-review.md) · [Plan-first](/en/extensions/aiti-plan-first.md) |
 | 🛡️ **Config safety net** | AI or human breaks a config: there's a diff to inspect and one-click rollback; if the system crashes, the CLI watchdog recovers without depending on the broken system itself | [aiti-configs](/en/extensions/aiti-configs.md) |
 | 🛡️ **AI secret masking (Paste-safe by default)** | keys/tokens pasted into prompts become placeholders before the model sees them and are restored for tool execution — CJK keywords supported, per-send wire evidence available | first-party pi plugin [pi-secret-mask](/en/guide/install.md) (pre-installed) |
-| 🧩 **And more** | Message navigation, token usage dashboard, in-place code editing, draft protection, prompt bookmarks … see all 76 extensions in one place | [Extension registry](/en/extensions/) |
+| 📤 **Share it out** | The workbench lives on your own machine, unreachable from outside — pick a session / message / file and send it through a share target (Gitee / image hosts / OSS / note archives, 161 built in) to get a public URL, with automatic redaction and a QR code | [aiti-msg-share](/en/extensions/aiti-msg-share.md) · [content-share](/en/extensions/content-share.md) |
+| 🧩 **And more** | Message navigation, token usage dashboard, in-place code editing, draft protection, prompt bookmarks … see all 71 extensions in one place | [Extension registry](/en/extensions/) |
 | 🛠️ **Page-debugging toolchain (aiti-devtools)** | The AI moves into the web page, face-to-face debugging — sees it, clicks it, changes it; adapted to DSH / OpenClaw / OpenCode across hosts | [aiti-devtools overview →](/en/devtools/) |
 
 ## What is aiti?
