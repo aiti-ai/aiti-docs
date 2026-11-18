@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-18T01:47:00.550Z",
-  "count": 9,
+  "generatedAt": "2026-11-18T01:55:15.039Z",
+  "count": 1,
   "releases": [
     {
       "tag": "v0.15.15-aiti.10",
@@ -17,78 +17,6 @@
       ],
       "sections": [],
       "substantive": true
-    },
-    {
-      "tag": "v0.15.15-aiti.9",
-      "version": "0.15.15-aiti.9",
-      "url": "https://github.com/aiti-ai/aiti-ai/releases/tag/v0.15.15-aiti.9",
-      "compareUrl": null,
-      "highlights": [],
-      "sections": [],
-      "substantive": false
-    },
-    {
-      "tag": "v0.15.15-aiti.8",
-      "version": "0.15.15-aiti.8",
-      "url": "https://github.com/aiti-ai/aiti-ai/releases/tag/v0.15.15-aiti.8",
-      "compareUrl": null,
-      "highlights": [],
-      "sections": [],
-      "substantive": false
-    },
-    {
-      "tag": "v0.15.15-aiti.6",
-      "version": "0.15.15-aiti.6",
-      "url": "https://github.com/aiti-ai/aiti-ai/releases/tag/v0.15.15-aiti.6",
-      "compareUrl": null,
-      "highlights": [],
-      "sections": [],
-      "substantive": false
-    },
-    {
-      "tag": "v0.15.15-aiti.5",
-      "version": "0.15.15-aiti.5",
-      "url": "https://github.com/aiti-ai/aiti-ai/releases/tag/v0.15.15-aiti.5",
-      "compareUrl": null,
-      "highlights": [],
-      "sections": [],
-      "substantive": false
-    },
-    {
-      "tag": "v0.15.15-aiti.4",
-      "version": "0.15.15-aiti.4",
-      "url": "https://github.com/aiti-ai/aiti-ai/releases/tag/v0.15.15-aiti.4",
-      "compareUrl": null,
-      "highlights": [],
-      "sections": [],
-      "substantive": false
-    },
-    {
-      "tag": "v0.15.15-aiti.3",
-      "version": "0.15.15-aiti.3",
-      "url": "https://github.com/aiti-ai/aiti-ai/releases/tag/v0.15.15-aiti.3",
-      "compareUrl": null,
-      "highlights": [],
-      "sections": [],
-      "substantive": false
-    },
-    {
-      "tag": "v0.15.15-aiti.2",
-      "version": "0.15.15-aiti.2",
-      "url": "https://github.com/aiti-ai/aiti-ai/releases/tag/v0.15.15-aiti.2",
-      "compareUrl": null,
-      "highlights": [],
-      "sections": [],
-      "substantive": false
-    },
-    {
-      "tag": "v0.15.15-aiti.1",
-      "version": "0.15.15-aiti.1",
-      "url": "https://github.com/aiti-ai/aiti-ai/releases/tag/v0.15.15-aiti.1",
-      "compareUrl": null,
-      "highlights": [],
-      "sections": [],
-      "substantive": false
     }
   ]
 }
