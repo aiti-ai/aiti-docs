@@ -35,7 +35,7 @@ export const enNavbar = navbar([
   {
     text: "Release Notes",
     icon: "history",
-    link: "/en/release-notes/",
+    link: "/en/changelogs/",
   },
   {
     text: "MCP Bridge",

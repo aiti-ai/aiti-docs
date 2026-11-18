@@ -1,5 +1,5 @@
 /**
- * ReleaseList — release notes 时间线（/release-notes 页）。
+ * ReleaseList — release notes 时间线（/changelogs 页）。
  *
  * 数据源（与 ExtensionList 同模式）：
  * - SSR/首屏：__RELEASES_CATALOG__（releases-changelog 插件 define 注入的构建期数据，
