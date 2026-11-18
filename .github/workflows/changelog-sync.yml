@@ -3,7 +3,7 @@
 #
 # Pulls the release notes bodies from the GitHub Releases API into releases/<tag>.md
 # (tools/sync-releases.mjs), commits them, and lets deploy.yml (push → build → publish)
-# ship the updated /release-notes page. No extra deploy trigger needed: pushing to main
+# ship the updated /changelogs page. No extra deploy trigger needed: pushing to main
 # IS the deploy (same chain as sync-ext-versions.yml).
 #
 # Needs nothing beyond the default GITHUB_TOKEN (public releases API).

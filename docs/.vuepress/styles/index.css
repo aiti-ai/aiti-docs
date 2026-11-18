@@ -132,7 +132,7 @@
   overflow-x: hidden;
 }
 
-/* ---- ReleaseList（/release-notes 变更历史时间线）---- */
+/* ---- ReleaseList（/changelogs 变更历史时间线）---- */
 .release-list .release-entry {
   padding: 1rem 0 1.25rem;
   border-bottom: 1px solid var(--vp-c-divider, #e2e8f0);
