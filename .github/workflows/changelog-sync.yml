@@ -13,6 +13,10 @@ on:
   repository_dispatch:
     types: [changelog-sync]
   workflow_dispatch:
+  # 无 dispatch token 时的自动收敛通道：定时拉取（sync 幂等，无变更即 no-op，
+  # push 用默认 GITHUB_TOKEN）。AITI_DOCS_TOKEN dispatch 到位后两条通道并存。
+  schedule:
+    - cron: "17 */6 * * *"
 
 permissions:
   contents: write
