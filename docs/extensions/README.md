@@ -10,6 +10,7 @@ keywords: aiti 扩展, pi-web 扩展, AI 调试扩展, 页面注入扩展, 模�
 > aiti 生态的扩展注册表。每个扩展一个 markdown 文件（`docs/extensions/<id>.md`），
 > 编译时自动生成 `/extensions.json`（aiti-agent 等可自动发现），本页列表按分类自动渲染。
 > 新增扩展 = 加一个 md + PR。元数据规范与提交流程见 [ext 元数据规范](/extensions/spec.md)。
+> 想从零写一个扩展？[扩展开发指南](/ext-dev/) 覆盖契约、插槽与服务端/客户端 API。
 
 ## 扩展列表
 

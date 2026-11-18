@@ -11,6 +11,7 @@ keywords: aiti extensions, pi-web extensions, AI debugging extensions, page inje
 > `/extensions.json` is generated automatically at compile time (auto-discoverable by aiti-agent and the like),
 > and the list on this page is rendered automatically by category.
 > Adding an extension = adding one md + a PR. For metadata conventions and the submission process, see the [ext metadata spec](/en/extensions/spec.md).
+> Want to build one from scratch? The [extension dev guide](/en/ext-dev/) covers contracts, slots, and server/client APIs.
 
 ## Extension List
 
