@@ -18,11 +18,6 @@ export const enNavbar = navbar([
     link: "/en/extensions/",
   },
   {
-    text: "Extension Dev",
-    icon: "wrench",
-    link: "/en/ext-dev/",
-  },
-  {
     text: "Install",
     icon: "download",
     link: "/en/guide/install.md",
