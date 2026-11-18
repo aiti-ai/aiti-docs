@@ -23,6 +23,16 @@ export const zhNavbar = navbar([
     link: "/ext-dev/",
   },
   {
+    text: "安装",
+    icon: "download",
+    link: "/guide/install.md",
+  },
+  {
+    text: "变更历史",
+    icon: "history",
+    link: "/changelogs/",
+  },
+  {
     text: "更多",
     icon: "ellipsis",
     children: [
@@ -35,11 +45,6 @@ export const zhNavbar = navbar([
         text: "IDE 插件",
         icon: "puzzle-piece",
         link: "/ide/",
-      },
-      {
-        text: "变更历史",
-        icon: "history",
-        link: "/changelogs/",
       },
       {
         text: "路线图",

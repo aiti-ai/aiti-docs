@@ -23,6 +23,16 @@ export const enNavbar = navbar([
     link: "/en/ext-dev/",
   },
   {
+    text: "Install",
+    icon: "download",
+    link: "/en/guide/install.md",
+  },
+  {
+    text: "Changelogs",
+    icon: "history",
+    link: "/en/changelogs/",
+  },
+  {
     text: "More",
     icon: "ellipsis",
     children: [
@@ -35,11 +45,6 @@ export const enNavbar = navbar([
         text: "IDE Plugins",
         icon: "puzzle-piece",
         link: "/en/ide/",
-      },
-      {
-        text: "Changelogs",
-        icon: "history",
-        link: "/en/changelogs/",
       },
       {
         text: "Roadmaps",
