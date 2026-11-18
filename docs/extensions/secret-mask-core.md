@@ -4,12 +4,12 @@ icon: 🧬
 ext:
   id: secret-mask-core
   name: secret-mask-core 脱敏引擎
-  description: 宿主无关的秘密脱敏基础能力包——确定性凭据检测规则、[REDACTED:*] 占位符 Registry、深遍历还原/脱敏、payload 审计与 /secret 命令逻辑。零运行时依赖；pi 版与 DSH 版的生产实现共用，任何 TS/JS agent 四步接入
+  description: 宿主无关的秘密脱敏基础能力包——确定性凭据检测规则、rsec_<hash8> 令牌 Registry（legacy [REDACTED:*] 兼容）、深遍历还原/脱敏、pi 消息适配、未挂载占位符 guard、落盘三态、自定义规则、payload 审计与 /secret 命令逻辑。零运行时依赖；pi 版与 DSH 版的生产实现共用，任何 TS/JS agent 四步接入
   soul: 一套检测引擎，所有 agent 共享同一份"随手贴，不泄密"。
   type: other
   installable: false  # 基础库——不是 aiti-agent/pi-web 扩展：extman 不列出、extensions.json 归 integrations
   category: 基础库
-  version: 0.1.2
+  version: 0.2.0
   status: active
   author: aiti-ai
   publisher: aiti-ai
@@ -36,9 +36,18 @@ ext:
 | 模块 | 导出 | 职责 |
 |---|---|---|
 | `detect` | `scan` / `RULES` / `entropy` / `fnv1a` / `plausibleSecret` | 确定性凭据检测（AWS/GitHub/GitLab/Slack/Stripe/SendGrid/Twilio/Google/Anthropic/OpenAI/HF/npm/PyPI/Azure/JWT/PEM/DB URL/Authorization 头/泛型赋值 + 中文关键词 + base64 包装 token），香农熵地板 + 误报护栏；无网络、无模型调用 |
-| `mask` | `Registry` / `redactForms` / `restoreDeep` / `redactDeep` / `restoreDeepInPlace` / `auditPayload` | 值↔占位符 Registry（`[REDACTED:alias]` / `[REDACTED:LABEL#hash]`，会话内稳定）、深遍历、最终 payload 泄露证明 |
+| `mask` | `Registry` / `redactForms` / `restoreDeep` / `redactDeep` / `restoreDeepInPlace` / `auditPayload` | 值↔令牌 Registry（`rsec_<hash8>`；会话盐 / vault 稳定命名空间，legacy `[REDACTED:*]` 可还原）、深遍历、最终 payload 泄露证明 |
 | `spans` | `redactTextSpans` / `spanOf` | 发送边界循环：把消息形状映射为 text span；**只有标记为用户手写的 span** 做自动检测登记 |
 | `commands` | `handleSecretCommand` / `savePersist` / `appendAuditLog` | `/secret` 全套命令逻辑（存储路径由宿主经 state 注入） |
+
+## 加密持久层：secret-vault-core
+
+需要「AI 只能拿令牌、值加密落盘、跨会话稳定」时用配套引擎 `@aiti-ai/secret-vault-core`：
+
+- `VaultStore`：AES-256-GCM 库（keyfile / OS 钥匙串双解锁模式，切换模式重新生成密钥并重加密）、global + project 分桶、轮换 version 与 `lastUsed*` 归因
+- `vault_list` / `vault_get`：只读 AI 面；`vault_get` 用 `Registry.registerStable(value, alias)` 生成跨会话稳定的 `rsec_<hash8>`
+- `/vault` 命令逻辑、capture/import/import-env、vault landing、零真值 session-state
+- pi 装配见 `@aiti-ai/pi-secret-vault`；DSH 侧仍是进程内 vendored core（无持久库）
 
 ## 四步接入任意 TS/JS agent
 

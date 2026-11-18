@@ -4,12 +4,12 @@ icon: 🥷
 ext:
   id: dsh-secret-mask
   name: dsh-secret-mask 粘贴防泄密
-  description: DeepSeek Harness（DSH）的会话级秘密脱敏——贴进消息的密钥/token/凭据在进入模型之前替换为稳定占位符 [REDACTED:*]，模型在工具参数里回显占位符时于执行前还原真实值；工具输出同步脱敏，可选审计证明无真值上线。检测核心与 pi 版逐字同源
+  description: DeepSeek Harness（DSH）的会话级秘密脱敏——贴进消息的密钥/token/凭据在进入模型之前替换为形似凭据的 rsec_<hash8> 令牌，模型在工具参数里回显令牌时于执行前还原真实值；未挂载令牌会被 guard 拦截，工具输出同步脱敏，可选审计证明无真值上线。检测核心与 pi 版共用 @aiti-ai/secret-mask-core
   soul: 随手贴，不泄密——换一个 harness 也是。
   type: host-adapter
   installable: false  # DSH 插件——装进 DSH profile，不进 aiti-agent/pi-web：extman 不列出、extensions.json 归 integrations
   category: 宿主适配
-  version: 0.1.1
+  version: 0.2.0
   status: active
   author: aiti-ai
   publisher: aiti-ai
@@ -31,7 +31,7 @@ ext:
 
 ```text
 你:        我的 api key 是 sk-ant-api03-<80 chars> —— 帮我写进 .env 的 ANTHROPIC_KEY
-模型看到:  我的 api key 是 [REDACTED:ANTHROPIC_KEY#a1b2c3d4] —— 帮我写进 .env ...
+模型看到:  我的 api key 是 rsec_a1b2c3d4 —— 帮我写进 .env ...
 bash 工具: ANTHROPIC_KEY=sk-ant-api03-<80 chars>   ← shadow 包装层执行时还原
 会话日志:  占位符持久落盘（pre-step 替换是 durable 的——与 pi 的「转录留原文」不同，见下）
 ```
