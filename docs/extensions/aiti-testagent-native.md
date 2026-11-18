@@ -18,7 +18,7 @@ ext:
     # 1) 常驻 tan broker（155：Startup 文件夹 start-tan.vbs——broker 8765/8766 + MCP HTTP 8767）
     #    手动：D:\path\to\testagent-native\native\build\win64-release\bin\<current-broker.txt> --port 8765 --http-port 8766
     # 2) 本面板随 pi-web 扩展部署自动生效（工具条「Win」入口）；数据源 broker HTTP 8766（env TAN_BROKER_HTTP 可改）
-    # 3) AI 侧走 testagent-native-mcp：node mcp/testagent-native-mcp/register.js（38 tan_* + 7 app_* 工具）
+    # 3) AI 侧走 testagent-native-mcp：node mcp/testagent-native-mcp/register.js（52 tan_* + 7 app_* 工具）
   license: MIT
   tags: [windows, native, win32, com, detours, injection, hook, trace, hotpatch, tan, testagent-native]
 ---
@@ -37,7 +37,7 @@ ext:
 - **D 热更新**：函数体级 hotpatch（dll_bypass apply/revert）+ quickjs-ng 沙箱脚本（ACG 进程可用）
 - **E 可逆审计**：hook/patch 登记强制度 + `tan_restore` 一键回滚 + history 审计
 
-工具面 **57 项 = 50 `tan_*` + 7 `app_*`**（2026-11-10 快照；「任意应用→MCP」服务层 + 跨平台对象模型 OM 系列：`tan_dbus_*`×4 / `tan_gir_*`×2 / `tan_objc_*`×3 / `tan_vtable_*`×3，随 OM 五期持续扩展）；旧名 `wintrace_*` 经 broker/MCP 双别名层过渡兼容。
+工具面 **59 项 = 52 `tan_*` + 7 `app_*`**（2026-11-19 快照；「任意应用→MCP」服务层 + 跨平台对象模型 OM 系列：`tan_dbus_*`×5 / `tan_gir_*`×2 / `tan_objc_*`×3 / `tan_vtable_*`×3）。**OM v2 已清账**：`tan_dbus_call`（⚠️ 写操作 danger 门——方法调用默认拒答 `write_gate_closed`，显式 `allow_write:true` 执行并落审计；签名取自 introspection，基础标量 marshal）+ ObjC observe-with-args 透传（`objc.watch` 规则 `through:true` → asm trampoline 记录后调原实现——变参/浮点/结构体签名全安全，原方法副作用连续）。旧名 `wintrace_*` 别名层已于 2026-11-18 退役（旧名现为 unknown fail-loud）。
 
 ## 数据源与配置
 
