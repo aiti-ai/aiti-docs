@@ -3,24 +3,9 @@ import { navbar } from "vuepress-theme-hope";
 export const zhNavbar = navbar([
   "/",
   {
-    text: "产品矩阵",
-    icon: "table-columns",
-    link: "/products/",
-  },
-  {
     text: "指南",
     icon: "lightbulb",
     link: "/guide/",
-  },
-  {
-    text: "扩展开发",
-    icon: "wrench",
-    link: "/ext-dev/",
-  },
-  {
-    text: "安装",
-    icon: "download",
-    link: "/guide/install.md",
   },
   {
     text: "aiti-devtools",
@@ -33,38 +18,33 @@ export const zhNavbar = navbar([
     link: "/extensions/",
   },
   {
-    text: "变更历史",
-    icon: "history",
-    link: "/changelogs/",
+    text: "扩展开发",
+    icon: "wrench",
+    link: "/ext-dev/",
   },
   {
-    text: "MCP 桥",
-    icon: "link",
-    link: "/guide/mcp/",
-  },
-  {
-    text: "IDE 插件",
-    icon: "puzzle-piece",
-    link: "/ide/",
-  },
-  {
-    text: "路线图",
-    icon: "road",
-    link: "/roadmaps/",
-  },
-  {
-    text: "外部链接",
-    icon: "link",
+    text: "更多",
+    icon: "ellipsis",
     children: [
       {
-        text: "GitHub",
-        link: "https://github.com/aiti-ai",
-        icon: "github",
+        text: "MCP 桥",
+        icon: "link",
+        link: "/guide/mcp/",
       },
       {
-        text: "aiti.pw",
-        link: "https://aiti.pw",
-        icon: "globe",
+        text: "IDE 插件",
+        icon: "puzzle-piece",
+        link: "/ide/",
+      },
+      {
+        text: "变更历史",
+        icon: "history",
+        link: "/changelogs/",
+      },
+      {
+        text: "路线图",
+        icon: "road",
+        link: "/roadmaps/",
       },
     ],
   },
