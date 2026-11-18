@@ -51,7 +51,7 @@ curl -fsSL https://aiti.pw/install.sh | AITI_INSTALL_DIR=~/apps/aiti sh
 
 @tab Docker
 
-Images are published to Docker Hub (built per release tag alongside GitHub Releases) and mirrored tag-for-tag to the public Aliyun ACR for faster pulls in China; there is also a GHCR source [`ghcr.io/aiti-ai/aiti-ai`](https://github.com/aiti-ai/aiti-ai/pkgs/container/aiti-ai) (core-equivalent, native amd64/arm64 multi-arch, tags are plain version numbers):
+Images are published to Docker Hub (built per release tag alongside GitHub Releases) and mirrored tag-for-tag to the public Aliyun ACR for faster pulls in China; there is also a GHCR source [`ghcr.io/aiti-ai/aiti-ai`](https://github.com/aiti-ai/aiti-ai/pkgs/container/aiti-ai) (same versions and content as Docker Hub — core/full variants, identical tags):
 
 ```bash
 docker run -d --name aiti --init -p 30142:30142 \
@@ -64,9 +64,9 @@ docker run -d --name aiti --init -p 30142:30142 \
 - `core` (~2.1 GB): fork of pi-web + all extensions + node/git + the justget tool market;
 - `full` (~7.8 GB): adds GUI / voice (funasr) / Chrome / tunnels — needs ≥8 GB RAM;
 - version tags: `aitiai/pi-web:v<version>-{core,full}`, rolling `core`/`full`/`latest`;
-- GHCR source: `ghcr.io/aiti-ai/aiti-ai:<version>` (e.g. `0.15.15-aiti.10`) — core-equivalent, native amd64/arm64 multi-arch, no emulation needed on ARM hosts;
+- GHCR source: `ghcr.io/aiti-ai/aiti-ai` — same versions and content as Docker Hub (core/full variants), identical tags (e.g. `v0.15.15-aiti.10-core` / `core` / `latest`);
 - ⚠ mount only sub-paths of `/opt/aiti`, never the root itself (a root mount shadows the new image on upgrade — extensions would never refresh);
-- the Docker Hub / ACR images currently ship linux/amd64 only; on ARM hosts prefer the GHCR source (native arm64), or add `--platform linux/amd64` to run under emulation (with a performance cost);
+- all three image channels (Docker Hub / ACR / GHCR) currently ship linux/amd64 only; on ARM hosts add `--platform linux/amd64` to run under emulation (with a performance cost);
 - slow pulls in China? swap the image for `registry.cn-hangzhou.aliyuncs.com/aiti-ai/pi-web:core` (Aliyun ACR, same tags as Docker Hub);
 - full ports/env vars/reverse-proxy/upgrade guide: the manual in the repo [`docker/`](https://github.com/aiti-ai/aiti-ai/tree/main/docker) directory (compose.yaml / README.md).
 

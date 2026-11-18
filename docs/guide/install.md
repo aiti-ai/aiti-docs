@@ -51,7 +51,7 @@ curl -fsSL https://aiti.pw/install.sh | AITI_INSTALL_DIR=~/apps/aiti sh
 
 @tab Docker
 
-镜像发布在 Docker Hub（随 GitHub Releases 同版本发布），并逐 tag 同步一份到阿里云 ACR（国内加速，已公开）；另有 GHCR 源 [`ghcr.io/aiti-ai/aiti-ai`](https://github.com/aiti-ai/aiti-ai/pkgs/container/aiti-ai)（core 等价、原生 amd64/arm64 双架构，tag 即版本号）：
+镜像发布在 Docker Hub（随 GitHub Releases 同版本发布），并逐 tag 同步一份到阿里云 ACR（国内加速，已公开）；另有 GHCR 源 [`ghcr.io/aiti-ai/aiti-ai`](https://github.com/aiti-ai/aiti-ai/pkgs/container/aiti-ai)（与 Docker Hub 同版本同内容，core/full 双变体，tag 完全一致）：
 
 ```bash
 docker run -d --name aiti --init -p 30142:30142 \
@@ -64,9 +64,9 @@ docker run -d --name aiti --init -p 30142:30142 \
 - `core`（约 2.1GB）：fork pi-web + 全部扩展 + node/git + justget 工具市场；
 - `full`（约 7.8GB）：加 GUI/语音（funasr）/Chrome/隧道等全功能（需 ≥8GB 内存）；
 - 版本 tag：`aitiai/pi-web:v<版本>-{core,full}`，滚动 `core`/`full`/`latest`；
-- GHCR 源：`ghcr.io/aiti-ai/aiti-ai:<版本>`（如 `0.15.15-aiti.10`）——core 等价、原生 amd64/arm64 双架构，ARM 主机免模拟；
+- GHCR 源：`ghcr.io/aiti-ai/aiti-ai`——与 Docker Hub 同版本同内容（core/full 双变体），tag 完全一致（如 `v0.15.15-aiti.10-core` / `core` / `latest`）；
 - ⚠ 卷只挂 `/opt/aiti` 子路径，勿挂整个 `/opt/aiti` 根（挂根会让镜像升级后扩展永不更新）；
-- Docker Hub / ACR 镜像当前仅提供 linux/amd64；ARM 主机建议改用 GHCR 源（原生 arm64），或加 `--platform linux/amd64` 模拟运行（性能有折损）；
+- 三个镜像渠道（Docker Hub / ACR / GHCR）当前均为 linux/amd64 单架构；ARM 主机加 `--platform linux/amd64` 模拟运行（性能有折损）；
 - 国内拉取慢？镜像名换 `registry.cn-hangzhou.aliyuncs.com/aiti-ai/pi-web:core`（阿里云 ACR，tag 与 Docker Hub 一致）；
 - 完整指南（端口/环境变量/反向代理/升级运维/compose）见 [Docker 部署](./docker.md)；compose 一键与手册见仓库 [`docker/`](https://github.com/aiti-ai/aiti-ai/tree/main/docker)。
 

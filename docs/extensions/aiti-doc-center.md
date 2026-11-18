@@ -8,7 +8,7 @@ ext:
   soul: 文档不检索，等于没写。
   type: aiti-ext
   category: 知识管理
-  version: "0.1.11"
+  version: "0.1.10"
   status: active
   author: aiti-ai
   publisher: aiti-ai
