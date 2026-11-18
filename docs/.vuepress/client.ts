@@ -5,6 +5,7 @@ import './styles/index.css';
 import ExtensionList from './components/ExtensionList.ts';
 import LatestVersion from './components/LatestVersion.ts';
 import ReleaseList from './components/ReleaseList.ts';
+import ShareTargetStatus from './components/ShareTargetStatus.ts';
 
 declare global {
   interface Window {
@@ -18,6 +19,7 @@ export default defineClientConfig({
     app.component('ExtensionList', ExtensionList);
     app.component('LatestVersion', LatestVersion);
     app.component('ReleaseList', ReleaseList);
+    app.component('ShareTargetStatus', ShareTargetStatus);
 
     // Baidu Analytics: this site is an SPA — hm.js would only track the initial
     // page load. Disable auto pageview and report one PV per route change instead.

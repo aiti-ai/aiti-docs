@@ -52,6 +52,14 @@ content-share mock paste-demo --port 8931       # start the demo paste server
 
 `publish` (public URL) · `archive` (Joplin/Obsidian deep links) · `bookmark` · `local` (local session links).
 
+## Target availability audit (2026-11)
+
+All 161 targets were probed with real uploads (direct connection → VPN policy routing → retest, merged multi-run evidence). Bottom line: **only 11 of the 136 zero-setup targets work out of the box and pass verification** — direct from China: paste.rs / dpaste.com / p.ip.fi / f.blicky.net; behind a VPN: rentry / gofile.io / write.as and others. The ShareX `.sxcu` catalog has aged badly (services moved, APIs changed, sites shut down), and the catalog `status` field disagrees with reality. The table below is filterable and searchable; each row carries its registration entry and notes. Machine-readable data: [`/share-targets.json`](/share-targets.json) (usable directly as the remote overlay catalog URL).
+
+<ClientOnly>
+<ShareTargetStatus />
+</ClientOnly>
+
 ## License
 
 MIT. The `.sxcu` syntax semantics are derived from ShareX (GPL v3) by independent reimplementation — no ShareX source code is included.

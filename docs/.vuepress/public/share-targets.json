@@ -1,0 +1,3526 @@
+{
+  "generatedAt": "2026-11-18T16:15:06Z",
+  "source": {
+    "catalog": "@aiti-ai/content-share@0.1.6",
+    "repo": "https://github.com/aiti-ai/content-share",
+    "totalEntries": 161
+  },
+  "method": "三轮实测：① 本机直连真实上传探针（node fetch, 20s 超时）→ ② 对不可达域名在路由器执行 addroute（VPN 隧道路由+防污染 DNS）→ ③ 翻墙路由后复测（修复 Node Happy-Eyeballs IPv6 绕过隧道问题后）+ curl -4 抽验",
+  "counts": {
+    "total": 139,
+    "byVerdict": {
+      "vpn-reachable": 31,
+      "vpn-ok": 7,
+      "cn-ok": 11,
+      "cn-reachable-broken": 40,
+      "vpn-unreachable": 18,
+      "dead": 26,
+      "needs-config": 3,
+      "template": 3
+    }
+  },
+  "providers": [
+    {
+      "id": "catbox.moe",
+      "name": "catbox.moe",
+      "kinds": [
+        "image",
+        "text",
+        "file"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "catbox.moe",
+      "setup": "none",
+      "verdict": "vpn-reachable",
+      "availability": {
+        "direct": "conn-reset",
+        "vpn": "reachable"
+      },
+      "register": {
+        "required": false,
+        "url": "https://catbox.moe/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": "Anonymous & permanent; slow from mainland China | 国内直连失败（conn-reset）；翻墙路由后网络可达，但上传失败：[sxcu] 412: No files given.",
+      "verified": false
+    },
+    {
+      "id": "gofile.io",
+      "name": "gofile.io",
+      "kinds": [
+        "file"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "store9.gofile.io",
+      "setup": "none",
+      "verdict": "vpn-ok",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "ok"
+      },
+      "url": "https://gofile.io/d/y0lzRYEk",
+      "register": {
+        "required": false,
+        "url": "https://store9.gofile.io/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": "Anonymous file host | 国内直连失败（timeout），已 addroute 翻墙路由后真实上传验证通过",
+      "verified": true
+    },
+    {
+      "id": "paste.rs",
+      "name": "paste.rs",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "aiti",
+      "domain": "",
+      "setup": "none",
+      "verdict": "cn-ok",
+      "availability": {
+        "direct": "ok",
+        "vpn": "not-probed"
+      },
+      "url": "https://paste.rs/SrGmQ",
+      "register": {
+        "required": false,
+        "note": "无需注册（匿名上传）"
+      },
+      "note": "Anonymous text paste | 国内直连可用，真实上传验证通过",
+      "verified": true
+    },
+    {
+      "id": "0x0.st (URL shortener)",
+      "name": "0x0.st (URL shortener)",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "0x0.st",
+      "setup": "none",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://0x0.st/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：[0x0.st (URL shortener)] 503: uploads disabled because it’s been almost nothing but AI botnet spam for the pas",
+      "verified": false
+    },
+    {
+      "id": "9m.no",
+      "name": "9m.no",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "9m.no",
+      "setup": "none",
+      "verdict": "vpn-reachable",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "reachable"
+      },
+      "register": {
+        "required": false,
+        "url": "https://9m.no/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连失败（timeout）；翻墙路由后网络可达，但上传失败：[sxcu] 400: Bad request",
+      "verified": false
+    },
+    {
+      "id": "aboo.se",
+      "name": "aboo.se",
+      "kinds": [
+        "image",
+        "text",
+        "file"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "api.aboo.se",
+      "setup": "none",
+      "verdict": "vpn-unreachable",
+      "availability": {
+        "direct": "tls",
+        "vpn": "tls"
+      },
+      "register": {
+        "required": false,
+        "url": "https://api.aboo.se/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 已 addroute 翻墙路由，多轮测试仍不可达（tls）→ 疑似服务已死或隧道丢包严重",
+      "verified": false
+    },
+    {
+      "id": "aww.moe",
+      "name": "aww.moe",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "aww.moe",
+      "setup": "none",
+      "verdict": "vpn-unreachable",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "tls"
+      },
+      "register": {
+        "required": false,
+        "url": "https://aww.moe/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 已 addroute 翻墙路由，多轮测试仍不可达（tls）→ 疑似服务已死或隧道丢包严重",
+      "verified": false
+    },
+    {
+      "id": "bakka.me",
+      "name": "bakka.me",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "bakka.me",
+      "setup": "none",
+      "verdict": "dead",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "dns"
+      },
+      "register": {
+        "required": false,
+        "url": "https://bakka.me/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 域名无 DNS 解析（网关 DNS 三次验证无 A 记录）→ 服务已死",
+      "verified": false
+    },
+    {
+      "id": "beeimg.com",
+      "name": "beeimg.com",
+      "kinds": [
+        "image"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "beeimg.com",
+      "setup": "none",
+      "verdict": "vpn-reachable",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "reachable"
+      },
+      "register": {
+        "required": false,
+        "url": "https://beeimg.com/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连失败（timeout）；翻墙路由后网络可达，但上传失败：fetch failed",
+      "verified": false
+    },
+    {
+      "id": "boring.host (Anonymous)",
+      "name": "boring.host (Anonymous)",
+      "kinds": [
+        "image"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "api.boring.host",
+      "setup": "none",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://api.boring.host/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：[boring.host (Anonymous)] 503: {\"success\":false,\"errors\":[\"boring.host is taking a short break. Uploads are pa",
+      "verified": false
+    },
+    {
+      "id": "boring.host (User)",
+      "name": "boring.host (User)",
+      "kinds": [
+        "image"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "api.boring.host",
+      "setup": "actually-needs-config",
+      "verdict": "needs-config",
+      "availability": {
+        "direct": "not-probed",
+        "vpn": "not-probed",
+        "registerPage": "blocked"
+      },
+      "register": {
+        "required": true,
+        "url": "https://boring.host/",
+        "note": "sxcu 需要 your_token（User 版）→ 注册获取。"
+      },
+      "note": " | 注册 boring.host 账号取 token。国内直连不通需翻墙；匿名入口当前 503 暂停上传。",
+      "verified": false
+    },
+    {
+      "id": "bpaste.net",
+      "name": "bpaste.net",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "bpaste.net",
+      "setup": "none",
+      "verdict": "cn-ok",
+      "availability": {
+        "direct": "ok",
+        "vpn": "not-probed"
+      },
+      "url": "https://bpa.st/",
+      "register": {
+        "required": false,
+        "url": "https://bpaste.net/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连可用，但 POST 返回 302→bpa.st（服务已迁移 bpaste.net→bpa.st），sxcu 上传配置过时",
+      "verified": false
+    },
+    {
+      "id": "cancer-co.de",
+      "name": "cancer-co.de",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "cancer-co.de",
+      "setup": "none",
+      "verdict": "dead",
+      "availability": {
+        "direct": "dns",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://cancer-co.de/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 域名无 DNS 解析（网关 DNS 三次验证无 A 记录）→ 服务已死",
+      "verified": false
+    },
+    {
+      "id": "capella.pics",
+      "name": "capella.pics",
+      "kinds": [
+        "image"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "capella.pics",
+      "setup": "none",
+      "verdict": "dead",
+      "availability": {
+        "direct": "dns",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://capella.pics/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 域名无 DNS 解析（网关 DNS 三次验证无 A 记录）→ 服务已死",
+      "verified": false
+    },
+    {
+      "id": "catgirlsare.sexy",
+      "name": "catgirlsare.sexy",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "catgirlsare.sexy",
+      "setup": "actually-needs-config",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": true,
+        "url": "https://catgirlsare.sexy/",
+        "note": "400 Invalid upload key → 服务已改为需要 key。"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：[sxcu] 400: {\"error\":\"Invalid upload key\"}",
+      "verified": false
+    },
+    {
+      "id": "chevereto.com",
+      "name": "chevereto.com",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "demo.chevereto.com",
+      "setup": "none",
+      "verdict": "vpn-reachable",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "reachable"
+      },
+      "register": {
+        "required": false,
+        "url": "https://demo.chevereto.com/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连失败（timeout）；翻墙路由后网络可达，但上传失败：[chevereto.com] 403: <!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta ht",
+      "verified": false
+    },
+    {
+      "id": "clyp.it",
+      "name": "clyp.it",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "upload.clyp.it",
+      "setup": "none",
+      "verdict": "vpn-reachable",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "reachable"
+      },
+      "register": {
+        "required": false,
+        "url": "https://upload.clyp.it/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连失败（timeout）；翻墙路由后网络可达，但上传失败：[clyp.it] 400: {\"Successful\":true,\"PlaylistId\":\"ukdhyq0y\",\"AudioFileId\":\"fonz3lf3\",\"Title\":\"Invalid ",
+      "verified": false
+    },
+    {
+      "id": "cockfile.com",
+      "name": "cockfile.com",
+      "kinds": [
+        "image",
+        "text",
+        "file"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "cockfile.com",
+      "setup": "none",
+      "verdict": "vpn-unreachable",
+      "availability": {
+        "direct": "tls",
+        "vpn": "tls"
+      },
+      "register": {
+        "required": false,
+        "url": "https://cockfile.com/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 已 addroute 翻墙路由，多轮测试仍不可达（tls）→ 疑似服务已死或隧道丢包严重",
+      "verified": false
+    },
+    {
+      "id": "digitaaldelen.nl",
+      "name": "digitaaldelen.nl",
+      "kinds": [
+        "image",
+        "file"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "digitaaldelen.nl",
+      "setup": "none",
+      "verdict": "vpn-unreachable",
+      "availability": {
+        "direct": "conn-reset",
+        "vpn": "conn-reset"
+      },
+      "register": {
+        "required": false,
+        "url": "https://digitaaldelen.nl/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 已 addroute 翻墙路由，多轮测试仍不可达（conn-reset）→ 疑似服务已死或隧道丢包严重",
+      "verified": false
+    },
+    {
+      "id": "Discord post",
+      "name": "Discord post",
+      "kinds": [
+        "image",
+        "text",
+        "file"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "discord.com",
+      "setup": "actually-needs-config",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": true,
+        "url": "https://discord.com/register",
+        "note": "需 Discord 账号 + 服务器 Webhook URL（服务器设置→整合→Webhook）。"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：[Discord post] 401: {\"message\": \"401: Unauthorized\", \"code\": 0}",
+      "verified": false
+    },
+    {
+      "id": "Discord webhook (Image uploader)",
+      "name": "Discord webhook (Image uploader)",
+      "kinds": [
+        "image"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "discord.com",
+      "setup": "actually-needs-config",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": true,
+        "url": "https://discord.com/register",
+        "note": "需 Discord 账号 + 服务器 Webhook URL。"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：Failed to parse URL from https://Webhook URL",
+      "verified": false
+    },
+    {
+      "id": "Discord webhook (URL sharing service)",
+      "name": "Discord webhook (URL sharing service)",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "discord.com",
+      "setup": "actually-needs-config",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": true,
+        "url": "https://discord.com/register",
+        "note": "需 Discord 账号 + 服务器 Webhook URL。"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：Failed to parse URL from https://Webhook URL",
+      "verified": false
+    },
+    {
+      "id": "Discord webhook embed (URL sharing service)",
+      "name": "Discord webhook embed (URL sharing service)",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "discord.com",
+      "setup": "actually-needs-config",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": true,
+        "url": "https://discord.com/register",
+        "note": "需 Discord 账号 + 服务器 Webhook URL。"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：Failed to parse URL from https://Webhook URL",
+      "verified": false
+    },
+    {
+      "id": "dnlk.de",
+      "name": "dnlk.de",
+      "kinds": [
+        "image"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "api.dnlk.de",
+      "setup": "none",
+      "verdict": "vpn-unreachable",
+      "availability": {
+        "direct": "tls",
+        "vpn": "tls"
+      },
+      "register": {
+        "required": false,
+        "url": "https://api.dnlk.de/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 已 addroute 翻墙路由，多轮测试仍不可达（tls）→ 疑似服务已死或隧道丢包严重",
+      "verified": false
+    },
+    {
+      "id": "dpaste.com",
+      "name": "dpaste.com",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "dpaste.com",
+      "setup": "none",
+      "verdict": "cn-ok",
+      "availability": {
+        "direct": "ok",
+        "vpn": "not-probed"
+      },
+      "url": "http://dpaste.com/785VQLQ7D",
+      "register": {
+        "required": false,
+        "url": "https://dpaste.com/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连可用，真实上传验证通过",
+      "verified": true
+    },
+    {
+      "id": "dropfile.to",
+      "name": "dropfile.to",
+      "kinds": [
+        "image",
+        "text",
+        "file"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "https://$random:d1|d2|d3$.dropfile.to/upload",
+      "setup": "none",
+      "verdict": "template",
+      "availability": {
+        "direct": "dns",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "note": "无需注册（模板/坏配置）"
+      },
+      "note": "sxcu 用 $random:… 子域名模板，且域名 DNS 已失效 → 不可用",
+      "verified": false
+    },
+    {
+      "id": "dtransfer.net (Anonymous)",
+      "name": "dtransfer.net (Anonymous)",
+      "kinds": [
+        "image",
+        "text",
+        "file"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "dtransfer.net",
+      "setup": "none",
+      "verdict": "dead",
+      "availability": {
+        "direct": "dns",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://dtransfer.net/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 域名无 DNS 解析（网关 DNS 三次验证无 A 记录）→ 服务已死",
+      "verified": false
+    },
+    {
+      "id": "dtransfer.net (User)",
+      "name": "dtransfer.net (User)",
+      "kinds": [
+        "image",
+        "text",
+        "file"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "dtransfer.net",
+      "setup": "none",
+      "verdict": "dead",
+      "availability": {
+        "direct": "dns",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://dtransfer.net/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 域名无 DNS 解析（网关 DNS 三次验证无 A 记录）→ 服务已死",
+      "verified": false
+    },
+    {
+      "id": "elixi.re",
+      "name": "elixi.re",
+      "kinds": [
+        "image"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "elixi.re",
+      "setup": "none",
+      "verdict": "vpn-reachable",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "reachable"
+      },
+      "register": {
+        "required": false,
+        "url": "https://elixi.re/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连失败（timeout）；翻墙路由后网络可达，但上传失败：[sxcu] 403: {\"code\":403,\"error\":true,\"message\":\"invalid token format\"}\n",
+      "verified": false
+    },
+    {
+      "id": "elixi.re (URL shortener)",
+      "name": "elixi.re (URL shortener)",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "elixi.re",
+      "setup": "none",
+      "verdict": "vpn-reachable",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "reachable"
+      },
+      "register": {
+        "required": false,
+        "url": "https://elixi.re/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连失败（timeout）；翻墙路由后网络可达，但上传失败：[elixi.re (URL shortener)] 403: {\"code\":403,\"error\":true,\"message\":\"invalid token format\"}\n",
+      "verified": false
+    },
+    {
+      "id": "epvpimg.com",
+      "name": "epvpimg.com",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "epvpimg.com",
+      "setup": "none",
+      "verdict": "vpn-reachable",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "reachable"
+      },
+      "register": {
+        "required": false,
+        "url": "https://epvpimg.com/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连失败（timeout）；翻墙路由后网络可达，但上传失败：[sxcu] 403: <!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=",
+      "verified": false
+    },
+    {
+      "id": "f.blicky.net",
+      "name": "f.blicky.net",
+      "kinds": [
+        "image",
+        "file"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "f.blicky.net",
+      "setup": "none",
+      "verdict": "cn-ok",
+      "availability": {
+        "direct": "ok",
+        "vpn": "not-probed"
+      },
+      "url": "https://f.blicky.net/f.php?h=2bMp06tG",
+      "register": {
+        "required": false,
+        "url": "https://f.blicky.net/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连可用，真实上传验证通过",
+      "verified": true
+    },
+    {
+      "id": "file.bin.moe (Image uploader)",
+      "name": "file.bin.moe (Image uploader)",
+      "kinds": [
+        "image",
+        "text",
+        "file"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "file.bin.moe",
+      "setup": "none",
+      "verdict": "vpn-unreachable",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "timeout"
+      },
+      "register": {
+        "required": false,
+        "url": "https://file.bin.moe/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 已 addroute 翻墙路由，多轮测试仍不可达（timeout）→ 疑似服务已死或隧道丢包严重",
+      "verified": false
+    },
+    {
+      "id": "file.bin.moe (URL shortener)",
+      "name": "file.bin.moe (URL shortener)",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "file.bin.moe",
+      "setup": "none",
+      "verdict": "vpn-unreachable",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "timeout"
+      },
+      "register": {
+        "required": false,
+        "url": "https://file.bin.moe/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 已 addroute 翻墙路由，多轮测试仍不可达（timeout）→ 疑似服务已死或隧道丢包严重",
+      "verified": false
+    },
+    {
+      "id": "file.coffee",
+      "name": "file.coffee",
+      "kinds": [
+        "image",
+        "text",
+        "file"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "file.coffee",
+      "setup": "none",
+      "verdict": "vpn-reachable",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "reachable"
+      },
+      "register": {
+        "required": false,
+        "url": "https://file.coffee/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连失败（timeout）；翻墙路由后网络可达，但上传失败：[sxcu] no URL in response",
+      "verified": false
+    },
+    {
+      "id": "file.io",
+      "name": "file.io",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "file.io",
+      "setup": "none",
+      "verdict": "vpn-reachable",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "reachable"
+      },
+      "register": {
+        "required": false,
+        "url": "https://file.io/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连失败（timeout）；翻墙路由后网络可达，但上传失败：[sxcu] no URL in response",
+      "verified": false
+    },
+    {
+      "id": "file.wine",
+      "name": "file.wine",
+      "kinds": [
+        "image",
+        "text",
+        "file"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "file.wine",
+      "setup": "none",
+      "verdict": "vpn-unreachable",
+      "availability": {
+        "direct": "conn-reset",
+        "vpn": "timeout"
+      },
+      "register": {
+        "required": false,
+        "url": "https://file.wine/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 已 addroute 翻墙路由，多轮测试仍不可达（timeout）→ 疑似服务已死或隧道丢包严重",
+      "verified": false
+    },
+    {
+      "id": "file.wine (Random)",
+      "name": "file.wine (Random)",
+      "kinds": [
+        "image",
+        "text",
+        "file"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "https://$random:depressive.club|xpross.center|hypixel.party|send-me-more.cash|niggers.group|fuck-your.party|sharex.host|niggers.farm|niggers.cool|skidding-for.life|png.party|doxing.services|mojang.sucks|discord.sucks|pls-kill.me|hitler.cool|ariana-gran.de|wrist-sl.it|rape.horse|niggers.life|buy-a-nig.ga|hitler.ooo|dont-dox.me$/upload.php",
+      "setup": "none",
+      "verdict": "template",
+      "availability": {
+        "direct": "dns",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "note": "无需注册（模板/坏配置）"
+      },
+      "note": "sxcu 随机域名池全为失效梗域名 → 不可用",
+      "verified": false
+    },
+    {
+      "id": "files.httpreq.club",
+      "name": "files.httpreq.club",
+      "kinds": [
+        "image",
+        "text",
+        "file"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "files.httpreq.club",
+      "setup": "none",
+      "verdict": "dead",
+      "availability": {
+        "direct": "dns",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://files.httpreq.club/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 域名无 DNS 解析（网关 DNS 三次验证无 A 记录）→ 服务已死",
+      "verified": false
+    },
+    {
+      "id": "flomo",
+      "name": "Flomo",
+      "kinds": [
+        "text"
+      ],
+      "category": "archive",
+      "source": "aiti",
+      "domain": "",
+      "setup": "actually-needs-config",
+      "verdict": "needs-config",
+      "availability": {
+        "direct": "not-probed",
+        "vpn": "not-probed",
+        "registerPage": "reachable"
+      },
+      "register": {
+        "required": true,
+        "url": "https://flomoapp.com/mine?source=incoming_webhook",
+        "note": "PRO 会员功能：生成 webhook，取 iwh/ 后段为 webhook_id。"
+      },
+      "note": "Flomo webhook | flomo PRO 会员功能：入口 flomoapp.com/mine?source=incoming_webhook，生成 https://flomoapp.com/iwh/xxx 形式的 webhook，取最后一段为 webhook_id。",
+      "verified": false
+    },
+    {
+      "id": "framapic.org",
+      "name": "framapic.org",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "framapic.org",
+      "setup": "none",
+      "verdict": "cn-ok",
+      "availability": {
+        "direct": "ok",
+        "vpn": "not-probed"
+      },
+      "url": "https://framapic.org/",
+      "register": {
+        "required": false,
+        "url": "https://framapic.org/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连可用，但 返回首页 URL，Lutim 上传接口未验证/已变更",
+      "verified": false
+    },
+    {
+      "id": "fred.moe",
+      "name": "fred.moe",
+      "kinds": [
+        "image",
+        "text",
+        "file"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "fred.moe",
+      "setup": "none",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://fred.moe/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：[sxcu] 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></cen",
+      "verified": false
+    },
+    {
+      "id": "freeimage.host",
+      "name": "freeimage.host",
+      "kinds": [
+        "image"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "freeimage.host",
+      "setup": "none",
+      "verdict": "cn-ok",
+      "availability": {
+        "direct": "ok",
+        "vpn": "not-probed"
+      },
+      "url": "https://freeimage.host/api/1/upload",
+      "register": {
+        "required": false,
+        "url": "https://freeimage.host/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连可用，但 返回了请求 URL 而非图片地址，上传结果未验证（ShareX 公共 key 模式）",
+      "verified": false
+    },
+    {
+      "id": "fuck.it",
+      "name": "fuck.it",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "fuck.it",
+      "setup": "none",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://fuck.it/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：Request with GET/HEAD method cannot have body.",
+      "verified": false
+    },
+    {
+      "id": "fuwa.se",
+      "name": "fuwa.se",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "fuwa.se",
+      "setup": "none",
+      "verdict": "dead",
+      "availability": {
+        "direct": "dns",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://fuwa.se/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 域名无 DNS 解析（网关 DNS 三次验证无 A 记录）→ 服务已死",
+      "verified": false
+    },
+    {
+      "id": "git.io",
+      "name": "git.io",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "git.io",
+      "setup": "none",
+      "verdict": "dead",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "conn-reset"
+      },
+      "register": {
+        "required": false,
+        "url": "https://git.io/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | GitHub git.io 短链服务 2022 年已下线（404 Route not found）→ 服务已死",
+      "verified": false
+    },
+    {
+      "id": "glot.io (Anonymous)",
+      "name": "glot.io (Anonymous)",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "snippets.glot.io",
+      "setup": "none",
+      "verdict": "dead",
+      "availability": {
+        "direct": "dns",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://snippets.glot.io/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 域名无 DNS 解析（网关 DNS 三次验证无 A 记录）→ 服务已死",
+      "verified": false
+    },
+    {
+      "id": "glot.io (User)",
+      "name": "glot.io (User)",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "snippets.glot.io",
+      "setup": "none",
+      "verdict": "dead",
+      "availability": {
+        "direct": "dns",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://snippets.glot.io/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 域名无 DNS 解析（网关 DNS 三次验证无 A 记录）→ 服务已死",
+      "verified": false
+    },
+    {
+      "id": "gyazo.com",
+      "name": "gyazo.com",
+      "kinds": [
+        "image"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "upload.gyazo.com",
+      "setup": "actually-needs-config",
+      "verdict": "needs-config",
+      "availability": {
+        "direct": "not-probed",
+        "vpn": "not-probed",
+        "registerPage": "reachable"
+      },
+      "register": {
+        "required": true,
+        "url": "https://gyazo.com/",
+        "note": "需注册并申请 access token。"
+      },
+      "note": " | 注册 Gyazo 账号 → OAuth 应用页申请 access token。",
+      "verified": false
+    },
+    {
+      "id": "hnng.moe (File uploader)",
+      "name": "hnng.moe (File uploader)",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "www.hnng.moe",
+      "setup": "none",
+      "verdict": "dead",
+      "availability": {
+        "direct": "dns",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://www.hnng.moe/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 域名无 DNS 解析（网关 DNS 三次验证无 A 记录）→ 服务已死",
+      "verified": false
+    },
+    {
+      "id": "hnng.moe (URL shortener)",
+      "name": "hnng.moe (URL shortener)",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "www.hnng.moe",
+      "setup": "none",
+      "verdict": "dead",
+      "availability": {
+        "direct": "other",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://www.hnng.moe/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 域名无 DNS 解析（网关 DNS 三次验证无 A 记录）→ 服务已死",
+      "verified": false
+    },
+    {
+      "id": "i-am.a-virg.in",
+      "name": "i-am.a-virg.in",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "i-am.a-virg.in",
+      "setup": "none",
+      "verdict": "dead",
+      "availability": {
+        "direct": "dns",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://i-am.a-virg.in/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 域名无 DNS 解析（网关 DNS 三次验证无 A 记录）→ 服务已死",
+      "verified": false
+    },
+    {
+      "id": "imgchest.com",
+      "name": "imgchest.com",
+      "kinds": [
+        "image"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "api.imgchest.com",
+      "setup": "actually-needs-config",
+      "verdict": "cn-ok",
+      "availability": {
+        "direct": "ok",
+        "vpn": "not-probed"
+      },
+      "url": "https://imgchest.com/p/",
+      "register": {
+        "required": true,
+        "url": "https://imgchest.com/dashboard/api-keys",
+        "note": "API 需 Bearer token（sxcu 里为空）→ 实际需注册获取 API key。"
+      },
+      "note": " | 国内直连可用，但 URL 模板缺 id（sxcu Bearer 为空，实际需 API key）",
+      "verified": false
+    },
+    {
+      "id": "imgops.com",
+      "name": "imgops.com",
+      "kinds": [
+        "image"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "imgops.com",
+      "setup": "none",
+      "verdict": "vpn-ok",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "ok"
+      },
+      "url": "http://imgops.com/imgops.com/1hr-tempcache/userUploadTempCache_ip152.69.203.211_utc_20261118-160823_probe.png",
+      "register": {
+        "required": false,
+        "url": "https://imgops.com/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连失败（timeout），已 addroute 翻墙路由后真实上传验证通过",
+      "verified": true
+    },
+    {
+      "id": "imgup.net",
+      "name": "imgup.net",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "imgup.net",
+      "setup": "none",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://imgup.net/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：[sxcu] 409: {\"type\":\"https://developers.cloudflare.com/support/troubleshooting/http-status-codes/cloudflare-1x",
+      "verified": false
+    },
+    {
+      "id": "imgur.com",
+      "name": "imgur.com",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "imgur.com",
+      "setup": "actually-needs-config",
+      "verdict": "vpn-reachable",
+      "availability": {
+        "direct": "conn-reset",
+        "vpn": "reachable"
+      },
+      "register": {
+        "required": true,
+        "url": "https://imgur.com/register",
+        "note": "匿名 API 已返回 410 Gone：需注册账号并在 api.imgur.com 创建应用取 Client-ID。"
+      },
+      "note": " | 国内直连失败（conn-reset）；翻墙路由后网络可达，但上传失败：[sxcu] 410: HTTP 410",
+      "verified": false
+    },
+    {
+      "id": "itmages.ru",
+      "name": "itmages.ru",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "itmages.ru",
+      "setup": "none",
+      "verdict": "dead",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "dns"
+      },
+      "register": {
+        "required": false,
+        "url": "https://itmages.ru/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 域名无 DNS 解析（网关 DNS 三次验证无 A 记录）→ 服务已死",
+      "verified": false
+    },
+    {
+      "id": "itsosticky.com",
+      "name": "itsosticky.com",
+      "kinds": [
+        "image"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "itsosticky.com",
+      "setup": "none",
+      "verdict": "vpn-unreachable",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "timeout"
+      },
+      "register": {
+        "required": false,
+        "url": "https://itsosticky.com/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 已 addroute 翻墙路由，多轮测试仍不可达（timeout）→ 疑似服务已死或隧道丢包严重",
+      "verified": false
+    },
+    {
+      "id": "ix.io",
+      "name": "ix.io",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "ix.io",
+      "setup": "none",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://ix.io/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：[sxcu] no URL in response",
+      "verified": false
+    },
+    {
+      "id": "leo.immobilien",
+      "name": "leo.immobilien",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "leo.immobilien",
+      "setup": "none",
+      "verdict": "dead",
+      "availability": {
+        "direct": "dns",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://leo.immobilien/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 域名无 DNS 解析（网关 DNS 三次验证无 A 记录）→ 服务已死",
+      "verified": false
+    },
+    {
+      "id": "LessnMore",
+      "name": "LessnMore",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "https://[LessnMore instance URL]/-/",
+      "setup": "actually-needs-config",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": true,
+        "url": "",
+        "note": "自建 LessnMore 实例 + API key（sxcu 占位 URL）。"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：Failed to parse URL from https://[LessnMore instance URL]/-/?api=%5BAPI+KEY%5D&url=aiti+content-share+connecti",
+      "verified": false
+    },
+    {
+      "id": "lewd.pics",
+      "name": "lewd.pics",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "lewd.pics",
+      "setup": "none",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://lewd.pics/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：[sxcu] no URL in response",
+      "verified": false
+    },
+    {
+      "id": "lewd.se",
+      "name": "lewd.se",
+      "kinds": [
+        "image",
+        "text",
+        "file"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "lewd.se",
+      "setup": "none",
+      "verdict": "vpn-unreachable",
+      "availability": {
+        "direct": "conn-reset",
+        "vpn": "timeout"
+      },
+      "register": {
+        "required": false,
+        "url": "https://lewd.se/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 已 addroute 翻墙路由，多轮测试仍不可达（timeout）→ 疑似服务已死或隧道丢包严重",
+      "verified": false
+    },
+    {
+      "id": "lookpic.com",
+      "name": "lookpic.com",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "lookpic.com",
+      "setup": "none",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://lookpic.com/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：[sxcu] no URL in response",
+      "verified": false
+    },
+    {
+      "id": "lut.im",
+      "name": "lut.im",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "lut.im",
+      "setup": "none",
+      "verdict": "vpn-unreachable",
+      "availability": {
+        "direct": "tls",
+        "vpn": "tls"
+      },
+      "register": {
+        "required": false,
+        "url": "https://lut.im/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 已 addroute 翻墙路由，多轮测试仍不可达（tls）→ 疑似服务已死或隧道丢包严重",
+      "verified": false
+    },
+    {
+      "id": "magaimg.net",
+      "name": "magaimg.net",
+      "kinds": [
+        "image"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "magaimg.net",
+      "setup": "none",
+      "verdict": "dead",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "dns"
+      },
+      "register": {
+        "required": false,
+        "url": "https://magaimg.net/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 域名无 DNS 解析（网关 DNS 三次验证无 A 记录）→ 服务已死",
+      "verified": false
+    },
+    {
+      "id": "miyako.xyz",
+      "name": "miyako.xyz",
+      "kinds": [
+        "image",
+        "text",
+        "file"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "miyako.xyz",
+      "setup": "none",
+      "verdict": "vpn-reachable",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "reachable"
+      },
+      "register": {
+        "required": false,
+        "url": "https://miyako.xyz/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连失败（timeout）；翻墙路由后网络可达，但上传失败：[sxcu] 405: HTTP 405",
+      "verified": false
+    },
+    {
+      "id": "myfile.org",
+      "name": "myfile.org",
+      "kinds": [
+        "file"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "myfile.org",
+      "setup": "none",
+      "verdict": "vpn-reachable",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "reachable"
+      },
+      "register": {
+        "required": false,
+        "url": "https://myfile.org/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连失败（timeout）；翻墙路由后网络可达，但上传失败：[sxcu] 404: HTTP 404",
+      "verified": false
+    },
+    {
+      "id": "needsmorejpeg.com",
+      "name": "needsmorejpeg.com",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "needsmorejpeg.com",
+      "setup": "none",
+      "verdict": "vpn-reachable",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "reachable"
+      },
+      "register": {
+        "required": false,
+        "url": "https://needsmorejpeg.com/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连失败（timeout）；翻墙路由后网络可达，但上传失败：[sxcu] 405: Something went wrong.",
+      "verified": false
+    },
+    {
+      "id": "oshi.at",
+      "name": "oshi.at",
+      "kinds": [
+        "image",
+        "text",
+        "file"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "oshi.at",
+      "setup": "none",
+      "verdict": "vpn-unreachable",
+      "availability": {
+        "direct": "tls",
+        "vpn": "tls"
+      },
+      "register": {
+        "required": false,
+        "url": "https://oshi.at/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 已 addroute 翻墙路由，多轮测试仍不可达（tls）→ 疑似服务已死或隧道丢包严重",
+      "verified": false
+    },
+    {
+      "id": "owo.vc",
+      "name": "owo.vc",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "owo.vc",
+      "setup": "none",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://owo.vc/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：[sxcu] 404: {\"message\":\"Route POST:/generate not found\",\"error\":\"Not Found\",\"statusCode\":404}",
+      "verified": false
+    },
+    {
+      "id": "p.ip.fi",
+      "name": "p.ip.fi",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "p.ip.fi",
+      "setup": "none",
+      "verdict": "cn-ok",
+      "availability": {
+        "direct": "ok",
+        "vpn": "not-probed"
+      },
+      "url": "http://p.ip.fi/AzLr",
+      "register": {
+        "required": false,
+        "url": "https://p.ip.fi/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连可用，真实上传验证通过",
+      "verified": true
+    },
+    {
+      "id": "paste.kde.org (Sticky Notes)",
+      "name": "paste.kde.org (Sticky Notes)",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "paste.kde.org",
+      "setup": "none",
+      "verdict": "cn-ok",
+      "availability": {
+        "direct": "ok",
+        "vpn": "not-probed"
+      },
+      "url": "https://paste.kde.org//",
+      "register": {
+        "required": false,
+        "url": "https://paste.kde.org/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连可用，但 api/json/create 返回空，API 已变更",
+      "verified": false
+    },
+    {
+      "id": "paste.scratchbook.ch (Stikked)",
+      "name": "paste.scratchbook.ch (Stikked)",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "paste.scratchbook.ch",
+      "setup": "none",
+      "verdict": "vpn-unreachable",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "timeout"
+      },
+      "register": {
+        "required": false,
+        "url": "https://paste.scratchbook.ch/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 已 addroute 翻墙路由，多轮测试仍不可达（timeout）→ 疑似服务已死或隧道丢包严重",
+      "verified": false
+    },
+    {
+      "id": "paste.ubuntu.com",
+      "name": "paste.ubuntu.com",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "paste.ubuntu.com",
+      "setup": "none",
+      "verdict": "vpn-unreachable",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "timeout"
+      },
+      "register": {
+        "required": false,
+        "url": "https://paste.ubuntu.com/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 已 addroute 翻墙路由，多轮测试仍不可达（timeout）→ 疑似服务已死或隧道丢包严重",
+      "verified": false
+    },
+    {
+      "id": "pasteboard.co",
+      "name": "pasteboard.co",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "pasteboard.co",
+      "setup": "none",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://pasteboard.co/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：[sxcu] 404: Server action not found.",
+      "verified": false
+    },
+    {
+      "id": "pastefy.ga",
+      "name": "pastefy.ga",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "pastefy.ga",
+      "setup": "none",
+      "verdict": "cn-ok",
+      "availability": {
+        "direct": "ok",
+        "vpn": "not-probed"
+      },
+      "url": "https://pastefy.ga/",
+      "register": {
+        "required": false,
+        "url": "https://pastefy.ga/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连可用，但 /create:paste 返回 HTML 首页（API 已迁 /api/v2/paste），sxcu 过时",
+      "verified": false
+    },
+    {
+      "id": "pi.gy",
+      "name": "pi.gy",
+      "kinds": [
+        "image"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "pi.gy",
+      "setup": "none",
+      "verdict": "dead",
+      "availability": {
+        "direct": "dns",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://pi.gy/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 域名无 DNS 解析（网关 DNS 三次验证无 A 记录）→ 服务已死",
+      "verified": false
+    },
+    {
+      "id": "pictshare.net",
+      "name": "pictshare.net",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "pictshare.net",
+      "setup": "none",
+      "verdict": "vpn-ok",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "ok"
+      },
+      "url": "http://www.pictshare.net/",
+      "register": {
+        "required": false,
+        "url": "https://pictshare.net/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连失败（timeout），已 addroute 翻墙路由后真实上传验证通过",
+      "verified": true
+    },
+    {
+      "id": "pixeldrain.com",
+      "name": "pixeldrain.com",
+      "kinds": [
+        "image",
+        "text",
+        "file"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "pixeldrain.com",
+      "setup": "none",
+      "verdict": "vpn-reachable",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "reachable"
+      },
+      "register": {
+        "required": false,
+        "url": "https://pixeldrain.com/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连失败（timeout）；翻墙路由后网络可达，但上传失败：[sxcu] 401: {\"success\":false,\"value\":\"authentication_required\",\"message\":\"This request requires API ",
+      "verified": false
+    },
+    {
+      "id": "pnsh.ga",
+      "name": "pnsh.ga",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "pnsh.ga",
+      "setup": "none",
+      "verdict": "dead",
+      "availability": {
+        "direct": "dns",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://pnsh.ga/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 域名无 DNS 解析（网关 DNS 三次验证无 A 记录）→ 服务已死",
+      "verified": false
+    },
+    {
+      "id": "pomf.pl",
+      "name": "pomf.pl",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "pomf.pl",
+      "setup": "none",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://pomf.pl/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：[sxcu] 405: <html>\r\n<head><title>405 Not Allowed</title></head>\r\n<body>\r\n<center><h1>405 Not Allowed</h1></cen",
+      "verified": false
+    },
+    {
+      "id": "pomf.se",
+      "name": "pomf.se",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "pomf.se",
+      "setup": "none",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://pomf.se/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：[sxcu] 404: <html>\r\n<head><title>404 Not Found</title></head>\r\n<body>\r\n<center><h1>404 Not Found</h1></center>",
+      "verified": false
+    },
+    {
+      "id": "prntscr.com",
+      "name": "prntscr.com",
+      "kinds": [
+        "image"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "prntscr.com",
+      "setup": "none",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://prntscr.com/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：[sxcu] 403: <!DOCTYPE html><html lang=\"en-US\"><head><title>Just a moment...</title><meta http-equiv=\"Content-T",
+      "verified": false
+    },
+    {
+      "id": "ptpimg.me",
+      "name": "ptpimg.me",
+      "kinds": [
+        "image"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "ptpimg.me",
+      "setup": "none",
+      "verdict": "vpn-reachable",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "reachable"
+      },
+      "register": {
+        "required": false,
+        "url": "https://ptpimg.me/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连失败（timeout）；翻墙路由后网络可达，但上传失败：[sxcu] 500: HTTP 500",
+      "verified": false
+    },
+    {
+      "id": "put.nu",
+      "name": "put.nu",
+      "kinds": [
+        "image",
+        "text",
+        "file"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "put.nu",
+      "setup": "none",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://put.nu/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：[sxcu] no URL in response",
+      "verified": false
+    },
+    {
+      "id": "put.re",
+      "name": "put.re",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "api.put.re",
+      "setup": "none",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://api.put.re/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：[put.re] 500: {\n  \"status\": \"error\",\n  \"message\": \"No files found\"\n}",
+      "verified": false
+    },
+    {
+      "id": "put.tf",
+      "name": "put.tf",
+      "kinds": [
+        "image",
+        "text",
+        "file"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "api.put.tf",
+      "setup": "none",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://api.put.tf/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：[put.tf] 404: not found",
+      "verified": false
+    },
+    {
+      "id": "puush.me",
+      "name": "puush.me",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "puush.me",
+      "setup": "actually-needs-config",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": true,
+        "url": "https://puush.me/",
+        "note": "需注册并获取 API key（响应无 URL → key 缺失）。"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：[sxcu] no URL in response",
+      "verified": false
+    },
+    {
+      "id": "questionable.link",
+      "name": "questionable.link",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "questionable.link",
+      "setup": "none",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://questionable.link/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：[sxcu] 404: <html>\r\n<head><title>404 Not Found</title></head>\r\n<body>\r\n<center><h1>404 Not Found</h1></center>",
+      "verified": false
+    },
+    {
+      "id": "ratelimited.me",
+      "name": "ratelimited.me",
+      "kinds": [
+        "image",
+        "text",
+        "file"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "api.ratelimited.me",
+      "setup": "none",
+      "verdict": "dead",
+      "availability": {
+        "direct": "dns",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://api.ratelimited.me/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 域名无 DNS 解析（网关 DNS 三次验证无 A 记录）→ 服务已死",
+      "verified": false
+    },
+    {
+      "id": "ratelimited.me (Random)",
+      "name": "ratelimited.me (Random)",
+      "kinds": [
+        "image",
+        "text",
+        "file"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "api.ratelimited.me",
+      "setup": "none",
+      "verdict": "dead",
+      "availability": {
+        "direct": "dns",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://api.ratelimited.me/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 域名无 DNS 解析（网关 DNS 三次验证无 A 记录）→ 服务已死",
+      "verified": false
+    },
+    {
+      "id": "rebrandly.com",
+      "name": "rebrandly.com",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "api.rebrandly.com",
+      "setup": "actually-needs-config",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": true,
+        "url": "https://app.rebrandly.com/api-keys",
+        "note": "401 Unauthorized → 需注册后创建 API key。"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：[rebrandly.com] 401: Unauthorized",
+      "verified": false
+    },
+    {
+      "id": "rentry",
+      "name": "Rentry",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "aiti",
+      "domain": "rentry.co",
+      "setup": "none",
+      "verdict": "vpn-ok",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "ok"
+      },
+      "url": "https://rentry.co/8ivtgxe7",
+      "register": {
+        "required": false,
+        "url": "https://rentry.co/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": "Anonymous; may require browser cookie | 国内直连失败（timeout），已 addroute 翻墙路由后真实上传验证通过",
+      "verified": true
+    },
+    {
+      "id": "sadder.xyz",
+      "name": "sadder.wtf",
+      "kinds": [
+        "image",
+        "text",
+        "file"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "",
+      "setup": "none",
+      "verdict": "template",
+      "availability": {
+        "direct": "dns",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "note": "无需注册（模板/坏配置）"
+      },
+      "note": "sxcu 无 RequestURL（配置损坏）",
+      "verified": false
+    },
+    {
+      "id": "screenshotting.site",
+      "name": "screenshotting.site",
+      "kinds": [
+        "image"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "screenshotting.site",
+      "setup": "none",
+      "verdict": "vpn-unreachable",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "timeout"
+      },
+      "register": {
+        "required": false,
+        "url": "https://screenshotting.site/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 已 addroute 翻墙路由，多轮测试仍不可达（timeout）→ 疑似服务已死或隧道丢包严重",
+      "verified": false
+    },
+    {
+      "id": "short.io",
+      "name": "short.io",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "api.short.io",
+      "setup": "actually-needs-config",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": true,
+        "url": "https://app.short.io/settings/integrations/api-key",
+        "note": "401 → 需注册后创建 API key。"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：[short.io] 401: {\"message\":\"Unauthorized\",\"statusCode\":401,\"success\":false}",
+      "verified": false
+    },
+    {
+      "id": "shtn.pw",
+      "name": "shtn.pw",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "shtn.pw",
+      "setup": "none",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://shtn.pw/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：Request with GET/HEAD method cannot have body.",
+      "verified": false
+    },
+    {
+      "id": "sm.ms",
+      "name": "sm.ms",
+      "kinds": [
+        "image"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "sm.ms",
+      "setup": "none",
+      "verdict": "vpn-reachable",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "reachable"
+      },
+      "register": {
+        "required": false,
+        "url": "https://sm.ms/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连失败（timeout）；翻墙路由后网络可达，但上传失败：[sxcu] 401: {\"code\":-1,\"message\":\"Unauthorized\",\"data\":\"\"}",
+      "verified": false
+    },
+    {
+      "id": "sr.ht",
+      "name": "sr.ht",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "sr.ht",
+      "setup": "none",
+      "verdict": "vpn-reachable",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "reachable"
+      },
+      "register": {
+        "required": false,
+        "url": "https://sr.ht/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连失败（timeout）；翻墙路由后网络可达，但上传失败：[sxcu] 404: {\"errors\": [{\"reason\": \"404 not found\"}]}",
+      "verified": false
+    },
+    {
+      "id": "starfiles.co",
+      "name": "starfiles.co",
+      "kinds": [
+        "image",
+        "text",
+        "file"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "api.starfiles.co",
+      "setup": "none",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://api.starfiles.co/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：[starfiles.co] 404: <html>\r\n<head><title>404 Not Found</title></head>\r\n<body>\r\n<center><h1>404 Not Found</h1><",
+      "verified": false
+    },
+    {
+      "id": "stepload.de",
+      "name": "stepload.de",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "stepload.de",
+      "setup": "none",
+      "verdict": "vpn-unreachable",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "timeout"
+      },
+      "register": {
+        "required": false,
+        "url": "https://stepload.de/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 已 addroute 翻墙路由，多轮测试仍不可达（timeout）→ 疑似服务已死或隧道丢包严重",
+      "verified": false
+    },
+    {
+      "id": "teknik.io (File uploader)",
+      "name": "teknik.io (File uploader)",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "api.teknik.io",
+      "setup": "none",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://api.teknik.io/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：[teknik.io (File uploader)] 404: <!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/T",
+      "verified": false
+    },
+    {
+      "id": "teknik.io (Text uploader)",
+      "name": "teknik.io (Text uploader)",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "api.teknik.io",
+      "setup": "none",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://api.teknik.io/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：[teknik.io (Text uploader)] 404: <!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/T",
+      "verified": false
+    },
+    {
+      "id": "teknik.io (URL shortener)",
+      "name": "teknik.io (URL shortener)",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "api.teknik.io",
+      "setup": "none",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://api.teknik.io/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：[teknik.io (URL shortener)] 404: <!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\" \"http://www.w3.org/T",
+      "verified": false
+    },
+    {
+      "id": "telegra.ph",
+      "name": "telegra.ph",
+      "kinds": [
+        "image"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "telegra.ph",
+      "setup": "none",
+      "verdict": "vpn-reachable",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "reachable"
+      },
+      "register": {
+        "required": false,
+        "url": "https://telegra.ph/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连失败（timeout）；翻墙路由后网络可达，但上传失败：[sxcu] 400: \"Unknown error\"",
+      "verified": false
+    },
+    {
+      "id": "temp.sh",
+      "name": "temp.sh",
+      "kinds": [
+        "file"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "temp.sh",
+      "setup": "none",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://temp.sh/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：[sxcu] 400: <!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 3.2 Final//EN\">\n<title>400 Bad Request</title>\n<h1>Bad Req",
+      "verified": false
+    },
+    {
+      "id": "tietuku.com",
+      "name": "tietuku.com",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "up.tietuku.com",
+      "setup": "none",
+      "verdict": "dead",
+      "availability": {
+        "direct": "dns",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://up.tietuku.com/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 域名无 DNS 解析（网关 DNS 三次验证无 A 记录）→ 服务已死",
+      "verified": false
+    },
+    {
+      "id": "tineye.com",
+      "name": "tineye.com",
+      "kinds": [
+        "image"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "www.tineye.com",
+      "setup": "none",
+      "verdict": "vpn-reachable",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "reachable"
+      },
+      "register": {
+        "required": false,
+        "url": "https://www.tineye.com/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连失败（timeout）；翻墙路由后网络可达，但上传失败：[sxcu] 403: <!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"utf-8\" />\n    <meta http-eq",
+      "verified": false
+    },
+    {
+      "id": "tinyimg.io",
+      "name": "tinyimg.io",
+      "kinds": [
+        "image"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "tinyimg.io",
+      "setup": "none",
+      "verdict": "vpn-reachable",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "reachable"
+      },
+      "register": {
+        "required": false,
+        "url": "https://tinyimg.io/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连失败（timeout）；翻墙路由后网络可达，但上传失败：[sxcu] 405: HTTP 405",
+      "verified": false
+    },
+    {
+      "id": "tinyurl.com",
+      "name": "tinyurl.com",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "tinyurl.com",
+      "setup": "none",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://tinyurl.com/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：Request with GET/HEAD method cannot have body.",
+      "verified": false
+    },
+    {
+      "id": "tmpfiles.org",
+      "name": "tmpfiles.org",
+      "kinds": [
+        "file"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "tmpfiles.org",
+      "setup": "none",
+      "verdict": "vpn-reachable",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "reachable"
+      },
+      "register": {
+        "required": false,
+        "url": "https://tmpfiles.org/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连失败（timeout）；翻墙路由后网络可达，但上传失败：[sxcu] 419: <!DOCTYPE html>\n<html lang=\"en\">\n    <head>\n        <meta charset=\"utf-8\">\n        <meta",
+      "verified": false
+    },
+    {
+      "id": "tny.im (w Keyword)",
+      "name": "tny.im (w Keyword)",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "tny.im",
+      "setup": "none",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://tny.im/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：Request with GET/HEAD method cannot have body.",
+      "verified": false
+    },
+    {
+      "id": "ttm.sh (File uploader)",
+      "name": "ttm.sh (File uploader)",
+      "kinds": [
+        "image",
+        "text",
+        "file"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "ttm.sh",
+      "setup": "none",
+      "verdict": "vpn-unreachable",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "timeout"
+      },
+      "register": {
+        "required": false,
+        "url": "https://ttm.sh/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 已 addroute 翻墙路由，多轮测试仍不可达（timeout）→ 疑似服务已死或隧道丢包严重",
+      "verified": false
+    },
+    {
+      "id": "ttm.sh (URL shortener)",
+      "name": "ttm.sh (URL shortener)",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "ttm.sh",
+      "setup": "none",
+      "verdict": "vpn-unreachable",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "timeout"
+      },
+      "register": {
+        "required": false,
+        "url": "https://ttm.sh/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 已 addroute 翻墙路由，多轮测试仍不可达（timeout）→ 疑似服务已死或隧道丢包严重",
+      "verified": false
+    },
+    {
+      "id": "txti.es",
+      "name": "txti.es",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "txti.es",
+      "setup": "none",
+      "verdict": "vpn-reachable",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "reachable"
+      },
+      "register": {
+        "required": false,
+        "url": "https://txti.es/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连失败（timeout）；翻墙路由后网络可达，但上传失败：[sxcu] no URL in response",
+      "verified": false
+    },
+    {
+      "id": "unsee.cc",
+      "name": "unsee.cc",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "unsee.cc",
+      "setup": "none",
+      "verdict": "dead",
+      "availability": {
+        "direct": "dns",
+        "vpn": "dns"
+      },
+      "register": {
+        "required": false,
+        "url": "https://unsee.cc/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 域名无 DNS 解析（网关 DNS 三次验证无 A 记录）→ 服务已死",
+      "verified": false
+    },
+    {
+      "id": "unserialize.com",
+      "name": "unserialize.com",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "www.unserialize.com",
+      "setup": "none",
+      "verdict": "vpn-ok",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "ok"
+      },
+      "url": "https://www.unserialize.com/",
+      "register": {
+        "required": false,
+        "url": "https://www.unserialize.com/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连失败（timeout），已 addroute 翻墙路由后真实上传验证通过",
+      "verified": true
+    },
+    {
+      "id": "up.vidyagam.es",
+      "name": "up.vidyagam.es",
+      "kinds": [
+        "image",
+        "text",
+        "file"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "up.vidyagam.es",
+      "setup": "none",
+      "verdict": "dead",
+      "availability": {
+        "direct": "dns",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://up.vidyagam.es/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 域名无 DNS 解析（网关 DNS 三次验证无 A 记录）→ 服务已死",
+      "verified": false
+    },
+    {
+      "id": "up2sha.re (User)",
+      "name": "up2sha.re (User)",
+      "kinds": [
+        "image",
+        "text",
+        "file"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "api.up2sha.re",
+      "setup": "actually-needs-config",
+      "verdict": "vpn-reachable",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "reachable"
+      },
+      "register": {
+        "required": true,
+        "url": "https://up2sha.re/",
+        "note": "User 版需要注册 token。"
+      },
+      "note": " | 国内直连失败（timeout）；翻墙路由后网络可达，但上传失败：[up2sha.re (User)] 401: {\"error\":\"Unauthorized\"}",
+      "verified": false
+    },
+    {
+      "id": "upl.io",
+      "name": "upl.io",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "upl.io",
+      "setup": "none",
+      "verdict": "vpn-reachable",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "reachable"
+      },
+      "register": {
+        "required": false,
+        "url": "https://upl.io/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连失败（timeout）；翻墙路由后网络可达，但上传失败：[sxcu] no URL in response",
+      "verified": false
+    },
+    {
+      "id": "uploadfiles.io",
+      "name": "uploadfiles.io",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "up.uploadfiles.io",
+      "setup": "none",
+      "verdict": "dead",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://up.uploadfiles.io/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 域名无 DNS 解析（网关 DNS 三次验证无 A 记录）→ 服务已死",
+      "verified": false
+    },
+    {
+      "id": "uploadpie.com",
+      "name": "uploadpie.com",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "uploadpie.com",
+      "setup": "none",
+      "verdict": "vpn-reachable",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "reachable"
+      },
+      "register": {
+        "required": false,
+        "url": "https://uploadpie.com/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连失败（timeout）；翻墙路由后网络可达，但上传失败：[sxcu] 405: <!DOCTYPE html><html lang=\"en\"><head><title>Upload Pie - Rest in pie</title><link rel=\"i",
+      "verified": false
+    },
+    {
+      "id": "urlify.dev",
+      "name": "urlify.dev",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "urlify.dev",
+      "setup": "none",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://urlify.dev/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：[sxcu] 404: <!DOCTYPE html><html lang=\"en-US\"><head><meta charSet=\"utf-8\"/><meta http-equiv=\"X-UA-Compatible\" ",
+      "verified": false
+    },
+    {
+      "id": "vee.gg",
+      "name": "vee.gg",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "vee.gg",
+      "setup": "none",
+      "verdict": "vpn-ok",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "ok"
+      },
+      "url": "https://vee.gg/",
+      "register": {
+        "required": false,
+        "url": "https://vee.gg/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连失败（timeout），已 addroute 翻墙路由后真实上传验证通过",
+      "verified": true
+    },
+    {
+      "id": "verylegit.link",
+      "name": "verylegit.link",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "verylegit.link",
+      "setup": "none",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://verylegit.link/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：[sxcu] 503: \n<html><head>\n<meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\">\n<title>503 Server",
+      "verified": false
+    },
+    {
+      "id": "vocaroo.com",
+      "name": "vocaroo.com",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "s1.vocaroo.com",
+      "setup": "none",
+      "verdict": "dead",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "dns"
+      },
+      "register": {
+        "required": false,
+        "url": "https://s1.vocaroo.com/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 域名无 DNS 解析（网关 DNS 三次验证无 A 记录）→ 服务已死",
+      "verified": false
+    },
+    {
+      "id": "waa.ai",
+      "name": "waa.ai",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "api.waa.ai",
+      "setup": "none",
+      "verdict": "vpn-reachable",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "reachable"
+      },
+      "register": {
+        "required": false,
+        "url": "https://api.waa.ai/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连失败（timeout）；翻墙路由后网络可达，但上传失败：[waa.ai] 404: {\"message\":\"Cannot POST /api/shorten\",\"error\":\"Not Found\",\"statusCode\":404}",
+      "verified": false
+    },
+    {
+      "id": "whats-th.is",
+      "name": "whats-th.is",
+      "kinds": [
+        "image",
+        "text",
+        "file"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "api.awau.moe",
+      "setup": "actually-needs-config",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": true,
+        "url": "https://aussiebb.xyz/",
+        "note": "401 bad token → 需要该服务 token（社区运营，注册入口不稳定）。"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：[whats-th.is] 401: {\"success\":false,\"errorcode\":401,\"description\":\"bad token\"}\n",
+      "verified": false
+    },
+    {
+      "id": "whats-th.is (Random)",
+      "name": "whats-th.is (Random)",
+      "kinds": [
+        "image",
+        "text",
+        "file"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "api.awau.moe",
+      "setup": "none",
+      "verdict": "vpn-reachable",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "reachable"
+      },
+      "register": {
+        "required": false,
+        "url": "https://api.awau.moe/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连失败（timeout）；翻墙路由后网络可达，但上传失败：[whats-th.is (Random)] 401: {\"success\":false,\"errorcode\":401,\"description\":\"bad token\"}\n",
+      "verified": false
+    },
+    {
+      "id": "whats-th.is (URL shortener)",
+      "name": "whats-th.is (URL shortener)",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "api.awau.moe",
+      "setup": "none",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://api.awau.moe/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：Request with GET/HEAD method cannot have body.",
+      "verified": false
+    },
+    {
+      "id": "why-am-i-he.re",
+      "name": "why-am-i-he.re",
+      "kinds": [
+        "image"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "why-am-i-he.re",
+      "setup": "none",
+      "verdict": "dead",
+      "availability": {
+        "direct": "dns",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://why-am-i-he.re/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 域名无 DNS 解析（网关 DNS 三次验证无 A 记录）→ 服务已死",
+      "verified": false
+    },
+    {
+      "id": "write.as",
+      "name": "write.as",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "write.as",
+      "setup": "none",
+      "verdict": "vpn-ok",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "ok"
+      },
+      "url": "https://write.as/ghhznv92aw1mr",
+      "register": {
+        "required": false,
+        "url": "https://write.as/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连失败（timeout），已 addroute 翻墙路由后真实上传验证通过",
+      "verified": true
+    },
+    {
+      "id": "x0.at",
+      "name": "x0.at",
+      "kinds": [
+        "image",
+        "file"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "x0.at",
+      "setup": "none",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://x0.at/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：[sxcu] 403: 403 Forbidden Your IP is banned from uploading.",
+      "verified": false
+    },
+    {
+      "id": "yabumi.cc",
+      "name": "yabumi.cc",
+      "kinds": [
+        "image"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "yabumi.cc",
+      "setup": "none",
+      "verdict": "vpn-reachable",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "reachable"
+      },
+      "register": {
+        "required": false,
+        "url": "https://yabumi.cc/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连失败（timeout）；翻墙路由后网络可达，但上传失败：[sxcu] 405: <html>\n<head><title>405 Not Allowed</title></head>\n<body bgcolor=\"white\">\n<center><h1>40",
+      "verified": false
+    },
+    {
+      "id": "yandex.com",
+      "name": "yandex.com",
+      "kinds": [
+        "image"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "yandex.com",
+      "setup": "none",
+      "verdict": "cn-ok",
+      "availability": {
+        "direct": "ok",
+        "vpn": "not-probed"
+      },
+      "url": "https://yandex.com/images/search?",
+      "register": {
+        "required": false,
+        "url": "https://yandex.com/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连可用，但 语义为以图搜图（返回搜索 URL），非存储型分享",
+      "verified": false
+    },
+    {
+      "id": "yourls.org",
+      "name": "yourls.org",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "yourls.org",
+      "setup": "none",
+      "verdict": "vpn-reachable",
+      "availability": {
+        "direct": "timeout",
+        "vpn": "reachable"
+      },
+      "register": {
+        "required": false,
+        "url": "https://yourls.org/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连失败（timeout）；翻墙路由后网络可达，但上传失败：[sxcu] 403: <?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<root><message>Please log in</message><errorCode>",
+      "verified": false
+    },
+    {
+      "id": "zippyshare.com",
+      "name": "zippyshare.com",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "www40.zippyshare.com",
+      "setup": "none",
+      "verdict": "vpn-reachable",
+      "availability": {
+        "direct": "conn-reset",
+        "vpn": "reachable"
+      },
+      "register": {
+        "required": false,
+        "url": "https://www40.zippyshare.com/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连失败（conn-reset）；翻墙路由后网络可达，但上传失败：[zippyshare.com] 404: <html>\r\n<head><title>404 Not Found</title></head>\r\n<body>\r\n<center><h1>404 Not",
+      "verified": false
+    },
+    {
+      "id": "zws.im",
+      "name": "zws.im",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "source": "sharex",
+      "domain": "us-central1-zero-width-shortener.cloudfunctions.net",
+      "setup": "none",
+      "verdict": "cn-reachable-broken",
+      "availability": {
+        "direct": "reachable",
+        "vpn": "not-probed"
+      },
+      "register": {
+        "required": false,
+        "url": "https://us-central1-zero-width-shortener.cloudfunctions.net/",
+        "note": "无需注册（匿名上传）"
+      },
+      "note": " | 国内直连网络可达，但上传失败（服务/API/配置异常）：Request with GET/HEAD method cannot have body.",
+      "verified": false
+    }
+  ],
+  "setupProviders": [
+    {
+      "id": "aliyun-oss",
+      "name": "Alibaba Cloud OSS",
+      "kinds": [
+        "text",
+        "image",
+        "file"
+      ],
+      "category": "publish",
+      "skipReason": "auth=key",
+      "register": {
+        "required": true,
+        "url": "https://www.aliyun.com",
+        "token": "https://ram.console.aliyun.com/manage/ak",
+        "cnReachable": true,
+        "note": "注册阿里云 → OSS 开通并创建 bucket → RAM 创建 AccessKey → 配置 accessKeyId/AccessKeySecret/bucket/endpoint。"
+      }
+    },
+    {
+      "id": "gitee-gist",
+      "name": "Gitee Snippet",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "skipReason": "auth=token",
+      "register": {
+        "required": true,
+        "url": "https://gitee.com/signup",
+        "token": "https://gitee.com/profile/personal_access_tokens",
+        "cnReachable": true,
+        "note": "注册 Gitee 账号 → 个人设置→私人令牌，勾选 gists 权限生成 token。"
+      }
+    },
+    {
+      "id": "imgbb.com",
+      "name": "imgbb.com",
+      "kinds": [
+        "image"
+      ],
+      "category": "publish",
+      "skipReason": "auth=token",
+      "register": {
+        "required": true,
+        "url": "https://imgbb.com/signup",
+        "token": "https://api.imgbb.com/",
+        "cnReachable": true,
+        "note": "注册免费账号 → api.imgbb.com 登录后点 Get API key。"
+      }
+    },
+    {
+      "id": "local-link",
+      "name": "Local link",
+      "kinds": [
+        "text",
+        "image",
+        "file"
+      ],
+      "category": "local",
+      "skipReason": "本地链接（无网络）",
+      "register": {
+        "required": true,
+        "note": "本机/自建服务，无公共注册"
+      }
+    },
+    {
+      "id": "lsky-pro",
+      "name": "Lsky Pro",
+      "kinds": [
+        "image"
+      ],
+      "category": "publish",
+      "skipReason": "auth=token",
+      "register": {
+        "required": true,
+        "url": "https://www.lsky.pro",
+        "cnReachable": true,
+        "note": "Lsky Pro 是自建/公益图床系统：在所选实例注册账号 → 个人设置生成 API token（V2 接口）。"
+      }
+    },
+    {
+      "id": "0x0.st (Image uploader)",
+      "name": "0x0.st (Image uploader)",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "skipReason": "status=legacy",
+      "register": {
+        "required": false,
+        "note": "本机/自建服务，无公共注册"
+      }
+    },
+    {
+      "id": "api.anonfiles.com",
+      "name": "api.anonfiles.com",
+      "kinds": [
+        "image",
+        "text",
+        "file"
+      ],
+      "category": "publish",
+      "skipReason": "status=dead（服务已停）",
+      "register": {
+        "required": false,
+        "note": "本机/自建服务，无公共注册"
+      }
+    },
+    {
+      "id": "joplin",
+      "name": "Joplin",
+      "kinds": [
+        "text"
+      ],
+      "category": "archive",
+      "skipReason": "auth=token",
+      "register": {
+        "required": true,
+        "url": "https://joplinapp.org",
+        "cnReachable": true,
+        "note": "自建 Joplin Server / Joplin Cloud：无公共注册，配置自己实例的 base URL + API token。"
+      }
+    },
+    {
+      "id": "memos",
+      "name": "Memos",
+      "kinds": [
+        "text"
+      ],
+      "category": "archive",
+      "skipReason": "auth=token",
+      "register": {
+        "required": true,
+        "url": "https://github.com/usememos/memos",
+        "cnReachable": true,
+        "note": "自建 memos 实例：实例内注册账号 → 设置里创建 Access Token。"
+      }
+    },
+    {
+      "id": "obsidian-local-rest",
+      "name": "Obsidian Local REST",
+      "kinds": [
+        "text"
+      ],
+      "category": "archive",
+      "skipReason": "auth=token",
+      "register": {
+        "required": true,
+        "url": "https://github.com/coddingtonbear/obsidian-local-rest-api",
+        "cnReachable": true,
+        "note": "本机 Obsidian 安装 Local REST API 插件 → 插件设置里取 API key。"
+      }
+    },
+    {
+      "id": "pastebin",
+      "name": "Pastebin",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "skipReason": "auth=token",
+      "register": {
+        "required": true,
+        "url": "https://pastebin.com/signup",
+        "token": "https://pastebin.com/doc_api",
+        "cnReachable": false,
+        "note": "注册账号（免费会员登录后即在 API 页可见 api_dev_key；部分高级功能限 PRO）。站点被墙，需翻墙访问。"
+      }
+    },
+    {
+      "id": "siyuan",
+      "name": "SiYuan",
+      "kinds": [
+        "text"
+      ],
+      "category": "archive",
+      "skipReason": "auth=token",
+      "register": {
+        "required": true,
+        "url": "https://b3log.org/siyuan/",
+        "cnReachable": true,
+        "note": "本机思源笔记：设置→关于→API token（本地服务，无注册）。"
+      }
+    },
+    {
+      "id": "sm-ms",
+      "name": "SM.MS",
+      "kinds": [
+        "image"
+      ],
+      "category": "publish",
+      "skipReason": "auth=token",
+      "register": {
+        "required": true,
+        "url": "https://sm.ms/",
+        "token": "https://sm.ms/home/apitoken",
+        "cnReachable": false,
+        "note": "注册账号 → home/apitoken 页 Generate Secret Token（只显示一次）。主域名国内访问不稳定/被墙，备用域名 smms.app。"
+      }
+    },
+    {
+      "id": "transfer.sh",
+      "name": "transfer.sh",
+      "kinds": [
+        "text"
+      ],
+      "category": "publish",
+      "skipReason": "status=dead（服务已停）",
+      "register": {
+        "required": false,
+        "note": "本机/自建服务，无公共注册"
+      }
+    },
+    {
+      "id": "uguu.se",
+      "name": "uguu.se",
+      "kinds": [
+        "file",
+        "image"
+      ],
+      "category": "publish",
+      "skipReason": "status=legacy",
+      "register": {
+        "required": false,
+        "note": "本机/自建服务，无公共注册"
+      }
+    }
+  ]
+}

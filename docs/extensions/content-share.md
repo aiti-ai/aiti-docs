@@ -72,6 +72,14 @@ content-share mock paste-demo --port 8931       # 起演示 paste 服务
 
 `publish`（公网 URL）· `archive`（Joplin/Obsidian 等深链）· `bookmark` · `local`（本机会话链接）。
 
+## 目标可用性实测（2026-11）
+
+161 个目标逐一实测（真实上传探针：直连 → VPN 策略路由 → 复测，多轮证据并集）的结论：**免 setup 目标中开箱即用且验证通过的只有 11 个**（国内直连 paste.rs / dpaste.com / p.ip.fi / f.blicky.net，翻墙后 rentry / gofile.io / write.as 等）；ShareX `.sxcu` 目录大量过时（服务迁移/API 变更/关站），目录 `status` 字段与实测严重不符。下表可筛选、可搜索，每行附注册入口与说明；机器可读数据源：[`/share-targets.json`](/share-targets.json)（可直接用作远端 overlay 目录 URL）。
+
+<ClientOnly>
+<ShareTargetStatus />
+</ClientOnly>
+
 ## 许可
 
 MIT。`.sxcu` 语法语义由 ShareX（GPL v3）独立重实现推导，未包含其源码。
