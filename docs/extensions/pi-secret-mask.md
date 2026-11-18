@@ -8,7 +8,7 @@ ext:
   soul: 随手贴，不泄密。
   type: pi-plugin
   category: pi 插件
-  version: 0.2.3
+  version: 0.2.4
   status: active
   author: aiti-ai
   publisher: aiti-ai
