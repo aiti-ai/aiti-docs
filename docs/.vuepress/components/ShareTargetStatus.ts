@@ -6,11 +6,12 @@
  * 支持按判定/类型筛选与搜索。双语展示层（中文注册表唯一数据源，/en/ 下翻译）。
  *
  * 判定语义见 /extensions/content-share 页面说明；数据由 2026-11 实测生成
- * （真实上传探针 × 直连 → addroute 翻墙路由 → 复测，多轮证据并集）。
+ * （真实上传探针：直连 → VPN 策略路由复测，多轮证据并集）。
  */
 import { defineComponent, ref, onMounted, computed, h } from "vue";
 import { useRoute } from "vuepress/client";
 
+interface Bi { zh?: string; en?: string }
 interface TargetRow {
   id: string;
   name: string;
@@ -21,8 +22,8 @@ interface TargetRow {
   verdict: string;
   availability: { direct?: string; vpn?: string };
   url?: string;
-  register?: { required: boolean; url?: string; token?: string; note?: string };
-  note?: string;
+  register?: { required: boolean; url?: string; token?: string; note?: Bi };
+  note?: Bi | string;
   verified?: boolean;
 }
 interface Payload {
@@ -80,15 +81,26 @@ export default defineComponent({
     });
 
     const t = (zhText: string, enText: string) => (isEn.value ? enText : zhText);
+    /** Prefer bilingual labels delivered by the payload; fall back to built-ins. */
+    const pickBi = (v: { zh?: string; en?: string } | string | undefined) => {
+      if (!v) return "";
+      if (typeof v === "string") return v;
+      return (isEn.value ? v.en : v.zh) || v.zh || v.en || "";
+    };
     const verdictLabel = (key: string) => {
+      const fromData = data.value?.labels?.verdicts?.[key];
+      if (fromData) return pickBi(fromData);
       const m = VERDICT_META[key];
       return m ? (isEn.value ? m.en : m.zh) : key;
     };
     const avLabel = (x?: string) => {
       if (!x) return "";
+      const fromData = data.value?.labels?.availability?.[x];
+      if (fromData) return pickBi(fromData);
       const m = ERROR_LABEL[x];
       return m ? (isEn.value ? m.en : m.zh) : x;
     };
+    const noteText = (p: TargetRow) => pickBi(p.note);
 
     const rows = computed<TargetRow[]>(() => {
       const list = [...(data.value?.providers ?? []), ...(data.value?.setupProviders ?? [])];
@@ -101,7 +113,7 @@ export default defineComponent({
       });
     });
 
-    return { data, error, loading, verdict, kind, query, rows, isEn, t, verdictLabel, avLabel };
+    return { data, error, loading, verdict, kind, query, rows, isEn, t, verdictLabel, avLabel, noteText };
   },
 
   render() {
@@ -122,7 +134,7 @@ export default defineComponent({
     const filters = h("div", { class: "st-filters" }, [
       h("div", { class: "st-chips" }, [
         chip("all", t("全部", "All"), data?.counts?.total),
-        ...VERDICTS.map((v) => chip(v.key, this.isEn ? v.en : v.zh, data?.counts?.byVerdict?.[v.key])),
+        ...VERDICTS.map((v) => chip(v.key, this.verdictLabel(v.key), data?.counts?.byVerdict?.[v.key])),
       ]),
       h("div", { class: "st-row2" }, [
         h("input", {
@@ -163,10 +175,10 @@ export default defineComponent({
               t("注册 ", "Register "),
               reg.url ? h("a", { href: reg.url, target: "_blank", rel: "noopener" }, reg.url) : h("span", t("见说明", "see note")),
               reg.token ? [" · ", h("a", { href: reg.token, target: "_blank", rel: "noopener" }, t("取密钥", "get key"))] : null,
-              reg.note ? h("span", { class: "st-reg-note" }, " — " + reg.note) : null,
+              reg.note ? h("span", { class: "st-reg-note" }, " — " + (typeof reg.note === "string" ? reg.note : (this.isEn ? reg.note.en : reg.note.zh) || "")) : null,
             ])
           : null,
-        p.note ? h("div", { class: "st-note", title: p.note }, p.note) : null,
+        (() => { const n = this.noteText(p); return n ? h("div", { class: "st-note", title: n }, n) : null; })(),
       ];
       return h("li", { class: "st-item", key: p.id }, children);
     };
