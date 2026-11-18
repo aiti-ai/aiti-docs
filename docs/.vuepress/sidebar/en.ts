@@ -123,7 +123,9 @@ export const enSidebar = sidebar({
         "pi-models-combo.md",
         "pi-subagents.md",
         "pi-secret-mask.md",
+        "pi-secret-vault.md",
         "secret-mask-core.md",
+        "aiti-secret-vault.md",
         "pi-session-search.md",
         "pi-git-trace.md",
         // Sessions & projects

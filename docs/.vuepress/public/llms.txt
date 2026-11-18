@@ -2,7 +2,7 @@
 
 > 以 pi 为引擎的个人 AI 开发工作台与本地调试注入生态：aiti-agent（自托管 Web 工作台）· aiti-devtools（页面内 AI 调试助手，AI 进驻网页面对面调试）· aiti-bridge（任意 AI agent 经 MCP 操作页面）。
 
-AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 71+ 个可组合扩展（调试注入 / 多 agent / 终端·VNC·RDP / 隧道 / 模型管理 / 配置安全网 / IM 接入等），aiti-devtools 已适配 DSH / OpenClaw / OpenCode 宿主。
+AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 72+ 个可组合扩展（调试注入 / 多 agent / 终端·VNC·RDP / 隧道 / 模型管理 / 配置安全网 / IM 接入等），aiti-devtools 已适配 DSH / OpenClaw / OpenCode 宿主。
 
 ## 文档
 - [首页 · 系统特色](https://aiti.pw/): 生态全景与特色速览
@@ -68,6 +68,7 @@ AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 71+ 个
 - [aiti-queue-keeper](https://aiti.pw/extensions/aiti-queue-keeper.html): 队列面板接管 —— 完整队列 UI（横幅/行操作/拖拽排序/回收站/撤销条/导入导出），core 回到上游同形兜底
 - [aiti-quickstart](https://aiti.pw/extensions/aiti-quickstart.html): 空白态引导扩展——新建会话欢迎页 widget（上手步骤 / 快捷操作 / 任务运行时 / 示例提示词，走宿主 newSessionWidgets 插槽可 ⚙ 自定义）+ 左栏 DockStack 全折叠空白引导卡（与应用中心同屏共存，✕ 可关闭）+ v2 工作区获取 Hub（Git 克隆 / 上传压缩包 / 本地目录 / 新建）+ 侧栏「快速上手」静态条目（应用中心可钉住卡片，点击重返 quickstart 欢迎页）
 - [aiti-recovery](https://aiti.pw/extensions/aiti-recovery.html): 恢复 UI 扩展——队列恢复对话框（会话中断排队消息逐条决议）+ 重启恢复向导（中断会话两步处理），红线语义保留：绝不自动投递，续跑只发「继续」
+- [aiti-secret-vault](https://aiti.pw/extensions/aiti-secret-vault.html): pi-web 的加密密钥库管理弹窗——别名查看/新增/轮换/查看明文/删除、锁定/解锁、keyfile ↔ 系统钥匙串切换、会话挂载总览；值只走浏览器→本机服务→加密库，不经过 AI 对话
 - [aiti-session-cards](https://aiti.pw/extensions/aiti-session-cards.html): 会话请求卡扩展——交互元语卡（zcode 方案审批 / AskUser / omp OAuth / generic 兜底）与工具授权卡完整 UI，自 pi-web core 外迁（agent 能力 UI 去核化 P1）
 - [aiti-sheet-univer](https://aiti.pw/extensions/aiti-sheet-univer.html): .xlsx/.xlsm 在线预览+编辑（exceljs 数据面 + Univer 视图面）；.xls/.ods 只读预览与一键转 .xlsx
 - [aiti-subagents](https://aiti.pw/extensions/aiti-subagents.html): 子代理舰队 Fleet 观测/运行控制/Agent 管理/并发配置——fork 引擎，工具归上游 pi-subagents
@@ -98,11 +99,12 @@ AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 71+ 个
 - [aiti-devtools-opencode](https://aiti.pw/extensions/aiti-devtools-opencode.html): OpenCode host 插件（16 工具进程内注册 + messages.transform 占位符改写）+ 官方 web UI 即 AI 窗（nginx 反代剥 CSP + sub_filter 注入，不 fork）
 - [aiti-inject](https://aiti.pw/extensions/aiti-inject.html): （已归档）dev 实例专用注入 FAB —— 已由 aiti-debug-inject 演变取代，源码 dev-exts/aiti-inject 已删除
 - [content-share](https://aiti.pw/extensions/content-share.html): 按 provider 把内容换成 URL 的基础能力包——内置 161 个分享目标（ShareX .sxcu 全量 148 份 + 国内直连 Gitee/兰空/SM.MS/Pastebin/Rentry/paste.rs/阿里云 OSS + 笔记库 Joplin/Obsidian/memos/思源/flomo），零运行时依赖的 .sxcu 执行引擎（4 种 body、ShareX 语法解析、JSONPath/regex 取 URL），支持远端目录 overlay 与脱敏 hook
-- [dsh-secret-mask](https://aiti.pw/extensions/dsh-secret-mask.html): DeepSeek Harness（DSH）的会话级秘密脱敏——贴进消息的密钥/token/凭据在进入模型之前替换为稳定占位符 [REDACTED:*]，模型在工具参数里回显占位符时于执行前还原真实值；工具输出同步脱敏，可选审计证明无真值上线。检测核心与 pi 版逐字同源
+- [dsh-secret-mask](https://aiti.pw/extensions/dsh-secret-mask.html): DeepSeek Harness（DSH）的会话级秘密脱敏——贴进消息的密钥/token/凭据在进入模型之前替换为形似凭据的 rsec_<hash8> 令牌，模型在工具参数里回显令牌时于执行前还原真实值；未挂载令牌会被 guard 拦截，工具输出同步脱敏，可选审计证明无真值上线。检测核心与 pi 版共用 @aiti-ai/secret-mask-core
 - [git-pullkeep](https://aiti.pw/extensions/git-pullkeep.html): git pull 被脏工作区挡住时，只把真正挡路的文件收进带标记的临时提交，拉完拆回未提交状态——staged 状态保留、未跟踪文件挪 aside 保住、其余脏文件全程不动；git pull 全选项透传的 drop-in 替代（--rebase 场景等价替代 pull --rebase --autostash）
 - [pi-git-trace](https://aiti.pw/extensions/pi-git-trace.html): pi 编码代理的 AI 变更带外追踪——repo 根 .aiti-trace 独立追踪仓（无 git 也能 autoInit）+ op 编号 before/after 双提交 + 文件⇄消息⇄操作全 lineage + 回滚 + 影子仓瘦身 compact
 - [pi-models-combo](https://aiti.pw/extensions/pi-models-combo.html): pi 编码代理的模型治理插件——模型列表过滤治理 + apiKeys 多 key 粘性轮转防 429 + 多 provider 聚合（combo 虚拟模型）+ 质量监控；装进 ~/.pi/agent/pi-plugins/
-- [pi-secret-mask](https://aiti.pw/extensions/pi-secret-mask.html): pi 的会话级秘密脱敏——贴进 prompt 的密钥/token/凭据在模型看到之前替换为稳定占位符 [REDACTED:*]，模型在工具参数里回显占位符时于执行前还原真实值；随手贴，不泄密。零依赖，TUI 与全部 pi-web 会话一次安装全覆盖
+- [pi-secret-mask](https://aiti.pw/extensions/pi-secret-mask.html): pi 的会话级秘密脱敏——贴进 prompt 的密钥/token/凭据在模型看到之前替换为形似凭据的不透明令牌 rsec_<hash8>（模型不再拒用），模型在工具参数里回显令牌时于执行前还原真实值；随手贴，不泄密。零依赖，TUI 与全部 pi-web 会话一次安装全覆盖
+- [pi-secret-vault](https://aiti.pw/extensions/pi-secret-vault.html): pi 的加密持久密钥库——/vault add 掩码录入，模型只拿 rsec_<hash8> 稳定令牌（vault_list / vault_get），工具执行前自动还原真值；AI 只读、值 AES-256-GCM 加密落盘（keyfile / 系统钥匙串）、session JSONL 零真值
 - [pi-session-search](https://aiti.pw/extensions/pi-session-search.html): 给 pi 编码代理加 session_search / session_read 只读工具——跨历史会话全文搜索（经 pi-web session-manager 索引可覆盖所有 agent 家族）+ 读原始消息，恢复被 compaction 吃掉的上下文、找回"上次怎么做的"
 - [pi-subagents](https://aiti.pw/extensions/pi-subagents.html): pi 编码代理的子 agent 委派插件（aiti fork）——单 agent 委派 + 脚本化多 agent 工作流（并行/后台/council 顾问团/saved workflow/worktree 隔离），代码评审、并行审计、实现分工的第二三双眼睛
-- [secret-mask-core](https://aiti.pw/extensions/secret-mask-core.html): 宿主无关的秘密脱敏基础能力包——确定性凭据检测规则、[REDACTED:*] 占位符 Registry、深遍历还原/脱敏、payload 审计与 /secret 命令逻辑。零运行时依赖；pi 版与 DSH 版的生产实现共用，任何 TS/JS agent 四步接入
+- [secret-mask-core](https://aiti.pw/extensions/secret-mask-core.html): 宿主无关的秘密脱敏基础能力包——确定性凭据检测规则、rsec_<hash8> 令牌 Registry（legacy [REDACTED:*] 兼容）、深遍历还原/脱敏、pi 消息适配、未挂载占位符 guard、落盘三态、自定义规则、payload 审计与 /secret 命令逻辑。零运行时依赖；pi 版与 DSH 版的生产实现共用，任何 TS/JS agent 四步接入
