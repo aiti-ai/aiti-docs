@@ -69,7 +69,7 @@ footer: MIT Licensed | Copyright © 2026 aiti-ai
 npm install -g @aiti-ai/pi-web@latest && pi-web
 ```
 
-首启后在 **Models** 面板登录或填 API key 即可开聊——60+ 内置扩展已就位，无需逐个安装。三种安装方式（npm / curl / PowerShell）见 **[安装指南](/guide/install.md)**。
+首启后在 **Models** 面板登录或填 API key 即可开聊——60+ 内置扩展已就位，无需逐个安装。四种安装方式（npm / curl / PowerShell / Docker）见 **[安装指南](/guide/install.md)**。
 
 ## 为什么选 aiti？
 

@@ -69,7 +69,7 @@ footer: MIT Licensed | Copyright © 2026 aiti-ai
 npm install -g @aiti-ai/pi-web@latest && pi-web
 ```
 
-On first launch, sign in or fill an API key in the **Models** panel and start chatting — the 60+ built-in extensions are already in place. Three install methods (npm / curl / PowerShell) in the **[install guide](/en/guide/install.md)**.
+On first launch, sign in or fill an API key in the **Models** panel and start chatting — the 60+ built-in extensions are already in place. Four install methods (npm / curl / PowerShell / Docker) in the **[install guide](/en/guide/install.md)**.
 
 ## Why aiti?
 
