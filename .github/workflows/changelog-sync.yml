@@ -1,0 +1,46 @@
+# Changelog Sync — consume aiti-ai's release.yml `changelog-sync` repository_dispatch
+# (event_type: changelog-sync, client_payload.tag) plus a manual escape hatch.
+#
+# Pulls the release notes bodies from the GitHub Releases API into releases/<tag>.md
+# (tools/sync-releases.mjs), commits them, and lets deploy.yml (push → build → publish)
+# ship the updated /release-notes page. No extra deploy trigger needed: pushing to main
+# IS the deploy (same chain as sync-ext-versions.yml).
+#
+# Needs nothing beyond the default GITHUB_TOKEN (public releases API).
+name: Changelog Sync
+
+on:
+  repository_dispatch:
+    types: [changelog-sync]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Pull release notes into releases/
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node tools/sync-releases.mjs
+
+      - name: Commit if changed
+        run: |
+          if [ -z "$(git status --porcelain releases/)" ]; then
+            echo "no changes — nothing to commit"
+            exit 0
+          fi
+          git config user.name "aiti-docs bot"
+          git config user.email "bot@aiti.pw"
+          git add releases/
+          git commit -m "chore(releases): sync release notes from aiti-ai"
+          git push

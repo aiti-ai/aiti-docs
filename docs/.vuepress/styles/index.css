@@ -131,3 +131,37 @@
   overflow-wrap: anywhere;
   overflow-x: hidden;
 }
+
+/* ---- ReleaseList（/release-notes 变更历史时间线）---- */
+.release-list .release-entry {
+  padding: 1rem 0 1.25rem;
+  border-bottom: 1px solid var(--vp-c-divider, #e2e8f0);
+}
+.release-list .release-entry:last-child { border-bottom: none; }
+.release-list .release-tag h2 { margin: 0.25rem 0 0.75rem; }
+.release-list .release-tag a { color: inherit; text-decoration: none; }
+.release-list .release-tag a:hover { color: var(--vp-c-brand, #3eaf7c); }
+.release-list .release-highlights {
+  padding-left: 1.2rem;
+  margin: 0.5rem 0;
+}
+.release-list .release-highlights li { margin: 0.3rem 0; }
+.release-list .release-section h4 {
+  margin: 0.9rem 0 0.35rem;
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+.release-list .release-section ul { padding-left: 1.2rem; margin: 0.25rem 0; }
+.release-list .release-section li { margin: 0.22rem 0; font-size: 0.92rem; }
+.release-list .release-internal { margin-top: 0.6rem; }
+.release-list .release-internal-toggle {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.9rem;
+  opacity: 0.75;
+  padding: 0.15rem 0;
+}
+.release-list .release-internal-toggle:hover { opacity: 1; }
+.release-list .release-legacy { opacity: 0.8; font-size: 0.92rem; }

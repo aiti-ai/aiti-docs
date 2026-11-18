@@ -33,6 +33,11 @@ export const zhNavbar = navbar([
     link: "/extensions/",
   },
   {
+    text: "变更历史",
+    icon: "history",
+    link: "/release-notes/",
+  },
+  {
     text: "MCP 桥",
     icon: "link",
     link: "/guide/mcp/",
