@@ -45,9 +45,9 @@ aiti-agent 构建于开源项目 [pi-web](https://github.com/agegr/pi-web) 之�
 - **上下文与流畅度** `aiti-ctx-meter` 在输入区实时显示上下文占用比例（四档色阶 + critical 呼吸），点击直达宿主会话统计面板；`aiti-cpu-meter` 给主线程打出 0–100 流畅度分、颜色分层、可最小化常驻，还带 AI 卡顿调试，并有可注入任意网站的单文件外部版。
 - **会话级统计**（🔵 上游基础 + 我方增强）每会话 token / 成本 / 工具调用 / 活跃时长汇总，可导出 HTML；再由 `aiti-git-trace` 把「AI 改了哪些文件、对应哪句对话、哪个操作」也纳入统计与审计。
 
-### 🟢 招牌三：会话脱离浏览器运行（start detached）
+### 🟢 招牌三：会话脱离服务进程运行（start detached）
 
-原生会话生命周期绑在网页连接上，关掉浏览器 agent 就停。我们做了完整的 `agent-starter` 体系：Linux/macOS 用 systemd-run 或普通脱离进程，Windows 走 Win32_Process.Create + 管道端点，会话由 wrapper 托管并通过本地 socket 通信。关浏览器、断网、甚至服务重启后都能重连回原会话；无客户端附着且长时间无输出的会话由 wrapper 空闲回收，不会无限占资源。CLI 接入家族（含 ACP 全系与 CodeBuddy）也在陆续接入这个可脱离宿主。详见 [会话与 detachment 说明](/guide/architecture.md)。
+原生的 agent 会话跑在 pi-web **服务进程**里：关掉浏览器标签页或断开网络，agent 照常继续跑——这一点本来就没问题；真正会中断的是**停掉或重启 pi-web 服务**（会话文件还在，但正在运行的 agent 随之终止）。我们做了完整的 `agent-starter` 体系来解决这一点：Linux/macOS 用 systemd-run 或普通脱离进程，Windows 走 Win32_Process.Create + 管道端点，agent 由独立 wrapper 进程托管并通过本地 socket 与服务通信。于是服务重启后仍能重连回原会话，agent 全程不停；无客户端附着且长时间无输出的会话由 wrapper 空闲回收，不会无限占资源。CLI 接入家族（含 ACP 全系与 CodeBuddy）也在陆续接入这个可脱离宿主。详见 [会话与 detachment 说明](/guide/architecture.md)。
 
 ---
 
