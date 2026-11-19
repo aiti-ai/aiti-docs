@@ -8,7 +8,7 @@ ext:
   soul: 大脑留给思考，命令交给收藏夹。
   type: aiti-ext
   category: 命令工具
-  version: "0.1.9"
+  version: "0.3.0"
   status: beta
   author: aiti-ai
   publisher: aiti-ai

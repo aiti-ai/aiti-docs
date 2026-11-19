@@ -9,7 +9,7 @@ ext:
   type: other
   installable: false  # 基础库——不是 aiti-agent/pi-web 扩展：extman 不列出、extensions.json 归 integrations
   category: 基础库
-  version: 0.2.0
+  version: 0.3.0
   status: active
   author: aiti-ai
   publisher: aiti-ai

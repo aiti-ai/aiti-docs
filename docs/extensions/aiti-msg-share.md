@@ -8,7 +8,7 @@ ext:
   soul: 分享出去，是为了让对话继续。
   type: aiti-ext
   category: 聊天增强
-  version: 0.1.0
+  version: 0.1.8
   status: experimental
   author: aiti-ai
   publisher: aiti-ai

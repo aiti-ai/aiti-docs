@@ -9,7 +9,7 @@ ext:
   type: host-adapter
   installable: false  # 宿主适配器——装进 OpenClaw，不进 aiti-agent/pi-web：extman 不列出、extensions.json 不入 extensions 数组（归 integrations）
   category: 宿主适配
-  version: 0.6.8
+  version: 0.6.9
   status: active
   author: aiti-ai
   publisher: aiti-ai
