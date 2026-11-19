@@ -33,6 +33,11 @@ ctx.registerItems("sessionTopbar", [{
 ```
 
 - Item = `{ id, render?, meta?, feature? }`; composite id = `"extId:itemId"`.
+- **Item display order**: by default, the extension's manifest listing order (≈ alphabetical
+  directory order, stable), then the registration array order within an extension. Items
+  declaring `meta.order` (number) sort before unordered ones (ascending) — useful to pin a
+  button right after the host's built-in buttons regardless of other extensions' alphabetical
+  order (e.g. aiti-msg-share's Share right after the message Copy button).
 - `render(props)` receives `currentSession` + slot extras (`ExtSlotPropsWithBuiltIn`).
 - `ctx.disposeItems(slot, ids)` removes exactly these registrations (HMR semantics).
 - **Extras carry data only; callbacks always go through services**

@@ -32,6 +32,9 @@ ctx.registerItems("sessionTopbar", [{
 ```
 
 - 条目 = `{ id, render?, meta?, feature? }`；组合 id = `"extId:itemId"`。
+- **条目显示顺序**：默认按扩展在 manifest 里的列出顺序（≈ 目录字母序，稳定），同扩展内按注册数组顺序。
+  声明 `meta.order`（数字）的条目排在没有声明的条目之前（升序）——用于把按钮钉在宿主内置按钮之后，
+  不受其他扩展的字母序影响（如 aiti-msg-share 的分享按钮紧跟消息 Copy 按钮）。
 - `render(props)` 收到 `currentSession` + 插槽 extra（`ExtSlotPropsWithBuiltIn`）。
 - `ctx.disposeItems(slot, ids)` 精确摘除（HMR 语义）。
 - **extra 只喂数据，回调一律走服务**（[宿主插槽红线](/guide/ext-services.md) §5.1）。
