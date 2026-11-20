@@ -28,6 +28,11 @@ export const zhNavbar = navbar([
     link: "/changelogs/",
   },
   {
+    text: "反馈",
+    icon: "comment",
+    link: "/feedback/",
+  },
+  {
     text: "更多",
     icon: "ellipsis",
     children: [
