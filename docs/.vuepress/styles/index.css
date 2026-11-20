@@ -2,10 +2,21 @@
 /* 注意：内容宽度通过 palette.scss 中的 $content-width 变量配置 */
 
 /* 首页 hero features：末行孤张卡跨全行居中（如 9 张卡时「开放生态」收尾行，
-   整句一行放下不再折行；4n+1 = 孤张必位于行首的通式，4/2 列布局均适用） */
+   整句一行放下不再折行；4n+1 = 孤张必位于行首的通式，4/2 列布局均适用）。
+   同时收紧该卡下方留白（padding/margin/容器 margin），
+   让收尾行与下方 badges 保持紧凑节奏 */
 .vp-features > .vp-feature-item:last-child:nth-child(4n+1) {
   flex-basis: 100%;
   text-align: center;
+  padding-bottom: 4px;
+  margin-bottom: 0;
+}
+.vp-features:has(> .vp-feature-item:last-child:nth-child(4n+1)) {
+  margin-bottom: 4px;
+}
+/* hero 容器在同款孤张收尾行时也收紧底部 padding（主题默认 1.5rem） */
+.vp-feature:has(> .vp-features > .vp-feature-item:last-child:nth-child(4n+1)) {
+  padding-bottom: 8px;
 }
 
 /* Mermaid 图表自适应宽度 */
