@@ -8,7 +8,7 @@ ext:
   soul: 一处写仓，处处安全。
   type: aiti-ext
   category: 服务端引擎
-  version: "0.1.11"
+  version: "0.1.12"
   status: active
   author: aiti-ai
   publisher: aiti-ai

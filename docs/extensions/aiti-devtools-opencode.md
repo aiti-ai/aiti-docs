@@ -9,7 +9,7 @@ ext:
   type: host-adapter
   installable: false  # 宿主适配器——装进 OpenCode，不进 aiti-agent/pi-web：extman 不列出、extensions.json 不入 extensions 数组（归 integrations）
   category: 宿主适配
-  version: 0.3.3
+  version: 0.3.4
   status: active
   author: aiti-ai
   publisher: aiti-ai
