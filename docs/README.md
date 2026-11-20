@@ -48,7 +48,7 @@ features:
     link: /devtools/
   - title: 开放生态
     icon: 🌍
-    details: npm scope @aiti-ai · GitHub 组织 aiti-ai · 官网 aiti.pw
+    details: '<span style="white-space:nowrap">npm scope @aiti-ai</span> · <span style="white-space:nowrap">GitHub 组织 aiti-ai</span> · <span style="white-space:nowrap">官网 aiti.pw</span>'
 
 copyright: false
 footer: MIT Licensed | Copyright © 2026 aiti-ai
