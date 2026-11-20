@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-20T02:50:52.449Z",
+  "count": 2,
+  "releases": [
+    {
+      "tag": "v0.17.0-aiti.1",
+      "version": "0.17.0-aiti.1",
+      "url": "https://github.com/aiti-ai/aiti-ai/releases/tag/v0.17.0-aiti.1",
+      "compareUrl": null,
+      "highlights": [
+        "**Upstream baseline 0.17.0**: the host app merges the upstream 0.17.0 release and is re-cut as a single-source repository — host app, 60+ extensions, packages, integrations and the release tooling now live in one tree",
+        "**Survive-restart agent hosting** goes end-to-end: detachable agent processes that outlive a host restart, a detach/start-in-process round-trip in the UI, per-session hosting preference across cold cycles, and a Windows runner (named-pipe endpoints)",
+        "**New extension `aiti-containers`**: container management panel (containers/images/volumes/networks, compose projects, live stats) built for the AI window",
+        "**Secret stack v2**: redaction engine rewrite, encrypted vault with a web UI, and the DSH build aligned at 0.2.0",
+        "**25-provider ACP family is now detachable** — external agents (qoder, codebuddy and friends) can be hosted in wrappers that survive restarts"
+      ],
+      "sections": [],
+      "substantive": true
+    },
+    {
+      "tag": "v0.15.15-aiti.10",
+      "version": "0.15.15-aiti.10",
+      "url": "https://github.com/aiti-ai/aiti-ai/releases/tag/v0.15.15-aiti.10",
+      "compareUrl": null,
+      "highlights": [
+        "New extension **aiti-msg-share**: share conversations and messages to pluggable targets",
+        "Four more new extensions: **pi-secret-mask** (deterministic secret redaction), **aiti-testagent** (Java backend debugging), **aiti-git-ops** (whitelisted git write engine) and **aiti-backup** (snapshot backup for large state data)",
+        "**aiti-editor**: selection cards now work across same-origin and cross-origin previews",
+        "Broad bilingual (en/zh) i18n sweep: 20+ extensions moved to keyed tables, plus cross-extension label translation infrastructure",
+        "File-based release notes pipeline (drafts land in `releases/` and gate tagging)"
+      ],
+      "sections": [],
+      "substantive": true
+    }
+  ]
+}

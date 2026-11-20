@@ -1,0 +1,84 @@
+{
+  "affiliate": {
+    "alibaba": {
+      "link": "",
+      "note": "阿里云百炼新客云大使返佣 25-45% 现金；注册即领"
+    },
+    "tencent-hunyuan": {
+      "link": "",
+      "note": "腾讯云混元推广大使 CPS：新客首单返佣 30%，综合最高 35% 现金"
+    },
+    "zhipu": {
+      "link": "",
+      "note": "智谱 GLM：新用户注册送 2000 万 GLM-4.5-Air Tokens（≈58 元）"
+    },
+    "siliconflow": {
+      "link": "",
+      "note": "硅基流动：新用户实名送券；邀请双方各得 16 元；充值消费 10% 代金券返还"
+    },
+    "moonshot": {
+      "link": "",
+      "note": "Kimi（月之暗面）：新用户注册送额度"
+    }
+  },
+  "freeModels": {
+    "pi-opencode-free": {
+      "npm": "npm:pi-opencode-free",
+      "name": "OpenCode Free",
+      "desc": "OpenCode Zen 免费模型直连——带 OpenCode 客户端头授权免费额度，无需 API Key",
+      "note": "免费目录由 Pi 原生动态发现 + 快照缓存，随 Zen 免费榜变动；模型选择器里选任意「(Free)」模型即可",
+      "url": "https://github.com/pedrostarkealexis/pi-opencode-free",
+      "models": [
+        "muse-spark-1.2-contributor-free · Meta · 1M 上下文 / 131K 输出 / 视觉",
+        "mimo-v2.5-free · 小米 MiMo · 1M / 131K / 视觉",
+        "nemotron-3.5-lightning-free · NVIDIA · 1M / 262K",
+        "nemotron-3-ultra-free · NVIDIA · 1M / 128K",
+        "hy3-free · 腾讯混元 · 262K / 128K",
+        "laguna-s-2.1-free · Poolside · 262K / 32K",
+        "big-pickle · 200K / 32K",
+        "…以上为 Zen 免费榜典型项，动态发现以选择器为准"
+      ]
+    },
+    "pi-freeflow": {
+      "npm": "npm:pi-freeflow",
+      "name": "Freeflow",
+      "desc": "28 个精选免费模型（8 OpenCode Zen + 20 KiloCode 网关），最高 1M 上下文 / 512K 输出；BYO 中继池轮询破限流",
+      "note": "本地代理 127.0.0.1:28180；429/504 自动冷却；/freeflow 命令行管理（status/list/use…）；本团队自维护扩展",
+      "url": "https://www.npmjs.com/package/pi-freeflow",
+      "models": [
+        "muse-spark-1.2-contributor-free · Meta · 1M / 131K / 视觉",
+        "mimo-v2.5-free · 小米 MiMo · 1M / 131K / 视觉",
+        "nemotron-3.5-lightning-free · NVIDIA · 1M / 262K",
+        "nemotron-3-ultra-free · NVIDIA · 1M / 128K",
+        "dots-3-note-preview · Dots Studio · 512K / 512K / 视觉",
+        "step-3.7-flash · 阶跃 · 262K / 262K / 视觉",
+        "hy3-free · 腾讯混元 · 262K / 128K",
+        "…共 28 个（8 Zen + 20 KiloCode），装后 /freeflow list 查看全量"
+      ]
+    },
+    "pi-free": {
+      "npm": "npm:pi-free",
+      "name": "Free",
+      "desc": "多网关免费模型聚合：Kilo、Cline、LLM7、FastRouter、Ollama Cloud、StepFun、Qoder + Pi 原生 OpenCode/OpenRouter 集成",
+      "note": "默认只显示免费模型（/toggle-<provider> 切全量目录）；当前模型报错自动切换其他免费模型；/pi-free-health 诊断",
+      "url": "https://github.com/apmantza/pi-free",
+      "models": [
+        "Kilo / Cline / LLM7 / FastRouter 多网关免费档",
+        "Ollama Cloud · StepFun · Qoder",
+        "OpenCode / OpenCode Go / OpenRouter（Pi 原生集成）",
+        "自带 Coding Index 评分与不可用模型自动探测"
+      ]
+    },
+    "pi-freerouter": {
+      "npm": "npm:pi-freerouter",
+      "name": "Freerouter",
+      "desc": "自动路由到 OpenRouter 免费模型档，模型选择器出现「auto [free-router]」",
+      "note": "需免费注册 OpenRouter 拿 key（openrouter.ai/keys 免费档，无付费）；设 OPENROUTER_API_KEY 后即用",
+      "url": "https://www.npmjs.com/package/pi-freerouter",
+      "models": [
+        "OpenRouter :free 档自动路由（Qwen / DeepSeek / Llama 等社区免费榜）",
+        "路由目标随 OpenRouter 免费榜动态变化"
+      ]
+    }
+  }
+}
