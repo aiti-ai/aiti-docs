@@ -69,7 +69,7 @@ footer: MIT Licensed | Copyright © 2026 aiti-ai
 npm install -g @aiti-ai/pi-web@latest && pi-web
 ```
 
-首启后在 **Models** 面板登录或填 API key 即可开聊——60+ 内置扩展已就位，无需逐个安装。四种安装方式（npm / curl / PowerShell / Docker）见 **[安装指南](/guide/install.md)**。
+首启后在 **Models** 面板登录或填 API key 即可开聊——60+ 内置扩展已就位，无需逐个安装。不想全局安装？`npx @aiti-ai/pi-web@latest` 可免安装直跑；其余方式（curl / PowerShell / Docker）见 **[安装指南](/guide/install.md)**。
 
 ## 为什么选 aiti？
 
@@ -117,7 +117,7 @@ npm install -g @aiti-ai/pi-web@latest && pi-web
 - **页面调试工具链**：`aiti-devtools` 注入到 Vite / Vue / Next / Svelte 等主流开发工具，`aiti-bridge` 作为 MCP 桥改造任意 AI agent——
   把 AI 请到页面开发现场，页面就是可调试、可交互、可回答 AI 问题的对象。详见 **[/devtools/](/devtools/)**。
 
-### 安装方式（npm / 脚本 / Docker）
+### 安装方式（npm / npx / 脚本 / Docker）
 
 > 多种方式任选，详见 **[安装指南](/guide/install.md)**（系统要求 / 常用命令 / 脚本透明性）。
 
@@ -129,6 +129,13 @@ npm install -g @aiti-ai/pi-web@latest && pi-web
 # Node.js ≥ 22.19
 npm install -g @aiti-ai/pi-web@latest
 pi-web          # 启动服务并打开浏览器（默认 http://127.0.0.1:30141）
+```
+
+@tab npx
+
+```bash
+# 不落盘，每次拉最新
+npx @aiti-ai/pi-web@latest
 ```
 
 @tab macOS / Linux

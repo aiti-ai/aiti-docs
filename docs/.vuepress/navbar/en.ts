@@ -28,6 +28,11 @@ export const enNavbar = navbar([
     link: "/en/changelogs/",
   },
   {
+    text: "Feedback",
+    icon: "comment",
+    link: "/en/feedback/",
+  },
+  {
     text: "More",
     icon: "ellipsis",
     children: [

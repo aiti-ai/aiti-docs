@@ -63,7 +63,7 @@ Data layer: shared pi JSONL + queue persistence + worktree              ← exis
 
 ## 6. Getting Started
 
-npm package **`@aiti-ai/pi-web`** (ships 63+ bundled extensions); three ways to install — see the [Install Guide](/en/guide/install.md):
+npm package **`@aiti-ai/pi-web`** (ships 63+ bundled extensions); for all install options see the [Install Guide](/en/guide/install.md):
 
 :::: tabs#install-short
 
@@ -71,6 +71,12 @@ npm package **`@aiti-ai/pi-web`** (ships 63+ bundled extensions); three ways to 
 
 ```bash
 npm install -g @aiti-ai/pi-web@latest && pi-web
+```
+
+@tab npx
+
+```bash
+npx @aiti-ai/pi-web@latest        # no install needed, runs directly
 ```
 
 @tab macOS / Linux

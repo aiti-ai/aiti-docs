@@ -63,7 +63,7 @@ UI 层：会话/服务/终端/桌面/调试 统一界面
 
 ## 6. 使用入口
 
-npm 包 **`@aiti-ai/pi-web`**（自带 63+ 内置扩展），三种安装方式详见 **[安装指南](/guide/install.md)**：
+npm 包 **`@aiti-ai/pi-web`**（自带 63+ 内置扩展），安装方式详见 **[安装指南](/guide/install.md)**：
 
 :::: tabs#install-short
 
@@ -71,6 +71,12 @@ npm 包 **`@aiti-ai/pi-web`**（自带 63+ 内置扩展），三种安装方式�
 
 ```bash
 npm install -g @aiti-ai/pi-web@latest && pi-web
+```
+
+@tab npx
+
+```bash
+npx @aiti-ai/pi-web@latest        # 免安装直跑
 ```
 
 @tab macOS / Linux

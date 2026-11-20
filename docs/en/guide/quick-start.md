@@ -22,6 +22,13 @@ Get **aiti-agent** (the self-hosted web workbench, npm package `@aiti-ai/pi-web`
 npm install -g @aiti-ai/pi-web@latest
 ```
 
+@tab npx
+
+```bash
+# nothing installed to disk, every run pulls the latest
+npx @aiti-ai/pi-web@latest
+```
+
 @tab macOS / Linux
 
 ```bash

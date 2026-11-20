@@ -69,7 +69,7 @@ footer: MIT Licensed | Copyright © 2026 aiti-ai
 npm install -g @aiti-ai/pi-web@latest && pi-web
 ```
 
-On first launch, sign in or fill an API key in the **Models** panel and start chatting — the 60+ built-in extensions are already in place. Four install methods (npm / curl / PowerShell / Docker) in the **[install guide](/en/guide/install.md)**.
+On first launch, sign in or fill an API key in the **Models** panel and start chatting — the 60+ built-in extensions are already in place. No global install? `npx @aiti-ai/pi-web@latest` runs it directly; other methods (curl / PowerShell / Docker) in the **[install guide](/en/guide/install.md)**.
 
 ## Why aiti?
 
@@ -117,7 +117,7 @@ On first launch, sign in or fill an API key in the **Models** panel and start ch
 - **Page-debugging toolchain**: `aiti-devtools` injects into Vite / Vue / Next / Svelte and other mainstream dev tools, and `aiti-bridge` retrofits any AI agent as an MCP bridge —
   bringing the AI to the page development front line, where the page itself becomes debuggable, interactive, and answerable. See **[/devtools/](/en/devtools/)**.
 
-### Install methods (npm / scripts / Docker)
+### Install methods (npm / npx / scripts / Docker)
 
 > Pick one — details in the **[install guide](/en/guide/install.md)** (system requirements / common commands / script transparency).
 
@@ -129,6 +129,13 @@ On first launch, sign in or fill an API key in the **Models** panel and start ch
 # Node.js ≥ 22.19
 npm install -g @aiti-ai/pi-web@latest
 pi-web          # starts the service and opens the browser (default http://127.0.0.1:30141)
+```
+
+@tab npx
+
+```bash
+# nothing installed to disk, every run pulls the latest
+npx @aiti-ai/pi-web@latest
 ```
 
 @tab macOS / Linux

@@ -22,6 +22,13 @@ tags: [guide, quick-start, pi-web, workbench]
 npm install -g @aiti-ai/pi-web@latest
 ```
 
+@tab npx
+
+```bash
+# 不落盘，每次拉最新
+npx @aiti-ai/pi-web@latest
+```
+
 @tab macOS / Linux
 
 ```bash
