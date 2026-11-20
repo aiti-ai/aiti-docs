@@ -1,6 +1,13 @@
 /* ====== 自定义样式 ====== */
 /* 注意：内容宽度通过 palette.scss 中的 $content-width 变量配置 */
 
+/* 首页 hero features：末行孤张卡跨全行居中（如 9 张卡时「开放生态」收尾行，
+   整句一行放下不再折行；4n+1 = 孤张必位于行首的通式，4/2 列布局均适用） */
+.vp-features > .vp-feature-item:last-child:nth-child(4n+1) {
+  flex-basis: 100%;
+  text-align: center;
+}
+
 /* Mermaid 图表自适应宽度 */
 .mermaid {
   max-width: 100%;
