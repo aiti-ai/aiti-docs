@@ -101,16 +101,28 @@ interface AppLike {
   dir: { source: () => string; public: () => string };
 }
 
-/** 写 public/releases.json（schemaVersion 1：版本时间线倒序） */
-const generate = (app: AppLike, releasesDir: string) => {
+/** 写 public/releases.json（schemaVersion 1：版本时间线倒序）。
+ *
+ * 幂等设计（releases.json 进 git，是每版本一条的最终数据文件）：
+ * 条目集合与磁盘现有文件一致时不重写——保留原 generatedAt，避免每次构建
+ * 产生 timestamp 噪音 diff；只有新 release 同步进来（releases/*.md 变化）
+ * 才追加条目并刷新时间戳，一次提交定稿。 */
+const buildCatalog = (app: AppLike, releasesDir: string) => {
   const releases = scanReleasesDir(releasesDir);
   const outFile = resolve(app.dir.public(), "releases.json");
   mkdirSync(dirname(outFile), { recursive: true });
-  writeFileSync(
-    outFile,
-    JSON.stringify({ schemaVersion: 1, generatedAt: new Date().toISOString(), count: releases.length, releases }, null, 2) + "\n",
-    "utf8",
-  );
+  let prev: { generatedAt?: string; releases?: unknown } | null = null;
+  if (existsSync(outFile)) {
+    try { prev = JSON.parse(readFileSync(outFile, "utf8")); } catch { /* 损坏则视为无旧文件 */ }
+  }
+  const sameSet =
+    prev !== null && Array.isArray(prev.releases) &&
+    JSON.stringify(prev.releases) === JSON.stringify(releases);
+  const generatedAt = sameSet && prev?.generatedAt ? prev.generatedAt : new Date().toISOString();
+  const body =
+    JSON.stringify({ schemaVersion: 1, generatedAt, count: releases.length, releases }, null, 2) + "\n";
+  if (!existsSync(outFile) || readFileSync(outFile, "utf8") !== body) writeFileSync(outFile, body, "utf8");
+  return { generatedAt, releases };
 };
 
 const releasesChangelog = (): PluginObject => {
@@ -118,13 +130,11 @@ const releasesChangelog = (): PluginObject => {
   return {
     name: "aiti-releases-changelog",
 
-    /** 注入客户端全局常量：变更历史构建期进 bundle → ReleaseList SSR 预渲染可见（搜索/SEO） */
+    /** 注入客户端全局常量：变更历史构建期进 bundle → ReleaseList SSR 预渲染可见（搜索/SEO）；与 releases.json 同源同时间戳 */
     define(app) {
+      const catalog = buildCatalog(app as AppLike, releasesDir(app as AppLike));
       return {
-        __RELEASES_CATALOG__: JSON.stringify({
-          generatedAt: new Date().toISOString(),
-          releases: scanReleasesDir(releasesDir(app as AppLike)),
-        }),
+        __RELEASES_CATALOG__: JSON.stringify(catalog),
       };
     },
 
@@ -133,9 +143,9 @@ const releasesChangelog = (): PluginObject => {
       return [join(releasesDir(app as AppLike), "*.md")];
     },
 
-    /** 启动/构建时生成 */
+    /** 启动/构建时生成（幂等：条目未变则不重写文件） */
     onPrepared(app) {
-      generate(app as AppLike, releasesDir(app as AppLike));
+      buildCatalog(app as AppLike, releasesDir(app as AppLike));
     },
   };
 };
