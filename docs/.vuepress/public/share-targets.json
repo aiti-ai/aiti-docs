@@ -14,10 +14,10 @@
     "byVerdict": {
       "vpn-reachable": 31,
       "vpn-ok": 7,
-      "cn-ok": 11,
-      "cn-reachable-broken": 40,
+      "cn-ok": 7,
+      "cn-reachable-broken": 42,
       "vpn-unreachable": 18,
-      "dead": 26,
+      "dead": 28,
       "needs-config": 3,
       "template": 3
     }
@@ -123,8 +123,8 @@
         }
       },
       "note": {
-        "zh": "匿名且永久；中国大陆访问较慢；国内直连失败（连接被重置）；经 VPN 策略路由后网络可达，但上传失败：[sxcu] 412: No files given.",
-        "en": "Anonymous & permanent; slow from mainland China; direct connection failed (connection reset); reachable through VPN routing, but the upload failed: [sxcu] 412: No files given."
+        "zh": "匿名且永久；中国大陆访问较慢；2026-11-19 起 API 对上传一律回 'Invalid uploader'（站点活着——持续观察）",
+        "en": "Anonymous & permanent; slow from mainland China; API rejecting uploads with 'Invalid uploader' since 2026-11-19 (site alive — under observation)"
       },
       "verified": false
     },
@@ -431,7 +431,7 @@
       "source": "sharex",
       "domain": "bpaste.net",
       "setup": "none",
-      "verdict": "cn-ok",
+      "verdict": "cn-reachable-broken",
       "availability": {
         "direct": "ok",
         "vpn": "not-probed"
@@ -446,8 +446,8 @@
         }
       },
       "note": {
-        "zh": "但 POST 已 302 迁至 bpa.st（服务迁移），上传配置过时",
-        "en": "POST now 302-redirects to bpa.st (service moved) — outdated upload config"
+        "zh": "2026-11-20 复核：服务迁至 bpa.st，创建表单带 XSRF 防护，sxcu 无法驱动（需 code provider）",
+        "en": "2026-11-20 recheck: moved to bpa.st; the create form is XSRF-protected — an .sxcu cannot drive it (needs a code provider)"
       },
       "verified": false
     },
@@ -1295,7 +1295,7 @@
       "source": "sharex",
       "domain": "framapic.org",
       "setup": "none",
-      "verdict": "cn-ok",
+      "verdict": "dead",
       "availability": {
         "direct": "ok",
         "vpn": "not-probed"
@@ -1310,8 +1310,8 @@
         }
       },
       "note": {
-        "zh": "返回首页 URL，Lutim 上传接口未验证/已变更",
-        "en": "returns the homepage URL — Lutim upload API unverified/changed"
+        "zh": "2026-11-20 复核：Framapic 已关停，301 跳转 alt.framasoft.org/framapic/",
+        "en": "2026-11-20 recheck: Framapic decommissioned — redirects to alt.framasoft.org/framapic/"
       },
       "verified": false
     },
@@ -2235,7 +2235,7 @@
       "source": "sharex",
       "domain": "paste.kde.org",
       "setup": "none",
-      "verdict": "cn-ok",
+      "verdict": "dead",
       "availability": {
         "direct": "ok",
         "vpn": "not-probed"
@@ -2250,8 +2250,8 @@
         }
       },
       "note": {
-        "zh": "api/json/create 返回空，API 已变更",
-        "en": "api/json/create returns empty — API has changed"
+        "zh": "2026-11-20 复核：服务已退役，301 跳转 invent.kde.org/snippets",
+        "en": "2026-11-20 recheck: service retired — redirects to invent.kde.org/snippets"
       },
       "verified": false
     },
@@ -2352,7 +2352,7 @@
       "source": "sharex",
       "domain": "pastefy.ga",
       "setup": "none",
-      "verdict": "cn-ok",
+      "verdict": "cn-reachable-broken",
       "availability": {
         "direct": "ok",
         "vpn": "not-probed"
@@ -2367,8 +2367,8 @@
         }
       },
       "note": {
-        "zh": "/create:paste 返回 HTML 首页（API 已迁至 /api/v2/paste），配置过时",
-        "en": "/create:paste returns an HTML page (API moved to /api/v2/paste) — outdated config"
+        "zh": "2026-11-20 复核：/api/* 一律返回 SPA HTML，匿名上传通道已不可用",
+        "en": "2026-11-20 recheck: /api/* serves the SPA HTML — the anonymous upload path is gone"
       },
       "verified": false
     },
