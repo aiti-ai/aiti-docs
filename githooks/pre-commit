@@ -1,0 +1,5 @@
+#!/bin/sh
+# Rewrite example versions in guide docs to the latest published release.
+# See tools/sync-latest-version.mjs. Enable on a fresh clone with:
+#   git config core.hooksPath githooks
+node "$(git rev-parse --show-toplevel)/tools/sync-latest-version.mjs" --stage

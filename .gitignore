@@ -7,3 +7,6 @@ docs/.vuepress/dist/
 
 # 编译生成物（extensions-catalog 插件每次编译重新生成）
 docs/.vuepress/public/extensions.json
+
+# 编译生成物（releases-changelog 插件每次编译重新生成）
+docs/.vuepress/public/releases.json

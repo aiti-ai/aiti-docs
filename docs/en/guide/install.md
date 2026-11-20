@@ -64,7 +64,7 @@ docker run -d --name aiti --init -p 30142:30142 \
 - `core` (~2.1 GB): fork of pi-web + all extensions + node/git + the justget tool market;
 - `full` (~7.8 GB): adds GUI / voice (funasr) / Chrome / tunnels — needs ≥8 GB RAM;
 - version tags: `aitiai/pi-web:v<version>-{core,full}`, rolling `core`/`full`/`latest`;
-- GHCR source: `ghcr.io/aiti-ai/aiti-ai` — same versions and content as Docker Hub (core/full variants), identical tags (e.g. `v0.15.15-aiti.10-core` / `core` / `latest`);
+- GHCR source: `ghcr.io/aiti-ai/aiti-ai` — same versions and content as Docker Hub (core/full variants), identical tags (e.g. `v0.17.0-aiti.1-core` / `core` / `latest`);
 - ⚠ mount only sub-paths of `/opt/aiti`, never the root itself (a root mount shadows the new image on upgrade — extensions would never refresh);
 - all three image channels (Docker Hub / ACR / GHCR) currently ship linux/amd64 only; on ARM hosts add `--platform linux/amd64` to run under emulation (with a performance cost);
 - slow pulls in China? swap the image for `registry.cn-hangzhou.aliyuncs.com/aiti-ai/pi-web:core` (Aliyun ACR, same tags as Docker Hub);
