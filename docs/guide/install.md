@@ -40,7 +40,7 @@ curl -fsSL https://aiti.pw/install.sh | sh
 固定版本：
 
 ```bash
-curl -fsSL https://aiti.pw/install.sh | sh -s -- --ref v0.15.7
+curl -fsSL https://aiti.pw/install.sh | sh -s -- --ref v0.17.0-aiti.1
 ```
 
 环境变量覆盖：`AITI_RELEASE_REPO`（镜像仓）、`AITI_INSTALL_DIR`、`AITI_BIN_DIR`：
@@ -81,7 +81,7 @@ irm https://aiti.pw/install.ps1 | iex
 固定版本与环境变量覆盖：
 
 ```powershell
-$env:AITI_RELEASE_TAG = "v0.15.7"; irm https://aiti.pw/install.ps1 | iex
+$env:AITI_RELEASE_TAG = "v0.17.0-aiti.1"; irm https://aiti.pw/install.ps1 | iex
 ```
 
 `AITI_RELEASE_REPO`（镜像仓）、`AITI_INSTALL_DIR` 同理可覆盖。

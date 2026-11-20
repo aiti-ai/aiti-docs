@@ -40,7 +40,7 @@ curl -fsSL https://aiti.pw/install.sh | sh
 Pin a version:
 
 ```bash
-curl -fsSL https://aiti.pw/install.sh | sh -s -- --ref v0.15.7
+curl -fsSL https://aiti.pw/install.sh | sh -s -- --ref v0.17.0-aiti.1
 ```
 
 Env overrides: `AITI_RELEASE_REPO` (mirror repo), `AITI_INSTALL_DIR`, `AITI_BIN_DIR`:
@@ -81,7 +81,7 @@ Requires PowerShell 5.1+ (built into Windows 10/11). Equivalent: `iwr -useb http
 Pin a version:
 
 ```powershell
-$env:AITI_RELEASE_TAG = "v0.15.7"; irm https://aiti.pw/install.ps1 | iex
+$env:AITI_RELEASE_TAG = "v0.17.0-aiti.1"; irm https://aiti.pw/install.ps1 | iex
 ```
 
 `AITI_RELEASE_REPO` and `AITI_INSTALL_DIR` work the same way.

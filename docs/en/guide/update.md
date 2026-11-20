@@ -13,14 +13,14 @@ Updating aiti Web always follows the same rhythm: **stop the server → update �
 
 ## Version scheme
 
-Versions look like `0.16.0` or `0.16.0-aiti.1` (Debian/Ubuntu style):
+Versions look like `0.17.0` or `0.17.0-aiti.1` (Debian/Ubuntu style):
 
 | Shape | Meaning |
 |---|---|
 | `X.Y.Z` | Upstream core version (the pi-web baseline) |
 | `X.Y.Z-aiti.N` | aiti distribution build based on upstream `X.Y.Z`; rebuilds of the same baseline increment `N` (`-aiti.2`, `-aiti.3` …) |
 
-Ordering follows dpkg semantics, not strict semver: the upstream `X.Y.Z` core dominates, and the fork suffix only breaks ties within the same baseline — `0.16.0-aiti.1` > `0.16.0` (strict semver would treat the suffix as a prerelease and sort it the other way; here it does not). Git tags are `v<version>` and the npm `latest` dist-tag carries the same string.
+Ordering follows dpkg semantics, not strict semver: the upstream `X.Y.Z` core dominates, and the fork suffix only breaks ties within the same baseline — `0.17.0-aiti.1` > `0.17.0` (strict semver would treat the suffix as a prerelease and sort it the other way; here it does not). Git tags are `v<version>` and the npm `latest` dist-tag carries the same string.
 
 Past versions and changelogs live in [GitHub Releases](https://github.com/aiti-ai/aiti-ai/releases).
 
