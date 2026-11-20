@@ -200,6 +200,7 @@ export const zhSidebar = sidebar({
         "aiti-testagent.md",
         "aiti-testagent-native.md",
         "aiti-cpu-meter.md",
+        "aiti-sysmon.md",
         "aiti-event-bus.md",
         "aiti-inject.md",
         "aiti-debug-inject.md",
