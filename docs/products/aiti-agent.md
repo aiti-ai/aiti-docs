@@ -91,6 +91,19 @@ curl -fsSL https://aiti.pw/install.sh | sh
 irm https://aiti.pw/install.ps1 | iex
 ```
 
+@tab 源码运行
+
+适合开发者：克隆仓库后一条命令跑起来，扩展原位加载、改完即生效（不需要部署）。
+
+```bash
+git clone https://github.com/aiti-ai/aiti-ai.git
+cd aiti-ai
+npm run local            # 开发模式（http://127.0.0.1:30141）
+npm run local -- --prod  # 编译运行（next build + next start）
+```
+
+详见 [本地开发与一键启动](/guide/local-dev.md)。
+
 ::::
 
 ```bash

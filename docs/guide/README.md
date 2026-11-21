@@ -20,5 +20,6 @@ description: aiti 指南总览
 | [懒加载契约](/guide/ext-lazy-loading.md) | 两段式转换：薄 entry 常驻 + 重 UI 按需物化 |
 | [扩展开发手册](/ext-dev/) | 🔧 完整手册：从零教程 / 契约与 API 参考 / 插槽全表 / feature / AI 集成 / 部署发布 |
 | [快速开始（aiti-agent 工作台）](/guide/quick-start.md) | 工作台快速上手：安装 → 启动 → 首启配置 → 日常入口 |
+| [本地开发与一键启动](/guide/local-dev.md) | 🛠️ 克隆仓库后一条命令跑起来：扩展原位加载、边改边生效；dev / 编译运行两种模式 |
 | [devtools 快速开始](/devtools/quick-start.md) | 5 分钟跑通「AI 操作页面」：注入 → 起桥 → 接 AI（调试工具链主线，详见 [/devtools/](/devtools/)） |
 | [MCP 桥](/guide/mcp/) | 让任意 AI agent 操作页面、与用户协作（Server / 会话 / 接入 agent / cockpit） |

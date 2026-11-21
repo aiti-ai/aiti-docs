@@ -117,7 +117,7 @@ On first launch, sign in or fill an API key in the **Models** panel and start ch
 - **Page-debugging toolchain**: `aiti-devtools` injects into Vite / Vue / Next / Svelte and other mainstream dev tools, and `aiti-bridge` retrofits any AI agent as an MCP bridge —
   bringing the AI to the page development front line, where the page itself becomes debuggable, interactive, and answerable. See **[/devtools/](/en/devtools/)**.
 
-### Install methods (npm / npx / scripts / Docker)
+### Install methods (npm / npx / scripts / Docker / source)
 
 > Pick one — details in the **[install guide](/en/guide/install.md)** (system requirements / common commands / script transparency).
 
@@ -161,6 +161,19 @@ docker run -d --name aiti --init -p 30142:30142 \
 # PowerShell 5.1+ (built into Windows 10/11)
 irm https://aiti.pw/install.ps1 | iex
 ```
+
+@tab Source
+
+For development: clone the repository and run it with one command — extensions load in place and edits take effect without a deploy.
+
+```bash
+git clone https://github.com/aiti-ai/aiti-ai.git
+cd aiti-ai
+npm run local            # dev mode (http://127.0.0.1:30141)
+npm run local -- --prod  # compiled mode (next build + next start)
+```
+
+See [Local development and one-command start](/en/guide/local-dev.md).
 
 ::::
 

@@ -9,7 +9,7 @@ tags: [guide, quick-start, pi-web, workbench]
 
 5 分钟装好 **aiti-agent**（自托管 Web 工作台，npm 包 `@aiti-ai/pi-web`）并开聊。
 
-> 想要的是「AI 操作网页」的**调试工具链**（aiti-devtools：注入 → 起桥 → 接 AI）？那是另一条主线：[devtools 快速开始](/devtools/quick-start.md)。安装方式的完整说明（三种方式 / 系统要求 / 常用命令 / 脚本透明性）见 [安装](/guide/install.md)。
+> 想要的是「AI 操作网页」的**调试工具链**（aiti-devtools：注入 → 起桥 → 接 AI）？那是另一条主线：[devtools 快速开始](/devtools/quick-start.md)。安装方式的完整说明（npm / npx / 脚本 / Docker / 源码 / 系统要求 / 常用命令 / 脚本透明性）见 [安装](/guide/install.md)。
 
 ## 1. 安装（选一种）
 
@@ -53,6 +53,19 @@ docker run -d --name aiti --init -p 30142:30142 \
 ```
 
 国内拉取慢？镜像名换 `registry.cn-hangzhou.aliyuncs.com/aiti-ai/pi-web:core`（阿里云 ACR，tag 与 Docker Hub 一致）。完整 docker run 指南（端口/环境变量/反向代理/升级运维）见 [Docker 部署](./docker.md)。
+
+@tab 源码运行
+
+适合开发者：克隆仓库后一条命令跑起来，扩展原位加载、改完即生效（不需要部署）。
+
+```bash
+git clone https://github.com/aiti-ai/aiti-ai.git
+cd aiti-ai
+npm run local            # 开发模式（http://127.0.0.1:30141）
+npm run local -- --prod  # 编译运行（next build + next start）
+```
+
+详见 [本地开发与一键启动](/guide/local-dev.md)。
 
 ::::
 

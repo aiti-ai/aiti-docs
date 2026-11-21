@@ -9,7 +9,7 @@ tags: [guide, quick-start, pi-web, workbench]
 
 Get **aiti-agent** (the self-hosted web workbench, npm package `@aiti-ai/pi-web`) installed and chatting in 5 minutes.
 
-> Looking for the **page-debugging toolchain** (aiti-devtools: inject → bridge → connect AI)? That's the other main line: the [devtools quick start](/en/devtools/quick-start.md). Full install details (three methods / system requirements / common commands / script transparency) live on [Installation](/en/guide/install.md).
+> Looking for the **page-debugging toolchain** (aiti-devtools: inject → bridge → connect AI)? That's the other main line: the [devtools quick start](/en/devtools/quick-start.md). Full install details (npm / npx / scripts / Docker / source / system requirements / common commands / script transparency) live on [Installation](/en/guide/install.md).
 
 ## 1. Install (pick one)
 
@@ -53,6 +53,19 @@ docker run -d --name aiti --init -p 30142:30142 \
 ```
 
 Slow pulls in China? swap the image for `registry.cn-hangzhou.aliyuncs.com/aiti-ai/pi-web:core` (Aliyun ACR, same tags as Docker Hub).
+
+@tab Source
+
+For development: clone the repository and run it with one command — extensions load in place and edits take effect without a deploy.
+
+```bash
+git clone https://github.com/aiti-ai/aiti-ai.git
+cd aiti-ai
+npm run local            # dev mode (http://127.0.0.1:30141)
+npm run local -- --prod  # compiled mode (next build + next start)
+```
+
+See [Local development and one-command start](/en/guide/local-dev.md).
 
 ::::
 

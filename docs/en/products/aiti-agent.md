@@ -91,6 +91,19 @@ curl -fsSL https://aiti.pw/install.sh | sh
 irm https://aiti.pw/install.ps1 | iex
 ```
 
+@tab Source
+
+For development: clone the repository and run it with one command — extensions load in place and edits take effect without a deploy.
+
+```bash
+git clone https://github.com/aiti-ai/aiti-ai.git
+cd aiti-ai
+npm run local            # dev mode (http://127.0.0.1:30141)
+npm run local -- --prod  # compiled mode (next build + next start)
+```
+
+See [Local development and one-command start](/en/guide/local-dev.md).
+
 ::::
 
 ```bash

@@ -31,6 +31,7 @@ export const enSidebar = sidebar({
         "lineage.md",
         "architecture.md",
         "quick-start.md",
+        "local-dev.md",
         "ext-services.md",
         "ext-data.md",
         "ext-lazy-loading.md",

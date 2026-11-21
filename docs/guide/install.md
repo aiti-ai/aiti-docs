@@ -1,7 +1,7 @@
 ---
 title: 安装
 icon: download
-description: 安装 aiti Web（@aiti-ai/pi-web）——npm、一键脚本（macOS/Linux）、PowerShell（Windows）三种方式
+description: 安装 aiti Web（@aiti-ai/pi-web）——npm、一键脚本（macOS/Linux）、PowerShell（Windows）、Docker，以及源码运行（开发者）
 tags: [guide, install]
 ---
 
@@ -87,6 +87,19 @@ $env:AITI_RELEASE_TAG = "v0.17.0-aiti.1"; irm https://aiti.pw/install.ps1 | iex
 `AITI_RELEASE_REPO`（镜像仓）、`AITI_INSTALL_DIR` 同理可覆盖。
 
 国内网络加速：脚本默认先走 GitHub Releases，失败自动回退 Gitee 镜像仓（[aiti-ai/aiti-ai](https://gitee.com/aiti-ai/aiti-ai/releases)，资产与校验和一致；超出 Gitee 单文件 100 MB 上限的归档以 `.part-N` 分片 + `.split` 清单发布，脚本自动拼接）。可用 `AITI_MIRROR=gitee`（或 `github`）强制指定源、`AITI_GITEE_REPO` 覆盖镜像仓。
+
+@tab 源码运行
+
+适合开发者：克隆仓库后一条命令跑起来，扩展原位加载、改完即生效（不需要部署）。
+
+```bash
+git clone https://github.com/aiti-ai/aiti-ai.git
+cd aiti-ai
+npm run local            # 开发模式（http://127.0.0.1:30141）
+npm run local -- --prod  # 编译运行（next build + next start）
+```
+
+详见 [本地开发与一键启动](/guide/local-dev.md)。
 
 ::::
 

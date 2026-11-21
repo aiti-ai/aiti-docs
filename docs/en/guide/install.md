@@ -1,7 +1,7 @@
 ---
 title: Installation
 icon: download
-description: Install aiti Web (@aiti-ai/pi-web) — npm, one-line script (macOS/Linux), or PowerShell (Windows)
+description: Install aiti Web (@aiti-ai/pi-web) — npm, one-line script (macOS/Linux), PowerShell (Windows), Docker, or run from source (developers)
 tags: [guide, install]
 ---
 
@@ -87,6 +87,19 @@ $env:AITI_RELEASE_TAG = "v0.17.0-aiti.1"; irm https://aiti.pw/install.ps1 | iex
 `AITI_RELEASE_REPO` and `AITI_INSTALL_DIR` work the same way.
 
 CN network acceleration: installers try GitHub Releases first and fall back to the Gitee mirror ([aiti-ai/aiti-ai](https://gitee.com/aiti-ai/aiti-ai/releases), identical assets and checksums; archives above Gitee's 100 MB per-file cap are published as `.part-N` pieces + a `.split` manifest and reassembled automatically). Force a source with `AITI_MIRROR=gitee` (or `github`); override the mirror repo with `AITI_GITEE_REPO`.
+
+@tab Source
+
+For development: clone the repository and run it with one command — extensions load in place and edits take effect without a deploy.
+
+```bash
+git clone https://github.com/aiti-ai/aiti-ai.git
+cd aiti-ai
+npm run local            # dev mode (http://127.0.0.1:30141)
+npm run local -- --prod  # compiled mode (next build + next start)
+```
+
+See [Local development and one-command start](/en/guide/local-dev.md).
 
 ::::
 
