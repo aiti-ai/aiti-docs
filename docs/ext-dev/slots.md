@@ -88,6 +88,7 @@ ctx.registerItems("sessionTopbar", [{
 | `modelSelector` | 聊天输入模型按钮接管 | 注册即替换原生 ModelSelector（契约 `ModelSelectorSlotProps`；未注册回退原生） |
 | `modelSelectorFooter` | 模型下拉底部操作区 | 管理模型入口（契约 `ModelSelectorFooterSlotProps`） |
 | `sessionStats` | 会话统计下拉内 | 报告入口行（usage-report 等） |
+| `sessionStatsInline` | 会话信息按钮内容尾部（in/out/cache/cost/context 之后） | 内联小指示（aiti-sysmon 的 CPU/内存芯片）。契约：仅行内内容（span/svg），禁块级与嵌套交互元素（渲染在 `<button>` 内；点击冒泡打开会话面板属预期）；extra = `SessionStatsInlineSlotProps`（`isMobile/isCompact` 档位数据，窄档由扩展自决不渲染）；无条目零渲染 |
 | `settingsModels` | 设置「模型」页全接管 | 注册即替换原生 ModelsConfig（契约 `SettingsModelsSlotProps`） |
 | `settingsAgentsFeature` | 设置 Agents 页顶部 feature 块 | 引擎 banner + 入口（契约 `SettingsAgentsFeatureSlotProps`） |
 | `settingsAgents` | 设置「子代理」页全接管 | 注册即替换原生 AgentsConfig（契约 `SettingsAgentsSlotProps`） |

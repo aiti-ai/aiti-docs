@@ -8,7 +8,7 @@ ext:
   soul: 服务器忙不忙，开左栏看一眼就知道。
   type: aiti-ext
   category: 系统工具
-  version: "0.1.0"
+  version: "0.2.0"
   status: active
   author: aiti-ai
   publisher: aiti-ai
@@ -36,13 +36,14 @@ npm 包：[`@aiti-ai/aiti-sysmon`](https://www.npmjs.com/package/@aiti-ai/aiti-s
 - **磁盘**：各挂载点已用/总量条（≥80% 琥珀色、≥90% 红色；自动滤掉 squashfs/loop/efivarfs 等噪音挂载）
 - **网络**：各真实网卡（自动滤掉 lo / docker 桥 / veth）↓/↑ 实时速率 + 累计流量，非 up 状态半透明
 - **底部工具行**：暂停/恢复 + 手动刷新 + 间隔快捷切换（2s / 5s / 15s）；面板文案全量中英双语（宿主语言跟随）
+- **顶栏会话信息 CPU/内存指示**：顶部「会话信息」按钮内容尾部常驻两枚小芯片——`CPU 负载%`、`MEM 占用%`（统一的纯文本标签，默认灰色融入 stats 行，≥70% 琥珀、≥90% 红；hover 显示详情，内存含 used/total 与 swap）；仅宽屏档显示（compact/移动档自动隐藏）；扩展管理器 `topbarChips` 可整体关闭（关即零渲染零采样）
 
 ## 工作方式（零常驻开销）
 
-- **服务端**：只读快照 API `GET /api/extensions/aiti-sysmon/snapshot`，**无后台定时器**——速率类数值
+- **服务端**：只读快照 API `GET /api/extensions/aiti-sysmon/snapshot`（面板）与轻量 API `GET …/brief`（顶栏芯片，仅 cpu/mem 两次廉价读 + 2s TTL 去重，芯片与面板并行轮询时合并采样），**无后台定时器**——速率类数值
   （CPU 占用 %、网卡每秒速率）由 systeminformation 在相邻两次调用间做 delta，客户端轮询节奏即采样窗口；
   慢变数据（磁盘 30s / OS 信息 10min / 温度 5s）服务端 TTL 缓存，单次轮询开销极低。
-- **客户端**：仅当面板**展开、页面可见、未暂停**时才轮询；折叠或切到后台标签页立即停止采样（keep-alive
+- **客户端**：仅当面板**展开、页面可见、未暂停**时才轮询（顶栏芯片：页面可见 + `topbarChips` 开启时轮询 `brief`）；折叠或切到后台标签页立即停止采样（keep-alive
   下也一样）；首帧渲染布局镜像骨架屏（pulse 动画尊重 `prefers-reduced-motion`）；CPU 迷你历史条为客户端内存内最近 60 点，不落盘。
 - **入栈语义**：与「任务」区块同款——刷新页面恢复默认存在（折叠态），用户 ⋮ 关闭本会话不回弹。
 
@@ -50,8 +51,9 @@ npm 包：[`@aiti-ai/aiti-sysmon`](https://www.npmjs.com/package/@aiti-ai/aiti-s
 
 | id | 类型 | 默认 | 含义 |
 |---|---|---|---|
-| `interval` | string | `3` | 面板展开时的轮询间隔秒数（面板折叠/页面隐藏时不采样） |
+| `interval` | string | `3` | 面板展开时的轮询间隔秒数（面板折叠/页面隐藏时不采样）；顶栏芯片同一节拍 |
 | `showSensors` | boolean | 开 | 显示 CPU 温度行 + 传感器芯片列表（读不到时显示 N/A + 配置指引链接） |
+| `topbarChips` | boolean | 开 | 顶栏会话信息尾部 CPU/内存芯片总开关（关即零渲染零采样；仅宽屏档显示） |
 
 ## 温度显示 N/A？——温度传感器说明
 
