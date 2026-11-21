@@ -85,6 +85,9 @@ npm run local -- --prod
 **构建失败提示找不到 vite/esbuild**
 执行 `npm install`（根 devDependencies 已包含 `vite` 与 `esbuild`）。
 
+**日志出现 `extension dependency reconcile failed`，或部分扩展未加载**
+某个扩展依赖的版本可能尚未发布到 npm registry。脚本会跳过该包、以降级方式安装其余依赖，并让 `@aiti-ai/ext-shared` 直接使用仓库源码（源码优先）。若仍有扩展缺失，`cd extensions/<id> && npm install` 后重启。
+
 **日志提示 `deployed extension(s) ... shadow the in-place sources`**
 user 扩展层（dev：`~/.pi/web-dev/extensions`；prod：`~/.pi/web/extensions`）里有同名部署副本，会盖住仓库源码。把该目录下对应扩展移走即可（原位不需要部署副本）。
 

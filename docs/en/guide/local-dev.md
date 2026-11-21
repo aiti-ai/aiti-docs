@@ -86,6 +86,9 @@ Run `npm run local:build -- --only <id> --force-build`; if the build fails, foll
 **Build cannot find vite/esbuild**
 Run `npm install` (the root devDependencies include `vite` and `esbuild`).
 
+**`extension dependency reconcile failed` in the log, or some extensions missing**
+A dependency version may not be published to the npm registry yet. The script skips that package, installs the rest in degraded mode, and points `@aiti-ai/ext-shared` at the repository source (source wins). If an extension is still missing, run `cd extensions/<id> && npm install` and restart.
+
 **`deployed extension(s) ... shadow the in-place sources`**
 The user extension layer (dev: `~/.pi/web-dev/extensions`; prod: `~/.pi/web/extensions`) contains a deployed copy with the same id, which wins over the repository source. Move it away — in-place mode needs no deployed copy.
 
