@@ -36,7 +36,7 @@ npm 包：[`@aiti-ai/aiti-sysmon`](https://www.npmjs.com/package/@aiti-ai/aiti-s
 - **磁盘**：各挂载点已用/总量条（≥80% 琥珀色、≥90% 红色；自动滤掉 squashfs/loop/efivarfs 等噪音挂载）
 - **网络**：各真实网卡（自动滤掉 lo / docker 桥 / veth）↓/↑ 实时速率 + 累计流量，非 up 状态半透明
 - **底部工具行**：暂停/恢复 + 手动刷新 + 间隔快捷切换（2s / 5s / 15s）；面板文案全量中英双语（宿主语言跟随）
-- **顶栏会话信息 CPU/内存指示**：顶部「会话信息」按钮内容尾部常驻两枚小芯片——`CPU 负载%`、`MEM 占用%`（统一的纯文本标签，默认灰色融入 stats 行，≥70% 琥珀、≥90% 红；hover 显示详情，内存含 used/total 与 swap）；仅宽屏档显示（compact/移动档自动隐藏）；扩展管理器 `topbarChips` 可整体关闭（关即零渲染零采样）
+- **顶栏会话信息 CPU/内存指示**：顶部「会话信息」按钮内容尾部常驻两枚紧凑芯片——`C8%`（CPU 负载）、`M89%`（内存占用），与宿主 in/out/cache/cost/context 同一行、同一文本流（默认灰色，≥70% 琥珀、≥90% 红）。hover 该按钮时 tooltip 多出一行 `system: CPU 12% · MEM 89% · 51.9 GB / 58.6 GB · swap 17.0 GB / 34.0 GB`（由 `meta.tooltip` 契约注入，全称含义与内存明细都在这里；采样超过 90s 未更新则不显示，避免旧值误导）。仅宽屏档显示（compact/移动档自动隐藏）；扩展管理器 `topbarChips` 可整体关闭（关即零渲染零采样、tooltip 也不再出现该行）
 
 ## 工作方式（零常驻开销）
 
