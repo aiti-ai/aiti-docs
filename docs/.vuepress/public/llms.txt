@@ -2,7 +2,7 @@
 
 > 以 pi 为引擎的个人 AI 开发工作台与本地调试注入生态：aiti-agent（自托管 Web 工作台）· aiti-devtools（页面内 AI 调试助手，AI 进驻网页面对面调试）· aiti-bridge（任意 AI agent 经 MCP 操作页面）。
 
-AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 73+ 个可组合扩展（调试注入 / 多 agent / 终端·VNC·RDP / 隧道 / 模型管理 / 配置安全网 / IM 接入等），aiti-devtools 已适配 DSH / OpenClaw / OpenCode 宿主。
+AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 74+ 个可组合扩展（调试注入 / 多 agent / 终端·VNC·RDP / 隧道 / 模型管理 / 配置安全网 / IM 接入等），aiti-devtools 已适配 DSH / OpenClaw / OpenCode 宿主。
 
 ## 文档
 - [首页 · 系统特色](https://aiti.pw/): 生态全景与特色速览
@@ -76,6 +76,7 @@ AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 73+ 个
 - [aiti-testagent](https://aiti.pw/extensions/aiti-testagent.html): Java 后端 AI 调试 MCP + IDE —— 扫描 Java 进程/attach 一键连桥/Tunnel 桥多端点纳管，JVM 内任意修改/Mock·SQL 拦截模拟/热更新/诊断采样，58 工具 10 组按需暴露，全可逆
 - [aiti-testagent-native](https://aiti.pw/extensions/aiti-testagent-native.html): testagent-native（Windows 原生进程活体操控）可视面 —— broker 进程/会话/挂钩/事件流；原 aiti-wintrace（2026-11-07 改名）
 - [aiti-ui-env](https://aiti.pw/extensions/aiti-ui-env.html): 后台无头服务器 UI 调试的环境分配器 —— 4 态模式裁决新启动 MCP/应用的显示环境，Xvfb+openbox+AT-SPI 虚拟屏 + VNC-on-web + RDP-on-web，Linux/Windows/macOS 三平台服务化；VNC 密码由 VNC server 自己认证（桥纯透传）
+- [aiti-video-studio](https://aiti.pw/extensions/aiti-video-studio.html): 把 scene.json 脚本确定性回放成演示视频——浏览器/桌面录制、TTS 旁白、光标与覆盖层、转场、字幕、多格式导出
 - [aiti-word-docx-preview](https://aiti.pw/extensions/aiti-word-docx-preview.html): .docx 高保真只读预览（docx-preview：分页 / 页眉页脚 / 表格 / 图片 / 列表还原）
 - [aiti-word-superdoc](https://aiti.pw/extensions/aiti-word-superdoc.html): .docx 在线编辑（SuperDoc：ProseMirror docx 双向）。AGPL 隔离于本扩展，不装即无
 - [aiti-zcode-agent](https://aiti.pw/extensions/aiti-zcode-agent.html): 智谱 ZCode（桌面端内嵌 CLI runtime）驱动 —— app-server 长驻（默认，流式/工具卡/steer/附件）+ oneshot 兜底双通道，接入 All Sessions，合规吃 GLM 编程套餐
@@ -95,6 +96,7 @@ AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 73+ 个
 - [aiti-devtools-webpack](https://aiti.pw/devtools/integrations/webpack-rspack.html): webpack-dev-server 插件 —— 一个插件 = dev server 内置 MCP + 自动注入（Rspack 直接复用）
 - [aiti-devtools-browser-ext](https://aiti.pw/devtools/browser-ext.html): 任意网页零改造注入 aiti-devtools——Chrome / Edge / Firefox（含 Android）MV3 扩展：FAB + Inspector + AI 窗，配合桥即可让 pi / claude / opencode 操作任意页面
 - [aiti-bridge](https://aiti.pw/extensions/aiti-bridge.html): MCP 桥 —— 让任意 AI agent 操作页面、直达 IDE AI 窗口
+- [aiti-desktop-widget](https://aiti.pw/extensions/aiti-desktop-widget.html): 与业务无关的原生桌面窗口壳——无框/透明/置顶/可点击穿透/可拖动，内容一律 URL 或本地 HTML；多显示器定位 + stdin JSONL 控制；供 aiti-video-studio 实时字幕、悬浮图标/桌面宠物使用
 - [aiti-devtools-dsh](https://aiti.pw/extensions/aiti-devtools-dsh.html): 把 aiti-devtools 完整移植到 DeepSeek Harness（DSH）—— 同款 launcher + 16 工具 + agent/pre-step 占位符替换（[元素N]/[回答N]/[错误N]）+ AI 窗候选条（元素/回答/错误三色 chip），官方 web UI 即 AI 窗
 - [aiti-devtools-openclaw](https://aiti.pw/extensions/aiti-devtools-openclaw.html): OpenClaw 插件直连跳过 MCP —— 16 工具注册进 agent 会话 + 会话自动上线 + chat.send 消息注入 + 答复回传 + 占位符对照表，cockpit 伴生 AI 窗
 - [aiti-devtools-opencode](https://aiti.pw/extensions/aiti-devtools-opencode.html): OpenCode host 插件（16 工具进程内注册 + messages.transform 占位符改写）+ 官方 web UI 即 AI 窗（nginx 反代剥 CSP + sub_filter 注入，不 fork）
