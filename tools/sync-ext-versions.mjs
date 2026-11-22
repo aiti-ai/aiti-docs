@@ -17,6 +17,7 @@
  *   3. $AITI_AI_DIR/packages/<id>/package.json        — bridge & shared packages (aiti-bridge, secret-mask-core)
  *   4. $AITI_AI_DIR/integrations/<id>/package.json    — integrations, flat (dsh-secret-mask)
  *   5. $AITI_AI_DIR/integrations/<repo>/<id>/package.json — integrations, per-repo layout (DSH/OpenClaw/OpenCode host adapters)
+ *   6. $AITI_AI_DIR/integrations/<id>/npm/package.json  — npm launcher of a native integration (aiti-desktop-widget)
  * AITI_AI_DIR defaults to ../aiti-ai (workflow layout; override for local runs).
  * Entries with no source there (git-pullkeep: SKILL.md carries no version
  * metadata) are reported as skipped and left untouched.
@@ -76,6 +77,8 @@ function sourceVersion(id) {
   }
   const pkgs = SOURCE_ROOTS.map((r) => join(r, id, "package.json"));
   for (const root of perRepoRoots) pkgs.push(join(root, id, "package.json"));
+  // Native integration with an npm launcher beside its Rust project.
+  pkgs.push(join(INTEGRATIONS_DIR, id, "npm", "package.json"));
   for (const pkg of pkgs) {
     if (!existsSync(pkg)) continue;
     try {
