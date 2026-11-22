@@ -27,7 +27,7 @@ aiti is not a single product but an **AI development tool ecosystem**. All produ
 | 10 | **aiti-devtools-vue / -react / -svelte** | 📋 planned (Vue / SvelteKit reuse the Vite plugin for now) | Framework-specific plugins | Deep framework integration such as component hierarchy info | 📋 |
 | 11 | **aiti-core** | 📋 planned (`@aiti-ai/aiti`) | SDK (protocol/types/shared library) | Shared by all products: bridge protocol, `pageId` session model, injection script, MCP tool definitions | 📋 |
 | 12 | **Extension ecosystem** | published npm `@aiti-ai/*` extension packages + 63+ bundled in pi-web | pi-web extensions | session-manager / git toolchain / multi-agent backends (Claude Code, Codex, Cursor…) / model wizard / service-tunnels / document viewers… | ✅ [browse all](/en/extensions/) |
-| 13 | **Standalone pieces** | [GitHub `aiti-ai` org](https://github.com/orgs/aiti-ai/repositories) | services / CLIs / libraries | service-tunnels (port tunnels), pi-subagents (pi subagent orchestration), grdpwasm (Web RDP), pi-models-respect, ddns | ✅ |
+| 13 | **Standalone pieces** | [GitHub `aiti-ai` org](https://github.com/orgs/aiti-ai/repositories) | services / CLIs / libraries | service-tunnels (port tunnels), pi-subagents (pi subagent orchestration), grdpwasm (Web RDP), aiti-widget (desktop overlay shell / six-platform native binaries + npm), pi-models-respect, ddns | ✅ |
 | 14 | **aiti-docs** | [github.com/aiti-ai/aiti-docs](https://github.com/aiti-ai/aiti-docs) (source of this site) | Documentation site (this website) | VuePress docs + product matrix + roadmaps | ✅ this page |
 
 > Brand and identity: GitHub org `aiti-ai` · website `https://aiti.pw` · npm scope `@aiti-ai` · MIT license.
