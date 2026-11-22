@@ -104,13 +104,17 @@ edge-tts + ffmpeg 合成，无第三方音频；`node demo/play/serve.mjs` 可�
 
 ## 页面控制与单行自适应（默认开）
 
-loopback 页面默认获得 **窗口控制能力**（`capabilities/widget-page-control.json` +
+loopback 页面默认获得 **页面控制能力**（`capabilities/widget-page-control.json` +
 `withGlobalTauri`）：可读写位置/尺寸/显示器、`setSize`/`setPosition`/`center`、尺寸约束、
 `startDragging`/`startResizeDragging`、置顶/穿透/跨工作区/跳过任务栏/阴影/装饰/聚焦/标题、
-hide/show/close 和 WebView zoom。能力只匹配 `127.0.0.1` / `localhost`；`--allow-remote true`
-加载的外部页面不能调用。默认授予完整的 **`core:window:*` + `core:webview:*` allow-list**
-（包含创建/销毁窗口、全屏/最大化、图标/徽标/进度、清数据、DevTools）；装入 widget 的
-loopback 页面应按可信代码对待，需要更小面时直接删 capability 权限。
+hide/show/close、全屏/最大化、图标/徽标/进度、DevTools，以及 `core:webview` / `core:app`
+（版本/标识/主题/退出）/ `core:event`（listen/emit）/ `core:image`（PNG/ICO 解码）/
+`core:menu` / `core:path` / `core:resources` / `core:tray` 和 dialog 插件的原生
+`open/save/ask/confirm/message`。能力只匹配 `127.0.0.1` / `localhost`；`--allow-remote true`
+加载的外部页面不能调用。`Cargo.toml` 同时启用了 `tray-icon`、`image-png`、`image-ico`
+特性，页面可以真正创建托盘图标、菜单与图像（二进制约 +0.8 MB）。装入 widget 的
+loopback 页面应按可信代码对待，需要更小面时直接删 capability 权限，再用
+`node scripts/check-capabilities.mjs` 对照 Tauri ACL 清单校验（缺/多都会报错，`--fix` 重写）。
 
 `demo/play/play.html` 在单行模式下（`layout=line` 或高度 ≤220px）默认 `autosize=1`：按当前
 歌词宽度调整窗口，**保持窗口中心不变**，长度自动伸缩；字号按高度固定以便测量。`autosize=0`

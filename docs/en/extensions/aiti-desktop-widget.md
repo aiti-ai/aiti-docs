@@ -83,15 +83,19 @@ The sample audio/lyrics are generated with edge-tts + ffmpeg (no third-party aud
 
 ## Page control and one-line autosize (default on)
 
-Loopback pages get **window control** by default (`capabilities/widget-page-control.json` +
+Loopback pages get **page control** by default (`capabilities/widget-page-control.json` +
 `withGlobalTauri`): geometry/monitor reads, `setSize`/`setPosition`/`center`, size constraints,
 `startDragging`/`startResizeDragging`, always-on-top/click-through/all-workspaces/skip-taskbar/
-shadow/decorations/focusable/title, hide/show/close and WebView zoom. The capability matches only
-`127.0.0.1` / `localhost`; external pages loaded with `--allow-remote true` cannot invoke it.
-The default set is the complete **`core:window:*` + `core:webview:*` allow-list** (including
-create/destroy, fullscreen/maximize, icon/badge/progress, clear-data and DevTools). Treat every
+shadow/decorations/focusable/title, hide/show/close, fullscreen/maximize, icon/badge/progress,
+DevTools, plus `core:webview`, `core:app` (version/identifier/theme/exit), `core:event`
+(listen/emit), `core:image` (PNG/ICO decoding), `core:menu`, `core:path`, `core:resources`,
+`core:tray` and the dialog plugin's native `open/save/ask/confirm/message`. The capability
+matches only `127.0.0.1` / `localhost`; external pages loaded with `--allow-remote true` cannot
+invoke it. `Cargo.toml` enables the matching `tray-icon`, `image-png` and `image-ico` features so
+pages can really build tray icons, menus and images (~0.8 MB extra binary size). Treat every
 loopback page as trusted code; trim `capabilities/widget-page-control.json` if a deployment needs
-a smaller surface.
+a smaller surface and re-check with `node scripts/check-capabilities.mjs` (fails on missing or
+unknown permissions; `--fix` rewrites the list).
 
 `demo/play/play.html` in one-line mode (`layout=line` or height ≤220px) defaults to `autosize=1`:
 the window width follows the current lyric while the **window center stays fixed**; use
