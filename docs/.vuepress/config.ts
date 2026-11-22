@@ -1,5 +1,6 @@
 import { defineUserConfig } from 'vuepress';
 import { viteBundler } from '@vuepress/bundler-vite';
+import { redirectPlugin } from '@vuepress/plugin-redirect';
 import theme from './theme.ts';
 import extensionsCatalog from './plugins/extensions-catalog.ts';
 import releasesChangelog from './plugins/releases-changelog.ts';
@@ -74,6 +75,15 @@ export default defineUserConfig({
 
   plugins: [
     blockGitPlugin,
+    // 首次打开按浏览器语言自动切换中/英文（zh* → /，其余 → /en/）。
+    // 同一标签页内手动切换语言后不再回弹（插件用 sessionStorage 记忆本次会话）。
+    redirectPlugin({
+      switchLocale: 'direct',
+      localeConfig: {
+        '/': ['zh', 'zh-CN', 'zh-Hans', 'zh-TW', 'zh-Hant'],
+        '/en/': ['en', 'en-US', 'en-GB', 'en-AU', 'en-CA'],
+      },
+    }),
     // 扩展注册表：扫描 docs/extensions/*.md 的 ext frontmatter → 生成 /extensions.json
     extensionsCatalog(),
     // 变更历史：扫描 releases/*.md（aiti-ai release notes 同步件）→ 生成 /releases.json

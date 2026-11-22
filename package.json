@@ -22,6 +22,7 @@
     "@vuepress/plugin-markdown-hint": "2.0.0-rc.112",
     "@vuepress/plugin-markdown-tab": "2.0.0-rc.112",
     "@vuepress/plugin-medium-zoom": "2.0.0-rc.112",
+    "@vuepress/plugin-redirect": "2.0.0-rc.121",
     "@vuepress/plugin-seo": "2.0.0-rc.112",
     "@vuepress/plugin-slimsearch": "2.0.0-rc.122",
     "gh-pages": "^6.3.0",

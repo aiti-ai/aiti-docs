@@ -30,6 +30,9 @@ importers:
       '@vuepress/plugin-medium-zoom':
         specifier: 2.0.0-rc.112
         version: 2.0.0-rc.112(vuepress@2.0.0-rc.26(@vuepress/bundler-vite@2.0.0-rc.26(@types/node@26.2.0)(sass@1.102.0))(vue@3.5.41))
+      '@vuepress/plugin-redirect':
+        specifier: 2.0.0-rc.121
+        version: 2.0.0-rc.121(vuepress@2.0.0-rc.26(@vuepress/bundler-vite@2.0.0-rc.26(@types/node@26.2.0)(sass@1.102.0))(vue@3.5.41))
       '@vuepress/plugin-seo':
         specifier: 2.0.0-rc.112
         version: 2.0.0-rc.112(vuepress@2.0.0-rc.26(@vuepress/bundler-vite@2.0.0-rc.26(@types/node@26.2.0)(sass@1.102.0))(vue@3.5.41))
