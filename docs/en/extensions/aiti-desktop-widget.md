@@ -78,8 +78,9 @@ falls back to GTK/Chrome captions.
 - **Linux**: WebKitGTK 4.1 + GTK3; on X11 without a compositor transparent areas may render black.
 - **Windows**: WebView2 runtime required (preinstalled on Windows 10/11, including ARM64); the
   binary is unsigned.
-- **macOS**: `Info.plist` is embedded in `__TEXT,__info_plist` (ATS localhost exception +
-  `LSUIElement`), so the bare binary loads `http://127.0.0.1` without an `.app` bundle.
+- **macOS**: minimum **10.15 (Intel) / 11.0 (Apple Silicon)**; `Info.plist` is embedded in
+  `__TEXT,__info_plist` (ATS localhost exception + `LSUIElement`), so the bare binary loads
+  `http://127.0.0.1` without an `.app` bundle; tested on 11.7.
 
 ## Release
 

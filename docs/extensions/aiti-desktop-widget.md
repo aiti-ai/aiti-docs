@@ -101,8 +101,9 @@ GTK/Chrome 字幕。
 - **Linux**：需要 WebKitGTK 4.1 + GTK3；无 compositor 的 X11 可能把透明区渲染成黑色（壳本身
   仍可运行）。CI 在 Ubuntu 22.04/24.04 构建 x64/arm64。
 - **Windows**：需要 WebView2 运行时（Win10/11 预装，含 ARM64）；二进制未签名。
-- **macOS**：可执行文件把 `Info.plist` 嵌入 `__TEXT,__info_plist`（ATS localhost 例外 +
-  `LSUIElement`），裸二进制可直接加载 `http://127.0.0.1`，不必 `.app` bundle。
+- **macOS**：最低 **10.15（Intel）/ 11.0（Apple Silicon）**；可执行文件把 `Info.plist` 嵌入
+  `__TEXT,__info_plist`（ATS localhost 例外 + `LSUIElement`），裸二进制可直接加载
+  `http://127.0.0.1`，不必 `.app` bundle；实测在 11.7。
 
 ## 发布与测试
 
