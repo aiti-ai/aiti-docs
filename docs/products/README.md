@@ -27,7 +27,7 @@ aiti 不是单一产品，而是一个 **AI 开发工具生态**。所有产品�
 | 10 | **aiti-devtools-vue / -react / -svelte** | 📋 规划（Vue / SvelteKit 现阶段直接复用 Vite 插件） | 框架专属插件 | 组件层级信息等框架深度集成 | 📋 |
 | 11 | **aiti-core** | 📋 规划（`@aiti-ai/aiti`） | SDK（协议/类型/共享库） | 全产品共享：桥协议、`pageId` 会话模型、注入脚本、MCP 工具定义 | 📋 |
 | 12 | **扩展生态** | npm `@aiti-ai/*` 已发布扩展包 + pi-web 内置 63+ | pi-web 扩展 | session-manager / git 工具链 / 多 agent 后端（Claude Code、Codex、Cursor…）/ 模型向导 / service-tunnels / 文档查看器… | ✅ [浏览全部](/extensions/) |
-| 13 | **周边独立件** | [GitHub `aiti-ai` org](https://github.com/orgs/aiti-ai/repositories) | 服务 / CLI / 库 | service-tunnels（端口隧道）、pi-subagents（pi 子代理编排）、grdpwasm（Web RDP）、aiti-widget（桌面悬浮窗 / 六平台原生二进制 + npm）、pi-models-respect、ddns | ✅ |
+| 13 | **周边独立件** | [GitHub `aiti-ai` org](https://github.com/orgs/aiti-ai/repositories) | 服务 / CLI / 库 | service-tunnels（端口隧道）、pi-subagents（pi 子代理编排）、grdpwasm（Web RDP）、aiti-desktop-widget（桌面悬浮窗 / 六平台原生二进制 + npm）、pi-models-respect、ddns | ✅ |
 | 14 | **aiti-docs** | [github.com/aiti-ai/aiti-docs](https://github.com/aiti-ai/aiti-docs)（本站源码） | 文档站（本网站） | VuePress 文档 + 产品矩阵 + 路线图 | ✅ 本页 |
 
 > 品牌与身份：GitHub 组织 `aiti-ai` · 官网 `https://aiti.pw` · npm scope `@aiti-ai` · 协议 MIT。

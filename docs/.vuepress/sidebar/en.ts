@@ -121,7 +121,7 @@ export const enSidebar = sidebar({
         // Standalone CLI tools (not installable as extensions)
         "git-pullkeep.md",
         // Standalone desktop shell/CLI (not installable as a pi-web extension)
-        "aiti-widget.md",
+        "aiti-desktop-widget.md",
         // pi plugins (installed into ~/.pi/agent, not installable as aiti-agent extensions)
         "pi-models-combo.md",
         "pi-subagents.md",

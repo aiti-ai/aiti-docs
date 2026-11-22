@@ -123,7 +123,7 @@ export const zhSidebar = sidebar({
         // 独立 CLI 工具（不可安装为扩展）
         "git-pullkeep.md",
         // 独立桌面壳/CLI（不可安装为 pi-web 扩展）
-        "aiti-widget.md",
+        "aiti-desktop-widget.md",
         // pi 插件（装进 ~/.pi/agent，不可安装为 aiti-agent 扩展）
         "pi-models-combo.md",
         "pi-subagents.md",
