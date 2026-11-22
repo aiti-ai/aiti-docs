@@ -88,8 +88,10 @@ Loopback pages get **window control** by default (`capabilities/widget-page-cont
 `startDragging`/`startResizeDragging`, always-on-top/click-through/all-workspaces/skip-taskbar/
 shadow/decorations/focusable/title, hide/show/close and WebView zoom. The capability matches only
 `127.0.0.1` / `localhost`; external pages loaded with `--allow-remote true` cannot invoke it.
-Destructive/multi-window permissions (create/destroy, fullscreen/maximize, icon/badge/progress,
-clear-data/devtools) stay off.
+The default set is the complete **`core:window:*` + `core:webview:*` allow-list** (including
+create/destroy, fullscreen/maximize, icon/badge/progress, clear-data and DevTools). Treat every
+loopback page as trusted code; trim `capabilities/widget-page-control.json` if a deployment needs
+a smaller surface.
 
 `demo/play/play.html` in one-line mode (`layout=line` or height ≤220px) defaults to `autosize=1`:
 the window width follows the current lyric while the **window center stays fixed**; use

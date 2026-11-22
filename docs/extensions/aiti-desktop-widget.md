@@ -108,8 +108,9 @@ loopback 页面默认获得 **窗口控制能力**（`capabilities/widget-page-c
 `withGlobalTauri`）：可读写位置/尺寸/显示器、`setSize`/`setPosition`/`center`、尺寸约束、
 `startDragging`/`startResizeDragging`、置顶/穿透/跨工作区/跳过任务栏/阴影/装饰/聚焦/标题、
 hide/show/close 和 WebView zoom。能力只匹配 `127.0.0.1` / `localhost`；`--allow-remote true`
-加载的外部页面不能调用。创建/销毁窗口、全屏/最大化、图标/徽标/进度、清数据/DevTools 等
-破坏性能力不开。
+加载的外部页面不能调用。默认授予完整的 **`core:window:*` + `core:webview:*` allow-list**
+（包含创建/销毁窗口、全屏/最大化、图标/徽标/进度、清数据、DevTools）；装入 widget 的
+loopback 页面应按可信代码对待，需要更小面时直接删 capability 权限。
 
 `demo/play/play.html` 在单行模式下（`layout=line` 或高度 ≤220px）默认 `autosize=1`：按当前
 歌词宽度调整窗口，**保持窗口中心不变**，长度自动伸缩；字号按高度固定以便测量。`autosize=0`
