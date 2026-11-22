@@ -62,6 +62,23 @@ aiti-desktop-widget http://127.0.0.1:8765/ --display 1 --center true
 The full CLI/config/control-channel reference lives in the
 [README](https://github.com/aiti-ai/aiti-ai/tree/main/integrations/aiti-desktop-widget#readme).
 
+## Demo: transparent lyric player
+
+`demo/play/play.html` is a dependency-free example: audio playback + LRC/SRT/VTT lyrics +
+current-line highlight + seekable progress + keyboard controls. The card is translucent by
+default; `?bare=1` removes it for a text-only overlay.
+
+```bash
+aiti-desktop-widget \
+  --html '/abs/path/demo/play/play.html?file=assets/aiti-intro.mp3&lyrics=assets/aiti-intro.lrc' \
+  --width 900 --height 320 --transparent true
+```
+
+Params: `file`, `lyrics` (`lrc|srt|vtt|subtitle`), `title`, `artist`, `cover`,
+`theme=dark|light`, `bg=transparent|none|color`, `bare=1`, `autoplay=1`, `loop=1`, `volume`.
+The sample audio/lyrics are generated with edge-tts + ffmpeg (no third-party audio); run
+`node demo/play/serve.mjs` for a local preview.
+
 ## Used by aiti-video-studio
 
 Video Studio's desktop `overlay` caption mode opens a loopback caption page

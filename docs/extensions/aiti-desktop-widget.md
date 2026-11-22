@@ -86,6 +86,21 @@ echo '{"cmd":"move","display":1,"x":24,"y":800}' | aiti-desktop-widget http://..
 完整参数、配置 JSON、stdin/stdout 事件、拖动/穿透/本地 HTML 的安全边界见
 [README](https://github.com/aiti-ai/aiti-ai/tree/main/integrations/aiti-desktop-widget#readme)。
 
+## 演示 Demo：透明歌词播放器
+
+`demo/play/play.html` 是一个零依赖示例：播放音频 + LRC/SRT/VTT 歌词 + 当前行高亮 + 进度条 +
+键盘控制，卡片默认半透明，`?bare=1` 去卡片，适合悬浮窗。
+
+```bash
+aiti-desktop-widget \
+  --html '/abs/path/demo/play/play.html?file=assets/aiti-intro.mp3&lyrics=assets/aiti-intro.lrc' \
+  --width 900 --height 320 --transparent true
+```
+
+参数：`file`（音频）、`lyrics`（`lrc|srt|vtt|subtitle`）、`title`、`artist`、`cover`、`theme=dark|light`、
+`bg=transparent|none|颜色`、`bare=1`、`autoplay=1`、`loop=1`、`volume`。示例音频/字幕由
+edge-tts + ffmpeg 合成，无第三方音频；`node demo/play/serve.mjs` 可本地预览。
+
 ## 与 aiti-video-studio 集成
 
 **aiti-video-studio** 的桌面 `overlay` 字幕模式用
