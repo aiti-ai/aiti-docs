@@ -77,7 +77,7 @@ aiti-desktop-widget \
 Params: `file`, `lyrics` (`lrc|srt|vtt|subtitle`), `title`, `artist`, `cover`,
 `theme=dark|light`, `bg=transparent|none|color`, `bare=1`, `autoplay` (default 1, attempts to start on open),
 `layout=auto|card|line`, `loop=1`, `volume`. At height ≤220px (or `layout=line`) the page
-switches to a one-line marquee with the current-line progress bar drawn on the lyric.
+switches to a one-line marquee with the text-width progress fill covering the current lyric (karaoke-style).
 The sample audio/lyrics are generated with edge-tts + ffmpeg (no third-party audio); run
 `node demo/play/serve.mjs` for a local preview.
 

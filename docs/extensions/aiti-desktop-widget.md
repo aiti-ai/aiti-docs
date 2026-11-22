@@ -99,7 +99,7 @@ aiti-desktop-widget \
 
 参数：`file`（音频）、`lyrics`（`lrc|srt|vtt|subtitle`）、`title`、`artist`、`cover`、`theme=dark|light`、
 `bg=transparent|none|颜色`、`bare=1`、`autoplay`（默认 1，打开即尝试播放）、`layout=auto|card|line`、`loop=1`、`volume`。
-高度 ≤220px 或 `layout=line` 时自动切单行跑马灯：只显示当前行，长文按当前行进度横向滚动，歌词上叠当前行进度条。示例音频/字幕由
+高度 ≤220px 或 `layout=line` 时自动切单行跑马灯：只显示当前行，长文按当前行进度横向滚动，歌词上叠与歌词等宽的当前行进度填充（karaoke 式覆盖歌词）。示例音频/字幕由
 edge-tts + ffmpeg 合成，无第三方音频；`node demo/play/serve.mjs` 可本地预览。
 
 ## 与 aiti-video-studio 集成
