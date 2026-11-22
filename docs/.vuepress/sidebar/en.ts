@@ -120,6 +120,8 @@ export const enSidebar = sidebar({
         "aiti-devtools-opencode.md",
         // Standalone CLI tools (not installable as extensions)
         "git-pullkeep.md",
+        // Standalone desktop shell/CLI (not installable as a pi-web extension)
+        "aiti-widget.md",
         // pi plugins (installed into ~/.pi/agent, not installable as aiti-agent extensions)
         "pi-models-combo.md",
         "pi-subagents.md",
