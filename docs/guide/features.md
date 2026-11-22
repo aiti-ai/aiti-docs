@@ -19,6 +19,8 @@ aiti-agent 构建于开源项目 [pi-web](https://github.com/agegr/pi-web) 之�
 
 判定依据：以 `up/main`（上游主线）逐个路径比对——上游主线没有 `extensions/`、`pi-plugins/`、`packages/` 目录，因此**下文所有扩展与 pi 插件均为 🟢 自研**；宿主层每项按「上游是否存在该模块 + 我方提交量」判定。
 
+> 覆盖范围：已发布扩展（`extensions/`）、pi 插件（`pi-plugins/`）、共享包与集成（`packages/`、`integrations/`），以及尚未公开的实验扩展（视频工作室、方案先行、方案采认等，集中维护在实验区）。
+
 ---
 
 ## 一、四大招牌能力（先看这里）
@@ -356,9 +358,45 @@ Monaco 编辑接管 + 保存（mtime 冲突 409、白名单与大小校验）、
 | `vscode-ext` | VS Code 扩展 | 在编辑器里注入 + 接桥 + MCP 接线 + 跳转 AI 窗口 |
 | `opencode-ext` / `openclaw-web-ext` / `dsh-web-ext` | 宿主 adapter | devtools 能力移植到 OpenCode / OpenClaw / DSH 三个宿主 |
 | `dsh-secret-mask` / `dsh-market` | 插件与市场索引 | DSH 侧的脱敏插件与插件市场索引（index v1 已起草） |
-| `aiti-desktop-widget` | 桌面组件壳 | 无边框、透明、置顶、可穿透/可拖的桌面挂件壳，加载任意 http(s) 页面或本地 HTML；用于桌面字幕窗、悬浮图标、状态卡、桌面宠物 |
+| `aiti-desktop-widget` | 桌面组件壳 | 无边框、透明、置顶、可穿透/可拖的桌面挂件壳，加载任意 http(s) 页面或本地 HTML；支持指定显示器与运行时重新定位；用于桌面字幕窗、悬浮图标、状态卡、桌面宠物（视频工作室的实时字幕窗就靠它） |
 | `aiti-bridge` + stdio shim | 独立服务 | 页面连接 / SSE / 工具执行 / MCP JSON-RPC 共用一个端口（默认 127.0.0.1:8777），供任何标准 MCP client 接入 |
 | `aiti-widget-interaction` | 包 | 宿主托管的异步用户交互（confirm / choose / input）：SSE + HTTP、挂起队列 + 浏览器渲染器，供所有 widget 复用 |
+| `relay-worker` | 边缘服务 | 部署在 Vercel 上的中继 worker，给跨网络的桥/设备互连做转发 |
+
+> 这些集成共用几个共享内核包：`aiti-devtools-core`（桥核心：页面 ⇄ agent 消息/会话桥、Streamable HTTP MCP 端点、浏览器协议）、`aiti-devtools-inject`（注入 SDK 与产物：launcher + client、host/iframe 路由）、`aiti-devtools-agent`（多 agent 宿主接线框架）、`aiti-devtools-pi`（pi CLI 侧连接器）、`aiti-devtools-vite`、`aiti-devtools-webpack`、`aiti-devtools-nuxt`（三个载体插件本体）、`secret-mask-core` / `secret-vault-core`（脱敏与保险库的共用引擎，Web 版、pi 版、DSH 版共用同一实现，任一 TS/JS agent 都能接）。
+
+### 🟢 视频工作室（`aiti-video-studio`）
+
+把「演示视频」变成一门可重现的工程，而不是靠人手录屏剪辑。核心思路：**AI 在创作期写脚本，运行时零 AI**——你打字，它出片。
+
+- **一条链路到底**：AI 读视频创作 skill → 探索目标站点（dry-run 探针）→ 写 `scene.json`（步骤 + 旁白节点 + 展示层）→ `/dryrun` 校验 → TTS 先行（内容哈希缓存，时长已知）→ 在 chromium 里确定性回放并采集画面 → ffmpeg 合成 → `final.mp4` + 字幕 + 章节 + 报告 + 波形图。也可用面板里的结构化编辑器，不写 JSON 也能做片。
+- **逐帧确定性录制**：CDP 在绘制时刻抓 JPEG 帧再拼接（无白场、文字锐利），另有 `recordVideo` 兜底；每一步在屏幕上停留的时长严格等于其旁白时长，因此画面与声音天然对齐。
+- **真实交互的现场感**：伪光标环 + 点击涟漪（可只在点击时出环）、导航后仍存活；四类特效（聚光灯 / 聚焦环 / 周遭压暗 / 彩带）按旁白自动定时。
+- **十六种覆盖层块**：下三分之一条、标题卡、标注、徽标、箭头、图片卡，外加 13 个内置块（推文、macOS 通知、YT 下三分之一、数据图表、Spotify 卡、Logo 片尾、IG/TikTok 关注、Reddit 帖、流程图、应用展示、UI 3D 揭幕、自定义本地 HTML）；四种转场与三种滤镜包（`flash-white` / `chromatic` / `glitch`），转场时长保留不抢旁白。
+- **后期一应俱全**：导出后用 `zoompan` 做镜头推拉（框准确、覆盖层不受影响）+ 可选动态模糊、屏幕工作室式画框（内边距 / 圆角 / 投影 / 渐变背景）、CAS 锐化、BT.709 编码、硬件编码器自动探测（nvenc/qsv/vaapi/videotoolbox 均真实试编）、背景音乐叠加 + EBU R128 响度归一。
+- **多语言成片**：同一份脚本可按语言出多条片，每语言独立配音映射与字幕；面板里切语言即可。
+- **人类参与但可控**：`user-confirm` 步骤会在页面上弹确认/选择/输入卡并等人点，等待过程可选择剪掉或保留在片里；另有两个显式 AI 触发点：`ai-decide`（让 AI 从实时页面证据里选一个值写进脚本变量，带问人兜底）与 `onError: ai-fix`（失败步骤由 AI 出 JSON 补丁并回写 `scene.json`，带熔断上限）。
+- **真机脚本可扩展**：步骤可引用项目内 `scripts/*.mjs`，一个模块导出多个入口；项目信任绑定到脚本树哈希，改动即失效。面板内置 CodeMirror 编辑器。
+- **隐私遮挡**：场景级或步骤级的 CSS 选择器 + 马赛克 / 模糊 / 遮盖规则，img 与 video（摄像头画中画）都能遮，录制里真的不出现。
+- **完整交付物**：`final.mp4`（H.264/AAC）、`final.srt`、`final.vtt`、`chapters.txt`、`report.md`、`waveform.png`、`timeline.json`、`meta.json`、逐步截图，以及 9:16 / 1:1 / GIF 附加格式与片片段提取（mp4/gif）。
+- **工程化管理**：项目侧栏（搜索 / 筛选 / 状态 / 置顶）、模板、重命名（显示名与目录 id 联动迁移）、复制、导入导出、删除进系统回收站、运行清理、并发队列批量录制。
+- **直播演示模式**：独立字幕条窗口（由 `aiti-desktop-widget` 承载）+ 当场语音播放，演示时可暂停 / 恢复 / 跳过当前步 / 跳到任意场景 / 停止；录制模式保持确定性，拒绝这些控制。
+- **播放器**：播放/暂停、±3 秒、上一/下一场景或章节，场景选择器由 `timeline.json` 生成，点任意场景即定位播放。
+
+> TTS 引擎可选 edge（本地 CLI）、任意 OpenAI 兼容 `/v1/audio/speech`、ElevenLabs、Gemini、Sarvam、以及可选的本地 kokoro-js。设计上借鉴了 Argo（`@argo-video/cli`，MIT）的思路（TTS 先行定节奏、内容寻址缓存、覆盖层词汇表、jpeg-stitch 采集等），并明确拒绝了几项（远程第三方 HTML 注册表、WebGL 预渲染转场、波形编辑器），理由写在扩展文档里。详见 [aiti-video-studio](/extensions/aiti-video-studio.md)。
+
+### 🟢 工作流程实验区（未公开发布）
+
+这几个扩展还在实验区磨练、未随发行版分发，但代表一个很不一样的方向——**把「先写方案再改代码」变成工具能感知、能提醒、能追责的流程**：
+
+| 扩展 | 作用 |
+|---|---|
+| `aiti-plan-first`（方案先行） | 靠 `aiti-git-trace` 事件感知（推-听架构、零扫描）：Markdown 变更时弹绑定向导（命名优先匹配方案）、大改却未跟方案时提醒、方案领先于代码时提醒「先做方案」；front-matter 作为标签事实源，会话列表行前部带 📋 绑定标 |
+| `aiti-plan-review`（方案采认） | Plan-Sandbox 的采认收尾 UI：读 `review.json` 契约列出「声明 vs 其他」差异，可采认选中并关闭沙盒 / 仅保存 / 全部丢弃；带沙盒历史（重新提取 / 重用 / 销毁） |
+| `aiti-echo-agent`（回声后端） | 多 agent 前端的会话 provider 插槽演示后端，用来验证新后端接入链路 |
+| `aiti-updater`（升级面板） | 服务管理 + 升级编排面板，通过 service-tunnels API 驱动，目前是骨架态 |
+
+另有 `aiti-bridge-probe`（桥连接诊断）与 `demo-lazy`（懒加载演示）两个诊断/示例用途的实验扩展。
 
 ---
 
