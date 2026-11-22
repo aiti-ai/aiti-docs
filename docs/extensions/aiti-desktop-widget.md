@@ -102,6 +102,20 @@ aiti-desktop-widget \
 高度 ≤220px 或 `layout=line` 时自动切单行跑马灯：只显示当前行，长文按当前行进度横向滚动，歌词上叠与歌词等宽的当前行进度填充（karaoke 式覆盖歌词）。示例音频/字幕由
 edge-tts + ffmpeg 合成，无第三方音频；`node demo/play/serve.mjs` 可本地预览。
 
+## 页面控制与单行自适应（默认开）
+
+loopback 页面默认获得 **窗口控制能力**（`capabilities/widget-page-control.json` +
+`withGlobalTauri`）：可读写位置/尺寸/显示器、`setSize`/`setPosition`/`center`、尺寸约束、
+`startDragging`/`startResizeDragging`、置顶/穿透/跨工作区/跳过任务栏/阴影/装饰/聚焦/标题、
+hide/show/close 和 WebView zoom。能力只匹配 `127.0.0.1` / `localhost`；`--allow-remote true`
+加载的外部页面不能调用。创建/销毁窗口、全屏/最大化、图标/徽标/进度、清数据/DevTools 等
+破坏性能力不开。
+
+`demo/play/play.html` 在单行模式下（`layout=line` 或高度 ≤220px）默认 `autosize=1`：按当前
+歌词宽度调整窗口，**保持窗口中心不变**，长度自动伸缩；字号按高度固定以便测量。`autosize=0`
+关闭。`--resizable false` 的 min=max 约束由页面先调用 `setMinSize`/`setMaxSize` 更新。
+拖动仍是页面 DOM 的 `data-tauri-drag-region`，没有窗口级 `draggable` 属性。
+
 ## 与 aiti-video-studio 集成
 
 **aiti-video-studio** 的桌面 `overlay` 字幕模式用

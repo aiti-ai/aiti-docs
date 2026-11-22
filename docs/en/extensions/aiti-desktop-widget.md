@@ -81,6 +81,21 @@ switches to a one-line marquee with the text-width progress fill covering the cu
 The sample audio/lyrics are generated with edge-tts + ffmpeg (no third-party audio); run
 `node demo/play/serve.mjs` for a local preview.
 
+## Page control and one-line autosize (default on)
+
+Loopback pages get **window control** by default (`capabilities/widget-page-control.json` +
+`withGlobalTauri`): geometry/monitor reads, `setSize`/`setPosition`/`center`, size constraints,
+`startDragging`/`startResizeDragging`, always-on-top/click-through/all-workspaces/skip-taskbar/
+shadow/decorations/focusable/title, hide/show/close and WebView zoom. The capability matches only
+`127.0.0.1` / `localhost`; external pages loaded with `--allow-remote true` cannot invoke it.
+Destructive/multi-window permissions (create/destroy, fullscreen/maximize, icon/badge/progress,
+clear-data/devtools) stay off.
+
+`demo/play/play.html` in one-line mode (`layout=line` or height ≤220px) defaults to `autosize=1`:
+the window width follows the current lyric while the **window center stays fixed**; use
+`autosize=0` to keep the caller size. The page updates the min=max constraints before resizing
+(`--resizable false`). Dragging is still a DOM `data-tauri-drag-region`, not a window property.
+
 ## Used by aiti-video-studio
 
 Video Studio's desktop `overlay` caption mode opens a loopback caption page
