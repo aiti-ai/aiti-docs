@@ -53,6 +53,19 @@ cua.ai is **not part of this extension** — it attaches to this extension's AT-
 > authentication = a 30min HttpOnly cookie (issued by `POST /vnc-session`, established when the panel opens): copying the URL elsewhere without the cookie gets a straight 403
 > (anti-leak / anti-pivot); refresh/reopen works within 30min.
 
+## Audio Output (Linux, On by Default)
+
+GUI apps launched through the virtual display or the desktop inherit the user session's audio environment, even when pi-web itself was started by systemd/SSH:
+
+- `PULSE_SERVER=unix:/run/user/<uid>/pulse/native`
+- `PIPEWIRE_RUNTIME_DIR=/run/user/<uid>`
+
+The paths are discovered from the current uid and injected only when the sockets exist;
+an explicit parent value wins. At startup the extension also hydrates the audio environment
+into the process env so agent bash children inherit it. Toggle **音频输出（Linux PipeWire/Pulse）**
+in ExtMan → aiti-ui-env → Features; it is **on by default**. Turning it off leaves audio
+environment variables untouched.
+
 ## VNC Password Contract (Finalized 2026-09-18)
 
 The password is "the one the user themselves knows" — on set, it is persisted to `configDir/vnc-passwd` (1–8 chars; env `UI_ENV_VNC_PASSWORD` takes priority; 0600), **authenticated by the VNC server itself, the bridge never answers on its behalf** (`lib/vnc-bridge.mjs` is a pure RFB passthrough; noVNC only pops the password prompt).

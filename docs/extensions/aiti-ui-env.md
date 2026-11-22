@@ -8,7 +8,7 @@ ext:
   soul: 没有显示器，也可以有舞台。
   type: aiti-ext
   category: 调试
-  version: "0.1.8"
+  version: "0.1.10"
   status: active
   author: aiti-ai
   publisher: aiti-ai
@@ -20,7 +20,7 @@ ext:
     # 服务化（虚拟屏常驻）：
     cd scripts/linux && ./setup-linux.sh && ./install-service.sh
   license: MIT
-  tags: [headless, xvfb, vnc, rdp, atspi, display, virtual-desktop, noVNC, vnc-password]
+  tags: [headless, xvfb, vnc, rdp, atspi, audio, pipewire, pulseaudio, display, virtual-desktop, noVNC, vnc-password]
 ---
 
 # aiti-ui-env
@@ -71,6 +71,18 @@ cua.ai **不在本扩展**——它挂本扩展的 AT-SPI 总线做独立扩展�
 > **URL 不落目标地址**：路径段 = 实例真随机令牌（30min 轮换 + 旧令牌宽限，middleware 按首段路由到实例 webPort）；
 > 认证 = 30min HttpOnly cookie（`POST /vnc-session` 下发，面板打开即建立）：复制到别处无 cookie 直接 403
 > （防泄露/防跳板）；刷新/重复打开 30min 内可用。
+
+## 音频输出（Linux，默认开）
+
+虚拟屏/桌面启动的 GUI 应用会带上用户会话的音频环境，即使 pi-web 由 systemd/SSH 启动也能出声：
+
+- `PULSE_SERVER=unix:/run/user/<uid>/pulse/native`
+- `PIPEWIRE_RUNTIME_DIR=/run/user/<uid>`
+
+路径按当前 uid 自动探测，只在 socket 存在时注入；父进程已显式设置的值优先。扩展启动时
+也会把音频环境 hydrate 到进程 env，agent bash 子进程可直接继承。开关在扩展管理器
+（ExtMan）→ aiti-ui-env → 功能管理 → **音频输出（Linux PipeWire/Pulse）**，**默认开**；
+关闭后不改动任何音频环境变量。
 
 ## VNC 密码契约（2026-09-18 定稿）
 
