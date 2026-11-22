@@ -39,6 +39,8 @@ ext:
   - 「打开 extman」跳转（extman 缺席时禁用区与 `＋` 一并隐藏）
 - **编辑模式（`✏️`，仅应用视图）**：钉住区排序 ▲▼、隐藏 ✕、底部「已隐藏 N 项」恢复区——批量整理入口
 - **tag 式分类（v2 体系）**：条目级（`meta.category` / 静态条目 `category`）→ feature 级（`features[].category`）→ 扩展级（index.ts 顶层 `category`，经 manifest 透传）→ 覆盖表 → 默认 `other`。内部固定 8 分类多语（会话与项目/代码与 Git/模型与 AI/自动化与 Agent/调试与观测/界面与阅读/系统与管理/其他），非内部 id = 自定义分类原样展示。扩展作者标注一个字段即可入册；未标注的存量扩展由 `APP_OVERRIDES` 覆盖表兜底归类
+- **搜索关键词扩展自声明（v0.3.x）**：扩展用条目级 `meta.keywords`（单条命令的别名，如「切换模型 / switch」）与扩展顶层 `keywords`（manifest 透传，整扩展身份词，如「输入 / 联想 / 语音」）自带搜索词汇；匹配链 = 条目 keywords → 扩展 keywords → `APP_OVERRIDES` 存量兜底。⚠ 新扩展必须自声明，**不要再往覆盖表加关键词**；扩展级词汇对该扩展所有卡片生效，命令别名请放条目级（否则「模型」会同时匹到无关命令）
+- **命令即入口（输入框即操作中枢）**：`commands` 命令目录槽的条目（`meta.onClick` 可调）自动进应用视图，同时被输入框联想消费——例如「选择模型」「压缩上下文」（由 `aiti-ai-input` 注册）在两个面都有入口，点一下即可执行、不占 UI 槽
 - **形态自适应（v3）**：应用 ≤ 12 平铺全部；否则常用 +「更多」两段式——无钉住记录（首次态）「更多」默认展开；形态判断取**实际可见钉住数**（隐藏项/未注册条目不计）
 - **用户定制**：`pi:app-center:pinned:v1` / `pi:app-center:hidden:v1`（localStorage，客户端约定；只存应用卡）+ 同 tab `pi:app-center:store` 事件与跨 tab `storage` 同步；v1 残留的 `toggle:*` 记录由 `pruneToggleIds()` 在组件加载时一次性清洗（幂等、干净时零写入）
 - **移动端**：卡片触达 ≥40px、搜索不自动聚焦、chips 换行 tag 云、操作按钮 `hover:none` 常显；应用中心随侧栏抽屉全屏

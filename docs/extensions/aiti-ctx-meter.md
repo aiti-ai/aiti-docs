@@ -30,6 +30,7 @@ ext:
 - **urgency 四档色阶**：色阶由宿主 `contextUrgency()` 的 `CtxUrgency` 对象驱动（扩展零展示逻辑只消费）——calm（<70 灰）/ warn（70–90 黄）/ urgent（90–97 红）/ critical（>97 深红 + 呼吸动画，`prefers-reduced-motion` 时关闭）
 - **压缩三态**：`compact.isCompacting / compactQueued`（streamingActions 提案压缩子集接缝）在 tooltip 附加行标注「压缩中… / 压缩已排队」
 - **点击**：`openSessionInfo()` 开宿主会话统计面板（token 明细 + 压缩按钮）——slot extra 回调优先 → `pi-web.composer` 客户端服务兜底 → 均缺席不可点降级
+- **输入框直达**：不必点比例条——在输入框打「压缩」/`compact` 选中「压缩上下文」命令即可触发压缩（命令由 `aiti-ai-input` 注册、走宿主 `pi-web.ui.compactSession`，与本面板压缩按钮同一链路，压缩中/排队中不重入）
 - **小屏（v0.1.4）**：只显示比例条本体不显示数字（数字仍在 title/aria-label，无障碍不丢信息）——给底排右侧按钮让宽
 - 纯函数内核（`barFillHeight`/`barPercentLabel`/`formatWindow`/`shouldShowPercentLabel`/`barTitleText`）5 组测试钉住；无轮询——percent 由宿主 state 事件驱动经插槽 extra 直达
 

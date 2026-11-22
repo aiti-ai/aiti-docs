@@ -93,6 +93,7 @@ npm install -g @aiti-ai/pi-web@latest && pi-web
 | --- | --- | --- |
 | 🤖🤖 **多 agent 同堂** | pi / Claude Code / Codex / Qoder / 任意 ACP agent 一个面板全看管——历史会话不是化石，点一下就复活 | [session-manager](/extensions/session-manager.md) · [claude-code](/extensions/aiti-claude-code-agent.md) · [codex](/extensions/aiti-codex-agent.md) · [qoder](/extensions/aiti-qoder-agent.md) |
 | 🧙 **模型管理一条龙** | 模型添加向导（目录搜索 / 贴地址反向匹配 / 自动探测）+ 多 key 粘性轮转 + 模型聚合（组合模型，成员可配**承接类别**：图形/文本专用分工路由）+ 可用性探测（429 限流识别与恢复预测）——告别模型管理焦虑 | [aiti-model-wizard](/extensions/aiti-model-wizard.md) · [aiti-model-check](/extensions/aiti-model-check.md) |
+| ⌨️ **输入框即操作中枢** | 打「模型」弹出选择模型、打「压缩」直接压缩上下文——命令即应用（扩展自声明命令与关键词），执行完光标回输入框，全程不离输入流 | [aiti-ai-input](/extensions/aiti-ai-input.md) · [aiti-app-center](/extensions/aiti-app-center.md) |
 | 👥 **子代理舰队** | 一句话派活：scout 侦察 / worker 干活 / reviewer 审核 / oracle 顾问，并行或流水线，Fleet 面板盯进度 | [aiti-subagents](/extensions/aiti-subagents.md) |
 | 🖥️ **终端 · VNC · RDP，远程无忧** | 真 PTY 命令终端；无头服务器虚拟屏 + 浏览器 VNC；浏览器直连 RDP 远程桌面——没有显示器，也有舞台 | [aiti-cmd](/extensions/aiti-cmd.md) · [aiti-ui-env](/extensions/aiti-ui-env.md) |
 | 💬 **IM 里遥控 AI** | 钉钉/飞书/微信接入工作台——人不在电脑前，群里发句话 AI 照样干活交差 | [aiti-channels](/extensions/aiti-channels.md) |
