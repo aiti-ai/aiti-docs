@@ -4,15 +4,11 @@ icon: 📄
 ext:
   id: aiti-word-docx-preview
   name: Word 文档预览
-  nameEn: "Word Preview"
   description: .docx 高保真只读预览（docx-preview：分页 / 页眉页脚 / 表格 / 图片 / 列表还原）
-  descriptionEn: "High-fidelity read-only .docx preview (docx-preview: pagination / headers & footers / tables / images / lists restoration)"
   soul: 只读档零依赖——Apache 链路看 Word，编辑交给 SuperDoc / OnlyOffice。
-  iconUrl: "/ext-icons/aiti-word-docx-preview.svg"
-  soulEn: "Read-only tier with zero dependencies — view Word on the Apache path, leave editing to SuperDoc / OnlyOffice."
   type: aiti-ext
   category: 开发工具
-  version: "0.1.10"
+  version: "0.1.11"
   status: active
   author: aiti-ai
   publisher: aiti-ai

@@ -12,7 +12,7 @@ ext:
   soulEn: "config has its safety net; state deserves one too."
   type: aiti-ext
   category: 系统工具
-  version: "0.1.11"
+  version: "0.1.12"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai

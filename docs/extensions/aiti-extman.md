@@ -5,15 +5,11 @@ description: 扩展管理器 —— 搜索/启停/安装/在线注册表
 ext:
   id: aiti-extman
   name: aiti-extman
-  nameEn: "Extension Manager"
   description: 扩展管理器 —— 搜索/启停/安装/在线注册表
-  descriptionEn: "Extension manager — search / enable-disable / install / online registry"
   soul: 管扩展的，也该是个扩展。
-  iconUrl: "/ext-icons/aiti-extman.svg"
-  soulEn: "The one managing extensions should be an extension itself."
   type: aiti-ext
   category: 系统工具
-  version: "0.1.13"
+  version: "0.1.14"
   status: beta
   author: aiti-ai
   publisher: aiti-ai

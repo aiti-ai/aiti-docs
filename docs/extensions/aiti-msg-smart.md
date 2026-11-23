@@ -4,15 +4,11 @@ icon: 💬
 ext:
   id: aiti-msg-smart
   name: 消息智能
-  nameEn: "Message Intelligence"
   description: 消息点击识别 —— 段落/标题/代码行点击 → 引用/复制/选项弹层 + 子句/行高亮
-  descriptionEn: "Message click recognition — paragraph/heading/code-line clicks → quote/copy/option popups + clause/line highlighting"
   soul: AI 说得再好，抄起来也挺费劲。
-  iconUrl: "/ext-icons/aiti-msg-smart.svg"
-  soulEn: "However well the AI says it, copying it is still a chore."
   type: aiti-ext
   category: 聊天增强
-  version: "0.1.11"
+  version: "0.1.12"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai

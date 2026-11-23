@@ -4,15 +4,11 @@ icon: 🧪
 ext:
   id: demo
   name: Demo Extension
-  nameEn: "Demo"
   description: 全插槽演示扩展 —— 框架验证用，覆盖每个扩展点
-  descriptionEn: "Reference extension demonstrating every extension point: two client styles side by side (plain hyperscript, and JSX with npm dependencies built by vite), config files, skills and server-side hooks. Meant to be read as the canonical example of how an aiti extension is put together."
   soul: 框架先有例子，人才有样子。
-  iconUrl: "/ext-icons/demo.svg"
-  soulEn: "The framework needs examples before people have a model to follow."
   type: aiti-ext
   category: 示例
-  version: "0.2.2"
+  version: "0.2.3"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai

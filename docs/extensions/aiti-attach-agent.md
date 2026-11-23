@@ -4,15 +4,11 @@ icon: 🔌
 ext:
   id: aiti-attach-agent
   name: 附着会话后端
-  nameEn: "Attach Session Backend"
   description: Socket 附着已运行 agent 进程 —— 连接 pi TUI bridge；支持环境变量全自动（PI_WEB_BRIDGE_AUTO=1 任何 CLI 会话自动上桥）；followUp 排队回显 + 图片附件透传 + 空闲超时退出
-  descriptionEn: "; supports full automation via environment variables (PI_WEB_BRIDGE_AUTO=1 auto-bridges any CLI session); followUp queue echo + image attachment passthrough + idle time"
   soul: 不抢方向盘——agent 已经在跑，附着上去看就好。
-  iconUrl: "/ext-icons/aiti-attach-agent.svg"
-  soulEn: "Don't grab the steering wheel — the agent is already running; attach to it and watch."
   type: aiti-ext
   category: 多 agent 后端
-  version: "0.1.10"
+  version: "0.1.11"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai

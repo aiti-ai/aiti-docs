@@ -4,15 +4,11 @@ icon: 📍
 ext:
   id: aiti-msg-anchor
   name: 消息锚点横幅
-  nameEn: "Message Anchor Banner"
   description: 消息区顶部常驻横幅 —— 展示「生成当前屏幕上内容的那条用户输入」，滚动跟随回合段；可切换为第一条输入 / 最近输入 / 会话标题
-  descriptionEn: "A persistent banner at the top of the message area — shows \"the user input that generated the content currently at the top of your screen\", following turn segments as you scroll; switchable to first input / latest input / session title"
   soul: 回错了人的话，比叫错名字还尴尬。
-  iconUrl: "/ext-icons/aiti-msg-anchor.svg"
-  soulEn: "Replying to the wrong person's words is more awkward than calling someone the wrong name."
   type: aiti-ext
   category: 聊天增强
-  version: "0.1.10"
+  version: "0.1.11"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai

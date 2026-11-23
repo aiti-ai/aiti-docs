@@ -5,11 +5,10 @@ ext:
   id: pi-secret-mask
   name: pi-secret-mask 粘贴防泄密
   description: pi 的会话级秘密脱敏——贴进 prompt 的密钥/token/凭据在模型看到之前替换为形似凭据的不透明令牌 rsec_<hash8>（模型不再拒用），模型在工具参数里回显令牌时于执行前还原真实值；随手贴，不泄密。零依赖，TUI 与全部 pi-web 会话一次安装全覆盖
-  descriptionEn: "Paste-safe by default — session-level secret redaction for pi: values pasted into prompts become opaque, credential-shaped tokens (rsec_<hash8>) before the model sees them and are restored inside tool arguments before execution. Adds on-disk redaction (landing plain|ephemeral), unresolved-placeholder guard, custom rules, compaction/tree scrubbing, `!`-command gate, provider payload rewrite + audit, and explicit /secret save|load snapshots. Engine shared with @aiti-ai/pi-secret-vault (encrypted persistent edition) and the DSH edition via @aiti-ai/secret-mask-core."
   soul: 随手贴，不泄密。
   type: pi-plugin
   category: pi 插件
-  version: 0.4.1
+  version: 0.4.2
   status: active
   author: aiti-ai
   publisher: aiti-ai

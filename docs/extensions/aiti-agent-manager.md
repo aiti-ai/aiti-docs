@@ -4,15 +4,11 @@ icon: 🤖
 ext:
   id: aiti-agent-manager
   name: Agent 管理界面
-  nameEn: "Agent Manager"
   description: 统一聚合外部 agent 登录态 + 登录操作代理 + 多账号档（备份/别名/一键切换）+ 账号额度显示——不实现任何登录协议
-  descriptionEn: "Unified aggregation of external agent login states + login action proxying + multi-account profiles (backup/alias/one-click switch) + account quota display — implements no login protocol at all"
   soul: 六家 agent 登录态，一屏看尽；多账号轮换，一键切换。
-  iconUrl: "/ext-icons/aiti-agent-manager.svg"
-  soulEn: "Six agents' login states on one screen; multi-account rotation, one-click switch."
   type: aiti-ext
   category: 多 agent 后端
-  version: "0.2.11"
+  version: "0.2.12"
   status: active
   author: aiti-ai
   publisher: aiti-ai

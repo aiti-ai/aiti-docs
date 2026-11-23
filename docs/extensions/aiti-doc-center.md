@@ -4,15 +4,11 @@ icon: 📚
 ext:
   id: aiti-doc-center
   name: 文档中心
-  nameEn: "Doc Center"
   description: workspace md 收集/整理/检索——FTS5 trigram 中文全文 + tag 七来源两层 + 📚 float 弹窗四视图
-  descriptionEn: "workspace markdown collection/organization/search — FTS5 trigram Chinese full-text + tag seven-source two-layer + 📚 float dialog four views"
   soul: 文档不检索，等于没写。
-  iconUrl: "/ext-icons/aiti-doc-center.svg"
-  soulEn: "Docs you cannot search are docs you never wrote."
   type: aiti-ext
   category: 知识管理
-  version: "0.1.12"
+  version: "0.1.13"
   status: active
   author: aiti-ai
   publisher: aiti-ai

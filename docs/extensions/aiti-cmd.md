@@ -4,15 +4,11 @@ icon: ⌨️
 ext:
   id: aiti-cmd
   name: aiti-cmd
-  nameEn: "Command Palette"
   description: 命令管理器 —— 真 PTY 终端 + 常用命令 + 消息识别执行 + agent 命令实时观察 + 跨扩展统一执行出口
-  descriptionEn: "Command manager — real PTY terminal + favorite commands + message-click recognition execution + live agent command observation + a unified cross-extension execution outlet"
   soul: 大脑留给思考，命令交给收藏夹。
-  iconUrl: "/ext-icons/aiti-cmd.svg"
-  soulEn: "Leave thinking to the brain; hand commands to the favorites."
   type: aiti-ext
   category: 命令工具
-  version: "0.3.1"
+  version: "0.3.2"
   status: beta
   author: aiti-ai
   publisher: aiti-ai

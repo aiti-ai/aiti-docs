@@ -5,11 +5,10 @@ ext:
   id: pi-models-combo
   name: pi-models-combo 模型治理
   description: pi 编码代理的模型治理插件——模型列表过滤治理 + apiKeys 多 key 粘性轮转防 429 + 多 provider 聚合（combo 虚拟模型）+ 质量监控；装进 ~/.pi/agent/pi-plugins/
-  descriptionEn: "Keep your model list tidy and rotate API keys to prevent 429 rate limits — model filtering, sticky multi-key rotation, multi-provider aggregation (combo models), quality monitoring"
   soul: 模型列表不疯长、429 不打断手——过滤、轮转、聚合各司其职。
   type: pi-plugin
   category: pi 插件
-  version: 0.4.15
+  version: 0.4.16
   status: active
   author: aiti-ai
   publisher: aiti-ai

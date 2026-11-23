@@ -4,15 +4,11 @@ icon: 🧩
 ext:
   id: aiti-custom-agent
   name: 自定义 Agent
-  nameEn: "Custom Agents"
   description: UI 表单注册自定义会话后端——启动命令 + 参数前缀 + 成员 env + 桥模式，保存即热生效；generic 驱动 one-shot spawn（docker 化 / 命令包装 / 同一 CLI 多配置）
-  descriptionEn: "Register custom session backends with a UI form — launch command + args prefix + member env + bridge mode, hot effective on save; generic driver one-shot spawn (dockerized / command wrapping / multiple configs for the same CLI)"
   soul: 一行命令，一个后端；docker 里跑 agent，从此不再手写配置。
-  iconUrl: "/ext-icons/aiti-custom-agent.svg"
-  soulEn: "One command line, one backend."
   type: aiti-ext
   category: 多 agent 后端
-  version: "0.1.11"
+  version: "0.1.12"
   status: active
   author: aiti-ai
   publisher: aiti-ai
