@@ -4,11 +4,13 @@ icon: 🧭
 ext:
   id: aiti-msg-nav
   name: 消息滚动导航
+  nameEn: "Message Scroll Nav"
   description: 消息区右侧的滚动导航条 —— 到最早 / 到最新 / 上一个 / 下一个用户输入，一键直达；长按「到最新」保持屏幕常亮
+  descriptionEn: "A scroll navigation bar on the right side of the message area — to earliest / to latest / previous / next user input, one-click direct access; long-press \"to latest\" keeps the screen awake"
   soul: 千楼万楼的聊天记录，电梯比楼梯好用。
   type: aiti-ext
   category: 聊天增强
-  version: "0.1.8"
+  version: "0.1.10"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai

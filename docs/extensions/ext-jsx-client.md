@@ -4,7 +4,9 @@ icon: ⚛️
 ext:
   id: ext-jsx-client
   name: ext-jsx-client（扩展 JSX 模板）
+  nameEn: "JSX Extension Template"
   description: 扩展 client 用 JSX + TypeScript + npm 依赖的共享模板（vite lib mode + host-shim 委托）
+  descriptionEn: "Shared template for extensions whose client uses JSX + TypeScript + npm deps (vite lib mode + host-shim). Copy it to <your-ext>/, then edit vite.config.ts / index.ts / client/src/entry.tsx."
   soul: 写扩展不该被迫手写 h() —— JSX + npm 依赖，复制即用。
   type: other
   category: 开发模板

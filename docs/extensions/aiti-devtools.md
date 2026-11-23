@@ -4,7 +4,9 @@ icon: 🛠️
 ext:
   id: aiti-devtools
   name: aiti devtools
+  nameEn: "Page DevTools"
   description: pi-web 扩展 —— 注入器 / 桥 / MCP server 端 + agent 工具进程内注入
+  descriptionEn: "pi-web extension — in-page AI debugging workbench: launcher + client injection, CDP-like commands, and a bridge that hands page capabilities to any AI agent as MCP tools"
   soul: AI 不该对着屏幕瞎猜，它该真正看见页面。
   type: aiti-ext
   category: 页面调试注入

@@ -5,11 +5,12 @@ ext:
   id: content-share
   name: content-share 内容分享引擎
   description: 按 provider 把内容换成 URL 的基础能力包——内置 161 个分享目标（ShareX .sxcu 全量 148 份 + 国内直连 Gitee/兰空/SM.MS/Pastebin/Rentry/paste.rs/阿里云 OSS + 笔记库 Joplin/Obsidian/memos/思源/flomo），零运行时依赖的 .sxcu 执行引擎（4 种 body、ShareX 语法解析、JSONPath/regex 取 URL），支持远端目录 overlay 与脱敏 hook
+  descriptionEn: "Provider-based content sharing: upload text, images or files to paste bins, image hosts, object storage and note archives, then return a shareable URL. SXCU catalog compatible (148 ShareX configs), zero runtime dependencies."
   soul: 一套 provider 引擎，所有应用共享同一份"从内容到 URL"。
   type: other
   installable: false  # 基础库——不是 aiti-agent/pi-web 扩展：extman 不列出、extensions.json 归 integrations
   category: 基础库
-  version: 0.1.11
+  version: 0.1.17
   status: active
   author: aiti-ai
   publisher: aiti-ai

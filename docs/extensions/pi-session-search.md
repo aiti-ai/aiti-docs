@@ -5,6 +5,7 @@ ext:
   id: pi-session-search
   name: pi-session-search 会话搜索
   description: 给 pi 编码代理加 session_search / session_read 只读工具——跨历史会话全文搜索（经 pi-web session-manager 索引可覆盖所有 agent 家族）+ 读原始消息，恢复被 compaction 吃掉的上下文、找回"上次怎么做的"
+  descriptionEn: "Give the pi agent session_search / session_read tools: full-text search across past sessions (optionally every agent family via a pi-web session-manager index) and read original messages — recover context lost to compaction, find how something was done before. A pi package."
   soul: compaction 吃掉的上下文，一句搜索全找回来。
   type: pi-plugin
   category: pi 插件

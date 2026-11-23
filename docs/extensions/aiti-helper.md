@@ -4,11 +4,13 @@ icon: 🤖
 ext:
   id: aiti-helper
   name: AI Helper
+  nameEn: "AI Helper"
   description: 全扩展的一句话 AI 能力入口 —— 声明式 AI 帮助点（pi skills 标准）+ 输入/结果预览/审核回填 + 流式进度总线交付 + 多轮追问 + 历史与后台任务 + 用户自定义 skills（配置版本化已独立为 aiti-configs）
+  descriptionEn: "The one-sentence AI capability entry for all extensions — declarative AI help points (pi skills standard) + input/result preview/review-and-fill-back + streaming progress bus delivery + multi-turn follow-ups + history and background tasks + user-defined skills (config versioning has been split out as aiti-configs)"
   soul: AI 的工具该由 AI 自己接线、自己进化——人类的角色是掌舵，不是搬砖。
   type: aiti-ext
   category: AI 能力
-  version: "0.5.11"
+  version: "0.5.13"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai

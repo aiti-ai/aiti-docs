@@ -4,11 +4,13 @@ icon: 👥
 ext:
   id: aiti-subagents
   name: 子代理
+  nameEn: "Subagents"
   description: 子代理舰队 Fleet 观测/运行控制/Agent 管理/并发配置——fork 引擎，工具归上游 pi-subagents
+  descriptionEn: "Subagent fleet — Fleet observation / run control / agent management / concurrency config — fork engine, tools belong to upstream pi-subagents"
   soul: 主 agent 负责思考，脏活累活分给专职的它。
   type: aiti-ext
   category: AI 能力
-  version: "0.4.11"
+  version: "0.4.12"
   status: active
   author: aiti-ai
   publisher: aiti-ai

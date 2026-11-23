@@ -4,11 +4,13 @@ icon: 🥧
 ext:
   id: aiti-pi-agent
   name: pi 会话后端
+  nameEn: "pi Session Backend"
   description: spawn pi --mode rpc 子进程作为会话 —— 多 agent 前端主路径
+  descriptionEn: "Spawns a pi --mode rpc child process as a session — the main path of the multi-agent frontend"
   soul: All Sessions 里最正统的一条路——pi 自己驱动自己。
   type: aiti-ext
   category: 多 agent 后端
-  version: "0.1.7"
+  version: "0.1.10"
   status: active
   author: aiti-ai
   publisher: aiti-ai

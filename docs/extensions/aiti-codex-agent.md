@@ -4,11 +4,13 @@ icon: 🟦
 ext:
   id: aiti-codex-agent
   name: Codex 会话后端
+  nameEn: "Codex Session Backend"
   description: OpenAI Codex CLI driver —— exec --json + resume 接入 All Sessions；认证双轨（auth.json OAuth / openrouter env），直播与冷回放同形原生工具卡
+  descriptionEn: "OpenAI Codex CLI driver — exec --json + resume integrated into All Sessions; dual-track auth (auth.json OAuth / openrouter env), live streaming and cold replay render identically-shaped native tool cards"
   soul: Codex 在哪儿跑，面板就在哪儿看。
   type: aiti-ext
   category: 多 agent 后端
-  version: "0.1.9"
+  version: "0.1.11"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai

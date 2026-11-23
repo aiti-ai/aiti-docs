@@ -4,11 +4,13 @@ icon: 🖥️
 ext:
   id: aiti-cursor-agent
   name: Cursor CLI 会话接入
+  nameEn: "Cursor CLI Session Backend"
   description: "驱动 Cursor Agent CLI 会话（agentKey: cursor）——stream-json print 模式 + --resume 多轮；Cursor IDE 会话只读解析"
+  descriptionEn: "Drives Cursor Agent CLI sessions (agentKey: cursor) — stream-json print mode + --resume multi-turn; Cursor IDE sessions parsed read-only"
   soul: Cursor 的会话，也进 All Sessions。
   type: aiti-ext
   category: 会话管理
-  version: "0.1.8"
+  version: "0.1.10"
   status: beta
   author: aiti-ai
   publisher: aiti-ai

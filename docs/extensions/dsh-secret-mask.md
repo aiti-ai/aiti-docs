@@ -5,11 +5,12 @@ ext:
   id: dsh-secret-mask
   name: dsh-secret-mask 粘贴防泄密
   description: DeepSeek Harness（DSH）的会话级秘密脱敏——贴进消息的密钥/token/凭据在进入模型之前替换为形似凭据的 rsec_<hash8> 令牌，模型在工具参数里回显令牌时于执行前还原真实值；未挂载令牌会被 guard 拦截，工具输出同步脱敏，可选审计证明无真值上线。检测核心与 pi 版共用 @aiti-ai/secret-mask-core
+  descriptionEn: "Paste-safe by default — session-level secret redaction for DSH (DeepSeek Harness): values pasted into prompts become opaque rsec_<hash8> tokens before a step enters the model and are restored inside whitelisted tool arguments before execution; unresolved tokens are guarded; sensitive-key extraction and a weak-password dictionary catch low-entropy passwords; tool results are redacted at tools/post-execute and an opt-in llm/stream audit proves no raw value reaches the provider. Detection/placeholder engine shared with the pi editions via @aiti-ai/secret-mask-core."
   soul: 随手贴，不泄密——换一个 harness 也是。
   type: host-adapter
   installable: false  # DSH 插件——装进 DSH profile，不进 aiti-agent/pi-web：extman 不列出、extensions.json 归 integrations
   category: 宿主适配
-  version: 0.3.0
+  version: 0.3.1
   status: active
   author: aiti-ai
   publisher: aiti-ai

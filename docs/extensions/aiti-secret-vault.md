@@ -4,11 +4,13 @@ icon: 🔑
 ext:
   id: aiti-secret-vault
   name: aiti-secret-vault 密钥库管理
+  nameEn: "Secret Vault"
   description: pi-web 的加密密钥库管理弹窗——别名查看/新增/轮换/查看明文/删除、锁定/解锁、keyfile ↔ 系统钥匙串切换、会话挂载总览；值只走浏览器→本机服务→加密库，不经过 AI 对话
+  descriptionEn: "Encrypted secret vault management UI for pi-web: list / add / rotate / reveal / remove aliases, lock/unlock, switch between keyfile and OS-keychain unlock, and inspect which aliases are mounted per session. Values never enter the AI conversation."
   soul: 在网页里管库，AI 永远只拿令牌。
   type: aiti-ext
   category: 安全
-  version: 0.2.0
+  version: 0.3.0
   status: active
   author: aiti-ai
   publisher: aiti-ai

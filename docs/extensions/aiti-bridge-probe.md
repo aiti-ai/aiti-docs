@@ -4,7 +4,9 @@ icon: 🩺
 ext:
   id: aiti-bridge-probe
   name: 桥连接探针
+  nameEn: "Bridge Probe"
   description: 手机端桥/SSE 连接探针（临时诊断）——页面侧采集生命周期/EventSource/fetch/心跳缺口证据落盘供 AI 分析；问题定位后应卸载
+  descriptionEn: "pi-web extension: bridge connection probe (temporary diagnostics)"
   soul: SSE 断在哪一环，让证据说话。
   type: aiti-ext
   category: 调试

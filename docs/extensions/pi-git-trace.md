@@ -5,6 +5,7 @@ ext:
   id: pi-git-trace
   name: pi-git-trace 变更追踪
   description: pi 编码代理的 AI 变更带外追踪——repo 根 .aiti-trace 独立追踪仓（无 git 也能 autoInit）+ op 编号 before/after 双提交 + 文件⇄消息⇄操作全 lineage + 回滚 + 影子仓瘦身 compact
+  descriptionEn: "Out-of-band AI change tracking — repo-root .aiti-trace standalone trace repo (autoInit even without git) + op-numbered before/after dual commits + full file⇄message⇄op lineage + rollback + shadow repo slimming compact"
   soul: AI 改了什么、为什么改、怎么改回去——trace 仓全记着。
   type: pi-plugin
   category: pi 插件

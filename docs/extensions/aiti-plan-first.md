@@ -4,7 +4,9 @@ icon: 📋
 ext:
   id: aiti-plan-first
   name: 方案先行
+  nameEn: "Plan First"
   description: AI 开发先方案后动手 —— aiti-git-trace 事件感知（推-听架构零扫描）：md 变更弹绑定向导（方案命名优先）、大改未跟方案提醒、领先提醒「先做方案」、tags 闭环（front-matter 事实源 + 手工/自荐标签）、会话列表行前部 📋 绑定标
+  descriptionEn: "Plan-first reminder extension — listens to aiti-git-trace events: bind md changes to a wizard, flag large changes without a plan, and insert \"update plan doc: @file\" in one click"
   soul: 不强制不打断，只在 md 变了和大改跑偏时轻轻提一句：先有方案，再动手。
   type: aiti-ext
   category: 开发工具

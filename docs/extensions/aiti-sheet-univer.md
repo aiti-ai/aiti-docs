@@ -4,11 +4,13 @@ icon: 📊
 ext:
   id: aiti-sheet-univer
   name: Excel 表格编辑器
+  nameEn: "Excel Editor"
   description: .xlsx/.xlsm 在线预览+编辑（exceljs 数据面 + Univer 视图面）；.xls/.ods 只读预览与一键转 .xlsx
+  descriptionEn: "In-browser preview + editing for .xlsx/.xlsm (exceljs data layer + Univer view layer); read-only preview and one-click convert to .xlsx for .xls/.ods"
   soul: 老格式不挡路——转换、派生、编辑各归其位。
   type: aiti-ext
   category: 开发工具
-  version: "0.1.8"
+  version: "0.1.10"
   status: active
   author: aiti-ai
   publisher: aiti-ai

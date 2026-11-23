@@ -5,6 +5,7 @@ ext:
   id: aiti-devtools-openclaw
   name: aiti-devtools OpenClaw 适配
   description: OpenClaw 插件直连跳过 MCP —— 16 工具注册进 agent 会话 + 会话自动上线 + chat.send 消息注入 + 答复回传 + 占位符对照表，cockpit 伴生 AI 窗
+  descriptionEn: "aiti-devtools OpenClaw 宿主 adapter：16 个 aiti_* 工具直连桥 REST（跳过 MCP）"
   soul: 好用的调试助手不该被协议门槛挡住——能 registerTool，就能开门。
   type: host-adapter
   installable: false  # 宿主适配器——装进 OpenClaw，不进 aiti-agent/pi-web：extman 不列出、extensions.json 不入 extensions 数组（归 integrations）

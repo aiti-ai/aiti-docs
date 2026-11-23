@@ -67,13 +67,28 @@ const perRepoRoots = existsSync(INTEGRATIONS_DIR)
  * Explicit list on purpose — a wildcard would match unrelated checkouts.
  */
 const EXTERNAL_PKG_DIRS = { "content-share": resolve(homedir(), "workspace", "content-share") };
+function readPkg(pkg) {
+  try {
+    const j = JSON.parse(readFileSync(pkg, "utf8"));
+    if (typeof j.version !== "string" || !j.version) return null;
+    return {
+      version: j.version,
+      source: pkg,
+      // English metadata for the extension catalog (ext.nameEn / ext.descriptionEn).
+      // `description` is the English baseline; displayNameI18n.en carries the English name.
+      nameEn: typeof j.displayNameI18n?.en === "string" ? j.displayNameI18n.en.trim() : "",
+      descriptionEn: typeof j.description === "string" ? j.description.trim() : "",
+    };
+  } catch {
+    return null;
+  }
+}
+
 function sourceVersion(id) {
   const ext = EXTERNAL_PKG_DIRS[id];
   if (ext && existsSync(join(ext, "package.json"))) {
-    try {
-      const v = JSON.parse(readFileSync(join(ext, "package.json"), "utf8")).version;
-      if (typeof v === "string" && v) return { version: v, source: ext };
-    } catch { /* fall through to the in-repo roots */ }
+    const hit = readPkg(join(ext, "package.json"));
+    if (hit) return hit;
   }
   const pkgs = SOURCE_ROOTS.map((r) => join(r, id, "package.json"));
   for (const root of perRepoRoots) pkgs.push(join(root, id, "package.json"));
@@ -81,12 +96,8 @@ function sourceVersion(id) {
   pkgs.push(join(INTEGRATIONS_DIR, id, "npm", "package.json"));
   for (const pkg of pkgs) {
     if (!existsSync(pkg)) continue;
-    try {
-      const v = JSON.parse(readFileSync(pkg, "utf8")).version;
-      if (typeof v === "string" && v) return { version: v, source: pkg };
-    } catch {
-      /* unreadable package.json — keep looking */
-    }
+    const hit = readPkg(pkg);
+    if (hit) return hit;
   }
   return null;
 }
@@ -106,6 +117,11 @@ function parseDoc(name) {
   let indent = "";
   let quote = "";
   let docVersion = "";
+  let nameLine = -1;
+  let descLine = -1;
+  let nameEnLine = -1;
+  let descEnLine = -1;
+  let blockEnd = lines.length;
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
     if (!inExt && /^ext:\s*$/.test(line)) {
@@ -115,7 +131,7 @@ function parseDoc(name) {
     if (!inExt) continue;
     if (line.trim() === "") continue;
     const ind = line.match(/^[ \t]*/)[0];
-    if (ind.length < 2) break; // dedent → ext block ended
+    if (ind.length < 2) { blockEnd = i; break; } // dedent → ext block ended
     const idm = line.match(/^[ \t]+id:\s*['"]?([\w@/.-]+)/);
     if (idm) id = idm[1];
     const vm = line.match(/^([ \t]+)version:\s*(['"]?)([^'"\s]+)\2\s*$/);
@@ -125,9 +141,13 @@ function parseDoc(name) {
       quote = vm[2];
       docVersion = vm[3];
     }
+    if (/^[ \t]+name:\s/.test(line)) nameLine = i;
+    else if (/^[ \t]+nameEn:\s/.test(line)) nameEnLine = i;
+    else if (/^[ \t]+description:\s/.test(line)) descLine = i;
+    else if (/^[ \t]+descriptionEn:\s/.test(line)) descEnLine = i;
   }
   if (!id || verLine === -1) return null;
-  return { file, id, verLine, indent, quote, docVersion };
+  return { file, id, verLine, indent, quote, docVersion, nameLine, descLine, nameEnLine, descEnLine, blockEnd };
 }
 
 const rows = [];
@@ -145,14 +165,39 @@ for (const row of rows) {
     result.skipped.push({ id: row.id, docVersion: row.docVersion });
     continue;
   }
-  if (src.version === row.docVersion) {
+  // English catalog metadata (ext.nameEn / ext.descriptionEn) rides along with the version sync:
+  // the docs build never checks out aiti-ai, so these fields are the only source the catalog plugin
+  // can read for localized names/descriptions.
+  const wantNameEn = Boolean(src.nameEn);
+  const wantDescEn = Boolean(src.descriptionEn);
+  const nameEnDrift = wantNameEn && row.nameEnLine === -1;
+  const descEnDrift = wantDescEn && row.descEnLine === -1;
+
+  if (src.version === row.docVersion && !nameEnDrift && !descEnDrift) {
     result.ok.push({ id: row.id, version: src.version });
     continue;
   }
-  result.updated.push({ id: row.id, from: row.docVersion, to: src.version });
+  result.updated.push({
+    id: row.id,
+    from: row.docVersion,
+    to: src.version,
+    ...(nameEnDrift ? { nameEn: "added" } : {}),
+    ...(descEnDrift ? { descriptionEn: "added" } : {}),
+  });
   if (!CHECK) {
     const lines = readFileSync(row.file, "utf8").split("\n");
     lines[row.verLine] = `${row.indent}version: ${row.quote}${src.version}${row.quote}`;
+    // Insert the English siblings after name / description (or after version when absent),
+    // then re-locate so both insertions land in the same pass.
+    const insertAfter = (anchorLine, key, value) => {
+      if (anchorLine < 0) return;
+      const ind = lines[anchorLine].match(/^[ \t]*/)[0];
+      lines.splice(anchorLine + 1, 0, `${ind}${key}: ${JSON.stringify(value)}`);
+    };
+    // Bottom-up insertion keeps earlier indices valid: descriptionEn sits below nameEn in the
+    // natural order, so it must be spliced first.
+    if (descEnDrift && wantDescEn) insertAfter(row.descLine >= 0 ? row.descLine : row.verLine, "descriptionEn", src.descriptionEn);
+    if (nameEnDrift && wantNameEn) insertAfter(row.nameLine >= 0 ? row.nameLine : row.verLine, "nameEn", src.nameEn);
     writeFileSync(row.file, lines.join("\n"), "utf8");
   }
 }

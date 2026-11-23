@@ -5,6 +5,7 @@ ext:
   id: aiti-devtools-dsh
   name: aiti-devtools DSH 适配
   description: 把 aiti-devtools 完整移植到 DeepSeek Harness（DSH）—— 同款 launcher + 16 工具 + agent/pre-step 占位符替换（[元素N]/[回答N]/[错误N]）+ AI 窗候选条（元素/回答/错误三色 chip），官方 web UI 即 AI 窗
+  descriptionEn: "aiti-devtools DSH adapter: in-process bridge mounted at /aiti on ctx.webServer (launcher/cockpit/bridge/mcp assets + REST/SSE), 16 aiti_* tools via ctx.tools.register, and agent/pre-step placeholder rewrite ([元素N]→describe+source tag). Client face renders the candidates bar in conversation.input.overlay."
   soul: 页面里的 AI 不挑宿主——换一个 harness，同一场面对面调试照演。
   type: host-adapter
   installable: false  # 宿主适配器——装进 DSH，不进 aiti-agent/pi-web：extman 不列出、extensions.json 不入 extensions 数组（归 integrations）

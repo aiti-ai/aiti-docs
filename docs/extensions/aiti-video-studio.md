@@ -4,7 +4,9 @@ icon: 🎬
 ext:
   id: aiti-video-studio
   name: aiti-video-studio 视频工作室
+  nameEn: "Video Studio"
   description: 把 scene.json 脚本确定性回放成演示视频——浏览器/桌面录制、TTS 旁白、光标与覆盖层、转场、字幕、多格式导出
+  descriptionEn: "Video Studio — deterministic replay recording (CDP jpeg-stitch), cursor/overlays/effects/camera/transitions/speed-ramp/frame polish, edge-tts or OpenAI-compatible narration, ffmpeg subtitles/chapters/formats, generative media with dependency scheduling, subtitle review; produces demo videos (mp4/srt/vtt/report)"
   soul: 写好脚本，一键出片。
   type: extension
   category: 媒体

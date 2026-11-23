@@ -4,11 +4,13 @@ icon: 🔗
 ext:
   id: aiti-acp-agent
   name: ACP 会话后端
+  nameEn: "ACP Session Backend"
   description: 泛用 ACP 驱动 —— 一个适配器接所有 Agent Client Protocol agent（25 家内置自动探测，对齐 agent-shell 全量清单 + 自定义后端面板 + 授权卡/队列/模型目录）
+  descriptionEn: "A universal ACP driver — one adapter connects all Agent Client Protocol agents (25 built-in with auto-detection + custom backend panel + permission cards/queue/model catalog)"
   soul: 协议统一了，适配器只需要写一次。
   type: aiti-ext
   category: 多 agent 后端
-  version: "0.3.8"
+  version: "0.3.10"
   status: active
   author: aiti-ai
   publisher: aiti-ai

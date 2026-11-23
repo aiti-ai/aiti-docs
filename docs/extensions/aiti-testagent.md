@@ -4,11 +4,13 @@ icon: 🧪
 ext:
   id: aiti-testagent
   name: TestAgent
+  nameEn: "Test Agent"
   description: Java 后端 AI 调试 MCP + IDE —— 扫描 Java 进程/attach 一键连桥/Tunnel 桥多端点纳管，JVM 内任意修改/Mock·SQL 拦截模拟/热更新/诊断采样，58 工具 10 组按需暴露，全可逆
+  descriptionEn: "AI debugging MCP + IDE for Java backends — scan Java processes / attach one-click bridge connect / tunnel-bridge multi-endpoint management; arbitrary in-JVM modification / Mock & SQL interception simulation / hot updates / diagnostic sampling; 57 tools in 10 groups exposed on demand, fully reversible"
   soul: 所有操作可逆（delete/stop 还原），AI 放心在运行中的 JVM 里做实验。
   type: bridge
   category: 调试
-  version: "0.1.8"
+  version: "0.1.10"
   status: active
   author: aiti-ai
   publisher: aiti-ai

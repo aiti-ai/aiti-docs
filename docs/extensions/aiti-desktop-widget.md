@@ -5,6 +5,7 @@ ext:
   id: aiti-desktop-widget
   name: aiti-desktop-widget 桌面悬浮窗
   description: 与业务无关的原生桌面窗口壳——无框/透明/置顶/可点击穿透/可拖动，内容一律 URL 或本地 HTML；多显示器定位 + stdin JSONL 控制；供 aiti-video-studio 实时字幕、悬浮图标/桌面宠物使用
+  descriptionEn: "Cross-platform frameless desktop widget shell — native binary fetched on first run with justget multi-source racing"
   soul: 窗口能力归壳，内容归调用方。
   type: integration
   installable: false  # 独立桌面壳/CLI，不是 pi-web 扩展：extman 不列出，extensions.json 归 integrations

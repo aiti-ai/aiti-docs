@@ -5,10 +5,11 @@ ext:
   id: pi-secret-vault
   name: pi-secret-vault 加密密钥库
   description: pi 的加密持久密钥库——/vault add 掩码录入，模型只拿 rsec_<hash8> 稳定令牌（vault_list / vault_get），工具执行前自动还原真值；AI 只读、值 AES-256-GCM 加密落盘（keyfile / 系统钥匙串）、session JSONL 零真值
+  descriptionEn: "Encrypted secret vault for pi: store credentials once (/vault add, masked input), let the model query aliases (vault_list / vault_get → opaque rsec_ tokens) and pass those tokens into any tool argument, where the runtime substitutes the real value. AI is read-only; values never enter the chat, the session file, or the wire payload. Superset of @aiti-ai/pi-secret-mask (same engine; same-session coexistence resolves to the vault)."
   soul: 库在你手，令牌给 AI。
   type: pi-plugin
   category: pi 插件
-  version: 0.2.0
+  version: 0.3.1
   status: active
   author: aiti-ai
   publisher: aiti-ai

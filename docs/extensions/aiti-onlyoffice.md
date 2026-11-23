@@ -4,11 +4,13 @@ icon: 📚
 ext:
   id: aiti-onlyoffice
   name: OnlyOffice 深度保真编辑
+  nameEn: "OnlyOffice Editor"
   description: .docx/.xlsx/.pptx 完整保真预览+编辑（OnlyOffice DocumentServer Docker 后端）。AGPL 社区版，feature 默认关
+  descriptionEn: "Full-fidelity preview + editing for .docx/.xlsx/.pptx (OnlyOffice DocumentServer Docker backend). AGPL community edition, feature off by default"
   soul: 深度保真档——与桌面 Office 同引擎，复杂排版编辑不将就。
   type: aiti-ext
   category: 开发工具
-  version: "0.1.8"
+  version: "0.1.10"
   status: active
   author: aiti-ai
   publisher: aiti-ai

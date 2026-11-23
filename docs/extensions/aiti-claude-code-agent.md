@@ -4,11 +4,13 @@ icon: 🟠
 ext:
   id: aiti-claude-code-agent
   name: Claude Code 会话后端
+  nameEn: "Claude Code Session Backend"
   description: "驱动 Claude Code CLI 会话 —— 从 All Sessions 恢复历史行（agentKey: claude）；claude 2.1.318+ keyring 凭据三级裁决登录态"
+  descriptionEn: "Drives Claude Code CLI sessions — restores history rows from All Sessions (agentKey: claude); claude 2.1.318+ keyring credentials with a three-tier login-state adjudication"
   soul: 历史会话不是化石——点一下就活过来。
   type: aiti-ext
   category: 多 agent 后端
-  version: "0.1.8"
+  version: "0.1.10"
   status: active
   author: aiti-ai
   publisher: aiti-ai

@@ -4,7 +4,9 @@ icon: 📝
 ext:
   id: aiti-append-system
   name: 追加系统提示词
+  nameEn: "Append System Prompt"
   description: 管理 pi 的 APPEND_SYSTEM.md（会话启动时追加进 system prompt）——全局 ~/.pi/agent/ 与项目 <cwd>/.pi/ 两份，网页面板在线编辑保存，🤖 AI 帮你起草并直接写入
+  descriptionEn: "Two-level appended system prompt management (APPEND_SYSTEM.md): global ~/.pi/agent (all projects) + project <cwd>/.pi (this project only), editable in the browser"
   soul: 一句提醒，次次生效。
   type: aiti-ext
   category: 效率工具

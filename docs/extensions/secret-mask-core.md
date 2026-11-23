@@ -5,11 +5,12 @@ ext:
   id: secret-mask-core
   name: secret-mask-core 脱敏引擎
   description: 宿主无关的秘密脱敏基础能力包——确定性凭据检测规则、rsec_<hash8> 令牌 Registry（legacy [REDACTED:*] 兼容）、深遍历还原/脱敏、pi 消息适配、未挂载占位符 guard、落盘三态、自定义规则、payload 审计与 /secret 命令逻辑。零运行时依赖；pi 版与 DSH 版的生产实现共用，任何 TS/JS agent 四步接入
+  descriptionEn: "Host-agnostic secret redaction engine: deterministic credential detection rules (regex + checksums + entropy + false-positive guards), credential-shaped placeholders (rsec_<hash8>, session-salted for session values and stable for vault aliases) with legacy [REDACTED:*] compatibility, deep redact/restore traversal, pi AgentMessage adapters (context / system / message_end), unresolved-placeholder guard, three-state landing policy (plain/vault/ephemeral), custom JSON rules, final-payload leak auditing, and the /secret command logic. Shared by @aiti-ai/pi-secret-mask, @aiti-ai/pi-secret-vault (via @aiti-ai/secret-vault-core) and @aiti-ai/dsh-secret-mask; any TS/JS agent can adapt it by mapping its message shapes to text spans."
   soul: 一套检测引擎，所有 agent 共享同一份"随手贴，不泄密"。
   type: other
   installable: false  # 基础库——不是 aiti-agent/pi-web 扩展：extman 不列出、extensions.json 归 integrations
   category: 基础库
-  version: 0.3.0
+  version: 0.4.3
   status: active
   author: aiti-ai
   publisher: aiti-ai

@@ -4,11 +4,13 @@ icon: 📥
 ext:
   id: aiti-models-import
   name: 模型配置导入
+  nameEn: "Model Import"
   description: 其他 agent models 配置导入——扫描 codex/ZCode/OpenCode 的 provider·模型配置成草稿，首启弹窗一次性引导导入；落盘一律经 aiti-model-wizard saveBatch（可一步撤销），绝不直写 models.json
+  descriptionEn: "Imports model configs from other agents — scans codex / ZCode / OpenCode provider·model configs into drafts (first-launch dialog for a one-time import); persistence always goes through aiti-model-wizard saveBatch (undoable in one step), never writes models.json directly"
   soul: 不抄配置，只搬家。
   type: aiti-ext
   category: AI 能力
-  version: "0.1.10"
+  version: "0.1.12"
   status: active
   author: aiti-ai
   publisher: aiti-ai

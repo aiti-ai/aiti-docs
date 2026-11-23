@@ -4,7 +4,9 @@ icon: 🖥️
 ext:
   id: aiti-sysmon
   name: aiti-sysmon
+  nameEn: "Server Status Viewer"
   description: 服务器状态查看器——左栏停靠面板实时查看 pi-web 所在主机的 CPU / 内存 / 磁盘 / 网络 / 温度 / 传感器，面板打开才采样、折叠即停，服务端零常驻开销
+  descriptionEn: "Server status viewer — sidebar dock panel for the pi-web host machine: CPU / memory / disk / network / temperature (systeminformation based)"
   soul: 服务器忙不忙，开左栏看一眼就知道。
   type: aiti-ext
   category: 系统工具

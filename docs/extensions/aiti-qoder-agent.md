@@ -4,11 +4,13 @@ icon: ⚡
 ext:
   id: aiti-qoder-agent
   name: Qoder 会话后端
+  nameEn: "Qoder Session Backend"
   description: Qoder CLI 专属后端 —— 双区域 credits/listModels、WASM 签名请求、扩展 API 免开会话查询
+  descriptionEn: "Exclusive Qoder CLI session backend (qodercli/qoderclicn): credits/quota (getUsage), WASM-signed model catalog (listModels), task-list mirror, run-queue management, and plan/permission-mode support."
   soul: 别人走 ACP 大路，它偏要走签名的独木桥——因为风景在对面。
   type: aiti-ext
   category: 多 agent 后端
-  version: "0.4.10"
+  version: "0.4.12"
   status: active
   author: aiti-ai
   publisher: aiti-ai

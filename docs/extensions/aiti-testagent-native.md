@@ -4,11 +4,13 @@ icon: ⌖
 ext:
   id: aiti-testagent-native
   name: TestAgent Native 面板
+  nameEn: "testagent-native (Windows API/COM trace panel)"
   description: testagent-native（Windows 原生进程活体操控）可视面 —— broker 进程/会话/挂钩/事件流；原 aiti-wintrace（2026-11-07 改名）
+  descriptionEn: "Visual panel for testagent-native (live Windows-native process control) — broker processes/sessions/hooks/event stream; formerly aiti-wintrace (renamed 2026-11-07)"
   soul: 任意 Windows 进程→AI 可编程工具面：API/COM 调用级追踪、原生求值、mock 覆写、函数体热替换，全可逆审计。
   type: aiti-ext
   category: 调试
-  version: "0.1.10"
+  version: "0.1.12"
   status: active
   author: aiti-ai
   publisher: aiti-ai

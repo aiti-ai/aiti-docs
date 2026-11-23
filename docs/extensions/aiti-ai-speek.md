@@ -4,11 +4,13 @@ icon: 🔊
 ext:
   id: aiti-ai-speek
   name: 跟读模式
+  nameEn: "AI Read Aloud"
   description: AI 输出语音朗读——可切音色/暂停/跳过/停止；默认浏览器 Web Speech，可选 edge-tts
+  descriptionEn: "Voice reading of AI output — browser Web Speech / edge-tts / local TTS (Hojo-TTS-Light, OpenAI-compatible) with cache, voice cloning and pause/skip/stop"
   soul: AI 说给你听。
   type: aiti-ext
   category: 聊天增强
-  version: "0.1.8"
+  version: "0.2.3"
   status: beta
   author: aiti-ai
   publisher: aiti-ai

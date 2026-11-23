@@ -4,7 +4,9 @@ icon: 🗄️
 ext:
   id: aiti-backup
   name: aiti-backup
+  nameEn: "Data Backup (snapshots)"
   description: pi-web 数据备份扩展（state 层快照：硬链接增量 + 保留轮转 + 源严格只读；与 aiti-configs 互补）
+  descriptionEn: "Snapshot backup for large pi-web state data — hard-link incremental snapshots, out-of-process execution, crash-safe temp files, keepCount rotation. Complements aiti-configs, which versions small configs in git."
   soul: config 有 aiti-configs，state 的大数据不该靠手动复制续命。
   type: aiti-ext
   category: 系统工具

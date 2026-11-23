@@ -24,6 +24,10 @@ export interface ExtCatalogEntry {
   id: string;
   name: string;
   description: string;
+  /** English display name (synced from aiti-ai package.json displayNameI18n.en). */
+  nameEn?: string;
+  /** English one-line description (synced from the aiti-ai package.json baseline description). */
+  descriptionEn?: string;
   /** 一句话灵魂描述（设计源动力，列表卡片展示） */
   soul?: string;
   type: string;
@@ -99,6 +103,8 @@ const extensionsCatalog = (): PluginObject => {
         id: raw.id,
         name: raw.name ?? raw.id,
         description: raw.description ?? "",
+        ...(typeof raw.nameEn === "string" && raw.nameEn.trim() ? { nameEn: raw.nameEn.trim() } : {}),
+        ...(typeof raw.descriptionEn === "string" && raw.descriptionEn.trim() ? { descriptionEn: raw.descriptionEn.trim() } : {}),
         soul: raw.soul ?? "",
         type: raw.type ?? "other",
         category: raw.category ?? "",

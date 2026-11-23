@@ -4,11 +4,13 @@ icon: 🕐
 ext:
   id: aiti-model-recent
   name: aiti-model-recent
+  nameEn: "Recent Models"
   description: 模型选择器「最近使用」数据提供方——纯 service 扩展（零 UI），面板最近段同步取数 + pick 事件入库 LRU；localStorage key 与原实现一致零迁移
+  descriptionEn: "The model selector's \"recently used\" data provider — a pure service extension (zero UI); the panel's recent section fetches data synchronously and pick events feed the LRU; the localStorage key matches the original implementation, zero migration"
   soul: 常用的模型，应当在指尖。
   type: aiti-ext
   category: 聊天增强
-  version: "0.1.9"
+  version: "0.1.11"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai

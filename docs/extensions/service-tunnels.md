@@ -4,11 +4,13 @@ icon: 🌐
 ext:
   id: service-tunnels
   name: Service Tunnels
+  nameEn: "Service Tunnels"
   description: 本机服务一键公网可达 —— 端口发现（服务识别/自定义名）/ 五种暴露模式（隧道·vhost·混合·路由器映射·IPv6 直连）/ 认证网关（portal·TOTP·人脸声纹）/ DDNS 自动解析 / 网络体检 doctor
+  descriptionEn: "One-click public reachability for local services — port discovery (service identification/custom names) / five exposure modes (tunnel·vhost·hybrid·router portmap·IPv6 direct) / auth gateway (portal·TOTP·face and voiceprint) / DDNS auto resolution / network health doctor"
   soul: 本地服务不该被防火墙关起来——在哪都应该可以安全访问。
   type: aiti-ext
   category: 服务隧道
-  version: "0.3.88"
+  version: "0.3.89"
   status: active
   author: aiti-ai
   publisher: aiti-ai

@@ -4,7 +4,9 @@ icon: 🔁
 ext:
   id: aiti-echo-agent
   name: Echo 会话后端
+  nameEn: "Echo Agent"
   description: Echo agent —— session-provider slot 演示（多 agent 前端最小示例）
+  descriptionEn: "Echo agent — session provider slot demo for pi-web's multi-agent frontend"
   soul: 先让一声回声上线，再让千军万马接入。
   type: aiti-ext
   category: 多 agent 后端
