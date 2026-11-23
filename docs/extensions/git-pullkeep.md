@@ -6,6 +6,7 @@ ext:
   name: git-pullkeep 保留脏工作区 pull
   description: git pull 被脏工作区挡住时，只把真正挡路的文件收进带标记的临时提交，拉完拆回未提交状态——staged 状态保留、未跟踪文件挪 aside 保住、其余脏文件全程不动；git pull 全选项透传的 drop-in 替代（--rebase 场景等价替代 pull --rebase --autostash）
   soul: 挪得最少、证明没动别的、每一步可回滚——stash 不再是拉代码的过路费。
+  soulEn: "Pull without losing the work you have not committed yet."
   type: cli-tool
   category: 命令行工具
   version: 0.1.4

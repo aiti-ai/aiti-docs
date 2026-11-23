@@ -8,6 +8,7 @@ ext:
   description: 白名单 git 写引擎——checkout 预检 / stash / plan 断点 / 审计 / changed topic，供 folder 与 session-manager 消费
   descriptionEn: "Whitelisted git write engine — checkout precheck / stash / plan breakpoints / audit / changed topic, consumed by folder and session-manager"
   soul: 一处写仓，处处安全。
+  soulEn: "One place to write the repo, every place stays safe."
   type: aiti-ext
   category: 服务端引擎
   version: "0.1.13"

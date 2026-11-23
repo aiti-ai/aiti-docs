@@ -8,6 +8,7 @@ ext:
   description: prompt 片段收藏 —— 收藏/分组/会话提取/输入即存
   descriptionEn: "Prompt snippet collection — favorites/groups/session extraction/save-as-you-type"
   soul: 我的输入是我宝贵的财富——好话不说二遍。
+  soulEn: "My input is my precious fortune — good lines are never typed twice."
   type: aiti-ext
   category: 命令工具
   version: "0.1.11"

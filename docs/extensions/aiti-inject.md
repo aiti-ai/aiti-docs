@@ -6,6 +6,7 @@ ext:
   name: aiti-inject
   description: （已归档）dev 实例专用注入 FAB —— 已由 aiti-debug-inject 演变取代，源码 dev-exts/aiti-inject 已删除
   soul: 调试的第一步不该是读文档。
+  soulEn: "Injected once, visible to every AI that can read the page."
   type: aiti-ext
   category: 页面调试注入
   version: 0.3.0

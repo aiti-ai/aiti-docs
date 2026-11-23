@@ -8,6 +8,7 @@ ext:
   description: 腾讯 CodeBuddy Code CLI（cbc）驱动 —— stream 长连接（默认）+ exec 兜底双模式 + --resume 接入 All Sessions，control_request 三通道，API-key env 登录
   descriptionEn: "Tencent CodeBuddy Code CLI (cbc) driver — stream long connection (default) + exec fallback dual mode + --resume into All Sessions, control_request three channels, API-key env login"
   soul: 腾讯 CodeBuddy 会话，哪儿都能接上聊。
+  soulEn: "Tencent CodeBuddy sessions, ready to chat anywhere."
   type: aiti-ext
   category: 多 agent 后端
   version: "0.1.9"

@@ -8,6 +8,7 @@ ext:
   description: 编外 AI 变更追踪——仓根 .aiti-trace 独立追踪仓（无 git 也可 autoInit）+ op 编号 before/after 双 commit + 文件⇄消息⇄操作全链路 + 回撤 + 影子仓瘦身 compact
   descriptionEn: "Out-of-band AI change tracking — repo-root .aiti-trace standalone trace repo (autoInit even without git) + op-numbered before/after dual commits + full file⇄message⇄op lineage + rollback + shadow repo slimming compact"
   soul: AI 改过的每一行都有账。
+  soulEn: "Every line the AI touched has a receipt."
   type: aiti-ext
   category: 系统工具
   version: "0.2.14"

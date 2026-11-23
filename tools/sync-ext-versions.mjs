@@ -78,6 +78,7 @@ function readPkg(pkg) {
       // `description` is the English baseline; displayNameI18n.en carries the English name.
       nameEn: typeof j.displayNameI18n?.en === "string" ? j.displayNameI18n.en.trim() : "",
       descriptionEn: typeof j.description === "string" ? j.description.trim() : "",
+      soulEn: typeof j.soulI18n?.en === "string" ? j.soulI18n.en.trim() : "",
     };
   } catch {
     return null;
@@ -121,6 +122,8 @@ function parseDoc(name) {
   let descLine = -1;
   let nameEnLine = -1;
   let descEnLine = -1;
+  let soulLine = -1;
+  let soulEnLine = -1;
   let blockEnd = lines.length;
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
@@ -145,9 +148,11 @@ function parseDoc(name) {
     else if (/^[ \t]+nameEn:\s/.test(line)) nameEnLine = i;
     else if (/^[ \t]+description:\s/.test(line)) descLine = i;
     else if (/^[ \t]+descriptionEn:\s/.test(line)) descEnLine = i;
+    else if (/^[ \t]+soul:\s/.test(line)) soulLine = i;
+    else if (/^[ \t]+soulEn:\s/.test(line)) soulEnLine = i;
   }
   if (!id || verLine === -1) return null;
-  return { file, id, verLine, indent, quote, docVersion, nameLine, descLine, nameEnLine, descEnLine, blockEnd };
+  return { file, id, verLine, indent, quote, docVersion, nameLine, descLine, nameEnLine, descEnLine, soulLine, soulEnLine, blockEnd };
 }
 
 const rows = [];
@@ -170,10 +175,12 @@ for (const row of rows) {
   // can read for localized names/descriptions.
   const wantNameEn = Boolean(src.nameEn);
   const wantDescEn = Boolean(src.descriptionEn);
+  const wantSoulEn = Boolean(src.soulEn);
   const nameEnDrift = wantNameEn && row.nameEnLine === -1;
   const descEnDrift = wantDescEn && row.descEnLine === -1;
+  const soulEnDrift = wantSoulEn && row.soulEnLine === -1;
 
-  if (src.version === row.docVersion && !nameEnDrift && !descEnDrift) {
+  if (src.version === row.docVersion && !nameEnDrift && !descEnDrift && !soulEnDrift) {
     result.ok.push({ id: row.id, version: src.version });
     continue;
   }
@@ -183,6 +190,7 @@ for (const row of rows) {
     to: src.version,
     ...(nameEnDrift ? { nameEn: "added" } : {}),
     ...(descEnDrift ? { descriptionEn: "added" } : {}),
+    ...(soulEnDrift ? { soulEn: "added" } : {}),
   });
   if (!CHECK) {
     const lines = readFileSync(row.file, "utf8").split("\n");
@@ -197,6 +205,7 @@ for (const row of rows) {
     // Bottom-up insertion keeps earlier indices valid: descriptionEn sits below nameEn in the
     // natural order, so it must be spliced first.
     if (descEnDrift && wantDescEn) insertAfter(row.descLine >= 0 ? row.descLine : row.verLine, "descriptionEn", src.descriptionEn);
+    if (soulEnDrift && wantSoulEn) insertAfter(row.soulLine >= 0 ? row.soulLine : row.verLine, "soulEn", src.soulEn);
     if (nameEnDrift && wantNameEn) insertAfter(row.nameLine >= 0 ? row.nameLine : row.verLine, "nameEn", src.nameEn);
     writeFileSync(row.file, lines.join("\n"), "utf8");
   }

@@ -6,6 +6,7 @@ ext:
   name: pi-subagents 子 agent 委派
   description: pi 编码代理的子 agent 委派插件（aiti fork）——单 agent 委派 + 脚本化多 agent 工作流（并行/后台/council 顾问团/saved workflow/worktree 隔离），代码评审、并行审计、实现分工的第二三双眼睛
   soul: 一双手忙不过来时，派几双专注的眼睛。
+  soulEn: "Many hands, one conductor."
   type: pi-plugin
   category: pi 插件
   version: 0.89.0-aiti.1

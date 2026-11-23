@@ -8,6 +8,7 @@ ext:
   description: Provider 余额/配额查询 —— 16 个适配器 id（DeepSeek/OpenRouter/Z.AI/OpenCode Go/Kimi/Codex/Copilot 等），会话信息面板「剩余额度」区块当前会话置顶展开，5min TTL 总览 + 手动刷新，事件驱动零轮询
   descriptionEn: "Provider balance/quota lookup — 16 adapter ids (DeepSeek/OpenRouter/Z.AI/OpenCode Go/Kimi/Codex/Copilot etc.), session info panel \"remaining quota\" section with the current session pinned on top, 5min TTL overview + manual refresh, event-driven zero polling"
   soul: 各家还剩多少额度，一面看尽。
+  soulEn: "How much quota each provider has left, all on one panel."
   type: aiti-ext
   category: 系统工具
   version: "0.1.11"

@@ -8,6 +8,7 @@ ext:
   description: 队列面板接管 —— 完整队列 UI（横幅/行操作/拖拽排序/回收站/撤销条/导入导出），core 回到上游同形兜底
   descriptionEn: "Full queue panel for the composer (queuePanel-slot takeover): banners, row operations (move / drag / steer-send / to-followUp / recall / delete) and a recycle bin — fully client-side."
   soul: 排队不可怕，可怕的是排完队忘了自己要说什么。
+  soulEn: "Queuing isn't scary; what's scary is forgetting what you wanted to say after queuing."
   type: aiti-ext
   category: 聊天增强
   version: "0.1.11"

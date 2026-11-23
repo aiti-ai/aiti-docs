@@ -8,6 +8,7 @@ ext:
   description: "驱动 Claude Code CLI 会话 —— 从 All Sessions 恢复历史行（agentKey: claude）；claude 2.1.318+ keyring 凭据三级裁决登录态"
   descriptionEn: "Drives Claude Code CLI sessions — restores history rows from All Sessions (agentKey: claude); claude 2.1.318+ keyring credentials with a three-tier login-state adjudication"
   soul: 历史会话不是化石——点一下就活过来。
+  soulEn: "Historical sessions are not fossils — one click brings them back to life."
   type: aiti-ext
   category: 多 agent 后端
   version: "0.1.10"

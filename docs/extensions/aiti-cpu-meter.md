@@ -8,6 +8,7 @@ ext:
   description: 主线程流畅度检测——读秒 + 0-100 分 + 颜色分层 + 最小化 + AI 卡顿调试（aiti-helper 帮助点）；可注入任意站点（内部版/外部版双产物）
   descriptionEn: "Main-thread smoothness detector — a seconds counter + 0–100 smoothness score + color tiers + minimize + AI jank debugging. Ships as two artifacts: a pi-web extension (internal) and a standalone single-file injector you can register into any website you develop."
   soul: 卡不卡，让数字说话；元凶是谁，让 AI 说话。
+  soulEn: "A stalled main thread stops the clock; one score tells busy from idle."
   type: aiti-ext
   category: 系统工具
   version: "0.2.10"

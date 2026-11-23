@@ -8,6 +8,7 @@ ext:
   description: 极简远程调试注入 —— 把另一个 pi-web 实例的调试器注入本实例页面，服务地址是 extman 里的文本 feature，默认关闭
   descriptionEn: "Minimal remote-debug injection — injects another pi-web instance's debugger into this instance's pages; the service URL is a text feature in extman, off by default"
   soul: 调试器该穿在哪件衣服里，由你说了算。
+  soulEn: "Which outfit the debugger wears is up to you."
   type: aiti-ext
   category: 页面调试注入
   version: "0.3.10"

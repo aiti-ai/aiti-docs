@@ -8,6 +8,7 @@ ext:
   description: 手机端桥/SSE 连接探针（临时诊断）——页面侧采集生命周期/EventSource/fetch/心跳缺口证据落盘供 AI 分析；问题定位后应卸载
   descriptionEn: "pi-web extension: bridge connection probe (temporary diagnostics)"
   soul: SSE 断在哪一环，让证据说话。
+  soulEn: "Plug in and see what the bridge sees."
   type: aiti-ext
   category: 调试
   version: "0.1.0"

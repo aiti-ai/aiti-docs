@@ -8,6 +8,7 @@ ext:
   description: session-manager 第三方 agent source 贡献方示例 —— §4.8 slot 契约最小可运行模板
   descriptionEn: "Minimal runnable template for contributing a third-party agent source to session-manager (the §4.8 slot contract)"
   soul: 想给 All Sessions 贡献会话源？抄这个就对了。
+  soulEn: "Want to contribute a session source to All Sessions? Copy this one."
   type: aiti-ext
   category: 示例
   version: 0.1.0

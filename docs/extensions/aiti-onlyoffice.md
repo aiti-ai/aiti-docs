@@ -8,6 +8,7 @@ ext:
   description: .docx/.xlsx/.pptx 完整保真预览+编辑（OnlyOffice DocumentServer Docker 后端）。AGPL 社区版，feature 默认关
   descriptionEn: "Full-fidelity preview + editing for .docx/.xlsx/.pptx (OnlyOffice DocumentServer Docker backend). AGPL community edition, feature off by default"
   soul: 深度保真档——与桌面 Office 同引擎，复杂排版编辑不将就。
+  soulEn: "The deep-fidelity tier — the same engine as desktop Office, no compromise on complex-layout editing."
   type: aiti-ext
   category: 开发工具
   version: "0.1.10"
