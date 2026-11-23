@@ -8,6 +8,7 @@ ext:
   description: 跨项目会话面板 —— tag 树+颜色 / 收藏 / 搜索 / 归档 / 看板 / 新建会话分支·Worktree 选择器 / 23 家 agent 历史解析 / DockStack 编排
   descriptionEn: "Cross-project session panel — tag tree + colors / favorites / search / archive / kanban / new-session branch·Worktree picker / history parsing for 23 agent families / DockStack orchestration"
   soul: 会话不是用完即走的流水，是每天都在累积的资产。
+  iconUrl: "/ext-icons/session-manager.svg"
   soulEn: "Sessions are not disposable transient flows — they are assets that accumulate every day."
   type: aiti-ext
   category: 会话管理

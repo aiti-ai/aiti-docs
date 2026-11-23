@@ -8,6 +8,7 @@ ext:
   description: pi-web 常驻调度器 —— 扩展声明式定时任务 + AI 计划（cron/间隔/一次性）+ 三模式执行引擎 + AI 自建计划工具 + 管理页
   descriptionEn: "pi-web resident scheduler — extension declarative scheduled tasks + AI plans (cron/interval/one-shot) + three-mode execution engine + AI self-service plan tool + management page"
   soul: 别再每个扩展自造 setInterval 了——声明即调度，AI 也能自己排班。
+  iconUrl: "/ext-icons/aiti-ai-schedule.svg"
   soulEn: "Stop hand-rolling setInterval in every extension — declare it and it's scheduled; AI can roster its own shifts too."
   type: aiti-ext
   category: 系统工具

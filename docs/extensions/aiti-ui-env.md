@@ -8,6 +8,7 @@ ext:
   description: 后台无头服务器 UI 调试的环境分配器 —— 4 态模式裁决新启动 MCP/应用的显示环境，Xvfb+openbox+AT-SPI 虚拟屏 + VNC-on-web + RDP-on-web，Linux/Windows/macOS 三平台服务化；VNC 密码由 VNC server 自己认证（桥纯透传）
   descriptionEn: "Environment allocator for UI debugging on headless background servers — a 4-state mode arbiter decides whether newly launched MCP/apps land on a real desktop or an Xvfb headless virtual display (Xvfb+openbox+picom+AT-SPI virtual display + VNC-on-web + RDP-on-web), service-ized on Linux/Windows/macOS; the VNC password is authenticated by the VNC server itself (the bridge is pure passthrough)"
   soul: 没有显示器，也可以有舞台。
+  iconUrl: "/ext-icons/aiti-ui-env.svg"
   soulEn: "No monitor needed — there can still be a stage."
   type: aiti-ext
   category: 调试

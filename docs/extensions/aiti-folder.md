@@ -8,6 +8,7 @@ ext:
   description: fileViewer folder 接管 + pathPicker 目录选择器 —— 浏览/回收站删除 + git 工具条与分组提交计划（软依赖 aiti-git-ops）
   descriptionEn: "fileViewer folder take-over + pathPicker directory picker — browse / delete to trash + git toolbar and grouped commit plans (soft-depends on aiti-git-ops)"
   soul: 目录树不是导航的终点，是操作的起点。
+  iconUrl: "/ext-icons/aiti-folder.svg"
   soulEn: "The directory tree is not the end of navigation — it is the start of action."
   type: aiti-ext
   category: 开发工具

@@ -8,6 +8,7 @@ ext:
   description: 模型健康度探测 —— 对每个模型发极小探针消息，看是否可用 / 429 限流 / 异常；解析限流恢复时间（Retry-After 等），记录历史识别可用窗口；长期限流到期提醒（纯本地时间检查零探测）
   descriptionEn: "Model health probing — sends a tiny probe message to each model to check availability / 429 rate limiting / errors; parses the rate-limit recovery time (Retry-After etc.), records history to identify availability windows; long-term rate-limit expiry reminders (pure local time checks, zero probing)"
   soul: 模型在不在家，敲门问问它。
+  iconUrl: "/ext-icons/aiti-model-check.svg"
   soulEn: "Is the model home? Knock and ask."
   type: aiti-ext
   category: AI 能力

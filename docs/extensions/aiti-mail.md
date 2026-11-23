@@ -8,6 +8,7 @@ ext:
   description: pi-web 内通用「邮件发送出口」——零依赖 SMTP 客户端 + 发送记录（node:sqlite）+ 管理弹窗（配置/测试/记录）
   descriptionEn: "The general \"mail sending outlet\" inside pi-web — zero-dependency SMTP client + send log (node:sqlite) + management dialog (config/test/log)"
   soul: 配置一次 SMTP，pi-web 里任何扩展和 AI 都能发邮件。
+  iconUrl: "/ext-icons/aiti-mail.svg"
   soulEn: "Configure SMTP once, and any extension and AI inside pi-web can send mail."
   type: aiti-ext
   category: 系统工具

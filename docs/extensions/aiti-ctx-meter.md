@@ -8,6 +8,7 @@ ext:
   description: 输入区上下文比例条指示器——桌面 compactLead 竖向比例条 + 小屏 modelInfoLead 前导位，urgency 四档色阶 + critical 呼吸，点击开宿主会话统计面板
   descriptionEn: "Input-area context ratio-bar indicator — desktop compactLead vertical bar + small-screen modelInfoLead leading slot, four-tier urgency color scale + critical breathing, click opens the host session stats panel"
   soul: 上下文还剩多少，看一眼电池就知道。
+  iconUrl: "/ext-icons/aiti-ctx-meter.svg"
   soulEn: "How much context is left — one glance at the battery tells you."
   type: aiti-ext
   category: 聊天增强

@@ -8,6 +8,7 @@ ext:
   description: 空白态引导扩展——新建会话欢迎页 widget（上手步骤 / 快捷操作 / 任务运行时 / 示例提示词，走宿主 newSessionWidgets 插槽可 ⚙ 自定义）+ 左栏 DockStack 全折叠空白引导卡（与应用中心同屏共存，✕ 可关闭）+ v2 工作区获取 Hub（Git 克隆 / 上传压缩包 / 本地目录 / 新建）+ 侧栏「快速上手」静态条目（应用中心可钉住卡片，点击重返 quickstart 欢迎页）
   descriptionEn: "Blank-state onboarding extension — new-session welcome page widgets (getting-started steps / quick actions / while-it-runs concepts / sample prompts, via the host newSessionWidgets slot, ⚙ customizable) + a left sidebar DockStack fully-collapsed blank guide card (shares the screen with the app center, ✕ dismissible) + a v2 workspace-acquisition Hub (Git clone / upload archive / local directory / create new) + a sidebar \"Quick Start\" static entry (pinnable as a card in the app center; clicking returns to the quickstart welcome page)"
   soul: 空白不可怕，第一句从这里开始。
+  iconUrl: "/ext-icons/aiti-quickstart.svg"
   soulEn: "A blank slate is nothing to fear; your first sentence starts here."
   type: aiti-ext
   category: 会话与项目

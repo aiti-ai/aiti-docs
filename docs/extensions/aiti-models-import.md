@@ -8,6 +8,7 @@ ext:
   description: 其他 agent models 配置导入——扫描 codex/ZCode/OpenCode 的 provider·模型配置成草稿，首启弹窗一次性引导导入；落盘一律经 aiti-model-wizard saveBatch（可一步撤销），绝不直写 models.json
   descriptionEn: "Imports model configs from other agents — scans codex / ZCode / OpenCode provider·model configs into drafts (first-launch dialog for a one-time import); persistence always goes through aiti-model-wizard saveBatch (undoable in one step), never writes models.json directly"
   soul: 不抄配置，只搬家。
+  iconUrl: "/ext-icons/aiti-models-import.svg"
   soulEn: "Don't copy the config — just move in."
   type: aiti-ext
   category: AI 能力

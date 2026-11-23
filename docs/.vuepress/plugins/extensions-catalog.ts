@@ -30,6 +30,12 @@ export interface ExtCatalogEntry {
   descriptionEn?: string;
   /** English tagline (synced from aiti-ai package.json soulI18n.en). */
   soulEn?: string;
+  /**
+   * Icon URL on this site (e.g. /ext-icons/aiti-devtools.svg). The online registry hands it to
+   * clients that do not have the package on disk, so an extension can customise its icon without
+   * being installed. The published copy uses a neutral stroke tint (no currentColor context).
+   */
+  iconUrl?: string;
   /** 一句话灵魂描述（设计源动力，列表卡片展示） */
   soul?: string;
   type: string;
@@ -108,6 +114,7 @@ const extensionsCatalog = (): PluginObject => {
         ...(typeof raw.nameEn === "string" && raw.nameEn.trim() ? { nameEn: raw.nameEn.trim() } : {}),
         ...(typeof raw.descriptionEn === "string" && raw.descriptionEn.trim() ? { descriptionEn: raw.descriptionEn.trim() } : {}),
         ...(typeof raw.soulEn === "string" && raw.soulEn.trim() ? { soulEn: raw.soulEn.trim() } : {}),
+        ...(typeof raw.iconUrl === "string" && raw.iconUrl.trim() ? { iconUrl: raw.iconUrl.trim() } : {}),
         soul: raw.soul ?? "",
         type: raw.type ?? "other",
         category: raw.category ?? "",

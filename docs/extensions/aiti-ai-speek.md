@@ -8,6 +8,7 @@ ext:
   description: AI 输出语音朗读——可切音色/暂停/跳过/停止；默认浏览器 Web Speech，可选 edge-tts
   descriptionEn: "Voice reading of AI output — browser Web Speech / edge-tts / local TTS (Hojo-TTS-Light, OpenAI-compatible) with cache, voice cloning and pause/skip/stop"
   soul: AI 说给你听。
+  iconUrl: "/ext-icons/aiti-ai-speek.svg"
   soulEn: "You type, it reads it back to you."
   type: aiti-ext
   category: 聊天增强

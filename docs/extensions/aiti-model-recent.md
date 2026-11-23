@@ -8,6 +8,7 @@ ext:
   description: 模型选择器「最近使用」数据提供方——纯 service 扩展（零 UI），面板最近段同步取数 + pick 事件入库 LRU；localStorage key 与原实现一致零迁移
   descriptionEn: "The model selector's \"recently used\" data provider — a pure service extension (zero UI); the panel's recent section fetches data synchronously and pick events feed the LRU; the localStorage key matches the original implementation, zero migration"
   soul: 常用的模型，应当在指尖。
+  iconUrl: "/ext-icons/aiti-model-recent.svg"
   soulEn: "Frequently used models should be at your fingertips."
   type: aiti-ext
   category: 聊天增强

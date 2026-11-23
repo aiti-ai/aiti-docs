@@ -8,6 +8,7 @@ ext:
   description: flag 写入 → startup throw → ⚠ 指示器 + restore-ext 幂等清除——崩溃自愈链路的演习工具
   descriptionEn: "Fatal crash-testing extension (dev only): deliberately breaks one core file to verify the full recovery loop (global-error rescue page / partial startup failure / CLI watchdog)"
   soul: 崩溃要演，不要等。
+  iconUrl: "/ext-icons/aiti-crash-fatal.svg"
   soulEn: "Rehearse the crash; don't wait for it."
   type: aiti-ext
   category: 系统工具

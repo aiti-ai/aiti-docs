@@ -28,13 +28,17 @@
  *   node tools/sync-ext-versions.mjs --json           # machine-readable output
  *   node tools/sync-ext-versions.mjs --only <id>      # restrict to given id(s), repeatable
  */
-import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
+import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { homedir } from "node:os";
 import { fileURLToPath } from "node:url";
 
 const REPO = resolve(join(fileURLToPath(import.meta.url), "..", ".."));
 const DOCS_EXT_DIR = join(REPO, "docs", "extensions");
+// Cloud-hosted extension icons: the online registry (extensions.json) points clients at these
+// URLs, so an extension can customise its icon without the client having the package on disk.
+const PUBLIC_ICON_DIR = join(REPO, "docs", ".vuepress", "public", "ext-icons");
+const ICON_URL_PREFIX = "/ext-icons";
 const AITI_AI_DIR = resolve(REPO, process.env.AITI_AI_DIR || "../aiti-ai");
 const SOURCE_ROOTS = [
   join(AITI_AI_DIR, "extensions"),
@@ -79,6 +83,23 @@ function readPkg(pkg) {
       nameEn: typeof j.displayNameI18n?.en === "string" ? j.displayNameI18n.en.trim() : "",
       descriptionEn: typeof j.description === "string" ? j.description.trim() : "",
       soulEn: typeof j.soulI18n?.en === "string" ? j.soulI18n.en.trim() : "",
+      // Declared icon, resolved against the package directory (icon.svg or icons/<name>.svg,
+      // the latter falling back to the shared line-icon library in the aiti-ai checkout).
+      iconFile: (() => {
+        const pkgDir = join(pkg, "..");
+        let entry = "";
+        try { entry = readFileSync(join(pkgDir, "index.ts"), "utf8"); } catch { /* no entry */ }
+        const decl = entry.match(/^\s*icon:\s*["']([^"']+\.svg)["']/m);
+        const rel = decl ? decl[1] : (existsSync(join(pkgDir, "icon.svg")) ? "icon.svg" : "");
+        if (!rel) return "";
+        const own = join(pkgDir, rel);
+        if (existsSync(own)) return own;
+        if (rel.startsWith("icons/")) {
+          const lib = join(AITI_AI_DIR, "extensions", "_shared", "icons", rel.slice("icons/".length));
+          if (existsSync(lib)) return lib;
+        }
+        return "";
+      })(),
     };
   } catch {
     return null;
@@ -124,6 +145,7 @@ function parseDoc(name) {
   let descEnLine = -1;
   let soulLine = -1;
   let soulEnLine = -1;
+  let iconUrlLine = -1;
   let blockEnd = lines.length;
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
@@ -150,9 +172,30 @@ function parseDoc(name) {
     else if (/^[ \t]+descriptionEn:\s/.test(line)) descEnLine = i;
     else if (/^[ \t]+soul:\s/.test(line)) soulLine = i;
     else if (/^[ \t]+soulEn:\s/.test(line)) soulEnLine = i;
+    else if (/^[ \t]+iconUrl:\s/.test(line)) iconUrlLine = i;
   }
   if (!id || verLine === -1) return null;
-  return { file, id, verLine, indent, quote, docVersion, nameLine, descLine, nameEnLine, descEnLine, soulLine, soulEnLine, blockEnd };
+  return { file, id, verLine, indent, quote, docVersion, nameLine, descLine, nameEnLine, descEnLine, soulLine, soulEnLine, iconUrlLine, blockEnd };
+}
+
+/**
+ * Publish one extension's icon for the online registry.
+ *
+ * The client renders registry icons with a plain <img>, where `currentColor` has no context, so the
+ * published copy replaces it with a neutral tint that stays visible on both light and dark themes.
+ * The source file is never modified.
+ */
+function publishIcon(id, iconFile) {
+  try {
+    let svg = readFileSync(iconFile, "utf8");
+    svg = svg.replace(/stroke="currentColor"/g, 'stroke="#8b93a7"');
+    svg = svg.replace(/fill="currentColor"/g, 'fill="#8b93a7"');
+    if (!/^<svg[^>]*\swidth="/m.test(svg)) svg = svg.replace(/<svg/, '<svg width="16" height="16"');
+    mkdirSync(PUBLIC_ICON_DIR, { recursive: true });
+    writeFileSync(join(PUBLIC_ICON_DIR, `${id}.svg`), svg, "utf8");
+  } catch {
+    /* publishing an icon must never break the version sync */
+  }
 }
 
 const rows = [];
@@ -176,11 +219,15 @@ for (const row of rows) {
   const wantNameEn = Boolean(src.nameEn);
   const wantDescEn = Boolean(src.descriptionEn);
   const wantSoulEn = Boolean(src.soulEn);
+  const wantIconUrl = Boolean(src.iconFile);
   const nameEnDrift = wantNameEn && row.nameEnLine === -1;
   const descEnDrift = wantDescEn && row.descEnLine === -1;
   const soulEnDrift = wantSoulEn && row.soulEnLine === -1;
 
-  if (src.version === row.docVersion && !nameEnDrift && !descEnDrift && !soulEnDrift) {
+  const iconUrlValue = wantIconUrl ? `${ICON_URL_PREFIX}/${row.id}.svg` : "";
+  const iconUrlDrift = wantIconUrl && !new RegExp(`iconUrl:\\s*["']?${iconUrlValue}`).test(readFileSync(row.file, "utf8"));
+
+  if (src.version === row.docVersion && !nameEnDrift && !descEnDrift && !soulEnDrift && !iconUrlDrift) {
     result.ok.push({ id: row.id, version: src.version });
     continue;
   }
@@ -191,6 +238,7 @@ for (const row of rows) {
     ...(nameEnDrift ? { nameEn: "added" } : {}),
     ...(descEnDrift ? { descriptionEn: "added" } : {}),
     ...(soulEnDrift ? { soulEn: "added" } : {}),
+    ...(iconUrlDrift ? { iconUrl: "added" } : {}),
   });
   if (!CHECK) {
     const lines = readFileSync(row.file, "utf8").split("\n");
@@ -206,8 +254,10 @@ for (const row of rows) {
     // natural order, so it must be spliced first.
     if (descEnDrift && wantDescEn) insertAfter(row.descLine >= 0 ? row.descLine : row.verLine, "descriptionEn", src.descriptionEn);
     if (soulEnDrift && wantSoulEn) insertAfter(row.soulLine >= 0 ? row.soulLine : row.verLine, "soulEn", src.soulEn);
+    if (iconUrlDrift && wantIconUrl) insertAfter(row.soulLine >= 0 ? row.soulLine : row.verLine, "iconUrl", iconUrlValue);
     if (nameEnDrift && wantNameEn) insertAfter(row.nameLine >= 0 ? row.nameLine : row.verLine, "nameEn", src.nameEn);
     writeFileSync(row.file, lines.join("\n"), "utf8");
+    if (wantIconUrl) publishIcon(row.id, src.iconFile);
   }
 }
 
