@@ -216,6 +216,10 @@ for (const row of rows) {
   // English catalog metadata (ext.nameEn / ext.descriptionEn) rides along with the version sync:
   // the docs build never checks out aiti-ai, so these fields are the only source the catalog plugin
   // can read for localized names/descriptions.
+  // Publish the cloud icon on every run: artwork can change without a version bump, and the
+  // frontmatter field alone cannot tell us that the file content moved.
+  if (src.iconFile && !CHECK) publishIcon(row.id, src.iconFile);
+
   const wantNameEn = Boolean(src.nameEn);
   const wantDescEn = Boolean(src.descriptionEn);
   const wantSoulEn = Boolean(src.soulEn);
@@ -257,7 +261,6 @@ for (const row of rows) {
     if (iconUrlDrift && wantIconUrl) insertAfter(row.soulLine >= 0 ? row.soulLine : row.verLine, "iconUrl", iconUrlValue);
     if (nameEnDrift && wantNameEn) insertAfter(row.nameLine >= 0 ? row.nameLine : row.verLine, "nameEn", src.nameEn);
     writeFileSync(row.file, lines.join("\n"), "utf8");
-    if (wantIconUrl) publishIcon(row.id, src.iconFile);
   }
 }
 
