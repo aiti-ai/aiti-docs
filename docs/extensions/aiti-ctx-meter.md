@@ -8,7 +8,7 @@ ext:
   soul: 上下文还剩多少，看一眼电池就知道。
   type: aiti-ext
   category: 聊天增强
-  version: "0.1.13"
+  version: "0.1.16"
   status: active
   author: aiti-ai
   publisher: aiti-ai

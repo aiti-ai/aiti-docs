@@ -8,7 +8,7 @@ ext:
   soul: 框架先有例子，人才有样子。
   type: aiti-ext
   category: 示例
-  version: "0.2.1"
+  version: "0.2.3"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai

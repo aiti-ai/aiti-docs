@@ -8,7 +8,7 @@ ext:
   soul: 服务器忙不忙，开左栏看一眼就知道。
   type: aiti-ext
   category: 系统工具
-  version: "0.2.0"
+  version: "0.2.1"
   status: active
   author: aiti-ai
   publisher: aiti-ai

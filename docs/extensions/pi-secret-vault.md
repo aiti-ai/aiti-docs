@@ -8,7 +8,7 @@ ext:
   soul: 库在你手，令牌给 AI。
   type: pi-plugin
   category: pi 插件
-  version: 0.2.0
+  version: 0.3.1
   status: active
   author: aiti-ai
   publisher: aiti-ai

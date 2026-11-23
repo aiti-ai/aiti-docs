@@ -8,7 +8,7 @@ ext:
   soul: 卡不卡，让数字说话；元凶是谁，让 AI 说话。
   type: aiti-ext
   category: 系统工具
-  version: "0.2.8"
+  version: "0.2.11"
   status: active
   author: aiti-ai
   publisher: aiti-ai

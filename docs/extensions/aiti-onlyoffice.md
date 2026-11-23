@@ -8,7 +8,7 @@ ext:
   soul: 深度保真档——与桌面 Office 同引擎，复杂排版编辑不将就。
   type: aiti-ext
   category: 开发工具
-  version: "0.1.8"
+  version: "0.1.11"
   status: active
   author: aiti-ai
   publisher: aiti-ai

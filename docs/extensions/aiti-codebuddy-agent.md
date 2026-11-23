@@ -8,7 +8,7 @@ ext:
   soul: 腾讯 CodeBuddy 会话，哪儿都能接上聊。
   type: aiti-ext
   category: 多 agent 后端
-  version: "0.1.7"
+  version: "0.1.10"
   status: active
   author: aiti-ai
   publisher: aiti-ai

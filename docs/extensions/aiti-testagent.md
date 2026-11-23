@@ -8,7 +8,7 @@ ext:
   soul: 所有操作可逆（delete/stop 还原），AI 放心在运行中的 JVM 里做实验。
   type: bridge
   category: 调试
-  version: "0.1.8"
+  version: "0.1.11"
   status: active
   author: aiti-ai
   publisher: aiti-ai

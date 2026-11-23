@@ -8,7 +8,7 @@ ext:
   soul: 不抄配置，只搬家。
   type: aiti-ext
   category: AI 能力
-  version: "0.1.10"
+  version: "0.1.14"
   status: active
   author: aiti-ai
   publisher: aiti-ai

@@ -8,7 +8,7 @@ ext:
   soul: 目录树不是导航的终点，是操作的起点。
   type: aiti-ext
   category: 开发工具
-  version: "0.1.10"
+  version: "0.1.13"
   status: active
   author: aiti-ai
   publisher: aiti-ai

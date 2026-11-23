@@ -8,7 +8,7 @@ ext:
   soul: compaction 吃掉的上下文，一句搜索全找回来。
   type: pi-plugin
   category: pi 插件
-  version: 0.1.0
+  version: 0.1.1
   status: active
   author: aiti-ai
   publisher: aiti-ai

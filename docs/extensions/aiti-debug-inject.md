@@ -8,7 +8,7 @@ ext:
   soul: 调试器该穿在哪件衣服里，由你说了算。
   type: aiti-ext
   category: 页面调试注入
-  version: "0.3.8"
+  version: "0.3.11"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai

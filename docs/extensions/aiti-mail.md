@@ -8,7 +8,7 @@ ext:
   soul: 配置一次 SMTP，pi-web 里任何扩展和 AI 都能发邮件。
   type: aiti-ext
   category: 系统工具
-  version: "0.1.8"
+  version: "0.1.11"
   status: active
   author: aiti-ai
   publisher: aiti-ai

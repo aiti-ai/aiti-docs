@@ -9,7 +9,7 @@ ext:
   type: host-adapter
   installable: false  # DSH 插件——装进 DSH profile，不进 aiti-agent/pi-web：extman 不列出、extensions.json 归 integrations
   category: 宿主适配
-  version: 0.3.0
+  version: 0.3.1
   status: active
   author: aiti-ai
   publisher: aiti-ai

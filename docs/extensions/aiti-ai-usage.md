@@ -8,7 +8,7 @@ ext:
   soul: 用量不是账单来了才知道——每一枚 token 都该有去向。
   type: aiti-ext
   category: 系统工具
-  version: "0.1.8"
+  version: "0.1.11"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai

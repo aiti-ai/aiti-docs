@@ -8,7 +8,7 @@ ext:
   soul: 你还没打完的字，它已经替你想到一半了。
   type: aiti-ext
   category: 聊天增强
-  version: "0.4.11"
+  version: "0.4.15"
   status: active
   author: aiti-ai
   publisher: aiti-ai

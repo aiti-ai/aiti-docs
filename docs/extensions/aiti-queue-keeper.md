@@ -8,7 +8,7 @@ ext:
   soul: 排队不可怕，可怕的是排完队忘了自己要说什么。
   type: aiti-ext
   category: 聊天增强
-  version: "0.1.9"
+  version: "0.1.12"
   status: active
   author: aiti-ai
   publisher: aiti-ai

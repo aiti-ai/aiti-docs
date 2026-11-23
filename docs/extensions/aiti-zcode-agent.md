@@ -8,7 +8,7 @@ ext:
   soul: GLM 套餐在哪儿跑，面板就在哪儿看。
   type: aiti-ext
   category: 多 agent 后端
-  version: "0.1.10"
+  version: "0.1.13"
   status: active
   author: aiti-ai
   publisher: aiti-ai

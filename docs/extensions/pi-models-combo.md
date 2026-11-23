@@ -8,7 +8,7 @@ ext:
   soul: 模型列表不疯长、429 不打断手——过滤、轮转、聚合各司其职。
   type: pi-plugin
   category: pi 插件
-  version: 0.4.13
+  version: 0.4.16
   status: active
   author: aiti-ai
   publisher: aiti-ai

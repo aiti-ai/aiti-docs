@@ -8,7 +8,7 @@ ext:
   soul: 我的输入是我宝贵的财富——好话不说二遍。
   type: aiti-ext
   category: 命令工具
-  version: "0.1.10"
+  version: "0.1.12"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai

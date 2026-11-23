@@ -8,7 +8,7 @@ ext:
   soul: 在网页里管库，AI 永远只拿令牌。
   type: aiti-ext
   category: 安全
-  version: 0.2.0
+  version: 0.3.0
   status: active
   author: aiti-ai
   publisher: aiti-ai

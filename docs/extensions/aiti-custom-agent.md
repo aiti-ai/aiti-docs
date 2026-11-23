@@ -8,7 +8,7 @@ ext:
   soul: 一行命令，一个后端；docker 里跑 agent，从此不再手写配置。
   type: aiti-ext
   category: 多 agent 后端
-  version: "0.1.9"
+  version: "0.1.12"
   status: active
   author: aiti-ai
   publisher: aiti-ai

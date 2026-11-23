@@ -8,7 +8,7 @@ ext:
   soul: AI 改过的每一行都有账。
   type: aiti-ext
   category: 系统工具
-  version: "0.2.12"
+  version: "0.2.15"
   status: active
   author: aiti-ai
   publisher: aiti-ai
