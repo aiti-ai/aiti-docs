@@ -35,7 +35,7 @@ AI 助手读我：本站是 aiti 生态官方文档。扩展注册表含 74+ 个
 - [aiti-cursor-agent](https://aiti.pw/extensions/aiti-cursor-agent.html): 驱动 Cursor Agent CLI 会话（agentKey: cursor）——stream-json print 模式 + --resume 多轮；Cursor IDE 会话只读解析
 - [aiti-custom-agent](https://aiti.pw/extensions/aiti-custom-agent.html): UI 表单注册自定义会话后端——启动命令 + 参数前缀 + 成员 env + 桥模式，保存即热生效；generic 驱动 one-shot spawn（docker 化 / 命令包装 / 同一 CLI 多配置）
 - [aiti-debug-inject](https://aiti.pw/extensions/aiti-debug-inject.html): 极简远程调试注入 —— 把另一个 pi-web 实例的调试器注入本实例页面，服务地址是 extman 里的文本 feature，默认关闭
-- [aiti-devtools](https://aiti.pw/extensions/aiti-devtools.html): pi-web 扩展 —— 注入器/桥/MCP server 端 + 方案 M agent 工具进程内注入
+- [aiti-devtools](https://aiti.pw/extensions/aiti-devtools.html): pi-web 扩展 —— 注入器 / 桥 / MCP server 端 + agent 工具进程内注入
 - [aiti-doc-center](https://aiti.pw/extensions/aiti-doc-center.html): workspace md 收集/整理/检索——FTS5 trigram 中文全文 + tag 七来源两层 + 📚 float 弹窗四视图
 - [aiti-draft-keeper](https://aiti.pw/extensions/aiti-draft-keeper.html): 草稿持久化 + 恢复接管 —— composer 契约 v2 唯一所有者（applyIntent 唯一写入口）、多标签共享槽位、无贡献不回写防震荡、pruneStale 7 天清理、水合后恢复
 - [aiti-echo-agent](https://aiti.pw/extensions/aiti-echo-agent.html): Echo agent —— session-provider slot 演示（多 agent 前端最小示例）

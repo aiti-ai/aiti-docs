@@ -1,8 +1,38 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-20T02:50:52.449Z",
-  "count": 2,
+  "generatedAt": "2026-11-23T22:55:06.875Z",
+  "count": 4,
   "releases": [
+    {
+      "tag": "v0.18.0-aiti.2",
+      "version": "0.18.0-aiti.2",
+      "url": "https://github.com/aiti-ai/aiti-ai/releases/tag/v0.18.0-aiti.2",
+      "compareUrl": null,
+      "highlights": [
+        "**Sessions open without spawning**: reading a session never starts an agent process (lazy open), and hosted sessions get a snapshot view, a switch API and an agent badge in the UI",
+        "**New `aiti-interaction` MCP toolset**: a desktop interaction daemon with dialog/cover windows, form input patterns, custom pages and async MCP tools — AI can drive real GUI dialogs end to end",
+        "**Extension updates you can trust**: `aiti-extman` checks updates from two sources with persisted verdicts, and extension metadata (names, taglines, feature groups) is now localized",
+        "**Duplicate bridge registration self-check**: the TUI bridge and the `aiti_*` bundle detect double loading at startup and yield automatically, ending the \"Tool conflicts\" class of errors",
+        "**Sharper chrome everywhere**: semantic icons on every `aiti-msg-smart` popover action, one line-icon system across the extension list, a compact two-column `aiti-ui-env` panel with restart-proof helper supervision, and provider icons fixed under sub-path deployments"
+      ],
+      "sections": [],
+      "substantive": true
+    },
+    {
+      "tag": "v0.18.0-aiti.1",
+      "version": "0.18.0-aiti.1",
+      "url": "https://github.com/aiti-ai/aiti-ai/releases/tag/v0.18.0-aiti.1",
+      "compareUrl": null,
+      "highlights": [
+        "**New extension `aiti-feedback`**: a sanitized in-app feedback form that opens a prefilled GitHub issue — tokens, private IP ranges and home directories are redacted before anything leaves the browser",
+        "**Secret stack v2 lands end-to-end**: an encrypted secret vault with a pre-send credential gate in the composer, shape/context-based secret detection (`secret-mask-core` 0.4), and the DSH port re-aligned on the same core",
+        "**A wider extension surface**: `aiti-sysmon` CPU/memory chips, `aiti-ai-schedule` event triggers (fs-watch / process-exit / webhook), `aiti-editor` and `aiti-sheet-univer` in-app editing, `aiti-folder` live directory watch, `aiti-ai-speek` local TTS, and a layered fleet view for `aiti-subagents`",
+        "**Chat that survives the page**: busy compact requests are parked server-side across reloads, forked sessions keep their live ids, IME composition no longer submits early, and session notice toasts dismiss by tap, swipe or button",
+        "**Top-bar and sidebar density work**: the `sessionStatsInline` slot condenses the stats row into a single flow, and the sidebar dock contract now covers channels, folder and the rest of the dock panels"
+      ],
+      "sections": [],
+      "substantive": true
+    },
     {
       "tag": "v0.17.0-aiti.1",
       "version": "0.17.0-aiti.1",

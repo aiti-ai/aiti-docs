@@ -70,13 +70,13 @@ npm 包 **`@aiti-ai/pi-web`**（自带 63+ 内置扩展），安装方式详见 
 @tab npm
 
 ```bash
-npm install -g @aiti-ai/pi-web@latest && pi-web
+npm install -g @aiti-ai/pi-web@latest --allow-scripts=@aiti-ai/pi-web,esbuild,node-pty,@google/genai,protobufjs,unrs-resolver && pi-web
 ```
 
 @tab npx
 
 ```bash
-npx @aiti-ai/pi-web@latest        # 免安装直跑
+npx --allow-scripts=@aiti-ai/pi-web,esbuild,node-pty,@google/genai,protobufjs,unrs-resolver @aiti-ai/pi-web@latest        # 免安装直跑
 ```
 
 @tab macOS / Linux

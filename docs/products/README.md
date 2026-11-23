@@ -36,7 +36,7 @@ aiti 不是单一产品，而是一个 **AI 开发工具生态**。所有产品�
 
 ```bash
 # 自托管工作台（三选一）
-npx @aiti-ai/pi-web@latest                       # npm 免安装直跑
+npx --allow-scripts=@aiti-ai/pi-web,esbuild,node-pty,@google/genai,protobufjs,unrs-resolver @aiti-ai/pi-web@latest   # npm 免安装直跑
 curl -fsSL https://aiti.pw/install.sh | sh       # macOS / Linux（无需 npm）
 docker run -d -p 30142:30142 aitiai/pi-web:core  # Docker（:full 加 GUI/语音/隧道）
 

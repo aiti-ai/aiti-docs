@@ -66,10 +66,10 @@ footer: MIT Licensed | Copyright © 2026 aiti-ai
 
 ```bash
 # Node.js ≥ 22.19
-npm install -g @aiti-ai/pi-web@latest && pi-web
+npm install -g @aiti-ai/pi-web@latest --allow-scripts=@aiti-ai/pi-web,esbuild,node-pty,@google/genai,protobufjs,unrs-resolver && pi-web
 ```
 
-首启后在 **Models** 面板登录或填 API key 即可开聊——60+ 内置扩展已就位，无需逐个安装。不想全局安装？`npx @aiti-ai/pi-web@latest` 可免安装直跑；其余方式（curl / PowerShell / Docker）见 **[安装指南](/guide/install.md)**。
+首启后在 **Models** 面板登录或填 API key 即可开聊——60+ 内置扩展已就位，无需逐个安装。不想全局安装？`npx --allow-scripts=@aiti-ai/pi-web,esbuild,node-pty,@google/genai,protobufjs,unrs-resolver @aiti-ai/pi-web@latest` 可免安装直跑；其余方式（curl / PowerShell / Docker）见 **[安装指南](/guide/install.md)**。
 
 ## 为什么选 aiti？
 
@@ -128,7 +128,7 @@ npm install -g @aiti-ai/pi-web@latest && pi-web
 
 ```bash
 # Node.js ≥ 22.19
-npm install -g @aiti-ai/pi-web@latest
+npm install -g @aiti-ai/pi-web@latest --allow-scripts=@aiti-ai/pi-web,esbuild,node-pty,@google/genai,protobufjs,unrs-resolver
 pi-web          # 启动服务并打开浏览器（默认 http://127.0.0.1:30141）
 ```
 
@@ -136,7 +136,7 @@ pi-web          # 启动服务并打开浏览器（默认 http://127.0.0.1:30141
 
 ```bash
 # 不落盘，每次拉最新
-npx @aiti-ai/pi-web@latest
+npx --allow-scripts=@aiti-ai/pi-web,esbuild,node-pty,@google/genai,protobufjs,unrs-resolver @aiti-ai/pi-web@latest
 ```
 
 @tab macOS / Linux

@@ -19,14 +19,14 @@ Get **aiti-agent** (the self-hosted web workbench, npm package `@aiti-ai/pi-web`
 
 ```bash
 # Node.js ≥ 22.19
-npm install -g @aiti-ai/pi-web@latest
+npm install -g @aiti-ai/pi-web@latest --allow-scripts=@aiti-ai/pi-web,esbuild,node-pty,@google/genai,protobufjs,unrs-resolver
 ```
 
 @tab npx
 
 ```bash
 # nothing installed to disk, every run pulls the latest
-npx @aiti-ai/pi-web@latest
+npx --allow-scripts=@aiti-ai/pi-web,esbuild,node-pty,@google/genai,protobufjs,unrs-resolver @aiti-ai/pi-web@latest
 ```
 
 @tab macOS / Linux

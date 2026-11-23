@@ -66,10 +66,10 @@ footer: MIT Licensed | Copyright © 2026 aiti-ai
 
 ```bash
 # Node.js ≥ 22.19
-npm install -g @aiti-ai/pi-web@latest && pi-web
+npm install -g @aiti-ai/pi-web@latest --allow-scripts=@aiti-ai/pi-web,esbuild,node-pty,@google/genai,protobufjs,unrs-resolver && pi-web
 ```
 
-On first launch, sign in or fill an API key in the **Models** panel and start chatting — the 60+ built-in extensions are already in place. No global install? `npx @aiti-ai/pi-web@latest` runs it directly; other methods (curl / PowerShell / Docker) in the **[install guide](/en/guide/install.md)**.
+On first launch, sign in or fill an API key in the **Models** panel and start chatting — the 60+ built-in extensions are already in place. No global install? `npx --allow-scripts=@aiti-ai/pi-web,esbuild,node-pty,@google/genai,protobufjs,unrs-resolver @aiti-ai/pi-web@latest` runs it directly; other methods (curl / PowerShell / Docker) in the **[install guide](/en/guide/install.md)**.
 
 ## Why aiti?
 
@@ -127,7 +127,7 @@ On first launch, sign in or fill an API key in the **Models** panel and start ch
 
 ```bash
 # Node.js ≥ 22.19
-npm install -g @aiti-ai/pi-web@latest
+npm install -g @aiti-ai/pi-web@latest --allow-scripts=@aiti-ai/pi-web,esbuild,node-pty,@google/genai,protobufjs,unrs-resolver
 pi-web          # starts the service and opens the browser (default http://127.0.0.1:30141)
 ```
 
@@ -135,7 +135,7 @@ pi-web          # starts the service and opens the browser (default http://127.0
 
 ```bash
 # nothing installed to disk, every run pulls the latest
-npx @aiti-ai/pi-web@latest
+npx --allow-scripts=@aiti-ai/pi-web,esbuild,node-pty,@google/genai,protobufjs,unrs-resolver @aiti-ai/pi-web@latest
 ```
 
 @tab macOS / Linux
