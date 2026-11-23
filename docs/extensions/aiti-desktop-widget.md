@@ -121,6 +121,30 @@ loopback 页面应按可信代码对待，需要更小面时直接删 capability
 关闭。`--resizable false` 的 min=max 约束由页面先调用 `setMinSize`/`setMaxSize` 更新。
 拖动仍是页面 DOM 的 `data-tauri-drag-region`，没有窗口级 `draggable` 属性。
 
+## aiti-dialog：跨平台 zenity 替代
+
+`@aiti-ai/widget-interaction` 提供 `aiti-dialog` 命令，用本壳做跨平台确认/选择/输入/文件选择：
+
+```bash
+aiti-dialog confirm --text "继续？"            # exit 0 / 1 / 5
+aiti-dialog input --text "名称："             # stdout = 文本
+aiti-dialog choose --options "A,B,C"          # stdout = 选中项
+aiti-dialog file --multiple                   # stdout = 绝对路径，每行一个
+aiti-dialog directory
+aiti-dialog notify --text "完成" --timeout 5
+aiti-dialog --daemon --port 18095             # 常驻，HTTP/SSE 复用同一窗口
+```
+
+- 退出码与 zenity 一致：`0` 已作答 / `1` 取消 / `5` 超时（`2` 参数、`4` 运行错误）。
+- `--json` 输出完整 Host envelope（`status`/`value`/`comment`/`tookMs`）。
+- 页面只是渲染器：pending、超时、幂等和回调都在 Host，页面刷新/重开不丢。
+- 原生文件/文件夹选择走 `tauri-plugin-dialog`（capability `dialog:allow-open`）。
+- 也可作为 MCP 服务：`widget_confirm` / `widget_choose` / `widget_input` / `widget_presence` /
+  `widget_notify` / `widget_cancel`，支持 `--http` 代理到常驻 daemon。
+
+桌面遮挡用同一套适配层的 `DesktopCover`：独立、置顶、点击穿透的 cover 窗口盖在录制区域内，
+页面刷新无法移除；实时像素化马赛克见 video-studio 的 `desktop-mosaic`。
+
 ## 与 aiti-video-studio 集成
 
 **aiti-video-studio** 的桌面 `overlay` 字幕模式用

@@ -102,6 +102,32 @@ the window width follows the current lyric while the **window center stays fixed
 `autosize=0` to keep the caller size. The page updates the min=max constraints before resizing
 (`--resizable false`). Dragging is still a DOM `data-tauri-drag-region`, not a window property.
 
+## aiti-dialog: a cross-platform zenity replacement
+
+`@aiti-ai/widget-interaction` ships an `aiti-dialog` command that drives this shell:
+
+```bash
+aiti-dialog confirm --text "Continue?"        # exit 0 / 1 / 5
+aiti-dialog input --text "Name:"              # stdout = text
+aiti-dialog choose --options "A,B,C"          # stdout = choice
+aiti-dialog file --multiple                   # stdout = absolute paths, one per line
+aiti-dialog directory
+aiti-dialog notify --text "Done" --timeout 5
+aiti-dialog --daemon --port 18095             # long-lived, HTTP/SSE reuse
+```
+
+- Exit codes match zenity: `0` answered, `1` cancelled, `5` timeout (`2` usage, `4` runtime).
+- `--json` prints the full host envelope (`status`/`value`/`comment`/`tookMs`).
+- The page is only a renderer: pending state, timeout, idempotency and callbacks live in the
+  host, so reloading or reopening the page never loses a request.
+- Native file/folder picking uses `tauri-plugin-dialog` (`dialog:allow-open`).
+- Also available as MCP tools: `widget_confirm` / `widget_choose` / `widget_input` /
+  `widget_presence` / `widget_notify` / `widget_cancel`, with `--http` proxying to a daemon.
+
+Desktop privacy covers use the same adapter's `DesktopCover`: a separate always-on-top,
+click-through window inside the capture rect, immune to page reloads. Real-time pixelation
+lives in video-studio's `desktop-mosaic`.
+
 ## Used by aiti-video-studio
 
 Video Studio's desktop `overlay` caption mode opens a loopback caption page
