@@ -13,14 +13,14 @@ aiti Web 的更新统一遵循一个节奏：**停止服务 → 更新 → 启�
 
 ## 版本号方案
 
-版本号形如 `0.17.0` 或 `0.17.0-aiti.1`（Debian/Ubuntu 风格）：
+版本号形如 `0.18.0` 或 `0.18.0-aiti.1`（Debian/Ubuntu 风格）：
 
 | 形态 | 含义 |
 |---|---|
 | `X.Y.Z` | 上游核心版本（pi-web 基线） |
 | `X.Y.Z-aiti.N` | 基于上游 `X.Y.Z` 的 aiti 发行构建；同一基线重构建递增 `N`（`-aiti.2`、`-aiti.3` …） |
 
-排序遵循 dpkg 语义而非严格 semver：上游 `X.Y.Z` 主导比较，fork 后缀只在同基线内分先后——`0.17.0-aiti.1` > `0.17.0`（严格 semver 会把后缀当预发布版排到前面，这里不是）。git tag 为 `v<版本>`，npm `latest` dist-tag 同名。
+排序遵循 dpkg 语义而非严格 semver：上游 `X.Y.Z` 主导比较，fork 后缀只在同基线内分先后——`0.18.0-aiti.1` > `0.18.0`（严格 semver 会把后缀当预发布版排到前面，这里不是）。git tag 为 `v<版本>`，npm `latest` dist-tag 同名。
 
 历史版本与变更日志见 [GitHub Releases](https://github.com/aiti-ai/aiti-ai/releases)。
 
@@ -44,7 +44,7 @@ pi-web update
 pi-web start
 ```
 
-`pi-web update` 等效于 `npm install -g @aiti-ai/pi-web@latest --allow-scripts`。
+`pi-web update` 等效于 `npm install -g @aiti-ai/pi-web@latest --allow-scripts=@aiti-ai/pi-web,esbuild,node-pty,@google/genai,protobufjs,unrs-resolver`。注意 `--allow-scripts` 必须带值并写在包 spec 之后；裸写会在 npm 12 下跳过全部安装脚本。
 
 @tab release 归档（macOS / Linux / Windows 一键脚本）
 
@@ -68,7 +68,7 @@ irm https://aiti.pw/install.ps1 | iex             # Windows (PowerShell)
 不落盘、每次拉最新——直接运行新版本即可：
 
 ```bash
-npx @aiti-ai/pi-web@latest
+npx --allow-scripts=@aiti-ai/pi-web,esbuild,node-pty,@google/genai,protobufjs,unrs-resolver @aiti-ai/pi-web@latest
 ```
 
 @tab Docker

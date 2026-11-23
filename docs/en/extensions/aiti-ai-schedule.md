@@ -6,7 +6,7 @@ description: pi-web resident scheduler — extension declarative scheduled tasks
 
 # aiti-ai-schedule
 
-> ❝ **Stop hand-rolling setInterval in every extension — declare it and it's scheduled; AI can roster its own shifts too.** ❝
+> ❝ **Stop hand-rolling setInterval in every extension — declare it and it's scheduled; AI can roster its own shifts too.** ❞
 
 pi-web resident scheduler: **runs 7×24, regardless of session life or death**. Two kinds of tasks feed one kernel:
 

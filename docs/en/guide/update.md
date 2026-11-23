@@ -13,14 +13,14 @@ Updating aiti Web always follows the same rhythm: **stop the server → update �
 
 ## Version scheme
 
-Versions look like `0.17.0` or `0.17.0-aiti.1` (Debian/Ubuntu style):
+Versions look like `0.18.0` or `0.18.0-aiti.1` (Debian/Ubuntu style):
 
 | Shape | Meaning |
 |---|---|
 | `X.Y.Z` | Upstream core version (the pi-web baseline) |
 | `X.Y.Z-aiti.N` | aiti distribution build based on upstream `X.Y.Z`; rebuilds of the same baseline increment `N` (`-aiti.2`, `-aiti.3` …) |
 
-Ordering follows dpkg semantics, not strict semver: the upstream `X.Y.Z` core dominates, and the fork suffix only breaks ties within the same baseline — `0.17.0-aiti.1` > `0.17.0` (strict semver would treat the suffix as a prerelease and sort it the other way; here it does not). Git tags are `v<version>` and the npm `latest` dist-tag carries the same string.
+Ordering follows dpkg semantics, not strict semver: the upstream `X.Y.Z` core dominates, and the fork suffix only breaks ties within the same baseline — `0.18.0-aiti.1` > `0.18.0` (strict semver would treat the suffix as a prerelease and sort it the other way; here it does not). Git tags are `v<version>` and the npm `latest` dist-tag carries the same string.
 
 Past versions and changelogs live in [GitHub Releases](https://github.com/aiti-ai/aiti-ai/releases).
 
@@ -44,7 +44,7 @@ pi-web update
 pi-web start
 ```
 
-`pi-web update` is equivalent to `npm install -g @aiti-ai/pi-web@latest --allow-scripts`.
+`pi-web update` is equivalent to `npm install -g @aiti-ai/pi-web@latest --allow-scripts=@aiti-ai/pi-web,esbuild,node-pty,@google/genai,protobufjs,unrs-resolver`. The flag must carry an explicit value after the package spec; a bare `--allow-scripts` skips all install scripts on npm 12.
 
 @tab release archive (macOS / Linux / Windows one-liner)
 
@@ -68,7 +68,7 @@ irm https://aiti.pw/install.ps1 | iex             # Windows (PowerShell)
 Nothing is installed to disk and every run pulls the latest — just run the new version:
 
 ```bash
-npx @aiti-ai/pi-web@latest
+npx --allow-scripts=@aiti-ai/pi-web,esbuild,node-pty,@google/genai,protobufjs,unrs-resolver @aiti-ai/pi-web@latest
 ```
 
 @tab Docker

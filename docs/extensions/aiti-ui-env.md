@@ -47,7 +47,7 @@ ext:
 
 ## 能力
 
-- **agent 工具**（方案 M 注入；整组 feature `agentTools.enabled` **默认关**——helper 🤖 临时启用或 extman 开，也可逐项启停）：
+- **agent 工具**（进程内注入；整组 feature `agentTools.enabled` **默认关**——helper 🤖 临时启用或 extman 开，也可逐项启停）：
   `ui_env_status` / `ui_env_set_mode` / `ui_env_resolve` / `ui_env_run` / `ui_env_headless`（虚拟屏启停）/ `ui_env_deps`（依赖自检/安装）/ `ui_env_vnc` / `ui_env_rdp`
 - **CLI**：`scripts/ui-env`（shell 里 `eval "$(ui-env env)"` 直接给 MCP/应用启动器注入环境）
 - **API**：`/api/extensions/aiti-ui-env/{status|set-mode|resolve|run|headless|vnc|vnc-session|vnc-password|vnc-clipboard|rdp|rdp-session|install-status}`

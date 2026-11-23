@@ -18,8 +18,10 @@ aiti Web (npm package **`@aiti-ai/pi-web`**) is a self-hosted AI development wor
 Requires Node.js ≥ 22.19 (check with `node --version`):
 
 ```bash
-npm install -g @aiti-ai/pi-web@latest
+npm install -g @aiti-ai/pi-web@latest --allow-scripts=@aiti-ai/pi-web,esbuild,node-pty,@google/genai,protobufjs,unrs-resolver
 ```
+
+> npm ≥11.16 requires an explicit install-script allowlist: use `--allow-scripts=<names>` AFTER the package spec. A bare `--allow-scripts` makes npm 12 block every install script (node-pty, esbuild, patch-package), while older npm ignores the flag.
 
 Then start:
 
@@ -27,7 +29,7 @@ Then start:
 pi-web          # serves http://127.0.0.1:30141 and opens your browser
 ```
 
-Prefer a throwaway run? `npx @aiti-ai/pi-web@latest` — no global install.
+Prefer a throwaway run? `npx --allow-scripts=@aiti-ai/pi-web,esbuild,node-pty,@google/genai,protobufjs,unrs-resolver @aiti-ai/pi-web@latest` — no global install (the same allow-scripts flag applies).
 
 @tab macOS / Linux
 
@@ -40,7 +42,7 @@ curl -fsSL https://aiti.pw/install.sh | sh
 Pin a version:
 
 ```bash
-curl -fsSL https://aiti.pw/install.sh | sh -s -- --ref v0.17.0-aiti.1
+curl -fsSL https://aiti.pw/install.sh | sh -s -- --ref v0.18.0-aiti.1
 ```
 
 Env overrides: `AITI_RELEASE_REPO` (mirror repo), `AITI_INSTALL_DIR`, `AITI_BIN_DIR`:
@@ -64,7 +66,7 @@ docker run -d --name aiti --init -p 30142:30142 \
 - `core` (~2.1 GB): fork of pi-web + all extensions + node/git + the justget tool market;
 - `full` (~7.8 GB): adds GUI / voice (funasr) / Chrome / tunnels — needs ≥8 GB RAM;
 - version tags: `aitiai/pi-web:v<version>-{core,full}`, rolling `core`/`full`/`latest`;
-- GHCR source: `ghcr.io/aiti-ai/aiti-ai` — same versions and content as Docker Hub (core/full variants), identical tags (e.g. `v0.17.0-aiti.1-core` / `core` / `latest`);
+- GHCR source: `ghcr.io/aiti-ai/aiti-ai` — same versions and content as Docker Hub (core/full variants), identical tags (e.g. `v0.18.0-aiti.1-core` / `core` / `latest`);
 - ⚠ mount only sub-paths of `/opt/aiti`, never the root itself (a root mount shadows the new image on upgrade — extensions would never refresh);
 - all three image channels (Docker Hub / ACR / GHCR) currently ship linux/amd64 only; on ARM hosts add `--platform linux/amd64` to run under emulation (with a performance cost);
 - slow pulls in China? swap the image for `registry.cn-hangzhou.aliyuncs.com/aiti-ai/pi-web:core` (Aliyun ACR, same tags as Docker Hub);
@@ -81,7 +83,7 @@ Requires PowerShell 5.1+ (built into Windows 10/11). Equivalent: `iwr -useb http
 Pin a version:
 
 ```powershell
-$env:AITI_RELEASE_TAG = "v0.17.0-aiti.1"; irm https://aiti.pw/install.ps1 | iex
+$env:AITI_RELEASE_TAG = "v0.18.0-aiti.1"; irm https://aiti.pw/install.ps1 | iex
 ```
 
 `AITI_RELEASE_REPO` and `AITI_INSTALL_DIR` work the same way.

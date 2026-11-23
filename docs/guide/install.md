@@ -18,8 +18,10 @@ aiti Web（npm 包名 **`@aiti-ai/pi-web`**）是自托管的 AI 开发工作台
 需要 Node.js ≥ 22.19（`node --version` 检查）：
 
 ```bash
-npm install -g @aiti-ai/pi-web@latest
+npm install -g @aiti-ai/pi-web@latest --allow-scripts=@aiti-ai/pi-web,esbuild,node-pty,@google/genai,protobufjs,unrs-resolver
 ```
+
+> npm ≥11.16 要求显式批准安装脚本：`--allow-scripts` 必须带 `=包名列表`，并写在包 spec 之后。裸写 `--allow-scripts` 在 npm 12 会拒绝全部脚本，导致 node-pty / esbuild / patch-package 的 postinstall 不执行；旧版 npm 忽略该参数，无副作用。
 
 安装后启动：
 
@@ -27,7 +29,7 @@ npm install -g @aiti-ai/pi-web@latest
 pi-web          # 启动服务并打开浏览器（默认 http://127.0.0.1:30141）
 ```
 
-不想全局安装？`npx @aiti-ai/pi-web@latest` 直接跑（不落盘、每次拉最新）。
+不想全局安装？`npx --allow-scripts=@aiti-ai/pi-web,esbuild,node-pty,@google/genai,protobufjs,unrs-resolver @aiti-ai/pi-web@latest` 直接跑（不落盘、每次拉最新，同样需要上面的允许脚本参数）。
 
 @tab macOS / Linux
 
@@ -40,7 +42,7 @@ curl -fsSL https://aiti.pw/install.sh | sh
 固定版本：
 
 ```bash
-curl -fsSL https://aiti.pw/install.sh | sh -s -- --ref v0.17.0-aiti.1
+curl -fsSL https://aiti.pw/install.sh | sh -s -- --ref v0.18.0-aiti.1
 ```
 
 环境变量覆盖：`AITI_RELEASE_REPO`（镜像仓）、`AITI_INSTALL_DIR`、`AITI_BIN_DIR`：
@@ -64,7 +66,7 @@ docker run -d --name aiti --init -p 30142:30142 \
 - `core`（约 2.1GB）：fork pi-web + 全部扩展 + node/git + justget 工具市场；
 - `full`（约 7.8GB）：加 GUI/语音（funasr）/Chrome/隧道等全功能（需 ≥8GB 内存）；
 - 版本 tag：`aitiai/pi-web:v<版本>-{core,full}`，滚动 `core`/`full`/`latest`；
-- GHCR 源：`ghcr.io/aiti-ai/aiti-ai`——与 Docker Hub 同版本同内容（core/full 双变体），tag 完全一致（如 `v0.17.0-aiti.1-core` / `core` / `latest`）；
+- GHCR 源：`ghcr.io/aiti-ai/aiti-ai`——与 Docker Hub 同版本同内容（core/full 双变体），tag 完全一致（如 `v0.18.0-aiti.1-core` / `core` / `latest`）；
 - ⚠ 卷只挂 `/opt/aiti` 子路径，勿挂整个 `/opt/aiti` 根（挂根会让镜像升级后扩展永不更新）；
 - 三个镜像渠道（Docker Hub / ACR / GHCR）当前均为 linux/amd64 单架构；ARM 主机加 `--platform linux/amd64` 模拟运行（性能有折损）；
 - 国内拉取慢？镜像名换 `registry.cn-hangzhou.aliyuncs.com/aiti-ai/pi-web:core`（阿里云 ACR，tag 与 Docker Hub 一致）；
@@ -81,7 +83,7 @@ irm https://aiti.pw/install.ps1 | iex
 固定版本与环境变量覆盖：
 
 ```powershell
-$env:AITI_RELEASE_TAG = "v0.17.0-aiti.1"; irm https://aiti.pw/install.ps1 | iex
+$env:AITI_RELEASE_TAG = "v0.18.0-aiti.1"; irm https://aiti.pw/install.ps1 | iex
 ```
 
 `AITI_RELEASE_REPO`（镜像仓）、`AITI_INSTALL_DIR` 同理可覆盖。

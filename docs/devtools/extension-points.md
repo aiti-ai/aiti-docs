@@ -194,7 +194,7 @@ ctx.registerItems("toolbar", [{
 | `api(req, ctx)` | `/api/extensions/<id>/<path...>` 命中 | 扩展自己的 API（返回 `null` = 404） |
 | `middleware(req)` | 每个请求，DNS-rebinding 门禁之前 | vhost 分支、门禁等（**抛异常 = fail-closed 403**） |
 | `rescanBackends(ctx)` | POST `/api/session-backends/rescan` | 后端型扩展重跑探测+注册（幂等；startup 只扫一次，装完 CLI 后靠它补扫） |
-| `agent.agentTools(info)` / `agent.onAgentSession(info)` / `agent.onAgentSessionEnd(info)` / `agent.onAgentSettled(info)` | 每个 agent 会话（方案 M，进程内零配置注入） | 注入自定义工具 / 会话生命周期回调（⚠️ idle GC 与热重载会重复触发 onAgentSession，实现必须幂等；宿主派发前回收上一轮 subscribeEvent 订阅） |
+| `agent.agentTools(info)` / `agent.onAgentSession(info)` / `agent.onAgentSessionEnd(info)` / `agent.onAgentSettled(info)` | 每个 agent 会话（进程内零配置注入） | 注入自定义工具 / 会话生命周期回调（⚠️ idle GC 与热重载会重复触发 onAgentSession，实现必须幂等；宿主派发前回收上一轮 subscribeEvent 订阅） |
 
 `ctx`（服务端）：`{ id, dir, configDir, stateDir, cacheDir, core, services, features, sessionProviders, sessionAnnotations, invokeAI? }`，其中：
 

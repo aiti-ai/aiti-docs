@@ -6,7 +6,7 @@ description: The general "mail sending outlet" inside pi-web — zero-dependency
 
 # aiti-mail
 
-> ❝ **Configure SMTP once, and any extension and AI inside pi-web can send mail.** ❝
+> ❝ **Configure SMTP once, and any extension and AI inside pi-web can send mail.** ❞
 
 The general mail-sending outlet inside pi-web. The first consumer is ⏰ scheduling (task-result mail delivery in `aiti-ai-schedule` v0.4.0).
 
