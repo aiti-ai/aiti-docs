@@ -63,7 +63,7 @@ npm run local -- --prod
 | `app/` `lib/` `components/` `hooks/` | next dev HMR，刷新页面 |
 | 扩展服务端 TS（`index.ts` 等） | `POST /api/extensions/reload` |
 | 扩展前端（`client/**`） | `npm run local:build -- --only <id>` → 刷新页面 |
-| `packages/aiti-devtools-inject` | `npm run local:build -- --only aiti-devtools`（会连带构建注入产物与 assets） |
+| `aiti-devtools-inject`（注入层包） | `npm run local:build -- --only aiti-devtools`（会连带构建注入产物与 assets） |
 | `pi-plugins/**` | 重启 `npm run local`（插件进程内加载） |
 | 宿主 env / 端口 | 重启 `npm run local` |
 

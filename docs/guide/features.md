@@ -356,7 +356,7 @@ Monaco 编辑接管 + 保存（mtime 冲突 409、白名单与大小校验）、
 | `aiti-devtools` 载体插件（vite / webpack / nuxt） | npm 包 | dev server 内嵌桥与 MCP（同源 `/aiti/`）+ 自动注入 launcher + 启动时自动登记 MCP，业务代码零改动 |
 | `browser-ext` | 浏览器扩展 | 任意网页（无需目标应用改造）注入页面内 AI 调试助手：FAB + Inspector + AI 窗，支持 Chrome / Edge / Firefox（含 Firefox Android） |
 | `vscode-ext` | VS Code 扩展 | 在编辑器里注入 + 接桥 + MCP 接线 + 跳转 AI 窗口 |
-| `opencode-ext` / `openclaw-web-ext` / `dsh-web-ext` | 宿主 adapter | devtools 能力移植到 OpenCode / OpenClaw / DSH 三个宿主 |
+| OpenCode / OpenClaw / DSH 适配扩展 | 宿主 adapter | devtools 能力移植到 OpenCode / OpenClaw / DSH 三个宿主 |
 | `dsh-secret-mask` / `dsh-market` | 插件与市场索引 | DSH 侧的脱敏插件与插件市场索引（index v1 已起草） |
 | `aiti-desktop-widget` | 桌面组件壳 | 无边框、透明、置顶、可穿透/可拖的桌面挂件壳，加载任意 http(s) 页面或本地 HTML；支持指定显示器与运行时重新定位；用于桌面字幕窗、悬浮图标、状态卡、桌面宠物（视频工作室的实时字幕窗就靠它） |
 | `aiti-bridge` + stdio shim | 独立服务 | 页面连接 / SSE / 工具执行 / MCP JSON-RPC 共用一个端口（默认 127.0.0.1:8777），供任何标准 MCP client 接入 |

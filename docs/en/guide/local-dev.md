@@ -64,7 +64,7 @@ Build output lives in `.next-local/`, isolated from any existing `.next` / `.nex
 | `app/` `lib/` `components/` `hooks/` | next dev HMR, refresh the page |
 | Extension server TS (`index.ts` etc.) | `POST /api/extensions/reload` |
 | Extension client (`client/**`) | `npm run local:build -- --only <id>` → refresh |
-| `packages/aiti-devtools-inject` | `npm run local:build -- --only aiti-devtools` (also builds inject assets) |
+| the `aiti-devtools-inject` package | `npm run local:build -- --only aiti-devtools` (also builds inject assets) |
 | `pi-plugins/**` | restart `npm run local` (plugins load in-process) |
 | Host env / port | restart `npm run local` |
 
