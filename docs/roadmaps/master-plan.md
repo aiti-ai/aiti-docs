@@ -18,7 +18,7 @@ description: aiti 整体规划 — 目标、产品矩阵、分层架构、里程
 | 维度 | 结论 |
 |---|---|
 | 干什么 | 自己的 AI 开发工具生态：自托管工作台 + 页面调试注入 + AI agent 改造 |
-| 地基 | 构建于开源项目 agegr/pi-web（全生态唯一 service-tunnels / queue 恢复） |
+| 地基 | 开源项目 agegr/pi-web 为上游底座，service-tunnels、queue 崩溃恢复等自研能力叠加其上 |
 | 引擎 | pi（earendil-works/pi，122k★，每日发版，mise 管理） |
 | 差异化 | 共享 JSONL 会话 + 真实工作区 + 服务隧道 + **AI 与页面/IDE 同场协作**（无人五层齐全） |
 | 产品矩阵 | 14 个产品，覆盖入口/注入/桥接/Agent 四层（见 [产品矩阵](/products/README.md)） |

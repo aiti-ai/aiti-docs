@@ -15,7 +15,7 @@ tags: [product, aiti-agent, pi-web]
 | 维度 | 结论 |
 |---|---|
 | 干什么 | 自建 AI 开发工作台（不是"再做一个 pi-web"，是"用 pi 做自己的工具"） |
-| 地基 | 构建于开源项目 agegr/pi-web（含全生态唯一的 service-tunnels / queue 恢复） |
+| 地基 | 开源项目 agegr/pi-web 为上游底座，service-tunnels、queue 崩溃恢复等自研能力叠加其上 |
 | 引擎 | pi（earendil-works/pi，每日发版，mise 管理版本） |
 | 差异化 | 共享 pi JSONL 会话 + 真实工作区 + 服务隧道 + 远程调试可视化（无人五层齐全） |
 | 形态 | Docker 单容器（core/full）→ 浏览器 + 移动端 |

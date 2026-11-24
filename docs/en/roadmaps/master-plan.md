@@ -18,7 +18,7 @@ description: aiti master plan — goals, product matrix, layered architecture, m
 | Dimension | Conclusion |
 |---|---|
 | What to build | Our own AI development tool ecosystem: self-hosted workbench + in-page debugging injection + AI agent enablement |
-| Foundation | Built on the open-source project agegr/pi-web (the only service-tunnels / queue recovery in the whole ecosystem) |
+| Foundation | agegr/pi-web serves as the upstream baseline; this project's own layers (service-tunnels, queue crash recovery, ...) are built on top |
 | Engine | pi (earendil-works/pi, 122k★, daily releases, managed by mise) |
 | Differentiation | Shared JSONL sessions + real workspaces + service tunnels + **AI collaborating live with pages/IDEs** (no one else has all five) |
 | Product matrix | 14 products covering the entry / injection / bridge / Agent layers (see [Product Matrix](/en/products/README.md)) |

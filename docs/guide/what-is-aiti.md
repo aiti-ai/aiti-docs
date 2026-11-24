@@ -23,10 +23,10 @@ tags: [guide, concept]
 
 ### 主线 A：aiti-agent — Web 主战场
 
-以 **pi** 为引擎、自托管的个人 AI 开发工作台。构建于开源项目 **pi-web** 之上，产品身份独立（来历见[项目起源](/guide/origin.md)）。
+以 **pi** 为引擎、自托管的个人 AI 开发工作台。以开源项目 **pi-web** 为上游底座，产品身份独立；底座之上的一切增强由本项目自行叠加（来历见[项目起源](/guide/origin.md)）。
 
 - 浏览器是主操作面，`docker run` 一键起（与 pi 同源兼容：pi CLI / pi IDE 扩展操作同一批会话）
-- 全生态唯一的 service-tunnels（HTTP vhost + TCP 隧道 + TOTP）与 queue 崩溃恢复
+- 底座之上的自研增强：service-tunnels（HTTP vhost + TCP 隧道 + TOTP）、queue 崩溃恢复
 - **AI 脱敏开箱即用**：第一方 pi 插件 pi-secret-mask 默认预配——贴进 prompt 的 token/密钥发送模型前自动变占位符、工具执行时自动还原真值（**随手贴，不泄密** · *Paste-safe by default.*）
 - 规划：内置终端 → Chrome CDP 远程调试 → CLI 桥接 → noVNC 桌面 → 工具市场
 
@@ -51,7 +51,7 @@ tags: [guide, concept]
 | 关系 | 说明 |
 |---|---|
 | pi = 引擎 | earendil-works/pi 是执行内核（每日发版，mise 管理）；aiti 接受这个依赖 |
-| pi-web = 起点 | agegr/pi-web 是开源的 Web 壳，我们构建于其上（含全生态唯一的 service-tunnels / queue 恢复）；产品身份独立，来龙去脉见[项目起源](/guide/origin.md) |
+| pi-web = 上游底座 | agegr/pi-web 是开源的 Web 壳，作为本项目的上游底座；service-tunnels、queue 崩溃恢复等能力由本项目自研叠加在其上；产品身份独立，来龙去脉见[项目起源](/guide/origin.md) |
 | 竞品 fork | jmfederico（栈不同不可合并）、PiClaw（拼定位不拼功能）、omp（远期双引擎选项） |
 
 ## 生态全景

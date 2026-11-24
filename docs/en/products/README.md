@@ -75,7 +75,7 @@ npx @aiti-ai/aiti-bridge --port 8777
 
 ### Main Line A: aiti-agent — the Main Web Workbench
 
-A self-hosted personal AI development workbench powered by **pi** (npm package **`@aiti-ai/pi-web`**). Built on the open-source project **agegr/pi-web** (including the ecosystem's only service-tunnels / queue recovery), with an independent product identity. See [Project Origin](/en/guide/origin.md) for the backstory.
+A self-hosted personal AI development workbench powered by **pi** (npm package **`@aiti-ai/pi-web`**). The open-source project **agegr/pi-web** is its upstream baseline; service-tunnels, queue crash recovery and the rest of the feature set are added by this project on top, with an independent product identity. See [Project Origin](/en/guide/origin.md) for the backstory.
 
 - Form: npm global install / one-line script / single Docker container (core/full) → browser + mobile
 - Status: ✅ published (0.15.x) — three install entries in [aiti-agent](/en/products/aiti-agent.md) and the [Install Guide](/en/guide/install.md)

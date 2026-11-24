@@ -15,7 +15,7 @@ tags: [product, aiti-agent, pi-web]
 | Dimension | Conclusion |
 |---|---|
 | What to build | Our own AI development workbench (not "yet another pi-web", but "use pi to build our own tools") |
-| Foundation | Built on the open-source project agegr/pi-web (incl. the ecosystem's only service-tunnels / queue recovery) |
+| Foundation | agegr/pi-web is the upstream baseline; this project's own layers (service-tunnels, queue crash recovery, ...) are built on top |
 | Engine | pi (earendil-works/pi, daily releases, versions managed by mise) |
 | Differentiation | Shared pi JSONL sessions + real workspaces + service tunnels + visualized remote debugging (no one else has all five) |
 | Form | Single Docker container (core/full) → browser + mobile |

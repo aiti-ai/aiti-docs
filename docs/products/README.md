@@ -75,7 +75,7 @@ npx @aiti-ai/aiti-bridge --port 8777
 
 ### 主线 A：aiti-agent — Web 主战场
 
-以 **pi** 为引擎、自托管的个人 AI 开发工作台（npm 包 **`@aiti-ai/pi-web`**）。构建于开源项目 **agegr/pi-web** 之上（含全生态唯一的 service-tunnels / queue 恢复），产品身份独立。来历见[项目起源](/guide/origin.md)。
+以 **pi** 为引擎、自托管的个人 AI 开发工作台（npm 包 **`@aiti-ai/pi-web`**）。以开源项目 **agegr/pi-web** 为上游底座；service-tunnels、queue 崩溃恢复等能力由本项目自研叠加在其上，产品身份独立。来历见[项目起源](/guide/origin.md)。
 
 - 形态：npm 全局安装 / 一键脚本 / Docker 单容器（core/full）→ 浏览器 + 移动端
 - 现状：✅ 已发布（0.15.x）——三种安装入口详见 [aiti-agent](/products/aiti-agent.md) 与 [安装指南](/guide/install.md)

@@ -23,10 +23,10 @@ tags: [guide, concept]
 
 ### Line A: aiti-agent — The Main Web Battleground
 
-A self-hosted personal AI development workbench powered by **pi**. Built on top of the open-source project **pi-web**, with an independent product identity (for its backstory see [Project Origins](/en/guide/origin.md)).
+A self-hosted personal AI development workbench powered by **pi**. The open-source project **pi-web** is its upstream baseline, with an independent product identity; everything beyond that baseline is added by this project on top (for its backstory see [Project Origins](/en/guide/origin.md)).
 
 - The browser is the primary operating surface; one-click start with `docker run` (same-origin compatible with pi: pi CLI / pi IDE extensions operate the same set of sessions)
-- The ecosystem's only service-tunnels (HTTP vhost + TCP tunneling + TOTP) and queue crash recovery
+- Self-built additions on top of that baseline: service-tunnels (HTTP vhost + TCP tunneling + TOTP) and queue crash recovery
 - **AI secret masking out of the box**: the first-party pi plugin pi-secret-mask ships pre-provisioned — keys pasted into prompts become placeholders before the model sees them and are restored for tool execution (**Paste-safe by default.**)
 - Roadmap: built-in terminal → Chrome CDP remote debugging → CLI bridging → noVNC desktop → tool marketplace
 
@@ -51,7 +51,7 @@ A bridging-layer product with three core jobs:
 | Relationship | Description |
 |---|---|
 | pi = engine | earendil-works/pi is the execution kernel (daily releases, managed by mise); aiti accepts this dependency |
-| pi-web = starting point | agegr/pi-web is the open-source web shell we build on (including the ecosystem's only service-tunnels / queue recovery); independent product identity — for the full story see [Project Origins](/en/guide/origin.md) |
+| pi-web = upstream baseline | agegr/pi-web is the open-source web shell that serves as the upstream baseline; service-tunnels, queue crash recovery and the rest of the feature set are built by this project on top of it; independent product identity — for the full story see [Project Origins](/en/guide/origin.md) |
 | Competitor forks | jmfederico (different stack, not mergeable), PiClaw (competes on positioning, not features), omp (long-term dual-engine option) |
 
 ## Ecosystem Panorama
