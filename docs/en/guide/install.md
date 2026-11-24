@@ -18,10 +18,10 @@ aiti Web (npm package **`@aiti-ai/pi-web`**) is a self-hosted AI development wor
 Requires Node.js ≥ 22.19 (check with `node --version`):
 
 ```bash
-npm install -g @aiti-ai/pi-web@latest --allow-scripts=@aiti-ai/pi-web,esbuild,node-pty,@google/genai,protobufjs,unrs-resolver
+npm install -g @aiti-ai/pi-web@latest --allow-scripts=@aiti-ai/pi-web
 ```
 
-> npm ≥11.16 requires an explicit install-script allowlist: use `--allow-scripts=<names>` AFTER the package spec. A bare `--allow-scripts` makes npm 12 block every install script (node-pty, esbuild, patch-package), while older npm ignores the flag.
+> npm ≥11.16 requires an explicit install-script allowlist: use `--allow-scripts=<names>` AFTER the package spec. A bare `--allow-scripts` makes npm 12 block every install script and leaves the install incomplete, while older npm ignores the flag.
 
 Then start:
 
@@ -29,7 +29,7 @@ Then start:
 pi-web          # serves http://127.0.0.1:30141 and opens your browser
 ```
 
-Prefer a throwaway run? `npx --allow-scripts=@aiti-ai/pi-web,esbuild,node-pty,@google/genai,protobufjs,unrs-resolver @aiti-ai/pi-web@latest` — no global install (the same allow-scripts flag applies).
+Prefer a throwaway run? `npx --allow-scripts=@aiti-ai/pi-web @aiti-ai/pi-web@latest` — no global install (the same allow-scripts flag applies).
 
 @tab macOS / Linux
 

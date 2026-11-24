@@ -70,13 +70,13 @@ npm package **`@aiti-ai/pi-web`** (ships 63+ bundled extensions); for all instal
 @tab npm
 
 ```bash
-npm install -g @aiti-ai/pi-web@latest --allow-scripts=@aiti-ai/pi-web,esbuild,node-pty,@google/genai,protobufjs,unrs-resolver && pi-web
+npm install -g @aiti-ai/pi-web@latest --allow-scripts=@aiti-ai/pi-web && pi-web
 ```
 
 @tab npx
 
 ```bash
-npx --allow-scripts=@aiti-ai/pi-web,esbuild,node-pty,@google/genai,protobufjs,unrs-resolver @aiti-ai/pi-web@latest        # no install needed, runs directly
+npx --allow-scripts=@aiti-ai/pi-web @aiti-ai/pi-web@latest        # no install needed, runs directly
 ```
 
 @tab macOS / Linux

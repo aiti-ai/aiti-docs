@@ -36,7 +36,7 @@ aiti is not a single product but an **AI development tool ecosystem**. All produ
 
 ```bash
 # Self-hosted workbench (pick one)
-npx --allow-scripts=@aiti-ai/pi-web,esbuild,node-pty,@google/genai,protobufjs,unrs-resolver @aiti-ai/pi-web@latest   # run straight from npm, no install
+npx --allow-scripts=@aiti-ai/pi-web @aiti-ai/pi-web@latest   # run straight from npm, no install
 curl -fsSL https://aiti.pw/install.sh | sh       # macOS / Linux (no npm needed)
 docker run -d -p 30142:30142 aitiai/pi-web:core  # Docker (:full adds GUI / voice / tunnels)
 

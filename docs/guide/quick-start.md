@@ -19,14 +19,14 @@ tags: [guide, quick-start, pi-web, workbench]
 
 ```bash
 # Node.js ≥ 22.19
-npm install -g @aiti-ai/pi-web@latest --allow-scripts=@aiti-ai/pi-web,esbuild,node-pty,@google/genai,protobufjs,unrs-resolver
+npm install -g @aiti-ai/pi-web@latest --allow-scripts=@aiti-ai/pi-web
 ```
 
 @tab npx
 
 ```bash
 # 不落盘，每次拉最新
-npx --allow-scripts=@aiti-ai/pi-web,esbuild,node-pty,@google/genai,protobufjs,unrs-resolver @aiti-ai/pi-web@latest
+npx --allow-scripts=@aiti-ai/pi-web @aiti-ai/pi-web@latest
 ```
 
 @tab macOS / Linux

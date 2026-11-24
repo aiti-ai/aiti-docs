@@ -44,7 +44,7 @@ pi-web update
 pi-web start
 ```
 
-`pi-web update` 等效于 `npm install -g @aiti-ai/pi-web@latest --allow-scripts=@aiti-ai/pi-web,esbuild,node-pty,@google/genai,protobufjs,unrs-resolver`。注意 `--allow-scripts` 必须带值并写在包 spec 之后；裸写会在 npm 12 下跳过全部安装脚本。
+`pi-web update` 等效于 `npm install -g @aiti-ai/pi-web@latest --allow-scripts=@aiti-ai/pi-web`。注意 `--allow-scripts` 必须带值并写在包 spec 之后；裸写会在 npm 12 下跳过全部安装脚本。
 
 @tab release 归档（macOS / Linux / Windows 一键脚本）
 
@@ -68,7 +68,7 @@ irm https://aiti.pw/install.ps1 | iex             # Windows (PowerShell)
 不落盘、每次拉最新——直接运行新版本即可：
 
 ```bash
-npx --allow-scripts=@aiti-ai/pi-web,esbuild,node-pty,@google/genai,protobufjs,unrs-resolver @aiti-ai/pi-web@latest
+npx --allow-scripts=@aiti-ai/pi-web @aiti-ai/pi-web@latest
 ```
 
 @tab Docker

@@ -18,10 +18,10 @@ aiti Web（npm 包名 **`@aiti-ai/pi-web`**）是自托管的 AI 开发工作台
 需要 Node.js ≥ 22.19（`node --version` 检查）：
 
 ```bash
-npm install -g @aiti-ai/pi-web@latest --allow-scripts=@aiti-ai/pi-web,esbuild,node-pty,@google/genai,protobufjs,unrs-resolver
+npm install -g @aiti-ai/pi-web@latest --allow-scripts=@aiti-ai/pi-web
 ```
 
-> npm ≥11.16 要求显式批准安装脚本：`--allow-scripts` 必须带 `=包名列表`，并写在包 spec 之后。裸写 `--allow-scripts` 在 npm 12 会拒绝全部脚本，导致 node-pty / esbuild / patch-package 的 postinstall 不执行；旧版 npm 忽略该参数，无副作用。
+> npm ≥11.16 要求显式批准安装脚本：`--allow-scripts` 必须带 `=包名列表`，并写在包 spec 之后。裸写 `--allow-scripts` 在 npm 12 会拒绝全部安装脚本，导致安装不完整；旧版 npm 忽略该参数，无副作用。
 
 安装后启动：
 
@@ -29,7 +29,7 @@ npm install -g @aiti-ai/pi-web@latest --allow-scripts=@aiti-ai/pi-web,esbuild,no
 pi-web          # 启动服务并打开浏览器（默认 http://127.0.0.1:30141）
 ```
 
-不想全局安装？`npx --allow-scripts=@aiti-ai/pi-web,esbuild,node-pty,@google/genai,protobufjs,unrs-resolver @aiti-ai/pi-web@latest` 直接跑（不落盘、每次拉最新，同样需要上面的允许脚本参数）。
+不想全局安装？`npx --allow-scripts=@aiti-ai/pi-web @aiti-ai/pi-web@latest` 直接跑（不落盘、每次拉最新，同样需要上面的允许脚本参数）。
 
 @tab macOS / Linux
 

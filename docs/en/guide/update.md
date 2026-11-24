@@ -44,7 +44,7 @@ pi-web update
 pi-web start
 ```
 
-`pi-web update` is equivalent to `npm install -g @aiti-ai/pi-web@latest --allow-scripts=@aiti-ai/pi-web,esbuild,node-pty,@google/genai,protobufjs,unrs-resolver`. The flag must carry an explicit value after the package spec; a bare `--allow-scripts` skips all install scripts on npm 12.
+`pi-web update` is equivalent to `npm install -g @aiti-ai/pi-web@latest --allow-scripts=@aiti-ai/pi-web`. The flag must carry an explicit value after the package spec; a bare `--allow-scripts` skips all install scripts on npm 12.
 
 @tab release archive (macOS / Linux / Windows one-liner)
 
@@ -68,7 +68,7 @@ irm https://aiti.pw/install.ps1 | iex             # Windows (PowerShell)
 Nothing is installed to disk and every run pulls the latest — just run the new version:
 
 ```bash
-npx --allow-scripts=@aiti-ai/pi-web,esbuild,node-pty,@google/genai,protobufjs,unrs-resolver @aiti-ai/pi-web@latest
+npx --allow-scripts=@aiti-ai/pi-web @aiti-ai/pi-web@latest
 ```
 
 @tab Docker
