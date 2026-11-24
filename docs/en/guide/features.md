@@ -71,6 +71,7 @@ Upstream treats the composer as a send control and messages as read-only text. T
 - **Drafts are never lost** (`aiti-draft-keeper`): the sole owner of the composer draft state machine (v2 intent contract). One shared slot per session, so tabs share the same draft; switching sessions, closing the page or crashing restores it verbatim; a rejected send merges the text back; stale slots are pruned after 7 days.
 - **Input is faster** (`aiti-ai-input`): two-tier autocomplete (instant local rules → AI continuation fallback), commands typed straight into the composer ("model", "compact" execute and leave the caret in the box), push-to-talk real-time speech input (streaming recognition + 2-pass refinement + multiple engines + hotwords), and a mobile newline pill.
 - **Queues are controllable** (`aiti-queue-keeper` + host queue persistence): while the AI is busy, queued messages get a full panel — drag to reorder, steer-send, convert to follow-up, recall for editing, soft-delete into a recycle bin with 8-second undo, import/export. The queue is mirrored to a server-side sidecar, so after a restart you decide per entry — resend / drop / later — and nothing is ever auto-delivered.
+- **Comfortable key semantics**: while running, `Enter` queues first and a second `Enter` on an empty composer promotes the queue head to a steer; `Alt/Option+Enter` steers immediately. With an empty composer, `↑` recalls a queue entry or pages session history, and `Shift+↑` opens the history menu. Full semantics live in the §4 quick-reference table.
 - **Messages are operable** (`aiti-msg-smart` + `aiti-msg-anchor` / `aiti-msg-nav`): click paragraphs, headings, table rows and code lines to copy / quote / highlight / pick an option; the top anchor banner tells you "which input produced what is on screen", and the navigation rail jumps to the previous / next / earliest / latest user turn; a whole session can also be shared out.
 - **It can read to you** (`aiti-ai-speek` follow mode): one click on 🔊 enters follow mode; each finished reply is queued in order and the current sentence is highlighted in the message flow and auto-scrolled (audiobook style); three engines — browser Web Speech / edge-tts / local ONNX — with voice cloning. With follow mode off there are zero subscriptions and zero requests.
 
@@ -119,6 +120,12 @@ A single browser chime at the end of a run (never duplicated), an unread badge o
 ### 🔵 Auto-naming and run-outcome detection
 A session title is generated after the first turn; a unified run-outcome classifier stops failures from being reported as "task completed", so sidebar state and notifications agree.
 
+### 🟢 Refresh prompt when another client writes
+A session file can be written by another client (for example the zcode desktop app continuing the conversation). The message area then shows a "Refresh session content" hint; one click reloads it without reopening the session.
+
+### 🟢 Task list progress
+Multi-step tasks show a `done/total` progress bar in the composer; click it to open the task list, so you can see how many steps remain while the run is in flight.
+
 ### 🔵 Git worktree workspace enhancements
 Upstream can switch worktrees; this project further groups and sorts sessions by project and worktree, supports renaming and drag-and-drop, offers a branch / worktree picker when creating a session in `session-manager`, and coordinates with the `aiti-git-ops` write gate.
 
@@ -133,6 +140,24 @@ Open the workspace in the system file manager with one click; Debian-style versi
 ## 4. 🟢 Composer and messages (all in-house extensions)
 
 The composer and message area are the two most-clicked surfaces every day. Upstream treats them as a "send control + read-only text"; this project turns the chain into a stateful, recoverable, operable workflow: **input → complete → queue → send → read → quote → listen**. Each link is taken over by a dedicated extension, and the host keeps only thin contracts (data and RPC in core, UI and policy in extensions), so disabling any extension falls back to a usable state without losing data.
+
+#### Composer key semantics (quick reference)
+
+Running-state Enter semantics are a deliberate change from upstream: upstream Enter steers immediately and `Alt+Enter` queues; this project flips it so the non-destructive queue is the default and steering needs an explicit key.
+
+| Context | Key | Behavior |
+|---|---|---|
+| Idle | `Enter` | Send (switchable to `Ctrl/Cmd+Enter` in settings); `Shift+Enter` inserts a newline |
+| Running, text present | `Enter` | Queue as a follow-up, sent in order after the current turn |
+| Running, text present | `Alt/Option+Enter` | Steer immediately, ahead of the current turn; falls back to queueing when the backend cannot steer |
+| Running, empty input | `Enter` / `Alt+Enter` | Promote the first queued follow-up to a steer — **Enter to queue, Enter again to steer** |
+| Running | `Esc` | Abort the current run (not while a menu is open or IME composition is active) |
+| Empty input | `↑` | With queued messages: recall the last one for editing (sending puts it back at its queue slot); without: page back through session input history shell-style |
+| Empty input | `Shift+↑` | Open the input-history menu; `↑/↓` browse, `Enter`/`Tab` pick |
+| While editing a recalled item | `↑ / ↓` | Switch editing between queue entries; each still returns to its original slot |
+| Composer | `/` | Slash-command candidates (extensions / prompts / skills in one search); `↑↓←→` navigate, `Tab`/`Enter` complete |
+| Composer | `@` | File candidates; `↑/↓` navigate, `Tab`/`Enter` complete |
+| IME composition | `Enter` | Confirms the candidate only, never sends by accident (short grace period after composition ends) |
 
 #### Input intelligence ([aiti-ai-input](/en/extensions/aiti-ai-input.md))
 
@@ -180,6 +205,8 @@ While the AI is busy you can queue your thoughts, and the queue itself is operab
 - **Coordination with Draft Keeper**: the two never talk directly; they meet through core contracts — draft recovery items and queue recovery items merge in the same recovery dialog; the draft's "re-queue" enters through core `queueFollowUp` (rendered by this extension); recalling a row writes back through core edit-intent (Draft Keeper sees the same value via `onChange`).
 
 Host queue persistence is the other half: steer / follow-up queues are mirrored to a sidecar file, and after a service restart a recovery dialog resolves entries one by one (resend / drop / later) and **never auto-delivers**; `aiti-recovery` presents interrupted sessions and pending queues together.
+
+When a run ends, the "Continue" button next to the composer sends "continue" in one click; with a non-empty queue the same button becomes "Run queue now", delivering every queued message in order. A recalled queue item returns to its original slot after sending, and `↑/↓` switches editing between queue entries.
 
 #### Message intelligence ([aiti-msg-smart](/en/extensions/aiti-msg-smart.md))
 
@@ -269,7 +296,7 @@ The web management UI: list aliases / add / rotate / reveal / delete, lock and u
 When AI or a human breaks a config or an extension, there is a diff to inspect, a change to blame and one-click restore; an independent command-line sentinel covers crashes without depending on the broken system itself.
 
 #### Data snapshot backup (`aiti-backup`)
-Hard-link incremental snapshots for large state-layer data (sessions and more), run in a separate subprocess with crash-safe temp files and keepCount rotation; complementary to git versioning for small configs.
+Hard-link incremental snapshots for large state-layer data (sessions and more): each round is a full point-in-time copy plus a manifest completion marker, and files with the same path, size and mtime are linked zero-copy; when the target disk does not support hard links (exFAT and friends) the round degrades to a full copy automatically. Sources are strictly read-only (symlinks are not followed), scanning and copying run in a subprocess with progress on the event bus; a kill mid-run only leaves `.tmp-*` cleaned up by the next round, and each source takes a run lock; keepCount rotation only deletes snapshot directories.
 
 #### Device pairing (`aiti-pair`)
 Devices connected to the same bridge (mobile browser / another computer / agent session / injected page) can message each other and transfer files — cross-device collaboration without building your own relay.
@@ -291,7 +318,7 @@ Dedicated to reviewing uncommitted code: a Monaco diff workspace (side-by-side /
 A whitelisted git write engine: checkout preflight, stash, plan checkpoints, full audit, changed topics; consumed by the file browser and session manager so the AI can make safe git writes without losing work.
 
 #### AI change tracing (`aiti-git-trace` / `pi-git-trace`)
-An out-of-tree trace repository `.aiti-trace`, auto-initialized even in directories without git; each change gets a before/after commit pair keyed by op number, so file ⇄ message ⇄ operation is traceable end to end, with one-click revert and shadow-repo compaction. Both share one engine: `aiti-git-trace` is the workbench extension, `pi-git-trace` serves pure CLI users.
+An out-of-tree trace repository `.aiti-trace`, auto-initialized even in directories without git; each change gets a before/after commit pair keyed by op number, so file ⇄ message ⇄ operation is traceable end to end, with one-click revert and shadow-repo compaction. Both share one engine: `aiti-git-trace` is the workbench extension (every file in the file browser carries a "⎇ file timeline" that opens that file's change history directly), `pi-git-trace` serves pure CLI users.
 
 #### Service tunnels (`service-tunnels`)
 Expose local services to the public internet with one command: automatic port discovery (service detection / custom names), five exposure modes (tunnel / vhost / mixed / router mapping / direct IPv6), an auth gateway (portal / TOTP / face and voice), DDNS auto-resolution and a network doctor. This exposure layer is unique to the project.
@@ -300,7 +327,7 @@ Expose local services to the public internet with one command: automatic port di
 One extension, three apps: command favorites (groups / tags / lexicon + one-click run), running (terminal sessions / agent commands / execution history) and a real PTY terminal; plus message recognition, a composer runtime entry and a unified cross-extension execution outlet. Terminal sessions survive reloads and restarts.
 
 #### Container management (`aiti-containers`)
-One panel for containers, images, volumes, networks and compose projects (docker / podman / nerdctl), with start/stop, logs and cleanup coverage; the AI can operate it via tools, dangerous actions need a second confirmation, and the port page links to service tunnels.
+One panel for containers, images, volumes, networks and compose projects (docker / podman / nerdctl), with start/stop, logs and cleanup coverage, linked to the service-tunnels port page. Dangerous actions share one confirmation protocol: the UI enters "click again within 5 seconds", the API returns 428 + a danger description without `confirm:true`, and the AI must show the exact action to the user and get explicit consent before retrying.
 
 #### Terminal bridge to the browser (`pi-web-bridge` · pi plugin)
 Run the pi TUI in a terminal as usual, then type `/web` to open the same session live in the browser with bidirectional IO (prompt / steer / follow-up / abort / model switch), queued-message echo and image attachment pass-through — hand off between terminal and browser at any time.
@@ -312,7 +339,7 @@ Allocates a virtual desktop for servers without a display: a four-state mode dec
 Injects another workbench instance's debugger into this instance's page, making it easy for developers to troubleshoot a deployed instance remotely; the service address is a text feature in extension management, off by default and enabled on demand.
 
 #### Smoothness meter (`aiti-cpu-meter`)
-See "Signature two" — a 0–100 smoothness score, color tiers, minimized residency, AI stall debugging, in-extension build plus a standalone single-file build injectable into any website.
+See "Signature two" — a 0–100 smoothness score, color tiers, minimized residency and AI stall debugging. Three injection channels: service-tunnels-proxied sites inject directly, any site works via the bookmarklet, and cross-instance injection (`service.url` + `inject.enabled`); `window.__aitiCpuMeter.report()` returns the score, long tasks, LoAF script attribution and session-level time-weighted averages — in-extension build plus a standalone single-file build.
 
 ---
 
@@ -389,6 +416,9 @@ Manages all sessions across projects: tag tree with colors, favorites, FTS5 sear
 
 #### App center (`aiti-app-center`)
 The "start menu" after all left-sidebar blocks collapse: an app view (action / panel / management entry cards, hover shortcuts to pin + info pages) and a switch view (feature toggles grouped by extension), two views toggled in one row; tag categories, per-view search, and edit mode for ordering / hiding / restoring.
+
+#### Agent badge (`aiti-agent-badge`)
+The agent badge in the composer toolbar (bottom of the ＋ sheet on mobile): filled dot = a turn is running, filled muted = the process is alive but idle, hollow = a cold session with no live process. Clicking opens a compact switch panel where the hosting mode (in-process / subprocess / subprocess-detached) can be changed — it decides whether this session keeps running across a pi-web restart or extension reload.
 
 #### Session request cards (`aiti-session-cards`)
 Presents AI plan approvals, AskUser questions, OAuth authorization, tool authorization and similar requests as clear cards that can be understood and confirmed at a glance, covering zcode / omp / generic interaction primitives.
@@ -480,6 +510,8 @@ These are small individually but handy day to day. They are additions not expand
 - 🟢 **Pre-send scan (composer gate)**: before a message leaves the composer, `aiti-secret-vault` scans it with stricter rules than automatic masking and asks "send masked / send as-is / cancel" on a hit — masking encrypts the value into the vault and leaves a stable placeholder, so the model never sees plaintext.
 - 🟢 **Compaction queued when busy**: if a compaction request arrives while the session is busy, the request waits **on the server** (queued by session id) rather than in the browser tab, and resumes when the session is free — closing the tab does not lose it.
 - 🟢 **Dual-currency cost display**: when the UI language is Chinese, cost shows as `$xx (¥yy)` (exchange rates cached server-side for 24h); other languages keep `$xx`; the accounting unit remains USD, so the calculation is unchanged.
+- 🟢 **New session with context**: the "New session" action next to the composer forks the current full context into a new session and sends the current input there, leaving the original session running untouched.
+- 🟢 **Relay between sessions (/relay)**: `/relay <session-id> <message>` delivers a message to another live backend session and injects its reply back into the current conversation — two agents can hand off without copy-paste.
 
 ### Navigation and layout
 
@@ -489,6 +521,10 @@ These are small individually but handy day to day. They are additions not expand
 - 🟢 **Top-bar closure**: the system prompt and debug panels gained title-bar close buttons, and debug entries joined the top-bar ordering system.
 - 🟢 **Welcome page recent-on-top**: the welcome page's top card area expands adaptively with recent sessions on top, so you resume immediately.
 - 🟢 **One dock, four homes**: the same panels can dock in the left sidebar block, the right panel or a standalone floating window; the ⋮ menu is uniform everywhere (float / left / right / up / down / close), and position memory is isolated per deployment sub-path.
+- 🟢 **Top bar you arrange**: the top-bar order is customizable — show/hide, move up/down, insert group dividers, the theme button; buttons contributed by extensions are in the same list.
+- 🔵 **Batch archiving**: multi-select sessions to archive / restore; the sidebar offers "archive older than 7 days" and "clean up archives older than 30 days", and deleting all sessions in a project keeps running ones.
+- 🟢 **Drafts and collapsing**: sessions not yet persisted are marked "draft"; sub-agent and branch sessions collapse separately so long trees do not take over.
+- 🟢 **Shift+click deletes directly**: deleting a session asks for confirmation by default; hold Shift to skip it.
 
 ### Model and backend selection
 
@@ -497,6 +533,8 @@ These are small individually but handy day to day. They are additions not expand
 - 🟢 **Missing CLIs are dimmed**: backends that are not installed are dimmed with a reason; "rescan" discovers CLIs installed after startup without restarting the workbench.
 - 🟢 **Model wizard readability**: a collapsible provider tree plus a status legend toolbar — dozens of providers no longer fill a whole screen.
 - 🟢 **Model visibility rules**: configurable model filtering, probe limits and discovery caching keep long lists to what you need.
+- 🟢 **Rate-limit and error badges**: model rows show 429 rate limiting / probe errors / untested, and provider-wide limiting merges into one hint; it only informs and never silently disables a model.
+- 🟢 **Model switch "next turn"**: switching mid-run does not interrupt the current turn, and a badge says when it takes effect.
 
 ### Files, queues and small tools
 
@@ -507,6 +545,9 @@ These are small individually but handy day to day. They are additions not expand
 - 🟢 **Masking plugin preinstalled**: the first launch installs the bundled first-party pi plugin (default `pi-secret-mask` — paste safely); skipped plugins state the reason instead of failing silently.
 - 🟢 **Extension background self-healing**: bundled extensions reconcile in the background with a cooldown on failure, so they do not retry forever and slow startup.
 - 🟢 **Composer command hints**: the placeholder hints at available commands and the trigger word is consumed after typing; the file panel also has an "open terminal" command card.
+- 🟢 **Undoable composer clear**: clearing goes to the recycle bin, and one click brings it back — an accidental clear is no longer a rewrite.
+- 🟢 **Attachments land in the workspace**: pasted or attached images and files go to `<cwd>/.pi-attachments/` (auto-added to `.gitignore`) and are referenced by path in the message; same-name files are never overwritten.
+- 🟢 **Mobile composer matrix and collapsing**: the ＋ sheet gathers model / thinking level / tool preset / compaction / sound / queue / extension status and panels; the composer and queue collapse on a swipe down and pull back up.
 
 ### In-extension experience details
 
