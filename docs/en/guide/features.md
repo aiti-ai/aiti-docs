@@ -474,7 +474,7 @@ These are small individually but handy day to day. They are additions not expand
 
 - 🟢 **Ask AI about an error**: error/warning notification bars carry an "Ask AI" button that feeds the original error text to the agent for triage, with no manual copy-paste.
 - 🟢 **Copy buttons at both ends**: the assistant message copy button sits at both the top and the bottom; hover actions move to the lower-left of the message so long messages do not need a scroll back to the top.
-- 🟢 **Fork while bash is running**: the fork button does not hide while a command runs; a click is staged instead of lost — a experience detail fixed on purpose.
+- 🟢 **Fork while bash is running**: the fork button does not hide while a command runs; a click is staged instead of lost — an experience detail fixed on purpose.
 - 🟢 **Visual hint while editing a prompt**: "Edit from here" shows a masked preview in the draft area, so prefilled content is not confused with your own typing.
 - 🟢 **Tidier operation cards in messages**: flat tool-call arguments are shown line by line, codemode calls show the script itself and its tool calls, and MCP calls show server/tool with indented JSON results.
 - 🟢 **Pre-send scan (composer gate)**: before a message leaves the composer, `aiti-secret-vault` scans it with stricter rules than automatic masking and asks "send masked / send as-is / cancel" on a hit — masking encrypts the value into the vault and leaves a stable placeholder, so the model never sees plaintext.
