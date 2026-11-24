@@ -4,7 +4,11 @@ icon: ⌨️
 ext:
   id: aiti-ai-input
   name: AI 输入增强
+  nameEn: "AI Input Enhancer"
   description: 聊天输入框增强 —— L0/L1 两层自动补全 + 收藏联想 + 🎤 实时 ASR 语音输入（多引擎可插拔/热词/2-pass 精修）+ 听写检测修复
+  descriptionEn: "Input enhancement for the AI chat composer: two-tier autocomplete (instant local → AI fallback), speech-input detection with spelling repair, streaming ASR with 2-pass refinement, switchable recognition engines (self-hosted / xfyun / Baidu / SiliconFlow / any OpenAI-compatible endpoint), hotwords, and usage reports."
+  iconUrl: "/ext-icons/aiti-ai-input.svg"
+  soulEn: "Before you finish typing, it has already guessed half of it."
   soul: 你还没打完的字，它已经替你想到一半了。
   type: aiti-ext
   category: 聊天增强
@@ -14,6 +18,7 @@ ext:
   publisher: aiti-ai
   website: https://aiti.pw
   repo: ""
+  npm: "@aiti-ai/aiti-ai-input"
   install: |
     # 部署到 ~/.pi/web/extensions/aiti-ai-input/ 后 reload
   license: MIT

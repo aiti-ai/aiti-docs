@@ -27,6 +27,13 @@
  *   node tools/sync-ext-versions.mjs --check          # report only; exit 1 on drift
  *   node tools/sync-ext-versions.mjs --json           # machine-readable output
  *   node tools/sync-ext-versions.mjs --only <id>      # restrict to given id(s), repeatable
+ *   node tools/sync-ext-versions.mjs --no-probe-npm   # skip the public registry probe
+ *
+ * Besides ext.version, the script keeps the online install source (`ext.npm`) in sync: for
+ * packages under the public @aiti-ai scope it derives the name from the source package.json and
+ * writes it only after the public registry confirms the package exists (an unverified or
+ * unpublished name would render a failing install button in the extension manager).
+ * Manually pinned `npm:` values that differ from the derived name are treated as overrides.
  */
 import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
@@ -78,6 +85,10 @@ function readPkg(pkg) {
     return {
       version: j.version,
       source: pkg,
+      // Package name — the online registry install source (`npm:` frontmatter field) is
+      // derived from it when the package belongs to the public @aiti-ai scope.
+      npmName: typeof j.name === "string" ? j.name.trim() : "",
+      private: j.private === true,
       // English metadata for the extension catalog (ext.nameEn / ext.descriptionEn).
       // `description` is the English baseline; displayNameI18n.en carries the English name.
       nameEn: typeof j.displayNameI18n?.en === "string" ? j.displayNameI18n.en.trim() : "",
@@ -146,6 +157,13 @@ function parseDoc(name) {
   let soulLine = -1;
   let soulEnLine = -1;
   let iconUrlLine = -1;
+  let websiteLine = -1;
+  let repoLine = -1;
+  let npmLine = -1;
+  let docNpm = "";
+  let quoteNpm = "";
+  let npmCommented = false;
+  let fieldIndent = "";
   let blockEnd = lines.length;
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
@@ -173,9 +191,21 @@ function parseDoc(name) {
     else if (/^[ \t]+soul:\s/.test(line)) soulLine = i;
     else if (/^[ \t]+soulEn:\s/.test(line)) soulEnLine = i;
     else if (/^[ \t]+iconUrl:\s/.test(line)) iconUrlLine = i;
+    else if (/^[ \t]+website:\s/.test(line)) websiteLine = i;
+    else if (/^[ \t]+repo:\s/.test(line)) repoLine = i;
+    // npm is a top-level ext field: only accept the key at the block's field indent so
+    // block scalars (install: | notes) never contribute a package name.
+    const nm = line.match(/^([ \t]+)npm:\s*(['"]?)([^'"\s]*)\2\s*(#.*)?$/);
+    if (!fieldIndent) fieldIndent = ind;
+    if (nm && nm[1] === fieldIndent) {
+      npmLine = i;
+      quoteNpm = nm[2];
+      docNpm = nm[3];
+      npmCommented = Boolean(nm[4]); // inline note = hand-maintained decision
+    }
   }
   if (!id || verLine === -1) return null;
-  return { file, id, verLine, indent, quote, docVersion, nameLine, descLine, nameEnLine, descEnLine, soulLine, soulEnLine, iconUrlLine, blockEnd };
+  return { file, id, verLine, indent, quote, docVersion, nameLine, descLine, nameEnLine, descEnLine, soulLine, soulEnLine, iconUrlLine, websiteLine, repoLine, npmLine, docNpm, quoteNpm, npmCommented, blockEnd };
 }
 
 /**
@@ -205,10 +235,71 @@ for (const name of readdirSync(DOCS_EXT_DIR).sort()) {
   if (parsed) rows.push(parsed);
 }
 
-const result = { updated: [], ok: [], skipped: [] };
+const result = { updated: [], ok: [], skipped: [], npmMissing: [], npmUnverified: [], npmManual: [] };
+
+// ── Online install source (`npm:` frontmatter) ──
+// The extman panel turns a registry entry into an install button only when the entry carries
+// `npm` or `repo` (see extensions/aiti-extman client registryInstallSource). The catalog is built
+// from these doc files, so the field has to live here. It is derived from the package name of the
+// aiti-ai source package, limited to the public @aiti-ai scope, and verified against the public
+// registry first — a wrong or unpublished name would surface a failing install button.
+const MANAGED_NPM = /^@aiti-ai\/[a-z0-9][a-z0-9._-]*$/i;
+const PROBE_NPM = !argv.includes("--no-probe-npm");
+const npmProbe = new Map(); // package name -> true (published) | false (404) | null (unverified)
+const probeCache = new Map(); // package name -> Promise<boolean|null>
+function probeNpm(name) {
+  if (!probeCache.has(name)) {
+    probeCache.set(name, (async () => {
+      try {
+        const res = await fetch(`https://registry.npmjs.org/${name.replace("/", "%2f")}`, {
+          headers: { accept: "application/vnd.npm.install-v1+json" },
+          signal: AbortSignal.timeout(10_000),
+        });
+        return res.ok;
+      } catch {
+        return null; // network hiccup: never write an unverified install source
+      }
+    })());
+  }
+  return probeCache.get(name);
+}
+
+const sources = new Map(); // id -> source package info | null
+for (const row of rows) sources.set(row.id, sourceVersion(row.id));
+
+const probeTargets = new Set();
+if (PROBE_NPM) {
+  for (const src of sources.values()) {
+    if (src && !src.private && MANAGED_NPM.test(src.npmName)) probeTargets.add(src.npmName);
+  }
+  const queue = [...probeTargets];
+  let cursor = 0;
+  const worker = async () => {
+    while (cursor < queue.length) {
+      const name = queue[cursor++];
+      npmProbe.set(name, await probeNpm(name));
+    }
+  };
+  await Promise.all(Array.from({ length: Math.min(8, queue.length) }, worker)); // eslint-disable-line no-undef
+}
+
+/** Desired npm field value for this doc row (null = leave the field alone). */
+function wantNpm(row, src) {
+  if (!src || src.private || !MANAGED_NPM.test(src.npmName)) return null;
+  if (row.docNpm && row.docNpm !== src.npmName) return null; // explicit manual override wins
+  if (row.npmCommented && row.docNpm !== src.npmName) {
+    // An inline note records a deliberate decision (e.g. "this name belongs to a third party");
+    // leave the field untouched instead of overwriting the reasoning.
+    result.npmManual.push({ id: row.id, npm: row.docNpm, derived: src.npmName });
+    return null;
+  }
+  if (!PROBE_NPM) return src.npmName;
+  return npmProbe.get(src.npmName) === true ? src.npmName : null;
+}
+
 for (const row of rows) {
   if (ONLY.size && !ONLY.has(row.id)) continue;
-  const src = sourceVersion(row.id);
+  const src = sources.get(row.id);
   if (!src) {
     result.skipped.push({ id: row.id, docVersion: row.docVersion });
     continue;
@@ -231,7 +322,15 @@ for (const row of rows) {
   const iconUrlValue = wantIconUrl ? `${ICON_URL_PREFIX}/${row.id}.svg` : "";
   const iconUrlDrift = wantIconUrl && !new RegExp(`iconUrl:\\s*["']?${iconUrlValue}`).test(readFileSync(row.file, "utf8"));
 
-  if (src.version === row.docVersion && !nameEnDrift && !descEnDrift && !soulEnDrift && !iconUrlDrift) {
+  const npmWanted = wantNpm(row, src);
+  const npmDrift = npmWanted !== null && npmWanted !== row.docNpm;
+  if (!npmWanted && src && !src.private && MANAGED_NPM.test(src.npmName) && row.docNpm !== src.npmName && PROBE_NPM) {
+    const state = npmProbe.get(src.npmName);
+    if (state === false) result.npmMissing.push({ id: row.id, npm: src.npmName });
+    else if (state === null) result.npmUnverified.push({ id: row.id, npm: src.npmName });
+  }
+
+  if (src.version === row.docVersion && !nameEnDrift && !descEnDrift && !soulEnDrift && !iconUrlDrift && !npmDrift) {
     result.ok.push({ id: row.id, version: src.version });
     continue;
   }
@@ -243,17 +342,30 @@ for (const row of rows) {
     ...(descEnDrift ? { descriptionEn: "added" } : {}),
     ...(soulEnDrift ? { soulEn: "added" } : {}),
     ...(iconUrlDrift ? { iconUrl: "added" } : {}),
+    ...(npmDrift ? { npm: row.npmLine === -1 ? "added" : "fixed" } : {}),
   });
   if (!CHECK) {
     const lines = readFileSync(row.file, "utf8").split("\n");
-    lines[row.verLine] = `${row.indent}version: ${row.quote}${src.version}${row.quote}`;
-    // Insert the English siblings after name / description (or after version when absent),
-    // then re-locate so both insertions land in the same pass.
     const insertAfter = (anchorLine, key, value) => {
       if (anchorLine < 0) return;
       const ind = lines[anchorLine].match(/^[ \t]*/)[0];
       lines.splice(anchorLine + 1, 0, `${ind}${key}: ${JSON.stringify(value)}`);
     };
+    // In-place rewrites first: an earlier insert shifts every later index, which would make a
+    // stale npmLine clobber a neighbouring field (the version line sits above both anchors).
+    lines[row.verLine] = `${row.indent}version: ${row.quote}${src.version}${row.quote}`;
+    // npm sits next to repo in the natural field order (website → repo → npm → install/license).
+    // Its anchor is the deepest one, so this insert runs before the English siblings below.
+    if (npmDrift) {
+      if (row.npmLine >= 0) {
+        const ind = lines[row.npmLine].match(/^[ \t]*/)[0] || row.indent;
+        lines[row.npmLine] = `${ind}npm: ${JSON.stringify(npmWanted)}`;
+      } else {
+        const anchor = row.repoLine >= 0 ? row.repoLine : row.websiteLine >= 0 ? row.websiteLine : row.verLine;
+        insertAfter(anchor, "npm", npmWanted);
+      }
+    }
+    // Insert the English siblings after name / description (or after version when absent).
     // Bottom-up insertion keeps earlier indices valid: descriptionEn sits below nameEn in the
     // natural order, so it must be spliced first.
     if (descEnDrift && wantDescEn) insertAfter(row.descLine >= 0 ? row.descLine : row.verLine, "descriptionEn", src.descriptionEn);
@@ -279,6 +391,14 @@ if (JSON_OUT) {
   if (result.skipped.length) {
     console.log("\nskipped (no version source under AITI_AI_DIR):");
     list(result.skipped, (s) => `${s.id} (doc=${s.docVersion})`);
+  }
+  if (result.npmMissing.length) {
+    console.log("\nnpm install source not published (field left unchanged):");
+    list(result.npmMissing, (s) => `${s.id}: ${s.npm}`);
+  }
+  if (result.npmUnverified.length) {
+    console.log("\nnpm install source unverified (registry unreachable, field left unchanged):");
+    list(result.npmUnverified, (s) => `${s.id}: ${s.npm}`);
   }
 }
 if (CHECK && result.updated.length > 0) process.exit(1);

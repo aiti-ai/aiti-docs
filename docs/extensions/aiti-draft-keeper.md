@@ -4,7 +4,11 @@ icon: 📝
 ext:
   id: aiti-draft-keeper
   name: 草稿保管员
+  nameEn: "Draft Keeper"
   description: 草稿持久化 + 恢复接管 —— composer 契约 v2 唯一所有者（applyIntent 唯一写入口）、多标签共享槽位、无贡献不回写防震荡、pruneStale 7 天清理、水合后恢复
+  descriptionEn: "Draft persistence and crash recovery for the composer — the sole owner of the composer draft state machine (v2 intent contract), shared slots across tabs, 7-day stale pruning."
+  iconUrl: "/ext-icons/aiti-draft-keeper.svg"
+  soulEn: "A crash can take the page away, but not the words you were halfway through typing."
   soul: 崩溃可以带走页面，带不走你打到一半的话。
   type: aiti-ext
   category: 聊天增强
@@ -14,6 +18,7 @@ ext:
   publisher: aiti-ai
   website: https://aiti.pw
   repo: ""
+  npm: "@aiti-ai/aiti-draft-keeper"
   install: |
     # 部署到 ~/.pi/web/extensions/aiti-draft-keeper/ 后 reload
   license: MIT

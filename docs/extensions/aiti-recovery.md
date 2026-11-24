@@ -4,7 +4,11 @@ icon: 🔄
 ext:
   id: aiti-recovery
   name: aiti-recovery
+  nameEn: "Recovery"
   description: 恢复 UI 扩展——队列恢复对话框（会话中断排队消息逐条决议）+ 重启恢复向导（中断会话两步处理），红线语义保留：绝不自动投递，续跑只发「继续」
+  descriptionEn: "Recovery UI extension — queue recovery dialog (resolving queued messages left by interrupted sessions one by one) + restart recovery wizard (two-step handling of interrupted sessions), red-line semantics preserved: never auto-deliver, resuming only sends \"continue\""
+  iconUrl: "/ext-icons/aiti-recovery.svg"
+  soulEn: "Interruption isn't scary; what's scary is not finding the way back."
   soul: 中断不可怕，可怕的是找不到回去的路。
   type: aiti-ext
   category: 聊天增强
@@ -14,6 +18,7 @@ ext:
   publisher: aiti-ai
   website: https://aiti.pw
   repo: ""
+  npm: "@aiti-ai/aiti-recovery"
   install: |
     # 部署到 ~/.pi/web/extensions/aiti-recovery/ 后 reload（需宿主 ≥ recoveryDialog 插槽版本，defork B3）
   license: MIT

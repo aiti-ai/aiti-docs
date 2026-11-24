@@ -4,7 +4,11 @@ icon: 🔀
 ext:
   id: aiti-git-ops
   name: Git Ops 共享引擎
+  nameEn: "Git Ops (shared git operations engine)"
   description: 白名单 git 写引擎——checkout 预检 / stash / plan 断点 / 审计 / changed topic，供 folder 与 session-manager 消费
+  descriptionEn: "Whitelisted git write engine — checkout precheck / stash / plan breakpoints / audit / changed topic, consumed by folder and session-manager"
+  iconUrl: "/ext-icons/aiti-git-ops.svg"
+  soulEn: "One place to write the repo, every place stays safe."
   soul: 一处写仓，处处安全。
   type: aiti-ext
   category: 服务端引擎
@@ -14,6 +18,7 @@ ext:
   publisher: aiti-ai
   website: https://aiti.pw
   repo: ""
+  npm: "@aiti-ai/aiti-git-ops"
   install: |
     # 部署到 ~/.pi/web/extensions/aiti-git-ops/ 后 reload
   license: MIT

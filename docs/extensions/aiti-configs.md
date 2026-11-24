@@ -4,16 +4,21 @@ icon: 🛡
 ext:
   id: aiti-configs
   name: 配置版本化 + 崩溃自检
+  nameEn: "Config Versioning & Self-check"
   description: 配置的安全网 —— AI/人改配置、改扩展改坏了，有锅可回、有 diff 可看、一键恢复；系统崩了，命令行哨兵不依赖出问题系统本身兜底恢复
+  descriptionEn: "A safety net for configuration — when AI/humans or extension changes break the config, there is a commit to revert, a diff to inspect, one-click restore; if the system crashes, a command-line watchdog recovers without relying on the broken system itself"
+  iconUrl: "/ext-icons/aiti-configs.svg"
+  soulEn: "The AI dares to change recklessly, because an entire git repo stands behind it as the undo button."
   soul: AI 敢乱改，因为身后有一整个 git 当后悔药。
   type: aiti-ext
   category: AI 能力
-  version: "0.1.11"
+  version: "0.1.12"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai
   website: https://aiti.pw
   repo: ""
+  npm: "@aiti-ai/aiti-configs"
   install: |
     # 部署到 ~/.pi/web/extensions/aiti-configs/ 后 reload
   license: MIT

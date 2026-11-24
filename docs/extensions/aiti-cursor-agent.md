@@ -4,7 +4,11 @@ icon: 🖥️
 ext:
   id: aiti-cursor-agent
   name: Cursor CLI 会话接入
+  nameEn: "Cursor CLI Session Backend"
   description: "驱动 Cursor Agent CLI 会话（agentKey: cursor）——stream-json print 模式 + --resume 多轮；Cursor IDE 会话只读解析"
+  descriptionEn: "Drives Cursor Agent CLI sessions (agentKey: cursor) — stream-json print mode + --resume multi-turn; Cursor IDE sessions parsed read-only"
+  iconUrl: "/ext-icons/aiti-cursor-agent.svg"
+  soulEn: "Bring Cursor's agent into pi-web's session universe too."
   soul: Cursor 的会话，也进 All Sessions。
   type: aiti-ext
   category: 会话管理
@@ -13,6 +17,7 @@ ext:
   author: aiti-ai
   publisher: aiti-ai
   website: https://aiti.pw
+  npm: "@aiti-ai/aiti-cursor-agent"
   license: MIT
   tags: [cursor, agent, sessions, cli]
 ---

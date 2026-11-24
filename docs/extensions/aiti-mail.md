@@ -4,7 +4,10 @@ icon: ✉️
 ext:
   id: aiti-mail
   name: aiti-mail
+  nameEn: "Mail Sender"
   description: pi-web 内通用「邮件发送出口」——零依赖 SMTP 客户端 + 发送记录（node:sqlite）+ 管理弹窗（配置/测试/记录）
+  descriptionEn: "The general \"mail sending outlet\" inside pi-web — zero-dependency SMTP client + send log (node:sqlite) + management dialog (config/test/log)"
+  iconUrl: "/ext-icons/aiti-mail.svg"
   soul: 配置一次 SMTP，pi-web 里任何扩展和 AI 都能发邮件。
   type: aiti-ext
   category: 系统工具
@@ -14,6 +17,7 @@ ext:
   publisher: aiti-ai
   website: https://aiti.pw
   repo: ""
+  npm: "@aiti-ai/aiti-mail"
   install: |
   license: MIT
   tags: [mail, smtp, email, notify, sqlite]

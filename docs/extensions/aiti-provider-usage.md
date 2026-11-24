@@ -4,7 +4,11 @@ icon: 📶
 ext:
   id: aiti-provider-usage
   name: aiti-provider-usage
+  nameEn: "Provider Usage"
   description: Provider 余额/配额查询 —— 16 个适配器 id（DeepSeek/OpenRouter/Z.AI/OpenCode Go/Kimi/Codex/Copilot 等），会话信息面板「剩余额度」区块当前会话置顶展开，5min TTL 总览 + 手动刷新，事件驱动零轮询
+  descriptionEn: "Provider balance/quota lookup — 16 adapter ids (DeepSeek/OpenRouter/Z.AI/OpenCode Go/Kimi/Codex/Copilot etc.), session info panel \"remaining quota\" section with the current session pinned on top, 5min TTL overview + manual refresh, event-driven zero polling"
+  iconUrl: "/ext-icons/aiti-provider-usage.svg"
+  soulEn: "How much quota each provider has left, all on one panel."
   soul: 各家还剩多少额度，一面看尽。
   type: aiti-ext
   category: 系统工具
@@ -14,6 +18,7 @@ ext:
   publisher: aiti-ai
   website: https://aiti.pw
   repo: ""
+  npm: "@aiti-ai/aiti-provider-usage"
   install: |
     # 部署到 ~/.pi/web/extensions/aiti-provider-usage/ 后 reload（需宿主 pi-web ≥ sessionInfoPanel 插槽版本，defork B1）
   license: MIT

@@ -4,7 +4,11 @@ icon: 🔵
 ext:
   id: aiti-codebuddy-agent
   name: CodeBuddy Code 会话后端
+  nameEn: "CodeBuddy Code (Tencent)"
   description: 腾讯 CodeBuddy Code CLI（cbc）驱动 —— stream 长连接（默认）+ exec 兜底双模式 + --resume 接入 All Sessions，control_request 三通道，API-key env 登录
+  descriptionEn: "Tencent CodeBuddy Code CLI (cbc) driver — stream long connection (default) + exec fallback dual mode + --resume into All Sessions, control_request three channels, API-key env login"
+  iconUrl: "/ext-icons/aiti-codebuddy-agent.svg"
+  soulEn: "Tencent CodeBuddy sessions, ready to chat anywhere."
   soul: 腾讯 CodeBuddy 会话，哪儿都能接上聊。
   type: aiti-ext
   category: 多 agent 后端
@@ -14,6 +18,7 @@ ext:
   publisher: aiti-ai
   website: https://aiti.pw
   repo: ""
+  npm: "@aiti-ai/aiti-codebuddy-agent"
   install: |
     # 部署到 ~/.pi/web/extensions/aiti-codebuddy-agent/ 后 reload
     # 需要本机可用 cbc：npm i -g @tencent-ai/codebuddy-code（或依赖 npx 兜底）

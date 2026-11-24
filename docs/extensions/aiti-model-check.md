@@ -4,7 +4,11 @@ icon: 📡
 ext:
   id: aiti-model-check
   name: 模型可用性管理
+  nameEn: "Model Availability"
   description: 模型健康度探测 —— 对每个模型发极小探针消息，看是否可用 / 429 限流 / 异常；解析限流恢复时间（Retry-After 等），记录历史识别可用窗口；长期限流到期提醒（纯本地时间检查零探测）
+  descriptionEn: "Model health probing — sends a tiny probe message to each model to check availability / 429 rate limiting / errors; parses the rate-limit recovery time (Retry-After etc.), records history to identify availability windows; long-term rate-limit expiry reminders (pure local time checks, zero probing)"
+  iconUrl: "/ext-icons/aiti-model-check.svg"
+  soulEn: "Is the model home? Knock and ask."
   soul: 模型在不在家，敲门问问它。
   type: aiti-ext
   category: AI 能力
@@ -14,6 +18,7 @@ ext:
   publisher: aiti-ai
   website: https://aiti.pw
   repo: ""
+  npm: "@aiti-ai/aiti-model-check"
   install: |
     # 部署到 ~/.pi/web/extensions/aiti-model-check/ 后 reload
   license: MIT

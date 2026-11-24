@@ -4,7 +4,10 @@ icon: ✍️
 ext:
   id: aiti-word-superdoc
   name: Word 文档编辑器
+  nameEn: "Word Editor"
   description: .docx 在线编辑（SuperDoc：ProseMirror docx 双向）。AGPL 隔离于本扩展，不装即无
+  descriptionEn: "Online .docx editing (SuperDoc: ProseMirror bidirectional docx). The AGPL is isolated within this extension — don't install it and it's simply not there"
+  iconUrl: "/ext-icons/aiti-word-superdoc.svg"
   soul: ProseMirror 双向——打开即 docx 结构，导出即 docx 文件。
   type: aiti-ext
   category: 开发工具
@@ -14,6 +17,7 @@ ext:
   publisher: aiti-ai
   website: https://aiti.pw
   repo: ""
+  npm: "@aiti-ai/aiti-word-superdoc"
   install: |
     # 部署到 ~/.pi/web/extensions/aiti-word-superdoc/ 后 reload
     # 依赖：aiti-editor（多编辑器仲裁宿主）

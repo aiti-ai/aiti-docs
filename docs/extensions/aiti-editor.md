@@ -4,16 +4,21 @@ icon: ✍️
 ext:
   id: aiti-editor
   name: 文件编辑器
+  nameEn: "File Editor"
   description: 可扩展编辑器 —— Monaco 编辑接管 + 保存（mtime 冲突 409 + 白名单/大小校验）+ 压缩包解析 + 统一图片查看器（消息图片/文件图片合一，缩放·捏合·信息面板）
+  descriptionEn: "Extensible editor — Monaco editing take over + save (mtime conflict 409 + whitelist/size checks) + archive extraction + unified image viewer (message images and file images unified, zoom · pinch · info panel)"
+  iconUrl: "/ext-icons/aiti-editor.svg"
+  soulEn: "See wrong code, fix it on the spot — no switching out to open an IDE."
   soul: 看到不对的代码，当场就能改——不用切出去开 IDE。
   type: aiti-ext
   category: 开发工具
-  version: "1.0.14"
+  version: "1.0.15"
   status: active
   author: aiti-ai
   publisher: aiti-ai
   website: https://aiti.pw
   repo: ""
+  npm: "@aiti-ai/aiti-editor"
   install: |
     # 部署到 ~/.pi/web/extensions/aiti-editor/ 后 reload
   license: MIT

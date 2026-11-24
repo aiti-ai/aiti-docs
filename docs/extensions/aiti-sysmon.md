@@ -18,6 +18,7 @@ ext:
   publisher: aiti-ai
   website: https://aiti.pw
   repo: ""
+  npm: "@aiti-ai/aiti-sysmon"
   install: |
   license: MIT
   tags: [server, monitor, cpu, memory, disk, network, temperature, sensors, systeminformation, sidebar-dock, i18n]

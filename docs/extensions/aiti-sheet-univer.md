@@ -4,7 +4,10 @@ icon: 📊
 ext:
   id: aiti-sheet-univer
   name: Excel 表格编辑器
+  nameEn: "Excel Editor"
   description: .xlsx/.xlsm 在线预览+编辑（exceljs 数据面 + Univer 视图面）；.xls/.ods 只读预览与一键转 .xlsx
+  descriptionEn: "In-browser preview + editing for .xlsx/.xlsm (exceljs data layer + Univer view layer); read-only preview and one-click convert to .xlsx for .xls/.ods"
+  iconUrl: "/ext-icons/aiti-sheet-univer.svg"
   soul: 老格式不挡路——转换、派生、编辑各归其位。
   type: aiti-ext
   category: 开发工具
@@ -14,6 +17,7 @@ ext:
   publisher: aiti-ai
   website: https://aiti.pw
   repo: ""
+  npm: "@aiti-ai/aiti-sheet-univer"
   install: |
     # 部署到 ~/.pi/web/extensions/aiti-sheet-univer/ 后 reload
     # 依赖：aiti-editor（多编辑器仲裁宿主）；服务器端转换需 LibreOffice (soffice)

@@ -18,6 +18,7 @@ ext:
   publisher: aiti-ai
   website: https://aiti.pw
   repo: ""
+  npm: "@aiti-ai/aiti-backup"
   install: |
     # 部署到 ~/.pi/web/extensions/aiti-backup/ 后 reload
   license: MIT

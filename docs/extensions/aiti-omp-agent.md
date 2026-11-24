@@ -4,7 +4,11 @@ icon: 🦉
 ext:
   id: aiti-omp-agent
   name: Oh My Pi Agent
+  nameEn: "Oh My Pi (omp subprocess backend)"
   description: Oh My Pi (omp.sh)——pi 最大 fork 的 RPC spawn 后端（拆分自 aiti-pi-agent 专一 omp）：omp --mode rpc 子进程 + ready 握手 / get_state 能力面 / host tools / login / branch
+  descriptionEn: "Oh My Pi (omp.sh) — RPC spawn backend for pi's largest fork (split from aiti-pi-agent to specialize in omp): `omp --mode rpc` child process + ready handshake / get_state capability surface / host tools / login / branch"
+  iconUrl: "/ext-icons/aiti-omp-agent.svg"
+  soulEn: "omp's independent world: ready handshake / get_state capability surface / host tools / login / branch."
   soul: omp 的独立世界：ready 握手 / get_state 能力面 / host tools / login / branch。
   type: aiti-ext
   category: 多 agent 后端

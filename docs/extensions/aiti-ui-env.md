@@ -18,6 +18,7 @@ ext:
   publisher: aiti-ai
   website: https://aiti.pw
   repo: ""
+  npm: "@aiti-ai/aiti-ui-env"
   install: |
     # 部署到 ~/.pi/web/extensions/aiti-ui-env/ 后 reload：
     curl -X POST http://127.0.0.1:<端口>/api/extensions/reload

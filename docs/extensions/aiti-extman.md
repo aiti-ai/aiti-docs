@@ -5,7 +5,11 @@ description: 扩展管理器 —— 搜索/启停/安装/在线注册表
 ext:
   id: aiti-extman
   name: aiti-extman
+  nameEn: "Extension Manager"
   description: 扩展管理器 —— 搜索/启停/安装/在线注册表
+  descriptionEn: "Extension manager — search / enable-disable / install / online registry"
+  iconUrl: "/ext-icons/aiti-extman.svg"
+  soulEn: "The one managing extensions should be an extension itself."
   soul: 管扩展的，也该是个扩展。
   type: aiti-ext
   category: 系统工具
@@ -15,7 +19,7 @@ ext:
   publisher: aiti-ai
   website: https://aiti.pw
   repo: ""
-  npm: ""
+  npm: "@aiti-ai/aiti-extman"
   install: |
     # 部署到 ~/.pi/web/extensions/aiti-extman/ 后 reload
   license: MIT

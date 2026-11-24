@@ -4,7 +4,11 @@ icon: 📮
 ext:
   id: aiti-channels
   name: IM 渠道
+  nameEn: "IM Channels"
   description: IM 渠道接入 + cc-connect 大前端外壳 —— 托管 cc-connect 进程、概览/项目/通道/会话面板、socket API 出站发消息
+  descriptionEn: "IM channel integration + a full frontend shell for cc-connect — hosts the cc-connect process, overview/projects/channels/sessions panels, and a socket API for outbound messaging"
+  iconUrl: "/ext-icons/aiti-channels.svg"
+  soulEn: "AI shouldn't be locked inside a web page — DingTalk/Feishu/WeChat are all its windows."
   soul: AI 不该被锁在网页里——钉钉/飞书/微信都是它的窗口。
   type: aiti-ext
   category: IM 渠道
@@ -14,6 +18,7 @@ ext:
   publisher: aiti-ai
   website: https://aiti.pw
   repo: ""
+  npm: "@aiti-ai/aiti-channels"
   install: |
     # 部署到 ~/.pi/web/extensions/aiti-channels/ 后 reload
   license: MIT

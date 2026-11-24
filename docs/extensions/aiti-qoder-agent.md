@@ -4,7 +4,11 @@ icon: ⚡
 ext:
   id: aiti-qoder-agent
   name: Qoder 会话后端
+  nameEn: "Qoder Session Backend"
   description: Qoder CLI 专属后端 —— 双区域 credits/listModels、WASM 签名请求、扩展 API 免开会话查询
+  descriptionEn: "Exclusive Qoder CLI session backend (qodercli/qoderclicn): credits/quota (getUsage), WASM-signed model catalog (listModels), task-list mirror, run-queue management, and plan/permission-mode support."
+  iconUrl: "/ext-icons/aiti-qoder-agent.svg"
+  soulEn: "Others take the ACP highway; it insists on the signed single-plank bridge — because the scenery is on the other side."
   soul: 别人走 ACP 大路，它偏要走签名的独木桥——因为风景在对面。
   type: aiti-ext
   category: 多 agent 后端
@@ -14,6 +18,7 @@ ext:
   publisher: aiti-ai
   website: https://aiti.pw
   repo: ""
+  npm: "@aiti-ai/aiti-qoder-agent"
   install: |
     # 部署到 ~/.pi/web/extensions/aiti-qoder-agent/ 后 reload
   license: MIT

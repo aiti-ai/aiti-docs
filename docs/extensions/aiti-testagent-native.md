@@ -4,7 +4,10 @@ icon: ⌖
 ext:
   id: aiti-testagent-native
   name: TestAgent Native 面板
+  nameEn: "testagent-native (Windows API/COM trace panel)"
   description: testagent-native（Windows 原生进程活体操控）可视面 —— broker 进程/会话/挂钩/事件流；原 aiti-wintrace（2026-11-07 改名）
+  descriptionEn: "Visual panel for testagent-native (live Windows-native process control) — broker processes/sessions/hooks/event stream; formerly aiti-wintrace (renamed 2026-11-07)"
+  iconUrl: "/ext-icons/aiti-testagent-native.svg"
   soul: 任意 Windows 进程→AI 可编程工具面：API/COM 调用级追踪、原生求值、mock 覆写、函数体热替换，全可逆审计。
   type: aiti-ext
   category: 调试
@@ -14,6 +17,7 @@ ext:
   publisher: aiti-ai
   website: https://aiti.pw
   repo: ""
+  npm: "@aiti-ai/aiti-testagent-native"
   install: |
     # 1) 常驻 tan broker（155：Startup 文件夹 start-tan.vbs——broker 8765/8766 + MCP HTTP 8767）
     #    手动：D:\path\to\testagent-native\native\build\win64-release\bin\<current-broker.txt> --port 8765 --http-port 8766

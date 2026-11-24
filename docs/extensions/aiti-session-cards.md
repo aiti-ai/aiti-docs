@@ -4,7 +4,11 @@ icon: 💬
 ext:
   id: aiti-session-cards
   name: 会话请求卡
+  nameEn: "Session Request Cards (approval/Q&A/authorization)"
   description: 会话请求卡扩展——交互元语卡（zcode 方案审批 / AskUser / omp OAuth / generic 兜底）与工具授权卡完整 UI，自 pi-web core 外迁（agent 能力 UI 去核化 P1）
+  descriptionEn: "Session request card extension — full UI for interaction-primitive cards (zcode plan approval / AskUser / omp OAuth / generic fallback) and tool authorization cards"
+  iconUrl: "/ext-icons/aiti-session-cards.svg"
+  soulEn: "The cards where an agent begs you for an answer — what they look like is the extension's call."
   soul: agent 求你作答的卡片，长什么样由扩展说了算。
   type: aiti-ext
   category: 聊天增强
@@ -14,6 +18,7 @@ ext:
   publisher: aiti-ai
   website: https://aiti.pw
   repo: ""
+  npm: "@aiti-ai/aiti-session-cards"
   install: |
   license: MIT
   tags: [session-request-card, plan-approval, ask-user, tool-auth, oauth, interaction, permission]

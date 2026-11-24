@@ -4,7 +4,11 @@ icon: 👥
 ext:
   id: aiti-subagents
   name: 子代理
+  nameEn: "Subagents"
   description: 子代理舰队 Fleet 观测/运行控制/Agent 管理/并发配置——fork 引擎，工具归上游 pi-subagents
+  descriptionEn: "Subagent fleet — Fleet observation / run control / agent management / concurrency config — fork engine, tools belong to upstream pi-subagents"
+  iconUrl: "/ext-icons/aiti-subagents.svg"
+  soulEn: "The main agent does the thinking; the dirty work goes to the specialist."
   soul: 主 agent 负责思考，脏活累活分给专职的它。
   type: aiti-ext
   category: AI 能力
@@ -14,6 +18,7 @@ ext:
   publisher: aiti-ai
   website: https://aiti.pw
   repo: ""
+  npm: "@aiti-ai/aiti-subagents"
   install: |
     # 部署到 ~/.pi/web/extensions/aiti-subagents/ 后 reload
   license: MIT

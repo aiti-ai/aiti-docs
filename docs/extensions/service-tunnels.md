@@ -4,7 +4,11 @@ icon: 🌐
 ext:
   id: service-tunnels
   name: Service Tunnels
+  nameEn: "Service Tunnels"
   description: 本机服务一键公网可达 —— 端口发现（服务识别/自定义名）/ 五种暴露模式（隧道·vhost·混合·路由器映射·IPv6 直连）/ 认证网关（portal·TOTP·人脸声纹）/ DDNS 自动解析 / 网络体检 doctor
+  descriptionEn: "One-click public reachability for local services — port discovery (service identification/custom names) / five exposure modes (tunnel·vhost·hybrid·router portmap·IPv6 direct) / auth gateway (portal·TOTP·face and voiceprint) / DDNS auto resolution / network health doctor"
+  iconUrl: "/ext-icons/service-tunnels.svg"
+  soulEn: "Local services should not be locked behind a firewall — they should be safely reachable from anywhere."
   soul: 本地服务不该被防火墙关起来——在哪都应该可以安全访问。
   type: aiti-ext
   category: 服务隧道
@@ -14,6 +18,7 @@ ext:
   publisher: aiti-ai
   website: https://aiti.pw
   repo: ""
+  npm: "@aiti-ai/aiti-service-tunnels"
   install: |
     # 源码：the internal dev repo
     # 部署：node tools/deploy.mjs（构建客户端 + 拷贝 + 目标内 npm install --omit=dev）

@@ -15,9 +15,10 @@ ext:
   publisher: aiti-ai
   website: https://aiti.pw
   repo: ""
-  npm: ""  # 无 npm 包：npmjs 上的 pi-session-search 是第三方同名包（samfp），勿混淆
+  npm: "@aiti-ai/pi-session-search"
   install: |
-    # 尚未公开发布（npmjs 同名包为第三方所有，勿装）——源码直连：
+    # 安装（pi 包）：pi install @aiti-ai/pi-session-search
+    # 或源码直连：
     pi -e /path/to/pi-session-search/src/index.ts
     # pi-web 会话无需安装：session_search/session_read 由 session-manager 注入
   license: MIT

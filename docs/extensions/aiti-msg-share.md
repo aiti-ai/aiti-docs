@@ -4,7 +4,11 @@ icon: 📤
 ext:
   id: aiti-msg-share
   name: 消息分享
+  nameEn: "Message Share"
   description: 把会话、单条消息、划选内容、文件与图片分享出去——工作台跑在自己机器上、外网访问不到，所以经可配置的分享目标（Gitee / 图床 / 对象存储 / 笔记库，内置 161 个）上传换回公网 URL，上传前自动脱敏，结果附二维码
+  descriptionEn: "Share sessions, messages, selections, files and images through pluggable targets with secret redaction and QR codes"
+  iconUrl: "/ext-icons/aiti-msg-share.svg"
+  soulEn: "Sharing it out is how the conversation continues."
   soul: 分享出去，是为了让对话继续。
   type: aiti-ext
   category: 聊天增强
@@ -14,6 +18,7 @@ ext:
   publisher: aiti-ai
   website: https://aiti.pw
   repo: ""
+  npm: "@aiti-ai/aiti-msg-share"
   install: |
     # 随 aiti-agent（@aiti-ai/pi-web）打包，在应用内扩展管理器启用
   license: MIT

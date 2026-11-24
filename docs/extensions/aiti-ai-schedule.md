@@ -4,16 +4,20 @@ icon: 🗓️
 ext:
   id: aiti-ai-schedule
   name: aiti-ai-schedule
+  nameEn: "AI Schedule"
   description: pi-web 常驻调度器 —— 扩展声明式定时任务 + AI 计划（cron/间隔/一次性）+ 三模式执行引擎 + AI 自建计划工具 + 管理页
+  descriptionEn: "pi-web resident scheduler — extension declarative scheduled tasks + AI plans (cron/interval/one-shot) + three-mode execution engine + AI self-service plan tool + management page"
+  iconUrl: "/ext-icons/aiti-ai-schedule.svg"
   soul: 别再每个扩展自造 setInterval 了——声明即调度，AI 也能自己排班。
   type: aiti-ext
   category: 系统工具
-  version: "0.4.11"
+  version: "0.4.12"
   status: active
   author: aiti-ai
   publisher: aiti-ai
   website: https://aiti.pw
   repo: ""
+  npm: "@aiti-ai/aiti-ai-schedule"
   install: |
     # 内置于 pi-web 扩展目录，随 pi-web 启动；门控见下方「门控与部署」
   license: MIT

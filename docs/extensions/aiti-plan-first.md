@@ -12,12 +12,13 @@ ext:
   soulEn: "Think it through before touching the keyboard — plans are cheapest when written first."
   type: aiti-ext
   category: 开发工具
-  version: "0.1.8"
+  version: "0.2.0"
   status: active
   author: aiti-ai
   publisher: aiti-ai
   website: https://aiti.pw
   repo: ""
+  npm: "@aiti-ai/aiti-plan-first"
   install: |
     # 依赖：aiti-git-trace ≥0.2.0（services.trace v2 事件出口；缺席自动休眠，手动绑定仍可用）
     # pi 扩展 emit 需重启 pi 进程生效（终端桥接会话不触发自动提醒——见方案文档 §9）；另需

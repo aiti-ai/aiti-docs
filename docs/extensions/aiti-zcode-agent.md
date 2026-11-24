@@ -4,7 +4,11 @@ icon: 🟢
 ext:
   id: aiti-zcode-agent
   name: ZCode 会话后端
+  nameEn: "ZCode Session Backend"
   description: 智谱 ZCode（桌面端内嵌 CLI runtime）驱动 —— app-server 长驻（默认，流式/工具卡/steer/附件）+ oneshot 兜底双通道，接入 All Sessions，合规吃 GLM 编程套餐
+  descriptionEn: "Driven by Zhipu ZCode (CLI runtime embedded in the desktop AppImage) — dual-channel resident app-server (default, streaming/tool cards/steer/attachments) + oneshot fallback, plugged into All Sessions, consuming the GLM coding plan compliantly"
+  iconUrl: "/ext-icons/aiti-zcode-agent.svg"
+  soulEn: "Where the GLM plan runs, that's where the panel watches it."
   soul: GLM 套餐在哪儿跑，面板就在哪儿看。
   type: aiti-ext
   category: 多 agent 后端
@@ -14,6 +18,7 @@ ext:
   publisher: aiti-ai
   website: https://aiti.pw
   repo: ""
+  npm: "@aiti-ai/aiti-zcode-agent"
   install: |
     # 部署到 ~/.pi/web/extensions/aiti-zcode-agent/ 后 reload
   license: MIT

@@ -4,7 +4,11 @@ icon: 🎈
 ext:
   id: aiti-float
   name: 弹窗浮动增强器
+  nameEn: "Dialog Float Enhancer"
   description: data-ext-float 契约接管 —— 拖拽/边缘缩放/位置持久化/点按置前/双击复位/自动最大化按钮，小屏自动全屏 + 系统返回关闭浮窗；DockStack 左栏统一区块栈服务
+  descriptionEn: "data-ext-float contract take-over — drag/edge resize/position persistence/click-to-front/double-click reset/auto maximize button, small-screen auto fullscreen + system back closes the float; the DockStack unified sidebar block-stack service"
+  iconUrl: "/ext-icons/aiti-float.svg"
+  soulEn: "The panel just sets one attribute; everything about floating is left to it."
   soul: 面板只管标一个属性，浮起来的一切交给它。
   type: aiti-ext
   category: 聊天增强
@@ -14,6 +18,7 @@ ext:
   publisher: aiti-ai
   website: https://aiti.pw
   repo: ""
+  npm: "@aiti-ai/aiti-float"
   install: |
     # 部署到 ~/.pi/web/extensions/aiti-float/ 后 reload
   license: MIT

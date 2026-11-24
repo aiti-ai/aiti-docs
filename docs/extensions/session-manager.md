@@ -4,16 +4,21 @@ icon: 📋
 ext:
   id: session-manager
   name: session-manager
+  nameEn: "Session Manager"
   description: 跨项目会话面板 —— tag 树+颜色 / 收藏 / 搜索 / 归档 / 看板 / 新建会话分支·Worktree 选择器 / 23 家 agent 历史解析 / DockStack 编排
+  descriptionEn: "Cross-project session panel — tag tree + colors / favorites / search / archive / kanban / new-session branch·Worktree picker / history parsing for 23 agent families / DockStack orchestration"
+  iconUrl: "/ext-icons/session-manager.svg"
+  soulEn: "Sessions are not disposable transient flows — they are assets that accumulate every day."
   soul: 会话不是用完即走的流水，是每天都在累积的资产。
   type: aiti-ext
   category: 会话管理
-  version: "0.2.19"
+  version: "0.2.20"
   status: active
   author: aiti-ai
   publisher: aiti-ai
   website: https://aiti.pw
   repo: ""
+  npm: "@aiti-ai/session-manager"
   install: |
     # 部署到 ~/.pi/web/extensions/session-manager/ 后 reload：
     curl -X POST http://127.0.0.1:<端口>/api/extensions/reload

@@ -4,16 +4,21 @@ icon: 🧭
 ext:
   id: aiti-app-center
   name: 应用中心
+  nameEn: "App Center"
   description: 左栏区块栈全部折叠后空白态的应用抽屉（开始菜单）——应用视图（动作/面板/管理入口卡，hover 快捷钉 + 信息页）与开关视图（feature 开关按扩展分组）双视图单行切换，tag 式分类（内部固定分类多语 + 自定义分类 + 默认 other）、按视图搜索、编辑模式排序/隐藏/恢复
+  descriptionEn: "The app drawer (start menu) shown in the blank state after every left-column dock block is collapsed — a single-row switch between the Apps view (action/panel/manage entry cards, hover quick-pin + info page) and the Toggles view (feature toggles grouped by extension), tag-style categories (8 fixed internal categories with i18n + custom categories + default other), search scoped per view, and edit-mode reorder/hide/restore"
+  iconUrl: "/ext-icons/aiti-app-center.svg"
+  soulEn: "Home for every plugin entry — collapsed, it becomes the start menu."
   soul: 所有插件入口的家——折叠即开始菜单。
   type: aiti-ext
   category: 系统与管理
-  version: "0.2.13"
+  version: "0.2.14"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai
   website: https://aiti.pw
   repo: ""
+  npm: "@aiti-ai/aiti-app-center"
   install: |
     # 消费方 session-manager（optionalDependsOn 软依赖）经 aiti-app-center.api 服务渲染进 DockStack filler
   license: MIT

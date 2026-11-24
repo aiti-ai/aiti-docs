@@ -4,7 +4,11 @@ icon: 🟠
 ext:
   id: aiti-claude-code-agent
   name: Claude Code 会话后端
+  nameEn: "Claude Code Session Backend"
   description: "驱动 Claude Code CLI 会话 —— 从 All Sessions 恢复历史行（agentKey: claude）；claude 2.1.318+ keyring 凭据三级裁决登录态"
+  descriptionEn: "Drives Claude Code CLI sessions — restores history rows from All Sessions (agentKey: claude); claude 2.1.318+ keyring credentials with a three-tier login-state adjudication"
+  iconUrl: "/ext-icons/aiti-claude-code-agent.svg"
+  soulEn: "Historical sessions are not fossils — one click brings them back to life."
   soul: 历史会话不是化石——点一下就活过来。
   type: aiti-ext
   category: 多 agent 后端
@@ -14,6 +18,7 @@ ext:
   publisher: aiti-ai
   website: https://aiti.pw
   repo: ""
+  npm: "@aiti-ai/aiti-claude-code-agent"
   install: |
     # 部署到 ~/.pi/web/extensions/aiti-claude-code-agent/ 后 reload
   license: MIT
