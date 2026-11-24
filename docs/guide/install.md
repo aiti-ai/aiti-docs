@@ -23,13 +23,27 @@ npm install -g @aiti-ai/pi-web@latest --allow-scripts=@aiti-ai/pi-web
 
 > npm ≥11.16 要求显式批准安装脚本：`--allow-scripts` 必须带 `=包名列表`，并写在包 spec 之后。裸写 `--allow-scripts` 在 npm 12 会拒绝全部安装脚本，导致安装不完整；旧版 npm 忽略该参数，无副作用。
 
+默认使用本机 npm 配置的源（`npm config get registry` 查看）。需要临时换源时，在命令末尾追加 `--registry <源地址>`：
+
+```bash
+# npm 官方源——源配置异常时显式指定，排查问题最稳
+npm install -g @aiti-ai/pi-web@latest --allow-scripts=@aiti-ai/pi-web --registry https://registry.npmjs.org
+
+# 国内镜像站（按自测速度选一个，以下均为完整 npm 镜像）
+npm install -g @aiti-ai/pi-web@latest --allow-scripts=@aiti-ai/pi-web --registry https://registry.npmmirror.com
+npm install -g @aiti-ai/pi-web@latest --allow-scripts=@aiti-ai/pi-web --registry https://mirrors.huaweicloud.com/repository/npm/
+npm install -g @aiti-ai/pi-web@latest --allow-scripts=@aiti-ai/pi-web --registry https://mirrors.cloud.tencent.com/npm/
+```
+
+`--registry` 只对本次命令生效，不改动全局 `.npmrc`；要长期生效用 `npm config set registry <地址>`。镜像站同步官方发布通常有几分钟到数十分钟延迟，刚发布的版本可能还没同步，取不到时请改用官方源。
+
 安装后启动：
 
 ```bash
 pi-web          # 启动服务并打开浏览器（默认 http://127.0.0.1:30141）
 ```
 
-不想全局安装？`npx --allow-scripts=@aiti-ai/pi-web @aiti-ai/pi-web@latest` 直接跑（不落盘、每次拉最新，同样需要上面的允许脚本参数）。
+不想全局安装？`npx --allow-scripts=@aiti-ai/pi-web @aiti-ai/pi-web@latest` 直接跑（不落盘、每次拉最新，同样需要上面的允许脚本参数，`--registry` 同理可加）。
 
 @tab macOS / Linux
 

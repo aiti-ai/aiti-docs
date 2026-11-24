@@ -23,13 +23,25 @@ npm install -g @aiti-ai/pi-web@latest --allow-scripts=@aiti-ai/pi-web
 
 > npm ≥11.16 requires an explicit install-script allowlist: use `--allow-scripts=<names>` AFTER the package spec. A bare `--allow-scripts` makes npm 12 block every install script and leaves the install incomplete, while older npm ignores the flag.
 
+By default the install uses whatever registry your npm is configured with (`npm config get registry`). To switch it for this command only, append `--registry <url>`:
+
+```bash
+# npmjs — explicit, handy when a mirror is stale or misconfigured
+npm install -g @aiti-ai/pi-web@latest --allow-scripts=@aiti-ai/pi-web --registry https://registry.npmjs.org
+
+# mirror example (China); any full npm mirror works the same way
+npm install -g @aiti-ai/pi-web@latest --allow-scripts=@aiti-ai/pi-web --registry https://registry.npmmirror.com
+```
+
+`--registry` applies to this command only and leaves your global `.npmrc` untouched; use `npm config set registry <url>` to make it permanent. Mirrors sync official releases with a delay (minutes to tens of minutes), so a brand-new version may only be available from npmjs at first.
+
 Then start:
 
 ```bash
 pi-web          # serves http://127.0.0.1:30141 and opens your browser
 ```
 
-Prefer a throwaway run? `npx --allow-scripts=@aiti-ai/pi-web @aiti-ai/pi-web@latest` — no global install (the same allow-scripts flag applies).
+Prefer a throwaway run? `npx --allow-scripts=@aiti-ai/pi-web @aiti-ai/pi-web@latest` — no global install (the same allow-scripts flag applies, and `--registry` works the same way).
 
 @tab macOS / Linux
 
