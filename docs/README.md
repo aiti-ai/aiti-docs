@@ -110,6 +110,8 @@ npm install -g @aiti-ai/pi-web@latest --allow-scripts=@aiti-ai/pi-web && pi-web
 | 🧩 **还有更多** | 消息导航、Token 用量看板、编辑器当场改码、草稿保护、prompt 收藏…… 71 个扩展一次看全 | [扩展注册表](/extensions/) |
 | 🛠️ **页面调试工具链（aiti-devtools）** | AI 进驻网页，面对面调试——看得见、点得着、改得了；已适配 DSH / OpenClaw / OpenCode 跨宿主 | [aiti-devtools 总览 →](/devtools/) |
 
+> 逐项拆解全部能力（含上游 / 自研来源标注、输入框按键速查、60+ 扩展细节）→ [特色功能全览（features）](/guide/features.md)。
+
 ## 什么是 aiti？
 
 **aiti**（发音 `/aiti/`，谐音「阿嚏」——「AI 开发像打喷嚏一样简单自然」）是一个以 **pi** 为引擎的 **AI 开发工具生态**：

@@ -109,6 +109,8 @@ Want to look around first? Online demo (mock data): **[demo.aiti.pw](https://dem
 | 🧩 **And more** | Message navigation, token usage dashboard, in-place code editing, draft protection, prompt bookmarks … see all 71 extensions in one place | [Extension registry](/en/extensions/) |
 | 🛠️ **Page-debugging toolchain (aiti-devtools)** | The AI moves into the web page, face-to-face debugging — sees it, clicks it, changes it; adapted to DSH / OpenClaw / OpenCode across hosts | [aiti-devtools overview →](/en/devtools/) |
 
+> The full item-by-item breakdown — upstream vs in-house attribution, composer key reference, 60+ extensions in detail → [Features at a Glance](/en/guide/features.md).
+
 ## What is aiti?
 
 **aiti** (pronounced `/aiti/`, echoing a sneeze — "AI development as natural as a sneeze") is an **AI development tool ecosystem** powered by **pi**:

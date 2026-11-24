@@ -2,10 +2,13 @@
 title: 特色功能全览
 icon: 🌟
 description: aiti-agent 特色功能全览——多 Agent 会话汇聚、多维统计、输入消息、安全数据、调试基建、办公文档、界面框架，逐项区分上游原生能力与自研增强
+keywords: 特色功能, 功能全览, features, feature list, capabilities, aiti-agent 功能, 扩展清单, 上游底座, 自研增强
 tags: [guide, features, overview, capabilities]
 ---
 
 # 特色功能全览
+
+> 英文版：[Features at a Glance](/en/guide/features.md)。本文是 aiti-agent 的 features 全览，逐项标注上游 / 自研来源。
 
 aiti-agent 构建于开源项目 [pi-web](https://github.com/agegr/pi-web) 之上。本文按来源分两层介绍：先列上游 pi-web 原生提供的能力（底座），再逐项展开本项目在其上新增的增强与自研特性；规划中的独有能力单列一节。
 
