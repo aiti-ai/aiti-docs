@@ -54,7 +54,7 @@ curl -fsSL https://aiti.pw/install.sh | sh
 Pin a version:
 
 ```bash
-curl -fsSL https://aiti.pw/install.sh | sh -s -- --ref v0.18.0-aiti.1
+curl -fsSL https://aiti.pw/install.sh | sh -s -- --ref v0.18.0-aiti.2
 ```
 
 Env overrides: `AITI_RELEASE_REPO` (mirror repo), `AITI_INSTALL_DIR`, `AITI_BIN_DIR`:
@@ -78,7 +78,7 @@ docker run -d --name aiti --init -p 30142:30142 \
 - `core` (~2.1 GB): fork of pi-web + all extensions + node/git + the justget tool market;
 - `full` (~7.8 GB): adds GUI / voice (funasr) / Chrome / tunnels — needs ≥8 GB RAM;
 - version tags: `aitiai/pi-web:v<version>-{core,full}`, rolling `core`/`full`/`latest`;
-- GHCR source: `ghcr.io/aiti-ai/aiti-ai` — same versions and content as Docker Hub (core/full variants), identical tags (e.g. `v0.18.0-aiti.1-core` / `core` / `latest`);
+- GHCR source: `ghcr.io/aiti-ai/aiti-ai` — same versions and content as Docker Hub (core/full variants), identical tags (e.g. `v0.18.0-aiti.2-core` / `core` / `latest`);
 - ⚠ mount only sub-paths of `/opt/aiti`, never the root itself (a root mount shadows the new image on upgrade — extensions would never refresh);
 - all three image channels (Docker Hub / ACR / GHCR) currently ship linux/amd64 only; on ARM hosts add `--platform linux/amd64` to run under emulation (with a performance cost);
 - slow pulls in China? swap the image for `registry.cn-hangzhou.aliyuncs.com/aiti-ai/pi-web:core` (Aliyun ACR, same tags as Docker Hub);
@@ -95,7 +95,7 @@ Requires PowerShell 5.1+ (built into Windows 10/11). Equivalent: `iwr -useb http
 Pin a version:
 
 ```powershell
-$env:AITI_RELEASE_TAG = "v0.18.0-aiti.1"; irm https://aiti.pw/install.ps1 | iex
+$env:AITI_RELEASE_TAG = "v0.18.0-aiti.2"; irm https://aiti.pw/install.ps1 | iex
 ```
 
 `AITI_RELEASE_REPO` and `AITI_INSTALL_DIR` work the same way.

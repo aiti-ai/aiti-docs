@@ -56,7 +56,7 @@ curl -fsSL https://aiti.pw/install.sh | sh
 固定版本：
 
 ```bash
-curl -fsSL https://aiti.pw/install.sh | sh -s -- --ref v0.18.0-aiti.1
+curl -fsSL https://aiti.pw/install.sh | sh -s -- --ref v0.18.0-aiti.2
 ```
 
 环境变量覆盖：`AITI_RELEASE_REPO`（镜像仓）、`AITI_INSTALL_DIR`、`AITI_BIN_DIR`：
@@ -80,7 +80,7 @@ docker run -d --name aiti --init -p 30142:30142 \
 - `core`（约 2.1GB）：fork pi-web + 全部扩展 + node/git + justget 工具市场；
 - `full`（约 7.8GB）：加 GUI/语音（funasr）/Chrome/隧道等全功能（需 ≥8GB 内存）；
 - 版本 tag：`aitiai/pi-web:v<版本>-{core,full}`，滚动 `core`/`full`/`latest`；
-- GHCR 源：`ghcr.io/aiti-ai/aiti-ai`——与 Docker Hub 同版本同内容（core/full 双变体），tag 完全一致（如 `v0.18.0-aiti.1-core` / `core` / `latest`）；
+- GHCR 源：`ghcr.io/aiti-ai/aiti-ai`——与 Docker Hub 同版本同内容（core/full 双变体），tag 完全一致（如 `v0.18.0-aiti.2-core` / `core` / `latest`）；
 - ⚠ 卷只挂 `/opt/aiti` 子路径，勿挂整个 `/opt/aiti` 根（挂根会让镜像升级后扩展永不更新）；
 - 三个镜像渠道（Docker Hub / ACR / GHCR）当前均为 linux/amd64 单架构；ARM 主机加 `--platform linux/amd64` 模拟运行（性能有折损）；
 - 国内拉取慢？镜像名换 `registry.cn-hangzhou.aliyuncs.com/aiti-ai/pi-web:core`（阿里云 ACR，tag 与 Docker Hub 一致）；
@@ -97,7 +97,7 @@ irm https://aiti.pw/install.ps1 | iex
 固定版本与环境变量覆盖：
 
 ```powershell
-$env:AITI_RELEASE_TAG = "v0.18.0-aiti.1"; irm https://aiti.pw/install.ps1 | iex
+$env:AITI_RELEASE_TAG = "v0.18.0-aiti.2"; irm https://aiti.pw/install.ps1 | iex
 ```
 
 `AITI_RELEASE_REPO`（镜像仓）、`AITI_INSTALL_DIR` 同理可覆盖。

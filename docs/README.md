@@ -71,6 +71,8 @@ npm install -g @aiti-ai/pi-web@latest --allow-scripts=@aiti-ai/pi-web && pi-web
 
 首启后在 **Models** 面板登录或填 API key 即可开聊——60+ 内置扩展已就位，无需逐个安装。不想全局安装？`npx --allow-scripts=@aiti-ai/pi-web @aiti-ai/pi-web@latest` 可免安装直跑；其余方式（curl / PowerShell / Docker）见 **[安装指南](/guide/install.md)**。
 
+想先看看效果？在线 demo（mock 数据）：**[demo.alot.pw](https://demo.alot.pw/)**。
+
 ## 为什么选 aiti？
 
 > [pi-web](https://github.com/agegr/pi-web) 是出色的 pi Web UI。aiti 在**同源兼容**的基础上（pi CLI / IDE 扩展操作同一批会话），把它扩展成一个开箱即用的完整工作台：

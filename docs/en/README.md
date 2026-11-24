@@ -71,6 +71,8 @@ npm install -g @aiti-ai/pi-web@latest --allow-scripts=@aiti-ai/pi-web && pi-web
 
 On first launch, sign in or fill an API key in the **Models** panel and start chatting — the 60+ built-in extensions are already in place. No global install? `npx --allow-scripts=@aiti-ai/pi-web @aiti-ai/pi-web@latest` runs it directly; other methods (curl / PowerShell / Docker) in the **[install guide](/en/guide/install.md)**.
 
+Want to look around first? Online demo (mock data): **[demo.alot.pw](https://demo.alot.pw/)**.
+
 ## Why aiti?
 
 > [pi-web](https://github.com/agegr/pi-web) is a great web UI for pi. Starting from the **same lineage** (pi CLI / IDE extensions operate the same sessions), aiti grows it into a complete, ready-to-use workbench:
