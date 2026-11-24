@@ -30,6 +30,7 @@ export const enSidebar = sidebar({
         "what-is-aiti.md",
         "lineage.md",
         "architecture.md",
+        "features.md",
         "quick-start.md",
         "local-dev.md",
         "ext-services.md",
