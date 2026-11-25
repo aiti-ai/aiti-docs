@@ -8,7 +8,7 @@ tags: [guide, features, overview, capabilities]
 
 # Features at a Glance
 
-> Chinese: [特色功能全览](/guide/features.md). This page is the features reference for aiti-agent, with upstream vs in-house attribution per item.
+> Chinese edition: switch the interface language to 简体中文 from the top-bar language menu — the corresponding page is「特色功能全览」. This page is the features reference for aiti-agent, with upstream vs in-house attribution per item.
 
 aiti-agent is built on top of the open-source [pi-web](https://github.com/agegr/pi-web). This page separates two layers: first the capabilities upstream pi-web already provides (the base), then the enhancements and in-house features this project adds on top; planned unique capabilities have their own section.
 
