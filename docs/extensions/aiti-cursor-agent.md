@@ -12,7 +12,7 @@ ext:
   soul: Cursor 的会话，也进 All Sessions。
   type: aiti-ext
   category: 会话管理
-  version: "0.1.11"
+  version: "0.1.12"
   status: beta
   author: aiti-ai
   publisher: aiti-ai

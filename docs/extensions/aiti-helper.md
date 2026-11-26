@@ -12,7 +12,7 @@ ext:
   soul: AI 的工具该由 AI 自己接线、自己进化——人类的角色是掌舵，不是搬砖。
   type: aiti-ext
   category: AI 能力
-  version: "0.5.14"
+  version: "0.5.15"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai

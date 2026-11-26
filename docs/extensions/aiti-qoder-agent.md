@@ -12,7 +12,7 @@ ext:
   soul: 别人走 ACP 大路，它偏要走签名的独木桥——因为风景在对面。
   type: aiti-ext
   category: 多 agent 后端
-  version: "0.4.13"
+  version: "0.4.14"
   status: active
   author: aiti-ai
   publisher: aiti-ai

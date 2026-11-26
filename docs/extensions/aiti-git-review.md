@@ -12,7 +12,7 @@ ext:
   soul: 作为人类，这是我对抗ai的最后倔犟了
   type: aiti-ext
   category: 开发工具
-  version: "0.2.11"
+  version: "0.2.12"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai

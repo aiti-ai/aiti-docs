@@ -12,7 +12,7 @@ ext:
   soul: 所有插件入口的家——折叠即开始菜单。
   type: aiti-ext
   category: 系统与管理
-  version: "0.2.14"
+  version: "0.2.15"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai

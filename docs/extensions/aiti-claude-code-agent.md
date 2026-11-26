@@ -12,7 +12,7 @@ ext:
   soul: 历史会话不是化石——点一下就活过来。
   type: aiti-ext
   category: 多 agent 后端
-  version: "0.1.11"
+  version: "0.1.12"
   status: active
   author: aiti-ai
   publisher: aiti-ai

@@ -11,7 +11,7 @@ ext:
   soul: 别再每个扩展自造 setInterval 了——声明即调度，AI 也能自己排班。
   type: aiti-ext
   category: 系统工具
-  version: "0.4.12"
+  version: "0.4.13"
   status: active
   author: aiti-ai
   publisher: aiti-ai

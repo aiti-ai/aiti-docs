@@ -12,7 +12,7 @@ ext:
   soul: 常用的模型，应当在指尖。
   type: aiti-ext
   category: 聊天增强
-  version: "0.1.12"
+  version: "0.1.13"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai

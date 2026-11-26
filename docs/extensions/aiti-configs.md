@@ -12,7 +12,7 @@ ext:
   soul: AI 敢乱改，因为身后有一整个 git 当后悔药。
   type: aiti-ext
   category: AI 能力
-  version: "0.1.12"
+  version: "0.1.13"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai

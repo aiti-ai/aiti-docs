@@ -12,7 +12,7 @@ ext:
   soul: 千楼万楼的聊天记录，电梯比楼梯好用。
   type: aiti-ext
   category: 聊天增强
-  version: "0.1.11"
+  version: "0.1.12"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai
