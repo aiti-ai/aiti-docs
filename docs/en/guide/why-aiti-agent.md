@@ -52,11 +52,13 @@ How many of these five happened to you last week?
 
 ## 2. The big comparison
 
-Three things to keep in mind so the tables are not read as "everyone else has nothing":
+Three things to keep in mind so the tables are not misread:
 
 1. **✅ / ⚠️ / ❌ describe the form's out-of-the-box default.** ⚠️ = usually needs a plugin, MCP, a cloud service or your own extension to reach parity; ❌ = no general extension point reaches the same level — not "impossible forever".
 2. **Other ecosystems are not weak**: IDEs have marketplaces + MCP + ACP, CLIs have plugins / skills / hooks / MCP, desktops have MCP extensions and connectors, and self-hosted web shells are growing. The gap is **ownership and tool surface**, not "whether plugins exist".
 3. **Our "N" numbers are not closed lists either** — they are today's built-in coverage, and they keep growing; see 2.0.
+
+These differences only mean the existing tools did not cover how I work — not that they cannot or do not do it well. Each has its strengths; I just filled in the part I needed.
 
 > Scope note: modern IDE agents often run partly in the vendor cloud (Cursor Cloud Agents, Copilot coding agent), and Claude Code / Codex have cloud sessions and mobile apps. The tables count those under the respective form rather than as "web-only".
 
@@ -112,7 +114,7 @@ Other forms' extension surfaces are real too; the difference is how far they rea
 | Access from browser / phone | ✅ Reverse proxy + tunnels + TOTP | ⚠️ vscode.dev / mobile companion | ⚠️ SSH / vendor app | ❌ | ✅ |
 | Survive network loss / device switch | ✅ SSE reconnect + server queue + drafts | ⚠️ Cloud sessions resume | ⚠️ Cloud sessions resume | ❌ | ⚠️ Implementation-dependent |
 
-**Takeaway**: cloud agents have made "keep running after closing the client" non-exclusive. The real difference is **whose machine it runs on** — a vendor cloud sandbox versus your server and real workspace — and whether a service restart also survives, which is what detached mode buys, without shipping code to someone else's cloud.
+**Takeaway**: cloud agents have made "keep running after closing the client" non-exclusive. The real difference is **whose machine it runs on** — a vendor cloud sandbox versus your server and real workspace — and whether a service restart also survives, which is what detached mode buys, without shipping code to a vendor cloud.
 
 ### 2.3 Sessions and multi-agent
 
@@ -162,7 +164,7 @@ Other forms' extension surfaces are real too; the difference is how far they rea
 | Config rollback / backup | ✅ Diff rollback + hardlink incremental snapshots | ⚠️ Settings sync / history | ⚠️ dotfiles / git | ⚠️ Limited | ⚠️ Implementation-dependent |
 | Local session data retention | ✅ Everything local; no vendor cloud | ⚠️ Tool-private formats | ✅ Local JSONL / SQLite | ⚠️ Mostly vendor cloud | ⚠️ Self-hosted or vendor cloud |
 
-**Takeaway**: statistics are not "nobody else does it" — vendors usually show you a quota page for their own product. A local cost view across provider / model / key / workspace / agent needs a centralized session layer. Third-party CLI tools close part of the gap, but they aggregate by tool and file, not from the same runtime sessions.
+**Takeaway**: statistics are not a blank space — vendors usually show you a quota page for their own product. A local cost view across provider / model / key / workspace / agent needs a centralized session layer. Third-party CLI tools close part of the gap, but they aggregate by tool and file, not from the same runtime sessions.
 
 ### 2.6 Beta and planned extensions (🟡 internal beta / 📋 planned)
 
@@ -177,7 +179,6 @@ These extensions are still in the experimental area; interfaces and behavior may
 
 > 🟡 internal-beta extensions ship from the experimental area only, are not on npm, are not in releases, and upgrades may break compatibility; CodeHub's write operations (such as creating merge requests) are off by default. 📋 planned items are still in design review and not implemented.
 
-**What we do not claim**: that others cannot do background execution, multi-agent, mobile or plugins — Cursor / VS Code cloud agents, Claude Code / Codex cloud sessions and mobile apps, Zed / JetBrains ACP, Claude Desktop / ChatGPT MCP all prove otherwise. What we claim is that **these capabilities should be out of the box, cross-vendor, running in an environment you control, with sessions and tools that belong to you**.
 
 ---
 
@@ -193,7 +194,7 @@ The browser is only a view. Close the tab, lose the network, switch devices — 
 
 ### 3. Input is a workflow
 
-Local favorites / history hits render instantly as ghost text at zero model cost; only a miss goes to the AI continuation (others can add OS dictation or completion plugins, but rarely put completion, commands, drafts and queues into one chain). Typing "model" or "compact" executes a command and returns the cursor to the composer. Press-and-hold gives streaming ASR with hotwords. Drafts are shared per session and survive crashes. The queue is persisted server-side: reorder, steer, take back to edit, and decide item by item after a restart. See [aiti-ai-input](/en/extensions/aiti-ai-input.md), [aiti-draft-keeper](/en/extensions/aiti-draft-keeper.md), [aiti-queue-keeper](/en/extensions/aiti-queue-keeper.md).
+Local favorites / history hits render instantly as ghost text at zero model cost; only a miss goes to the AI continuation (OS dictation or completion plugins can cover part of it, but rarely put completion, commands, drafts and queues into one chain). Typing "model" or "compact" executes a command and returns the cursor to the composer. Press-and-hold gives streaming ASR with hotwords. Drafts are shared per session and survive crashes. The queue is persisted server-side: reorder, steer, take back to edit, and decide item by item after a restart. See [aiti-ai-input](/en/extensions/aiti-ai-input.md), [aiti-draft-keeper](/en/extensions/aiti-draft-keeper.md), [aiti-queue-keeper](/en/extensions/aiti-queue-keeper.md).
 
 ### 4. Messages are interface objects
 

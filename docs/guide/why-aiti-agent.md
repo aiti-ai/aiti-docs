@@ -52,11 +52,13 @@ tags: [guide, comparison, positioning]
 
 ## 二、大对照表
 
-先说明三件事，避免把表格读成「别人什么都没有」：
+先说明三件事，避免误读表格：
 
 1. **✅ / ⚠️ / ❌ 只描述该形态「开箱默认」**。⚠️ = 通常要靠插件、MCP、云服务或自己写扩展才能补到；❌ = 没有通用扩展点能补到同等程度——不等于永远做不到。
 2. **其他形态的扩展生态并不弱**：IDE 有插件市场 + MCP + ACP，CLI 有插件 / 技能 / 钩子 / MCP，桌面有 MCP 扩展与连接器，自托管 Web 壳也在长。差距主要在**归属与工具面**，不在「有没有插件」。
 3. **我们的「N 家」同样不是封闭清单**——它们是今天内置的覆盖，后面都能继续加，见 2.0。
+
+上面这些差异只说明现有工具没有覆盖我的用法，不代表它们做不到或做得不好。它们各有各的强项，我只是按自己的需要补了一块。
 
 > 口径补充：现代 IDE 的 agent 常常一部分跑在厂商云（如 Cursor Cloud Agents、Copilot coding agent），Claude Code / Codex 也有云会话与移动端；表格把这些算进对应形态，而不是当作「Web 独有」。
 
@@ -112,7 +114,7 @@ tags: [guide, comparison, positioning]
 | 浏览器 / 手机随时接入 | ✅ 反代 + 隧道 + TOTP | ⚠️ vscode.dev / 移动 companion | ⚠️ SSH / 厂商 App | ❌ | ✅ |
 | 断网 / 换设备继续 | ✅ SSE 重连 + 服务端队列 + 草稿 | ⚠️ 云会话可续 | ⚠️ 云会话可续 | ❌ | ⚠️ 视实现 |
 
-**小结**：云端 agent 已经让「关客户端继续跑」不再独有。真正的差别是**跑在谁的机器上**：厂商云沙箱 vs 你的服务器和真实工作区；以及「服务重启也不断」——detached 的价值在这里，且不需要把代码送到别人的云上。
+**小结**：云端 agent 已经让「关客户端继续跑」不再独有。真正的差别是**跑在谁的机器上**：厂商云沙箱 vs 你的服务器和真实工作区；以及「服务重启也不断」——detached 的价值在这里，且不需要把代码送到厂商云上。
 
 ### 2.3 会话与多 Agent
 
@@ -162,7 +164,7 @@ tags: [guide, comparison, positioning]
 | 配置回滚 / 数据备份 | ✅ diff 回滚 + 硬链接增量快照 | ⚠️ 设置同步 / 历史 | ⚠️ dotfiles / git | ⚠️ 有限 | ⚠️ 视实现 |
 | 会话数据本地留存 | ✅ 全在本地；不经厂商云 | ⚠️ 工具私有格式 | ✅ 本地 JSONL / SQLite | ⚠️ 厂商云为主 | ⚠️ 自托管 / 厂商云 |
 
-**小结**：统计不是「别人完全不做」，而是**厂商通常只给自己那一家的额度页**；跨 provider / model / key / workspace / agent 的本地成本视图，需要中心化会话层。第三方 CLI 工具能补一部分，但仍是按工具、按文件汇总，不是与运行时会话同源的统计。
+**小结**：统计并非空白，只是**厂商通常只给自己那一家的额度页**；跨 provider / model / key / workspace / agent 的本地成本视图，需要中心化会话层。第三方 CLI 工具能补一部分，但仍是按工具、按文件汇总，不是与运行时会话同源的统计。
 
 ### 2.6 内测与规划中的扩展（🟡 内测中 / 📋 规划中）
 
@@ -177,7 +179,6 @@ tags: [guide, comparison, positioning]
 
 > 🟡 内测中的扩展只在实验区分发，未上架 npm、未随发行版，升级可能不兼容；CodeHub 的写操作（如建合并请求）默认关闭。📋 规划中的还在方案评审，尚未实现。
 
-**我们不主张**：别人做不到后台运行、多 agent、移动端或插件——Cursor / VS Code 的云 agent、Claude Code / Codex 的云会话与移动端、Zed / JetBrains 的 ACP、Claude Desktop / ChatGPT 的 MCP 都证明了相反。我们主张的是：**这些能力应当开箱、跨厂商、跑在你自己控制的环境里，并且会话与工具属于你**。
 
 ---
 
@@ -185,7 +186,7 @@ tags: [guide, comparison, positioning]
 
 ### 1. 运行位置：会话在服务里，不在窗口里
 
-浏览器只是一个视图。关标签页、断网、换设备，agent 照常跑（竞品的厂商云 agent 也能做到后台，区别是跑在厂商沙箱而不是你的机器上）；**停掉或重启 pi-web 服务本身也不必然打断正在跑的回合**——`detach` 让 agent 由独立 wrapper 托管（Linux `systemd-run` / macOS 普通脱离进程 / Windows `Win32_Process.Create`），通过本地 socket 与服务通信，自带 4 MB 环形 journal——服务重启后重连，历史输出原样回放，空闲且无客户端附着的会话由 wrapper 回收。已接入：pi、ACP 全系、Claude Code、CodeBuddy、Cursor、Qoder、omp 等，其余后端陆续接入。详见[架构 · 会话与 detachment](/guide/architecture.md)。
+浏览器只是一个视图。关标签页、断网、换设备，agent 照常跑（厂商云 agent 也能做到后台，区别是跑在厂商沙箱而不是你的机器上）；**停掉或重启 pi-web 服务本身也不必然打断正在跑的回合**——`detach` 让 agent 由独立 wrapper 托管（Linux `systemd-run` / macOS 普通脱离进程 / Windows `Win32_Process.Create`），通过本地 socket 与服务通信，自带 4 MB 环形 journal——服务重启后重连，历史输出原样回放，空闲且无客户端附着的会话由 wrapper 回收。已接入：pi、ACP 全系、Claude Code、CodeBuddy、Cursor、Qoder、omp 等，其余后端陆续接入。详见[架构 · 会话与 detachment](/guide/architecture.md)。
 
 ### 2. 会话资产：一个索引覆盖 20+ 家 agent
 
@@ -193,7 +194,7 @@ tags: [guide, comparison, positioning]
 
 ### 3. 输入是工作流
 
-本地收藏 / 历史命中即灰字直出（零模型），未命中才走 AI 续写（别人也能靠系统听写 / 补全插件补一部分，但很少把补全、命令、草稿、队列做进同一条链）；打「模型」「压缩」直接执行命令并回到输入流；按住说话有流式 ASR 与热词；草稿按会话共享、崩溃可恢复；队列在服务端持久化，能排序、插队、取回编辑、重启后逐条决议。见 [aiti-ai-input](/extensions/aiti-ai-input.md)、[aiti-draft-keeper](/extensions/aiti-draft-keeper.md)、[aiti-queue-keeper](/extensions/aiti-queue-keeper.md)。
+本地收藏 / 历史命中即灰字直出（零模型），未命中才走 AI 续写（系统听写 / 补全插件能补一部分，但很少把补全、命令、草稿、队列做进同一条链）；打「模型」「压缩」直接执行命令并回到输入流；按住说话有流式 ASR 与热词；草稿按会话共享、崩溃可恢复；队列在服务端持久化，能排序、插队、取回编辑、重启后逐条决议。见 [aiti-ai-input](/extensions/aiti-ai-input.md)、[aiti-draft-keeper](/extensions/aiti-draft-keeper.md)、[aiti-queue-keeper](/extensions/aiti-queue-keeper.md)。
 
 ### 4. 消息是界面对象
 
