@@ -11,7 +11,7 @@ ext:
   soul: 任意 Windows 进程→AI 可编程工具面：API/COM 调用级追踪、原生求值、mock 覆写、函数体热替换，全可逆审计。
   type: aiti-ext
   category: 调试
-  version: "0.1.13"
+  version: "0.1.14"
   status: active
   author: aiti-ai
   publisher: aiti-ai

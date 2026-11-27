@@ -12,7 +12,7 @@ ext:
   soulEn: "Manage the vault in the browser; the AI only gets tokens."
   type: aiti-ext
   category: 安全
-  version: 0.3.0
+  version: 0.3.1
   status: active
   author: aiti-ai
   publisher: aiti-ai

@@ -11,7 +11,7 @@ ext:
   soul: 只读档零依赖——Apache 链路看 Word，编辑交给 SuperDoc / OnlyOffice。
   type: aiti-ext
   category: 开发工具
-  version: "0.1.11"
+  version: "0.1.12"
   status: active
   author: aiti-ai
   publisher: aiti-ai

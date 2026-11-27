@@ -12,7 +12,7 @@ ext:
   soul: 主 agent 负责思考，脏活累活分给专职的它。
   type: aiti-ext
   category: AI 能力
-  version: "0.4.13"
+  version: "0.4.14"
   status: active
   author: aiti-ai
   publisher: aiti-ai

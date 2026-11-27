@@ -12,7 +12,7 @@ ext:
   soulEn: "How busy is the server? One glance at the left sidebar tells you."
   type: aiti-ext
   category: 系统工具
-  version: "0.2.1"
+  version: "0.2.2"
   status: active
   author: aiti-ai
   publisher: aiti-ai

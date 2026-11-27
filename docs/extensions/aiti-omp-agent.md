@@ -12,7 +12,7 @@ ext:
   soul: omp 的独立世界：ready 握手 / get_state 能力面 / host tools / login / branch。
   type: aiti-ext
   category: 多 agent 后端
-  version: "0.1.12"
+  version: "0.1.13"
   status: active
   author: aiti-ai
   publisher: aiti-ai

@@ -12,7 +12,7 @@ ext:
   soulEn: "No monitor needed — there can still be a stage."
   type: aiti-ext
   category: 调试
-  version: "0.1.11"
+  version: "0.1.12"
   status: active
   author: aiti-ai
   publisher: aiti-ai

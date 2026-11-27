@@ -12,7 +12,7 @@ ext:
   soul: 空白不可怕，第一句从这里开始。
   type: aiti-ext
   category: 会话与项目
-  version: "0.2.5"
+  version: "0.2.6"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai

@@ -12,7 +12,7 @@ ext:
   soul: 模型在不在家，敲门问问它。
   type: aiti-ext
   category: AI 能力
-  version: "0.1.11"
+  version: "0.1.12"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai

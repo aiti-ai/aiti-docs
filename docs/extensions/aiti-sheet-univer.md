@@ -11,7 +11,7 @@ ext:
   soul: 老格式不挡路——转换、派生、编辑各归其位。
   type: aiti-ext
   category: 开发工具
-  version: "0.1.11"
+  version: "0.1.12"
   status: active
   author: aiti-ai
   publisher: aiti-ai

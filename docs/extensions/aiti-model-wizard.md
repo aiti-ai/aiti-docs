@@ -12,7 +12,7 @@ ext:
   soul: 地址、token、注册页——散落四方的钥匙，串成一串。
   type: aiti-ext
   category: AI 能力
-  version: "0.1.17"
+  version: "0.1.18"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai

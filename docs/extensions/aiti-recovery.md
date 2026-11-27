@@ -12,7 +12,7 @@ ext:
   soul: 中断不可怕，可怕的是找不到回去的路。
   type: aiti-ext
   category: 聊天增强
-  version: "0.1.12"
+  version: "0.1.13"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai
