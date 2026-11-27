@@ -73,6 +73,7 @@ These differences only mean the existing tools did not cover how I work — not 
 | **4** external usage sources | ingest source table in `aiti-ai-usage` | Code-level readers (JSONL / SQLite) | Add a reader; model attribution follows the same shape |
 | **60+** bundled extensions | bundled extensions | Host extension API (slots / services / API routes / agent hooks) + MCP | Publish an extension, or attach any MCP server directly |
 | TTS / ASR / sharing / page carriers | engine and target registries | OpenAI-compatible endpoints, share sinks, carrier plugins | Switch in settings, or write a plugin for a new engine / site |
+| **161** share targets | the `content-share` catalog | an `.sxcu` file is a provider; `registry.register()` / `addEntry()` at runtime; any HTTP endpoint | Import an `.sxcu`, write a template provider, or add a custom endpoint |
 
 > In one line: **both user-level additions (install an extension, fill a form, attach MCP) and code-level ones (adapters, ingest readers) have a defined door**; the latter need code, but the change is one declaration or one file, not a rewrite. The only test is whether **the target exposes readable session storage, a usage API or ACP support** — if it does, it can be connected without waiting for our release.
 
@@ -95,12 +96,13 @@ Other forms' extension surfaces are real too; the difference is how far they rea
 | Draft safety | ✅ One shared slot per session; survives tabs, reload, crash | ⚠️ Kept in session, resumable | ✅ resume / checkpoint keeps context | ⚠️ Kept in session | ⚠️ Implementation-dependent |
 | Actionable queue | ✅ Reorder / steer / take back / trash / decide item by item after restart | ⚠️ Some support queueing | ⚠️ Can queue, limited visibility | ❌ | ⚠️ Simple queue |
 | Actionable messages | ✅ Click paragraphs / code lines; quote, A/B options, copy | ⚠️ Copy / apply / partial quote | ⚠️ Terminal text, mostly copy | ⚠️ Copy | ⚠️ Copy / quote by implementation |
+| Sharing (output / sessions / files / images) | ✅ Sessions / messages / selections / files / images → 161 targets (image hosts / paste / OSS / note archives), redaction before upload, link + QR code | ⚠️ Copy / export; sharing needs a plugin or manual upload | ⚠️ Copy / pipes; files via external tools | ⚠️ Copy / attachment download, some cloud links | ⚠️ Copy / download by implementation |
 | Long-conversation navigation | ✅ Anchor banner + previous / next / earliest / latest | ⚠️ Scroll + in-tool search | ⚠️ resume / logs, no anchors | ⚠️ Scroll | ⚠️ Implementation-dependent |
 | Read-aloud / follow mode | ✅ Audiobook follow mode, three TTS engines, voice cloning | ⚠️ OS screen reader | ❌ (OS screen reader) | ⚠️ OS screen reader | ⚠️ Browser TTS |
 | Full-power small screen | ✅ Touch composer matrix, full-screen dialogs, back gesture, touch reorder | ⚠️ Mobile companion, supervision-first | ⚠️ Vendor app can view / approve | ❌ (phone is another form) | ✅ A web page opens on a phone |
 | Multiple tabs / devices | ✅ Shared draft and queue, consistent state | ⚠️ Cloud sessions visible across devices | ⚠️ Cloud sessions visible across devices | ❌ | ⚠️ Implementation-dependent |
 
-**Takeaway**: input and messages remain the web's strongest ground, but mobile is not exclusive — IDE / CLI mobile experiences are "watch and approve" today, while a full operating surface is still most natural on the web. Desktop and web-shell input enhancements depend on the host or a plugin.
+**Takeaway**: input and messages remain the web's strongest ground, but mobile is not exclusive — IDE / CLI mobile experiences are "watch and approve" today, while a full operating surface is still most natural on the web. Desktop and web-shell input enhancements depend on the host or a plugin. Sharing is the same story: the workbench runs on your own machine and is not reachable from the internet, so "upload to a configurable target and get a URL back" is built in; other forms usually stop at copy / export.
 
 ### 2.2 Runtime and persistence
 
