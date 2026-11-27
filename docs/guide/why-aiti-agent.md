@@ -134,7 +134,7 @@ tags: [guide, comparison, positioning]
 | 会话 fork / 分支 | ✅ 双分支 + 分支导航 + 从引用处跳转 | ⚠️ 编辑重发 / 部分支持 | ⚠️ checkpoint / rewind | ⚠️ 有限 | ⚠️ 视实现 |
 | 项目 / worktree 分组 | ✅ 与 git worktree 联动 | ✅ 内置 | ⚠️ 手动 | ⚠️ 手动 | ⚠️ 视实现 |
 
-**小结**：「运行其他 agent」这一项，**现代 IDE 已经追上来了**——VS Code 的 Agent Sessions 把 Copilot、云端 coding agent、CLI 与 Codex 放进一个面板，ACP 让 Zed / JetBrains 直接跑 Claude Code 等外部 agent。我们领先的不是「能跑」，而是**同一套会话模型 + 跨厂商历史 + 跨端续写**；IDE 能把多个 agent 放进一个视图，但历史仍分别落在各扩展 / 厂商的存储里。
+**小结**：「运行其他 agent」这一项，**现代 IDE 已经追上来了**——VS Code 的 Agent Sessions 把 Copilot、云端 coding agent、CLI 与 Codex 放进一个面板，ACP 让 Zed / JetBrains 直接跑 Claude Code 等外部 agent。我关心的不是「能不能跑」，而是**同一套会话模型 + 跨厂商历史 + 跨端续写**；IDE 能把多个 agent 放进一个视图，但历史仍分别落在各扩展 / 厂商的存储里。
 
 ### 2.4 工具链与生态
 
@@ -152,7 +152,7 @@ tags: [guide, comparison, positioning]
 | 子代理 / 定时任务 | ✅ 舰队面板 + 常驻调度器 | ⚠️ 部分（自定义 agent / 多 agent 窗口） | ✅ 子代理 / 钩子 | ⚠️ MCP 可接 | ⚠️ 视实现 |
 | 扩展机制 | ✅ 60+ 内置扩展 + `ctx.services` 跨扩展契约 | ✅ 插件市场 + MCP + ACP | ✅ 插件 / 技能 / 钩子 / MCP | ⚠️ MCP 扩展 / 连接器 | ⚠️ 视实现 |
 
-**小结**：工具链的差别是**广度 vs 深度**。IDE 在编辑器、调试、重构上更深，这一点我们承认；我们的广度在「agent 能动手的范围」——容器、虚拟桌面、隧道、Office、IM、设备互连不在 IDE 的职责里。页面注入也不是独占：任何能接 MCP 的宿主都能用 aiti-bridge，只是我们把它做成了内置面板。 表里标 ⚠️ 的两项（LSP / 通用调试器）也能靠 MCP 或扩展补一部分，但完整的 IDE 体验仍建议配 IDE。
+**小结**：工具链的差别是**广度 vs 深度**。IDE 在编辑器、调试、重构上更深；这套工作台的广度在「agent 能动手的范围」——容器、虚拟桌面、隧道、Office、IM、设备互连不在 IDE 的职责里。页面注入也不是独占：任何能接 MCP 的宿主都能用 aiti-bridge，这里只是把它做成了内置面板。 表里标 ⚠️ 的两项（LSP / 通用调试器）也能靠 MCP 或扩展补一部分，但完整的 IDE 体验仍建议配 IDE。
 
 ### 2.5 统计、安全与治理
 
@@ -207,7 +207,7 @@ tags: [guide, comparison, positioning]
 
 ### 5. 工具链长在同一页
 
-真 PTY 终端（重启存活）、容器面板、虚拟桌面 VNC / RDP、服务隧道、文件 / Office / 文档中心、Git 审核与改动血缘、JVM 与 Windows 进程调试、子代理舰队、定时任务、IM 遥控——都是同一个工作台里的面板，和会话共享工作目录与运行上下文。这是「比 IDE 更丰富」的具体含义：不是编辑器功能更多（编辑器 / 调试 IDE 更深，我们承认），而是**agent 能动手的范围更大**。
+真 PTY 终端（重启存活）、容器面板、虚拟桌面 VNC / RDP、服务隧道、文件 / Office / 文档中心、Git 审核与改动血缘、JVM 与 Windows 进程调试、子代理舰队、定时任务、IM 遥控——都是同一个工作台里的面板，和会话共享工作目录与运行上下文。这是「比 IDE 更丰富」的具体含义：不是编辑器功能更多（编辑器 / 调试仍是 IDE 更深），而是**agent 能动手的范围更大**。
 
 ### 6. 统计与治理要中心化
 
@@ -219,7 +219,7 @@ tags: [guide, comparison, positioning]
 
 ### 8. 页面就是 AI 的现场（aiti-devtools）
 
-把调试客户端注入正在开发的页面：点选元素 → 结构化信息直达 AI；AI 可执行类 DevTools 的 DOM / CSS / 输入 / 性能操作，也能反过来请用户点选元素、回答问题。载体覆盖 Vite / webpack / Nuxt / Astro，另有浏览器扩展（任意站点）与 VS Code 扩展，桥协议统一。页面注入并非独占——任何 MCP 宿主都能接 `aiti-bridge`；我们的优势是把它做成内置面板，并与工作台同源。 实验区还在长：CodeHub 把工作项和代码库接进来，视频工作室把演示视频变成可重跑的流水线，模型网关把已配置的模型借给外部 agent——都还是内测（见 §2.6）。见 [aiti-devtools](/extensions/aiti-devtools.md)。
+把调试客户端注入正在开发的页面：点选元素 → 结构化信息直达 AI；AI 可执行类 DevTools 的 DOM / CSS / 输入 / 性能操作，也能反过来请用户点选元素、回答问题。载体覆盖 Vite / webpack / Nuxt / Astro，另有浏览器扩展（任意站点）与 VS Code 扩展，桥协议统一。页面注入并非独占——任何 MCP 宿主都能接 `aiti-bridge`；这里只是把它做成了内置面板，并与工作台同源。 实验区还在长：CodeHub 把工作项和代码库接进来，视频工作室把演示视频变成可重跑的流水线，模型网关把已配置的模型借给外部 agent——都还是内测（见 §2.6）。见 [aiti-devtools](/extensions/aiti-devtools.md)。
 
 ---
 

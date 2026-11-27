@@ -134,7 +134,7 @@ Other forms' extension surfaces are real too; the difference is how far they rea
 | Session fork / branches | ✅ Dual branching + branch navigator + jump from a quote | ⚠️ Edit and resend / partial | ⚠️ checkpoint / rewind | ⚠️ Limited | ⚠️ Implementation-dependent |
 | Project / worktree grouping | ✅ Integrated with git worktrees | ✅ Native | ⚠️ Manual | ⚠️ Manual | ⚠️ Implementation-dependent |
 
-**Takeaway**: on "run other agents", **modern IDEs have caught up** — VS Code's Agent Sessions puts Copilot, the cloud coding agent, the CLI and Codex in one panel, and ACP lets Zed and JetBrains drive Claude Code and other external agents. Our lead is not "it can run them" but **one session model + cross-vendor history + cross-client continuation**; an IDE can show several agents in one view, but their histories still live in each extension's or vendor's store.
+**Takeaway**: on "run other agents", **modern IDEs have caught up** — VS Code's Agent Sessions puts Copilot, the cloud coding agent, the CLI and Codex in one panel, and ACP lets Zed and JetBrains drive Claude Code and other external agents. What matters here is not "it can run them" but **one session model + cross-vendor history + cross-client continuation**; an IDE can show several agents in one view, but their histories still live in each extension's or vendor's store.
 
 ### 2.4 Toolchain and ecosystem
 
@@ -152,7 +152,7 @@ Other forms' extension surfaces are real too; the difference is how far they rea
 | Subagents / scheduled tasks | ✅ Fleet panel + resident scheduler | ⚠️ Partial (custom agents / multi-agent windows) | ✅ Subagents / hooks | ⚠️ Via MCP | ⚠️ Implementation-dependent |
 | Extension mechanism | ✅ 60+ bundled extensions + `ctx.services` contracts | ✅ Marketplace + MCP + ACP | ✅ Plugins / skills / hooks / MCP | ⚠️ MCP extensions / connectors | ⚠️ Implementation-dependent |
 
-**Takeaway**: the toolchain difference is **breadth versus depth**. IDEs go deeper on editing, debugging and refactoring — we say so; our breadth is the range of things the agent can act on: containers, virtual desktops, tunnels, Office, IM, device pairing — none of which is an IDE's job. Page injection is not exclusive either: any MCP host can use aiti-bridge; we simply make it a built-in panel. The two ⚠️ items (LSP / general debugger) can be partly covered by an MCP server or an extension, but the full IDE experience is still better in an IDE.
+**Takeaway**: the toolchain difference is **breadth versus depth**. IDEs go deeper on editing, debugging and refactoring; the breadth here is the range of things the agent can act on: containers, virtual desktops, tunnels, Office, IM, device pairing — none of which is an IDE's job. Page injection is not exclusive either: any MCP host can use aiti-bridge; here it is simply a built-in panel. The two ⚠️ items (LSP / general debugger) can be partly covered by an MCP server or an extension, but the full IDE experience is still better in an IDE.
 
 ### 2.5 Statistics, security and governance
 
@@ -207,7 +207,7 @@ Paragraphs, headings, table rows and code lines are clickable: copy, quote, A/B 
 
 ### 5. The toolchain lives on the same page
 
-A real PTY terminal (survives restarts), container panel, virtual desktop VNC / RDP, service tunnels, files / Office / document center, git review and change lineage, JVM and Windows process debugging, subagent fleet, scheduled tasks, IM remote control — all panels in the same workbench, sharing the workspace and runtime context with the session. That is what "richer than an IDE" means concretely: not more editor features (IDEs go deeper on editing and debugging — we say so), but a **wider range of things the agent can act on**.
+A real PTY terminal (survives restarts), container panel, virtual desktop VNC / RDP, service tunnels, files / Office / document center, git review and change lineage, JVM and Windows process debugging, subagent fleet, scheduled tasks, IM remote control — all panels in the same workbench, sharing the workspace and runtime context with the session. That is what "richer than an IDE" means concretely: not more editor features (IDEs still go deeper on editing and debugging), but a **wider range of things the agent can act on**.
 
 ### 6. Statistics and governance need to be centralized
 
@@ -219,7 +219,7 @@ A phone is not a remote peephole: a touch composer matrix (model / thinking leve
 
 ### 8. The page is the AI's scene (aiti-devtools)
 
-Inject the debug client into the page you are developing: pick an element and structured information goes straight to the AI; the AI can run DevTools-like DOM / CSS / input / performance operations, and can ask the user to pick elements or answer questions. Carriers cover Vite / webpack / Nuxt / Astro, plus a browser extension (any site) and a VS Code extension, all on one bridge protocol. Page injection is not exclusive — any MCP host can use `aiti-bridge`; our advantage is making it a built-in panel, sharing the same origin as the workbench. The experimental area keeps growing: CodeHub brings work items and repositories in, Video Studio turns demo videos into a repeatable pipeline, and Model Gateway lends configured models to external agents — all still in beta (see §2.6). See [aiti-devtools](/en/extensions/aiti-devtools.md).
+Inject the debug client into the page you are developing: pick an element and structured information goes straight to the AI; the AI can run DevTools-like DOM / CSS / input / performance operations, and can ask the user to pick elements or answer questions. Carriers cover Vite / webpack / Nuxt / Astro, plus a browser extension (any site) and a VS Code extension, all on one bridge protocol. Page injection is not exclusive — any MCP host can use `aiti-bridge`; here it is simply a built-in panel, sharing the same origin as the workbench. The experimental area keeps growing: CodeHub brings work items and repositories in, Video Studio turns demo videos into a repeatable pipeline, and Model Gateway lends configured models to external agents — all still in beta (see §2.6). See [aiti-devtools](/en/extensions/aiti-devtools.md).
 
 ---
 
