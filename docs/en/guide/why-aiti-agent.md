@@ -60,6 +60,8 @@ Three things to keep in mind so the tables are not misread:
 
 These differences only mean the existing tools did not cover how I work — not that they cannot or do not do it well. Each has its strengths; I just filled in the part I needed.
 
+**Missing capability has a path**: install an MCP server, install a pi plugin, or write a workbench extension against the extension API (slots / services / API routes / agent hooks). The first two work as soon as they are installed; an extension can use existing slots, and if none fits, add one more extension point.
+
 > Scope note: modern IDE agents often run partly in the vendor cloud (Cursor Cloud Agents, Copilot coding agent), and Claude Code / Codex have cloud sessions and mobile apps. The tables count those under the respective form rather than as "web-only".
 
 ### 2.0 Where our "N" comes from and how it grows
@@ -150,7 +152,7 @@ Other forms' extension surfaces are real too; the difference is how far they rea
 | Subagents / scheduled tasks | ✅ Fleet panel + resident scheduler | ⚠️ Partial (custom agents / multi-agent windows) | ✅ Subagents / hooks | ⚠️ Via MCP | ⚠️ Implementation-dependent |
 | Extension mechanism | ✅ 60+ bundled extensions + `ctx.services` contracts | ✅ Marketplace + MCP + ACP | ✅ Plugins / skills / hooks / MCP | ⚠️ MCP extensions / connectors | ⚠️ Implementation-dependent |
 
-**Takeaway**: the toolchain difference is **breadth versus depth**. IDEs go deeper on editing, debugging and refactoring — we say so; our breadth is the range of things the agent can act on: containers, virtual desktops, tunnels, Office, IM, device pairing — none of which is an IDE's job. Page injection is not exclusive either: any MCP host can use aiti-bridge; we simply make it a built-in panel.
+**Takeaway**: the toolchain difference is **breadth versus depth**. IDEs go deeper on editing, debugging and refactoring — we say so; our breadth is the range of things the agent can act on: containers, virtual desktops, tunnels, Office, IM, device pairing — none of which is an IDE's job. Page injection is not exclusive either: any MCP host can use aiti-bridge; we simply make it a built-in panel. The two ⚠️ items (LSP / general debugger) can be partly covered by an MCP server or an extension, but the full IDE experience is still better in an IDE.
 
 ### 2.5 Statistics, security and governance
 
@@ -227,7 +229,7 @@ A credible "why choose" page states the costs. These are known boundaries, not b
 
 | Boundary | Explanation | Suggestion |
 |---|---|---|
-| Not an IDE | No LSP completion, breakpoint debugging, cross-file refactoring or test panel | Keep the IDE for deep coding; pi sessions are shared, and other agents' sessions continue in the web |
+| Not an IDE | No LSP completion, breakpoint debugging, cross-file refactoring or test panel | Keep the IDE for deep coding; LSP / debugging can be partly covered by MCP or an extension; pi sessions are shared, and other agents' sessions continue in the web |
 | Deployment is still converging | Install / upgrade / reverse proxy are being wired up by the beta `aiti-updater` (via service-tunnels) and are not in releases yet | Use `docker run` or the install script today; it becomes a panel once the updater ships |
 | Browsers have a cost | Higher memory than a TUI; very long sessions rely on lazy paging | Use paged navigation; run the server on another machine |
 | Single-user self-hosting | No multi-tenant, team collaboration or cloud sync | Isolate instances behind your own proxy for multi-user setups |
