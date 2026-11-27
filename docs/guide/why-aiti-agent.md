@@ -14,7 +14,7 @@ tags: [guide, comparison, positioning]
 
 如果你只是偶尔用 AI 写点东西，**不要折腾这个**——用你熟悉的工具就好，IDE 内置 AI、命令行 agent、桌面 App 都能干活。**工具没有好坏，你能驾驭的那把就是好工具。**
 
-这个项目是**按一个人的工作习惯和工作场景深度定制**的：碎片时间、随身设备、省 token、多 agent 并行、远程机器、页面调试……它适合的是这套生活方式，不一定适合你；它的复杂度（自己跑服务、配反代、维护扩展）就是这些场景的代价。来历见[项目起源](/guide/origin.md)。
+这个项目是按我个人的工作习惯和工作场景深度定制的。它不一定适合你。来历见[项目起源](/guide/origin.md)。
 
 ## 三十秒判断
 
@@ -171,8 +171,9 @@ tags: [guide, comparison, positioning]
 - **[CodeHub](/extensions/aiti-codehub.md)（`aiti-codehub`）**——云效 / GitHub / Gitee / GitLab 的工作项与代码库统一入口：搜索、详情、评论、克隆、建分支 / 合并请求；多账号；`aiti_codehub_*` 工具 + skills。**意义**：把「需求 → 分支 → 会话」收进同一个工作台，代码托管不再是另一个浏览器标签页。
 - **视频工作室（`aiti-video-studio`）**——`scene.json` 写脚本 → 确定性回放录制 → TTS 旁白 → ffmpeg 合成；光标 / 覆盖层 / 转场 / 字幕 / 多语言 / 9:16。**意义**：AI 只参与创作期、运行期零 AI，演示视频从手工录屏剪辑变成可重跑的流水线。见[扩展页](/extensions/aiti-video-studio.md)。
 - **模型网关（`aiti-model-gateway`）**——把工作台已配置的模型导出成 OpenAI 兼容 API（chat/completions + tools、models、images），外部 CLI 用网关 token 接入。**意义**：让「跑其他 agent」不只共享会话，也能共享模型与凭据，外部 agent 看不到真实 provider key。
+- **Updater（`aiti-updater`）**——版本检查 → 升级触发 → 原地观察（SSE）→ 跳到服务管理（停止 / 重启 / 注销 / 环境 / 日志）；安装、升级、反代通过 service-tunnels 配置收口。**意义**：把部署与升级收进工作台的一个面板。
 
-> 三者均为 🟡 内测中：只在实验区分发，未上架 npm、未随发行版，升级可能不兼容。CodeHub 的写操作（如建合并请求）默认关闭。
+> 以上均为 🟡 内测中：只在实验区分发，未上架 npm、未随发行版，升级可能不兼容。CodeHub 的写操作（如建合并请求）默认关闭。
 
 **我们不主张**：别人做不到后台运行、多 agent、移动端或插件——Cursor / VS Code 的云 agent、Claude Code / Codex 的云会话与移动端、Zed / JetBrains 的 ACP、Claude Desktop / ChatGPT 的 MCP 都证明了相反。我们主张的是：**这些能力应当开箱、跨厂商、跑在你自己控制的环境里，并且会话与工具属于你**。
 
@@ -221,7 +222,7 @@ tags: [guide, comparison, positioning]
 | 边界 | 说明 | 建议 |
 |---|---|---|
 | 不是 IDE | 没有 LSP 补全、断点调试、跨文件重构、测试面板 | 深度改代码继续用 IDE；pi 会话与 IDE 同源，其他 agent 的会话可在 Web 侧继续 |
-| 要自己运维 | Node 22 / Docker / 端口 / 反代 / 认证都要自己配 | 用 `docker run` 或一键脚本；公网走隧道 + TOTP |
+| 部署仍在收口 | 安装 / 升级 / 反代正在由内测中的 `aiti-updater` 打通（依赖 service-tunnels），尚未随发行版 | 现在可用 `docker run` 或一键脚本；转正后是面板里的事 |
 | 浏览器有成本 | 内存占用高于 TUI；超长会话依赖懒加载分页 | 大会话用分页导航；服务端可跑在别的机器 |
 | 单用户自托管 | 没有多租户、团队协作、云同步 | 多人场景自行做实例隔离与反代 |
 | 移动端仍有余量 | 触屏交互已完整，PWA 安装态 / 离线待推进 | 用浏览器「添加到主屏幕」，依赖在线连接 |

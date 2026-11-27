@@ -14,7 +14,7 @@ tags: [guide, comparison, positioning]
 
 If you only use AI occasionally, **do not bother with this** — use what you already know: IDE-embedded AI, a CLI agent, a desktop app, all get work done. **Tools are not good or bad; the one you can drive is the good one.**
 
-This project is **deeply customized around one person's habits and working scenarios**: fragmented time, mobile devices, token budgets, many agents in parallel, remote machines, page debugging... It fits that way of working, not necessarily you; its complexity (running a service, a reverse proxy, maintaining extensions) is the price of those scenarios. See [Origin](/en/guide/origin.md).
+This project is customized around my own working habits and scenarios. It may not be a fit for you. See [Origin](/en/guide/origin.md).
 
 ## A 30-second check
 
@@ -171,8 +171,9 @@ These extensions are still in the experimental area; interfaces and behavior may
 - **[CodeHub](/en/extensions/aiti-codehub.md) (`aiti-codehub`)** — one hub for work items and repositories across Yunxiao / GitHub / Gitee / GitLab: search, detail, comments, clone, create branch / merge request; multiple accounts; `aiti_codehub_*` tools + skills. **Why it matters**: brings "requirement → branch → session" into one workbench; code hosting is no longer another browser tab.
 - **Video Studio (`aiti-video-studio`)** — write a `scene.json` script → deterministic replay recording → TTS narration → ffmpeg composite; cursor / overlays / transitions / subtitles / multiple languages / 9:16. **Why it matters**: AI only participates while authoring, zero AI at runtime; demo videos become a repeatable pipeline instead of manual screen recording and editing. See the [extension page](/en/extensions/aiti-video-studio.md).
 - **Model Gateway (`aiti-model-gateway`)** — exports models already configured in the workbench as an OpenAI-compatible API (chat/completions + tools, models, images); external CLIs connect with a gateway token. **Why it matters**: running other agents can share not only sessions but also models and credentials; external agents never see the real provider key.
+- **Updater (`aiti-updater`)** — version check → upgrade trigger → in-place observation (SSE) → jump to service management (stop / restart / unregister / env / logs); install, upgrade and reverse proxy are handled through the service-tunnels config. **Why it matters**: deployment and upgrades become a panel in the workbench.
 
-> All three are 🟡 internal beta: experimental-area distribution only, not on npm, not in releases, and upgrades may break compatibility. CodeHub's write operations (such as creating merge requests) are off by default.
+> All of the above are 🟡 internal beta: experimental-area distribution only, not on npm, not in releases, and upgrades may break compatibility. CodeHub's write operations (such as creating merge requests) are off by default.
 
 **What we do not claim**: that others cannot do background execution, multi-agent, mobile or plugins — Cursor / VS Code cloud agents, Claude Code / Codex cloud sessions and mobile apps, Zed / JetBrains ACP, Claude Desktop / ChatGPT MCP all prove otherwise. What we claim is that **these capabilities should be out of the box, cross-vendor, running in an environment you control, with sessions and tools that belong to you**.
 
@@ -221,7 +222,7 @@ A credible "why choose" page states the costs. These are known boundaries, not b
 | Boundary | Explanation | Suggestion |
 |---|---|---|
 | Not an IDE | No LSP completion, breakpoint debugging, cross-file refactoring or test panel | Keep the IDE for deep coding; pi sessions are shared, and other agents' sessions continue in the web |
-| You operate it | Node 22 / Docker / ports / reverse proxy / auth are yours to set up | Use `docker run` or the install script; expose via tunnels + TOTP |
+| Deployment is still converging | Install / upgrade / reverse proxy are being wired up by the beta `aiti-updater` (via service-tunnels) and are not in releases yet | Use `docker run` or the install script today; it becomes a panel once the updater ships |
 | Browsers have a cost | Higher memory than a TUI; very long sessions rely on lazy paging | Use paged navigation; run the server on another machine |
 | Single-user self-hosting | No multi-tenant, team collaboration or cloud sync | Isolate instances behind your own proxy for multi-user setups |
 | Mobile still has headroom | Touch interaction is complete; PWA install / offline is pending | "Add to home screen" works, but needs connectivity |
