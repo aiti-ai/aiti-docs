@@ -87,6 +87,8 @@ Want to look around first? Online demo (mock data): **[demo.aiti.pw](https://dem
 | **Page-debug injection** (AI in the page) | — | ✅ aiti-devtools: Vite / webpack / Nuxt / Astro plugins |
 | **Config safety net** | — | ✅ diff view / one-click rollback / crash watchdog |
 
+> Form-factor comparison (web / IDE / CLI / desktop / CLI web shell) → [Why a Web Workbench](/en/guide/why-aiti-agent.md).
+
 ## ✨ Highlights
 
 > Behind every highlight stands a ready-to-use extension — click through to see the implementation. The page-debugging toolchain (aiti-devtools) highlights live on [/devtools/](/en/devtools/).

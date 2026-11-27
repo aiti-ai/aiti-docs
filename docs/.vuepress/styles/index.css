@@ -64,6 +64,19 @@
   vertical-align: top;
 }
 
+/* 宽对照矩阵（表头 ≥5 列）：小屏改为横向滚动。
+   普通表格仍按上面的「折行自适应」处理，不受影响。 */
+@media (max-width: 719px) {
+  .vp-page table:has(thead th:nth-child(5)) {
+    display: block;
+    overflow-x: auto;
+  }
+  .vp-page table:has(thead th:nth-child(5)) th,
+  .vp-page table:has(thead th:nth-child(5)) td {
+    white-space: nowrap;
+  }
+}
+
 /* 产品矩阵卡片表格行高亮 */
 .vp-page table tbody tr:hover {
   background-color: var(--bg-color-mute, rgba(124, 58, 237, 0.06));

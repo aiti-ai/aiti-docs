@@ -600,6 +600,7 @@ Status follows the public roadmap (✅ shipped / 🚧 in progress / 📋 planned
 
 ## Learn more
 
+- Why the web form factor (IDE / CLI / desktop / web shell compared): [Why a Web Workbench](/en/guide/why-aiti-agent.md)
 - Every extension in detail: [extension catalog](/en/extensions/README.md)
 - Positioning and the five capability layers: [aiti-agent](/en/products/aiti-agent.md)
 - Architecture overview: [architecture](/en/guide/architecture.md)

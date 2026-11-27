@@ -13,6 +13,7 @@ description: aiti 指南总览
 | [安装](/guide/install.md) | 安装 aiti Web 工作台：npm / 一键脚本 / PowerShell / Docker 四种方式 |
 | [项目起源](/guide/origin.md) | aiti 怎么来的：从其它 AI agent 到 pi-web，再到自己发版 |
 | [什么是 aiti](/guide/what-is-aiti.md) | 定位、品牌、三条主线、与 pi/pi-web 的关系 |
+| [为什么选 Web 工作台](/guide/why-aiti-agent.md) | ⚖️ 五种 AI 编程形态横向对比（Web / IDE / CLI / 桌面 / CLI 兼容 Web）：后台运行、detached、小屏、统计、工具链逐项对照 |
 | [开发血缘](/guide/lineage.md) | 🧬 AI 改动的全链路溯源：会话、方案、操作、采认五维血缘，可归因可回滚 |
 | [架构](/guide/architecture.md) | 分层架构、注入链路、桥链路、端到端数据流 |
 | [扩展服务与跨扩展调用规范](/guide/ext-services.md) | 🔌 ctx.services 定位器：怎么提供/消费/降级；全局量红线（写扩展必读） |

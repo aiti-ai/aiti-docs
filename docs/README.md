@@ -87,6 +87,8 @@ npm install -g @aiti-ai/pi-web@latest --allow-scripts=@aiti-ai/pi-web && pi-web
 | **页面调试注入**（AI 进驻网页） | — | ✅ aiti-devtools：Vite / webpack / Nuxt / Astro 插件 |
 | **配置安全网** | — | ✅ diff 查看 / 一键回滚 / 崩溃 watchdog 自恢复 |
 
+> 跨形态对比（Web / IDE / CLI / 桌面 / CLI 兼容 Web）→ [为什么选 Web 工作台](/guide/why-aiti-agent.md)。
+
 ## ✨ 系统特色
 
 > 每一条特色背后都是开箱即用的扩展——点进去看实现。页面调试工具链（aiti-devtools）的特色见 [/devtools/](/devtools/)。

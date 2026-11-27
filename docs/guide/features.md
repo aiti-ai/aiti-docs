@@ -600,6 +600,7 @@ Monaco 编辑接管 + 保存（mtime 冲突 409、白名单与大小校验）、
 
 ## 深入了解
 
+- 为什么选 Web 形态（IDE / CLI / 桌面 / 兼容 Web 横向对比）：[为什么选 Web 工作台](/guide/why-aiti-agent.md)
 - 全部扩展逐个详解：[扩展目录](/extensions/README.md)
 - 产品定位与能力五层：[aiti-agent](/products/aiti-agent.md)
 - 架构总览：[架构](/guide/architecture.md)

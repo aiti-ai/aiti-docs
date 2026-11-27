@@ -28,6 +28,7 @@ export const enSidebar = sidebar({
         "install.md",
         "update.md",
         "what-is-aiti.md",
+        "why-aiti-agent.md",
         "features.md",
         "lineage.md",
         "architecture.md",

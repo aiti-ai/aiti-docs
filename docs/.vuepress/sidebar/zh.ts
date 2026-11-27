@@ -29,6 +29,7 @@ export const zhSidebar = sidebar({
         "docker.md",
         "update.md",
         "what-is-aiti.md",
+        "why-aiti-agent.md",
         "features.md",
         "lineage.md",
         "architecture.md",
