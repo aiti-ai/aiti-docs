@@ -10,6 +10,12 @@ tags: [guide, comparison, positioning]
 
 > **In one line**: move the actions you repeat dozens of times a day — start a task, watch progress, review output, switch models, read statistics, take over from another device — out of an IDE window or a terminal, onto an always-on operating surface that is remote-capable and mobile-capable, while **the code, the sessions and the tools stay on your own machine**.
 
+## First, a warning: this may not be for you
+
+If you only use AI occasionally, **do not bother with this** — use what you already know: IDE-embedded AI, a CLI agent, a desktop app, all get work done. **Tools are not good or bad; the one you can drive is the good one.**
+
+This project is **deeply customized around one person's habits and working scenarios**: fragmented time, mobile devices, token budgets, many agents in parallel, remote machines, page debugging... It fits that way of working, not necessarily you; its complexity (running a service, a reverse proxy, maintaining extensions) is the price of those scenarios. See [Origin](/en/guide/origin.md).
+
 ## A 30-second check
 
 How many of these five happened to you last week?
@@ -23,6 +29,8 @@ How many of these five happened to you last week?
 | You wanted the AI to look at the page, click elements and change styles, so you took a screenshot and pasted it | Terminals and editors cannot see what is rendered |
 
 **Two or more "yes"** means your workflow has outgrown a single-window tool — which is exactly what a web workbench is designed around. Below: a form-factor comparison, then the mechanics and the boundaries. Every claim is verifiable in the ten-minute self-test at the end.
+
+**Zero or one "yes"**: close this page and keep using what you have — there is no reason to change your workflow for a workbench.
 
 > **Scope**: this page compares **form factors**, not specific products. Within one form factor the spread is wide (Cursor and JetBrains AI are both IDEs but differ a lot). Cells describe typical capability: ✅ native / ⚠️ partial or via plugins / ❌ essentially absent. Every "N" below is **today's built-in coverage, not a capability ceiling**.
 
@@ -242,7 +250,7 @@ Skip the prose and just do this:
 6. **Read the numbers**: open the usage report, pivot by provider / model, export a CSV.
 7. **Enter the page**: add `@aiti-ai/aiti-devtools-vite` to any Vite project and ask the AI to restyle an element you click.
 
-If three or more of these feel like something you would use daily, the web workbench is the right center. If only step 7 resonates, you probably need [aiti-devtools](/en/devtools/) rather than the whole workbench.
+If three or more of these feel like something you would use daily, the web workbench is the right center. If only step 7 resonates, you probably need [aiti-devtools](/en/devtools/) rather than the whole workbench. If none of them do, do not migrate — **the tool that fits your hand beats the one with more features**.
 
 ---
 
