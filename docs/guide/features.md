@@ -495,7 +495,8 @@ Monaco 编辑接管 + 保存（mtime 冲突 409、白名单与大小校验）、
 | `aiti-plan-first`（方案先行） | 靠 `aiti-git-trace` 事件感知（推-听架构、零扫描）：Markdown 变更时弹绑定向导（命名优先匹配方案）、大改却未跟方案时提醒、方案领先于代码时提醒「先做方案」；front-matter 作为标签事实源，会话列表行前部带 📋 绑定标 |
 | `aiti-plan-review`（方案采认） | Plan-Sandbox 的采认收尾 UI：读 `review.json` 契约列出「声明 vs 其他」差异，可采认选中并关闭沙盒 / 仅保存 / 全部丢弃；带沙盒历史（重新提取 / 重用 / 销毁） |
 | `aiti-echo-agent`（回声后端） | 多 agent 前端的会话 provider 插槽演示后端，用来验证新后端接入链路 |
-| `aiti-updater`（升级面板） | 🟡 内测中：版本检查 → 升级触发 → 原地观察（SSE）→ 跳服务管理；安装 / 升级 / 反代通过 service-tunnels 配置收口 |
+| `aiti-updater`（升级面板） | 🟡 内测中：版本检查 → 升级触发 → 原地观察（SSE）→ 跳服务管理；服务注册 / 升级 / 服务管理统管，安装与反代通过 service-tunnels 配置收口 |
+| `aiti-proc-tree`（子进程管理） | 📋 方案评审中：以 pi-web 宿主为根，树形列出终端 / 隧道 / 子代理 / 外部 agent / detached 会话等全部派生进程，带 CPU / 内存 / 时长，可结束单进程或整棵子树（对齐 Chrome 任务管理器）；打开才采样 |
 
 另有 `aiti-bridge-probe`（桥连接诊断）与 `demo-lazy`（懒加载演示）两个诊断/示例用途的实验扩展。
 

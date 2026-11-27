@@ -164,16 +164,18 @@ Other forms' extension surfaces are real too; the difference is how far they rea
 
 **Takeaway**: statistics are not "nobody else does it" — vendors usually show you a quota page for their own product. A local cost view across provider / model / key / workspace / agent needs a centralized session layer. Third-party CLI tools close part of the gap, but they aggregate by tool and file, not from the same runtime sessions.
 
-### 2.6 Extensions in beta (🟡 internal beta, not in releases)
+### 2.6 Beta and planned extensions (🟡 internal beta / 📋 planned)
 
-These extensions are still in the experimental area; interfaces and behavior may change. They are listed to show how far the workbench can grow, not as a delivery promise.
+These extensions are still in the experimental area; interfaces and behavior may change. They are listed to show how far the workbench can grow, not as a delivery promise. 🟡 means testable now; 📋 means still in design review and not implemented.
 
 - **[CodeHub](/en/extensions/aiti-codehub.md) (`aiti-codehub`)** — one hub for work items and repositories across Yunxiao / GitHub / Gitee / GitLab: search, detail, comments, clone, create branch / merge request; multiple accounts; `aiti_codehub_*` tools + skills. **Why it matters**: brings "requirement → branch → session" into one workbench; code hosting is no longer another browser tab.
 - **Video Studio (`aiti-video-studio`)** — write a `scene.json` script → deterministic replay recording → TTS narration → ffmpeg composite; cursor / overlays / transitions / subtitles / multiple languages / 9:16. **Why it matters**: AI only participates while authoring, zero AI at runtime; demo videos become a repeatable pipeline instead of manual screen recording and editing. See the [extension page](/en/extensions/aiti-video-studio.md).
 - **Model Gateway (`aiti-model-gateway`)** — exports models already configured in the workbench as an OpenAI-compatible API (chat/completions + tools, models, images); external CLIs connect with a gateway token. **Why it matters**: running other agents can share not only sessions but also models and credentials; external agents never see the real provider key.
-- **Updater (`aiti-updater`)** — version check → upgrade trigger → in-place observation (SSE) → jump to service management (stop / restart / unregister / env / logs); install, upgrade and reverse proxy are handled through the service-tunnels config. **Why it matters**: deployment and upgrades become a panel in the workbench.
+- **Updater (`aiti-updater`)** — version check → upgrade trigger → in-place observation (SSE) → jump to service management (stop / restart / unregister / env / logs); service registration, upgrade and service management in one place, with install and reverse proxy handled through the service-tunnels config. **Why it matters**: deployment, upgrades and service management become a panel in the workbench.
 
-> All of the above are 🟡 internal beta: experimental-area distribution only, not on npm, not in releases, and upgrades may break compatibility. CodeHub's write operations (such as creating merge requests) are off by default.
+- **Proc Tree (`aiti-proc-tree`) · 📋 planned** — roots at the pi-web host and lists every derived child process as a tree: terminals (aiti-cmd), tunnels (service-tunnels), subagents, external agents (Pi TUI / ACP backends) and detached sessions are all attributed; CPU / memory / uptime per row, and you can stop one process or a whole subtree, shaped like Chrome's task manager. **Why it matters**: no more digging through `ps` for a runaway child. Currently in design review, not implemented.
+
+> 🟡 internal-beta extensions ship from the experimental area only, are not on npm, are not in releases, and upgrades may break compatibility; CodeHub's write operations (such as creating merge requests) are off by default. 📋 planned items are still in design review and not implemented.
 
 **What we do not claim**: that others cannot do background execution, multi-agent, mobile or plugins — Cursor / VS Code cloud agents, Claude Code / Codex cloud sessions and mobile apps, Zed / JetBrains ACP, Claude Desktop / ChatGPT MCP all prove otherwise. What we claim is that **these capabilities should be out of the box, cross-vendor, running in an environment you control, with sessions and tools that belong to you**.
 

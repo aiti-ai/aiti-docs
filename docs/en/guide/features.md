@@ -495,7 +495,8 @@ These extensions are still being honed in the experimental area and are not dist
 | `aiti-plan-first` (plan first) | Event-driven through `aiti-git-trace` (push-listen architecture, zero scanning): a binding wizard pops up when a Markdown file changes (naming prefers matching plans), warns on a large change without a followed plan, and reminds "write the plan first" when the plan is ahead of the code; front-matter is the source of truth for tags, and the session row carries a 📋 binding marker |
 | `aiti-plan-review` (plan acceptance) | The acceptance UI for Plan-Sandbox: reads the `review.json` contract and lists "declared vs other" differences; accept the selection and close the sandbox / save only / discard all; includes sandbox history (re-extract / reuse / destroy) |
 | `aiti-echo-agent` (echo backend) | A demo session-provider backend for the multi-agent front end, used to validate the new-backend integration path |
-| `aiti-updater` (upgrade panel) | 🟡 internal beta: version check → upgrade trigger → in-place observation (SSE) → jump to service management; install / upgrade / reverse proxy handled through the service-tunnels config |
+| `aiti-updater` (upgrade panel) | 🟡 internal beta: version check → upgrade trigger → in-place observation (SSE) → jump to service management; service registration / upgrade / service management in one place, with install and reverse proxy handled through the service-tunnels config |
+| `aiti-proc-tree` (child process manager) | 📋 design review: roots at the pi-web host and shows every derived process as a tree — terminals / tunnels / subagents / external agents / detached sessions — with CPU / memory / uptime and stop-one-or-subtree actions (Shaped like Chrome's task manager); samples only while the panel is open |
 
 There are also `aiti-bridge-probe` (bridge connection diagnostics) and `demo-lazy` (lazy-loading demo), two diagnostic/example extensions.
 

@@ -164,16 +164,18 @@ tags: [guide, comparison, positioning]
 
 **小结**：统计不是「别人完全不做」，而是**厂商通常只给自己那一家的额度页**；跨 provider / model / key / workspace / agent 的本地成本视图，需要中心化会话层。第三方 CLI 工具能补一部分，但仍是按工具、按文件汇总，不是与运行时会话同源的统计。
 
-### 2.6 内测中的扩展（🟡 内测中，未随发行版）
+### 2.6 内测与规划中的扩展（🟡 内测中 / 📋 规划中）
 
-这些扩展还在实验区，接口与行为都可能变；列在这里是为了说明工作台能长到哪，不是交付承诺。
+这些扩展还在实验区，接口与行为都可能变；列在这里是为了说明工作台能长到哪，不是交付承诺。标 🟡 的已可内测，标 📋 的还在方案评审、尚未实现。
 
 - **[CodeHub](/extensions/aiti-codehub.md)（`aiti-codehub`）**——云效 / GitHub / Gitee / GitLab 的工作项与代码库统一入口：搜索、详情、评论、克隆、建分支 / 合并请求；多账号；`aiti_codehub_*` 工具 + skills。**意义**：把「需求 → 分支 → 会话」收进同一个工作台，代码托管不再是另一个浏览器标签页。
 - **视频工作室（`aiti-video-studio`）**——`scene.json` 写脚本 → 确定性回放录制 → TTS 旁白 → ffmpeg 合成；光标 / 覆盖层 / 转场 / 字幕 / 多语言 / 9:16。**意义**：AI 只参与创作期、运行期零 AI，演示视频从手工录屏剪辑变成可重跑的流水线。见[扩展页](/extensions/aiti-video-studio.md)。
 - **模型网关（`aiti-model-gateway`）**——把工作台已配置的模型导出成 OpenAI 兼容 API（chat/completions + tools、models、images），外部 CLI 用网关 token 接入。**意义**：让「跑其他 agent」不只共享会话，也能共享模型与凭据，外部 agent 看不到真实 provider key。
-- **Updater（`aiti-updater`）**——版本检查 → 升级触发 → 原地观察（SSE）→ 跳到服务管理（停止 / 重启 / 注销 / 环境 / 日志）；安装、升级、反代通过 service-tunnels 配置收口。**意义**：把部署与升级收进工作台的一个面板。
+- **Updater（`aiti-updater`）**——版本检查 → 升级触发 → 原地观察（SSE）→ 跳服务管理（停止 / 重启 / 注销 / 环境 / 日志）；服务注册、升级、服务管理统管，安装与反代通过 service-tunnels 配置收口。**意义**：把部署、升级与服务管理收进工作台的一个面板。
 
-> 以上均为 🟡 内测中：只在实验区分发，未上架 npm、未随发行版，升级可能不兼容。CodeHub 的写操作（如建合并请求）默认关闭。
+- **Proc Tree（`aiti-proc-tree`）· 📋 规划中**——以 pi-web 宿主为根，把所有派生出来的子进程按树列出：终端（aiti-cmd）、隧道（service-tunnels）、子代理（subagents）、外部 agent（Pi TUI / ACP 后端）、detached 会话都能认领；带 CPU / 内存 / 时长，可结束单进程或整棵子树，形态对齐 Chrome 任务管理器。**意义**：跑飞的子进程不用再去 `ps` 里翻。当前状态是方案评审，尚未实现。
+
+> 🟡 内测中的扩展只在实验区分发，未上架 npm、未随发行版，升级可能不兼容；CodeHub 的写操作（如建合并请求）默认关闭。📋 规划中的还在方案评审，尚未实现。
 
 **我们不主张**：别人做不到后台运行、多 agent、移动端或插件——Cursor / VS Code 的云 agent、Claude Code / Codex 的云会话与移动端、Zed / JetBrains 的 ACP、Claude Desktop / ChatGPT 的 MCP 都证明了相反。我们主张的是：**这些能力应当开箱、跨厂商、跑在你自己控制的环境里，并且会话与工具属于你**。
 
