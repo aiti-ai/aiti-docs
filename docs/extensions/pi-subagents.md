@@ -9,7 +9,7 @@ ext:
   soulEn: "Many hands, one conductor."
   type: pi-plugin
   category: pi 插件
-  version: 0.89.0-aiti.1
+  version: 0.90.0-aiti.1
   status: active
   author: aiti-ai
   publisher: aiti-ai
