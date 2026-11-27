@@ -8,6 +8,8 @@ description: Deterministic scene.json replay to demo video — browser/desktop c
 
 > Write the scene once, replay it forever.
 
+> 🟡 **Internal beta**: not distributed with releases and not on npm; currently deployed from the experimental source only (dev instance recommended). Interfaces and behavior may change — wait for an official release before production use.
+
 Scenes are deterministic `scene.json` scripts. Video Studio records them, adds TTS
 narration and composes a final video; runtime recording and composing do not call AI.
 

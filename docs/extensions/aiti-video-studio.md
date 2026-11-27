@@ -12,13 +12,11 @@ ext:
   soulEn: "Write the script, get the film in one click."
   type: extension
   category: 媒体
-  version: "0.13.2"
-  status: active
+  version: "0.14.0"
+  status: beta
   author: aiti-ai
   publisher: aiti-ai
   website: https://aiti.pw
-  repo: https://github.com/aiti-ai/aiti-ai/tree/main/extensions/aiti-video-studio
-  npm: "@aiti-ai/aiti-video-studio"
   license: MIT
   tags: [video, demo, recording, playwright, tts, desktop, overlay, ffmpeg]
 ---
@@ -27,12 +25,14 @@ ext:
 
 > ❝ **写好脚本，一键出片。** ❞
 
+> 🟡 **内测中**：尚未随发行版分发、未上架 npm；当前仅在实验区源码部署（建议 dev 实例），接口与行为可能变化，生产使用请等正式发布。
+
 用 `scene.json` 描述操作 → 确定性录制 → TTS 旁白 → 合成 `final.mp4`。AI 只参与创作期；
 录制和合成阶段零 AI，可重复回放。
 
 ## 安装
 
-在 pi-web 的扩展管理器中启用 **aiti-video-studio**，或安装 npm 包/源码部署后重启 pi-web。
+🟡 内测中，暂不提供 npm 包，也不随发行版预装。当前从实验区源码部署到 **dev 实例** 后 reload 生效；生产实例需显式确认。
 
 首次使用需要：
 

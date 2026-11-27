@@ -464,7 +464,9 @@ Everything above runs inside the workbench process. There is a broader integrati
 
 > These integrations share several core packages: `aiti-devtools-core` (bridge core: page ⇄ agent message/session bridge, Streamable HTTP MCP endpoint, browser protocol), `aiti-devtools-inject` (injection SDK and artifacts: launcher + client, host/iframe routing), `aiti-devtools-agent` (multi-agent host wiring framework), `aiti-devtools-pi` (pi CLI connector), `aiti-devtools-vite`, `aiti-devtools-webpack`, `aiti-devtools-nuxt` (the three carrier plugins), `secret-mask-core` / `secret-vault-core` (the shared masking and vault engines used by the Web, pi and DSH versions — any TS/JS agent can integrate).
 
-### 🟢 Video studio (`aiti-video-studio`)
+### 🟢 Video studio (`aiti-video-studio`) · 🟡 internal beta
+
+> 🟡 **Internal beta**: not distributed with releases and not on npm; currently deployed from the experimental source only (dev instance recommended). Wait for an official release before production use.
 
 Turns "demo video" into a reproducible engineering artifact instead of manual screen recording and editing. The core idea: **AI writes the script during authoring; runtime has zero AI** — you type, it produces the video.
 
@@ -496,6 +498,8 @@ These extensions are still being honed in the experimental area and are not dist
 | `aiti-updater` (upgrade panel) | Service management + upgrade orchestration panel driven by the service-tunnels API; currently a skeleton |
 
 There are also `aiti-bridge-probe` (bridge connection diagnostics) and `demo-lazy` (lazy-loading demo), two diagnostic/example extensions.
+
+**R&D and model experiments (🟡 internal beta)**: [`aiti-codehub`](/en/extensions/aiti-codehub.md) brings Yunxiao / GitHub / Gitee / GitLab work items and repositories into the workbench (multiple accounts, AI tools, workspace clone); `aiti-model-gateway` exports configured models as an OpenAI-compatible API for external agents via gateway tokens. Neither is distributed with releases.
 
 ---
 

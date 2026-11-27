@@ -164,6 +164,16 @@ tags: [guide, comparison, positioning]
 
 **小结**：统计不是「别人完全不做」，而是**厂商通常只给自己那一家的额度页**；跨 provider / model / key / workspace / agent 的本地成本视图，需要中心化会话层。第三方 CLI 工具能补一部分，但仍是按工具、按文件汇总，不是与运行时会话同源的统计。
 
+### 2.6 内测中的扩展（🟡 内测中，未随发行版）
+
+这些扩展还在实验区，接口与行为都可能变；列在这里是为了说明工作台能长到哪，不是交付承诺。
+
+- **[CodeHub](/extensions/aiti-codehub.md)（`aiti-codehub`）**——云效 / GitHub / Gitee / GitLab 的工作项与代码库统一入口：搜索、详情、评论、克隆、建分支 / 合并请求；多账号；`aiti_codehub_*` 工具 + skills。**意义**：把「需求 → 分支 → 会话」收进同一个工作台，代码托管不再是另一个浏览器标签页。
+- **视频工作室（`aiti-video-studio`）**——`scene.json` 写脚本 → 确定性回放录制 → TTS 旁白 → ffmpeg 合成；光标 / 覆盖层 / 转场 / 字幕 / 多语言 / 9:16。**意义**：AI 只参与创作期、运行期零 AI，演示视频从手工录屏剪辑变成可重跑的流水线。见[扩展页](/extensions/aiti-video-studio.md)。
+- **模型网关（`aiti-model-gateway`）**——把工作台已配置的模型导出成 OpenAI 兼容 API（chat/completions + tools、models、images），外部 CLI 用网关 token 接入。**意义**：让「跑其他 agent」不只共享会话，也能共享模型与凭据，外部 agent 看不到真实 provider key。
+
+> 三者均为 🟡 内测中：只在实验区分发，未上架 npm、未随发行版，升级可能不兼容。CodeHub 的写操作（如建合并请求）默认关闭。
+
 **我们不主张**：别人做不到后台运行、多 agent、移动端或插件——Cursor / VS Code 的云 agent、Claude Code / Codex 的云会话与移动端、Zed / JetBrains 的 ACP、Claude Desktop / ChatGPT 的 MCP 都证明了相反。我们主张的是：**这些能力应当开箱、跨厂商、跑在你自己控制的环境里，并且会话与工具属于你**。
 
 ---
@@ -200,7 +210,7 @@ tags: [guide, comparison, positioning]
 
 ### 8. 页面就是 AI 的现场（aiti-devtools）
 
-把调试客户端注入正在开发的页面：点选元素 → 结构化信息直达 AI；AI 可执行类 DevTools 的 DOM / CSS / 输入 / 性能操作，也能反过来请用户点选元素、回答问题。载体覆盖 Vite / webpack / Nuxt / Astro，另有浏览器扩展（任意站点）与 VS Code 扩展，桥协议统一。页面注入并非独占——任何 MCP 宿主都能接 `aiti-bridge`；我们的优势是把它做成内置面板，并与工作台同源。见 [aiti-devtools](/extensions/aiti-devtools.md)。
+把调试客户端注入正在开发的页面：点选元素 → 结构化信息直达 AI；AI 可执行类 DevTools 的 DOM / CSS / 输入 / 性能操作，也能反过来请用户点选元素、回答问题。载体覆盖 Vite / webpack / Nuxt / Astro，另有浏览器扩展（任意站点）与 VS Code 扩展，桥协议统一。页面注入并非独占——任何 MCP 宿主都能接 `aiti-bridge`；我们的优势是把它做成内置面板，并与工作台同源。 实验区还在长：CodeHub 把工作项和代码库接进来，视频工作室把演示视频变成可重跑的流水线，模型网关把已配置的模型借给外部 agent——都还是内测（见 §2.6）。见 [aiti-devtools](/extensions/aiti-devtools.md)。
 
 ---
 

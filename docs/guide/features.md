@@ -464,7 +464,9 @@ Monaco 编辑接管 + 保存（mtime 冲突 409、白名单与大小校验）、
 
 > 这些集成共用几个共享内核包：`aiti-devtools-core`（桥核心：页面 ⇄ agent 消息/会话桥、Streamable HTTP MCP 端点、浏览器协议）、`aiti-devtools-inject`（注入 SDK 与产物：launcher + client、host/iframe 路由）、`aiti-devtools-agent`（多 agent 宿主接线框架）、`aiti-devtools-pi`（pi CLI 侧连接器）、`aiti-devtools-vite`、`aiti-devtools-webpack`、`aiti-devtools-nuxt`（三个载体插件本体）、`secret-mask-core` / `secret-vault-core`（脱敏与保险库的共用引擎，Web 版、pi 版、DSH 版共用同一实现，任一 TS/JS agent 都能接）。
 
-### 🟢 视频工作室（`aiti-video-studio`）
+### 🟢 视频工作室（`aiti-video-studio`）· 🟡 内测中
+
+> 🟡 **内测中**：未随发行版分发、未上架 npm；当前仅在实验区源码部署（建议 dev 实例），生产使用请等正式发布。
 
 把「演示视频」变成一门可重现的工程，而不是靠人手录屏剪辑。核心思路：**AI 在创作期写脚本，运行时零 AI**——你打字，它出片。
 
@@ -496,6 +498,8 @@ Monaco 编辑接管 + 保存（mtime 冲突 409、白名单与大小校验）、
 | `aiti-updater`（升级面板） | 服务管理 + 升级编排面板，通过 service-tunnels API 驱动，目前是骨架态 |
 
 另有 `aiti-bridge-probe`（桥连接诊断）与 `demo-lazy`（懒加载演示）两个诊断/示例用途的实验扩展。
+
+**研发与模型实验（🟡 内测中）**：[`aiti-codehub`](/extensions/aiti-codehub.md) 把云效 / GitHub / Gitee / GitLab 的工作项与代码库收进工作台（多账号、AI 工具、工作区克隆）；`aiti-model-gateway` 把已配置模型导出为 OpenAI 兼容 API，供外部 agent 用网关 token 接入。两者都未随发行版分发。
 
 ---
 
