@@ -12,7 +12,7 @@ ext:
   soul: 看到不对的代码，当场就能改——不用切出去开 IDE。
   type: aiti-ext
   category: 开发工具
-  version: "1.0.16"
+  version: "1.0.17"
   status: active
   author: aiti-ai
   publisher: aiti-ai

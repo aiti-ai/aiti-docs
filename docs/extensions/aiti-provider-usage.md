@@ -12,7 +12,7 @@ ext:
   soul: 各家还剩多少额度，一面看尽。
   type: aiti-ext
   category: 系统工具
-  version: "0.1.13"
+  version: "0.1.14"
   status: experimental
   author: aiti-ai
   publisher: aiti-ai

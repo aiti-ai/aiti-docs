@@ -12,7 +12,7 @@ ext:
   soul: 协议统一了，适配器只需要写一次。
   type: aiti-ext
   category: 多 agent 后端
-  version: "0.3.12"
+  version: "0.3.13"
   status: active
   author: aiti-ai
   publisher: aiti-ai

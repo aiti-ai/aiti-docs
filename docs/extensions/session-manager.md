@@ -12,7 +12,7 @@ ext:
   soul: 会话不是用完即走的流水，是每天都在累积的资产。
   type: aiti-ext
   category: 会话管理
-  version: "0.2.21"
+  version: "0.2.22"
   status: active
   author: aiti-ai
   publisher: aiti-ai
