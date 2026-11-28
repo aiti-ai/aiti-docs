@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-11-28T11:09:44.381Z",
+  "count": 6,
+  "releases": [
+    {
+      "tag": "v0.19.0-aiti.1",
+      "version": "0.19.0-aiti.1",
+      "url": "https://github.com/aiti-ai/aiti-ai/releases/tag/v0.19.0-aiti.1",
+      "compareUrl": null,
+      "highlights": [
+        "**Shared layer becomes a real package**: every extension now resolves shared helpers through `@aiti-ai/ext-shared` (declared dependency + reconcile install) instead of deploy-time sibling copies — the publish tree is self-contained and ~5.5MB lighter, and the ui icon library resolves at load time via a new host fallback",
+        "**aiti-channels v2**: full management plane (bots aggregation, admin tabs, chat relay, proc runner) plus a Windows-native ACP server TCP transport",
+        "**Detached zcode sessions**: the zcode agent survives a pi-web restart, with live coding-plan quota surfaced through the get_usage capability and across usage surfaces (i18n bucket keys)",
+        "**Process tree grows up**: session names on wrapper/agent rows, node memory breakdown, clean-memory action, kill actions, and click-to-sort headers",
+        "**English-first shared layer**: the entire `extensions/_shared` source (83 files) is now English across comments, logs and dev strings, with locale resources (zh-CN word tables, i18n dictionaries) deliberately preserved"
+      ],
+      "sections": [],
+      "substantive": true
+    },
+    {
+      "tag": "v0.18.0-aiti.3",
+      "version": "0.18.0-aiti.3",
+      "url": "https://github.com/aiti-ai/aiti-ai/releases/tag/v0.18.0-aiti.3",
+      "compareUrl": null,
+      "highlights": [
+        "**Cursor sessions run on a persistent ACP backend**: new and takeover cursor sessions use the resident `cursor-agent acp` process instead of re-paying a 5-8s CLI warm-up every turn; the legacy print backend stays as fallback",
+        "**Drag-to-reorder toolbar customization**: the toolbar customize panel now supports drag reordering of buttons",
+        "**Session JSON export**: export any pi or external (claude/codex/opencode/…) session to a JSON file from session-manager viewers and row menus",
+        "**Editor & extman upgrades**: large-file info cards with a chunked read-only viewer, `loadMonaco` exposed to third-party providers, and per-extension settings inside the extension manager",
+        "**Richer usage reporting**: provider usage shows the remaining-time ratio next to each reset time and a dedicated credits dimension; agent-badge gains an account quota row"
+      ],
+      "sections": [],
+      "substantive": true
+    },
+    {
+      "tag": "v0.18.0-aiti.2",
+      "version": "0.18.0-aiti.2",
+      "url": "https://github.com/aiti-ai/aiti-ai/releases/tag/v0.18.0-aiti.2",
+      "compareUrl": null,
+      "highlights": [
+        "**Sessions open without spawning**: reading a session never starts an agent process (lazy open), and hosted sessions get a snapshot view, a switch API and an agent badge in the UI",
+        "**New `aiti-interaction` MCP toolset**: a desktop interaction daemon with dialog/cover windows, form input patterns, custom pages and async MCP tools — AI can drive real GUI dialogs end to end",
+        "**Extension updates you can trust**: `aiti-extman` checks updates from two sources with persisted verdicts, and extension metadata (names, taglines, feature groups) is now localized",
+        "**Duplicate bridge registration self-check**: the TUI bridge and the `aiti_*` bundle detect double loading at startup and yield automatically, ending the \"Tool conflicts\" class of errors",
+        "**Sharper chrome everywhere**: semantic icons on every `aiti-msg-smart` popover action, one line-icon system across the extension list, a compact two-column `aiti-ui-env` panel with restart-proof helper supervision, and provider icons fixed under sub-path deployments"
+      ],
+      "sections": [],
+      "substantive": true
+    },
+    {
+      "tag": "v0.18.0-aiti.1",
+      "version": "0.18.0-aiti.1",
+      "url": "https://github.com/aiti-ai/aiti-ai/releases/tag/v0.18.0-aiti.1",
+      "compareUrl": null,
+      "highlights": [
+        "**New extension `aiti-feedback`**: a sanitized in-app feedback form that opens a prefilled GitHub issue — tokens, private IP ranges and home directories are redacted before anything leaves the browser",
+        "**Secret stack v2 lands end-to-end**: an encrypted secret vault with a pre-send credential gate in the composer, shape/context-based secret detection (`secret-mask-core` 0.4), and the DSH port re-aligned on the same core",
+        "**A wider extension surface**: `aiti-sysmon` CPU/memory chips, `aiti-ai-schedule` event triggers (fs-watch / process-exit / webhook), `aiti-editor` and `aiti-sheet-univer` in-app editing, `aiti-folder` live directory watch, `aiti-ai-speek` local TTS, and a layered fleet view for `aiti-subagents`",
+        "**Chat that survives the page**: busy compact requests are parked server-side across reloads, forked sessions keep their live ids, IME composition no longer submits early, and session notice toasts dismiss by tap, swipe or button",
+        "**Top-bar and sidebar density work**: the `sessionStatsInline` slot condenses the stats row into a single flow, and the sidebar dock contract now covers channels, folder and the rest of the dock panels"
+      ],
+      "sections": [],
+      "substantive": true
+    },
+    {
+      "tag": "v0.17.0-aiti.1",
+      "version": "0.17.0-aiti.1",
+      "url": "https://github.com/aiti-ai/aiti-ai/releases/tag/v0.17.0-aiti.1",
+      "compareUrl": null,
+      "highlights": [
+        "**Upstream baseline 0.17.0**: the host app merges the upstream 0.17.0 release and is re-cut as a single-source repository — host app, 60+ extensions, packages, integrations and the release tooling now live in one tree",
+        "**Survive-restart agent hosting** goes end-to-end: detachable agent processes that outlive a host restart, a detach/start-in-process round-trip in the UI, per-session hosting preference across cold cycles, and a Windows runner (named-pipe endpoints)",
+        "**New extension `aiti-containers`**: container management panel (containers/images/volumes/networks, compose projects, live stats) built for the AI window",
+        "**Secret stack v2**: redaction engine rewrite, encrypted vault with a web UI, and the DSH build aligned at 0.2.0",
+        "**25-provider ACP family is now detachable** — external agents (qoder, codebuddy and friends) can be hosted in wrappers that survive restarts"
+      ],
+      "sections": [],
+      "substantive": true
+    },
+    {
+      "tag": "v0.15.15-aiti.10",
+      "version": "0.15.15-aiti.10",
+      "url": "https://github.com/aiti-ai/aiti-ai/releases/tag/v0.15.15-aiti.10",
+      "compareUrl": null,
+      "highlights": [
+        "New extension **aiti-msg-share**: share conversations and messages to pluggable targets",
+        "Four more new extensions: **pi-secret-mask** (deterministic secret redaction), **aiti-testagent** (Java backend debugging), **aiti-git-ops** (whitelisted git write engine) and **aiti-backup** (snapshot backup for large state data)",
+        "**aiti-editor**: selection cards now work across same-origin and cross-origin previews",
+        "Broad bilingual (en/zh) i18n sweep: 20+ extensions moved to keyed tables, plus cross-extension label translation infrastructure",
+        "File-based release notes pipeline (drafts land in `releases/` and gate tagging)"
+      ],
+      "sections": [],
+      "substantive": true
+    }
+  ]
+}
