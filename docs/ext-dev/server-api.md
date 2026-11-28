@@ -24,6 +24,7 @@ interface ExtServerContext {
   features: ExtFeaturesSlot;  // feature 状态读写
   sessionProviders: ExtSessionProviderSlot;      // 会话后端注册
   sessionAnnotations: ExtSessionAnnotatorSlot;   // 会话列表注记
+  usageAdapters: ExtUsageAdapterSlot;            // provider 用量适配器运行时注册
   invokeAI?(params): Promise<{ text, provider, model, usage? }>; // 通用 AI 调用
 }
 ```
@@ -112,7 +113,40 @@ ctx.sessionAnnotations.register({
 });
 ```
 
-## 7. `invokeAI`（通用 AI 调用）
+## 7. `usageAdapters`（provider 用量适配器运行时注册，2026-11-28 新增）
+
+给「provider 账号配额/用量」体系追加自建 provider：注册后 pi 会话的 get_usage fallback
+（会话当前 provider 的账号配额）、aiti-provider-usage 的总览/查询面、宿主
+`/api/provider-usage/overview`（ModelsConfig Summary）全部自动出现该 provider——无需改
+core 或 aiti-provider-usage。注册归属按扩展 id 记账：扩展 shutdown/reload 时自动反注册
+（镜像 image-provider ledger）；内置静态 id 拒绝覆盖；他人已注册的同 id 拒绝接管；
+重注册自己 = 幂等。
+
+适配器 = 普通对象（与 `lib/provider-usage/types.ts` 的 UsageAdapter 同形，扩展侧按结构书写
+即可，无需 import 宿主类型）：`id`（与 pi provider id 同名直配）+ `origins`（安全门禁）+
+`url/headers/normalize`（声明式）或完整 `query(ctx)`。查询失败/normalize 抛错一律降级为
+query-failed（fail-honest，UI 静默隐藏）。
+
+```ts
+ctx.usageAdapters.register({
+  id: "ark-plan",                       // 与 pi provider id 同名（models.json key）
+  displayName: "ARK Plan",
+  origins: ["https://ark.cn-beijing.volces.com"], // secure-fetch origin 门禁
+  url: (auth) => "https://ark.cn-beijing.volces.com/api/v3/usage",
+  normalize: (payload, ctx) => ({       // payload → UsageReport（buckets/metrics/exhausted）
+    providerId: ctx.providerId, providerName: "ARK Plan", capturedAt: Date.now(),
+    buckets: [], metrics: [],
+  }),
+  async query(ctx) { /* 或自行 fetch：返回 UsageReport 形状 */ },
+}); // → { ok, reason? }（builtin-conflict / owned-by-other-extension / invalid-adapter）
+```
+
+配套成员：`unregister(id)` 热移除（仅限自己的条目）、`list()` 全量清单（含
+`extId: string | null` 归属——aiti-provider-usage 合并第三方条目时按归属过滤自家）。
+消费管线：pi 会话 get_usage fallback（lib/session/provider-quota）先查本地注册表，
+miss 时按 exact id 落到第三方条目；凭据仍由调用方经 pi runtime/auth.json 通用解析。
+
+## 8. `invokeAI`（通用 AI 调用）
 
 core 最低层的模型能力：任意 system+messages → `{ text, usage }`。**core 零业务逻辑零统计**——
 prompt 组装/上下文/项目状态/token 记账全部是调用扩展的责任：

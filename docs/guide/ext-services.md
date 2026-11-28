@@ -164,7 +164,7 @@ const off = ctx.onExtServiceChange?.((key, phase) => {
 
 | key | 提供方 | 用途 | 消费方 |
 |---|---|---|---|
-| `pi-web.session` | AppShell | 当前会话句柄/切换 | aiti-editor、aiti-plan-first、aiti-git-trace、aiti-ai-speek（`onExtServiceChange` 重挂范式） |
+| `pi-web.session` | AppShell | 当前会话句柄/切换 + `refreshBackendUsage()`（重拉当前会话 backend-usage 快照，2026-11-28 增；provider-usage 面板「刷新用量」与 badge 配额行联动，无会话/实现缺席时降级跳过） | aiti-editor、aiti-plan-first、aiti-git-trace、aiti-ai-speek、aiti-provider-usage（`onExtServiceChange` 重挂范式） |
 | `pi-web.home` | AppShell | 回首页/导航 | session-manager（store、sidebar-content） |
 | `pi-web.toast` | AppShell | 全局 toast | session-manager（toast.tsx） |
 | `pi-web.overlayBack` | AppShell | 浮层返回注册 | 14+ 处（`_shared/overlay-back-client` 统一封装 + aiti-float / aiti-editor / service-tunnels / aiti-folder / session-manager） |

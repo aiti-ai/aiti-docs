@@ -5,14 +5,14 @@ ext:
   id: aiti-channels
   name: IM 渠道
   nameEn: "IM Channels"
-  description: IM 渠道接入 + cc-connect 大前端外壳 —— 托管 cc-connect 进程、概览/项目/通道/会话面板、socket API 出站发消息
-  descriptionEn: "IM channel integration + a full frontend shell for cc-connect — hosts the cc-connect process, overview/projects/channels/sessions panels, and a socket API for outbound messaging"
+  description: IM 渠道接入 + cc-connect 大前端外壳 —— 托管 cc-connect 进程、六 tab 管理面板、机器人向导五步、对话实时流、移动端远程控制
+  descriptionEn: "IM channel integration + a full frontend shell for cc-connect — hosts the cc-connect process, a six-tab management panel, a five-step bot wizard, live chat, and mobile remote control"
   iconUrl: "/ext-icons/aiti-channels.svg"
   soulEn: "AI shouldn't be locked inside a web page — DingTalk/Feishu/WeChat are all its windows."
   soul: AI 不该被锁在网页里——钉钉/飞书/微信都是它的窗口。
   type: aiti-ext
   category: IM 渠道
-  version: "0.1.13"
+  version: "0.1.14"
   status: active
   author: aiti-ai
   publisher: aiti-ai
@@ -29,19 +29,32 @@ ext:
 
 > ❝ **AI 不该被锁在网页里——钉钉/飞书/微信都是它的窗口。** ❞
 
-IM 渠道接入扩展：托管 cc-connect 进程（无 systemd 依赖），给 cc-connect 一个大前端外壳。平台 schema 覆盖 14 类：dingtalk / feishu / wechat / telegram / discord / slack / line / qq / qqbot / wecom / matrix / webex / yuanbao / googlechat。
+IM 渠道接入扩展：托管 cc-connect 进程，给 cc-connect 一个大前端外壳。平台 schema 覆盖 14 类：dingtalk / feishu / wechat / telegram / discord / slack / line / qq / qqbot / wecom / matrix / webex / yuanbao / googlechat。
 
-- **进程托管**：cc-connect 由扩展拉起/管理，免 systemd 配置
-- **面板**：概览 / 项目 / 通道 / 会话 / 配置 + 管理台内嵌 cc-connect 原生 Web UI
-- **出站 API**：socket API 发消息（文本/文件），供 agent 工具链调用（如 `aiti-im-send`）
-- **client**：JSX + vite 构建（模板 templates/ext-jsx-client）
+## 面板（六 tab）
 
-## 能力一览
+- **总览**：状态驱动 onboarding——按实例真实状态给出下一步（未安装→装、未运行→启动、无机器人→打开向导、未绑定→诊断、全就绪→手机接入/对话）
+- **机器人**：机器人列表（= cc-connect 项目，1:1）+ **向导五步**（基础→选平台→凭据→生效→验证，全程不换 tab；生效动作按创建路径自动判定 reload 或 restart）+ 行内项目设置（心跳/工作区/模型）+ 回复颗粒度
+- **对话**：bridge WebSocket 实时流 + 会话管理（出站发送/删除）+ 消息日志
+- **自动化**：定时任务（cron）/ Providers（37 预设 + 项目级激活）/ Skills（已装矩阵 + 预设市场，统一搜索）
+- **系统**：安装/更新（justget 双源）、进程托管（systemd transient unit + 外部进程接管）、全局设置、配置批量生成（带整份重写警示）、实例日志（journald 或文件尾）
+- **原版**：cc-connect 原生管理台内嵌（URL 自动推导：页面 host 子域置换 `cc.` 前缀，或显式 adminOrigin 配置）
 
-- **多实例**：向导式添加（自动分配 id/端口：mgmt 9821-9849、bridge 9811-9839），每实例独立 config/dataDir/socket；default 实例保护不可删
-- **配置生成**：表单按平台 schema 动态渲染 → 生成 config.toml（写前自动 .bak 备份），免手编
-- **扫码授权**：飞书/微信走 cc-connect 官方向导（本扩展代理转发，凭证回填表单、不代保存）
-- **ACP agent 后端**：pi-web 常驻 ACP server（每实例 Unix socket），cc-connect 连接器仅几 KB——IM 消息由 pi-web 真会话承接，含 session/request_permission 人闸批准卡
-- **agent 工具**：`aiti-im-list` / `aiti-im-send`——send 不带 session_key 自动选该项目首个活跃会话；filePath 发文件；默认关（extman `agentTools.enabled` 开）
-- **安装/更新**：面板一键 install/update（justget，github+gitee 双源）
-- **运维端点**：log（tail）/ msg-log（出站记录）/ reload-cc / restart-cc
+## 接入
+
+- **机器人向导**：唯一创建主线。扫码直建（微信/飞书/Lark，走 cc-connect 官方 device flow，凭证不代保存）或 token 表单（schema 动态渲染）；新建/生效/验证一气呵成
+- **渠道健康**：平台连接状态、白名单 allow_from、心跳，经 management API 实时读取
+
+## agent 后端（ACP）
+
+- **pi-web 常驻 ACP server**，每实例独立端点：POSIX = Unix socket；**Windows = TCP（127.0.0.1，端口按实例派生 29000-29999）与命名管并存**——Windows 上 cc-connect piweb agent 以 `tcp://` 直拨，原生链零子进程
+- cc-connect 侧连接器兜底（几 KB，stdio ⇄ 端点转发）保留；POSIX 原生链走 unix socket 直拨
+- 反向人闸：session/request_permission → IM 弹批准卡
+- 移动端远程：扫码深链携带当前会话（`?session=<id>`），手机登录后直接接管当前对话
+
+## 托管与运维
+
+- **进程托管**：Linux systemd transient unit（cgroup 树杀）；Windows CIM/taskkill；外部进程（手工 unit/nohup）可一键接管到面板托管
+- **出站 API**：management API 通道（文本 `projects/{name}/send`），附件走 socket/TCP；`aiti-im-list` / `aiti-im-send` agent 工具同通道（默认关，extman `agentTools.enabled` 开）
+- **配置生成**：表单批量生成 config.toml（写前备份 + 覆盖需显式确认 + token 不轮换）；日常加机器人走向导
+- **多实例**：每实例独立 config/dataDir/端点；default 实例保护不可删

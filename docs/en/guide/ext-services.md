@@ -164,7 +164,7 @@ const off = ctx.onExtServiceChange?.((key, phase) => {
 
 | key | Provider | Purpose | Consumers |
 |---|---|---|---|
-| `pi-web.session` | AppShell | Current session handle / switching | aiti-editor, aiti-plan-first, aiti-git-trace, aiti-ai-speek (the `onExtServiceChange` re-mount pattern) |
+| `pi-web.session` | AppShell | Current session handle / switching + `refreshBackendUsage()` (re-fetch the active session's backend-usage snapshot, 2026-11-28; wired to the provider-usage panel's refresh button and the badge quota row; degrades to a skip when absent) | aiti-editor, aiti-plan-first, aiti-git-trace, aiti-ai-speek, aiti-provider-usage (the `onExtServiceChange` re-mount pattern) |
 | `pi-web.home` | AppShell | Back to home / navigation | session-manager (store, sidebar-content) |
 | `pi-web.toast` | AppShell | Global toast | session-manager (toast.tsx) |
 | `pi-web.overlayBack` | AppShell | Overlay back registration | 14+ sites (`_shared/overlay-back-client` unified wrapper + aiti-float / aiti-editor / service-tunnels / aiti-folder / session-manager) |

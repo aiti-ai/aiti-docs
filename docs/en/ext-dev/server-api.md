@@ -25,6 +25,7 @@ interface ExtServerContext {
   features: ExtFeaturesSlot;  // feature state read/write
   sessionProviders: ExtSessionProviderSlot;      // session backend registration
   sessionAnnotations: ExtSessionAnnotatorSlot;   // session-list annotations
+  usageAdapters: ExtUsageAdapterSlot;            // provider usage-adapter runtime registration
   invokeAI?(params): Promise<{ text, provider, model, usage? }>; // generic AI invocation
 }
 ```
@@ -120,7 +121,43 @@ ctx.sessionAnnotations.register({
 });
 ```
 
-## 7. `invokeAI` (generic AI invocation)
+## 7. `usageAdapters` (provider usage-adapter runtime registration, added 2026-11-28)
+
+Register self-hosted providers into the provider account-quota system: once registered, the
+pi-session get_usage fallback (current provider's account quota), the aiti-provider-usage
+overview/query surfaces and the host `/api/provider-usage/overview` (ModelsConfig Summary) all
+pick the provider up automatically — no core or aiti-provider-usage changes needed. Registrations
+are owned per extension id: shutdown/reload removes exactly that extension's entries; built-in
+static ids reject takeover; the same id registered by another extension is rejected; re-registering
+your own id is idempotent.
+
+The adapter is a plain object (same shape as `UsageAdapter` in `lib/provider-usage/types.ts` —
+write it structurally, no host-type import needed): `id` (matches the pi provider id in
+models.json), `origins` (secure-fetch origin gate), `url/headers/normalize` (declarative) or a
+full `query(ctx)`. Query failures / normalize throws degrade to query-failed (fail-honest, the
+UI hides silently).
+
+```ts
+ctx.usageAdapters.register({
+  id: "ark-plan",                       // same name as the pi provider id (models.json key)
+  displayName: "ARK Plan",
+  origins: ["https://ark.cn-beijing.volces.com"], // secure-fetch origin gate
+  url: (auth) => "https://ark.cn-beijing.volces.com/api/v3/usage",
+  normalize: (payload, ctx) => ({       // payload -> UsageReport (buckets/metrics/exhausted)
+    providerId: ctx.providerId, providerName: "ARK Plan", capturedAt: Date.now(),
+    buckets: [], metrics: [],
+  }),
+  async query(ctx) { /* or fetch yourself: return a UsageReport shape */ },
+}); // -> { ok, reason? } (builtin-conflict / owned-by-other-extension / invalid-adapter)
+```
+
+Companions: `unregister(id)` (own entries only), `list()` (every adapter with
+`extId: string | null` ownership — aiti-provider-usage merges third-party entries and filters
+its own by ownership). Consumption: the pi-session get_usage fallback
+(lib/session/provider-quota) checks the local registry first and falls to third-party entries by
+exact id; credentials still resolve generically via the pi runtime/auth.json.
+
+## 8. `invokeAI` (generic AI invocation)
 
 The core's lowest-level model capability: any system+messages → `{ text, usage }`. **Zero business
 logic, zero accounting in the core** — prompt assembly / context / project state / token billing
